@@ -1,0 +1,40 @@
+{
+    "extends": [
+        "angular-tslint-rules",
+        "tslint:recommended"
+    ],
+    "rulesDirectory": [
+        "./node_modules/codelyzer"
+    ],
+    "rules": {
+        "binary-expression-operand-order": false,
+        "component-class-suffix": true,
+        "component-selector": [true, "element", "mv", "kebab-case"],
+        "directive-class-suffix": true,
+        "directive-selector": [false, "attribute"],
+        "i18n": [false],
+        "no-attribute-parameter-decorator": true,
+        "no-console": false,
+        "no-dynamic-delete": false,
+        "no-forward-ref": false,
+        "no-implicit-dependencies": [true, "dev"],
+        "no-inferrable-types": false,
+        "no-input-rename": false,
+        "no-null-keyword": false,
+        "no-output-rename": true,
+        "no-require-imports": false,
+        "no-string-literal": false,
+        "no-template-call-expression": false,
+        "no-var-requires": false,
+        "object-literal-key-quotes": [true, "as-needed"],
+        "only-arrow-functions": false,
+        "pipe-impure": false,
+        "prefer-template": [true, "allow-single-concat"],
+        "radix": false,
+        "use-host-property-decorator": true,
+        "use-input-property-decorator": true,
+        "use-life-cycle-interface": true,
+        "use-output-property-decorator": true,
+        "use-pipe-transform-interface": true
+    }
+}

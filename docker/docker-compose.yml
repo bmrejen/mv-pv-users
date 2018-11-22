@@ -1,0 +1,27 @@
+version: "3"
+services:
+  webserver:
+    build:
+      context: webserver/.
+    volumes:
+      - ../.:/usr/local/apache2/htdocs/.
+       # use host's shared memory when running chrome
+      - /dev/shm:/dev/shm
+      - ~/.ssh:/home/user/.ssh
+    env_file:
+      - ~/.docker/.env
+    environment:
+      - VIRTUAL_HOST=users.local
+    ports:
+      # Use for debugging, access to vnc to show running test
+       - "9099:80"
+       - "5902:5900"
+    container_name: users_webserver
+    networks:
+      - default_local
+    # Allow to run chrome
+    cap_add:
+      - SYS_ADMIN
+networks:
+  default_local:
+    external: true

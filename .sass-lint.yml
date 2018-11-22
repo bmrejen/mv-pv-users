@@ -1,0 +1,22 @@
+files:
+  include: 'src/scss/**/*.scss'
+rules:
+  class-name-format:
+    - 1
+    - convention: hyphenatedbem
+  no-vendor-prefixes: 0
+  variable-name-format:
+    - 1
+    - allow-leading-underscore: true
+      convention: hyphenatedbem
+  placeholder-in-extend: 0
+  no-important: 0
+  nesting-depth:
+    - 1
+    - max-depth: 4
+  mixin-name-format:
+    - 1
+    - convention: camelcase
+  function-name-format:
+    - 1
+    - convention: camelcase
