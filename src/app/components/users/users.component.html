@@ -1,0 +1,14 @@
+<h2>Users component</h2>
+<h3>Fake users</h3>
+
+<div *ngFor="let user of users; trackBy: trackByFn">
+
+  <h4>{{ user.name }}</h4>
+</div>
+
+
+<h3>HTTP GET users</h3>
+<div *ngFor="let user of realUsers">
+
+  <h4>{{ user.name }}</h4>
+</div>

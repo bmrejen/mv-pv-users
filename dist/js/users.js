@@ -10956,6 +10956,59 @@
         return flags;
     }
     /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    /**
+     * @param {?} flags
+     * @param {?} matchedQueriesDsl
+     * @param {?} ngContentIndex
+     * @param {?} childCount
+     * @param {?=} handleEvent
+     * @param {?=} templateFactory
+     * @return {?}
+     */
+    function anchorDef(flags, matchedQueriesDsl, ngContentIndex, childCount, handleEvent, templateFactory) {
+        flags |= 1 /* TypeElement */;
+        var _a = splitMatchedQueriesDsl(matchedQueriesDsl), matchedQueries = _a.matchedQueries, references = _a.references, matchedQueryIds = _a.matchedQueryIds;
+        var /** @type {?} */ template = templateFactory ? resolveDefinition(templateFactory) : null;
+        return {
+            // will bet set by the view definition
+            nodeIndex: -1,
+            parent: null,
+            renderParent: null,
+            bindingIndex: -1,
+            outputIndex: -1,
+            // regular values
+            flags: flags,
+            checkIndex: -1,
+            childFlags: 0,
+            directChildFlags: 0,
+            childMatchedQueries: 0, matchedQueries: matchedQueries, matchedQueryIds: matchedQueryIds, references: references, ngContentIndex: ngContentIndex, childCount: childCount,
+            bindings: [],
+            bindingFlags: 0,
+            outputs: [],
+            element: {
+                ns: null,
+                name: null,
+                attrs: null, template: template,
+                componentProvider: null,
+                componentView: null,
+                componentRendererType: null,
+                publicProviders: null,
+                allProviders: null,
+                handleEvent: handleEvent || NOOP
+            },
+            provider: null,
+            text: null,
+            query: null,
+            ngContent: null
+        };
+    }
+    /**
      * @param {?} checkIndex
      * @param {?} flags
      * @param {?} matchedQueriesDsl
@@ -23777,6 +23830,2642 @@
         return Config;
     }());
 
+    var __decorate$1 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    };
+    var __metadata$1 = (undefined && undefined.__metadata) || function (k, v) {
+        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+    };
+    var AppComponent = /** @class */ (function () {
+        function AppComponent() {
+            // constructor
+        }
+        AppComponent = __decorate$1([
+            Component({
+                selector: "mv-users",
+                template: "\n        <div id=\"mv-users\" class=\"content\">\n            <router-outlet></router-outlet>\n        </div>\n    ",
+            }),
+            __metadata$1("design:paramtypes", [])
+        ], AppComponent);
+        return AppComponent;
+    }());
+
+    var __decorate$2 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    };
+    var __metadata$2 = (undefined && undefined.__metadata) || function (k, v) {
+        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+    };
+    var HomeComponent = /** @class */ (function () {
+        function HomeComponent() {
+            // constructor
+        }
+        HomeComponent.prototype.ngOnInit = function () {
+            // init
+        };
+        HomeComponent = __decorate$2([
+            Component({
+                templateUrl: "./home.component.html",
+            }),
+            __metadata$2("design:paramtypes", [])
+        ], HomeComponent);
+        return HomeComponent;
+    }());
+
+    var of_1 = ArrayObservable_1.ArrayObservable.of;
+
+    /* tslint:enable:max-line-length */
+    /**
+     * Projects each source value to an Observable which is merged in the output
+     * Observable, in a serialized fashion waiting for each one to complete before
+     * merging the next.
+     *
+     * <span class="informal">Maps each value to an Observable, then flattens all of
+     * these inner Observables using {@link concatAll}.</span>
+     *
+     * <img src="./img/concatMap.png" width="100%">
+     *
+     * Returns an Observable that emits items based on applying a function that you
+     * supply to each item emitted by the source Observable, where that function
+     * returns an (so-called "inner") Observable. Each new inner Observable is
+     * concatenated with the previous inner Observable.
+     *
+     * __Warning:__ if source values arrive endlessly and faster than their
+     * corresponding inner Observables can complete, it will result in memory issues
+     * as inner Observables amass in an unbounded buffer waiting for their turn to
+     * be subscribed to.
+     *
+     * Note: `concatMap` is equivalent to `mergeMap` with concurrency parameter set
+     * to `1`.
+     *
+     * @example <caption>For each click event, tick every second from 0 to 3, with no concurrency</caption>
+     * var clicks = Rx.Observable.fromEvent(document, 'click');
+     * var result = clicks.concatMap(ev => Rx.Observable.interval(1000).take(4));
+     * result.subscribe(x => console.log(x));
+     *
+     * // Results in the following:
+     * // (results are not concurrent)
+     * // For every click on the "document" it will emit values 0 to 3 spaced
+     * // on a 1000ms interval
+     * // one click = 1000ms-> 0 -1000ms-> 1 -1000ms-> 2 -1000ms-> 3
+     *
+     * @see {@link concat}
+     * @see {@link concatAll}
+     * @see {@link concatMapTo}
+     * @see {@link exhaustMap}
+     * @see {@link mergeMap}
+     * @see {@link switchMap}
+     *
+     * @param {function(value: T, ?index: number): ObservableInput} project A function
+     * that, when applied to an item emitted by the source Observable, returns an
+     * Observable.
+     * @param {function(outerValue: T, innerValue: I, outerIndex: number, innerIndex: number): any} [resultSelector]
+     * A function to produce the value on the output Observable based on the values
+     * and the indices of the source (outer) emission and the inner Observable
+     * emission. The arguments passed to this function are:
+     * - `outerValue`: the value that came from the source
+     * - `innerValue`: the value that came from the projected Observable
+     * - `outerIndex`: the "index" of the value that came from the source
+     * - `innerIndex`: the "index" of the value from the projected Observable
+     * @return {Observable} An Observable that emits the result of applying the
+     * projection function (and the optional `resultSelector`) to each item emitted
+     * by the source Observable and taking values from each projected inner
+     * Observable sequentially.
+     * @method concatMap
+     * @owner Observable
+     */
+    function concatMap(project, resultSelector) {
+        return mergeMap_1.mergeMap(project, resultSelector, 1);
+    }
+    var concatMap_2 = concatMap;
+
+
+    var concatMap_1 = {
+    	concatMap: concatMap_2
+    };
+
+    /* tslint:enable:max-line-length */
+    /**
+     * Projects each source value to an Observable which is merged in the output
+     * Observable, in a serialized fashion waiting for each one to complete before
+     * merging the next.
+     *
+     * <span class="informal">Maps each value to an Observable, then flattens all of
+     * these inner Observables using {@link concatAll}.</span>
+     *
+     * <img src="./img/concatMap.png" width="100%">
+     *
+     * Returns an Observable that emits items based on applying a function that you
+     * supply to each item emitted by the source Observable, where that function
+     * returns an (so-called "inner") Observable. Each new inner Observable is
+     * concatenated with the previous inner Observable.
+     *
+     * __Warning:__ if source values arrive endlessly and faster than their
+     * corresponding inner Observables can complete, it will result in memory issues
+     * as inner Observables amass in an unbounded buffer waiting for their turn to
+     * be subscribed to.
+     *
+     * Note: `concatMap` is equivalent to `mergeMap` with concurrency parameter set
+     * to `1`.
+     *
+     * @example <caption>For each click event, tick every second from 0 to 3, with no concurrency</caption>
+     * var clicks = Rx.Observable.fromEvent(document, 'click');
+     * var result = clicks.concatMap(ev => Rx.Observable.interval(1000).take(4));
+     * result.subscribe(x => console.log(x));
+     *
+     * // Results in the following:
+     * // (results are not concurrent)
+     * // For every click on the "document" it will emit values 0 to 3 spaced
+     * // on a 1000ms interval
+     * // one click = 1000ms-> 0 -1000ms-> 1 -1000ms-> 2 -1000ms-> 3
+     *
+     * @see {@link concat}
+     * @see {@link concatAll}
+     * @see {@link concatMapTo}
+     * @see {@link exhaustMap}
+     * @see {@link mergeMap}
+     * @see {@link switchMap}
+     *
+     * @param {function(value: T, ?index: number): ObservableInput} project A function
+     * that, when applied to an item emitted by the source Observable, returns an
+     * Observable.
+     * @param {function(outerValue: T, innerValue: I, outerIndex: number, innerIndex: number): any} [resultSelector]
+     * A function to produce the value on the output Observable based on the values
+     * and the indices of the source (outer) emission and the inner Observable
+     * emission. The arguments passed to this function are:
+     * - `outerValue`: the value that came from the source
+     * - `innerValue`: the value that came from the projected Observable
+     * - `outerIndex`: the "index" of the value that came from the source
+     * - `innerIndex`: the "index" of the value from the projected Observable
+     * @return {Observable} An Observable that emits the result of applying the
+     * projection function (and the optional `resultSelector`) to each item emitted
+     * by the source Observable and taking values from each projected inner
+     * Observable sequentially.
+     * @method concatMap
+     * @owner Observable
+     */
+    function concatMap$1(project, resultSelector) {
+        return concatMap_1.concatMap(project, resultSelector)(this);
+    }
+    var concatMap_3 = concatMap$1;
+
+    var __extends$e = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+        for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+
+    /* tslint:enable:max-line-length */
+    /**
+     * Filter items emitted by the source Observable by only emitting those that
+     * satisfy a specified predicate.
+     *
+     * <span class="informal">Like
+     * [Array.prototype.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter),
+     * it only emits a value from the source if it passes a criterion function.</span>
+     *
+     * <img src="./img/filter.png" width="100%">
+     *
+     * Similar to the well-known `Array.prototype.filter` method, this operator
+     * takes values from the source Observable, passes them through a `predicate`
+     * function and only emits those values that yielded `true`.
+     *
+     * @example <caption>Emit only click events whose target was a DIV element</caption>
+     * var clicks = Rx.Observable.fromEvent(document, 'click');
+     * var clicksOnDivs = clicks.filter(ev => ev.target.tagName === 'DIV');
+     * clicksOnDivs.subscribe(x => console.log(x));
+     *
+     * @see {@link distinct}
+     * @see {@link distinctUntilChanged}
+     * @see {@link distinctUntilKeyChanged}
+     * @see {@link ignoreElements}
+     * @see {@link partition}
+     * @see {@link skip}
+     *
+     * @param {function(value: T, index: number): boolean} predicate A function that
+     * evaluates each value emitted by the source Observable. If it returns `true`,
+     * the value is emitted, if `false` the value is not passed to the output
+     * Observable. The `index` parameter is the number `i` for the i-th source
+     * emission that has happened since the subscription, starting from the number
+     * `0`.
+     * @param {any} [thisArg] An optional argument to determine the value of `this`
+     * in the `predicate` function.
+     * @return {Observable} An Observable of values from the source that were
+     * allowed by the `predicate` function.
+     * @method filter
+     * @owner Observable
+     */
+    function filter(predicate, thisArg) {
+        return function filterOperatorFunction(source) {
+            return source.lift(new FilterOperator(predicate, thisArg));
+        };
+    }
+    var filter_2 = filter;
+    var FilterOperator = (function () {
+        function FilterOperator(predicate, thisArg) {
+            this.predicate = predicate;
+            this.thisArg = thisArg;
+        }
+        FilterOperator.prototype.call = function (subscriber, source) {
+            return source.subscribe(new FilterSubscriber(subscriber, this.predicate, this.thisArg));
+        };
+        return FilterOperator;
+    }());
+    /**
+     * We need this JSDoc comment for affecting ESDoc.
+     * @ignore
+     * @extends {Ignored}
+     */
+    var FilterSubscriber = (function (_super) {
+        __extends$e(FilterSubscriber, _super);
+        function FilterSubscriber(destination, predicate, thisArg) {
+            _super.call(this, destination);
+            this.predicate = predicate;
+            this.thisArg = thisArg;
+            this.count = 0;
+        }
+        // the try catch block below is left specifically for
+        // optimization and perf reasons. a tryCatcher is not necessary here.
+        FilterSubscriber.prototype._next = function (value) {
+            var result;
+            try {
+                result = this.predicate.call(this.thisArg, value, this.count++);
+            }
+            catch (err) {
+                this.destination.error(err);
+                return;
+            }
+            if (result) {
+                this.destination.next(value);
+            }
+        };
+        return FilterSubscriber;
+    }(Subscriber_1.Subscriber));
+
+
+    var filter_1 = {
+    	filter: filter_2
+    };
+
+    /* tslint:enable:max-line-length */
+    /**
+     * Filter items emitted by the source Observable by only emitting those that
+     * satisfy a specified predicate.
+     *
+     * <span class="informal">Like
+     * [Array.prototype.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter),
+     * it only emits a value from the source if it passes a criterion function.</span>
+     *
+     * <img src="./img/filter.png" width="100%">
+     *
+     * Similar to the well-known `Array.prototype.filter` method, this operator
+     * takes values from the source Observable, passes them through a `predicate`
+     * function and only emits those values that yielded `true`.
+     *
+     * @example <caption>Emit only click events whose target was a DIV element</caption>
+     * var clicks = Rx.Observable.fromEvent(document, 'click');
+     * var clicksOnDivs = clicks.filter(ev => ev.target.tagName === 'DIV');
+     * clicksOnDivs.subscribe(x => console.log(x));
+     *
+     * @see {@link distinct}
+     * @see {@link distinctUntilChanged}
+     * @see {@link distinctUntilKeyChanged}
+     * @see {@link ignoreElements}
+     * @see {@link partition}
+     * @see {@link skip}
+     *
+     * @param {function(value: T, index: number): boolean} predicate A function that
+     * evaluates each value emitted by the source Observable. If it returns `true`,
+     * the value is emitted, if `false` the value is not passed to the output
+     * Observable. The `index` parameter is the number `i` for the i-th source
+     * emission that has happened since the subscription, starting from the number
+     * `0`.
+     * @param {any} [thisArg] An optional argument to determine the value of `this`
+     * in the `predicate` function.
+     * @return {Observable} An Observable of values from the source that were
+     * allowed by the `predicate` function.
+     * @method filter
+     * @owner Observable
+     */
+    function filter$1(predicate, thisArg) {
+        return filter_1.filter(predicate, thisArg)(this);
+    }
+    var filter_3 = filter$1;
+
+    var __extends$f = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+        for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+
+    /**
+     * Applies a given `project` function to each value emitted by the source
+     * Observable, and emits the resulting values as an Observable.
+     *
+     * <span class="informal">Like [Array.prototype.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map),
+     * it passes each source value through a transformation function to get
+     * corresponding output values.</span>
+     *
+     * <img src="./img/map.png" width="100%">
+     *
+     * Similar to the well known `Array.prototype.map` function, this operator
+     * applies a projection to each value and emits that projection in the output
+     * Observable.
+     *
+     * @example <caption>Map every click to the clientX position of that click</caption>
+     * var clicks = Rx.Observable.fromEvent(document, 'click');
+     * var positions = clicks.map(ev => ev.clientX);
+     * positions.subscribe(x => console.log(x));
+     *
+     * @see {@link mapTo}
+     * @see {@link pluck}
+     *
+     * @param {function(value: T, index: number): R} project The function to apply
+     * to each `value` emitted by the source Observable. The `index` parameter is
+     * the number `i` for the i-th emission that has happened since the
+     * subscription, starting from the number `0`.
+     * @param {any} [thisArg] An optional argument to define what `this` is in the
+     * `project` function.
+     * @return {Observable<R>} An Observable that emits the values from the source
+     * Observable transformed by the given `project` function.
+     * @method map
+     * @owner Observable
+     */
+    function map(project, thisArg) {
+        return function mapOperation(source) {
+            if (typeof project !== 'function') {
+                throw new TypeError('argument is not a function. Are you looking for `mapTo()`?');
+            }
+            return source.lift(new MapOperator(project, thisArg));
+        };
+    }
+    var map_2 = map;
+    var MapOperator = (function () {
+        function MapOperator(project, thisArg) {
+            this.project = project;
+            this.thisArg = thisArg;
+        }
+        MapOperator.prototype.call = function (subscriber, source) {
+            return source.subscribe(new MapSubscriber(subscriber, this.project, this.thisArg));
+        };
+        return MapOperator;
+    }());
+    var MapOperator_1 = MapOperator;
+    /**
+     * We need this JSDoc comment for affecting ESDoc.
+     * @ignore
+     * @extends {Ignored}
+     */
+    var MapSubscriber = (function (_super) {
+        __extends$f(MapSubscriber, _super);
+        function MapSubscriber(destination, project, thisArg) {
+            _super.call(this, destination);
+            this.project = project;
+            this.count = 0;
+            this.thisArg = thisArg || this;
+        }
+        // NOTE: This looks unoptimized, but it's actually purposefully NOT
+        // using try/catch optimizations.
+        MapSubscriber.prototype._next = function (value) {
+            var result;
+            try {
+                result = this.project.call(this.thisArg, value, this.count++);
+            }
+            catch (err) {
+                this.destination.error(err);
+                return;
+            }
+            this.destination.next(result);
+        };
+        return MapSubscriber;
+    }(Subscriber_1.Subscriber));
+
+
+    var map_1 = {
+    	map: map_2,
+    	MapOperator: MapOperator_1
+    };
+
+    /**
+     * Applies a given `project` function to each value emitted by the source
+     * Observable, and emits the resulting values as an Observable.
+     *
+     * <span class="informal">Like [Array.prototype.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map),
+     * it passes each source value through a transformation function to get
+     * corresponding output values.</span>
+     *
+     * <img src="./img/map.png" width="100%">
+     *
+     * Similar to the well known `Array.prototype.map` function, this operator
+     * applies a projection to each value and emits that projection in the output
+     * Observable.
+     *
+     * @example <caption>Map every click to the clientX position of that click</caption>
+     * var clicks = Rx.Observable.fromEvent(document, 'click');
+     * var positions = clicks.map(ev => ev.clientX);
+     * positions.subscribe(x => console.log(x));
+     *
+     * @see {@link mapTo}
+     * @see {@link pluck}
+     *
+     * @param {function(value: T, index: number): R} project The function to apply
+     * to each `value` emitted by the source Observable. The `index` parameter is
+     * the number `i` for the i-th emission that has happened since the
+     * subscription, starting from the number `0`.
+     * @param {any} [thisArg] An optional argument to define what `this` is in the
+     * `project` function.
+     * @return {Observable<R>} An Observable that emits the values from the source
+     * Observable transformed by the given `project` function.
+     * @method map
+     * @owner Observable
+     */
+    function map$1(project, thisArg) {
+        return map_1.map(project, thisArg)(this);
+    }
+    var map_3 = map$1;
+
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    /**
+     * Transforms an `HttpRequest` into a stream of `HttpEvent`s, one of which will likely be a
+     * `HttpResponse`.
+     *
+     * `HttpHandler` is injectable. When injected, the handler instance dispatches requests to the
+     * first interceptor in the chain, which dispatches to the second, etc, eventually reaching the
+     * `HttpBackend`.
+     *
+     * In an `HttpInterceptor`, the `HttpHandler` parameter is the next interceptor in the chain.
+     *
+     * \@experimental
+     * @abstract
+     */
+    var HttpHandler = (function () {
+        function HttpHandler() {
+        }
+        /**
+         * @abstract
+         * @param {?} req
+         * @return {?}
+         */
+        HttpHandler.prototype.handle = function (req) { };
+        return HttpHandler;
+    }());
+    /**
+     * A final `HttpHandler` which will dispatch the request via browser HTTP APIs to a backend.
+     *
+     * Interceptors sit between the `HttpClient` interface and the `HttpBackend`.
+     *
+     * When injected, `HttpBackend` dispatches requests directly to the backend, without going
+     * through the interceptor chain.
+     *
+     * \@experimental
+     * @abstract
+     */
+    var HttpBackend = (function () {
+        function HttpBackend() {
+        }
+        /**
+         * @abstract
+         * @param {?} req
+         * @return {?}
+         */
+        HttpBackend.prototype.handle = function (req) { };
+        return HttpBackend;
+    }());
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    /**
+     * A `HttpParameterCodec` that uses `encodeURIComponent` and `decodeURIComponent` to
+     * serialize and parse URL parameter keys and values.
+     *
+     * \@experimental
+     */
+    var HttpUrlEncodingCodec = (function () {
+        function HttpUrlEncodingCodec() {
+        }
+        /**
+         * @param {?} k
+         * @return {?}
+         */
+        HttpUrlEncodingCodec.prototype.encodeKey = function (k) { return standardEncoding(k); };
+        /**
+         * @param {?} v
+         * @return {?}
+         */
+        HttpUrlEncodingCodec.prototype.encodeValue = function (v) { return standardEncoding(v); };
+        /**
+         * @param {?} k
+         * @return {?}
+         */
+        HttpUrlEncodingCodec.prototype.decodeKey = function (k) { return decodeURIComponent(k); };
+        /**
+         * @param {?} v
+         * @return {?}
+         */
+        HttpUrlEncodingCodec.prototype.decodeValue = function (v) { return decodeURIComponent(v); };
+        return HttpUrlEncodingCodec;
+    }());
+    /**
+     * @param {?} rawParams
+     * @param {?} codec
+     * @return {?}
+     */
+    function paramParser(rawParams, codec) {
+        var /** @type {?} */ map$$1 = new Map();
+        if (rawParams.length > 0) {
+            var /** @type {?} */ params = rawParams.split('&');
+            params.forEach(function (param) {
+                var /** @type {?} */ eqIdx = param.indexOf('=');
+                var _a = eqIdx == -1 ?
+                    [codec.decodeKey(param), ''] :
+                    [codec.decodeKey(param.slice(0, eqIdx)), codec.decodeValue(param.slice(eqIdx + 1))], key = _a[0], val = _a[1];
+                var /** @type {?} */ list = map$$1.get(key) || [];
+                list.push(val);
+                map$$1.set(key, list);
+            });
+        }
+        return map$$1;
+    }
+    /**
+     * @param {?} v
+     * @return {?}
+     */
+    function standardEncoding(v) {
+        return encodeURIComponent(v)
+            .replace(/%40/gi, '@')
+            .replace(/%3A/gi, ':')
+            .replace(/%24/gi, '$')
+            .replace(/%2C/gi, ',')
+            .replace(/%3B/gi, ';')
+            .replace(/%2B/gi, '+')
+            .replace(/%3D/gi, '=')
+            .replace(/%3F/gi, '?')
+            .replace(/%2F/gi, '/');
+    }
+    /**
+     * An HTTP request/response body that represents serialized parameters,
+     * per the MIME type `application/x-www-form-urlencoded`.
+     *
+     * This class is immuatable - all mutation operations return a new instance.
+     *
+     * \@experimental
+     */
+    var HttpParams = (function () {
+        /**
+         * @param {?=} options
+         */
+        function HttpParams(options) {
+            if (options === void 0) { options = {}; }
+            this.updates = null;
+            this.cloneFrom = null;
+            this.encoder = options.encoder || new HttpUrlEncodingCodec();
+            this.map = !!options.fromString ? paramParser(options.fromString, this.encoder) : null;
+        }
+        /**
+         * Check whether the body has one or more values for the given parameter name.
+         * @param {?} param
+         * @return {?}
+         */
+        HttpParams.prototype.has = function (param) {
+            this.init();
+            return ((this.map)).has(param);
+        };
+        /**
+         * Get the first value for the given parameter name, or `null` if it's not present.
+         * @param {?} param
+         * @return {?}
+         */
+        HttpParams.prototype.get = function (param) {
+            this.init();
+            var /** @type {?} */ res = ((this.map)).get(param);
+            return !!res ? res[0] : null;
+        };
+        /**
+         * Get all values for the given parameter name, or `null` if it's not present.
+         * @param {?} param
+         * @return {?}
+         */
+        HttpParams.prototype.getAll = function (param) {
+            this.init();
+            return ((this.map)).get(param) || null;
+        };
+        /**
+         * Get all the parameter names for this body.
+         * @return {?}
+         */
+        HttpParams.prototype.keys = function () {
+            this.init();
+            return Array.from(/** @type {?} */ ((this.map)).keys());
+        };
+        /**
+         * Construct a new body with an appended value for the given parameter name.
+         * @param {?} param
+         * @param {?} value
+         * @return {?}
+         */
+        HttpParams.prototype.append = function (param, value) { return this.clone({ param: param, value: value, op: 'a' }); };
+        /**
+         * Construct a new body with a new value for the given parameter name.
+         * @param {?} param
+         * @param {?} value
+         * @return {?}
+         */
+        HttpParams.prototype.set = function (param, value) { return this.clone({ param: param, value: value, op: 's' }); };
+        /**
+         * Construct a new body with either the given value for the given parameter
+         * removed, if a value is given, or all values for the given parameter removed
+         * if not.
+         * @param {?} param
+         * @param {?=} value
+         * @return {?}
+         */
+        HttpParams.prototype.delete = function (param, value) { return this.clone({ param: param, value: value, op: 'd' }); };
+        /**
+         * Serialize the body to an encoded string, where key-value pairs (separated by `=`) are
+         * separated by `&`s.
+         * @return {?}
+         */
+        HttpParams.prototype.toString = function () {
+            var _this = this;
+            this.init();
+            return this.keys()
+                .map(function (key) {
+                var /** @type {?} */ eKey = _this.encoder.encodeKey(key);
+                return ((((_this.map)).get(key))).map(function (value) { return eKey + '=' + _this.encoder.encodeValue(value); })
+                    .join('&');
+            })
+                .join('&');
+        };
+        /**
+         * @param {?} update
+         * @return {?}
+         */
+        HttpParams.prototype.clone = function (update) {
+            var /** @type {?} */ clone = new HttpParams({ encoder: this.encoder });
+            clone.cloneFrom = this.cloneFrom || this;
+            clone.updates = (this.updates || []).concat([update]);
+            return clone;
+        };
+        /**
+         * @return {?}
+         */
+        HttpParams.prototype.init = function () {
+            var _this = this;
+            if (this.map === null) {
+                this.map = new Map();
+            }
+            if (this.cloneFrom !== null) {
+                this.cloneFrom.init();
+                this.cloneFrom.keys().forEach(function (key) { return ((_this.map)).set(key, /** @type {?} */ ((((((_this.cloneFrom)).map)).get(key)))); }); /** @type {?} */
+                ((this.updates)).forEach(function (update) {
+                    switch (update.op) {
+                        case 'a':
+                        case 's':
+                            var /** @type {?} */ base = (update.op === 'a' ? ((_this.map)).get(update.param) : undefined) || [];
+                            base.push(/** @type {?} */ ((update.value))); /** @type {?} */
+                            ((_this.map)).set(update.param, base);
+                            break;
+                        case 'd':
+                            if (update.value !== undefined) {
+                                var /** @type {?} */ base_1 = ((_this.map)).get(update.param) || [];
+                                var /** @type {?} */ idx = base_1.indexOf(update.value);
+                                if (idx !== -1) {
+                                    base_1.splice(idx, 1);
+                                }
+                                if (base_1.length > 0) {
+                                    ((_this.map)).set(update.param, base_1);
+                                }
+                                else {
+                                    ((_this.map)).delete(update.param);
+                                }
+                            }
+                            else {
+                                ((_this.map)).delete(update.param);
+                                break;
+                            }
+                    }
+                });
+                this.cloneFrom = null;
+            }
+        };
+        return HttpParams;
+    }());
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    /**
+     * Immutable set of Http headers, with lazy parsing.
+     * \@experimental
+     */
+    var HttpHeaders = (function () {
+        /**
+         * @param {?=} headers
+         */
+        function HttpHeaders(headers) {
+            var _this = this;
+            /**
+             * Internal map of lowercased header names to the normalized
+             * form of the name (the form seen first).
+             */
+            this.normalizedNames = new Map();
+            /**
+             * Queued updates to be materialized the next initialization.
+             */
+            this.lazyUpdate = null;
+            if (!headers) {
+                this.headers = new Map();
+            }
+            else if (typeof headers === 'string') {
+                this.lazyInit = function () {
+                    _this.headers = new Map();
+                    headers.split('\n').forEach(function (line) {
+                        var index = line.indexOf(':');
+                        if (index > 0) {
+                            var name = line.slice(0, index);
+                            var key = name.toLowerCase();
+                            var value = line.slice(index + 1).trim();
+                            _this.maybeSetNormalizedName(name, key);
+                            if (_this.headers.has(key)) {
+                                _this.headers.get(key).push(value);
+                            }
+                            else {
+                                _this.headers.set(key, [value]);
+                            }
+                        }
+                    });
+                };
+            }
+            else {
+                this.lazyInit = function () {
+                    _this.headers = new Map();
+                    Object.keys(headers).forEach(function (name) {
+                        var values = headers[name];
+                        var key = name.toLowerCase();
+                        if (typeof values === 'string') {
+                            values = [values];
+                        }
+                        if (values.length > 0) {
+                            _this.headers.set(key, values);
+                            _this.maybeSetNormalizedName(name, key);
+                        }
+                    });
+                };
+            }
+        }
+        /**
+         * Checks for existence of header by given name.
+         * @param {?} name
+         * @return {?}
+         */
+        HttpHeaders.prototype.has = function (name) {
+            this.init();
+            return this.headers.has(name.toLowerCase());
+        };
+        /**
+         * Returns first header that matches given name.
+         * @param {?} name
+         * @return {?}
+         */
+        HttpHeaders.prototype.get = function (name) {
+            this.init();
+            var /** @type {?} */ values = this.headers.get(name.toLowerCase());
+            return values && values.length > 0 ? values[0] : null;
+        };
+        /**
+         * Returns the names of the headers
+         * @return {?}
+         */
+        HttpHeaders.prototype.keys = function () {
+            this.init();
+            return Array.from(this.normalizedNames.values());
+        };
+        /**
+         * Returns list of header values for a given name.
+         * @param {?} name
+         * @return {?}
+         */
+        HttpHeaders.prototype.getAll = function (name) {
+            this.init();
+            return this.headers.get(name.toLowerCase()) || null;
+        };
+        /**
+         * @param {?} name
+         * @param {?} value
+         * @return {?}
+         */
+        HttpHeaders.prototype.append = function (name, value) {
+            return this.clone({ name: name, value: value, op: 'a' });
+        };
+        /**
+         * @param {?} name
+         * @param {?} value
+         * @return {?}
+         */
+        HttpHeaders.prototype.set = function (name, value) {
+            return this.clone({ name: name, value: value, op: 's' });
+        };
+        /**
+         * @param {?} name
+         * @param {?=} value
+         * @return {?}
+         */
+        HttpHeaders.prototype.delete = function (name, value) {
+            return this.clone({ name: name, value: value, op: 'd' });
+        };
+        /**
+         * @param {?} name
+         * @param {?} lcName
+         * @return {?}
+         */
+        HttpHeaders.prototype.maybeSetNormalizedName = function (name, lcName) {
+            if (!this.normalizedNames.has(lcName)) {
+                this.normalizedNames.set(lcName, name);
+            }
+        };
+        /**
+         * @return {?}
+         */
+        HttpHeaders.prototype.init = function () {
+            var _this = this;
+            if (!!this.lazyInit) {
+                if (this.lazyInit instanceof HttpHeaders) {
+                    this.copyFrom(this.lazyInit);
+                }
+                else {
+                    this.lazyInit();
+                }
+                this.lazyInit = null;
+                if (!!this.lazyUpdate) {
+                    this.lazyUpdate.forEach(function (update) { return _this.applyUpdate(update); });
+                    this.lazyUpdate = null;
+                }
+            }
+        };
+        /**
+         * @param {?} other
+         * @return {?}
+         */
+        HttpHeaders.prototype.copyFrom = function (other) {
+            var _this = this;
+            other.init();
+            Array.from(other.headers.keys()).forEach(function (key) {
+                _this.headers.set(key, /** @type {?} */ ((other.headers.get(key))));
+                _this.normalizedNames.set(key, /** @type {?} */ ((other.normalizedNames.get(key))));
+            });
+        };
+        /**
+         * @param {?} update
+         * @return {?}
+         */
+        HttpHeaders.prototype.clone = function (update) {
+            var /** @type {?} */ clone = new HttpHeaders();
+            clone.lazyInit =
+                (!!this.lazyInit && this.lazyInit instanceof HttpHeaders) ? this.lazyInit : this;
+            clone.lazyUpdate = (this.lazyUpdate || []).concat([update]);
+            return clone;
+        };
+        /**
+         * @param {?} update
+         * @return {?}
+         */
+        HttpHeaders.prototype.applyUpdate = function (update) {
+            var /** @type {?} */ key = update.name.toLowerCase();
+            switch (update.op) {
+                case 'a':
+                case 's':
+                    var /** @type {?} */ value = ((update.value));
+                    if (typeof value === 'string') {
+                        value = [value];
+                    }
+                    if (value.length === 0) {
+                        return;
+                    }
+                    this.maybeSetNormalizedName(update.name, key);
+                    var /** @type {?} */ base = (update.op === 'a' ? this.headers.get(key) : undefined) || [];
+                    base.push.apply(base, value);
+                    this.headers.set(key, base);
+                    break;
+                case 'd':
+                    var /** @type {?} */ toDelete_1 = (update.value);
+                    if (!toDelete_1) {
+                        this.headers.delete(key);
+                        this.normalizedNames.delete(key);
+                    }
+                    else {
+                        var /** @type {?} */ existing = this.headers.get(key);
+                        if (!existing) {
+                            return;
+                        }
+                        existing = existing.filter(function (value) { return toDelete_1.indexOf(value) === -1; });
+                        if (existing.length === 0) {
+                            this.headers.delete(key);
+                            this.normalizedNames.delete(key);
+                        }
+                        else {
+                            this.headers.set(key, existing);
+                        }
+                    }
+                    break;
+            }
+        };
+        /**
+         * \@internal
+         * @param {?} fn
+         * @return {?}
+         */
+        HttpHeaders.prototype.forEach = function (fn) {
+            var _this = this;
+            this.init();
+            Array.from(this.normalizedNames.keys())
+                .forEach(function (key) { return fn(/** @type {?} */ ((_this.normalizedNames.get(key))), /** @type {?} */ ((_this.headers.get(key)))); });
+        };
+        return HttpHeaders;
+    }());
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    /**
+     * Determine whether the given HTTP method may include a body.
+     * @param {?} method
+     * @return {?}
+     */
+    function mightHaveBody(method) {
+        switch (method) {
+            case 'DELETE':
+            case 'GET':
+            case 'HEAD':
+            case 'OPTIONS':
+            case 'JSONP':
+                return false;
+            default:
+                return true;
+        }
+    }
+    /**
+     * Safely assert whether the given value is an ArrayBuffer.
+     *
+     * In some execution environments ArrayBuffer is not defined.
+     * @param {?} value
+     * @return {?}
+     */
+    function isArrayBuffer(value) {
+        return typeof ArrayBuffer !== 'undefined' && value instanceof ArrayBuffer;
+    }
+    /**
+     * Safely assert whether the given value is a Blob.
+     *
+     * In some execution environments Blob is not defined.
+     * @param {?} value
+     * @return {?}
+     */
+    function isBlob(value) {
+        return typeof Blob !== 'undefined' && value instanceof Blob;
+    }
+    /**
+     * Safely assert whether the given value is a FormData instance.
+     *
+     * In some execution environments FormData is not defined.
+     * @param {?} value
+     * @return {?}
+     */
+    function isFormData(value) {
+        return typeof FormData !== 'undefined' && value instanceof FormData;
+    }
+    /**
+     * An outgoing HTTP request with an optional typed body.
+     *
+     * `HttpRequest` represents an outgoing request, including URL, method,
+     * headers, body, and other request configuration options. Instances should be
+     * assumed to be immutable. To modify a `HttpRequest`, the `clone`
+     * method should be used.
+     *
+     * \@experimental
+     */
+    var HttpRequest = (function () {
+        /**
+         * @param {?} method
+         * @param {?} url
+         * @param {?=} third
+         * @param {?=} fourth
+         */
+        function HttpRequest(method, url, third, fourth) {
+            this.url = url;
+            /**
+             * The request body, or `null` if one isn't set.
+             *
+             * Bodies are not enforced to be immutable, as they can include a reference to any
+             * user-defined data type. However, interceptors should take care to preserve
+             * idempotence by treating them as such.
+             */
+            this.body = null;
+            /**
+             * Whether this request should be made in a way that exposes progress events.
+             *
+             * Progress events are expensive (change detection runs on each event) and so
+             * they should only be requested if the consumer intends to monitor them.
+             */
+            this.reportProgress = false;
+            /**
+             * Whether this request should be sent with outgoing credentials (cookies).
+             */
+            this.withCredentials = false;
+            /**
+             * The expected response type of the server.
+             *
+             * This is used to parse the response appropriately before returning it to
+             * the requestee.
+             */
+            this.responseType = 'json';
+            this.method = method.toUpperCase();
+            // Next, need to figure out which argument holds the HttpRequestInit
+            // options, if any.
+            var options;
+            // Check whether a body argument is expected. The only valid way to omit
+            // the body argument is to use a known no-body method like GET.
+            if (mightHaveBody(this.method) || !!fourth) {
+                // Body is the third argument, options are the fourth.
+                this.body = third || null;
+                options = fourth;
+            }
+            else {
+                // No body required, options are the third argument. The body stays null.
+                options = third;
+            }
+            // If options have been passed, interpret them.
+            if (options) {
+                // Normalize reportProgress and withCredentials.
+                this.reportProgress = !!options.reportProgress;
+                this.withCredentials = !!options.withCredentials;
+                // Override default response type of 'json' if one is provided.
+                if (!!options.responseType) {
+                    this.responseType = options.responseType;
+                }
+                // Override headers if they're provided.
+                if (!!options.headers) {
+                    this.headers = options.headers;
+                }
+                if (!!options.params) {
+                    this.params = options.params;
+                }
+            }
+            // If no headers have been passed in, construct a new HttpHeaders instance.
+            if (!this.headers) {
+                this.headers = new HttpHeaders();
+            }
+            // If no parameters have been passed in, construct a new HttpUrlEncodedParams instance.
+            if (!this.params) {
+                this.params = new HttpParams();
+                this.urlWithParams = url;
+            }
+            else {
+                // Encode the parameters to a string in preparation for inclusion in the URL.
+                var params = this.params.toString();
+                if (params.length === 0) {
+                    // No parameters, the visible URL is just the URL given at creation time.
+                    this.urlWithParams = url;
+                }
+                else {
+                    // Does the URL already have query parameters? Look for '?'.
+                    var qIdx = url.indexOf('?');
+                    // There are 3 cases to handle:
+                    // 1) No existing parameters -> append '?' followed by params.
+                    // 2) '?' exists and is followed by existing query string ->
+                    //    append '&' followed by params.
+                    // 3) '?' exists at the end of the url -> append params directly.
+                    // This basically amounts to determining the character, if any, with
+                    // which to join the URL and parameters.
+                    var sep = qIdx === -1 ? '?' : (qIdx < url.length - 1 ? '&' : '');
+                    this.urlWithParams = url + sep + params;
+                }
+            }
+        }
+        /**
+         * Transform the free-form body into a serialized format suitable for
+         * transmission to the server.
+         * @return {?}
+         */
+        HttpRequest.prototype.serializeBody = function () {
+            // If no body is present, no need to serialize it.
+            if (this.body === null) {
+                return null;
+            }
+            // Check whether the body is already in a serialized form. If so,
+            // it can just be returned directly.
+            if (isArrayBuffer(this.body) || isBlob(this.body) || isFormData(this.body) ||
+                typeof this.body === 'string') {
+                return this.body;
+            }
+            // Check whether the body is an instance of HttpUrlEncodedParams.
+            if (this.body instanceof HttpParams) {
+                return this.body.toString();
+            }
+            // Check whether the body is an object or array, and serialize with JSON if so.
+            if (typeof this.body === 'object' || typeof this.body === 'boolean' ||
+                Array.isArray(this.body)) {
+                return JSON.stringify(this.body);
+            }
+            // Fall back on toString() for everything else.
+            return ((this.body)).toString();
+        };
+        /**
+         * Examine the body and attempt to infer an appropriate MIME type
+         * for it.
+         *
+         * If no such type can be inferred, this method will return `null`.
+         * @return {?}
+         */
+        HttpRequest.prototype.detectContentTypeHeader = function () {
+            // An empty body has no content type.
+            if (this.body === null) {
+                return null;
+            }
+            // FormData bodies rely on the browser's content type assignment.
+            if (isFormData(this.body)) {
+                return null;
+            }
+            // Blobs usually have their own content type. If it doesn't, then
+            // no type can be inferred.
+            if (isBlob(this.body)) {
+                return this.body.type || null;
+            }
+            // Array buffers have unknown contents and thus no type can be inferred.
+            if (isArrayBuffer(this.body)) {
+                return null;
+            }
+            // Technically, strings could be a form of JSON data, but it's safe enough
+            // to assume they're plain strings.
+            if (typeof this.body === 'string') {
+                return 'text/plain';
+            }
+            // `HttpUrlEncodedParams` has its own content-type.
+            if (this.body instanceof HttpParams) {
+                return 'application/x-www-form-urlencoded;charset=UTF-8';
+            }
+            // Arrays, objects, and numbers will be encoded as JSON.
+            if (typeof this.body === 'object' || typeof this.body === 'number' ||
+                Array.isArray(this.body)) {
+                return 'application/json';
+            }
+            // No type could be inferred.
+            return null;
+        };
+        /**
+         * @param {?=} update
+         * @return {?}
+         */
+        HttpRequest.prototype.clone = function (update) {
+            if (update === void 0) { update = {}; }
+            // For method, url, and responseType, take the current value unless
+            // it is overridden in the update hash.
+            var /** @type {?} */ method = update.method || this.method;
+            var /** @type {?} */ url = update.url || this.url;
+            var /** @type {?} */ responseType = update.responseType || this.responseType;
+            // The body is somewhat special - a `null` value in update.body means
+            // whatever current body is present is being overridden with an empty
+            // body, whereas an `undefined` value in update.body implies no
+            // override.
+            var /** @type {?} */ body = (update.body !== undefined) ? update.body : this.body;
+            // Carefully handle the boolean options to differentiate between
+            // `false` and `undefined` in the update args.
+            var /** @type {?} */ withCredentials = (update.withCredentials !== undefined) ? update.withCredentials : this.withCredentials;
+            var /** @type {?} */ reportProgress = (update.reportProgress !== undefined) ? update.reportProgress : this.reportProgress;
+            // Headers and params may be appended to if `setHeaders` or
+            // `setParams` are used.
+            var /** @type {?} */ headers = update.headers || this.headers;
+            var /** @type {?} */ params = update.params || this.params;
+            // Check whether the caller has asked to add headers.
+            if (update.setHeaders !== undefined) {
+                // Set every requested header.
+                headers =
+                    Object.keys(update.setHeaders)
+                        .reduce(function (headers, name) { return headers.set(name, /** @type {?} */ ((update.setHeaders))[name]); }, headers);
+            }
+            // Check whether the caller has asked to set params.
+            if (update.setParams) {
+                // Set every requested param.
+                params = Object.keys(update.setParams)
+                    .reduce(function (params, param) { return params.set(param, /** @type {?} */ ((update.setParams))[param]); }, params);
+            }
+            // Finally, construct the new HttpRequest using the pieces from above.
+            return new HttpRequest(method, url, body, {
+                params: params, headers: headers, reportProgress: reportProgress, responseType: responseType, withCredentials: withCredentials,
+            });
+        };
+        return HttpRequest;
+    }());
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    var HttpEventType = {};
+    HttpEventType.Sent = 0;
+    HttpEventType.UploadProgress = 1;
+    HttpEventType.ResponseHeader = 2;
+    HttpEventType.DownloadProgress = 3;
+    HttpEventType.Response = 4;
+    HttpEventType.User = 5;
+    HttpEventType[HttpEventType.Sent] = "Sent";
+    HttpEventType[HttpEventType.UploadProgress] = "UploadProgress";
+    HttpEventType[HttpEventType.ResponseHeader] = "ResponseHeader";
+    HttpEventType[HttpEventType.DownloadProgress] = "DownloadProgress";
+    HttpEventType[HttpEventType.Response] = "Response";
+    HttpEventType[HttpEventType.User] = "User";
+    /**
+     * Base class for both `HttpResponse` and `HttpHeaderResponse`.
+     *
+     * \@experimental
+     * @abstract
+     */
+    var HttpResponseBase = (function () {
+        /**
+         * Super-constructor for all responses.
+         *
+         * The single parameter accepted is an initialization hash. Any properties
+         * of the response passed there will override the default values.
+         * @param {?} init
+         * @param {?=} defaultStatus
+         * @param {?=} defaultStatusText
+         */
+        function HttpResponseBase(init, defaultStatus, defaultStatusText) {
+            if (defaultStatus === void 0) { defaultStatus = 200; }
+            if (defaultStatusText === void 0) { defaultStatusText = 'OK'; }
+            // If the hash has values passed, use them to initialize the response.
+            // Otherwise use the default values.
+            this.headers = init.headers || new HttpHeaders();
+            this.status = init.status !== undefined ? init.status : defaultStatus;
+            this.statusText = init.statusText || defaultStatusText;
+            this.url = init.url || null;
+            // Cache the ok value to avoid defining a getter.
+            this.ok = this.status >= 200 && this.status < 300;
+        }
+        return HttpResponseBase;
+    }());
+    /**
+     * A partial HTTP response which only includes the status and header data,
+     * but no response body.
+     *
+     * `HttpHeaderResponse` is a `HttpEvent` available on the response
+     * event stream, only when progress events are requested.
+     *
+     * \@experimental
+     */
+    var HttpHeaderResponse = (function (_super) {
+        __extends(HttpHeaderResponse, _super);
+        /**
+         * Create a new `HttpHeaderResponse` with the given parameters.
+         * @param {?=} init
+         */
+        function HttpHeaderResponse(init) {
+            if (init === void 0) { init = {}; }
+            var _this = _super.call(this, init) || this;
+            _this.type = HttpEventType.ResponseHeader;
+            return _this;
+        }
+        /**
+         * Copy this `HttpHeaderResponse`, overriding its contents with the
+         * given parameter hash.
+         * @param {?=} update
+         * @return {?}
+         */
+        HttpHeaderResponse.prototype.clone = function (update) {
+            if (update === void 0) { update = {}; }
+            // Perform a straightforward initialization of the new HttpHeaderResponse,
+            // overriding the current parameters with new ones if given.
+            return new HttpHeaderResponse({
+                headers: update.headers || this.headers,
+                status: update.status !== undefined ? update.status : this.status,
+                statusText: update.statusText || this.statusText,
+                url: update.url || this.url || undefined,
+            });
+        };
+        return HttpHeaderResponse;
+    }(HttpResponseBase));
+    /**
+     * A full HTTP response, including a typed response body (which may be `null`
+     * if one was not returned).
+     *
+     * `HttpResponse` is a `HttpEvent` available on the response event
+     * stream.
+     *
+     * \@experimental
+     */
+    var HttpResponse = (function (_super) {
+        __extends(HttpResponse, _super);
+        /**
+         * Construct a new `HttpResponse`.
+         * @param {?=} init
+         */
+        function HttpResponse(init) {
+            if (init === void 0) { init = {}; }
+            var _this = _super.call(this, init) || this;
+            _this.type = HttpEventType.Response;
+            _this.body = init.body || null;
+            return _this;
+        }
+        /**
+         * @param {?=} update
+         * @return {?}
+         */
+        HttpResponse.prototype.clone = function (update) {
+            if (update === void 0) { update = {}; }
+            return new HttpResponse({
+                body: (update.body !== undefined) ? update.body : this.body,
+                headers: update.headers || this.headers,
+                status: (update.status !== undefined) ? update.status : this.status,
+                statusText: update.statusText || this.statusText,
+                url: update.url || this.url || undefined,
+            });
+        };
+        return HttpResponse;
+    }(HttpResponseBase));
+    /**
+     * A response that represents an error or failure, either from a
+     * non-successful HTTP status, an error while executing the request,
+     * or some other failure which occurred during the parsing of the response.
+     *
+     * Any error returned on the `Observable` response stream will be
+     * wrapped in an `HttpErrorResponse` to provide additional context about
+     * the state of the HTTP layer when the error occurred. The error property
+     * will contain either a wrapped Error object or the error response returned
+     * from the server.
+     *
+     * \@experimental
+     */
+    var HttpErrorResponse = (function (_super) {
+        __extends(HttpErrorResponse, _super);
+        /**
+         * @param {?} init
+         */
+        function HttpErrorResponse(init) {
+            var _this = 
+            // Initialize with a default status of 0 / Unknown Error.
+            _super.call(this, init, 0, 'Unknown Error') || this;
+            _this.name = 'HttpErrorResponse';
+            /**
+             * Errors are never okay, even when the status code is in the 2xx success range.
+             */
+            _this.ok = false;
+            // If the response was successful, then this was a parse error. Otherwise, it was
+            // a protocol-level failure of some sort. Either the request failed in transit
+            // or the server returned an unsuccessful status code.
+            if (_this.status >= 200 && _this.status < 300) {
+                _this.message = "Http failure during parsing for " + (init.url || '(unknown url)');
+            }
+            else {
+                _this.message =
+                    "Http failure response for " + (init.url || '(unknown url)') + ": " + init.status + " " + init.statusText;
+            }
+            _this.error = init.error || null;
+            return _this;
+        }
+        return HttpErrorResponse;
+    }(HttpResponseBase));
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    /**
+     * Construct an instance of `HttpRequestOptions<T>` from a source `HttpMethodOptions` and
+     * the given `body`. Basically, this clones the object and adds the body.
+     * @template T
+     * @param {?} options
+     * @param {?} body
+     * @return {?}
+     */
+    function addBody(options, body) {
+        return {
+            body: body,
+            headers: options.headers,
+            observe: options.observe,
+            params: options.params,
+            reportProgress: options.reportProgress,
+            responseType: options.responseType,
+            withCredentials: options.withCredentials,
+        };
+    }
+    /**
+     * Perform HTTP requests.
+     *
+     * `HttpClient` is available as an injectable class, with methods to perform HTTP requests.
+     * Each request method has multiple signatures, and the return type varies according to which
+     * signature is called (mainly the values of `observe` and `responseType`).
+     *
+     * \@experimental
+     */
+    var HttpClient = (function () {
+        /**
+         * @param {?} handler
+         */
+        function HttpClient(handler) {
+            this.handler = handler;
+        }
+        /**
+         * Constructs an `Observable` for a particular HTTP request that, when subscribed,
+         * fires the request through the chain of registered interceptors and on to the
+         * server.
+         *
+         * This method can be called in one of two ways. Either an `HttpRequest`
+         * instance can be passed directly as the only parameter, or a method can be
+         * passed as the first parameter, a string URL as the second, and an
+         * options hash as the third.
+         *
+         * If a `HttpRequest` object is passed directly, an `Observable` of the
+         * raw `HttpEvent` stream will be returned.
+         *
+         * If a request is instead built by providing a URL, the options object
+         * determines the return type of `request()`. In addition to configuring
+         * request parameters such as the outgoing headers and/or the body, the options
+         * hash specifies two key pieces of information about the request: the
+         * `responseType` and what to `observe`.
+         *
+         * The `responseType` value determines how a successful response body will be
+         * parsed. If `responseType` is the default `json`, a type interface for the
+         * resulting object may be passed as a type parameter to `request()`.
+         *
+         * The `observe` value determines the return type of `request()`, based on what
+         * the consumer is interested in observing. A value of `events` will return an
+         * `Observable<HttpEvent>` representing the raw `HttpEvent` stream,
+         * including progress events by default. A value of `response` will return an
+         * `Observable<HttpResponse<T>>` where the `T` parameter of `HttpResponse`
+         * depends on the `responseType` and any optionally provided type parameter.
+         * A value of `body` will return an `Observable<T>` with the same `T` body type.
+         * @param {?} first
+         * @param {?=} url
+         * @param {?=} options
+         * @return {?}
+         */
+        HttpClient.prototype.request = function (first, url, options) {
+            var _this = this;
+            if (options === void 0) { options = {}; }
+            var /** @type {?} */ req;
+            // Firstly, check whether the primary argument is an instance of `HttpRequest`.
+            if (first instanceof HttpRequest) {
+                // It is. The other arguments must be undefined (per the signatures) and can be
+                // ignored.
+                req = (first);
+            }
+            else {
+                // It's a string, so it represents a URL. Construct a request based on it,
+                // and incorporate the remaining arguments (assuming GET unless a method is
+                // provided.
+                req = new HttpRequest(first, /** @type {?} */ ((url)), options.body || null, {
+                    headers: options.headers,
+                    params: options.params,
+                    reportProgress: options.reportProgress,
+                    // By default, JSON is assumed to be returned for all calls.
+                    responseType: options.responseType || 'json',
+                    withCredentials: options.withCredentials,
+                });
+            }
+            // Start with an Observable.of() the initial request, and run the handler (which
+            // includes all interceptors) inside a concatMap(). This way, the handler runs
+            // inside an Observable chain, which causes interceptors to be re-run on every
+            // subscription (this also makes retries re-run the handler, including interceptors).
+            var /** @type {?} */ events$ = concatMap_3.call(of_1(req), function (req) { return _this.handler.handle(req); });
+            // If coming via the API signature which accepts a previously constructed HttpRequest,
+            // the only option is to get the event stream. Otherwise, return the event stream if
+            // that is what was requested.
+            if (first instanceof HttpRequest || options.observe === 'events') {
+                return events$;
+            }
+            // The requested stream contains either the full response or the body. In either
+            // case, the first step is to filter the event stream to extract a stream of
+            // responses(s).
+            var /** @type {?} */ res$ = filter_3.call(events$, function (event) { return event instanceof HttpResponse; });
+            // Decide which stream to return.
+            switch (options.observe || 'body') {
+                case 'body':
+                    // The requested stream is the body. Map the response stream to the response
+                    // body. This could be done more simply, but a misbehaving interceptor might
+                    // transform the response body into a different format and ignore the requested
+                    // responseType. Guard against this by validating that the response is of the
+                    // requested type.
+                    switch (req.responseType) {
+                        case 'arraybuffer':
+                            return map_3.call(res$, function (res) {
+                                // Validate that the body is an ArrayBuffer.
+                                if (res.body !== null && !(res.body instanceof ArrayBuffer)) {
+                                    throw new Error('Response is not an ArrayBuffer.');
+                                }
+                                return res.body;
+                            });
+                        case 'blob':
+                            return map_3.call(res$, function (res) {
+                                // Validate that the body is a Blob.
+                                if (res.body !== null && !(res.body instanceof Blob)) {
+                                    throw new Error('Response is not a Blob.');
+                                }
+                                return res.body;
+                            });
+                        case 'text':
+                            return map_3.call(res$, function (res) {
+                                // Validate that the body is a string.
+                                if (res.body !== null && typeof res.body !== 'string') {
+                                    throw new Error('Response is not a string.');
+                                }
+                                return res.body;
+                            });
+                        case 'json':
+                        default:
+                            // No validation needed for JSON responses, as they can be of any type.
+                            return map_3.call(res$, function (res) { return res.body; });
+                    }
+                case 'response':
+                    // The response stream was requested directly, so return it.
+                    return res$;
+                default:
+                    // Guard against new future observe types being added.
+                    throw new Error("Unreachable: unhandled observe type " + options.observe + "}");
+            }
+        };
+        /**
+         * Constructs an `Observable` which, when subscribed, will cause the configured
+         * DELETE request to be executed on the server. See the individual overloads for
+         * details of `delete()`'s return type based on the provided options.
+         * @param {?} url
+         * @param {?=} options
+         * @return {?}
+         */
+        HttpClient.prototype.delete = function (url, options) {
+            if (options === void 0) { options = {}; }
+            return this.request('DELETE', url, /** @type {?} */ (options));
+        };
+        /**
+         * Constructs an `Observable` which, when subscribed, will cause the configured
+         * GET request to be executed on the server. See the individual overloads for
+         * details of `get()`'s return type based on the provided options.
+         * @param {?} url
+         * @param {?=} options
+         * @return {?}
+         */
+        HttpClient.prototype.get = function (url, options) {
+            if (options === void 0) { options = {}; }
+            return this.request('GET', url, /** @type {?} */ (options));
+        };
+        /**
+         * Constructs an `Observable` which, when subscribed, will cause the configured
+         * HEAD request to be executed on the server. See the individual overloads for
+         * details of `head()`'s return type based on the provided options.
+         * @param {?} url
+         * @param {?=} options
+         * @return {?}
+         */
+        HttpClient.prototype.head = function (url, options) {
+            if (options === void 0) { options = {}; }
+            return this.request('HEAD', url, /** @type {?} */ (options));
+        };
+        /**
+         * Constructs an `Observable` which, when subscribed, will cause a request
+         * with the special method `JSONP` to be dispatched via the interceptor pipeline.
+         *
+         * A suitable interceptor must be installed (e.g. via the `HttpClientJsonpModule`).
+         * If no such interceptor is reached, then the `JSONP` request will likely be
+         * rejected by the configured backend.
+         * @template T
+         * @param {?} url
+         * @param {?} callbackParam
+         * @return {?}
+         */
+        HttpClient.prototype.jsonp = function (url, callbackParam) {
+            return this.request('JSONP', url, {
+                params: new HttpParams().append(callbackParam, 'JSONP_CALLBACK'),
+                observe: 'body',
+                responseType: 'json',
+            });
+        };
+        /**
+         * Constructs an `Observable` which, when subscribed, will cause the configured
+         * OPTIONS request to be executed on the server. See the individual overloads for
+         * details of `options()`'s return type based on the provided options.
+         * @param {?} url
+         * @param {?=} options
+         * @return {?}
+         */
+        HttpClient.prototype.options = function (url, options) {
+            if (options === void 0) { options = {}; }
+            return this.request('OPTIONS', url, /** @type {?} */ (options));
+        };
+        /**
+         * Constructs an `Observable` which, when subscribed, will cause the configured
+         * PATCH request to be executed on the server. See the individual overloads for
+         * details of `patch()`'s return type based on the provided options.
+         * @param {?} url
+         * @param {?} body
+         * @param {?=} options
+         * @return {?}
+         */
+        HttpClient.prototype.patch = function (url, body, options) {
+            if (options === void 0) { options = {}; }
+            return this.request('PATCH', url, addBody(options, body));
+        };
+        /**
+         * Constructs an `Observable` which, when subscribed, will cause the configured
+         * POST request to be executed on the server. See the individual overloads for
+         * details of `post()`'s return type based on the provided options.
+         * @param {?} url
+         * @param {?} body
+         * @param {?=} options
+         * @return {?}
+         */
+        HttpClient.prototype.post = function (url, body, options) {
+            if (options === void 0) { options = {}; }
+            return this.request('POST', url, addBody(options, body));
+        };
+        /**
+         * Constructs an `Observable` which, when subscribed, will cause the configured
+         * POST request to be executed on the server. See the individual overloads for
+         * details of `post()`'s return type based on the provided options.
+         * @param {?} url
+         * @param {?} body
+         * @param {?=} options
+         * @return {?}
+         */
+        HttpClient.prototype.put = function (url, body, options) {
+            if (options === void 0) { options = {}; }
+            return this.request('PUT', url, addBody(options, body));
+        };
+        return HttpClient;
+    }());
+    HttpClient.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    HttpClient.ctorParameters = function () { return [
+        { type: HttpHandler, },
+    ]; };
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    /**
+     * `HttpHandler` which applies an `HttpInterceptor` to an `HttpRequest`.
+     *
+     * \@experimental
+     */
+    var HttpInterceptorHandler = (function () {
+        /**
+         * @param {?} next
+         * @param {?} interceptor
+         */
+        function HttpInterceptorHandler(next, interceptor) {
+            this.next = next;
+            this.interceptor = interceptor;
+        }
+        /**
+         * @param {?} req
+         * @return {?}
+         */
+        HttpInterceptorHandler.prototype.handle = function (req) {
+            return this.interceptor.intercept(req, this.next);
+        };
+        return HttpInterceptorHandler;
+    }());
+    /**
+     * A multi-provider token which represents the array of `HttpInterceptor`s that
+     * are registered.
+     *
+     * \@experimental
+     */
+    var HTTP_INTERCEPTORS = new InjectionToken('HTTP_INTERCEPTORS');
+    var NoopInterceptor = (function () {
+        function NoopInterceptor() {
+        }
+        /**
+         * @param {?} req
+         * @param {?} next
+         * @return {?}
+         */
+        NoopInterceptor.prototype.intercept = function (req, next) {
+            return next.handle(req);
+        };
+        return NoopInterceptor;
+    }());
+    NoopInterceptor.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    NoopInterceptor.ctorParameters = function () { return []; };
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    // Every request made through JSONP needs a callback name that's unique across the
+    // whole page. Each request is assigned an id and the callback name is constructed
+    // from that. The next id to be assigned is tracked in a global variable here that
+    // is shared among all applications on the page.
+    var nextRequestId = 0;
+    // Error text given when a JSONP script is injected, but doesn't invoke the callback
+    // passed in its URL.
+    var JSONP_ERR_NO_CALLBACK = 'JSONP injected script did not invoke callback.';
+    // Error text given when a request is passed to the JsonpClientBackend that doesn't
+    // have a request method JSONP.
+    var JSONP_ERR_WRONG_METHOD = 'JSONP requests must use JSONP request method.';
+    var JSONP_ERR_WRONG_RESPONSE_TYPE = 'JSONP requests must use Json response type.';
+    /**
+     * DI token/abstract type representing a map of JSONP callbacks.
+     *
+     * In the browser, this should always be the `window` object.
+     *
+     * \@experimental
+     * @abstract
+     */
+    var JsonpCallbackContext = (function () {
+        function JsonpCallbackContext() {
+        }
+        return JsonpCallbackContext;
+    }());
+    /**
+     * `HttpBackend` that only processes `HttpRequest` with the JSONP method,
+     * by performing JSONP style requests.
+     *
+     * \@experimental
+     */
+    var JsonpClientBackend = (function () {
+        /**
+         * @param {?} callbackMap
+         * @param {?} document
+         */
+        function JsonpClientBackend(callbackMap, document) {
+            this.callbackMap = callbackMap;
+            this.document = document;
+        }
+        /**
+         * Get the name of the next callback method, by incrementing the global `nextRequestId`.
+         * @return {?}
+         */
+        JsonpClientBackend.prototype.nextCallback = function () { return "ng_jsonp_callback_" + nextRequestId++; };
+        /**
+         * Process a JSONP request and return an event stream of the results.
+         * @param {?} req
+         * @return {?}
+         */
+        JsonpClientBackend.prototype.handle = function (req) {
+            var _this = this;
+            // Firstly, check both the method and response type. If either doesn't match
+            // then the request was improperly routed here and cannot be handled.
+            if (req.method !== 'JSONP') {
+                throw new Error(JSONP_ERR_WRONG_METHOD);
+            }
+            else if (req.responseType !== 'json') {
+                throw new Error(JSONP_ERR_WRONG_RESPONSE_TYPE);
+            }
+            // Everything else happens inside the Observable boundary.
+            return new Observable_2(function (observer) {
+                // The first step to make a request is to generate the callback name, and replace the
+                // callback placeholder in the URL with the name. Care has to be taken here to ensure
+                // a trailing &, if matched, gets inserted back into the URL in the correct place.
+                var /** @type {?} */ callback = _this.nextCallback();
+                var /** @type {?} */ url = req.urlWithParams.replace(/=JSONP_CALLBACK(&|$)/, "=" + callback + "$1");
+                // Construct the <script> tag and point it at the URL.
+                var /** @type {?} */ node = _this.document.createElement('script');
+                node.src = url;
+                // A JSONP request requires waiting for multiple callbacks. These variables
+                // are closed over and track state across those callbacks.
+                // The response object, if one has been received, or null otherwise.
+                var /** @type {?} */ body = null;
+                // Whether the response callback has been called.
+                var /** @type {?} */ finished = false;
+                // Whether the request has been cancelled (and thus any other callbacks)
+                // should be ignored.
+                var /** @type {?} */ cancelled = false;
+                // Set the response callback in this.callbackMap (which will be the window
+                // object in the browser. The script being loaded via the <script> tag will
+                // eventually call this callback.
+                _this.callbackMap[callback] = function (data) {
+                    // Data has been received from the JSONP script. Firstly, delete this callback.
+                    delete _this.callbackMap[callback];
+                    // Next, make sure the request wasn't cancelled in the meantime.
+                    if (cancelled) {
+                        return;
+                    }
+                    // Set state to indicate data was received.
+                    body = data;
+                    finished = true;
+                };
+                // cleanup() is a utility closure that removes the <script> from the page and
+                // the response callback from the window. This logic is used in both the
+                // success, error, and cancellation paths, so it's extracted out for convenience.
+                var /** @type {?} */ cleanup = function () {
+                    // Remove the <script> tag if it's still on the page.
+                    if (node.parentNode) {
+                        node.parentNode.removeChild(node);
+                    }
+                    // Remove the response callback from the callbackMap (window object in the
+                    // browser).
+                    delete _this.callbackMap[callback];
+                };
+                // onLoad() is the success callback which runs after the response callback
+                // if the JSONP script loads successfully. The event itself is unimportant.
+                // If something went wrong, onLoad() may run without the response callback
+                // having been invoked.
+                var /** @type {?} */ onLoad = function (event) {
+                    // Do nothing if the request has been cancelled.
+                    if (cancelled) {
+                        return;
+                    }
+                    // Cleanup the page.
+                    cleanup();
+                    // Check whether the response callback has run.
+                    if (!finished) {
+                        // It hasn't, something went wrong with the request. Return an error via
+                        // the Observable error path. All JSONP errors have status 0.
+                        observer.error(new HttpErrorResponse({
+                            url: url,
+                            status: 0,
+                            statusText: 'JSONP Error',
+                            error: new Error(JSONP_ERR_NO_CALLBACK),
+                        }));
+                        return;
+                    }
+                    // Success. body either contains the response body or null if none was
+                    // returned.
+                    observer.next(new HttpResponse({
+                        body: body,
+                        status: 200,
+                        statusText: 'OK', url: url,
+                    }));
+                    // Complete the stream, the resposne is over.
+                    observer.complete();
+                };
+                // onError() is the error callback, which runs if the script returned generates
+                // a Javascript error. It emits the error via the Observable error channel as
+                // a HttpErrorResponse.
+                var /** @type {?} */ onError = function (error) {
+                    // If the request was already cancelled, no need to emit anything.
+                    if (cancelled) {
+                        return;
+                    }
+                    cleanup();
+                    // Wrap the error in a HttpErrorResponse.
+                    observer.error(new HttpErrorResponse({
+                        error: error,
+                        status: 0,
+                        statusText: 'JSONP Error', url: url,
+                    }));
+                };
+                // Subscribe to both the success (load) and error events on the <script> tag,
+                // and add it to the page.
+                node.addEventListener('load', onLoad);
+                node.addEventListener('error', onError);
+                _this.document.body.appendChild(node);
+                // The request has now been successfully sent.
+                observer.next({ type: HttpEventType.Sent });
+                // Cancellation handler.
+                return function () {
+                    // Track the cancellation so event listeners won't do anything even if already scheduled.
+                    cancelled = true;
+                    // Remove the event listeners so they won't run if the events later fire.
+                    node.removeEventListener('load', onLoad);
+                    node.removeEventListener('error', onError);
+                    // And finally, clean up the page.
+                    cleanup();
+                };
+            });
+        };
+        return JsonpClientBackend;
+    }());
+    JsonpClientBackend.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    JsonpClientBackend.ctorParameters = function () { return [
+        { type: JsonpCallbackContext, },
+        { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] },] },
+    ]; };
+    /**
+     * An `HttpInterceptor` which identifies requests with the method JSONP and
+     * shifts them to the `JsonpClientBackend`.
+     *
+     * \@experimental
+     */
+    var JsonpInterceptor = (function () {
+        /**
+         * @param {?} jsonp
+         */
+        function JsonpInterceptor(jsonp) {
+            this.jsonp = jsonp;
+        }
+        /**
+         * @param {?} req
+         * @param {?} next
+         * @return {?}
+         */
+        JsonpInterceptor.prototype.intercept = function (req, next) {
+            if (req.method === 'JSONP') {
+                return this.jsonp.handle(/** @type {?} */ (req));
+            }
+            // Fall through for normal HTTP requests.
+            return next.handle(req);
+        };
+        return JsonpInterceptor;
+    }());
+    JsonpInterceptor.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    JsonpInterceptor.ctorParameters = function () { return [
+        { type: JsonpClientBackend, },
+    ]; };
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    var XSSI_PREFIX = /^\)\]\}',?\n/;
+    /**
+     * Determine an appropriate URL for the response, by checking either
+     * XMLHttpRequest.responseURL or the X-Request-URL header.
+     * @param {?} xhr
+     * @return {?}
+     */
+    function getResponseUrl(xhr) {
+        if ('responseURL' in xhr && xhr.responseURL) {
+            return xhr.responseURL;
+        }
+        if (/^X-Request-URL:/m.test(xhr.getAllResponseHeaders())) {
+            return xhr.getResponseHeader('X-Request-URL');
+        }
+        return null;
+    }
+    /**
+     * A wrapper around the `XMLHttpRequest` constructor.
+     *
+     * \@experimental
+     * @abstract
+     */
+    var XhrFactory = (function () {
+        function XhrFactory() {
+        }
+        /**
+         * @abstract
+         * @return {?}
+         */
+        XhrFactory.prototype.build = function () { };
+        return XhrFactory;
+    }());
+    /**
+     * A factory for \@{link HttpXhrBackend} that uses the `XMLHttpRequest` browser API.
+     *
+     * \@experimental
+     */
+    var BrowserXhr = (function () {
+        function BrowserXhr() {
+        }
+        /**
+         * @return {?}
+         */
+        BrowserXhr.prototype.build = function () { return ((new XMLHttpRequest())); };
+        return BrowserXhr;
+    }());
+    BrowserXhr.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    BrowserXhr.ctorParameters = function () { return []; };
+    /**
+     * An `HttpBackend` which uses the XMLHttpRequest API to send
+     * requests to a backend server.
+     *
+     * \@experimental
+     */
+    var HttpXhrBackend = (function () {
+        /**
+         * @param {?} xhrFactory
+         */
+        function HttpXhrBackend(xhrFactory) {
+            this.xhrFactory = xhrFactory;
+        }
+        /**
+         * Process a request and return a stream of response events.
+         * @param {?} req
+         * @return {?}
+         */
+        HttpXhrBackend.prototype.handle = function (req) {
+            var _this = this;
+            // Quick check to give a better error message when a user attempts to use
+            // HttpClient.jsonp() without installing the JsonpClientModule
+            if (req.method === 'JSONP') {
+                throw new Error("Attempted to construct Jsonp request without JsonpClientModule installed.");
+            }
+            // Everything happens on Observable subscription.
+            return new Observable_2(function (observer) {
+                // Start by setting up the XHR object with request method, URL, and withCredentials flag.
+                var /** @type {?} */ xhr = _this.xhrFactory.build();
+                xhr.open(req.method, req.urlWithParams);
+                if (!!req.withCredentials) {
+                    xhr.withCredentials = true;
+                }
+                // Add all the requested headers.
+                req.headers.forEach(function (name, values) { return xhr.setRequestHeader(name, values.join(',')); });
+                // Add an Accept header if one isn't present already.
+                if (!req.headers.has('Accept')) {
+                    xhr.setRequestHeader('Accept', 'application/json, text/plain, */*');
+                }
+                // Auto-detect the Content-Type header if one isn't present already.
+                if (!req.headers.has('Content-Type')) {
+                    var /** @type {?} */ detectedType = req.detectContentTypeHeader();
+                    // Sometimes Content-Type detection fails.
+                    if (detectedType !== null) {
+                        xhr.setRequestHeader('Content-Type', detectedType);
+                    }
+                }
+                // Set the responseType if one was requested.
+                if (req.responseType) {
+                    var /** @type {?} */ responseType = req.responseType.toLowerCase();
+                    // JSON responses need to be processed as text. This is because if the server
+                    // returns an XSSI-prefixed JSON response, the browser will fail to parse it,
+                    // xhr.response will be null, and xhr.responseText cannot be accessed to
+                    // retrieve the prefixed JSON data in order to strip the prefix. Thus, all JSON
+                    // is parsed by first requesting text and then applying JSON.parse.
+                    xhr.responseType = (((responseType !== 'json') ? responseType : 'text'));
+                }
+                // Serialize the request body if one is present. If not, this will be set to null.
+                var /** @type {?} */ reqBody = req.serializeBody();
+                // If progress events are enabled, response headers will be delivered
+                // in two events - the HttpHeaderResponse event and the full HttpResponse
+                // event. However, since response headers don't change in between these
+                // two events, it doesn't make sense to parse them twice. So headerResponse
+                // caches the data extracted from the response whenever it's first parsed,
+                // to ensure parsing isn't duplicated.
+                var /** @type {?} */ headerResponse = null;
+                // partialFromXhr extracts the HttpHeaderResponse from the current XMLHttpRequest
+                // state, and memoizes it into headerResponse.
+                var /** @type {?} */ partialFromXhr = function () {
+                    if (headerResponse !== null) {
+                        return headerResponse;
+                    }
+                    // Read status and normalize an IE9 bug (http://bugs.jquery.com/ticket/1450).
+                    var /** @type {?} */ status = xhr.status === 1223 ? 204 : xhr.status;
+                    var /** @type {?} */ statusText = xhr.statusText || 'OK';
+                    // Parse headers from XMLHttpRequest - this step is lazy.
+                    var /** @type {?} */ headers = new HttpHeaders(xhr.getAllResponseHeaders());
+                    // Read the response URL from the XMLHttpResponse instance and fall back on the
+                    // request URL.
+                    var /** @type {?} */ url = getResponseUrl(xhr) || req.url;
+                    // Construct the HttpHeaderResponse and memoize it.
+                    headerResponse = new HttpHeaderResponse({ headers: headers, status: status, statusText: statusText, url: url });
+                    return headerResponse;
+                };
+                // Next, a few closures are defined for the various events which XMLHttpRequest can
+                // emit. This allows them to be unregistered as event listeners later.
+                // First up is the load event, which represents a response being fully available.
+                var /** @type {?} */ onLoad = function () {
+                    // Read response state from the memoized partial data.
+                    var _a = partialFromXhr(), headers = _a.headers, status = _a.status, statusText = _a.statusText, url = _a.url;
+                    // The body will be read out if present.
+                    var /** @type {?} */ body = null;
+                    if (status !== 204) {
+                        // Use XMLHttpRequest.response if set, responseText otherwise.
+                        body = (typeof xhr.response === 'undefined') ? xhr.responseText : xhr.response;
+                    }
+                    // Normalize another potential bug (this one comes from CORS).
+                    if (status === 0) {
+                        status = !!body ? 200 : 0;
+                    }
+                    // ok determines whether the response will be transmitted on the event or
+                    // error channel. Unsuccessful status codes (not 2xx) will always be errors,
+                    // but a successful status code can still result in an error if the user
+                    // asked for JSON data and the body cannot be parsed as such.
+                    var /** @type {?} */ ok = status >= 200 && status < 300;
+                    // Check whether the body needs to be parsed as JSON (in many cases the browser
+                    // will have done that already).
+                    if (ok && req.responseType === 'json' && typeof body === 'string') {
+                        // Attempt the parse. If it fails, a parse error should be delivered to the user.
+                        body = body.replace(XSSI_PREFIX, '');
+                        try {
+                            body = JSON.parse(body);
+                        }
+                        catch (error) {
+                            // Even though the response status was 2xx, this is still an error.
+                            ok = false;
+                            // The parse error contains the text of the body that failed to parse.
+                            body = ({ error: error, text: body });
+                        }
+                    }
+                    else if (!ok && req.responseType === 'json' && typeof body === 'string') {
+                        try {
+                            // Attempt to parse the body as JSON.
+                            body = JSON.parse(body);
+                        }
+                        catch (error) {
+                            // Cannot be certain that the body was meant to be parsed as JSON.
+                            // Leave the body as a string.
+                        }
+                    }
+                    if (ok) {
+                        // A successful response is delivered on the event stream.
+                        observer.next(new HttpResponse({
+                            body: body,
+                            headers: headers,
+                            status: status,
+                            statusText: statusText,
+                            url: url || undefined,
+                        }));
+                        // The full body has been received and delivered, no further events
+                        // are possible. This request is complete.
+                        observer.complete();
+                    }
+                    else {
+                        // An unsuccessful request is delivered on the error channel.
+                        observer.error(new HttpErrorResponse({
+                            // The error in this case is the response body (error from the server).
+                            error: body,
+                            headers: headers,
+                            status: status,
+                            statusText: statusText,
+                            url: url || undefined,
+                        }));
+                    }
+                };
+                // The onError callback is called when something goes wrong at the network level.
+                // Connection timeout, DNS error, offline, etc. These are actual errors, and are
+                // transmitted on the error channel.
+                var /** @type {?} */ onError = function (error) {
+                    var /** @type {?} */ res = new HttpErrorResponse({
+                        error: error,
+                        status: xhr.status || 0,
+                        statusText: xhr.statusText || 'Unknown Error',
+                    });
+                    observer.error(res);
+                };
+                // The sentHeaders flag tracks whether the HttpResponseHeaders event
+                // has been sent on the stream. This is necessary to track if progress
+                // is enabled since the event will be sent on only the first download
+                // progerss event.
+                var /** @type {?} */ sentHeaders = false;
+                // The download progress event handler, which is only registered if
+                // progress events are enabled.
+                var /** @type {?} */ onDownProgress = function (event) {
+                    // Send the HttpResponseHeaders event if it hasn't been sent already.
+                    if (!sentHeaders) {
+                        observer.next(partialFromXhr());
+                        sentHeaders = true;
+                    }
+                    // Start building the download progress event to deliver on the response
+                    // event stream.
+                    var /** @type {?} */ progressEvent = {
+                        type: HttpEventType.DownloadProgress,
+                        loaded: event.loaded,
+                    };
+                    // Set the total number of bytes in the event if it's available.
+                    if (event.lengthComputable) {
+                        progressEvent.total = event.total;
+                    }
+                    // If the request was for text content and a partial response is
+                    // available on XMLHttpRequest, include it in the progress event
+                    // to allow for streaming reads.
+                    if (req.responseType === 'text' && !!xhr.responseText) {
+                        progressEvent.partialText = xhr.responseText;
+                    }
+                    // Finally, fire the event.
+                    observer.next(progressEvent);
+                };
+                // The upload progress event handler, which is only registered if
+                // progress events are enabled.
+                var /** @type {?} */ onUpProgress = function (event) {
+                    // Upload progress events are simpler. Begin building the progress
+                    // event.
+                    var /** @type {?} */ progress = {
+                        type: HttpEventType.UploadProgress,
+                        loaded: event.loaded,
+                    };
+                    // If the total number of bytes being uploaded is available, include
+                    // it.
+                    if (event.lengthComputable) {
+                        progress.total = event.total;
+                    }
+                    // Send the event.
+                    observer.next(progress);
+                };
+                // By default, register for load and error events.
+                xhr.addEventListener('load', onLoad);
+                xhr.addEventListener('error', onError);
+                // Progress events are only enabled if requested.
+                if (req.reportProgress) {
+                    // Download progress is always enabled if requested.
+                    xhr.addEventListener('progress', onDownProgress);
+                    // Upload progress depends on whether there is a body to upload.
+                    if (reqBody !== null && xhr.upload) {
+                        xhr.upload.addEventListener('progress', onUpProgress);
+                    }
+                }
+                // Fire the request, and notify the event stream that it was fired.
+                xhr.send(reqBody);
+                observer.next({ type: HttpEventType.Sent });
+                // This is the return from the Observable function, which is the
+                // request cancellation handler.
+                return function () {
+                    // On a cancellation, remove all registered event listeners.
+                    xhr.removeEventListener('error', onError);
+                    xhr.removeEventListener('load', onLoad);
+                    if (req.reportProgress) {
+                        xhr.removeEventListener('progress', onDownProgress);
+                        if (reqBody !== null && xhr.upload) {
+                            xhr.upload.removeEventListener('progress', onUpProgress);
+                        }
+                    }
+                    // Finally, abort the in-flight request.
+                    xhr.abort();
+                };
+            });
+        };
+        return HttpXhrBackend;
+    }());
+    HttpXhrBackend.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    HttpXhrBackend.ctorParameters = function () { return [
+        { type: XhrFactory, },
+    ]; };
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    var XSRF_COOKIE_NAME = new InjectionToken('XSRF_COOKIE_NAME');
+    var XSRF_HEADER_NAME = new InjectionToken('XSRF_HEADER_NAME');
+    /**
+     * Retrieves the current XSRF token to use with the next outgoing request.
+     *
+     * \@experimental
+     * @abstract
+     */
+    var HttpXsrfTokenExtractor = (function () {
+        function HttpXsrfTokenExtractor() {
+        }
+        /**
+         * Get the XSRF token to use with an outgoing request.
+         *
+         * Will be called for every request, so the token may change between requests.
+         * @abstract
+         * @return {?}
+         */
+        HttpXsrfTokenExtractor.prototype.getToken = function () { };
+        return HttpXsrfTokenExtractor;
+    }());
+    /**
+     * `HttpXsrfTokenExtractor` which retrieves the token from a cookie.
+     */
+    var HttpXsrfCookieExtractor = (function () {
+        /**
+         * @param {?} doc
+         * @param {?} platform
+         * @param {?} cookieName
+         */
+        function HttpXsrfCookieExtractor(doc, platform, cookieName) {
+            this.doc = doc;
+            this.platform = platform;
+            this.cookieName = cookieName;
+            this.lastCookieString = '';
+            this.lastToken = null;
+            /**
+             * \@internal for testing
+             */
+            this.parseCount = 0;
+        }
+        /**
+         * @return {?}
+         */
+        HttpXsrfCookieExtractor.prototype.getToken = function () {
+            if (this.platform === 'server') {
+                return null;
+            }
+            var /** @type {?} */ cookieString = this.doc.cookie || '';
+            if (cookieString !== this.lastCookieString) {
+                this.parseCount++;
+                this.lastToken = parseCookieValue(cookieString, this.cookieName);
+                this.lastCookieString = cookieString;
+            }
+            return this.lastToken;
+        };
+        return HttpXsrfCookieExtractor;
+    }());
+    HttpXsrfCookieExtractor.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    HttpXsrfCookieExtractor.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] },] },
+        { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] },] },
+        { type: undefined, decorators: [{ type: Inject, args: [XSRF_COOKIE_NAME,] },] },
+    ]; };
+    /**
+     * `HttpInterceptor` which adds an XSRF token to eligible outgoing requests.
+     */
+    var HttpXsrfInterceptor = (function () {
+        /**
+         * @param {?} tokenService
+         * @param {?} headerName
+         */
+        function HttpXsrfInterceptor(tokenService, headerName) {
+            this.tokenService = tokenService;
+            this.headerName = headerName;
+        }
+        /**
+         * @param {?} req
+         * @param {?} next
+         * @return {?}
+         */
+        HttpXsrfInterceptor.prototype.intercept = function (req, next) {
+            var /** @type {?} */ lcUrl = req.url.toLowerCase();
+            // Skip both non-mutating requests and absolute URLs.
+            // Non-mutating requests don't require a token, and absolute URLs require special handling
+            // anyway as the cookie set
+            // on our origin is not the same as the token expected by another origin.
+            if (req.method === 'GET' || req.method === 'HEAD' || lcUrl.startsWith('http://') ||
+                lcUrl.startsWith('https://')) {
+                return next.handle(req);
+            }
+            var /** @type {?} */ token = this.tokenService.getToken();
+            // Be careful not to overwrite an existing header of the same name.
+            if (token !== null && !req.headers.has(this.headerName)) {
+                req = req.clone({ headers: req.headers.set(this.headerName, token) });
+            }
+            return next.handle(req);
+        };
+        return HttpXsrfInterceptor;
+    }());
+    HttpXsrfInterceptor.decorators = [
+        { type: Injectable },
+    ];
+    /**
+     * @nocollapse
+     */
+    HttpXsrfInterceptor.ctorParameters = function () { return [
+        { type: HttpXsrfTokenExtractor, },
+        { type: undefined, decorators: [{ type: Inject, args: [XSRF_HEADER_NAME,] },] },
+    ]; };
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+    /**
+     * Constructs an `HttpHandler` that applies a bunch of `HttpInterceptor`s
+     * to a request before passing it to the given `HttpBackend`.
+     *
+     * Meant to be used as a factory function within `HttpClientModule`.
+     *
+     * \@experimental
+     * @param {?} backend
+     * @param {?=} interceptors
+     * @return {?}
+     */
+    function interceptingHandler(backend, interceptors) {
+        if (interceptors === void 0) { interceptors = []; }
+        if (!interceptors) {
+            return backend;
+        }
+        return interceptors.reduceRight(function (next, interceptor) { return new HttpInterceptorHandler(next, interceptor); }, backend);
+    }
+    /**
+     * `NgModule` which adds XSRF protection support to outgoing requests.
+     *
+     * Provided the server supports a cookie-based XSRF protection system, this
+     * module can be used directly to configure XSRF protection with the correct
+     * cookie and header names.
+     *
+     * If no such names are provided, the default is to use `X-XSRF-TOKEN` for
+     * the header name and `XSRF-TOKEN` for the cookie name.
+     *
+     * \@experimental
+     */
+    var HttpClientXsrfModule = (function () {
+        function HttpClientXsrfModule() {
+        }
+        /**
+         * Disable the default XSRF protection.
+         * @return {?}
+         */
+        HttpClientXsrfModule.disable = function () {
+            return {
+                ngModule: HttpClientXsrfModule,
+                providers: [
+                    { provide: HttpXsrfInterceptor, useClass: NoopInterceptor },
+                ],
+            };
+        };
+        /**
+         * Configure XSRF protection to use the given cookie name or header name,
+         * or the default names (as described above) if not provided.
+         * @param {?=} options
+         * @return {?}
+         */
+        HttpClientXsrfModule.withOptions = function (options) {
+            if (options === void 0) { options = {}; }
+            return {
+                ngModule: HttpClientXsrfModule,
+                providers: [
+                    options.cookieName ? { provide: XSRF_COOKIE_NAME, useValue: options.cookieName } : [],
+                    options.headerName ? { provide: XSRF_HEADER_NAME, useValue: options.headerName } : [],
+                ],
+            };
+        };
+        return HttpClientXsrfModule;
+    }());
+    HttpClientXsrfModule.decorators = [
+        { type: NgModule, args: [{
+                    providers: [
+                        HttpXsrfInterceptor,
+                        { provide: HTTP_INTERCEPTORS, useExisting: HttpXsrfInterceptor, multi: true },
+                        { provide: HttpXsrfTokenExtractor, useClass: HttpXsrfCookieExtractor },
+                        { provide: XSRF_COOKIE_NAME, useValue: 'XSRF-TOKEN' },
+                        { provide: XSRF_HEADER_NAME, useValue: 'X-XSRF-TOKEN' },
+                    ],
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    HttpClientXsrfModule.ctorParameters = function () { return []; };
+    /**
+     * `NgModule` which provides the `HttpClient` and associated services.
+     *
+     * Interceptors can be added to the chain behind `HttpClient` by binding them
+     * to the multiprovider for `HTTP_INTERCEPTORS`.
+     *
+     * \@experimental
+     */
+    var HttpClientModule = (function () {
+        function HttpClientModule() {
+        }
+        return HttpClientModule;
+    }());
+    HttpClientModule.decorators = [
+        { type: NgModule, args: [{
+                    imports: [
+                        HttpClientXsrfModule.withOptions({
+                            cookieName: 'XSRF-TOKEN',
+                            headerName: 'X-XSRF-TOKEN',
+                        }),
+                    ],
+                    providers: [
+                        HttpClient,
+                        // HttpHandler is the backend + interceptors and is constructed
+                        // using the interceptingHandler factory function.
+                        {
+                            provide: HttpHandler,
+                            useFactory: interceptingHandler,
+                            deps: [HttpBackend, [new Optional(), new Inject(HTTP_INTERCEPTORS)]],
+                        },
+                        HttpXhrBackend,
+                        { provide: HttpBackend, useExisting: HttpXhrBackend },
+                        BrowserXhr,
+                        { provide: XhrFactory, useExisting: BrowserXhr },
+                    ],
+                },] },
+    ];
+    /**
+     * @nocollapse
+     */
+    HttpClientModule.ctorParameters = function () { return []; };
+
+    var __decorate$3 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    };
+    var __metadata$3 = (undefined && undefined.__metadata) || function (k, v) {
+        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+    };
+    var UserService = /** @class */ (function () {
+        function UserService(http) {
+            this.http = http;
+            this.url = "https://jsonplaceholder.typicode.com/users";
+            this.users = [
+                { name: "Ben" },
+                { name: "Bob" },
+                { name: "Rita" },
+                { name: "Ata" },
+            ];
+        }
+        UserService.prototype.getUsers = function () {
+            console.log("UserService is fetching users...");
+            return of_1(this.users);
+        };
+        UserService.prototype.getRealUsers = function () {
+            return this.http.get(this.url);
+        };
+        UserService = __decorate$3([
+            Injectable(),
+            __metadata$3("design:paramtypes", [HttpClient])
+        ], UserService);
+        return UserService;
+    }());
+
+    var __decorate$4 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    };
+    var __metadata$4 = (undefined && undefined.__metadata) || function (k, v) {
+        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+    };
+    var UsersComponent = /** @class */ (function () {
+        function UsersComponent(userService) {
+            this.userService = userService;
+            // constructor
+        }
+        UsersComponent.prototype.ngOnInit = function () {
+            var _this = this;
+            console.log("Users component launched");
+            this.userService.getUsers()
+                .subscribe(function (users) {
+                _this.users = users;
+            });
+            this.userService.getRealUsers()
+                .subscribe(function (realUsers) {
+                _this.realUsers = realUsers;
+            });
+            console.table(this.users);
+            console.table(this.realUsers);
+        };
+        UsersComponent.prototype.trackByFn = function (index, item) {
+            return index; // or item.id
+        };
+        UsersComponent = __decorate$4([
+            Component({
+                selector: "mv-app-users",
+                templateUrl: "./users.component.html",
+            }),
+            __metadata$4("design:paramtypes", [UserService])
+        ], UsersComponent);
+        return UsersComponent;
+    }());
+
+    /* tslint:disable object-literal-sort-keys */
+    var AppRoutes = [
+        {
+            path: "home",
+            component: HomeComponent,
+        },
+        {
+            path: "users",
+            component: UsersComponent,
+        },
+        { path: "**", redirectTo: "users" },
+    ];
+    /* tslint:enable */
+
     /**
      * @license Angular v4.4.7
      * (c) 2010-2017 Google, Inc. https://angular.io/
@@ -29753,7 +32442,7 @@
      */
     BrowserAnimationsModule.ctorParameters = function () { return []; };
 
-    var __extends$e = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$g = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -29764,7 +32453,7 @@
      * @class BehaviorSubject<T>
      */
     var BehaviorSubject = (function (_super) {
-        __extends$e(BehaviorSubject, _super);
+        __extends$g(BehaviorSubject, _super);
         function BehaviorSubject(_value) {
             _super.call(this);
             this._value = _value;
@@ -29801,7 +32490,7 @@
     }(Subject_1.Subject));
     var BehaviorSubject_2 = BehaviorSubject;
 
-    var __extends$f = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$h = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -29814,7 +32503,7 @@
      * @hide true
      */
     var PromiseObservable = (function (_super) {
-        __extends$f(PromiseObservable, _super);
+        __extends$h(PromiseObservable, _super);
         function PromiseObservable(promise, scheduler) {
             _super.call(this);
             this.promise = promise;
@@ -29926,7 +32615,7 @@
     	PromiseObservable: PromiseObservable_2
     };
 
-    var __extends$g = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$i = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -29940,7 +32629,7 @@
      * @hide true
      */
     var IteratorObservable = (function (_super) {
-        __extends$g(IteratorObservable, _super);
+        __extends$i(IteratorObservable, _super);
         function IteratorObservable(iterator$$1, scheduler) {
             _super.call(this);
             this.scheduler = scheduler;
@@ -30093,7 +32782,7 @@
     	IteratorObservable: IteratorObservable_2
     };
 
-    var __extends$h = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$j = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -30107,7 +32796,7 @@
      * @hide true
      */
     var ArrayLikeObservable = (function (_super) {
-        __extends$h(ArrayLikeObservable, _super);
+        __extends$j(ArrayLikeObservable, _super);
         function ArrayLikeObservable(arrayLike, scheduler) {
             _super.call(this);
             this.arrayLike = arrayLike;
@@ -30297,7 +32986,7 @@
     	Notification: Notification_2
     };
 
-    var __extends$i = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$k = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -30375,7 +33064,7 @@
      * @extends {Ignored}
      */
     var ObserveOnSubscriber = (function (_super) {
-        __extends$i(ObserveOnSubscriber, _super);
+        __extends$k(ObserveOnSubscriber, _super);
         function ObserveOnSubscriber(destination, scheduler, delay) {
             if (delay === void 0) { delay = 0; }
             _super.call(this, destination);
@@ -30419,7 +33108,7 @@
     	ObserveOnMessage: ObserveOnMessage_1
     };
 
-    var __extends$j = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$l = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -30441,7 +33130,7 @@
      * @hide true
      */
     var FromObservable = (function (_super) {
-        __extends$j(FromObservable, _super);
+        __extends$l(FromObservable, _super);
         function FromObservable(ish, scheduler) {
             _super.call(this, null);
             this.ish = ish;
@@ -30547,144 +33236,7 @@
 
     var from_2 = FromObservable_1.FromObservable.create;
 
-    var of_1 = ArrayObservable_1.ArrayObservable.of;
-
-    /* tslint:enable:max-line-length */
-    /**
-     * Projects each source value to an Observable which is merged in the output
-     * Observable, in a serialized fashion waiting for each one to complete before
-     * merging the next.
-     *
-     * <span class="informal">Maps each value to an Observable, then flattens all of
-     * these inner Observables using {@link concatAll}.</span>
-     *
-     * <img src="./img/concatMap.png" width="100%">
-     *
-     * Returns an Observable that emits items based on applying a function that you
-     * supply to each item emitted by the source Observable, where that function
-     * returns an (so-called "inner") Observable. Each new inner Observable is
-     * concatenated with the previous inner Observable.
-     *
-     * __Warning:__ if source values arrive endlessly and faster than their
-     * corresponding inner Observables can complete, it will result in memory issues
-     * as inner Observables amass in an unbounded buffer waiting for their turn to
-     * be subscribed to.
-     *
-     * Note: `concatMap` is equivalent to `mergeMap` with concurrency parameter set
-     * to `1`.
-     *
-     * @example <caption>For each click event, tick every second from 0 to 3, with no concurrency</caption>
-     * var clicks = Rx.Observable.fromEvent(document, 'click');
-     * var result = clicks.concatMap(ev => Rx.Observable.interval(1000).take(4));
-     * result.subscribe(x => console.log(x));
-     *
-     * // Results in the following:
-     * // (results are not concurrent)
-     * // For every click on the "document" it will emit values 0 to 3 spaced
-     * // on a 1000ms interval
-     * // one click = 1000ms-> 0 -1000ms-> 1 -1000ms-> 2 -1000ms-> 3
-     *
-     * @see {@link concat}
-     * @see {@link concatAll}
-     * @see {@link concatMapTo}
-     * @see {@link exhaustMap}
-     * @see {@link mergeMap}
-     * @see {@link switchMap}
-     *
-     * @param {function(value: T, ?index: number): ObservableInput} project A function
-     * that, when applied to an item emitted by the source Observable, returns an
-     * Observable.
-     * @param {function(outerValue: T, innerValue: I, outerIndex: number, innerIndex: number): any} [resultSelector]
-     * A function to produce the value on the output Observable based on the values
-     * and the indices of the source (outer) emission and the inner Observable
-     * emission. The arguments passed to this function are:
-     * - `outerValue`: the value that came from the source
-     * - `innerValue`: the value that came from the projected Observable
-     * - `outerIndex`: the "index" of the value that came from the source
-     * - `innerIndex`: the "index" of the value from the projected Observable
-     * @return {Observable} An Observable that emits the result of applying the
-     * projection function (and the optional `resultSelector`) to each item emitted
-     * by the source Observable and taking values from each projected inner
-     * Observable sequentially.
-     * @method concatMap
-     * @owner Observable
-     */
-    function concatMap(project, resultSelector) {
-        return mergeMap_1.mergeMap(project, resultSelector, 1);
-    }
-    var concatMap_2 = concatMap;
-
-
-    var concatMap_1 = {
-    	concatMap: concatMap_2
-    };
-
-    /* tslint:enable:max-line-length */
-    /**
-     * Projects each source value to an Observable which is merged in the output
-     * Observable, in a serialized fashion waiting for each one to complete before
-     * merging the next.
-     *
-     * <span class="informal">Maps each value to an Observable, then flattens all of
-     * these inner Observables using {@link concatAll}.</span>
-     *
-     * <img src="./img/concatMap.png" width="100%">
-     *
-     * Returns an Observable that emits items based on applying a function that you
-     * supply to each item emitted by the source Observable, where that function
-     * returns an (so-called "inner") Observable. Each new inner Observable is
-     * concatenated with the previous inner Observable.
-     *
-     * __Warning:__ if source values arrive endlessly and faster than their
-     * corresponding inner Observables can complete, it will result in memory issues
-     * as inner Observables amass in an unbounded buffer waiting for their turn to
-     * be subscribed to.
-     *
-     * Note: `concatMap` is equivalent to `mergeMap` with concurrency parameter set
-     * to `1`.
-     *
-     * @example <caption>For each click event, tick every second from 0 to 3, with no concurrency</caption>
-     * var clicks = Rx.Observable.fromEvent(document, 'click');
-     * var result = clicks.concatMap(ev => Rx.Observable.interval(1000).take(4));
-     * result.subscribe(x => console.log(x));
-     *
-     * // Results in the following:
-     * // (results are not concurrent)
-     * // For every click on the "document" it will emit values 0 to 3 spaced
-     * // on a 1000ms interval
-     * // one click = 1000ms-> 0 -1000ms-> 1 -1000ms-> 2 -1000ms-> 3
-     *
-     * @see {@link concat}
-     * @see {@link concatAll}
-     * @see {@link concatMapTo}
-     * @see {@link exhaustMap}
-     * @see {@link mergeMap}
-     * @see {@link switchMap}
-     *
-     * @param {function(value: T, ?index: number): ObservableInput} project A function
-     * that, when applied to an item emitted by the source Observable, returns an
-     * Observable.
-     * @param {function(outerValue: T, innerValue: I, outerIndex: number, innerIndex: number): any} [resultSelector]
-     * A function to produce the value on the output Observable based on the values
-     * and the indices of the source (outer) emission and the inner Observable
-     * emission. The arguments passed to this function are:
-     * - `outerValue`: the value that came from the source
-     * - `innerValue`: the value that came from the projected Observable
-     * - `outerIndex`: the "index" of the value that came from the source
-     * - `innerIndex`: the "index" of the value from the projected Observable
-     * @return {Observable} An Observable that emits the result of applying the
-     * projection function (and the optional `resultSelector`) to each item emitted
-     * by the source Observable and taking values from each projected inner
-     * Observable sequentially.
-     * @method concatMap
-     * @owner Observable
-     */
-    function concatMap$1(project, resultSelector) {
-        return concatMap_1.concatMap(project, resultSelector)(this);
-    }
-    var concatMap_3 = concatMap$1;
-
-    var __extends$k = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$m = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -30725,7 +33277,7 @@
      * @extends {Ignored}
      */
     var EverySubscriber = (function (_super) {
-        __extends$k(EverySubscriber, _super);
+        __extends$m(EverySubscriber, _super);
         function EverySubscriber(destination, predicate, thisArg, source) {
             _super.call(this, destination);
             this.predicate = predicate;
@@ -30781,7 +33333,7 @@
     }
     var every_3 = every$1;
 
-    var __extends$l = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$n = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -30797,7 +33349,7 @@
      * @class EmptyError
      */
     var EmptyError = (function (_super) {
-        __extends$l(EmptyError, _super);
+        __extends$n(EmptyError, _super);
         function EmptyError() {
             var err = _super.call(this, 'no elements in sequence');
             this.name = err.name = 'EmptyError';
@@ -30813,7 +33365,7 @@
     	EmptyError: EmptyError_2
     };
 
-    var __extends$m = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$o = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -30891,7 +33443,7 @@
      * @extends {Ignored}
      */
     var FirstSubscriber = (function (_super) {
-        __extends$m(FirstSubscriber, _super);
+        __extends$o(FirstSubscriber, _super);
         function FirstSubscriber(destination, predicate, resultSelector, defaultValue, source) {
             _super.call(this, destination);
             this.predicate = predicate;
@@ -31023,7 +33575,7 @@
     }
     var first_3 = first$1;
 
-    var __extends$n = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$p = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -31070,7 +33622,7 @@
      * @extends {Ignored}
      */
     var LastSubscriber = (function (_super) {
-        __extends$n(LastSubscriber, _super);
+        __extends$p(LastSubscriber, _super);
         function LastSubscriber(destination, predicate, resultSelector, defaultValue, source) {
             _super.call(this, destination);
             this.predicate = predicate;
@@ -31169,138 +33721,6 @@
     }
     var last_3 = last$1;
 
-    var __extends$o = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
-        for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-
-    /**
-     * Applies a given `project` function to each value emitted by the source
-     * Observable, and emits the resulting values as an Observable.
-     *
-     * <span class="informal">Like [Array.prototype.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map),
-     * it passes each source value through a transformation function to get
-     * corresponding output values.</span>
-     *
-     * <img src="./img/map.png" width="100%">
-     *
-     * Similar to the well known `Array.prototype.map` function, this operator
-     * applies a projection to each value and emits that projection in the output
-     * Observable.
-     *
-     * @example <caption>Map every click to the clientX position of that click</caption>
-     * var clicks = Rx.Observable.fromEvent(document, 'click');
-     * var positions = clicks.map(ev => ev.clientX);
-     * positions.subscribe(x => console.log(x));
-     *
-     * @see {@link mapTo}
-     * @see {@link pluck}
-     *
-     * @param {function(value: T, index: number): R} project The function to apply
-     * to each `value` emitted by the source Observable. The `index` parameter is
-     * the number `i` for the i-th emission that has happened since the
-     * subscription, starting from the number `0`.
-     * @param {any} [thisArg] An optional argument to define what `this` is in the
-     * `project` function.
-     * @return {Observable<R>} An Observable that emits the values from the source
-     * Observable transformed by the given `project` function.
-     * @method map
-     * @owner Observable
-     */
-    function map(project, thisArg) {
-        return function mapOperation(source) {
-            if (typeof project !== 'function') {
-                throw new TypeError('argument is not a function. Are you looking for `mapTo()`?');
-            }
-            return source.lift(new MapOperator(project, thisArg));
-        };
-    }
-    var map_2 = map;
-    var MapOperator = (function () {
-        function MapOperator(project, thisArg) {
-            this.project = project;
-            this.thisArg = thisArg;
-        }
-        MapOperator.prototype.call = function (subscriber, source) {
-            return source.subscribe(new MapSubscriber(subscriber, this.project, this.thisArg));
-        };
-        return MapOperator;
-    }());
-    var MapOperator_1 = MapOperator;
-    /**
-     * We need this JSDoc comment for affecting ESDoc.
-     * @ignore
-     * @extends {Ignored}
-     */
-    var MapSubscriber = (function (_super) {
-        __extends$o(MapSubscriber, _super);
-        function MapSubscriber(destination, project, thisArg) {
-            _super.call(this, destination);
-            this.project = project;
-            this.count = 0;
-            this.thisArg = thisArg || this;
-        }
-        // NOTE: This looks unoptimized, but it's actually purposefully NOT
-        // using try/catch optimizations.
-        MapSubscriber.prototype._next = function (value) {
-            var result;
-            try {
-                result = this.project.call(this.thisArg, value, this.count++);
-            }
-            catch (err) {
-                this.destination.error(err);
-                return;
-            }
-            this.destination.next(result);
-        };
-        return MapSubscriber;
-    }(Subscriber_1.Subscriber));
-
-
-    var map_1 = {
-    	map: map_2,
-    	MapOperator: MapOperator_1
-    };
-
-    /**
-     * Applies a given `project` function to each value emitted by the source
-     * Observable, and emits the resulting values as an Observable.
-     *
-     * <span class="informal">Like [Array.prototype.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map),
-     * it passes each source value through a transformation function to get
-     * corresponding output values.</span>
-     *
-     * <img src="./img/map.png" width="100%">
-     *
-     * Similar to the well known `Array.prototype.map` function, this operator
-     * applies a projection to each value and emits that projection in the output
-     * Observable.
-     *
-     * @example <caption>Map every click to the clientX position of that click</caption>
-     * var clicks = Rx.Observable.fromEvent(document, 'click');
-     * var positions = clicks.map(ev => ev.clientX);
-     * positions.subscribe(x => console.log(x));
-     *
-     * @see {@link mapTo}
-     * @see {@link pluck}
-     *
-     * @param {function(value: T, index: number): R} project The function to apply
-     * to each `value` emitted by the source Observable. The `index` parameter is
-     * the number `i` for the i-th emission that has happened since the
-     * subscription, starting from the number `0`.
-     * @param {any} [thisArg] An optional argument to define what `this` is in the
-     * `project` function.
-     * @return {Observable<R>} An Observable that emits the values from the source
-     * Observable transformed by the given `project` function.
-     * @method map
-     * @owner Observable
-     */
-    function map$1(project, thisArg) {
-        return map_1.map(project, thisArg)(this);
-    }
-    var map_3 = map$1;
-
     /* tslint:enable:max-line-length */
     /**
      * Projects each source value to an Observable which is merged in the output
@@ -31366,7 +33786,7 @@
     }
     var mergeMap_3 = mergeMap$1;
 
-    var __extends$p = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$q = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -31443,7 +33863,7 @@
      * @extends {Ignored}
      */
     var ScanSubscriber = (function (_super) {
-        __extends$p(ScanSubscriber, _super);
+        __extends$q(ScanSubscriber, _super);
         function ScanSubscriber(destination, accumulator, _seed, hasSeed) {
             _super.call(this, destination);
             this.accumulator = accumulator;
@@ -31491,7 +33911,7 @@
     	scan: scan_2
     };
 
-    var __extends$q = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$r = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -31507,7 +33927,7 @@
      * @class ArgumentOutOfRangeError
      */
     var ArgumentOutOfRangeError = (function (_super) {
-        __extends$q(ArgumentOutOfRangeError, _super);
+        __extends$r(ArgumentOutOfRangeError, _super);
         function ArgumentOutOfRangeError() {
             var err = _super.call(this, 'argument out of range');
             this.name = err.name = 'ArgumentOutOfRangeError';
@@ -31523,7 +33943,7 @@
     	ArgumentOutOfRangeError: ArgumentOutOfRangeError_2
     };
 
-    var __extends$r = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$s = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -31596,7 +34016,7 @@
      * @extends {Ignored}
      */
     var TakeLastSubscriber = (function (_super) {
-        __extends$r(TakeLastSubscriber, _super);
+        __extends$s(TakeLastSubscriber, _super);
         function TakeLastSubscriber(destination, total) {
             _super.call(this, destination);
             this.total = total;
@@ -31636,7 +34056,7 @@
     	takeLast: takeLast_2
     };
 
-    var __extends$s = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$t = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -31693,7 +34113,7 @@
      * @extends {Ignored}
      */
     var DefaultIfEmptySubscriber = (function (_super) {
-        __extends$s(DefaultIfEmptySubscriber, _super);
+        __extends$t(DefaultIfEmptySubscriber, _super);
         function DefaultIfEmptySubscriber(destination, defaultValue) {
             _super.call(this, destination);
             this.defaultValue = defaultValue;
@@ -31844,7 +34264,7 @@
     }
     var reduce_3 = reduce$1;
 
-    var __extends$t = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$u = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -31931,7 +34351,7 @@
      * @extends {Ignored}
      */
     var CatchSubscriber = (function (_super) {
-        __extends$t(CatchSubscriber, _super);
+        __extends$u(CatchSubscriber, _super);
         function CatchSubscriber(destination, selector, caught) {
             _super.call(this, destination);
             this.selector = selector;
@@ -32191,149 +34611,6 @@
         return mergeAll_1.mergeAll(concurrent)(this);
     }
     var mergeAll_3 = mergeAll$1;
-
-    var __extends$u = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
-        for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-
-    /* tslint:enable:max-line-length */
-    /**
-     * Filter items emitted by the source Observable by only emitting those that
-     * satisfy a specified predicate.
-     *
-     * <span class="informal">Like
-     * [Array.prototype.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter),
-     * it only emits a value from the source if it passes a criterion function.</span>
-     *
-     * <img src="./img/filter.png" width="100%">
-     *
-     * Similar to the well-known `Array.prototype.filter` method, this operator
-     * takes values from the source Observable, passes them through a `predicate`
-     * function and only emits those values that yielded `true`.
-     *
-     * @example <caption>Emit only click events whose target was a DIV element</caption>
-     * var clicks = Rx.Observable.fromEvent(document, 'click');
-     * var clicksOnDivs = clicks.filter(ev => ev.target.tagName === 'DIV');
-     * clicksOnDivs.subscribe(x => console.log(x));
-     *
-     * @see {@link distinct}
-     * @see {@link distinctUntilChanged}
-     * @see {@link distinctUntilKeyChanged}
-     * @see {@link ignoreElements}
-     * @see {@link partition}
-     * @see {@link skip}
-     *
-     * @param {function(value: T, index: number): boolean} predicate A function that
-     * evaluates each value emitted by the source Observable. If it returns `true`,
-     * the value is emitted, if `false` the value is not passed to the output
-     * Observable. The `index` parameter is the number `i` for the i-th source
-     * emission that has happened since the subscription, starting from the number
-     * `0`.
-     * @param {any} [thisArg] An optional argument to determine the value of `this`
-     * in the `predicate` function.
-     * @return {Observable} An Observable of values from the source that were
-     * allowed by the `predicate` function.
-     * @method filter
-     * @owner Observable
-     */
-    function filter(predicate, thisArg) {
-        return function filterOperatorFunction(source) {
-            return source.lift(new FilterOperator(predicate, thisArg));
-        };
-    }
-    var filter_2 = filter;
-    var FilterOperator = (function () {
-        function FilterOperator(predicate, thisArg) {
-            this.predicate = predicate;
-            this.thisArg = thisArg;
-        }
-        FilterOperator.prototype.call = function (subscriber, source) {
-            return source.subscribe(new FilterSubscriber(subscriber, this.predicate, this.thisArg));
-        };
-        return FilterOperator;
-    }());
-    /**
-     * We need this JSDoc comment for affecting ESDoc.
-     * @ignore
-     * @extends {Ignored}
-     */
-    var FilterSubscriber = (function (_super) {
-        __extends$u(FilterSubscriber, _super);
-        function FilterSubscriber(destination, predicate, thisArg) {
-            _super.call(this, destination);
-            this.predicate = predicate;
-            this.thisArg = thisArg;
-            this.count = 0;
-        }
-        // the try catch block below is left specifically for
-        // optimization and perf reasons. a tryCatcher is not necessary here.
-        FilterSubscriber.prototype._next = function (value) {
-            var result;
-            try {
-                result = this.predicate.call(this.thisArg, value, this.count++);
-            }
-            catch (err) {
-                this.destination.error(err);
-                return;
-            }
-            if (result) {
-                this.destination.next(value);
-            }
-        };
-        return FilterSubscriber;
-    }(Subscriber_1.Subscriber));
-
-
-    var filter_1 = {
-    	filter: filter_2
-    };
-
-    /* tslint:enable:max-line-length */
-    /**
-     * Filter items emitted by the source Observable by only emitting those that
-     * satisfy a specified predicate.
-     *
-     * <span class="informal">Like
-     * [Array.prototype.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter),
-     * it only emits a value from the source if it passes a criterion function.</span>
-     *
-     * <img src="./img/filter.png" width="100%">
-     *
-     * Similar to the well-known `Array.prototype.filter` method, this operator
-     * takes values from the source Observable, passes them through a `predicate`
-     * function and only emits those values that yielded `true`.
-     *
-     * @example <caption>Emit only click events whose target was a DIV element</caption>
-     * var clicks = Rx.Observable.fromEvent(document, 'click');
-     * var clicksOnDivs = clicks.filter(ev => ev.target.tagName === 'DIV');
-     * clicksOnDivs.subscribe(x => console.log(x));
-     *
-     * @see {@link distinct}
-     * @see {@link distinctUntilChanged}
-     * @see {@link distinctUntilKeyChanged}
-     * @see {@link ignoreElements}
-     * @see {@link partition}
-     * @see {@link skip}
-     *
-     * @param {function(value: T, index: number): boolean} predicate A function that
-     * evaluates each value emitted by the source Observable. If it returns `true`,
-     * the value is emitted, if `false` the value is not passed to the output
-     * Observable. The `index` parameter is the number `i` for the i-th source
-     * emission that has happened since the subscription, starting from the number
-     * `0`.
-     * @param {any} [thisArg] An optional argument to determine the value of `this`
-     * in the `predicate` function.
-     * @return {Observable} An Observable of values from the source that were
-     * allowed by the `predicate` function.
-     * @method filter
-     * @owner Observable
-     */
-    function filter$1(predicate, thisArg) {
-        return filter_1.filter(predicate, thisArg)(this);
-    }
-    var filter_3 = filter$1;
 
     /**
      * @license
@@ -38563,68 +40840,36 @@
      */
     var VERSION$3 = new Version('4.4.7');
 
+    var __decorate$5 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    };
+    var __metadata$5 = (undefined && undefined.__metadata) || function (k, v) {
+        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+    };
+    var UserComponent = /** @class */ (function () {
+        function UserComponent() {
+            // constructor
+        }
+        UserComponent.prototype.ngOnInit = function () {
+            console.log("User component launched");
+        };
+        UserComponent = __decorate$5([
+            Component({
+                selector: "mv-app-user",
+                templateUrl: "./user.component.html",
+            }),
+            __metadata$5("design:paramtypes", [])
+        ], UserComponent);
+        return UserComponent;
+    }());
+
     // HACK: does nothing, because `toPromise` now lives on the `Observable` itself.
     // leaving this module here to prevent breakage.
 
-    var __decorate$1 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-        return c > 3 && r && Object.defineProperty(target, key, r), r;
-    };
-    var __metadata$1 = (undefined && undefined.__metadata) || function (k, v) {
-        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-    };
-    var HomeComponent = /** @class */ (function () {
-        function HomeComponent() {
-            // constructor
-        }
-        HomeComponent.prototype.ngOnInit = function () {
-            // init
-        };
-        HomeComponent = __decorate$1([
-            Component({
-                templateUrl: "./home.component.html",
-            }),
-            __metadata$1("design:paramtypes", [])
-        ], HomeComponent);
-        return HomeComponent;
-    }());
-
-    /* tslint:disable object-literal-sort-keys */
-    var AppRoutes = [
-        {
-            path: "home",
-            component: HomeComponent,
-        },
-        { path: "**", redirectTo: "home" },
-    ];
-    /* tslint:enable */
-
-    var __decorate$2 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-        return c > 3 && r && Object.defineProperty(target, key, r), r;
-    };
-    var __metadata$2 = (undefined && undefined.__metadata) || function (k, v) {
-        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-    };
-    var AppComponent = /** @class */ (function () {
-        function AppComponent() {
-            // constructor
-        }
-        AppComponent = __decorate$2([
-            Component({
-                selector: "mv-users",
-                template: "\n        <div id=\"mv-users\" class=\"content\">\n            <router-outlet></router-outlet>\n        </div>\n    ",
-            }),
-            __metadata$2("design:paramtypes", [])
-        ], AppComponent);
-        return AppComponent;
-    }());
-
-    var __decorate$3 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var __decorate$6 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -38633,7 +40878,7 @@
     var AppModule = /** @class */ (function () {
         function AppModule() {
         }
-        AppModule = __decorate$3([
+        AppModule = __decorate$6([
             NgModule({
                 bootstrap: [
                     AppComponent,
@@ -38641,13 +40886,18 @@
                 declarations: [
                     AppComponent,
                     HomeComponent,
+                    UserComponent,
+                    UsersComponent,
                 ],
                 imports: [
                     BrowserModule,
                     BrowserAnimationsModule,
+                    HttpClientModule,
                     RouterModule.forRoot(AppRoutes),
                 ],
                 providers: [
+                    UserService,
+                    HttpClient,
                     { provide: APP_BASE_HREF, useValue: "/" },
                     { provide: LOCALE_ID, useValue: "fr-FR" },
                 ],
@@ -38666,7 +40916,7 @@
         styles: styles_HomeComponent, data: {} });
     function View_HomeComponent_0(_l) {
         return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 1, 'b', [], null, null, null, null, null)), (_l()(),
-                textDef(-1, null, ['Users'])), (_l()(), textDef(-1, null, ['\n']))], null, null);
+                textDef(-1, null, [' Users '])), (_l()(), textDef(-1, null, ['\n']))], null, null);
     }
     function View_HomeComponent_Host_0(_l) {
         return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 1, 'ng-component', [], null, null, null, View_HomeComponent_0, RenderType_HomeComponent)), directiveDef(1, 114688, null, 0, HomeComponent, [], null, null)], function (_ck, _v) {
@@ -38674,6 +40924,50 @@
         }, null);
     }
     var HomeComponentNgFactory = createComponentFactory('ng-component', HomeComponent, View_HomeComponent_Host_0, {}, {}, []);
+
+    /**
+     * @fileoverview This file is generated by the Angular template compiler.
+     * Do not edit.
+     * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride}
+     */
+    var styles_UsersComponent = [];
+    var RenderType_UsersComponent = createRendererType2({ encapsulation: 2,
+        styles: styles_UsersComponent, data: {} });
+    function View_UsersComponent_1(_l) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 4, 'div', [], null, null, null, null, null)), (_l()(),
+                textDef(-1, null, ['\n\n  '])), (_l()(), elementDef(2, 0, null, null, 1, 'h4', [], null, null, null, null, null)), (_l()(), textDef(3, null, ['', ''])), (_l()(), textDef(-1, null, ['\n']))], null, function (_ck, _v) {
+            var currVal_0 = _v.context.$implicit.name;
+            _ck(_v, 3, 0, currVal_0);
+        });
+    }
+    function View_UsersComponent_2(_l) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 4, 'div', [], null, null, null, null, null)), (_l()(),
+                textDef(-1, null, ['\n\n  '])), (_l()(), elementDef(2, 0, null, null, 1, 'h4', [], null, null, null, null, null)), (_l()(), textDef(3, null, ['', ''])), (_l()(), textDef(-1, null, ['\n']))], null, function (_ck, _v) {
+            var currVal_0 = _v.context.$implicit.name;
+            _ck(_v, 3, 0, currVal_0);
+        });
+    }
+    function View_UsersComponent_0(_l) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 1, 'h2', [], null, null, null, null, null)), (_l()(),
+                textDef(-1, null, ['Users component'])), (_l()(), textDef(-1, null, ['\n'])), (_l()(), elementDef(3, 0, null, null, 1, 'h3', [], null, null, null, null, null)), (_l()(),
+                textDef(-1, null, ['Fake users'])), (_l()(), textDef(-1, null, ['\n\n'])),
+            (_l()(), anchorDef(16777216, null, null, 1, null, View_UsersComponent_1)),
+            directiveDef(7, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef,
+                IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(), textDef(-1, null, ['\n\n\n'])), (_l()(), elementDef(9, 0, null, null, 1, 'h3', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['HTTP GET users'])), (_l()(), textDef(-1, null, ['\n'])), (_l()(), anchorDef(16777216, null, null, 1, null, View_UsersComponent_2)), directiveDef(13, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'] }, null), (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
+            var _co = _v.component;
+            var currVal_0 = _co.users;
+            var currVal_1 = _co.trackByFn;
+            _ck(_v, 7, 0, currVal_0, currVal_1);
+            var currVal_2 = _co.realUsers;
+            _ck(_v, 13, 0, currVal_2);
+        }, null);
+    }
+    function View_UsersComponent_Host_0(_l) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 1, 'mv-app-users', [], null, null, null, View_UsersComponent_0, RenderType_UsersComponent)), directiveDef(1, 114688, null, 0, UsersComponent, [UserService], null, null)], function (_ck, _v) {
+            _ck(_v, 1, 0);
+        }, null);
+    }
+    var UsersComponentNgFactory = createComponentFactory('mv-app-users', UsersComponent, View_UsersComponent_Host_0, {}, {}, []);
 
     /**
      * @fileoverview This file is generated by the Angular template compiler.
@@ -38703,41 +40997,40 @@
      * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride}
      */
     var AppModuleNgFactory = createNgModuleFactory(AppModule, [AppComponent], function (_l) {
-        return moduleDef([moduleProvideDef(512, ComponentFactoryResolver, CodegenComponentFactoryResolver, [[8, [HomeComponentNgFactory, AppComponentNgFactory]], [3, ComponentFactoryResolver],
-                NgModuleRef]), moduleProvideDef(4352, LOCALE_ID, 'fr-FR', []), moduleProvideDef(4608, NgLocalization, NgLocaleLocalization, [LOCALE_ID]), moduleProvideDef(5120, APP_ID, _appIdRandomProviderFactory, []), moduleProvideDef(5120, IterableDiffers, _iterableDiffersFactory, []),
-            moduleProvideDef(5120, KeyValueDiffers, _keyValueDiffersFactory, []), moduleProvideDef(4608, DomSanitizer, DomSanitizerImpl, [DOCUMENT]), moduleProvideDef(6144, Sanitizer, null, [DomSanitizer]),
-            moduleProvideDef(4608, HAMMER_GESTURE_CONFIG, HammerGestureConfig, []),
-            moduleProvideDef(5120, EVENT_MANAGER_PLUGINS, function (p0_0, p1_0, p2_0, p2_1) {
+        return moduleDef([moduleProvideDef(512, ComponentFactoryResolver, CodegenComponentFactoryResolver, [[8, [HomeComponentNgFactory, UsersComponentNgFactory, AppComponentNgFactory]],
+                [3, ComponentFactoryResolver], NgModuleRef]), moduleProvideDef(4352, LOCALE_ID, 'fr-FR', []), moduleProvideDef(4608, NgLocalization, NgLocaleLocalization, [LOCALE_ID]), moduleProvideDef(5120, APP_ID, _appIdRandomProviderFactory, []), moduleProvideDef(5120, IterableDiffers, _iterableDiffersFactory, []), moduleProvideDef(5120, KeyValueDiffers, _keyValueDiffersFactory, []), moduleProvideDef(4608, DomSanitizer, DomSanitizerImpl, [DOCUMENT]), moduleProvideDef(6144, Sanitizer, null, [DomSanitizer]), moduleProvideDef(4608, HAMMER_GESTURE_CONFIG, HammerGestureConfig, []), moduleProvideDef(5120, EVENT_MANAGER_PLUGINS, function (p0_0, p1_0, p2_0, p2_1) {
                 return [new DomEventsPlugin(p0_0), new KeyEventsPlugin(p1_0), new HammerGesturesPlugin(p2_0, p2_1)];
-            }, [DOCUMENT, DOCUMENT, DOCUMENT, HAMMER_GESTURE_CONFIG]), moduleProvideDef(4608, EventManager, EventManager, [EVENT_MANAGER_PLUGINS, NgZone]),
-            moduleProvideDef(135680, DomSharedStylesHost, DomSharedStylesHost, [DOCUMENT]),
-            moduleProvideDef(4608, DomRendererFactory2, DomRendererFactory2, [EventManager,
-                DomSharedStylesHost]), moduleProvideDef(5120, AnimationDriver, instantiateSupportedAnimationDriver, []),
-            moduleProvideDef(5120, AnimationStyleNormalizer, instantiateDefaultStyleNormalizer, []), moduleProvideDef(4608, AnimationEngine, InjectableAnimationEngine, [AnimationDriver, AnimationStyleNormalizer]),
-            moduleProvideDef(5120, RendererFactory2, instantiateRendererFactory, [DomRendererFactory2, AnimationEngine,
-                NgZone]), moduleProvideDef(6144, SharedStylesHost, null, [DomSharedStylesHost]),
-            moduleProvideDef(4608, Testability, Testability, [NgZone]), moduleProvideDef(4608, Meta, Meta, [DOCUMENT]), moduleProvideDef(4608, Title, Title, [DOCUMENT]),
-            moduleProvideDef(4608, AnimationBuilder, BrowserAnimationBuilder, [RendererFactory2,
-                DOCUMENT$1]), moduleProvideDef(5120, ActivatedRoute, rootRoute, [Router]), moduleProvideDef(4608, NoPreloading, NoPreloading, []), moduleProvideDef(6144, PreloadingStrategy, null, [NoPreloading]), moduleProvideDef(135680, RouterPreloader, RouterPreloader, [Router, NgModuleFactoryLoader, Compiler,
-                Injector, PreloadingStrategy]), moduleProvideDef(4608, PreloadAllModules, PreloadAllModules, []), moduleProvideDef(5120, ROUTER_INITIALIZER, getBootstrapListener, [RouterInitializer]), moduleProvideDef(5120, APP_BOOTSTRAP_LISTENER, function (p0_0) {
+            }, [DOCUMENT, DOCUMENT, DOCUMENT, HAMMER_GESTURE_CONFIG]), moduleProvideDef(4608, EventManager, EventManager, [EVENT_MANAGER_PLUGINS, NgZone]), moduleProvideDef(135680, DomSharedStylesHost, DomSharedStylesHost, [DOCUMENT]), moduleProvideDef(4608, DomRendererFactory2, DomRendererFactory2, [EventManager, DomSharedStylesHost]),
+            moduleProvideDef(5120, AnimationDriver, instantiateSupportedAnimationDriver, []), moduleProvideDef(5120, AnimationStyleNormalizer, instantiateDefaultStyleNormalizer, []), moduleProvideDef(4608, AnimationEngine, InjectableAnimationEngine, [AnimationDriver,
+                AnimationStyleNormalizer]), moduleProvideDef(5120, RendererFactory2, instantiateRendererFactory, [DomRendererFactory2, AnimationEngine, NgZone]), moduleProvideDef(6144, SharedStylesHost, null, [DomSharedStylesHost]), moduleProvideDef(4608, Testability, Testability, [NgZone]), moduleProvideDef(4608, Meta, Meta, [DOCUMENT]), moduleProvideDef(4608, Title, Title, [DOCUMENT]), moduleProvideDef(4608, AnimationBuilder, BrowserAnimationBuilder, [RendererFactory2,
+                DOCUMENT$1]), moduleProvideDef(4608, HttpXsrfTokenExtractor, HttpXsrfCookieExtractor, [DOCUMENT,
+                PLATFORM_ID, XSRF_COOKIE_NAME]), moduleProvideDef(4608, HttpXsrfInterceptor, HttpXsrfInterceptor, [HttpXsrfTokenExtractor,
+                XSRF_HEADER_NAME]), moduleProvideDef(5120, HTTP_INTERCEPTORS, function (p0_0) {
                 return [p0_0];
-            }, [ROUTER_INITIALIZER]), moduleProvideDef(512, CommonModule, CommonModule, []), moduleProvideDef(1024, ErrorHandler, errorHandler, []), moduleProvideDef(1024, NgProbeToken, function () {
+            }, [HttpXsrfInterceptor]), moduleProvideDef(4608, BrowserXhr, BrowserXhr, []), moduleProvideDef(6144, XhrFactory, null, [BrowserXhr]), moduleProvideDef(4608, HttpXhrBackend, HttpXhrBackend, [XhrFactory]), moduleProvideDef(6144, HttpBackend, null, [HttpXhrBackend]),
+            moduleProvideDef(5120, HttpHandler, interceptingHandler, [HttpBackend, [2,
+                    HTTP_INTERCEPTORS]]), moduleProvideDef(4608, HttpClient, HttpClient, [HttpHandler]), moduleProvideDef(5120, ActivatedRoute, rootRoute, [Router]),
+            moduleProvideDef(4608, NoPreloading, NoPreloading, []), moduleProvideDef(6144, PreloadingStrategy, null, [NoPreloading]), moduleProvideDef(135680, RouterPreloader, RouterPreloader, [Router, NgModuleFactoryLoader,
+                Compiler, Injector, PreloadingStrategy]), moduleProvideDef(4608, PreloadAllModules, PreloadAllModules, []), moduleProvideDef(5120, ROUTER_INITIALIZER, getBootstrapListener, [RouterInitializer]), moduleProvideDef(5120, APP_BOOTSTRAP_LISTENER, function (p0_0) {
+                return [p0_0];
+            }, [ROUTER_INITIALIZER]), moduleProvideDef(4608, UserService, UserService, [HttpClient]), moduleProvideDef(512, CommonModule, CommonModule, []),
+            moduleProvideDef(1024, ErrorHandler, errorHandler, []), moduleProvideDef(1024, NgProbeToken, function () {
                 return [routerNgProbeToken()];
             }, []), moduleProvideDef(512, RouterInitializer, RouterInitializer, [Injector]), moduleProvideDef(1024, APP_INITIALIZER, function (p0_0, p0_1, p1_0) {
                 return [_createNgProbe(p0_0, p0_1), getAppInitializer(p1_0)];
             }, [[2, NgProbeToken$1], [2, NgProbeToken], RouterInitializer]), moduleProvideDef(512, ApplicationInitStatus, ApplicationInitStatus, [[2, APP_INITIALIZER]]), moduleProvideDef(131584, ApplicationRef_, ApplicationRef_, [NgZone, Console, Injector, ErrorHandler, ComponentFactoryResolver,
                 ApplicationInitStatus]), moduleProvideDef(2048, ApplicationRef, null, [ApplicationRef_]), moduleProvideDef(512, ApplicationModule, ApplicationModule, [ApplicationRef]),
             moduleProvideDef(512, BrowserModule, BrowserModule, [[3, BrowserModule]]), moduleProvideDef(512, BrowserAnimationsModule, BrowserAnimationsModule, []),
-            moduleProvideDef(1024, ROUTER_FORROOT_GUARD, provideForRootGuard, [[3, Router]]), moduleProvideDef(512, UrlSerializer, DefaultUrlSerializer, []), moduleProvideDef(512, ChildrenOutletContexts, ChildrenOutletContexts, []), moduleProvideDef(256, APP_BASE_HREF, '/', []), moduleProvideDef(256, ROUTER_CONFIGURATION, {}, []),
-            moduleProvideDef(1024, LocationStrategy, provideLocationStrategy, [PlatformLocation, [2, APP_BASE_HREF],
-                ROUTER_CONFIGURATION]), moduleProvideDef(512, Location, Location, [LocationStrategy]),
-            moduleProvideDef(512, Compiler, Compiler, []), moduleProvideDef(512, NgModuleFactoryLoader, SystemJsNgModuleLoader, [Compiler, [2, SystemJsNgModuleLoaderConfig]]),
-            moduleProvideDef(1024, ROUTES, function () {
-                return [[{ path: 'home', component: HomeComponent }, { path: '**', redirectTo: 'home' }]];
+            moduleProvideDef(512, HttpClientXsrfModule, HttpClientXsrfModule, []),
+            moduleProvideDef(512, HttpClientModule, HttpClientModule, []), moduleProvideDef(1024, ROUTER_FORROOT_GUARD, provideForRootGuard, [[3, Router]]), moduleProvideDef(512, UrlSerializer, DefaultUrlSerializer, []), moduleProvideDef(512, ChildrenOutletContexts, ChildrenOutletContexts, []), moduleProvideDef(256, APP_BASE_HREF, '/', []), moduleProvideDef(256, ROUTER_CONFIGURATION, {}, []), moduleProvideDef(1024, LocationStrategy, provideLocationStrategy, [PlatformLocation, [2, APP_BASE_HREF], ROUTER_CONFIGURATION]),
+            moduleProvideDef(512, Location, Location, [LocationStrategy]), moduleProvideDef(512, Compiler, Compiler, []), moduleProvideDef(512, NgModuleFactoryLoader, SystemJsNgModuleLoader, [Compiler, [2, SystemJsNgModuleLoaderConfig]]), moduleProvideDef(1024, ROUTES, function () {
+                return [[{ path: 'home', component: HomeComponent }, { path: 'users', component: UsersComponent },
+                        { path: '**', redirectTo: 'users' }]];
             }, []), moduleProvideDef(1024, Router, setupRouter, [ApplicationRef, UrlSerializer,
                 ChildrenOutletContexts, Location, Injector, NgModuleFactoryLoader,
                 Compiler, ROUTES, ROUTER_CONFIGURATION, [2, UrlHandlingStrategy],
-                [2, RouteReuseStrategy]]), moduleProvideDef(512, RouterModule, RouterModule, [[2, ROUTER_FORROOT_GUARD], [2, Router]]), moduleProvideDef(512, AppModule, AppModule, [])]);
+                [2, RouteReuseStrategy]]), moduleProvideDef(512, RouterModule, RouterModule, [[2, ROUTER_FORROOT_GUARD], [2, Router]]), moduleProvideDef(512, AppModule, AppModule, []),
+            moduleProvideDef(256, XSRF_COOKIE_NAME, 'XSRF-TOKEN', []), moduleProvideDef(256, XSRF_HEADER_NAME, 'X-XSRF-TOKEN', [])]);
     });
 
     var isEnabledProdMode = Config.get("enableProdMode");
