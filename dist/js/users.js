@@ -23862,6 +23862,59 @@
     var __metadata$2 = (undefined && undefined.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
+    var CreateUserFormComponent = /** @class */ (function () {
+        function CreateUserFormComponent() {
+            // constructor
+        }
+        CreateUserFormComponent.prototype.ngOnInit = function () {
+            console.log("CreateUserFormComponent launched");
+        };
+        CreateUserFormComponent = __decorate$2([
+            Component({
+                selector: "mv-app-create-user-form",
+                templateUrl: "./create-user-form.component.html",
+            }),
+            __metadata$2("design:paramtypes", [])
+        ], CreateUserFormComponent);
+        return CreateUserFormComponent;
+    }());
+
+    var __decorate$3 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    };
+    var __metadata$3 = (undefined && undefined.__metadata) || function (k, v) {
+        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+    };
+    var DisableUserFormComponent = /** @class */ (function () {
+        function DisableUserFormComponent() {
+            this.enableAdd = true;
+            // constructor
+        }
+        DisableUserFormComponent.prototype.ngOnInit = function () {
+            console.log("DisableUserForm Component launched");
+        };
+        DisableUserFormComponent = __decorate$3([
+            Component({
+                selector: "mv-app-disable-user-form",
+                templateUrl: "./disable-user-form.component.html",
+            }),
+            __metadata$3("design:paramtypes", [])
+        ], DisableUserFormComponent);
+        return DisableUserFormComponent;
+    }());
+
+    var __decorate$4 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    };
+    var __metadata$4 = (undefined && undefined.__metadata) || function (k, v) {
+        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+    };
     var HomeComponent = /** @class */ (function () {
         function HomeComponent() {
             // constructor
@@ -23869,11 +23922,11 @@
         HomeComponent.prototype.ngOnInit = function () {
             // init
         };
-        HomeComponent = __decorate$2([
+        HomeComponent = __decorate$4([
             Component({
                 templateUrl: "./home.component.html",
             }),
-            __metadata$2("design:paramtypes", [])
+            __metadata$4("design:paramtypes", [])
         ], HomeComponent);
         return HomeComponent;
     }());
@@ -26377,13 +26430,13 @@
      */
     HttpClientModule.ctorParameters = function () { return []; };
 
-    var __decorate$3 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var __decorate$5 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var __metadata$3 = (undefined && undefined.__metadata) || function (k, v) {
+    var __metadata$5 = (undefined && undefined.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var UserService = /** @class */ (function () {
@@ -26404,20 +26457,20 @@
         UserService.prototype.getRealUsers = function () {
             return this.http.get(this.url);
         };
-        UserService = __decorate$3([
+        UserService = __decorate$5([
             Injectable(),
-            __metadata$3("design:paramtypes", [HttpClient])
+            __metadata$5("design:paramtypes", [HttpClient])
         ], UserService);
         return UserService;
     }());
 
-    var __decorate$4 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var __decorate$6 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var __metadata$4 = (undefined && undefined.__metadata) || function (k, v) {
+    var __metadata$6 = (undefined && undefined.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var UsersComponent = /** @class */ (function () {
@@ -26442,12 +26495,12 @@
         UsersComponent.prototype.trackByFn = function (index, item) {
             return index; // or item.id
         };
-        UsersComponent = __decorate$4([
+        UsersComponent = __decorate$6([
             Component({
                 selector: "mv-app-users",
                 templateUrl: "./users.component.html",
             }),
-            __metadata$4("design:paramtypes", [UserService])
+            __metadata$6("design:paramtypes", [UserService])
         ], UsersComponent);
         return UsersComponent;
     }());
@@ -26461,6 +26514,14 @@
         {
             path: "users",
             component: UsersComponent,
+        },
+        {
+            path: "create",
+            component: CreateUserFormComponent,
+        },
+        {
+            path: "disable",
+            component: DisableUserFormComponent,
         },
         { path: "**", redirectTo: "users" },
     ];
@@ -40840,13 +40901,13 @@
      */
     var VERSION$3 = new Version('4.4.7');
 
-    var __decorate$5 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var __decorate$7 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var __metadata$5 = (undefined && undefined.__metadata) || function (k, v) {
+    var __metadata$7 = (undefined && undefined.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var UserComponent = /** @class */ (function () {
@@ -40856,12 +40917,12 @@
         UserComponent.prototype.ngOnInit = function () {
             console.log("User component launched");
         };
-        UserComponent = __decorate$5([
+        UserComponent = __decorate$7([
             Component({
                 selector: "mv-app-user",
                 templateUrl: "./user.component.html",
             }),
-            __metadata$5("design:paramtypes", [])
+            __metadata$7("design:paramtypes", [])
         ], UserComponent);
         return UserComponent;
     }());
@@ -40869,7 +40930,7 @@
     // HACK: does nothing, because `toPromise` now lives on the `Observable` itself.
     // leaving this module here to prevent breakage.
 
-    var __decorate$6 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var __decorate$8 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -40878,7 +40939,7 @@
     var AppModule = /** @class */ (function () {
         function AppModule() {
         }
-        AppModule = __decorate$6([
+        AppModule = __decorate$8([
             NgModule({
                 bootstrap: [
                     AppComponent,
@@ -40888,6 +40949,8 @@
                     HomeComponent,
                     UserComponent,
                     UsersComponent,
+                    CreateUserFormComponent,
+                    DisableUserFormComponent,
                 ],
                 imports: [
                     BrowserModule,
@@ -40974,6 +41037,249 @@
      * Do not edit.
      * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride}
      */
+    var styles_CreateUserFormComponent = [];
+    var RenderType_CreateUserFormComponent = createRendererType2({ encapsulation: 2,
+        styles: styles_CreateUserFormComponent, data: {} });
+    function View_CreateUserFormComponent_0(_l) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 1, 'h2', [], null, null, null, null, null)), (_l()(),
+                textDef(-1, null, [' Create User Form '])), (_l()(), textDef(-1, null, ['\n\n'])), (_l()(), elementDef(3, 0, null, null, 432, 'form', [], null, null, null, null, null)), (_l()(),
+                textDef(-1, null, ['\n  '])), (_l()(), elementDef(5, 0, null, null, 28, 'fieldset', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(7, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Type de compte'])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(10, 0, null, null, 22, 'div', [['class', 'checkbox-list'], ['id', 'account-type']], null, null, null, null, null)), (_l()(),
+                textDef(-1, null, ['\n      '])), (_l()(), elementDef(12, 0, null, null, 1, 'div', [['class', 'subtitle']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Type de compte'])), (_l()(),
+                textDef(-1, null, ['\n      '])), (_l()(), elementDef(15, 0, null, null, 3, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(17, 0, null, null, 0, 'input', [['name', 'account-type[sugar]'], ['type',
+                    'checkbox']], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['sugar\n      '])), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(20, 0, null, null, 3, 'label', [], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(22, 0, null, null, 0, 'input', [['name', 'account-type[gapps]'], ['type', 'checkbox']], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['gapps\n      '])), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(25, 0, null, null, 3, 'label', [], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(27, 0, null, null, 0, 'input', [['name', 'account-type[switchvox]'], ['type', 'checkbox']], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['switchvox\n      '])), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(30, 0, null, null, 1, 'div', [['class', 'clear-fix']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(35, 0, null, null, 44, 'fieldset', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(37, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Compte utilisateur'])),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(40, 0, null, null, 6, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])),
+            (_l()(), elementDef(42, 0, null, null, 1, 'label', [['for', 'firstname']], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Prénom'])), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(45, 0, null, null, 0, 'input', [['name', 'firstname'], ['type', 'text']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(48, 0, null, null, 6, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])),
+            (_l()(), elementDef(50, 0, null, null, 1, 'label', [['for', 'lastname']], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Nom'])), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(53, 0, null, null, 0, 'input', [['name', 'lastname'], ['type', 'text']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(56, 0, null, null, 6, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])),
+            (_l()(), elementDef(58, 0, null, null, 1, 'label', [['for', 'username']], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Username'])), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(61, 0, null, null, 0, 'input', [['name', 'username'], ['type', 'text']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(64, 0, null, null, 6, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])),
+            (_l()(), elementDef(66, 0, null, null, 1, 'label', [['for', 'email']], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Email'])), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(69, 0, null, null, 0, 'input', [['name', 'email'], ['type', 'text']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(72, 0, null, null, 6, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])),
+            (_l()(), elementDef(74, 0, null, null, 1, 'label', [['for', 'password']], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Password'])), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(77, 0, null, null, 0, 'input', [['name', 'password'], ['type', 'text']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])),
+            (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(81, 0, null, null, 234, 'fieldset', [], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(83, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['SugarCRM'])),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(86, 0, null, null, 10, 'div', [['class', 'select']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(88, 0, null, null, 1, 'div', [['class', 'subtitle']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Hérite les préférence de l\'utilisateur'])),
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(91, 0, null, null, 1, 'select', [['name', 'usertocopyhpfrom']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(94, 0, null, null, 1, 'div', [['class', 'clear-fix']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), textDef(-1, null, ['\n    '])),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(98, 0, null, null, 57, 'div', [['class', 'checkbox-list'], ['id', 'sugar_role']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(100, 0, null, null, 1, 'div', [['class', 'subtitle']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Role'])),
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(103, 0, null, null, 3, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])),
+            (_l()(), elementDef(105, 0, null, null, 0, 'input', [['name', 'sugar_role[dfd8b251-db66-3a60-ca21-4e23e7976bfb]'],
+                ['type', 'checkbox']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['admin\n      '])), (_l()(),
+                textDef(-1, null, ['\n      '])), (_l()(), elementDef(108, 0, null, null, 3, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])),
+            (_l()(), elementDef(110, 0, null, null, 0, 'input', [['name', 'sugar_role[723b4e69-b694-50da-4326-4aaf093df7ca]'],
+                ['type', 'checkbox']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['bo\n      '])), (_l()(),
+                textDef(-1, null, ['\n      '])), (_l()(), elementDef(113, 0, null, null, 3, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])),
+            (_l()(), elementDef(115, 0, null, null, 0, 'input', [['name', 'sugar_role[b97df828-2842-24ed-0bcf-4a7026b4ec1b]'],
+                ['type', 'checkbox']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['salesmanager\n      '])),
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(118, 0, null, null, 3, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])),
+            (_l()(), elementDef(120, 0, null, null, 0, 'input', [['name', 'sugar_role[6f89b1d4-9c9e-3436-ec67-4a702644eb29]'],
+                ['type', 'checkbox']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['sales\n      '])), (_l()(),
+                textDef(-1, null, ['\n      '])), (_l()(), elementDef(123, 0, null, null, 3, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])),
+            (_l()(), elementDef(125, 0, null, null, 0, 'input', [['name', 'sugar_role[8674a9aa-567d-b961-0b07-4d2ae7dfbc7f]'],
+                ['type', 'checkbox']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['sav\n      '])), (_l()(),
+                textDef(-1, null, ['\n      '])), (_l()(), elementDef(128, 0, null, null, 3, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])),
+            (_l()(), elementDef(130, 0, null, null, 0, 'input', [['name', 'sugar_role[e6e83aa3-35ce-5390-99ff-4f9b531ea254]'],
+                ['type', 'checkbox']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['supervisor\n      '])),
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(133, 0, null, null, 3, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])),
+            (_l()(), elementDef(135, 0, null, null, 0, 'input', [['name', 'sugar_role[128e2eae-322a-8a0d-e9f0-4cf35b5bfe5b]'],
+                ['type', 'checkbox']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['teammanager\n      '])),
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(138, 0, null, null, 3, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])),
+            (_l()(), elementDef(140, 0, null, null, 0, 'input', [['name', 'sugar_role[bd4b4c2a-0d47-a6ef-fb3e-53169635c764]'],
+                ['type', 'checkbox']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['hr\n      '])), (_l()(),
+                textDef(-1, null, ['\n      '])), (_l()(), elementDef(143, 0, null, null, 3, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])),
+            (_l()(), elementDef(145, 0, null, null, 0, 'input', [['name', 'sugar_role[da7b7380-1839-83c1-4863-4d53bb7481c3]'],
+                ['type', 'checkbox']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['readonly\n      '])),
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(148, 0, null, null, 3, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])),
+            (_l()(), elementDef(150, 0, null, null, 0, 'input', [['name', 'sugar_role[8bd8a755-d4e0-78e0-4dda-4bfcf0aed3e3]'],
+                ['type', 'checkbox']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['accountant\n      '])),
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(153, 0, null, null, 1, 'div', [['class', 'clear-fix']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(157, 0, null, null, 57, 'div', [['class', 'checkbox-list'], ['id', 'sugar_departement']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(159, 0, null, null, 1, 'div', [['class', 'subtitle']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Service'])),
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(162, 0, null, null, 3, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])),
+            (_l()(), elementDef(164, 0, null, null, 0, 'input', [['name', 'sugar_departement[Departement (facultatif)]'],
+                ['type', 'checkbox']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Departement (facultatif)\n      '])),
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(167, 0, null, null, 3, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])),
+            (_l()(), elementDef(169, 0, null, null, 0, 'input', [['name', 'sugar_departement[Backoffice]'],
+                ['type', 'checkbox']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Backoffice\n      '])),
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(172, 0, null, null, 3, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])),
+            (_l()(), elementDef(174, 0, null, null, 0, 'input', [['name', 'sugar_departement[Backoffice Billet]'],
+                ['type', 'checkbox']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Backoffice Billet\n      '])),
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(177, 0, null, null, 3, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])),
+            (_l()(), elementDef(179, 0, null, null, 0, 'input', [['name', 'sugar_departement[Backoffice Carnet]'],
+                ['type', 'checkbox']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Backoffice Carnet\n      '])),
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(182, 0, null, null, 3, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])),
+            (_l()(), elementDef(184, 0, null, null, 0, 'input', [['name', 'sugar_departement[Backoffice Resa]'],
+                ['type', 'checkbox']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Backoffice Resa\n      '])),
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(187, 0, null, null, 3, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])),
+            (_l()(), elementDef(189, 0, null, null, 0, 'input', [['name', 'sugar_departement[Comptabilité]'],
+                ['type', 'checkbox']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Comptabilité\n      '])),
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(192, 0, null, null, 3, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])),
+            (_l()(), elementDef(194, 0, null, null, 0, 'input', [['name', 'sugar_departement[Production]'],
+                ['type', 'checkbox']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Production\n      '])),
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(197, 0, null, null, 3, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])),
+            (_l()(), elementDef(199, 0, null, null, 0, 'input', [['name', 'sugar_departement[SAV]'],
+                ['type', 'checkbox']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['SAV\n      '])), (_l()(),
+                textDef(-1, null, ['\n      '])), (_l()(), elementDef(202, 0, null, null, 3, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])),
+            (_l()(), elementDef(204, 0, null, null, 0, 'input', [['name', 'sugar_departement[Service Qualité]'],
+                ['type', 'checkbox']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Service Qualité\n      '])),
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(207, 0, null, null, 3, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])),
+            (_l()(), elementDef(209, 0, null, null, 0, 'input', [['name', 'sugar_departement[Ventes]'],
+                ['type', 'checkbox']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Ventes\n      '])), (_l()(),
+                textDef(-1, null, ['\n      '])), (_l()(), elementDef(212, 0, null, null, 1, 'div', [['class', 'clear-fix']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(216, 0, null, null, 73, 'div', [['class', 'select']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])),
+            (_l()(), elementDef(218, 0, null, null, 1, 'div', [['class', 'subtitle']], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Bureau'])), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(221, 0, null, null, 64, 'select', [['name', 'sugar_bureau']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])), (_l()(),
+                elementDef(223, 0, null, null, 1, 'option', [['value', '']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['*Néant*'])), (_l()(), textDef(-1, null, ['\n        '])),
+            (_l()(), elementDef(226, 0, null, null, 1, 'option', [['value', '1006']], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Bureau - Backoffice'])), (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(229, 0, null, null, 1, 'option', [['value', '1012']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Bureau - Black Pearl 1'])),
+            (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(232, 0, null, null, 1, 'option', [['value', '1943']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Bureau - Black Pearl 2'])), (_l()(), textDef(-1, null, ['\n        '])),
+            (_l()(), elementDef(235, 0, null, null, 1, 'option', [['value', '1377']], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Bureau - Comptabilite'])), (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(238, 0, null, null, 1, 'option', [['value', '1014']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Bureau - Golden Dragons 1'])),
+            (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(241, 0, null, null, 1, 'option', [['value', '1376']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Bureau - Golden Dragons 2'])), (_l()(), textDef(-1, null, ['\n        '])),
+            (_l()(), elementDef(244, 0, null, null, 1, 'option', [['value', '1010']], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Bureau - Guaranis 1'])), (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(247, 0, null, null, 1, 'option', [['value', '1011']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Bureau - Guaranis 2'])),
+            (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(250, 0, null, null, 1, 'option', [['value', '1009']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Bureau - Iroquois 1'])), (_l()(), textDef(-1, null, ['\n        '])),
+            (_l()(), elementDef(253, 0, null, null, 1, 'option', [['value', '1963']], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Bureau - Iroquois 2'])), (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(256, 0, null, null, 1, 'option', [['value', '1007']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Bureau - Marines'])),
+            (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(259, 0, null, null, 1, 'option', [['value', '1964']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Bureau - Marines 2'])), (_l()(), textDef(-1, null, ['\n        '])),
+            (_l()(), elementDef(262, 0, null, null, 1, 'option', [['value', '1008']], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Bureau - Masai'])), (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(265, 0, null, null, 1, 'option', [['value', '1930']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Bureau - Papagayos 1'])),
+            (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(268, 0, null, null, 1, 'option', [['value', '1944']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Bureau - Papagayos 2'])), (_l()(), textDef(-1, null, ['\n        '])),
+            (_l()(), elementDef(271, 0, null, null, 1, 'option', [['value', '1015']], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Bureau - Prestige'])), (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(274, 0, null, null, 1, 'option', [['value', '1017']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Bureau - Production'])),
+            (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(277, 0, null, null, 1, 'option', [['value', '1690']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Bureau - SG'])), (_l()(), textDef(-1, null, ['\n        '])), (_l()(),
+                elementDef(280, 0, null, null, 1, 'option', [['value', '1013']], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Bureau - Shaolin'])), (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(283, 0, null, null, 1, 'option', [['value', '1005']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Bureau - Sharks'])), (_l()(),
+                textDef(-1, null, ['\n      '])), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(287, 0, null, null, 1, 'div', [['class', 'clear-fix']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])), (_l()(),
+                textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n    '])),
+            (_l()(), elementDef(291, 0, null, null, 7, 'div', [['class', 'checkbox-list'],
+                ['id', 'sugar_team']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])), (_l()(),
+                elementDef(293, 0, null, null, 1, 'div', [['class', 'subtitle']], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Equipes (Sugar)'])), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(296, 0, null, null, 1, 'div', [['class', 'clear-fix']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])), (_l()(),
+                textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n    '])),
+            (_l()(), elementDef(300, 0, null, null, 6, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(302, 0, null, null, 1, 'label', [['for', 'sugar_tourplan']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Code User Tourplan\n      '])),
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(305, 0, null, null, 0, 'input', [['name', 'sugar_tourplan'], ['type', 'text']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n    '])),
+            (_l()(), elementDef(308, 0, null, null, 6, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(310, 0, null, null, 1, 'label', [['for', 'sugar_via']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Code User VIA\n      '])),
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(313, 0, null, null, 0, 'input', [['name', 'sugar_via'], ['type', 'text']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(),
+                textDef(-1, null, ['\n  '])), (_l()(), elementDef(317, 0, null, null, 20, 'fieldset', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])),
+            (_l()(), elementDef(319, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Telephonie'])), (_l()(), textDef(-1, null, ['\n    '])),
+            (_l()(), elementDef(322, 0, null, null, 6, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(324, 0, null, null, 1, 'label', [['for', 'phone_number']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Phone Number\n      '])),
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(327, 0, null, null, 0, 'input', [['name', 'phone_number'], ['type', 'text']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n    '])),
+            (_l()(), elementDef(330, 0, null, null, 6, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(332, 0, null, null, 1, 'label', [['for', 'extension']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Extension\n      '])),
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(335, 0, null, null, 0, 'input', [['name', 'extension'], ['type', 'text']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(),
+                textDef(-1, null, ['\n  '])), (_l()(), elementDef(339, 0, null, null, 93, 'fieldset', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])),
+            (_l()(), elementDef(341, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Google Apps'])), (_l()(), textDef(-1, null, ['\n    '])),
+            (_l()(), elementDef(344, 0, null, null, 79, 'div', [['class', 'select']], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(346, 0, null, null, 1, 'div', [['class', 'subtitle']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Organisation'])), (_l()(), textDef(-1, null, ['\n      '])), (_l()(),
+                elementDef(349, 0, null, null, 70, 'select', [['name', 'org_unit']], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(351, 0, null, null, 1, 'option', [['value', '/']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])),
+            (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(354, 0, null, null, 1, 'option', [['value', '/BackOffice']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['BackOffice'])), (_l()(), textDef(-1, null, ['\n        '])), (_l()(),
+                elementDef(357, 0, null, null, 1, 'option', [['value', '/Compta']], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Compta'])), (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(360, 0, null, null, 1, 'option', [['value', '/EQ Black Pearls']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['EQ Black Pearls'])),
+            (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(363, 0, null, null, 1, 'option', [['value', '/EQ Cajuns']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['EQ Cajuns'])), (_l()(), textDef(-1, null, ['\n        '])), (_l()(),
+                elementDef(366, 0, null, null, 1, 'option', [['value', '/EQ Golden Dragons']], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['EQ Golden Dragons'])), (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(369, 0, null, null, 1, 'option', [['value', '/EQ Guaranis']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['EQ Guaranis'])),
+            (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(372, 0, null, null, 1, 'option', [['value', '/EQ Iroquois']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['EQ Iroquois'])), (_l()(), textDef(-1, null, ['\n        '])), (_l()(),
+                elementDef(375, 0, null, null, 1, 'option', [['value', '/EQ Marines']], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['EQ Marines'])), (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(378, 0, null, null, 1, 'option', [['value', '/EQ Masais']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['EQ Masais'])), (_l()(),
+                textDef(-1, null, ['\n        '])), (_l()(), elementDef(381, 0, null, null, 1, 'option', [['value', '/EQ Papagayos']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['EQ Papagayos'])), (_l()(), textDef(-1, null, ['\n        '])), (_l()(),
+                elementDef(384, 0, null, null, 1, 'option', [['value', '/EQ Shaolins']], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['EQ Shaolins'])), (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(387, 0, null, null, 1, 'option', [['value', '/EQ Sharks']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['EQ Sharks'])), (_l()(),
+                textDef(-1, null, ['\n        '])), (_l()(), elementDef(390, 0, null, null, 1, 'option', [['value', '/IT']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['IT'])),
+            (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(393, 0, null, null, 1, 'option', [['value', '/Marketing Paris']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Marketing Paris'])), (_l()(), textDef(-1, null, ['\n        '])),
+            (_l()(), elementDef(396, 0, null, null, 1, 'option', [['value', '/Prod / Achats']], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Prod / Achats'])), (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(399, 0, null, null, 1, 'option', [['value', '/SG & Direction']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['SG & Direction'])),
+            (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(402, 0, null, null, 1, 'option', [['value', '/Shanghai']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Shanghai'])), (_l()(), textDef(-1, null, ['\n        '])), (_l()(),
+                elementDef(405, 0, null, null, 1, 'option', [['value', '/Web Tools']], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Web Tools'])), (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(408, 0, null, null, 1, 'option', [['value', '/X - Congé maternité']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['X - Congé maternité'])),
+            (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(411, 0, null, null, 1, 'option', [['value', '/X 1 - Pending Legal Do not delete']], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['X 1 - Pending Legal Do not delete'])), (_l()(),
+                textDef(-1, null, ['\n        '])), (_l()(), elementDef(414, 0, null, null, 1, 'option', [['value', '/X Partis']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['X Partis'])), (_l()(), textDef(-1, null, ['\n        '])), (_l()(),
+                elementDef(417, 0, null, null, 1, 'option', [['value', '/X X A EFFACER']], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['X X A EFFACER'])), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(421, 0, null, null, 1, 'div', [['class', 'clear-fix']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), textDef(-1, null, ['\n    '])),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(425, 0, null, null, 6, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])),
+            (_l()(), elementDef(427, 0, null, null, 1, 'label', [['for', 'google_group']], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Groupes - Séparer les noms de groupes par des ";" et ne pas mettre @planetveo.com\n      '])),
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(430, 0, null, null, 0, 'input', [['name', 'google_group'], ['type', 'text']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(),
+                textDef(-1, null, ['\n  '])), (_l()(), elementDef(434, 0, null, null, 0, 'input', [['type', 'submit'], ['value', 'Créer l\'utilisateur']], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['\n'])), (_l()(), textDef(-1, null, ['\n']))], null, null);
+    }
+    function View_CreateUserFormComponent_Host_0(_l) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 1, 'mv-app-create-user-form', [], null, null, null, View_CreateUserFormComponent_0, RenderType_CreateUserFormComponent)), directiveDef(1, 114688, null, 0, CreateUserFormComponent, [], null, null)], function (_ck, _v) {
+            _ck(_v, 1, 0);
+        }, null);
+    }
+    var CreateUserFormComponentNgFactory = createComponentFactory('mv-app-create-user-form', CreateUserFormComponent, View_CreateUserFormComponent_Host_0, {}, {}, []);
+
+    /**
+     * @fileoverview This file is generated by the Angular template compiler.
+     * Do not edit.
+     * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride}
+     */
+    var styles_DisableUserFormComponent = [];
+    var RenderType_DisableUserFormComponent = createRendererType2({ encapsulation: 2,
+        styles: styles_DisableUserFormComponent, data: {} });
+    function View_DisableUserFormComponent_0(_l) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 1, 'h2', [], null, null, null, null, null)), (_l()(),
+                textDef(-1, null, [' Disable User Form '])), (_l()(), textDef(-1, null, ['\n\n'])), (_l()(), elementDef(3, 0, null, null, 90, 'form', [], null, null, null, null, null)), (_l()(),
+                textDef(-1, null, ['\n  '])), (_l()(), elementDef(5, 0, null, null, 28, 'fieldset', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(7, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Type de compte'])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(10, 0, null, null, 22, 'div', [['class', 'checkbox-list'], ['id', 'account-type']], null, null, null, null, null)), (_l()(),
+                textDef(-1, null, ['\n      '])), (_l()(), elementDef(12, 0, null, null, 1, 'div', [['class', 'subtitle']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Type de compte'])), (_l()(),
+                textDef(-1, null, ['\n      '])), (_l()(), elementDef(15, 0, null, null, 3, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(17, 0, null, null, 0, 'input', [['name', 'account-type[sugar]'], ['type',
+                    'checkbox']], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['sugar\n      '])), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(20, 0, null, null, 3, 'label', [], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(22, 0, null, null, 0, 'input', [['name', 'account-type[gapps]'], ['type', 'checkbox']], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['gapps\n      '])), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(25, 0, null, null, 3, 'label', [], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(27, 0, null, null, 0, 'input', [['name', 'account-type[switchvox]'], ['type', 'checkbox']], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['switchvox\n      '])), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(30, 0, null, null, 1, 'div', [['class', 'clear-fix']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(35, 0, null, null, 54, 'fieldset', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(37, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Action'])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(40, 0, null, null, 16, 'div', [['class', 'select']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])),
+            (_l()(), elementDef(42, 0, null, null, 1, 'div', [['class', 'subtitle']], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Compte utilisateur a desactiver'])), (_l()(),
+                textDef(-1, null, ['\n      '])), (_l()(), elementDef(45, 0, null, null, 10, 'select', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])),
+            (_l()(), elementDef(47, 0, null, null, 1, 'option', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['*Néant*'])), (_l()(), textDef(-1, null, ['\n        '])),
+            (_l()(), elementDef(50, 0, null, null, 1, 'option', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Utilisateur 1'])), (_l()(), textDef(-1, null, ['\n        '])),
+            (_l()(), elementDef(53, 0, null, null, 1, 'option', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Utilisateur 2'])), (_l()(), textDef(-1, null, ['\n      '])),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(58, 0, null, null, 6, 'div', [], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(60, 0, null, null, 1, 'label', [['for', 'password']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Nouveau mot de passe'])), (_l()(), textDef(-1, null, ['\n      '])),
+            (_l()(), elementDef(63, 0, null, null, 0, 'input', [['name', 'password'],
+                ['type', 'text']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(66, 0, null, null, 22, 'div', [['class', 'checkbox-list'], ['id', 'account-type']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(68, 0, null, null, 1, 'div', [['class', 'subtitle']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Action'])),
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(71, 0, null, null, 3, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])),
+            (_l()(), elementDef(73, 0, null, null, 0, 'input', [['type', 'checkbox']], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Gapps - Retirer des boucles\n      '])), (_l()(),
+                textDef(-1, null, ['\n      '])), (_l()(), elementDef(76, 0, null, null, 3, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])),
+            (_l()(), elementDef(78, 0, null, null, 0, 'input', [['type', 'checkbox']], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Gapps - Changer le mot de passe\n      '])),
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(81, 0, null, null, 3, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])),
+            (_l()(), elementDef(83, 0, null, null, 0, 'input', [['type', 'checkbox']], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Sugar - Desactiver le compte\n      '])),
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(86, 0, null, null, 1, 'div', [['class', 'clear-fix']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(),
+                elementDef(91, 0, null, null, 1, 'button', [], [[8, 'disabled',
+                        0]], null, null, null, null)), (_l()(),
+                textDef(-1, null, ['Desactiver l\'utilisateur'])), (_l()(), textDef(-1, null, ['\n'])), (_l()(), textDef(-1, null, ['\n']))], null, function (_ck, _v) {
+            var _co = _v.component;
+            var currVal_0 = !_co.enableAdd;
+            _ck(_v, 91, 0, currVal_0);
+        });
+    }
+    function View_DisableUserFormComponent_Host_0(_l) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 1, 'mv-app-disable-user-form', [], null, null, null, View_DisableUserFormComponent_0, RenderType_DisableUserFormComponent)), directiveDef(1, 114688, null, 0, DisableUserFormComponent, [], null, null)], function (_ck, _v) {
+            _ck(_v, 1, 0);
+        }, null);
+    }
+    var DisableUserFormComponentNgFactory = createComponentFactory('mv-app-disable-user-form', DisableUserFormComponent, View_DisableUserFormComponent_Host_0, {}, {}, []);
+
+    /**
+     * @fileoverview This file is generated by the Angular template compiler.
+     * Do not edit.
+     * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride}
+     */
     var styles_AppComponent = [];
     var RenderType_AppComponent = createRendererType2({ encapsulation: 2, styles: styles_AppComponent,
         data: {} });
@@ -40997,12 +41303,22 @@
      * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride}
      */
     var AppModuleNgFactory = createNgModuleFactory(AppModule, [AppComponent], function (_l) {
-        return moduleDef([moduleProvideDef(512, ComponentFactoryResolver, CodegenComponentFactoryResolver, [[8, [HomeComponentNgFactory, UsersComponentNgFactory, AppComponentNgFactory]],
-                [3, ComponentFactoryResolver], NgModuleRef]), moduleProvideDef(4352, LOCALE_ID, 'fr-FR', []), moduleProvideDef(4608, NgLocalization, NgLocaleLocalization, [LOCALE_ID]), moduleProvideDef(5120, APP_ID, _appIdRandomProviderFactory, []), moduleProvideDef(5120, IterableDiffers, _iterableDiffersFactory, []), moduleProvideDef(5120, KeyValueDiffers, _keyValueDiffersFactory, []), moduleProvideDef(4608, DomSanitizer, DomSanitizerImpl, [DOCUMENT]), moduleProvideDef(6144, Sanitizer, null, [DomSanitizer]), moduleProvideDef(4608, HAMMER_GESTURE_CONFIG, HammerGestureConfig, []), moduleProvideDef(5120, EVENT_MANAGER_PLUGINS, function (p0_0, p1_0, p2_0, p2_1) {
+        return moduleDef([moduleProvideDef(512, ComponentFactoryResolver, CodegenComponentFactoryResolver, [[8, [HomeComponentNgFactory, UsersComponentNgFactory, CreateUserFormComponentNgFactory,
+                        DisableUserFormComponentNgFactory, AppComponentNgFactory]], [3, ComponentFactoryResolver],
+                NgModuleRef]), moduleProvideDef(4352, LOCALE_ID, 'fr-FR', []), moduleProvideDef(4608, NgLocalization, NgLocaleLocalization, [LOCALE_ID]), moduleProvideDef(5120, APP_ID, _appIdRandomProviderFactory, []), moduleProvideDef(5120, IterableDiffers, _iterableDiffersFactory, []),
+            moduleProvideDef(5120, KeyValueDiffers, _keyValueDiffersFactory, []), moduleProvideDef(4608, DomSanitizer, DomSanitizerImpl, [DOCUMENT]), moduleProvideDef(6144, Sanitizer, null, [DomSanitizer]),
+            moduleProvideDef(4608, HAMMER_GESTURE_CONFIG, HammerGestureConfig, []),
+            moduleProvideDef(5120, EVENT_MANAGER_PLUGINS, function (p0_0, p1_0, p2_0, p2_1) {
                 return [new DomEventsPlugin(p0_0), new KeyEventsPlugin(p1_0), new HammerGesturesPlugin(p2_0, p2_1)];
-            }, [DOCUMENT, DOCUMENT, DOCUMENT, HAMMER_GESTURE_CONFIG]), moduleProvideDef(4608, EventManager, EventManager, [EVENT_MANAGER_PLUGINS, NgZone]), moduleProvideDef(135680, DomSharedStylesHost, DomSharedStylesHost, [DOCUMENT]), moduleProvideDef(4608, DomRendererFactory2, DomRendererFactory2, [EventManager, DomSharedStylesHost]),
-            moduleProvideDef(5120, AnimationDriver, instantiateSupportedAnimationDriver, []), moduleProvideDef(5120, AnimationStyleNormalizer, instantiateDefaultStyleNormalizer, []), moduleProvideDef(4608, AnimationEngine, InjectableAnimationEngine, [AnimationDriver,
-                AnimationStyleNormalizer]), moduleProvideDef(5120, RendererFactory2, instantiateRendererFactory, [DomRendererFactory2, AnimationEngine, NgZone]), moduleProvideDef(6144, SharedStylesHost, null, [DomSharedStylesHost]), moduleProvideDef(4608, Testability, Testability, [NgZone]), moduleProvideDef(4608, Meta, Meta, [DOCUMENT]), moduleProvideDef(4608, Title, Title, [DOCUMENT]), moduleProvideDef(4608, AnimationBuilder, BrowserAnimationBuilder, [RendererFactory2,
+            }, [DOCUMENT, DOCUMENT, DOCUMENT, HAMMER_GESTURE_CONFIG]), moduleProvideDef(4608, EventManager, EventManager, [EVENT_MANAGER_PLUGINS, NgZone]),
+            moduleProvideDef(135680, DomSharedStylesHost, DomSharedStylesHost, [DOCUMENT]),
+            moduleProvideDef(4608, DomRendererFactory2, DomRendererFactory2, [EventManager,
+                DomSharedStylesHost]), moduleProvideDef(5120, AnimationDriver, instantiateSupportedAnimationDriver, []),
+            moduleProvideDef(5120, AnimationStyleNormalizer, instantiateDefaultStyleNormalizer, []), moduleProvideDef(4608, AnimationEngine, InjectableAnimationEngine, [AnimationDriver, AnimationStyleNormalizer]),
+            moduleProvideDef(5120, RendererFactory2, instantiateRendererFactory, [DomRendererFactory2, AnimationEngine,
+                NgZone]), moduleProvideDef(6144, SharedStylesHost, null, [DomSharedStylesHost]),
+            moduleProvideDef(4608, Testability, Testability, [NgZone]), moduleProvideDef(4608, Meta, Meta, [DOCUMENT]), moduleProvideDef(4608, Title, Title, [DOCUMENT]),
+            moduleProvideDef(4608, AnimationBuilder, BrowserAnimationBuilder, [RendererFactory2,
                 DOCUMENT$1]), moduleProvideDef(4608, HttpXsrfTokenExtractor, HttpXsrfCookieExtractor, [DOCUMENT,
                 PLATFORM_ID, XSRF_COOKIE_NAME]), moduleProvideDef(4608, HttpXsrfInterceptor, HttpXsrfInterceptor, [HttpXsrfTokenExtractor,
                 XSRF_HEADER_NAME]), moduleProvideDef(5120, HTTP_INTERCEPTORS, function (p0_0) {
@@ -41025,7 +41341,8 @@
             moduleProvideDef(512, HttpClientModule, HttpClientModule, []), moduleProvideDef(1024, ROUTER_FORROOT_GUARD, provideForRootGuard, [[3, Router]]), moduleProvideDef(512, UrlSerializer, DefaultUrlSerializer, []), moduleProvideDef(512, ChildrenOutletContexts, ChildrenOutletContexts, []), moduleProvideDef(256, APP_BASE_HREF, '/', []), moduleProvideDef(256, ROUTER_CONFIGURATION, {}, []), moduleProvideDef(1024, LocationStrategy, provideLocationStrategy, [PlatformLocation, [2, APP_BASE_HREF], ROUTER_CONFIGURATION]),
             moduleProvideDef(512, Location, Location, [LocationStrategy]), moduleProvideDef(512, Compiler, Compiler, []), moduleProvideDef(512, NgModuleFactoryLoader, SystemJsNgModuleLoader, [Compiler, [2, SystemJsNgModuleLoaderConfig]]), moduleProvideDef(1024, ROUTES, function () {
                 return [[{ path: 'home', component: HomeComponent }, { path: 'users', component: UsersComponent },
-                        { path: '**', redirectTo: 'users' }]];
+                        { path: 'create', component: CreateUserFormComponent }, { path: 'disable',
+                            component: DisableUserFormComponent }, { path: '**', redirectTo: 'users' }]];
             }, []), moduleProvideDef(1024, Router, setupRouter, [ApplicationRef, UrlSerializer,
                 ChildrenOutletContexts, Location, Injector, NgModuleFactoryLoader,
                 Compiler, ROUTES, ROUTER_CONFIGURATION, [2, UrlHandlingStrategy],

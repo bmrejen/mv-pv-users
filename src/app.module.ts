@@ -21,6 +21,9 @@ import {
   NgModule,
 } from "@angular/core";
 
+import { CreateUserFormComponent } from "./app/components/create-user-form/create-user-form.component";
+import { DisableUserFormComponent } from "./app/components/disable-user-form/disable-user-form.component";
+
 import { RouterModule } from "@angular/router";
 import { UserComponent } from "./app/components/user/user.component";
 import { UsersComponent } from "./app/components/users/users.component";
@@ -37,6 +40,8 @@ import "./app/rxjs-extensions";
   HomeComponent,
   UserComponent,
   UsersComponent,
+  CreateUserFormComponent,
+  DisableUserFormComponent,
   ],
   imports: [
   BrowserModule,
