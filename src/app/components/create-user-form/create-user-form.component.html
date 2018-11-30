@@ -1,220 +1,95 @@
 <h2> Create User Form </h2>
 
 <form>
-  <fieldset>
-    <legend>Type de compte</legend>
-    <div class="checkbox-list" id="account-type">
-      <div class="subtitle">Type de compte</div>
-      <label>
-        <input type=checkbox name="account-type[sugar]">sugar
-      </label>
-      <label>
-        <input type=checkbox name="account-type[gapps]">gapps
-      </label>
-      <label>
-        <input type=checkbox name="account-type[switchvox]">switchvox
-      </label>
-      <div class=clear-fix>
-      </div>
-    </div>
-  </fieldset>
-  <fieldset>
-    <legend>Compte utilisateur</legend>
-    <div>
-      <label for=firstname>Prénom</label>
-      <input name=firstname type=text>
-    </div>
-    <div>
-      <label for=lastname>Nom</label>
-      <input name=lastname type=text>
-    </div>
-    <div>
-      <label for=username>Username</label>
-      <input name=username type=text>
-    </div>
-    <div>
-      <label for=email>Email</label>
-      <input name=email type=text>
-    </div>
-    <div>
-      <label for=password>Password</label>
-      <input name=password type=text>
-    </div>
-  </fieldset>
-  <fieldset>
-    <legend>SugarCRM</legend>
-    <div class="select">
-      <div class="subtitle">Hérite les préférence de l'utilisateur</div>
-      <select name="usertocopyhpfrom">
-      </select>
-      <div class=clear-fix>
-      </div>
-    </div>
-    <div class="checkbox-list" id="sugar_role">
-      <div class="subtitle">Role</div>
-      <label>
-        <input type=checkbox name="sugar_role[dfd8b251-db66-3a60-ca21-4e23e7976bfb]">admin
-      </label>
-      <label>
-        <input type=checkbox name="sugar_role[723b4e69-b694-50da-4326-4aaf093df7ca]">bo
-      </label>
-      <label>
-        <input type=checkbox name="sugar_role[b97df828-2842-24ed-0bcf-4a7026b4ec1b]">salesmanager
-      </label>
-      <label>
-        <input type=checkbox name="sugar_role[6f89b1d4-9c9e-3436-ec67-4a702644eb29]">sales
-      </label>
-      <label>
-        <input type=checkbox name="sugar_role[8674a9aa-567d-b961-0b07-4d2ae7dfbc7f]">sav
-      </label>
-      <label>
-        <input type=checkbox name="sugar_role[e6e83aa3-35ce-5390-99ff-4f9b531ea254]">supervisor
-      </label>
-      <label>
-        <input type=checkbox name="sugar_role[128e2eae-322a-8a0d-e9f0-4cf35b5bfe5b]">teammanager
-      </label>
-      <label>
-        <input type=checkbox name="sugar_role[bd4b4c2a-0d47-a6ef-fb3e-53169635c764]">hr
-      </label>
-      <label>
-        <input type=checkbox name="sugar_role[da7b7380-1839-83c1-4863-4d53bb7481c3]">readonly
-      </label>
-      <label>
-        <input type=checkbox name="sugar_role[8bd8a755-d4e0-78e0-4dda-4bfcf0aed3e3]">accountant
-      </label>
-      <div class=clear-fix>
-      </div>
-    </div>
-    <div class="checkbox-list" id="sugar_departement">
-      <div class="subtitle">Service</div>
-      <label>
-        <input type=checkbox name="sugar_departement[Departement (facultatif)]">Departement (facultatif)
-      </label>
-      <label>
-        <input type=checkbox name="sugar_departement[Backoffice]">Backoffice
-      </label>
-      <label>
-        <input type=checkbox name="sugar_departement[Backoffice Billet]">Backoffice Billet
-      </label>
-      <label>
-        <input type=checkbox name="sugar_departement[Backoffice Carnet]">Backoffice Carnet
-      </label>
-      <label>
-        <input type=checkbox name="sugar_departement[Backoffice Resa]">Backoffice Resa
-      </label>
-      <label>
-        <input type=checkbox name="sugar_departement[Comptabilité]">Comptabilité
-      </label>
-      <label>
-        <input type=checkbox name="sugar_departement[Production]">Production
-      </label>
-      <label>
-        <input type=checkbox name="sugar_departement[SAV]">SAV
-      </label>
-      <label>
-        <input type=checkbox name="sugar_departement[Service Qualité]">Service Qualité
-      </label>
-      <label>
-        <input type=checkbox name="sugar_departement[Ventes]">Ventes
-      </label>
-      <div class=clear-fix>
-      </div>
-    </div>
-    <div class="select">
-      <div class="subtitle">Bureau</div>
-      <select name="sugar_bureau">
-        <option value="">*Néant*</option>
-        <option value="1006">Bureau - Backoffice</option>
-        <option value="1012">Bureau - Black Pearl 1</option>
-        <option value="1943">Bureau - Black Pearl 2</option>
-        <option value="1377">Bureau - Comptabilite</option>
-        <option value="1014">Bureau - Golden Dragons 1</option>
-        <option value="1376">Bureau - Golden Dragons 2</option>
-        <option value="1010">Bureau - Guaranis 1</option>
-        <option value="1011">Bureau - Guaranis 2</option>
-        <option value="1009">Bureau - Iroquois 1</option>
-        <option value="1963">Bureau - Iroquois 2</option>
-        <option value="1007">Bureau - Marines</option>
-        <option value="1964">Bureau - Marines 2</option>
-        <option value="1008">Bureau - Masai</option>
-        <option value="1930">Bureau - Papagayos 1</option>
-        <option value="1944">Bureau - Papagayos 2</option>
-        <option value="1015">Bureau - Prestige</option>
-        <option value="1017">Bureau - Production</option>
-        <option value="1690">Bureau - SG</option>
-        <option value="1013">Bureau - Shaolin</option>
-        <option value="1005">Bureau - Sharks</option>
-      </select>
-      <div class=clear-fix>
-      </div>
-    </div>
-    <div class="checkbox-list" id="sugar_team">
-      <div class="subtitle">Equipes (Sugar)</div>
-      <div class=clear-fix>
-      </div>
-    </div>
-    <div>
-      <label for=sugar_tourplan>Code User Tourplan
-      </label>
-      <input name=sugar_tourplan type=text>
-    </div>
-    <div>
-      <label for=sugar_via>Code User VIA
-      </label>
-      <input name=sugar_via type=text>
-    </div>
-  </fieldset>
-  <fieldset>
-    <legend>Telephonie</legend>
-    <div>
-      <label for=phone_number>Phone Number
-      </label>
-      <input name=phone_number type=text>
-    </div>
-    <div>
-      <label for=extension>Extension
-      </label>
-      <input name=extension type=text>
-    </div>
-  </fieldset>
-  <fieldset>
-    <legend>Google Apps</legend>
-    <div class="select">
-      <div class="subtitle">Organisation</div>
-      <select name="org_unit">
-        <option value="/">
-        </option>
-        <option value="/BackOffice">BackOffice</option>
-        <option value="/Compta">Compta</option>
-        <option value="/EQ Black Pearls">EQ Black Pearls</option>
-        <option value="/EQ Cajuns">EQ Cajuns</option>
-        <option value="/EQ Golden Dragons">EQ Golden Dragons</option>
-        <option value="/EQ Guaranis">EQ Guaranis</option>
-        <option value="/EQ Iroquois">EQ Iroquois</option>
-        <option value="/EQ Marines">EQ Marines</option>
-        <option value="/EQ Masais">EQ Masais</option>
-        <option value="/EQ Papagayos">EQ Papagayos</option>
-        <option value="/EQ Shaolins">EQ Shaolins</option>
-        <option value="/EQ Sharks">EQ Sharks</option>
-        <option value="/IT">IT</option>
-        <option value="/Marketing Paris">Marketing Paris</option>
-        <option value="/Prod / Achats">Prod / Achats</option>
-        <option value="/SG & Direction">SG & Direction</option>
-        <option value="/Shanghai">Shanghai</option>
-        <option value="/Web Tools">Web Tools</option>
-        <option value="/X - Congé maternité">X - Congé maternité</option>
-        <option value="/X 1 - Pending Legal Do not delete">X 1 - Pending Legal Do not delete</option>
-        <option value="/X Partis">X Partis</option>
-        <option value="/X X A EFFACER">X X A EFFACER</option>
-      </select>
-      <div class=clear-fix>
-      </div>
-    </div>
-    <div>
-      <label for=google_group>Groupes - Séparer les noms de groupes par des ";" et ne pas mettre @planetveo.com
-      </label>
-      <input name=google_group type=text>
-    </div>
-  </fieldset>
-  <input type=submit value="Créer l'utilisateur">
+ <fieldset>
+  <legend>Type de compte</legend>
+  <div class="checkbox-list" id="account-type">
+   <div *ngFor="let account of fields.accounts">
+    <input type=checkbox [name]="account.label">{{ account.name }}
+  </div>
+</div>
+</fieldset>
+<fieldset>
+  <legend>Compte utilisateur</legend>
+  <div *ngFor="let userField of fields.userFields">
+   <label [for]="userField.name">{{ userField.label }}</label>
+   <input [name]="userField.name" type=text>
+ </div>
+</fieldset>
+<fieldset>
+  <legend>SugarCRM</legend>
+  <button (click)="handleClick($event)">Ventes - Conseiller</button>
+  <button (click)="handleClick($event)">Ventes – Junior Manager</button>
+  <button (click)="handleClick($event)">Ventes - Manager</button>
+  <button (click)="handleClick($event)">Ventes – Assistant de ventes</button>
+  <button (click)="handleClick($event)">Agent Qualité</button>
+  <button (click)="handleClick($event)">Compta</button>
+  <button (click)="handleClick($event)">Inactif</button>
+  <div class="select">
+    <div class="subtitle">Hérite les préférence de l'utilisateur</div>
+    <select name="usertocopyhpfrom">
+    </select>
+  </div>
+  <div class="checkbox-list" id="sugar_role">
+   <div class="subtitle">Role</div>
+   <span *ngFor="let role of fields.roles ; trackBy: trackByFn">
+    <input
+    type="checkbox"
+    [name]="sugarRole(role.name)">{{ role.label }}
+  </span>
+</div>
+<div class="checkbox-list" id="sugar_departement">
+ <div class="subtitle">Service</div>
+ <span *ngFor="let service of fields.services ; trackBy: trackByFn">
+  <input
+  type="checkbox"
+  [name]="sugarDepartment(service)">{{ service.label }}
+</span>
+</div>
+<div class="select">
+ <div class="subtitle">Bureau</div>
+ <select name="sugar_bureau">
+  <option *ngFor="let bureau of fields.bureaux ; trackBy: trackByFn"
+  [value]="bureau.value">{{ bureau.label }}</option>
+</select>
+</div>
+<div class="checkbox-list" id="sugar_team">
+ <div class="subtitle">Equipes (Sugar)</div>
+</div>
+<div>
+ <label for=sugar_tourplan>Code User Tourplan</label>
+ <input name=sugar_tourplan type=text>
+</div>
+<div>
+ <label for=sugar_via>Code User VIA</label>
+ <input name=sugar_via type=text>
+</div>
+</fieldset>
+<fieldset>
+  <legend>Telephonie</legend>
+  <div>
+   <label for=phone_number>Phone Number</label>
+   <input name=phone_number type=text>
+ </div>
+ <div>
+   <label for=extension>Extension</label>
+   <input name=extension type=text>
+ </div>
+</fieldset>
+<fieldset>
+  <legend>Google Apps</legend>
+  <div class="select">
+   <div class="subtitle">Organisation</div>
+   <select name="org_unit">
+    <option *ngFor="let orga of fields.orgas ; trackBy: trackByFn"
+    [value]="orga.value">{{ orga.label }}</option>
+  </select>
+</div>
+<div>
+ <label for=google_group>Groupes - Séparer les noms de groupes par des ";" et ne pas mettre @planetveo.com>
+ </label>
+ <input name=google_group type=text>
+</div>
+</fieldset>
+<input type=submit value="Créer l'utilisateur">
 </form>

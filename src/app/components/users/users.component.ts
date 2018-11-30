@@ -1,35 +1,42 @@
-import { Component, OnInit } from "@angular/core";
-import { IUser } from "../../models/user";
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { User } from "../../models/user";
 import { UserService } from "../../services/user.service";
 
 @Component({
-  selector: "mv-app-users",
-  templateUrl: "./users.component.html",
+ selector: "mv-app-users",
+ templateUrl: "./users.component.html",
 })
 
 export class UsersComponent implements OnInit {
-  public users: IUser[];
-  public realUsers: IUser[];
-  constructor(private userService: UserService) {
-    // constructor
-  }
+ public fakeUsers: User;
+ public realUsers: User;
 
-  public ngOnInit(): void {
-    console.log("Users component launched");
-    this.userService.getUsers()
-    .subscribe((users) => {
-      this.users = users;
-    });
-    this.userService.getRealUsers()
-    .subscribe((realUsers) => {
-      this.realUsers = realUsers;
-    });
-    console.table(this.users);
-    console.table(this.realUsers);
-  }
-  public trackByFn(index, item) {
-    const self = this;
+ @ViewChild("disableForm") public form: any;
+ constructor(private userService: UserService) {
+  // constructor
+ }
 
-    return index; // or item.id
-  }
+ public ngOnInit(): void {
+  console.log("Users component launched");
+
+  this.userService.getFakeUsers()
+  .subscribe((users) => {
+   console.log(users);
+   console.log(this.fakeUsers);
+   // this.fakeUsers = users;
+  });
+
+  this.userService.getUser()
+  .subscribe((realUsers) => {
+   this.realUsers = realUsers.data;
+   // OU BIEn
+   // this.realUsers.push(realUsers.data)
+  });
+ }
+
+ public trackByFn(index, item) {
+  const self = this;
+
+  return index; // or item.id
+ }
 }

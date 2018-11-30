@@ -7,8 +7,8 @@ import { AppModuleNgFactory } from "./aot/src/app.module.ngfactory";
 const isEnabledProdMode = Config.get("enableProdMode");
 
 if (true === isEnabledProdMode) {
-    enableProdMode();
+  enableProdMode();
 }
 
 platformBrowser()
-    .bootstrapModuleFactory(AppModuleNgFactory);
+.bootstrapModuleFactory(AppModuleNgFactory);

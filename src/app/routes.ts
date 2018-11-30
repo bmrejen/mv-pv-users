@@ -1,37 +1,44 @@
 import { Routes } from "@angular/router";
 
 import {
-  CreateUserFormComponent,
+ CreateUserFormComponent,
 } from "./components/create-user-form/create-user-form.component";
 import {
-  DisableUserFormComponent,
+ DisableUserFormComponent,
 } from "./components/disable-user-form/disable-user-form.component";
 
 import {
-  HomeComponent,
+ HomeComponent,
 } from "./components";
 import {
-  UsersComponent,
+ UserComponent,
+} from "./components/user/user.component";
+import {
+ UsersComponent,
 } from "./components/users/users.component";
 
 /* tslint:disable object-literal-sort-keys */
 export const AppRoutes: Routes = [
 {
-  path: "home",
-  component: HomeComponent,
+ path: "home",
+ component: HomeComponent,
 },
 {
-  path: "users",
-  component: UsersComponent,
+ path: "users",
+ component: UsersComponent,
 },
 {
-  path: "create",
-  component: CreateUserFormComponent,
+ path: "user",
+ component: UserComponent,
 },
 {
-  path: "disable",
-  component: DisableUserFormComponent,
+ path: "create",
+ component: CreateUserFormComponent,
 },
-{ path: "**", redirectTo: "users" },
+{
+ path: "disable",
+ component: DisableUserFormComponent,
+},
+{ path: "**", redirectTo: "user" },
 ];
 /* tslint:enable */
