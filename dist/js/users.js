@@ -25103,30 +25103,30 @@
                         console.log(ventes);
                         break;
                     }
-                    // case "qualite":
-                    // {
-                    //   this.checkRole("Quality Control");
-                    //   this.checkService("Service Qualité");
-                    //   this.fields.selectedFunction = "aq";
-                    this.checkOthers(["Backoffice", "Global", "SAV"]);
-                //   break;
-                // }
-                // case "compta":
-                // {
-                //   this.checkRole("Accountant");
-                //   this.checkService("Comptabilité");
-                //   this.fields.selectedBureau = "1377";
-                // this.checkOthers(["Global", "ROLE - Affaire Validation", "ROLE - Create Provider"]);
-                // this.checkOrga("Compta");
-                //   break;
-                // }
-                // case "inactif":
-                // {
-                //   this.checkRole("Read-only");
-                // STATUS INACTIF (RADIO)
-                // EMPLOYEE STATUS: INACTIF (RADIO)
-                //   break;
-                // }
+                case "qualite":
+                    {
+                        //   this.checkRole("Quality Control");
+                        //   this.checkService("Service Qualité");
+                        //   this.fields.selectedFunction = "aq";
+                        this.checkOthers(["Backoffice", "Global", "SAV"]);
+                        break;
+                    }
+                case "compta":
+                    {
+                        //   this.checkRole("Accountant");
+                        //   this.checkService("Comptabilité");
+                        //   this.fields.selectedBureau = "1377";
+                        // this.checkOthers(["Global", "ROLE - Affaire Validation", "ROLE - Create Provider"]);
+                        // this.checkOrga("Compta");
+                        break;
+                    }
+                case "inactif":
+                    {
+                        //   this.checkRole("Read-only");
+                        // STATUS INACTIF (RADIO)
+                        // EMPLOYEE STATUS: INACTIF (RADIO)
+                        break;
+                    }
                 default:
                     // code...
                     break;
@@ -25136,7 +25136,7 @@
             console.log(user);
         };
         CreateUserFormComponent.prototype.trackByFn = function (index, item) {
-            return index; // or item.id
+            return item.id; // or index
         };
         CreateUserFormComponent = __decorate$3([
             Component({
@@ -25169,6 +25169,9 @@
             this.fields.accounts.forEach(function (account) {
                 account.checked = true;
             });
+        };
+        DisableUserFormComponent.prototype.trackByFn = function (index, item) {
+            return item.id;
         };
         DisableUserFormComponent = __decorate$4([
             Component({
@@ -48815,11 +48818,11 @@
     }
     function View_CreateUserFormComponent_5(_l) {
         return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 11, 'span', [], null, null, null, null, null)), (_l()(),
-                textDef(-1, null, ['\n  '])), (_l()(), elementDef(2, 0, null, null, 5, 'input', [['type', 'checkbox']], [[2, 'ng-untouched', null], [2, 'ng-touched',
-                    null], [2, 'ng-pristine', null], [2, 'ng-dirty', null],
-                [2, 'ng-valid', null], [2, 'ng-invalid', null], [2, 'ng-pending',
-                    null]], [[null, 'ngModelChange'], [null, 'change'],
-                [null, 'blur']], function (_v, en, $event) {
+                textDef(-1, null, ['\n  '])), (_l()(), elementDef(2, 0, null, null, 5, 'input', [['type', 'checkbox']], [[8, 'id', 0], [2, 'ng-untouched', null],
+                [2, 'ng-touched', null], [2, 'ng-pristine', null], [2, 'ng-dirty',
+                    null], [2, 'ng-valid', null], [2, 'ng-invalid', null],
+                [2, 'ng-pending', null]], [[null, 'ngModelChange'], [null,
+                    'change'], [null, 'blur']], function (_v, en, $event) {
                 var ad = true;
                 if (('change' === en)) {
                     var pd_0 = (nodeValue(_v, 3).onChange($event.target.checked) !== false);
@@ -48838,22 +48841,23 @@
                 return [p0_0];
             }, [CheckboxControlValueAccessor]), directiveDef(5, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(7, 16384, null, 0, NgControlStatus, [NgControl], null, null), (_l()(), textDef(8, null, ['', '\n  '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_6)), directiveDef(10, 16384, null, 0, NgIf, [ViewContainerRef,
                 TemplateRef], { ngIf: [0, 'ngIf'] }, null), (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
-            var currVal_7 = _v.context.$implicit.name;
-            var currVal_8 = _v.context.$implicit.checked;
-            _ck(_v, 5, 0, currVal_7, currVal_8);
-            var currVal_10 = _v.context.$implicit.checked;
-            _ck(_v, 10, 0, currVal_10);
+            var currVal_8 = _v.context.$implicit.name;
+            var currVal_9 = _v.context.$implicit.checked;
+            _ck(_v, 5, 0, currVal_8, currVal_9);
+            var currVal_11 = _v.context.$implicit.checked;
+            _ck(_v, 10, 0, currVal_11);
         }, function (_ck, _v) {
-            var currVal_0 = nodeValue(_v, 7).ngClassUntouched;
-            var currVal_1 = nodeValue(_v, 7).ngClassTouched;
-            var currVal_2 = nodeValue(_v, 7).ngClassPristine;
-            var currVal_3 = nodeValue(_v, 7).ngClassDirty;
-            var currVal_4 = nodeValue(_v, 7).ngClassValid;
-            var currVal_5 = nodeValue(_v, 7).ngClassInvalid;
-            var currVal_6 = nodeValue(_v, 7).ngClassPending;
-            _ck(_v, 2, 0, currVal_0, currVal_1, currVal_2, currVal_3, currVal_4, currVal_5, currVal_6);
-            var currVal_9 = _v.context.$implicit.name;
-            _ck(_v, 8, 0, currVal_9);
+            var currVal_0 = _v.context.$implicit.id;
+            var currVal_1 = nodeValue(_v, 7).ngClassUntouched;
+            var currVal_2 = nodeValue(_v, 7).ngClassTouched;
+            var currVal_3 = nodeValue(_v, 7).ngClassPristine;
+            var currVal_4 = nodeValue(_v, 7).ngClassDirty;
+            var currVal_5 = nodeValue(_v, 7).ngClassValid;
+            var currVal_6 = nodeValue(_v, 7).ngClassInvalid;
+            var currVal_7 = nodeValue(_v, 7).ngClassPending;
+            _ck(_v, 2, 0, currVal_0, currVal_1, currVal_2, currVal_3, currVal_4, currVal_5, currVal_6, currVal_7);
+            var currVal_10 = _v.context.$implicit.name;
+            _ck(_v, 8, 0, currVal_10);
         });
     }
     function View_CreateUserFormComponent_7(_l) {
@@ -48926,10 +48930,10 @@
     function View_CreateUserFormComponent_10(_l) {
         return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(),
                 textDef(-1, null, ['\n        '])), (_l()(), elementDef(2, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n          '])),
-            (_l()(), elementDef(4, 0, null, null, 5, 'input', [['type', 'checkbox']], [[2, 'ng-untouched', null], [2, 'ng-touched', null], [2, 'ng-pristine',
-                    null], [2, 'ng-dirty', null], [2, 'ng-valid', null],
-                [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null,
-                    'ngModelChange'], [null, 'change'], [null, 'blur']], function (_v, en, $event) {
+            (_l()(), elementDef(4, 0, null, null, 5, 'input', [['type', 'checkbox']], [[8, 'id', 0], [2, 'ng-untouched', null], [2, 'ng-touched', null],
+                [2, 'ng-pristine', null], [2, 'ng-dirty', null], [2, 'ng-valid',
+                    null], [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null, 'ngModelChange'], [null, 'change'], [null,
+                    'blur']], function (_v, en, $event) {
                 var ad = true;
                 if (('change' === en)) {
                     var pd_0 = (nodeValue(_v, 5).onChange($event.target.checked) !== false);
@@ -48948,20 +48952,21 @@
                 return [p0_0];
             }, [CheckboxControlValueAccessor]), directiveDef(7, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(9, 16384, null, 0, NgControlStatus, [NgControl], null, null), (_l()(),
                 textDef(10, null, [' ', '\n        '])), (_l()(), textDef(-1, null, ['\n      ']))], function (_ck, _v) {
-            var currVal_7 = _v.context.$implicit.name;
-            var currVal_8 = _v.context.$implicit.checked;
-            _ck(_v, 7, 0, currVal_7, currVal_8);
+            var currVal_8 = _v.context.$implicit.name;
+            var currVal_9 = _v.context.$implicit.checked;
+            _ck(_v, 7, 0, currVal_8, currVal_9);
         }, function (_ck, _v) {
-            var currVal_0 = nodeValue(_v, 9).ngClassUntouched;
-            var currVal_1 = nodeValue(_v, 9).ngClassTouched;
-            var currVal_2 = nodeValue(_v, 9).ngClassPristine;
-            var currVal_3 = nodeValue(_v, 9).ngClassDirty;
-            var currVal_4 = nodeValue(_v, 9).ngClassValid;
-            var currVal_5 = nodeValue(_v, 9).ngClassInvalid;
-            var currVal_6 = nodeValue(_v, 9).ngClassPending;
-            _ck(_v, 4, 0, currVal_0, currVal_1, currVal_2, currVal_3, currVal_4, currVal_5, currVal_6);
-            var currVal_9 = _v.context.$implicit.name;
-            _ck(_v, 10, 0, currVal_9);
+            var currVal_0 = _v.context.$implicit.id;
+            var currVal_1 = nodeValue(_v, 9).ngClassUntouched;
+            var currVal_2 = nodeValue(_v, 9).ngClassTouched;
+            var currVal_3 = nodeValue(_v, 9).ngClassPristine;
+            var currVal_4 = nodeValue(_v, 9).ngClassDirty;
+            var currVal_5 = nodeValue(_v, 9).ngClassValid;
+            var currVal_6 = nodeValue(_v, 9).ngClassInvalid;
+            var currVal_7 = nodeValue(_v, 9).ngClassPending;
+            _ck(_v, 4, 0, currVal_0, currVal_1, currVal_2, currVal_3, currVal_4, currVal_5, currVal_6, currVal_7);
+            var currVal_10 = _v.context.$implicit.name;
+            _ck(_v, 10, 0, currVal_10);
         });
     }
     function View_CreateUserFormComponent_11(_l) {
@@ -49364,10 +49369,9 @@
             (_l()(), elementDef(180, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Destinations'])), (_l()(), textDef(-1, null, ['\n    '])),
             (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_11)),
             directiveDef(184, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef,
-                IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(), textDef(-1, null, ['\n\n'])), (_l()(), textDef(-1, null, ['\n'])), (_l()(), elementDef(187, 0, null, null, 15, 'div', [['class', 'select']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n '])),
+                IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(), textDef(-1, null, ['\n\n  '])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(187, 0, null, null, 15, 'div', [['class', 'select']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n   '])),
             (_l()(), elementDef(189, 0, null, null, 1, 'div', [['class', 'subtitle']], null, null, null, null, null)),
-            (_l()(), textDef(-1, null, ['Manager'])), (_l()(), textDef(-1, null, ['\n '])), (_l()(), elementDef(192, 0, null, null, 9, 'select', [['name',
-                    'manager']], [[2, 'ng-untouched', null], [2, 'ng-touched', null],
+            (_l()(), textDef(-1, null, ['Manager'])), (_l()(), textDef(-1, null, ['\n   '])), (_l()(), elementDef(192, 0, null, null, 9, 'select', [['name', 'manager']], [[2, 'ng-untouched', null], [2, 'ng-touched', null],
                 [2, 'ng-pristine', null], [2, 'ng-dirty', null], [2, 'ng-valid',
                     null], [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null, 'ngModelChange'], [null, 'change'], [null,
                     'blur']], function (_v, en, $event) {
@@ -49389,8 +49393,8 @@
             }, null, null)), directiveDef(193, 16384, null, 0, SelectControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
                 return [p0_0];
             }, [SelectControlValueAccessor]), directiveDef(195, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(197, 16384, null, 0, NgControlStatus, [NgControl], null, null),
-            (_l()(), textDef(-1, null, ['\n '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_12)), directiveDef(200, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(),
-                textDef(-1, null, ['\n'])), (_l()(), textDef(-1, null, ['\n'])),
+            (_l()(), textDef(-1, null, ['\n   '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_12)), directiveDef(200, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(),
+                textDef(-1, null, ['\n '])), (_l()(), textDef(-1, null, ['\n'])),
             (_l()(), textDef(-1, null, ['\n'])), (_l()(), elementDef(204, 0, null, null, 10, 'fieldset', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n  '])),
             (_l()(), elementDef(206, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Organisations'])), (_l()(), textDef(-1, null, ['\n  '])),
             (_l()(), elementDef(209, 0, null, null, 4, 'div', [['class', 'orgas']], null, null, null, null, null)),
@@ -49892,10 +49896,9 @@
             }, null, null)), directiveDef(4, 16384, null, 0, NgNoValidate, [], null, null), directiveDef(5, 16384, null, 0, NgForm, [[8, null],
                 [8, null]], null, null), providerDef(2048, null, ControlContainer, null, [NgForm]), directiveDef(7, 16384, null, 0, NgControlStatusGroup, [ControlContainer], null, null), (_l()(), textDef(-1, null, ['\n '])), (_l()(), elementDef(9, 0, null, null, 10, 'fieldset', [], null, null, null, null, null)), (_l()(),
                 textDef(-1, null, ['\n  '])), (_l()(), elementDef(11, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Type de compte'])), (_l()(),
-                textDef(-1, null, ['\n  '])), (_l()(), elementDef(14, 0, null, null, 4, 'div', [['class', 'checkbox-list'], ['id', 'account-type']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_DisableUserFormComponent_1)), directiveDef(17, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'] }, null), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n'])), (_l()(), textDef(-1, null, ['\n'])), (_l()(), elementDef(21, 0, null, null, 60, 'fieldset', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(23, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(),
-                textDef(-1, null, ['Action'])), (_l()(), textDef(-1, null, ['\n  '])),
-            (_l()(), elementDef(26, 0, null, null, 22, 'div', [['class', 'select']], null, null, null, null, null)),
-            (_l()(), textDef(-1, null, ['\n   '])), (_l()(), elementDef(28, 0, null, null, 1, 'div', [['class', 'subtitle']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Compte utilisateur a desactiver'])), (_l()(), textDef(-1, null, ['\n   '])),
+                textDef(-1, null, ['\n  '])), (_l()(), elementDef(14, 0, null, null, 4, 'div', [['class', 'checkbox-list'], ['id', 'account-type']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_DisableUserFormComponent_1)), directiveDef(17, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'],
+                ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n'])), (_l()(), textDef(-1, null, ['\n'])), (_l()(), elementDef(21, 0, null, null, 60, 'fieldset', [], null, null, null, null, null)), (_l()(),
+                textDef(-1, null, ['\n  '])), (_l()(), elementDef(23, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Action'])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(26, 0, null, null, 22, 'div', [['class', 'select']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n   '])), (_l()(), elementDef(28, 0, null, null, 1, 'div', [['class', 'subtitle']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Compte utilisateur a desactiver'])), (_l()(), textDef(-1, null, ['\n   '])),
             (_l()(), elementDef(31, 0, null, null, 16, 'select', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(33, 0, null, null, 3, 'option', [], null, null, null, null, null)), directiveDef(34, 147456, null, 0, NgSelectOption, [ElementRef,
                 Renderer2, [8, null]], null, null), directiveDef(35, 147456, null, 0, NgSelectMultipleOption, [ElementRef, Renderer2, [8, null]], null, null), (_l()(), textDef(-1, null, ['*Néant*'])),
             (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(38, 0, null, null, 3, 'option', [], null, null, null, null, null)), directiveDef(39, 147456, null, 0, NgSelectOption, [ElementRef, Renderer2, [8, null]], null, null),
@@ -49917,7 +49920,8 @@
             (_l()(), textDef(-1, null, ['Desactiver l\'utilisateur'])), (_l()(), textDef(-1, null, ['\n'])), (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
             var _co = _v.component;
             var currVal_7 = _co.fields.accounts;
-            _ck(_v, 17, 0, currVal_7);
+            var currVal_8 = _co.trackByFn;
+            _ck(_v, 17, 0, currVal_7, currVal_8);
         }, function (_ck, _v) {
             var _co = _v.component;
             var currVal_0 = nodeValue(_v, 7).ngClassUntouched;
@@ -49928,8 +49932,8 @@
             var currVal_5 = nodeValue(_v, 7).ngClassInvalid;
             var currVal_6 = nodeValue(_v, 7).ngClassPending;
             _ck(_v, 3, 0, currVal_0, currVal_1, currVal_2, currVal_3, currVal_4, currVal_5, currVal_6);
-            var currVal_8 = !_co.enableAdd;
-            _ck(_v, 83, 0, currVal_8);
+            var currVal_9 = !_co.enableAdd;
+            _ck(_v, 83, 0, currVal_9);
         });
     }
     function View_DisableUserFormComponent_Host_0(_l) {

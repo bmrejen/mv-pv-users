@@ -185,6 +185,6 @@ export class CreateUserFormComponent implements OnInit {
   public trackByFn(index, item) {
     const self = this;
 
-    return index; // or item.id
+    return item.id; // or index
   }
 }

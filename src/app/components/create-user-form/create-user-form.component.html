@@ -65,6 +65,7 @@
  <div class="subtitle">Service</div>
  <span *ngFor="let service of fields.services ; trackBy: trackByFn">
   <input
+  [id]="service.id"
   type="checkbox"
   [(ngModel)]="service.checked"
   [name]="service.name">{{ service.name }}
@@ -115,6 +116,7 @@ id="fonctions"
       <div *ngFor="let autre of fields.autres ; trackBy: trackByFn">
         <label>
           <input
+          [id]="autre.id"
           type="checkbox"
           [name]="autre.name"
           [(ngModel)]="autre.checked"> {{ autre.name }}
