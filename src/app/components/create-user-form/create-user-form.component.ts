@@ -1,318 +1,21 @@
 import { Component, OnInit } from "@angular/core";
+import { FieldsService } from "../../services/fields.service";
 
 @Component({
   selector: "mv-app-create-user-form",
+  styleUrls: ["./create-user-form.component.css"],
   templateUrl: "./create-user-form.component.html",
 })
 
 export class CreateUserFormComponent implements OnInit {
-
-  public fields = {
-    accounts: [{
-      label: "gapps",
-      name: "Google Apps",
-    },
-    {
-      label: "sugar",
-      name: "Sugar",
-    },
-    {
-      label: "switchvox",
-      name: "SwitchVox",
-    },
-    ],
-    bureaux: [
-    {
-      label: "*Néant*",
-      value: "",
-    },
-    {
-      label: "Bureau - Backoffice",
-      value: "1006",
-    },
-    {
-      label: "Bureau - Black Pearl 1",
-      value: "1012",
-    },
-    {
-      label: "Bureau - Black Pearl 2",
-      value: "1943",
-    },
-    {
-      label: "Bureau - Comptabilite",
-      value: "1377",
-    },
-    {
-      label: "Bureau - Golden Dragons 1",
-      value: "1014",
-    },
-    {
-      label: "Bureau - Golden Dragons 2",
-      value: "1376",
-    },
-    {
-      label: "Bureau - Guaranis 1",
-      value: "1010",
-    },
-    {
-      label: "Bureau - Guaranis 2",
-      value: "1011",
-    },
-    {
-      label: "Bureau - Iroquois 1",
-      value: "1009",
-    },
-    {
-      label: "Bureau - Iroquois 2",
-      value: "1963",
-    },
-    {
-      label: "Bureau - Marines",
-      value: "1007",
-    },
-    {
-      label: "Bureau - Marines 2",
-      value: "1964",
-    },
-    {
-      label: "Bureau - Masai",
-      value: "1008",
-    },
-    {
-      label: "Bureau - Papagayos 1",
-      value: "1930",
-    },
-    {
-      label: "Bureau - Papagayos 2",
-      value: "1944",
-    },
-    {
-      label: "Bureau - Prestige",
-      value: "1015",
-    },
-    {
-      label: "Bureau - Production",
-      value: "1017",
-    },
-    {
-      label: "Bureau - SG",
-      value: "1690",
-    },
-    {
-      label: "Bureau - Shaolin",
-      value: "1013",
-    },
-    {
-      label: "Bureau - Sharks",
-      value: "1005",
-    },
-    ],
-    orgas: [
-    {
-      label: "",
-      value: "/",
-    },
-    {
-      label: "BackOffice",
-      value: "/BackOffice",
-    },
-    {
-      label: "Compta",
-      value: "/Compta",
-    },
-    {
-      label: "EQ Black Pearls",
-      value: "/EQ Black Pearls",
-    },
-    {
-      label: "EQ Cajuns",
-      value: "/EQ Cajuns",
-    },
-    {
-      label: "EQ Golden Dragons",
-      value: "/EQ Golden Dragons",
-    },
-    {
-      label: "EQ Guaranis",
-      value: "/EQ Guaranis",
-    },
-    {
-      label: "EQ Iroquois",
-      value: "/EQ Iroquois",
-    },
-    {
-      label: "EQ Marines",
-      value: "/EQ Marines",
-    },
-    {
-      label: "EQ Masais",
-      value: "/EQ Masais",
-    },
-    {
-      label: "EQ Papagayos",
-      value: "/EQ Papagayos",
-    },
-    {
-      label: "EQ Shaolins",
-      value: "/EQ Shaolins",
-    },
-    {
-      label: "EQ Sharks",
-      value: "/EQ Sharks",
-    },
-    {
-      label: "IT",
-      value: "/IT",
-    },
-    {
-      label: "Marketing Paris",
-      value: "/Marketing Paris",
-    },
-    {
-      label: "Prod / Achats",
-      value: "/Prod / Achats",
-    },
-    {
-      label: "SG & Direction",
-      value: "/SG & Direction",
-    },
-    {
-      label: "Shanghai",
-      value: "/Shanghai",
-    },
-    {
-      label: "Web Tools",
-      value: "/Web Tools",
-    },
-    {
-      label: "X - Congé maternité",
-      value: "/X - Congé maternité",
-    },
-    {
-      label: "X 1 - Pending Legal Do not delete",
-      value: "/X 1 - Pending Legal Do not delete",
-    },
-    {
-      label: "X Partis",
-      value: "/X Partis",
-    },
-    {
-      label: "X X A EFFACER",
-      value: "/X X A EFFACER",
-    },
-
-    ],
-    roles: [
-    {
-      label: "Admin",
-      name: "dfd8b251-db66-3a60-ca21-4e23e7976bfb",
-    },
-    {
-      label: "Bo",
-      name: "723b4e69-b694-50da-4326-4aaf093df7ca",
-    },
-    {
-      label: "Sales Manager",
-      name: "b97df828-2842-24ed-0bcf-4a7026b4ec1b",
-    },
-    {
-      label: "Sales",
-      name: "6f89b1d4-9c9e-3436-ec67-4a702644eb29",
-    },
-    {
-      label: "SAV",
-      name: "8674a9aa-567d-b961-0b07-4d2ae7dfbc7f",
-    },
-    {
-      label: "Superviseur",
-      name: "e6e83aa3-35ce-5390-99ff-4f9b531ea254",
-    },
-    {
-      label: "Team Manager",
-      name: "128e2eae-322a-8a0d-e9f0-4cf35b5bfe5b",
-    },
-    {
-      label: "HR",
-      name: "bd4b4c2a-0d47-a6ef-fb3e-53169635c764",
-    },
-    {
-      label: "Read-only",
-      name: "da7b7380-1839-83c1-4863-4d53bb7481c3",
-    },
-    {
-      label: "Accountant",
-      name: "8bd8a755-d4e0-78e0-4dda-4bfcf0aed3e3",
-    },
-    ],
-    services: [
-    {
-      label: "Departement (facultatif)",
-      name: "Departement (facultatif)",
-    },
-    {
-      label: "Backoffice",
-      name: "Backoffice",
-    },
-    {
-      label: "Backoffice Billet",
-      name: "Backoffice Billet",
-    },
-    {
-      label: "Backoffice Carnet",
-      name: "Backoffice Carnet",
-    },
-    {
-      label: "Backoffice Resa",
-      name: "Backoffice Resa",
-    },
-    {
-      label: "Comptabilité",
-      name: "Comptabilité",
-    },
-    {
-      label: "Production",
-      name: "Production",
-    },
-    {
-      label: "SAV",
-      name: "SAV",
-    },
-    {
-      label: "Service Qualité",
-      name: "Service Qualité",
-    },
-    {
-      label: "Ventes",
-      name: "Ventes",
-    },
-    ],
-    userFields: [{
-      label: "Prenom",
-      name: "firstname",
-    },
-    {
-      label: "Nom",
-      name: "lastname",
-    },
-    {
-      label: "Username",
-      name: "username",
-    },
-    {
-      label: "E-mail",
-      name: "email",
-    },
-    {
-      label: "Mot de passe",
-      name: "password",
-    }],
-  };
-
-  constructor() {
-    // constructor
+  public fields;
+  constructor(private fieldsService: FieldsService) {
+    //
   }
 
   public ngOnInit(): void {
+    this.fields = this.fieldsService.getData();
+    this.resetSugar();
   }
 
   public sugarRole(num) {
@@ -323,9 +26,160 @@ export class CreateUserFormComponent implements OnInit {
     return `sugar_department[${ser}]`;
   }
 
-  public handleClick(e) {
-    e.preventDefault();
-    console.log("e.target.value");
+  public resetSugar() {
+    const ventes = this.fields.services[8];
+
+    console.log("---RESET SUGAR---");
+    console.log(ventes);
+    this.fields.userValue = "user_default_xx";
+    this.fields.roles.forEach((role) => role.checked = false);
+    this.fields.services.forEach((service) => service.checked = false);
+    this.fields.selectedBureau = "";
+    this.fields.selectedFunction = "";
+    this.fields.autres.forEach((autre) => autre.checked = false);
+    console.log(ventes);
+
+  }
+
+  public checkOthers(arr) {
+    arr.forEach((element) => {
+      const myOther = this.fields.autres.find((autre) => autre.id === `autres-${element}`);
+      if (!!myOther) { myOther.checked = true; }
+    });
+  }
+
+  public checkRole(roleToCheck: string) {
+    const myRole = this.fields.roles.find((role) =>
+      role.id === `roles-${roleToCheck}`);
+    if (!!myRole) { myRole.checked = true; }
+  }
+
+  public checkService(serviceToCheck: string) {
+    const myService = this.fields.services.find((service) =>
+      service.id === `services-${serviceToCheck}`);
+    console.log("---MYSERVICE---");
+    console.log(myService);
+    if (myService != null) { myService.checked = true; }
+    console.log(myService);
+  }
+
+  public checkOrga(orgaToCheck: string) {
+    const myOrga = this.fields.orgas.find((orga) => orga.id === `orgas-${orga.orgaToCheck}`);
+    myOrga.checked = true;
+  }
+
+  public handleClick(e, type) {
+
+    this.resetSugar();
+    switch (type) {
+      case "conseiller":
+      {
+        // this.checkRole("Sales");
+        this.checkService("Ventes");
+        // this.fields.userValue = "user_default";
+        // this.checkOthers(["Global", "Ventes", "Devis Cotation", "ROLE - Reservation"]);
+        break;
+      }
+      case "jm":
+      {
+        // this.checkRole("Sales");
+        this.checkService("Ventes");
+
+        this.fields.userValue = "user_default_jm";
+        this.fields.selectedFunction = "jm";
+        // this.checkOthers(
+        //   [
+        //   "Global",
+        //   "Ventes",
+        //   "Devis Cotation",
+        //   "ROLE - BI Validation",
+        //   "ROLE - ViewRCM",
+        //   "ROLE - View RM",
+        //   "Ventes",
+        //   ],
+        //   );
+        break;
+      }
+      case "manager":
+      {
+        // console.log("---TEAM MANAGER---");
+        // console.log(this.fields.services[8]);
+        // this.checkRole("Team Manager");
+        this.checkService("Ventes");
+
+        this.fields.selectedFunction = "jm";
+        // this.checkOthers(
+        //   [
+        //   "Global",
+        //   "Devis Cotation",
+        //   "Devis V3",
+        //   "ROLE - BI Validation",
+        //   "Ventes",
+        //   ],
+        //   );
+        // console.log(this.fields.services[8]);
+        break;
+      }
+      case "assistant":
+      {
+        const ventes = this.fields.services[8];
+        console.log("---ASSISTANT VENTES START---");
+        console.log(ventes);
+
+        // this.checkRole("Reservation");
+        this.checkService("Ventes");
+
+        console.log("---JUST CHECKED---");
+        console.log(ventes);
+
+        // this.fields.selectedFunction = "av";
+        // this.checkOthers(
+        //   [
+        //   "Devis V3",
+        //   "Devis Cotation",
+        //   "Global",
+        //   "Reservation",
+        //   "ROLE - Reservation",
+        //   ]);
+
+        console.log("---END OF FUNCTION---");
+        console.log(ventes);
+        break;
+      }
+      case "qualite":
+      {
+        //   this.checkRole("Quality Control");
+        //   this.checkService("Service Qualité");
+        //   this.fields.selectedFunction = "aq";
+        this.checkOthers(["Backoffice", "Global", "SAV"]);
+        break;
+      }
+      case "compta":
+      {
+        //   this.checkRole("Accountant");
+        //   this.checkService("Comptabilité");
+
+        //   this.fields.selectedBureau = "1377";
+        // this.checkOthers(["Global", "ROLE - Affaire Validation", "ROLE - Create Provider"]);
+        // this.checkOrga("Compta");
+        break;
+      }
+      case "inactif":
+      {
+        //   this.checkRole("Read-only");
+        // STATUS INACTIF (RADIO)
+        // EMPLOYEE STATUS: INACTIF (RADIO)
+        break;
+      }
+
+      default:
+      // code...
+      break;
+    }
+  }
+
+  public selectTmp($event, user) {
+    console.log(user);
   }
 
   public trackByFn(index, item) {

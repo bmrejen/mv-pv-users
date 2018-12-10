@@ -1,14 +1,13 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { User } from "../../models/user";
 import { UserService } from "../../services/user.service";
 
 @Component({
-  selector: "mv-app-user",
-  templateUrl: "./user.component.html",
+  selector: "mv-app-teams",
+  templateUrl: "./teams.component.html",
 })
 
-export class UserComponent implements OnInit {
-  public user: User;
+export class TeamsComponent implements OnInit {
+  public teamsFromSugar;
 
   @ViewChild("disableForm") public form: any;
   constructor(private userService: UserService) {
@@ -16,10 +15,11 @@ export class UserComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.userService.getUser()
-    .subscribe((user) => {
-      this.user = user.data;
+    this.userService.getTeamsFromSugar()
+    .subscribe((teams) => {
+      this.teamsFromSugar = teams.data;
     });
+
   }
 
   public trackByFn(index, item) {

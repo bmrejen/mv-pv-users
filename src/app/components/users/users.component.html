@@ -1,13 +1,22 @@
 <h2>Users component</h2>
-<h3>Fake User</h3>
 
+<h3>Sugar Users</h3>
 
-
-
-
-<!-- <div *ngFor="let user of realUsers; trackBy: trackByFn">
- <h4>{{ user.data.id }}</h4>
- <h4>{{ user.data.attributes.firstName }}</h4>
- <h4>{{ user.data.attributes.lastName }}</h4>
+<div *ngIf="usersFromSugar && usersFromSugar != undefined">
+  <div *ngFor="let user of usersFromSugar ; trackBy: trackByFn">
+    <h4>{{ user.attributes.firstName }} {{ user.attributes.lastName }}</h4>
+    <ul>
+     <li><strong>ID:</strong> {{ user.id }}</li>
+     <li><strong>Type:</strong> {{ user.type }}</li>
+     <li><strong>Phone Home:</strong> {{ user.attributes.phoneHome }}</li>
+     <li><strong>Phone Mobile:</strong> {{ user.attributes.phoneMobile }}</li>
+     <li><strong>Phone Work:</strong> {{ user.attributes.phoneWork }}</li>
+     <li><strong>Phone Other:</strong> {{ user.attributes.phoneOther }}</li>
+     <li><strong>Phone Fax:</strong> {{ user.attributes.phoneFax }}</li>
+     <li><strong>Phone Asterisk:</strong> {{ user.attributes.phoneAsterisk }}</li>
+     <li><strong>E-mail:</strong> {{ user.attributes.email }}</li>
+     <li><strong>Status:</strong> {{ user.attributes.status }}</li>
+     <li><strong>Employee Status</strong> {{ user.attributes.employeeStatus }}</li>
+   </ul>
+ </div>
 </div>
--->
