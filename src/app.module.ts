@@ -31,6 +31,7 @@ import { TeamsComponent } from "./app/components/teams/teams.component";
 import { UserComponent } from "./app/components/user/user.component";
 import { UsersComponent } from "./app/components/users/users.component";
 import { FieldsService } from "./app/services/fields.service";
+import { SwitchVoxService } from "./app/services/switchvox.service";
 import { UserService } from "./app/services/user.service";
 
 import "./app/rxjs-extensions";
@@ -58,6 +59,7 @@ import "./app/rxjs-extensions";
   ],
   providers: [
   FieldsService,
+  SwitchVoxService,
   UserService,
   HttpClient,
   { provide: APP_BASE_HREF, useValue: "/" },

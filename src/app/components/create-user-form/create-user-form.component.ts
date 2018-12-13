@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FieldsService } from "../../services/fields.service";
+import { SwitchVoxService } from "../../services/switchvox.service";
 
 @Component({
   selector: "mv-app-create-user-form",
@@ -9,64 +10,51 @@ import { FieldsService } from "../../services/fields.service";
 
 export class CreateUserFormComponent implements OnInit {
   public fields;
-  constructor(private fieldsService: FieldsService) {
+  constructor(
+    private fieldsService: FieldsService,
+    private switchvoxService: SwitchVoxService) {
     //
   }
 
   public ngOnInit(): void {
     this.fields = this.fieldsService.getData();
     this.resetSugar();
+    this.getSwitchvoxUsers();
   }
 
-  public sugarRole(num) {
-    return `sugar_role[${num}]`;
+  public getSwitchvoxUsers() {
+    this.switchvoxService.getData()
+    .subscribe((data) => {
+      console.log(data);
+    });
   }
 
-  public sugarDepartment(ser) {
-    return `sugar_department[${ser}]`;
-  }
+  public checkStuff(where, arr) {
+    let prefix;
+    switch (where) {
+      case this.fields.roles:
+      prefix = "roles";
+      break;
+      case this.fields.orgas:
+      prefix = "orgas";
+      break;
+      case this.fields.services:
+      prefix = "services";
+      break;
+      case this.fields.autres:
+      prefix = "autres";
+      break;
 
-  public resetSugar() {
-    const ventes = this.fields.services[8];
-
-    console.log("---RESET SUGAR---");
-    console.log(ventes);
-    this.fields.userValue = "user_default_xx";
-    this.fields.roles.forEach((role) => role.checked = false);
-    this.fields.services.forEach((service) => service.checked = false);
-    this.fields.selectedBureau = "";
-    this.fields.selectedFunction = "";
-    this.fields.autres.forEach((autre) => autre.checked = false);
-    console.log(ventes);
-
-  }
-
-  public checkOthers(arr) {
+      default:
+      console.error("Wrong input");
+      break;
+    }
     arr.forEach((element) => {
-      const myOther = this.fields.autres.find((autre) => autre.id === `autres-${element}`);
+      const myOther = where.find((autre) => autre.id === `${prefix}-${element}`);
       if (!!myOther) { myOther.checked = true; }
     });
   }
 
-  public checkRole(roleToCheck: string) {
-    const myRole = this.fields.roles.find((role) =>
-      role.id === `roles-${roleToCheck}`);
-    if (!!myRole) { myRole.checked = true; }
-  }
-
-  public checkService(serviceToCheck: string) {
-    const myService = this.fields.services.find((service) =>
-      service.id === `services-${serviceToCheck}`);
-    console.log("---MYSERVICE---");
-    console.log(myService);
-    if (myService != null) { myService.checked = true; }
-    console.log(myService);
-  }
-
-  public checkOrga(orgaToCheck: string) {
-    const myOrga = this.fields.orgas.find((orga) => orga.id === `orgas-${orga.orgaToCheck}`);
-    myOrga.checked = true;
-  }
 
   public handleClick(e, type) {
 
@@ -74,99 +62,90 @@ export class CreateUserFormComponent implements OnInit {
     switch (type) {
       case "conseiller":
       {
-        // this.checkRole("Sales");
-        this.checkService("Ventes");
-        // this.fields.userValue = "user_default";
-        // this.checkOthers(["Global", "Ventes", "Devis Cotation", "ROLE - Reservation"]);
+        this.fields.userValue = "user_default";
+        this.checkStuff(this.fields.roles, ["Sales"]);
+        this.checkStuff(this.fields.services, ["Ventes"]);
+        this.checkStuff(this.fields.autres, ["Global", "Ventes", "Devis Cotation", "ROLE - Reservation"]);
         break;
       }
+
       case "jm":
       {
-        // this.checkRole("Sales");
-        this.checkService("Ventes");
-
         this.fields.userValue = "user_default_jm";
         this.fields.selectedFunction = "jm";
-        // this.checkOthers(
-        //   [
-        //   "Global",
-        //   "Ventes",
-        //   "Devis Cotation",
-        //   "ROLE - BI Validation",
-        //   "ROLE - ViewRCM",
-        //   "ROLE - View RM",
-        //   "Ventes",
-        //   ],
-        //   );
+
+        this.checkStuff(this.fields.roles, ["Sales"]);
+        this.checkStuff(this.fields.services, ["Ventes"]);
+        this.checkStuff(this.fields.autres,
+          [
+          "Global",
+          "Ventes",
+          "Devis Cotation",
+          "ROLE - BI Validation",
+          "ROLE - ViewRCM",
+          "ROLE - View RM",
+          "Ventes",
+          ],
+          );
         break;
       }
       case "manager":
       {
-        // console.log("---TEAM MANAGER---");
-        // console.log(this.fields.services[8]);
-        // this.checkRole("Team Manager");
-        this.checkService("Ventes");
+        this.fields.selectedFunction = "mgr";
 
-        this.fields.selectedFunction = "jm";
-        // this.checkOthers(
-        //   [
-        //   "Global",
-        //   "Devis Cotation",
-        //   "Devis V3",
-        //   "ROLE - BI Validation",
-        //   "Ventes",
-        //   ],
-        //   );
-        // console.log(this.fields.services[8]);
+        this.checkStuff(this.fields.roles, ["Team Manager"]);
+        this.checkStuff(this.fields.services, ["Ventes"]);
+        this.checkStuff(this.fields.autres, [
+          "Global",
+          "Devis Cotation",
+          "Devis V3",
+          "ROLE - BI Validation",
+          "Ventes",
+          ],
+          );
         break;
       }
       case "assistant":
       {
-        const ventes = this.fields.services[8];
-        console.log("---ASSISTANT VENTES START---");
-        console.log(ventes);
-
-        // this.checkRole("Reservation");
-        this.checkService("Ventes");
-
-        console.log("---JUST CHECKED---");
-        console.log(ventes);
-
-        // this.fields.selectedFunction = "av";
-        // this.checkOthers(
-        //   [
-        //   "Devis V3",
-        //   "Devis Cotation",
-        //   "Global",
-        //   "Reservation",
-        //   "ROLE - Reservation",
-        //   ]);
-
-        console.log("---END OF FUNCTION---");
-        console.log(ventes);
+        this.fields.selectedFunction = "av";
+        this.checkStuff(this.fields.roles, ["Reservation"]);
+        this.checkStuff(this.fields.services, ["Ventes"]);
+        this.checkStuff(this.fields.autres, [
+          "Devis V3",
+          "Devis Cotation",
+          "Global",
+          "Reservation",
+          "ROLE - Reservation",
+          ]);
         break;
       }
       case "qualite":
       {
-        //   this.checkRole("Quality Control");
-        //   this.checkService("Service Qualité");
-        //   this.fields.selectedFunction = "aq";
-        this.checkOthers(["Backoffice", "Global", "SAV"]);
+        this.fields.selectedFunction = "aq";
+        this.fields.selectedBureau = "Bureau - Billetterie & Qualité";
+        this.fields.selectedManager = "Manager du service qualité (Aminata)";
+
+        this.checkStuff(this.fields.roles, ["Quality Control"]);
+        this.checkStuff(this.fields.services, ["Service Qualité"]);
+        this.checkStuff(this.fields.autres, ["BackOffice", "Global", "SAV"]);
+        this.checkStuff(this.fields.orgas, ["BackOffice"]);
         break;
       }
       case "compta":
       {
-        //   this.checkRole("Accountant");
-        //   this.checkService("Comptabilité");
+        this.fields.selectedBureau = "1377";
 
-        //   this.fields.selectedBureau = "1377";
-        // this.checkOthers(["Global", "ROLE - Affaire Validation", "ROLE - Create Provider"]);
-        // this.checkOrga("Compta");
+        this.checkStuff(this.fields.roles, ["Accountant"]);
+        this.checkStuff(this.fields.services, ["Comptabilité"]);
+        this.checkStuff(this.fields.autres, ["Global", "ROLE - Affaire Validation", "ROLE - Create Provider"]);
+        this.checkStuff(this.fields.orgas, ["Compta"]);
         break;
       }
       case "inactif":
       {
-        //   this.checkRole("Read-only");
+        this.checkStuff(this.fields.roles, ["Read-only"]);
+        this.fields.inactiveStatus = true;
+        this.fields.inactiveEmployee = true;
         // STATUS INACTIF (RADIO)
         // EMPLOYEE STATUS: INACTIF (RADIO)
         break;
@@ -178,13 +157,50 @@ export class CreateUserFormComponent implements OnInit {
     }
   }
 
-  public selectTmp($event, user) {
-    console.log(user);
-  }
-
   public trackByFn(index, item) {
     const self = this;
 
     return item.id; // or index
+  }
+
+  private unCheckArrays(arrays) {
+    arrays.forEach((array) => this.unCheck(array));
+  }
+
+  private eraseFields(fields) {
+    fields.forEach((field) => field = "");
+  }
+
+  private unCheck(array) {
+    array.forEach((x) => x.checked = false);
+  }
+
+  private resetSugar() {
+    this.fields.inactiveStatus = false,
+    this.fields.inactiveEmployee = false,
+    this.fields.userValue = "user_default_xx";
+    this.fields.selectedManager = null,
+    this.eraseFields([
+      this.fields.codeSON,
+      this.fields.codeTourplan,
+      this.fields.codevad,
+      this.fields.groupes,
+      this.fields.inbound,
+      this.fields.outbound,
+      this.fields.phoneExtension,
+      this.fields.phoneNumber,
+      this.fields.selectedBureau,
+      this.fields.selectedFunction,
+      this.fields.selectedOrganisation,
+      this.fields.title,
+      ]);
+    this.unCheckArrays([
+      this.fields.roles,
+      this.fields.services,
+      this.fields.autres,
+      this.fields.teams,
+      this.fields.destinations,
+      this.fields.orgas,
+      ]);
   }
 }
