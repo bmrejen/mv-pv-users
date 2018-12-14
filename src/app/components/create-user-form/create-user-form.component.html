@@ -1,6 +1,4 @@
 <h2> Create User Form </h2>
-{{createForm.value | json}}
-
 <form #createForm="ngForm">
   <fieldset>
     <legend>Type de compte</legend>
@@ -12,6 +10,7 @@
       </div>
     </div>
   </fieldset>
+
   <fieldset>
     <legend>Compte utilisateur</legend>
     <div ngModelGroup="userInfo">
@@ -81,17 +80,23 @@
   </span>
 </div>
 </div>
+
 <div class="select">
  <div class="subtitle">Bureau</div>
- <select name="sugar_bureau"
+ <select
+ name="sugar_bureau"
  [(ngModel)]="fields.selectedBureau"
  name="office"
  >
- <option *ngFor="let bureau of fields.bureaux ; trackBy: trackByFn"
+ <option
+ *ngFor="let bureau of fields.bureaux ; trackBy: trackByFn"
  [value]="bureau.value"
- >{{ bureau.label }}</option>
+ >
+ {{ bureau.label }}
+</option>
 </select>
 </div>
+
 <div>Fonction</div>
 <select
 name="fonction"
@@ -103,6 +108,7 @@ name="fonction"
 [value]="func.value"
 >{{ func.label }}</option>
 </select>
+
 <fieldset>
   <legend>Equipe</legend>
   <div ngModelGroup="team">
@@ -201,26 +207,20 @@ name="fonction"
 </div>
 
 <div ngModelGroup="inactive">
-  <div>
-    <label>Statut inactif
-      <input type="checkbox"
-      [(ngModel)]="fields.inactiveStatus"
-      name="inactiveStatus"
-      >
-    </label>
-  </div>
-  <div>
-    <label>Statut Employe inactif
-      <input type="checkbox"
-      [(ngModel)]="fields.inactiveEmployee"
-      name="inactiveEmployee"
-      >
-    </label>
-  </div>
+  <label>Statut inactif
+    <input type="checkbox"
+    [(ngModel)]="fields.inactiveStatus"
+    name="inactiveStatus"
+    >
+  </label>
+  <label>Statut Employe inactif
+    <input type="checkbox"
+    [(ngModel)]="fields.inactiveEmployee"
+    name="inactiveEmployee"
+    >
+  </label>
 </div>
-
 </fieldset>
-{{createForm.value | json}}
 
 <fieldset>
   <legend>Telephonie</legend>
@@ -279,5 +279,8 @@ name="fonction"
  </label>
 </div>
 </fieldset>
+
 <input type="submit" value="Créer l'utilisateur">
 </form>
+
+{{ createForm.value | json }}

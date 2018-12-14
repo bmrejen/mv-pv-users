@@ -55,7 +55,6 @@ export class CreateUserFormComponent implements OnInit {
     });
   }
 
-
   public handleClick(e, type) {
 
     this.resetSugar();
@@ -163,16 +162,16 @@ export class CreateUserFormComponent implements OnInit {
     return item.id; // or index
   }
 
-  private unCheckArrays(arrays) {
-    arrays.forEach((array) => this.unCheck(array));
-  }
-
-  private eraseFields(fields) {
+  public eraseFields(fields) {
     fields.forEach((field) => field = "");
   }
 
-  private unCheck(array) {
+  public unCheck(array) {
     array.forEach((x) => x.checked = false);
+  }
+
+  private unCheckArrays(arrays) {
+    arrays.forEach((array) => this.unCheck(array));
   }
 
   private resetSugar() {
