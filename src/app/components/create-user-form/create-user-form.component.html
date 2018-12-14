@@ -27,7 +27,7 @@
     <div ngModelGroup="credentials">
       <div *ngFor="let userField of fields.userFields ; trackBy: trackByFn">
        <label>{{ userField.label }}
-         <input [(ngModel)]="userField.value" [name]="userField.name" type=text>
+         <input  (click)="setPassword()" [(ngModel)]="userField.value" [name]="userField.name" type=text>
        </label>
      </div>
    </div>

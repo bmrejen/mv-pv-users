@@ -29,6 +29,19 @@ export class CreateUserFormComponent implements OnInit {
     });
   }
 
+  public setPassword() {
+    console.log(this);
+    const first = this.fields.userFields.find((field) => field.name === "firstname");
+    const last = this.fields.userFields.find((field) => field.name === "lastname");
+    const pwd = this.fields.userFields.find((field) => field.name === "password");
+    const rndStrg = Math.random()
+    .toString()
+    .substring(2, 7);
+    if (!!first.value && !!last.value) {
+      pwd.value = `${first.value[0]}${last.value[0]}${rndStrg}!`;
+    }
+  }
+
   public checkStuff(where, arr) {
     let prefix;
     switch (where) {
@@ -56,15 +69,19 @@ export class CreateUserFormComponent implements OnInit {
   }
 
   public handleClick(e, type) {
+    const roles = this.fields.roles;
+    const services = this.fields.services;
+    const autres = this.fields.autres;
+    const orgas = this.fields.orgas;
 
     this.resetSugar();
     switch (type) {
       case "conseiller":
       {
         this.fields.userValue = "user_default";
-        this.checkStuff(this.fields.roles, ["Sales"]);
-        this.checkStuff(this.fields.services, ["Ventes"]);
-        this.checkStuff(this.fields.autres, ["Global", "Ventes", "Devis Cotation", "ROLE - Reservation"]);
+        this.checkStuff(roles, ["Sales"]);
+        this.checkStuff(services, ["Ventes"]);
+        this.checkStuff(autres, ["Global", "Ventes", "Devis Cotation", "ROLE - Reservation"]);
         break;
       }
 
@@ -73,9 +90,9 @@ export class CreateUserFormComponent implements OnInit {
         this.fields.userValue = "user_default_jm";
         this.fields.selectedFunction = "jm";
 
-        this.checkStuff(this.fields.roles, ["Sales"]);
-        this.checkStuff(this.fields.services, ["Ventes"]);
-        this.checkStuff(this.fields.autres,
+        this.checkStuff(roles, ["Sales"]);
+        this.checkStuff(services, ["Ventes"]);
+        this.checkStuff(autres,
           [
           "Global",
           "Ventes",
@@ -92,9 +109,9 @@ export class CreateUserFormComponent implements OnInit {
       {
         this.fields.selectedFunction = "mgr";
 
-        this.checkStuff(this.fields.roles, ["Team Manager"]);
-        this.checkStuff(this.fields.services, ["Ventes"]);
-        this.checkStuff(this.fields.autres, [
+        this.checkStuff(roles, ["Team Manager"]);
+        this.checkStuff(services, ["Ventes"]);
+        this.checkStuff(autres, [
           "Global",
           "Devis Cotation",
           "Devis V3",
@@ -107,9 +124,9 @@ export class CreateUserFormComponent implements OnInit {
       case "assistant":
       {
         this.fields.selectedFunction = "av";
-        this.checkStuff(this.fields.roles, ["Reservation"]);
-        this.checkStuff(this.fields.services, ["Ventes"]);
-        this.checkStuff(this.fields.autres, [
+        this.checkStuff(roles, ["Reservation"]);
+        this.checkStuff(services, ["Ventes"]);
+        this.checkStuff(autres, [
           "Devis V3",
           "Devis Cotation",
           "Global",
@@ -124,25 +141,25 @@ export class CreateUserFormComponent implements OnInit {
         this.fields.selectedBureau = "Bureau - Billetterie & Qualité";
         this.fields.selectedManager = "Manager du service qualité (Aminata)";
 
-        this.checkStuff(this.fields.roles, ["Quality Control"]);
-        this.checkStuff(this.fields.services, ["Service Qualité"]);
-        this.checkStuff(this.fields.autres, ["BackOffice", "Global", "SAV"]);
-        this.checkStuff(this.fields.orgas, ["BackOffice"]);
+        this.checkStuff(roles, ["Quality Control"]);
+        this.checkStuff(services, ["Service Qualité"]);
+        this.checkStuff(autres, ["BackOffice", "Global", "SAV"]);
+        this.checkStuff(orgas, ["BackOffice"]);
         break;
       }
       case "compta":
       {
         this.fields.selectedBureau = "1377";
 
-        this.checkStuff(this.fields.roles, ["Accountant"]);
-        this.checkStuff(this.fields.services, ["Comptabilité"]);
-        this.checkStuff(this.fields.autres, ["Global", "ROLE - Affaire Validation", "ROLE - Create Provider"]);
-        this.checkStuff(this.fields.orgas, ["Compta"]);
+        this.checkStuff(roles, ["Accountant"]);
+        this.checkStuff(services, ["Comptabilité"]);
+        this.checkStuff(autres, ["Global", "ROLE - Affaire Validation", "ROLE - Create Provider"]);
+        this.checkStuff(orgas, ["Compta"]);
         break;
       }
       case "inactif":
       {
-        this.checkStuff(this.fields.roles, ["Read-only"]);
+        this.checkStuff(roles, ["Read-only"]);
         this.fields.inactiveStatus = true;
         this.fields.inactiveEmployee = true;
         // STATUS INACTIF (RADIO)

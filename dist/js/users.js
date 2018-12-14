@@ -27573,6 +27573,18 @@
                 console.log(data);
             });
         };
+        CreateUserFormComponent.prototype.setPassword = function () {
+            console.log(this);
+            var first = this.fields.userFields.find(function (field) { return field.name === "firstname"; });
+            var last = this.fields.userFields.find(function (field) { return field.name === "lastname"; });
+            var pwd = this.fields.userFields.find(function (field) { return field.name === "password"; });
+            var rndStrg = Math.random()
+                .toString()
+                .substring(2, 7);
+            if (!!first.value && !!last.value) {
+                pwd.value = "" + first.value[0] + last.value[0] + rndStrg + "!";
+            }
+        };
         CreateUserFormComponent.prototype.checkStuff = function (where, arr) {
             var prefix;
             switch (where) {
@@ -27600,23 +27612,27 @@
             });
         };
         CreateUserFormComponent.prototype.handleClick = function (e, type) {
+            var roles = this.fields.roles;
+            var services = this.fields.services;
+            var autres = this.fields.autres;
+            var orgas = this.fields.orgas;
             this.resetSugar();
             switch (type) {
                 case "conseiller":
                     {
                         this.fields.userValue = "user_default";
-                        this.checkStuff(this.fields.roles, ["Sales"]);
-                        this.checkStuff(this.fields.services, ["Ventes"]);
-                        this.checkStuff(this.fields.autres, ["Global", "Ventes", "Devis Cotation", "ROLE - Reservation"]);
+                        this.checkStuff(roles, ["Sales"]);
+                        this.checkStuff(services, ["Ventes"]);
+                        this.checkStuff(autres, ["Global", "Ventes", "Devis Cotation", "ROLE - Reservation"]);
                         break;
                     }
                 case "jm":
                     {
                         this.fields.userValue = "user_default_jm";
                         this.fields.selectedFunction = "jm";
-                        this.checkStuff(this.fields.roles, ["Sales"]);
-                        this.checkStuff(this.fields.services, ["Ventes"]);
-                        this.checkStuff(this.fields.autres, [
+                        this.checkStuff(roles, ["Sales"]);
+                        this.checkStuff(services, ["Ventes"]);
+                        this.checkStuff(autres, [
                             "Global",
                             "Ventes",
                             "Devis Cotation",
@@ -27630,9 +27646,9 @@
                 case "manager":
                     {
                         this.fields.selectedFunction = "mgr";
-                        this.checkStuff(this.fields.roles, ["Team Manager"]);
-                        this.checkStuff(this.fields.services, ["Ventes"]);
-                        this.checkStuff(this.fields.autres, [
+                        this.checkStuff(roles, ["Team Manager"]);
+                        this.checkStuff(services, ["Ventes"]);
+                        this.checkStuff(autres, [
                             "Global",
                             "Devis Cotation",
                             "Devis V3",
@@ -27644,9 +27660,9 @@
                 case "assistant":
                     {
                         this.fields.selectedFunction = "av";
-                        this.checkStuff(this.fields.roles, ["Reservation"]);
-                        this.checkStuff(this.fields.services, ["Ventes"]);
-                        this.checkStuff(this.fields.autres, [
+                        this.checkStuff(roles, ["Reservation"]);
+                        this.checkStuff(services, ["Ventes"]);
+                        this.checkStuff(autres, [
                             "Devis V3",
                             "Devis Cotation",
                             "Global",
@@ -27660,24 +27676,24 @@
                         this.fields.selectedFunction = "aq";
                         this.fields.selectedBureau = "Bureau - Billetterie & Qualité";
                         this.fields.selectedManager = "Manager du service qualité (Aminata)";
-                        this.checkStuff(this.fields.roles, ["Quality Control"]);
-                        this.checkStuff(this.fields.services, ["Service Qualité"]);
-                        this.checkStuff(this.fields.autres, ["BackOffice", "Global", "SAV"]);
-                        this.checkStuff(this.fields.orgas, ["BackOffice"]);
+                        this.checkStuff(roles, ["Quality Control"]);
+                        this.checkStuff(services, ["Service Qualité"]);
+                        this.checkStuff(autres, ["BackOffice", "Global", "SAV"]);
+                        this.checkStuff(orgas, ["BackOffice"]);
                         break;
                     }
                 case "compta":
                     {
                         this.fields.selectedBureau = "1377";
-                        this.checkStuff(this.fields.roles, ["Accountant"]);
-                        this.checkStuff(this.fields.services, ["Comptabilité"]);
-                        this.checkStuff(this.fields.autres, ["Global", "ROLE - Affaire Validation", "ROLE - Create Provider"]);
-                        this.checkStuff(this.fields.orgas, ["Compta"]);
+                        this.checkStuff(roles, ["Accountant"]);
+                        this.checkStuff(services, ["Comptabilité"]);
+                        this.checkStuff(autres, ["Global", "ROLE - Affaire Validation", "ROLE - Create Provider"]);
+                        this.checkStuff(orgas, ["Compta"]);
                         break;
                     }
                 case "inactif":
                     {
-                        this.checkStuff(this.fields.roles, ["Read-only"]);
+                        this.checkStuff(roles, ["Read-only"]);
                         this.fields.inactiveStatus = true;
                         this.fields.inactiveEmployee = true;
                         // STATUS INACTIF (RADIO)
@@ -48904,10 +48920,11 @@
                 elementDef(4, 0, null, null, 5, 'input', [['type', 'text']], [[2, 'ng-untouched',
                         null], [2, 'ng-touched', null], [2, 'ng-pristine', null],
                     [2, 'ng-dirty', null], [2, 'ng-valid', null], [2, 'ng-invalid',
-                        null], [2, 'ng-pending', null]], [[null, 'ngModelChange'],
-                    [null, 'input'], [null, 'blur'], [null, 'compositionstart'],
-                    [null, 'compositionend']], function (_v, en, $event) {
+                        null], [2, 'ng-pending', null]], [[null, 'click'],
+                    [null, 'ngModelChange'], [null, 'input'], [null, 'blur'],
+                    [null, 'compositionstart'], [null, 'compositionend']], function (_v, en, $event) {
                     var ad = true;
+                    var _co = _v.component;
                     if (('input' === en)) {
                         var pd_0 = (nodeValue(_v, 5)._handleInput($event.target.value) !== false);
                         ad = (pd_0 && ad);
@@ -48924,9 +48941,13 @@
                         var pd_3 = (nodeValue(_v, 5)._compositionEnd($event.target.value) !== false);
                         ad = (pd_3 && ad);
                     }
-                    if (('ngModelChange' === en)) {
-                        var pd_4 = ((_v.context.$implicit.value = $event) !== false);
+                    if (('click' === en)) {
+                        var pd_4 = (_co.setPassword() !== false);
                         ad = (pd_4 && ad);
+                    }
+                    if (('ngModelChange' === en)) {
+                        var pd_5 = ((_v.context.$implicit.value = $event) !== false);
+                        ad = (pd_5 && ad);
                     }
                     return ad;
                 }, null, null)), directiveDef(5, 16384, null, 0, DefaultValueAccessor, [Renderer2, ElementRef, [2, COMPOSITION_BUFFER_MODE]], null, null),
