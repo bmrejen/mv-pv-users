@@ -29,17 +29,32 @@ export class CreateUserFormComponent implements OnInit {
     });
   }
 
-  public setPassword() {
-    console.log(this);
+  public credentialClick(e) {
     const first = this.fields.userFields.find((field) => field.name === "firstname");
     const last = this.fields.userFields.find((field) => field.name === "lastname");
+    const username = this.fields.userFields.find((field) => field.name === "username");
+    if (!!first.value && !!last.value) {
+      this.setUsername(first, last, username);
+      this.setPassword(first, last);
+      this.setEmail(username);
+    }
+  }
+
+  public setUsername(first, last, username) {
+    username.value = `${first.value[0].toLowerCase()}${last.value.toLowerCase()}`;
+  }
+
+  public setPassword(first, last) {
     const pwd = this.fields.userFields.find((field) => field.name === "password");
     const rndStrg = Math.random()
     .toString()
     .substring(2, 7);
-    if (!!first.value && !!last.value) {
-      pwd.value = `${first.value[0]}${last.value[0]}${rndStrg}!`;
-    }
+    pwd.value = `${first.value[0].toLowerCase()}${last.value[0].toLowerCase()}${rndStrg}!`;
+  }
+
+  public setEmail(username) {
+    const email = this.fields.userFields.find((field) => field.name === "email");
+    email.value = `${username.value}@marcovasco.fr`;
   }
 
   public checkStuff(where, arr) {

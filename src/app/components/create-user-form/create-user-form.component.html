@@ -27,11 +27,11 @@
     <div ngModelGroup="credentials">
       <div *ngFor="let userField of fields.userFields ; trackBy: trackByFn">
        <label>{{ userField.label }}
-         <input  (click)="setPassword()" [(ngModel)]="userField.value" [name]="userField.name" type=text>
-       </label>
-     </div>
-   </div>
- </div>
+        <input  (blur)="credentialClick($event)" [(ngModel)]="userField.value" [name]="userField.name" type=text>
+      </label>
+    </div>
+  </div>
+</div>
 </fieldset>
 
 <fieldset>
