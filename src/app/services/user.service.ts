@@ -1,7 +1,9 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import { of } from "rxjs/observable/of";
+import { _throw } from "rxjs/observable/throw";
+import { catchError } from "rxjs/operators";
 
 @Injectable()
 export class UserService {
@@ -24,8 +26,17 @@ export class UserService {
     return this.getData("teams");
   }
 
+  public postDataToSugar(body) {
+    return this.http.post<any>(this.endPoint, body)
+    .pipe(catchError(this.errorHandler));
+  }
+
   public getRolesFromSugar(): Observable<any> {
     return this.getData("roles");
+  }
+
+  public errorHandler(error: HttpErrorResponse) {
+    return _throw(error);
   }
 
   private getData(item: string): Observable<any> {

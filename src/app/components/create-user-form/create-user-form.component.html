@@ -1,5 +1,15 @@
 <h2> Create User Form </h2>
-<form #createForm="ngForm">
+<textarea
+#textArea="ngModel"
+[(ngModel)]="csv"
+name="csv"
+rows="4"
+cols="100"
+>
+</textarea>
+<button (click)="parse(csv)">Parse</button>
+{{ csv }}
+<form #createForm="ngForm" (ngSubmit)="onSubmit()">
   <fieldset>
     <legend>Type de compte</legend>
     <div class="checkbox-list" id="account-type" ngModelGroup="accounts">
@@ -27,7 +37,11 @@
     <div ngModelGroup="credentials">
       <div *ngFor="let userField of fields.userFields ; trackBy: trackByFn">
        <label>{{ userField.label }}
-        <input  (blur)="credentialClick($event)" [(ngModel)]="userField.value" [name]="userField.name" type=text>
+        <input
+        (blur)="credentialClick($event)"
+        [(ngModel)]="userField.value"
+        [name]="userField.name"
+        type="text">
       </label>
     </div>
   </div>
@@ -279,8 +293,10 @@ name="fonction"
  </label>
 </div>
 </fieldset>
+<div *ngIf="errorMsg">ERROR: {{ errorMsg }}</div>
 
-<input type="submit" value="Créer l'utilisateur">
+<button type="submit">Créer l'utilisateur
+</button>
 </form>
 
 {{ createForm.value | json }}

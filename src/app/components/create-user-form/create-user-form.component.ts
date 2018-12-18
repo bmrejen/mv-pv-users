@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { FieldsService } from "../../services/fields.service";
+// import { ParserService } from "../../services/parser.service";
 import { SwitchVoxService } from "../../services/switchvox.service";
+import { UserService } from "../../services/user.service";
 
 @Component({
   selector: "mv-app-create-user-form",
@@ -10,9 +12,14 @@ import { SwitchVoxService } from "../../services/switchvox.service";
 
 export class CreateUserFormComponent implements OnInit {
   public fields;
+  public errorMsg;
+  public csv;
   constructor(
     private fieldsService: FieldsService,
-    private switchvoxService: SwitchVoxService) {
+    private switchvoxService: SwitchVoxService,
+    private userService: UserService,
+    // private parserService: ParserService
+    ) {
     //
   }
 
@@ -38,6 +45,10 @@ export class CreateUserFormComponent implements OnInit {
       this.setPassword(first, last);
       this.setEmail(username);
     }
+  }
+
+  public parse(d) {
+    // this.parserService.getData(d);
   }
 
   public setUsername(first, last, username) {
@@ -81,6 +92,13 @@ export class CreateUserFormComponent implements OnInit {
       const myOther = where.find((autre) => autre.id === `${prefix}-${element}`);
       if (!!myOther) { myOther.checked = true; }
     });
+  }
+
+  public onSubmit() {
+    this.userService.postDataToSugar(this.fields)
+    .subscribe(
+      (data) => console.log("DATA- ", data),
+      (error) => this.errorMsg = error.statusText);
   }
 
   public handleClick(e, type) {
