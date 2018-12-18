@@ -20,7 +20,6 @@ import {
   LOCALE_ID,
   NgModule,
 } from "@angular/core";
-// import { PapaParseModule } from "ngx-papaparse";
 
 import { RouterModule } from "@angular/router";
 
@@ -32,7 +31,7 @@ import { TeamsComponent } from "./app/components/teams/teams.component";
 import { UserComponent } from "./app/components/user/user.component";
 import { UsersComponent } from "./app/components/users/users.component";
 import { FieldsService } from "./app/services/fields.service";
-// import { ParserService } from "./app/services/parser.service";
+import { ParserService } from "./app/services/parser.service";
 import { SwitchVoxService } from "./app/services/switchvox.service";
 import { UserService } from "./app/services/user.service";
 
@@ -57,12 +56,11 @@ import "./app/rxjs-extensions";
   BrowserAnimationsModule,
   FormsModule,
   HttpClientModule,
-  // PapaParseModule,
   RouterModule.forRoot(AppRoutes),
   ],
   providers: [
   FieldsService,
-  // ParserService,
+  ParserService,
   SwitchVoxService,
   UserService,
   HttpClient,
