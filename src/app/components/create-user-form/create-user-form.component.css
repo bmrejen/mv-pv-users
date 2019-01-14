@@ -1,20 +1,3 @@
-.autres {
- display: flex;
- justify-content: flex-start;
- flex-flow: column wrap;
- height: 300px;
-
- label {
-  font-style: bold;
-}
-}
-
-
-
-.teams {
-  display: inline-block;
-}
-
 .orgas {
  display: flex;
  justify-content: flex-start;

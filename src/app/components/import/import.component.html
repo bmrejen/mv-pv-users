@@ -1,0 +1,16 @@
+<h2>Import</h2>
+
+<textarea
+#textArea="ngModel"
+[(ngModel)]="csv"
+name="csv"
+rows="4"
+cols="100"
+>
+</textarea>
+<button (click)="parse(csv)">Parse</button>
+{{ csv }}
+
+<ol *ngIf="!!res">
+  <li *ngFor="let field of res; trackBy: trackByFn">{{ field }}</li>
+</ol>

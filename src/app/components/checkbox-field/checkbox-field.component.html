@@ -1,0 +1,10 @@
+<fieldset>
+  <div *ngFor="let box of checkboxes; trackBy: trackByFn">
+    <label>
+      <input
+      type="checkbox"
+      [(ngModel)]="box.checked"
+      [name]="box.id"> {{ box.label }}
+    </label>
+  </div>
+</fieldset>

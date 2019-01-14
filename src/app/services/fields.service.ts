@@ -32,6 +32,8 @@ export class FieldsService {
     inactiveEmployee : false,
     inactiveStatus : false,
     inbound : "",
+    leadsMax: null,
+    leadsMin: null,
     managers: Managers,
     orgas : Orgas,
     outbound : "",

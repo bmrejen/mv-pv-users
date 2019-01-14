@@ -1,17 +1,17 @@
 export const Accounts = [
 {
   checked: true,
-  label: "gapps",
-  name: "Google Apps",
+  id: "gapps",
+  label: "Google Apps",
 },
 {
   checked: true,
-  label: "sugar",
-  name: "Sugar",
+  id: "sugar",
+  label: "Sugar",
 },
 {
   checked: true,
-  label: "switchvox",
-  name: "SwitchVox",
+  id: "switchvox",
+  label: "SwitchVox",
 },
 ];

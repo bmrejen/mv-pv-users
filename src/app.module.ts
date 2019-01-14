@@ -23,8 +23,10 @@ import {
 
 import { RouterModule } from "@angular/router";
 
+import { CheckboxFieldComponent } from "./app/components/checkbox-field/checkbox-field.component";
 import { CreateUserFormComponent } from "./app/components/create-user-form/create-user-form.component";
 import { DisableUserFormComponent } from "./app/components/disable-user-form/disable-user-form.component";
+import { ImportComponent } from "./app/components/import/import.component";
 
 import { RolesComponent } from "./app/components/roles/roles.component";
 import { TeamsComponent } from "./app/components/teams/teams.component";
@@ -44,8 +46,10 @@ import "./app/rxjs-extensions";
   declarations: [
   AppComponent,
   HomeComponent,
+  ImportComponent,
   UserComponent,
   UsersComponent,
+  CheckboxFieldComponent,
   CreateUserFormComponent,
   DisableUserFormComponent,
   RolesComponent,

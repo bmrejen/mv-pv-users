@@ -6,6 +6,9 @@ import {
 import {
   DisableUserFormComponent,
 } from "./components/disable-user-form/disable-user-form.component";
+import {
+  ImportComponent,
+} from "./components/import/import.component";
 
 import {
   HomeComponent,
@@ -52,6 +55,10 @@ export const AppRoutes: Routes = [
 {
   path: "roles",
   component: RolesComponent,
+},
+{
+  path: "import",
+  component: ImportComponent,
 },
 { path: "**", redirectTo: "user" },
 ];

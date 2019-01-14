@@ -23962,18 +23962,18 @@
     var Accounts = [
         {
             checked: true,
-            label: "gapps",
-            name: "Google Apps",
+            id: "gapps",
+            label: "Google Apps",
         },
         {
             checked: true,
-            label: "sugar",
-            name: "Sugar",
+            id: "sugar",
+            label: "Sugar",
         },
         {
             checked: true,
-            label: "switchvox",
-            name: "SwitchVox",
+            id: "switchvox",
+            label: "SwitchVox",
         },
     ];
 
@@ -23981,427 +23981,427 @@
         {
             checked: false,
             id: "autres-Admin Devis Cotation",
-            name: "Admin Devis Cotation",
+            label: "Admin Devis Cotation",
         },
         {
             checked: false,
             id: "autres-Afrique",
-            name: "Afrique",
+            label: "Afrique",
         },
         {
             checked: false,
             id: "autres-AfriqueDuSud",
-            name: "AfriqueDuSud",
+            label: "AfriqueDuSud",
         },
         {
             checked: false,
             id: "autres-Argentine",
-            name: "Argentine",
+            label: "Argentine",
         },
         {
             checked: false,
             id: "autres-Australie",
-            name: "Australie",
+            label: "Australie",
         },
         {
             checked: false,
             id: "autres-Aventure",
-            name: "Aventure",
+            label: "Aventure",
         },
         {
             checked: false,
             id: "autres-BackOffice",
-            name: "BackOffice",
+            label: "BackOffice",
         },
         {
             checked: false,
             id: "autres-Backoffice Manager",
-            name: "Backoffice Manager",
+            label: "Backoffice Manager",
         },
         {
             checked: false,
             id: "autres-Bahamas",
-            name: "Bahamas",
+            label: "Bahamas",
         },
         {
             checked: false,
             id: "autres-Bali",
-            name: "Bali",
+            label: "Bali",
         },
         {
             checked: false,
             id: "autres-Birmanie",
-            name: "Birmanie",
+            label: "Birmanie",
         },
         {
             checked: false,
             id: "autres-Bresil",
-            name: "Bresil",
+            label: "Bresil",
         },
         {
             checked: false,
             id: "autres-Canada",
-            name: "Canada",
+            label: "Canada",
         },
         {
             checked: false,
             id: "autres-Chili",
-            name: "Chili",
+            label: "Chili",
         },
         {
             checked: false,
             id: "autres-Chine",
-            name: "Chine",
+            label: "Chine",
         },
         {
             checked: false,
             id: "autres-Coree",
-            name: "Coree",
+            label: "Coree",
         },
         {
             checked: false,
             id: "autres-CostaRica",
-            name: "CostaRica",
+            label: "CostaRica",
         },
         {
             checked: false,
             id: "autres-Cuba",
-            name: "Cuba",
+            label: "Cuba",
         },
         {
             checked: false,
             id: "autres-Devis Cotation",
-            name: "Devis Cotation",
+            label: "Devis Cotation",
         },
         {
             checked: false,
             id: "autres-Devis Simplifié",
-            name: "Devis Simplifié",
+            label: "Devis Simplifié",
         },
         {
             checked: false,
             id: "autres-Devis V2",
-            name: "Devis V2",
+            label: "Devis V2",
         },
         {
             checked: false,
             id: "autres-Devis V3",
-            name: "Devis V3",
+            label: "Devis V3",
         },
         {
             checked: false,
             id: "autres-France",
-            name: "France",
+            label: "France",
         },
         {
             checked: false,
             id: "autres-Global",
-            name: "Global",
+            label: "Global",
         },
         {
             checked: false,
             id: "autres-Inde",
-            name: "Inde",
+            label: "Inde",
         },
         {
             checked: false,
             id: "autres-Indonesie",
-            name: "Indonesie",
+            label: "Indonesie",
         },
         {
             checked: false,
             id: "autres-Iran",
-            name: "Iran",
+            label: "Iran",
         },
         {
             checked: false,
             id: "autres-Islande",
-            name: "Islande",
+            label: "Islande",
         },
         {
             checked: false,
             id: "autres-Japan",
-            name: "Japan",
+            label: "Japan",
         },
         {
             checked: false,
             id: "autres-Japon",
-            name: "Japon",
+            label: "Japon",
         },
         {
             checked: false,
             id: "autres-Kenya",
-            name: "Kenya",
+            label: "Kenya",
         },
         {
             checked: false,
             id: "autres-Madagascar",
-            name: "Madagascar",
+            label: "Madagascar",
         },
         {
             checked: false,
             id: "autres-Malaisie",
-            name: "Malaisie",
+            label: "Malaisie",
         },
         {
             checked: false,
             id: "autres-Malaysia",
-            name: "Malaysia",
+            label: "Malaysia",
         },
         {
             checked: false,
             id: "autres-Maldives",
-            name: "Maldives",
+            label: "Maldives",
         },
         {
             checked: false,
             id: "autres-Manager",
-            name: "Manager",
+            label: "Manager",
         },
         {
             checked: false,
             id: "autres-MarcoVasco",
-            name: "MarcoVasco",
+            label: "MarcoVasco",
         },
         {
             checked: false,
             id: "autres-Maurice",
-            name: "Maurice",
+            label: "Maurice",
         },
         {
             checked: false,
             id: "autres-Mexique",
-            name: "Mexique",
+            label: "Mexique",
         },
         {
             checked: false,
             id: "autres-Mongolie",
-            name: "Mongolie",
+            label: "Mongolie",
         },
         {
             checked: false,
             id: "autres-MoyenOrient",
-            name: "MoyenOrient",
+            label: "MoyenOrient",
         },
         {
             checked: false,
             id: "autres-Namibie",
-            name: "Namibie",
+            label: "Namibie",
         },
         {
             checked: false,
             id: "autres-Noces",
-            name: "Noces",
+            label: "Noces",
         },
         {
             checked: false,
             id: "autres-NouvelleZelande",
-            name: "NouvelleZelande",
+            label: "NouvelleZelande",
         },
         {
             checked: false,
             id: "autres-Ouzbekistan",
-            name: "Ouzbekistan",
+            label: "Ouzbekistan",
         },
         {
             checked: false,
             id: "autres-Perou",
-            name: "Perou",
+            label: "Perou",
         },
         {
             checked: false,
             id: "autres-Philippines",
-            name: "Philippines",
+            label: "Philippines",
         },
         {
             checked: false,
             id: "autres-Polynesie",
-            name: "Polynesie",
+            label: "Polynesie",
         },
         {
             checked: false,
             id: "autres-Questionnaire V3",
-            name: "Questionnaire V3",
+            label: "Questionnaire V3",
         },
         {
             checked: false,
             id: "autres-RD",
-            name: "RD",
+            label: "RD",
         },
         {
             checked: false,
             id: "autres-Reservation",
-            name: "Reservation",
+            label: "Reservation",
         },
         {
             checked: false,
             id: "autres-ROLE - Affaire Validation",
-            name: "ROLE - Affaire Validation",
+            label: "ROLE - Affaire Validation",
         },
         {
             checked: false,
             id: "autres-ROLE - BI Validation",
-            name: "ROLE - BI Validation",
+            label: "ROLE - BI Validation",
         },
         {
             checked: false,
             id: "autres-ROLE - Conciergerie",
-            name: "ROLE - Conciergerie",
+            label: "ROLE - Conciergerie",
         },
         {
             checked: false,
             id: "autres-ROLE - Create Provider",
-            name: "ROLE - Create Provider",
+            label: "ROLE - Create Provider",
         },
         {
             checked: false,
             id: "autres-ROLE - Dashlet assurances",
-            name: "ROLE - Dashlet assurances",
+            label: "ROLE - Dashlet assurances",
         },
         {
             checked: false,
             id: "autres-ROLE - Exclude review from NPS",
-            name: "ROLE - Exclude review from NPS",
+            label: "ROLE - Exclude review from NPS",
         },
         {
             checked: false,
             id: "autres-ROLE - Fid",
-            name: "ROLE - Fid",
+            label: "ROLE - Fid",
         },
         {
             checked: false,
             id: "autres-ROLE - Formation",
-            name: "ROLE - Formation",
+            label: "ROLE - Formation",
         },
         {
             checked: false,
             id: "autres-ROLE - Import OBJ",
-            name: "ROLE - Import OBJ",
+            label: "ROLE - Import OBJ",
         },
         {
             checked: false,
             id: "autres-ROLE - Paiement Manuel",
-            name: "ROLE - Paiement Manuel",
+            label: "ROLE - Paiement Manuel",
         },
         {
             checked: false,
             id: "autres-ROLE - Production",
-            name: "ROLE - Production",
+            label: "ROLE - Production",
         },
         {
             checked: false,
             id: "autres-ROLE - Reservation",
-            name: "ROLE - Reservation",
+            label: "ROLE - Reservation",
         },
         {
             checked: false,
             id: "autres-ROLE - Update Deposite Rate",
-            name: "ROLE - Update Deposite Rate",
+            label: "ROLE - Update Deposite Rate",
         },
         {
             checked: false,
             id: "autres-ROLE - ViewGDPR",
-            name: "ROLE - ViewGDPR",
+            label: "ROLE - ViewGDPR",
         },
         {
             checked: false,
             id: "autres-ROLE - View Incentive Tracker",
-            name: "ROLE - View Incentive Tracker",
+            label: "ROLE - View Incentive Tracker",
         },
         {
             checked: false,
             id: "autres-ROLE - View Leads M",
-            name: "ROLE - View Leads M",
+            label: "ROLE - View Leads M",
         },
         {
             checked: false,
             id: "autres-ROLE - View OBJ",
-            name: "ROLE - View OBJ",
+            label: "ROLE - View OBJ",
         },
         {
             checked: false,
             id: "autres-ROLE - View PPV",
-            name: "ROLE - View PPV",
+            label: "ROLE - View PPV",
         },
         {
             checked: false,
             id: "autres-ROLE - View Product Feeds",
-            name: "ROLE - View Product Feeds",
+            label: "ROLE - View Product Feeds",
         },
         {
             checked: false,
             id: "autres-ROLE - ViewRCM",
-            name: "ROLE - ViewRCM",
+            label: "ROLE - ViewRCM",
         },
         {
             checked: false,
             id: "autres-ROLE - View RCQ",
-            name: "ROLE - View RCQ",
+            label: "ROLE - View RCQ",
         },
         {
             checked: false,
             id: "autres-ROLE - View RM",
-            name: "ROLE - View RM",
+            label: "ROLE - View RM",
         },
         {
             checked: false,
             id: "autres-ROLE - ViewSEO",
-            name: "ROLE - ViewSEO",
+            label: "ROLE - ViewSEO",
         },
         {
             checked: false,
             id: "autres-ROLE - View SQ",
-            name: "ROLE - View SQ",
+            label: "ROLE - View SQ",
         },
         {
             checked: false,
             id: "autres-ROLE - View SQ Sales",
-            name: "ROLE - View SQ Sales",
+            label: "ROLE - View SQ Sales",
         },
         {
             checked: false,
             id: "autres-SAV",
-            name: "SAV",
+            label: "SAV",
         },
         {
             checked: false,
             id: "autres-Seychelles",
-            name: "Seychelles",
+            label: "Seychelles",
         },
         {
             checked: false,
             id: "autres-Tanzanie",
-            name: "Tanzanie",
+            label: "Tanzanie",
         },
         {
             checked: false,
             id: "autres-Team Manager",
-            name: "Team Manager",
+            label: "Team Manager",
         },
         {
             checked: false,
             id: "autres-Thailande",
-            name: "Thailande",
+            label: "Thailande",
         },
         {
             checked: false,
             id: "autres-Usa",
-            name: "Usa",
+            label: "Usa",
         },
         {
             checked: false,
             id: "autres-Ventes",
-            name: "Ventes",
+            label: "Ventes",
         },
         {
             checked: false,
             id: "autres-Vietnam",
-            name: "Vietnam",
+            label: "Vietnam",
         },
         {
             checked: false,
             id: "autres-XTest",
-            name: "XTest",
+            label: "XTest",
         },
     ];
 
@@ -24831,82 +24831,82 @@
         {
             checked: false,
             id: 1,
-            name: "EQ Baguette",
+            label: "EQ Baguette",
         },
         {
             checked: false,
             id: 2,
-            name: "EQ Black Pearls",
+            label: "EQ Black Pearls",
         },
         {
             checked: false,
             id: 3,
-            name: "EQ Cajuns",
+            label: "EQ Cajuns",
         },
         {
             checked: false,
             id: 4,
-            name: "EQ Drakkars",
+            label: "EQ Drakkars",
         },
         {
             checked: false,
             id: 5,
-            name: "EQ Explorers",
+            label: "EQ Explorers",
         },
         {
             checked: false,
             id: 6,
-            name: "EQ Golden Dragons",
+            label: "EQ Golden Dragons",
         },
         {
             checked: false,
             id: 7,
-            name: "EQ Guaranis",
+            label: "EQ Guaranis",
         },
         {
             checked: false,
             id: 8,
-            name: "EQ Iroquois",
+            label: "EQ Iroquois",
         },
         {
             checked: false,
             id: 9,
-            name: "EQ Islanders",
+            label: "EQ Islanders",
         },
         {
             checked: false,
             id: 10,
-            name: "EQ Masais",
+            label: "EQ Masais",
         },
         {
             checked: false,
             id: 11,
-            name: "EQ Nomades",
+            label: "EQ Nomades",
         },
         {
             checked: false,
             id: 12,
-            name: "EQ Papagayos",
+            label: "EQ Papagayos",
         },
         {
             checked: false,
             id: 13,
-            name: "EQ Service Groupe",
+            label: "EQ Service Groupe",
         },
         {
             checked: false,
             id: 14,
-            name: "EQ Seven Seas",
+            label: "EQ Seven Seas",
         },
         {
             checked: false,
             id: 15,
-            name: "EQ Shaolin",
+            label: "EQ Shaolin",
         },
         {
             checked: false,
             id: 16,
-            name: "EQ Yankees",
+            label: "EQ Yankees",
         },
     ];
 
@@ -24981,6 +24981,8 @@
                 inactiveEmployee: false,
                 inactiveStatus: false,
                 inbound: "",
+                leadsMax: null,
+                leadsMin: null,
                 managers: Managers,
                 orgas: Orgas,
                 outbound: "",
@@ -34198,16 +34200,17 @@
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var CreateUserFormComponent = /** @class */ (function () {
+        // CODE TOURPLAN SERA LEFT(user_name, 6)
         function CreateUserFormComponent(fieldsService, switchvoxService, userService, parserService) {
             this.fieldsService = fieldsService;
             this.switchvoxService = switchvoxService;
             this.userService = userService;
             this.parserService = parserService;
+            this.displayVentesLeads = false;
             //
         }
         CreateUserFormComponent.prototype.ngOnInit = function () {
             this.fields = this.fieldsService.getData();
-            this.setVariables();
             this.resetSugar();
             this.getSwitchvoxUsers();
         };
@@ -34217,7 +34220,6 @@
                 console.log(data);
             });
         };
-        CreateUserFormComponent.prototype.setVariables = function () { };
         CreateUserFormComponent.prototype.credentialClick = function (e) {
             var first = this.fields.userFields.find(function (field) { return field.name === "firstname"; });
             var last = this.fields.userFields.find(function (field) { return field.name === "lastname"; });
@@ -34228,17 +34230,6 @@
                 this.setEmail(username);
             }
         };
-        CreateUserFormComponent.prototype.parse = function (d) {
-            // const numberOfFields = 22;
-            // const res = this.parserService.getData(d);
-            // console.table(res);
-            // if (res.length % numberOfFields !== 0) {
-            //   alert("csv has wrong number of fields");
-            // } else {
-            //   this.fields.userInfo.credentials.firstname = res[0];
-            //   this.fields.userInfo.credentials.lastname = res[1];
-            // }
-        };
         CreateUserFormComponent.prototype.setUsername = function (first, last, username) {
             username.value = "" + first.value[0].toLowerCase() + last.value.toLowerCase();
         };
@@ -34248,6 +34239,33 @@
                 .toString()
                 .substring(2, 7);
             pwd.value = "" + first.value[0].toLowerCase() + last.value[0].toLowerCase() + rndStrg + "!";
+        };
+        CreateUserFormComponent.prototype.setVentesLeads = function () {
+            console.log("leadsmin", this.fields.leadsMin);
+            console.log("leadsmax", this.fields.leadsMax);
+            this.fields.leadsMin = 15;
+            this.fields.leadsMax = 45;
+            console.log("leadsmin", this.fields.leadsMin);
+            console.log("leadsmax", this.fields.leadsMax);
+        };
+        CreateUserFormComponent.prototype.eraseVentesLeads = function () {
+            this.fields.leadsMin = null;
+            this.fields.leadsMax = null;
+            console.log("erased Ventes");
+        };
+        CreateUserFormComponent.prototype.onServiceChecked = function (service, e) {
+            console.log(e);
+            if (service.id === "services-Ventes") {
+                if (!service.checked) {
+                    this.eraseVentesLeads();
+                    this.displayVentesLeads = e;
+                }
+                else {
+                    this.setVentesLeads();
+                    // this.displayVentesLeads = false;
+                }
+                console.log(service);
+            }
         };
         CreateUserFormComponent.prototype.setEmail = function (username) {
             var email = this.fields.userFields.find(function (field) { return field.name === "email"; });
@@ -34394,7 +34412,9 @@
         CreateUserFormComponent.prototype.resetSugar = function () {
             this.fields.inactiveStatus = false,
                 this.fields.inactiveEmployee = false,
-                this.fields.userValue = "user_default_xx";
+                this.fields.leadsMin = null;
+            this.fields.leadsMax = null;
+            this.fields.userValue = "user_default_xx";
             this.fields.selectedManager = null,
                 this.eraseFields([
                     this.fields.codeSON,
@@ -34476,20 +34496,37 @@
     var __metadata$7 = (undefined && undefined.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var HomeComponent = /** @class */ (function () {
-        function HomeComponent() {
-            // constructor
+    var ImportComponent = /** @class */ (function () {
+        function ImportComponent(parserService) {
+            this.parserService = parserService;
+            this.numberOfFields = 22;
+            this.csv = '"Cindy","Guerineau","","New","Ventes","","","cguerineau@marcovasco.fr","01 76 64 72 87","1287","cg11215!","","cguerineau","0","0","Active","0","Active","0","1","15","45","Coralie","Viarnes","","New","Ventes","","","cviarnes@marcovasco.fr","01 56 67 01 00","2100","cv19833!","","cviarnes","0","0","Active","0","Active","0","1","15","45","Nejma","Mebarki","","New","Ventes","","","nmebarki@marcovasco.fr","01 76 64 72 92","1292","nm62684!","","nmebarki","0","0","Active","0","Active","0","1","15","45","Fanny","Marh-Zhoock","","New","Ventes","","","farhzhoock@marcovasco.fr","01 56 67 00 88","2088","fm48032!","","farhzhoock","0","0","Active","0","Active","0","1","15","45"';
+            //
         }
-        HomeComponent.prototype.ngOnInit = function () {
-            // init
+        ImportComponent.prototype.parse = function (d) {
+            this.res = this.parserService.getData(d);
+            console.table(this.res);
+            if (this.res.length % this.numberOfFields !== 0) {
+                alert("csv has wrong number of fields");
+            }
+            this.firstname = this.res[0];
+            this.lastname = this.res[1];
         };
-        HomeComponent = __decorate$8([
+        ImportComponent.prototype.ngOnInit = function () {
+            //
+        };
+        ImportComponent.prototype.trackByFn = function (item, id) {
+            return id;
+        };
+        ImportComponent = __decorate$8([
             Component({
-                templateUrl: "./home.component.html",
+                selector: "mv-import",
+                styleUrls: ["./import.component.css"],
+                templateUrl: "./import.component.html",
             }),
-            __metadata$7("design:paramtypes", [])
-        ], HomeComponent);
-        return HomeComponent;
+            __metadata$7("design:paramtypes", [ParserService])
+        ], ImportComponent);
+        return ImportComponent;
     }());
 
     var __decorate$9 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -34499,6 +34536,31 @@
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
     var __metadata$8 = (undefined && undefined.__metadata) || function (k, v) {
+        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+    };
+    var HomeComponent = /** @class */ (function () {
+        function HomeComponent() {
+            // constructor
+        }
+        HomeComponent.prototype.ngOnInit = function () {
+            // init
+        };
+        HomeComponent = __decorate$9([
+            Component({
+                templateUrl: "./home.component.html",
+            }),
+            __metadata$8("design:paramtypes", [])
+        ], HomeComponent);
+        return HomeComponent;
+    }());
+
+    var __decorate$a = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    };
+    var __metadata$9 = (undefined && undefined.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var RolesComponent = /** @class */ (function () {
@@ -34516,27 +34578,27 @@
         RolesComponent.prototype.trackByFn = function (index, item) {
             return index; // or item.id
         };
-        __decorate$9([
+        __decorate$a([
             ViewChild("disableForm"),
-            __metadata$8("design:type", Object)
+            __metadata$9("design:type", Object)
         ], RolesComponent.prototype, "form", void 0);
-        RolesComponent = __decorate$9([
+        RolesComponent = __decorate$a([
             Component({
                 selector: "mv-app-roles",
                 templateUrl: "./roles.component.html",
             }),
-            __metadata$8("design:paramtypes", [UserService])
+            __metadata$9("design:paramtypes", [UserService])
         ], RolesComponent);
         return RolesComponent;
     }());
 
-    var __decorate$a = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var __decorate$b = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var __metadata$9 = (undefined && undefined.__metadata) || function (k, v) {
+    var __metadata$a = (undefined && undefined.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var TeamsComponent = /** @class */ (function () {
@@ -34554,27 +34616,27 @@
         TeamsComponent.prototype.trackByFn = function (index, item) {
             return index; // or item.id
         };
-        __decorate$a([
+        __decorate$b([
             ViewChild("disableForm"),
-            __metadata$9("design:type", Object)
+            __metadata$a("design:type", Object)
         ], TeamsComponent.prototype, "form", void 0);
-        TeamsComponent = __decorate$a([
+        TeamsComponent = __decorate$b([
             Component({
                 selector: "mv-app-teams",
                 templateUrl: "./teams.component.html",
             }),
-            __metadata$9("design:paramtypes", [UserService])
+            __metadata$a("design:paramtypes", [UserService])
         ], TeamsComponent);
         return TeamsComponent;
     }());
 
-    var __decorate$b = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var __decorate$c = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var __metadata$a = (undefined && undefined.__metadata) || function (k, v) {
+    var __metadata$b = (undefined && undefined.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var UserComponent = /** @class */ (function () {
@@ -34592,27 +34654,27 @@
         UserComponent.prototype.trackByFn = function (index, item) {
             return index; // or item.id
         };
-        __decorate$b([
+        __decorate$c([
             ViewChild("disableForm"),
-            __metadata$a("design:type", Object)
+            __metadata$b("design:type", Object)
         ], UserComponent.prototype, "form", void 0);
-        UserComponent = __decorate$b([
+        UserComponent = __decorate$c([
             Component({
                 selector: "mv-app-user",
                 templateUrl: "./user.component.html",
             }),
-            __metadata$a("design:paramtypes", [UserService])
+            __metadata$b("design:paramtypes", [UserService])
         ], UserComponent);
         return UserComponent;
     }());
 
-    var __decorate$c = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var __decorate$d = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var __metadata$b = (undefined && undefined.__metadata) || function (k, v) {
+    var __metadata$c = (undefined && undefined.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var UsersComponent = /** @class */ (function () {
@@ -34634,16 +34696,16 @@
         UsersComponent.prototype.trackByFn = function (index, item) {
             return index; // or item.id
         };
-        __decorate$c([
+        __decorate$d([
             ViewChild("disableForm"),
-            __metadata$b("design:type", Object)
+            __metadata$c("design:type", Object)
         ], UsersComponent.prototype, "form", void 0);
-        UsersComponent = __decorate$c([
+        UsersComponent = __decorate$d([
             Component({
                 selector: "mv-app-users",
                 templateUrl: "./users.component.html",
             }),
-            __metadata$b("design:paramtypes", [UserService])
+            __metadata$c("design:paramtypes", [UserService])
         ], UsersComponent);
         return UsersComponent;
     }());
@@ -34677,6 +34739,10 @@
         {
             path: "roles",
             component: RolesComponent,
+        },
+        {
+            path: "import",
+            component: ImportComponent,
         },
         { path: "**", redirectTo: "user" },
     ];
@@ -53433,10 +53499,39 @@
      */
     var VERSION$4 = new Version('4.4.7');
 
+    var __decorate$e = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    };
+    var __metadata$d = (undefined && undefined.__metadata) || function (k, v) {
+        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+    };
+    var CheckboxFieldComponent = /** @class */ (function () {
+        function CheckboxFieldComponent() {
+        }
+        CheckboxFieldComponent.prototype.trackByFn = function (item, id) {
+            return id;
+        };
+        __decorate$e([
+            Input(),
+            __metadata$d("design:type", Array)
+        ], CheckboxFieldComponent.prototype, "checkboxes", void 0);
+        CheckboxFieldComponent = __decorate$e([
+            Component({
+                selector: "mv-checkbox-field",
+                styleUrls: ["./checkbox-field.component.css"],
+                templateUrl: "./checkbox-field.component.html",
+            })
+        ], CheckboxFieldComponent);
+        return CheckboxFieldComponent;
+    }());
+
     // HACK: does nothing, because `toPromise` now lives on the `Observable` itself.
     // leaving this module here to prevent breakage.
 
-    var __decorate$d = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var __decorate$f = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -53445,7 +53540,7 @@
     var AppModule = /** @class */ (function () {
         function AppModule() {
         }
-        AppModule = __decorate$d([
+        AppModule = __decorate$f([
             NgModule({
                 bootstrap: [
                     AppComponent,
@@ -53453,8 +53548,10 @@
                 declarations: [
                     AppComponent,
                     HomeComponent,
+                    ImportComponent,
                     UserComponent,
                     UsersComponent,
+                    CheckboxFieldComponent,
                     CreateUserFormComponent,
                     DisableUserFormComponent,
                     RolesComponent,
@@ -53508,49 +53605,33 @@
     var styles_UsersComponent = [];
     var RenderType_UsersComponent = createRendererType2({ encapsulation: 2,
         styles: styles_UsersComponent, data: {} });
-    function View_UsersComponent_2(_l) {
-        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 62, 'div', [], null, null, null, null, null)), (_l()(),
-                textDef(-1, null, ['\n    '])), (_l()(), elementDef(2, 0, null, null, 1, 'h4', [], null, null, null, null, null)), (_l()(), textDef(3, null, ['', ' ', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(5, 0, null, null, 56, 'ul', [], null, null, null, null, null)),
-            (_l()(), textDef(-1, null, ['\n     '])), (_l()(), elementDef(7, 0, null, null, 3, 'li', [], null, null, null, null, null)), (_l()(), elementDef(8, 0, null, null, 1, 'strong', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['ID:'])), (_l()(), textDef(10, null, [' ', ''])), (_l()(), textDef(-1, null, ['\n     '])),
-            (_l()(), elementDef(12, 0, null, null, 3, 'li', [], null, null, null, null, null)), (_l()(), elementDef(13, 0, null, null, 1, 'strong', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Type:'])), (_l()(), textDef(15, null, [' ', ''])), (_l()(), textDef(-1, null, ['\n     '])), (_l()(), elementDef(17, 0, null, null, 3, 'li', [], null, null, null, null, null)), (_l()(), elementDef(18, 0, null, null, 1, 'strong', [], null, null, null, null, null)),
-            (_l()(), textDef(-1, null, ['Phone Home:'])), (_l()(), textDef(20, null, [' ', ''])), (_l()(), textDef(-1, null, ['\n     '])), (_l()(), elementDef(22, 0, null, null, 3, 'li', [], null, null, null, null, null)), (_l()(), elementDef(23, 0, null, null, 1, 'strong', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Phone Mobile:'])),
-            (_l()(), textDef(25, null, [' ', ''])), (_l()(), textDef(-1, null, ['\n     '])), (_l()(), elementDef(27, 0, null, null, 3, 'li', [], null, null, null, null, null)),
-            (_l()(), elementDef(28, 0, null, null, 1, 'strong', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Phone Work:'])), (_l()(), textDef(30, null, [' ', ''])),
-            (_l()(), textDef(-1, null, ['\n     '])), (_l()(), elementDef(32, 0, null, null, 3, 'li', [], null, null, null, null, null)), (_l()(), elementDef(33, 0, null, null, 1, 'strong', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Phone Other:'])), (_l()(),
-                textDef(35, null, [' ', ''])), (_l()(), textDef(-1, null, ['\n     '])),
-            (_l()(), elementDef(37, 0, null, null, 3, 'li', [], null, null, null, null, null)), (_l()(), elementDef(38, 0, null, null, 1, 'strong', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Phone Fax:'])), (_l()(), textDef(40, null, [' ', ''])), (_l()(), textDef(-1, null, ['\n     '])), (_l()(), elementDef(42, 0, null, null, 3, 'li', [], null, null, null, null, null)), (_l()(), elementDef(43, 0, null, null, 1, 'strong', [], null, null, null, null, null)),
-            (_l()(), textDef(-1, null, ['Phone Asterisk:'])), (_l()(), textDef(45, null, [' ', ''])), (_l()(), textDef(-1, null, ['\n     '])), (_l()(), elementDef(47, 0, null, null, 3, 'li', [], null, null, null, null, null)), (_l()(), elementDef(48, 0, null, null, 1, 'strong', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['E-mail:'])),
-            (_l()(), textDef(50, null, [' ', ''])), (_l()(), textDef(-1, null, ['\n     '])), (_l()(), elementDef(52, 0, null, null, 3, 'li', [], null, null, null, null, null)),
-            (_l()(), elementDef(53, 0, null, null, 1, 'strong', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Status:'])), (_l()(), textDef(55, null, [' ', ''])),
-            (_l()(), textDef(-1, null, ['\n     '])), (_l()(), elementDef(57, 0, null, null, 3, 'li', [], null, null, null, null, null)), (_l()(), elementDef(58, 0, null, null, 1, 'strong', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Employee Status'])), (_l()(),
-                textDef(60, null, [' ', ''])), (_l()(), textDef(-1, null, ['\n   '])),
-            (_l()(), textDef(-1, null, ['\n ']))], null, function (_ck, _v) {
-            var currVal_0 = _v.context.$implicit.attributes.firstName;
-            var currVal_1 = _v.context.$implicit.attributes.lastName;
-            _ck(_v, 3, 0, currVal_0, currVal_1);
-            var currVal_2 = _v.context.$implicit.id;
-            _ck(_v, 10, 0, currVal_2);
-            var currVal_3 = _v.context.$implicit.type;
-            _ck(_v, 15, 0, currVal_3);
-            var currVal_4 = _v.context.$implicit.attributes.phoneHome;
-            _ck(_v, 20, 0, currVal_4);
-            var currVal_5 = _v.context.$implicit.attributes.phoneMobile;
-            _ck(_v, 25, 0, currVal_5);
-            var currVal_6 = _v.context.$implicit.attributes.phoneWork;
-            _ck(_v, 30, 0, currVal_6);
-            var currVal_7 = _v.context.$implicit.attributes.phoneOther;
-            _ck(_v, 35, 0, currVal_7);
-            var currVal_8 = _v.context.$implicit.attributes.phoneFax;
-            _ck(_v, 40, 0, currVal_8);
-            var currVal_9 = _v.context.$implicit.attributes.phoneAsterisk;
-            _ck(_v, 45, 0, currVal_9);
-            var currVal_10 = _v.context.$implicit.attributes.email;
-            _ck(_v, 50, 0, currVal_10);
-            var currVal_11 = _v.context.$implicit.attributes.status;
-            _ck(_v, 55, 0, currVal_11);
-            var currVal_12 = _v.context.$implicit.attributes.employeeStatus;
-            _ck(_v, 60, 0, currVal_12);
+    function View_UsersComponent_3(_l) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 1, 'h4', [], null, null, null, null, null)), (_l()(),
+                textDef(1, null, ['\n    ', ' ', '']))], null, function (_ck, _v) {
+            var currVal_0 = _v.parent.context.$implicit.attributes.firstName;
+            var currVal_1 = _v.parent.context.$implicit.attributes.lastName;
+            _ck(_v, 1, 0, currVal_0, currVal_1);
         });
+    }
+    function View_UsersComponent_4(_l) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 7, 'ul', [], null, null, null, null, null)), (_l()(),
+                textDef(-1, null, ['\n      '])), (_l()(), textDef(-1, null, ['\n      '])),
+            (_l()(), elementDef(3, 0, null, null, 3, 'li', [], null, null, null, null, null)), (_l()(), elementDef(4, 0, null, null, 1, 'strong', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Employee Status'])), (_l()(), textDef(6, null, [' ', ''])), (_l()(),
+                textDef(-1, null, ['\n    ']))], null, function (_ck, _v) {
+            var currVal_0 = _v.parent.context.$implicit.attributes.employeeStatus;
+            _ck(_v, 6, 0, currVal_0);
+        });
+    }
+    function View_UsersComponent_2(_l) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 7, 'div', [], null, null, null, null, null)), (_l()(),
+                textDef(-1, null, ['\n    '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_UsersComponent_3)), directiveDef(3, 16384, null, 0, NgIf, [ViewContainerRef, TemplateRef], { ngIf: [0, 'ngIf'] }, null),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_UsersComponent_4)), directiveDef(6, 16384, null, 0, NgIf, [ViewContainerRef, TemplateRef], { ngIf: [0, 'ngIf'] }, null),
+            (_l()(), textDef(-1, null, ['\n  ']))], function (_ck, _v) {
+            var currVal_0 = (_v.context.$implicit.attributes.status == 'Inactive');
+            _ck(_v, 3, 0, currVal_0);
+            var currVal_1 = (_v.context.$implicit.attributes.status == 'Inactive');
+            _ck(_v, 6, 0, currVal_1);
+        }, null);
     }
     function View_UsersComponent_1(_l) {
         return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 4, 'div', [], null, null, null, null, null)), (_l()(),
@@ -53655,7 +53736,78 @@
      * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride}
      */
     /* tslint:disable */
-    var styles = ['.autres[_ngcontent-%COMP%] {\n display: flex;\n justify-content: flex-start;\n flex-flow: column wrap;\n height: 300px;\n\n label {\n  font-style: bold;\n}\n}\n\n\n\n.teams[_ngcontent-%COMP%] {\n  display: inline-block;\n}\n\n.orgas[_ngcontent-%COMP%] {\n display: flex;\n justify-content: flex-start;\n flex-flow: column wrap;\n height: 120px;\n}'];
+    var styles = ['.orgas[_ngcontent-%COMP%] {\n display: flex;\n justify-content: flex-start;\n flex-flow: column wrap;\n height: 120px;\n}'];
+
+    /**
+     * @fileoverview This file is generated by the Angular template compiler.
+     * Do not edit.
+     * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride}
+     */
+    /* tslint:disable */
+    var styles$1 = ['div[_ngcontent-%COMP%] {\n  display: flex;\n}'];
+
+    /**
+     * @fileoverview This file is generated by the Angular template compiler.
+     * Do not edit.
+     * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride}
+     */
+    var styles_CheckboxFieldComponent = [styles$1];
+    var RenderType_CheckboxFieldComponent = createRendererType2({ encapsulation: 0,
+        styles: styles_CheckboxFieldComponent, data: {} });
+    function View_CheckboxFieldComponent_1(_l) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(),
+                textDef(-1, null, ['\n    '])), (_l()(), elementDef(2, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(4, 0, null, null, 5, 'input', [['type', 'checkbox']], [[2, 'ng-untouched',
+                    null], [2, 'ng-touched', null], [2, 'ng-pristine', null],
+                [2, 'ng-dirty', null], [2, 'ng-valid', null], [2, 'ng-invalid',
+                    null], [2, 'ng-pending', null]], [[null, 'ngModelChange'],
+                [null, 'change'], [null, 'blur']], function (_v, en, $event) {
+                var ad = true;
+                if (('change' === en)) {
+                    var pd_0 = (nodeValue(_v, 5).onChange($event.target.checked) !== false);
+                    ad = (pd_0 && ad);
+                }
+                if (('blur' === en)) {
+                    var pd_1 = (nodeValue(_v, 5).onTouched() !== false);
+                    ad = (pd_1 && ad);
+                }
+                if (('ngModelChange' === en)) {
+                    var pd_2 = ((_v.context.$implicit.checked = $event) !== false);
+                    ad = (pd_2 && ad);
+                }
+                return ad;
+            }, null, null)), directiveDef(5, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
+                return [p0_0];
+            }, [CheckboxControlValueAccessor]), directiveDef(7, 671744, null, 0, NgModel, [[8, null], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(9, 16384, null, 0, NgControlStatus, [NgControl], null, null), (_l()(), textDef(10, null, [' ', '\n    '])), (_l()(), textDef(-1, null, ['\n  ']))], function (_ck, _v) {
+            var currVal_7 = _v.context.$implicit.id;
+            var currVal_8 = _v.context.$implicit.checked;
+            _ck(_v, 7, 0, currVal_7, currVal_8);
+        }, function (_ck, _v) {
+            var currVal_0 = nodeValue(_v, 9).ngClassUntouched;
+            var currVal_1 = nodeValue(_v, 9).ngClassTouched;
+            var currVal_2 = nodeValue(_v, 9).ngClassPristine;
+            var currVal_3 = nodeValue(_v, 9).ngClassDirty;
+            var currVal_4 = nodeValue(_v, 9).ngClassValid;
+            var currVal_5 = nodeValue(_v, 9).ngClassInvalid;
+            var currVal_6 = nodeValue(_v, 9).ngClassPending;
+            _ck(_v, 4, 0, currVal_0, currVal_1, currVal_2, currVal_3, currVal_4, currVal_5, currVal_6);
+            var currVal_9 = _v.context.$implicit.label;
+            _ck(_v, 10, 0, currVal_9);
+        });
+    }
+    function View_CheckboxFieldComponent_0(_l) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 4, 'fieldset', [], null, null, null, null, null)), (_l()(),
+                textDef(-1, null, ['\n  '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CheckboxFieldComponent_1)), directiveDef(3, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0,
+                    'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(), textDef(-1, null, ['\n'])), (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
+            var _co = _v.component;
+            var currVal_0 = _co.checkboxes;
+            var currVal_1 = _co.trackByFn;
+            _ck(_v, 3, 0, currVal_0, currVal_1);
+        }, null);
+    }
+    function View_CheckboxFieldComponent_Host_0(_l) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 1, 'mv-checkbox-field', [], null, null, null, View_CheckboxFieldComponent_0, RenderType_CheckboxFieldComponent)), directiveDef(1, 49152, null, 0, CheckboxFieldComponent, [], null, null)], null, null);
+    }
+    var CheckboxFieldComponentNgFactory = createComponentFactory('mv-checkbox-field', CheckboxFieldComponent, View_CheckboxFieldComponent_Host_0, { checkboxes: 'checkboxes' }, {}, []);
 
     /**
      * @fileoverview This file is generated by the Angular template compiler.
@@ -53690,7 +53842,7 @@
                 return [p0_0];
             }, [CheckboxControlValueAccessor]), directiveDef(7, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(9, 16384, null, 0, NgControlStatus, [NgControl], null, null), (_l()(),
                 textDef(10, null, ['', '\n        '])), (_l()(), textDef(-1, null, ['\n      ']))], function (_ck, _v) {
-            var currVal_7 = _v.context.$implicit.label;
+            var currVal_7 = _v.context.$implicit.id;
             var currVal_8 = _v.context.$implicit.checked;
             _ck(_v, 7, 0, currVal_7, currVal_8);
         }, function (_ck, _v) {
@@ -53702,18 +53854,85 @@
             var currVal_5 = nodeValue(_v, 9).ngClassInvalid;
             var currVal_6 = nodeValue(_v, 9).ngClassPending;
             _ck(_v, 4, 0, currVal_0, currVal_1, currVal_2, currVal_3, currVal_4, currVal_5, currVal_6);
-            var currVal_9 = _v.context.$implicit.name;
+            var currVal_9 = _v.context.$implicit.label;
             _ck(_v, 10, 0, currVal_9);
         });
     }
     function View_CreateUserFormComponent_2(_l) {
-        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 12, 'div', [], null, null, null, null, null)), (_l()(),
-                textDef(-1, null, ['\n       '])), (_l()(), elementDef(2, 0, null, null, 9, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(4, 0, null, null, 6, 'input', [['name', 'gender'], ['type', 'radio']], [[2, 'ng-untouched', null], [2, 'ng-touched', null], [2, 'ng-pristine',
-                    null], [2, 'ng-dirty', null], [2, 'ng-valid', null],
-                [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null,
-                    'ngModelChange'], [null, 'input'], [null, 'blur'], [null,
-                    'compositionstart'], [null, 'compositionend'], [null, 'change']], function (_v, en, $event) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(),
+                textDef(-1, null, ['\n        '])), (_l()(), elementDef(2, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), elementDef(3, 0, null, null, 6, 'input', [['name', 'gender'], ['type', 'radio']], [[2, 'ng-untouched', null],
+                [2, 'ng-touched', null], [2, 'ng-pristine', null], [2, 'ng-dirty',
+                    null], [2, 'ng-valid', null], [2, 'ng-invalid', null],
+                [2, 'ng-pending', null]], [[null, 'ngModelChange'], [null,
+                    'input'], [null, 'blur'], [null, 'compositionstart'], [null,
+                    'compositionend'], [null, 'change']], function (_v, en, $event) {
                 var ad = true;
+                if (('input' === en)) {
+                    var pd_0 = (nodeValue(_v, 4)._handleInput($event.target.value) !== false);
+                    ad = (pd_0 && ad);
+                }
+                if (('blur' === en)) {
+                    var pd_1 = (nodeValue(_v, 4).onTouched() !== false);
+                    ad = (pd_1 && ad);
+                }
+                if (('compositionstart' === en)) {
+                    var pd_2 = (nodeValue(_v, 4)._compositionStart() !== false);
+                    ad = (pd_2 && ad);
+                }
+                if (('compositionend' === en)) {
+                    var pd_3 = (nodeValue(_v, 4)._compositionEnd($event.target.value) !== false);
+                    ad = (pd_3 && ad);
+                }
+                if (('change' === en)) {
+                    var pd_4 = (nodeValue(_v, 5).onChange() !== false);
+                    ad = (pd_4 && ad);
+                }
+                if (('blur' === en)) {
+                    var pd_5 = (nodeValue(_v, 5).onTouched() !== false);
+                    ad = (pd_5 && ad);
+                }
+                if (('ngModelChange' === en)) {
+                    var pd_6 = ((_v.context.$implicit.label = $event) !== false);
+                    ad = (pd_6 && ad);
+                }
+                return ad;
+            }, null, null)), directiveDef(4, 16384, null, 0, DefaultValueAccessor, [Renderer2, ElementRef, [2, COMPOSITION_BUFFER_MODE]], null, null),
+            directiveDef(5, 212992, null, 0, RadioControlValueAccessor, [Renderer2,
+                ElementRef, RadioControlRegistry, Injector], { name: [0, 'name'], value: [1, 'value'] }, null),
+            providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0, p1_0) {
+                return [p0_0, p1_0];
+            }, [DefaultValueAccessor, RadioControlValueAccessor]), directiveDef(7, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null],
+                [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }),
+            providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(9, 16384, null, 0, NgControlStatus, [NgControl], null, null),
+            (_l()(), textDef(10, null, ['', '\n        '])), (_l()(), textDef(-1, null, ['\n      ']))], function (_ck, _v) {
+            var currVal_7 = 'gender';
+            var currVal_8 = _v.context.$implicit.label;
+            _ck(_v, 5, 0, currVal_7, currVal_8);
+            var currVal_9 = 'gender';
+            var currVal_10 = _v.context.$implicit.label;
+            _ck(_v, 7, 0, currVal_9, currVal_10);
+        }, function (_ck, _v) {
+            var currVal_0 = nodeValue(_v, 9).ngClassUntouched;
+            var currVal_1 = nodeValue(_v, 9).ngClassTouched;
+            var currVal_2 = nodeValue(_v, 9).ngClassPristine;
+            var currVal_3 = nodeValue(_v, 9).ngClassDirty;
+            var currVal_4 = nodeValue(_v, 9).ngClassValid;
+            var currVal_5 = nodeValue(_v, 9).ngClassInvalid;
+            var currVal_6 = nodeValue(_v, 9).ngClassPending;
+            _ck(_v, 3, 0, currVal_0, currVal_1, currVal_2, currVal_3, currVal_4, currVal_5, currVal_6);
+            var currVal_11 = _v.context.$implicit.label;
+            _ck(_v, 10, 0, currVal_11);
+        });
+    }
+    function View_CreateUserFormComponent_3(_l) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(),
+                textDef(-1, null, ['\n          '])), (_l()(), elementDef(2, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(3, null, ['\n            ',
+                '\n            '])), (_l()(), elementDef(4, 0, null, null, 5, 'input', [['type', 'text']], [[2, 'ng-untouched', null], [2, 'ng-touched', null],
+                [2, 'ng-pristine', null], [2, 'ng-dirty', null], [2, 'ng-valid',
+                    null], [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null, 'blur'], [null, 'ngModelChange'], [null, 'input'],
+                [null, 'compositionstart'], [null, 'compositionend']], function (_v, en, $event) {
+                var ad = true;
+                var _co = _v.component;
                 if (('input' === en)) {
                     var pd_0 = (nodeValue(_v, 5)._handleInput($event.target.value) !== false);
                     ad = (pd_0 && ad);
@@ -53730,89 +53949,21 @@
                     var pd_3 = (nodeValue(_v, 5)._compositionEnd($event.target.value) !== false);
                     ad = (pd_3 && ad);
                 }
-                if (('change' === en)) {
-                    var pd_4 = (nodeValue(_v, 6).onChange() !== false);
+                if (('blur' === en)) {
+                    var pd_4 = (_co.credentialClick($event) !== false);
                     ad = (pd_4 && ad);
                 }
-                if (('blur' === en)) {
-                    var pd_5 = (nodeValue(_v, 6).onTouched() !== false);
-                    ad = (pd_5 && ad);
-                }
                 if (('ngModelChange' === en)) {
-                    var pd_6 = ((_v.context.$implicit.label = $event) !== false);
-                    ad = (pd_6 && ad);
+                    var pd_5 = ((_v.context.$implicit.value = $event) !== false);
+                    ad = (pd_5 && ad);
                 }
                 return ad;
             }, null, null)), directiveDef(5, 16384, null, 0, DefaultValueAccessor, [Renderer2, ElementRef, [2, COMPOSITION_BUFFER_MODE]], null, null),
-            directiveDef(6, 212992, null, 0, RadioControlValueAccessor, [Renderer2,
-                ElementRef, RadioControlRegistry, Injector], { name: [0, 'name'], value: [1, 'value'] }, null),
-            providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0, p1_0) {
-                return [p0_0, p1_0];
-            }, [DefaultValueAccessor, RadioControlValueAccessor]), directiveDef(8, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null],
-                [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }),
-            providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(10, 16384, null, 0, NgControlStatus, [NgControl], null, null),
-            (_l()(), textDef(11, null, ['\n        ', '\n      '])), (_l()(), textDef(-1, null, ['\n    ']))], function (_ck, _v) {
-            var currVal_7 = 'gender';
-            var currVal_8 = _v.context.$implicit.label;
-            _ck(_v, 6, 0, currVal_7, currVal_8);
-            var currVal_9 = 'gender';
-            var currVal_10 = _v.context.$implicit.label;
-            _ck(_v, 8, 0, currVal_9, currVal_10);
-        }, function (_ck, _v) {
-            var currVal_0 = nodeValue(_v, 10).ngClassUntouched;
-            var currVal_1 = nodeValue(_v, 10).ngClassTouched;
-            var currVal_2 = nodeValue(_v, 10).ngClassPristine;
-            var currVal_3 = nodeValue(_v, 10).ngClassDirty;
-            var currVal_4 = nodeValue(_v, 10).ngClassValid;
-            var currVal_5 = nodeValue(_v, 10).ngClassInvalid;
-            var currVal_6 = nodeValue(_v, 10).ngClassPending;
-            _ck(_v, 4, 0, currVal_0, currVal_1, currVal_2, currVal_3, currVal_4, currVal_5, currVal_6);
-            var currVal_11 = _v.context.$implicit.label;
-            _ck(_v, 11, 0, currVal_11);
-        });
-    }
-    function View_CreateUserFormComponent_3(_l) {
-        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(),
-                textDef(-1, null, ['\n       '])), (_l()(), elementDef(2, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(3, null, ['', '\n        '])), (_l()(),
-                elementDef(4, 0, null, null, 5, 'input', [['type', 'text']], [[2, 'ng-untouched',
-                        null], [2, 'ng-touched', null], [2, 'ng-pristine', null],
-                    [2, 'ng-dirty', null], [2, 'ng-valid', null], [2, 'ng-invalid',
-                        null], [2, 'ng-pending', null]], [[null, 'blur'],
-                    [null, 'ngModelChange'], [null, 'input'], [null, 'compositionstart'],
-                    [null, 'compositionend']], function (_v, en, $event) {
-                    var ad = true;
-                    var _co = _v.component;
-                    if (('input' === en)) {
-                        var pd_0 = (nodeValue(_v, 5)._handleInput($event.target.value) !== false);
-                        ad = (pd_0 && ad);
-                    }
-                    if (('blur' === en)) {
-                        var pd_1 = (nodeValue(_v, 5).onTouched() !== false);
-                        ad = (pd_1 && ad);
-                    }
-                    if (('compositionstart' === en)) {
-                        var pd_2 = (nodeValue(_v, 5)._compositionStart() !== false);
-                        ad = (pd_2 && ad);
-                    }
-                    if (('compositionend' === en)) {
-                        var pd_3 = (nodeValue(_v, 5)._compositionEnd($event.target.value) !== false);
-                        ad = (pd_3 && ad);
-                    }
-                    if (('blur' === en)) {
-                        var pd_4 = (_co.credentialClick($event) !== false);
-                        ad = (pd_4 && ad);
-                    }
-                    if (('ngModelChange' === en)) {
-                        var pd_5 = ((_v.context.$implicit.value = $event) !== false);
-                        ad = (pd_5 && ad);
-                    }
-                    return ad;
-                }, null, null)), directiveDef(5, 16384, null, 0, DefaultValueAccessor, [Renderer2, ElementRef, [2, COMPOSITION_BUFFER_MODE]], null, null),
             providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
                 return [p0_0];
             }, [DefaultValueAccessor]), directiveDef(7, 671744, null, 0, NgModel, [[2,
                     ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(9, 16384, null, 0, NgControlStatus, [NgControl], null, null), (_l()(),
-                textDef(-1, null, ['\n      '])), (_l()(), textDef(-1, null, ['\n    ']))], function (_ck, _v) {
+                textDef(-1, null, ['\n          '])), (_l()(), textDef(-1, null, ['\n        ']))], function (_ck, _v) {
             var currVal_8 = _v.context.$implicit.name;
             var currVal_9 = _v.context.$implicit.value;
             _ck(_v, 7, 0, currVal_8, currVal_9);
@@ -53839,7 +53990,7 @@
                 }
                 return ad;
             }, null, null)), directiveDef(1, 147456, null, 0, NgSelectOption, [ElementRef, Renderer2, [2, SelectControlValueAccessor]], { value: [0, 'value'] }, null), directiveDef(2, 147456, null, 0, NgSelectMultipleOption, [ElementRef, Renderer2,
-                [8, null]], { value: [0, 'value'] }, null), (_l()(), textDef(3, null, ['', '']))], function (_ck, _v) {
+                [8, null]], { value: [0, 'value'] }, null), (_l()(), textDef(3, null, ['', '\n          ']))], function (_ck, _v) {
             var currVal_0 = _v.context.$implicit.value;
             _ck(_v, 1, 0, currVal_0);
             var currVal_1 = _v.context.$implicit.value;
@@ -53850,6 +54001,114 @@
         });
     }
     function View_CreateUserFormComponent_5(_l) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 9, 'span', [], null, null, null, null, null)), (_l()(),
+                textDef(-1, null, ['\n        '])), (_l()(), elementDef(2, 0, null, null, 7, 'label', [], null, null, null, null, null)), (_l()(), elementDef(3, 0, null, null, 5, 'input', [['type', 'checkbox']], [[2, 'ng-untouched', null], [2, 'ng-touched',
+                    null], [2, 'ng-pristine', null], [2, 'ng-dirty', null],
+                [2, 'ng-valid', null], [2, 'ng-invalid', null], [2, 'ng-pending',
+                    null]], [[null, 'ngModelChange'], [null, 'change'],
+                [null, 'blur']], function (_v, en, $event) {
+                var ad = true;
+                if (('change' === en)) {
+                    var pd_0 = (nodeValue(_v, 4).onChange($event.target.checked) !== false);
+                    ad = (pd_0 && ad);
+                }
+                if (('blur' === en)) {
+                    var pd_1 = (nodeValue(_v, 4).onTouched() !== false);
+                    ad = (pd_1 && ad);
+                }
+                if (('ngModelChange' === en)) {
+                    var pd_2 = ((_v.context.$implicit.checked = $event) !== false);
+                    ad = (pd_2 && ad);
+                }
+                return ad;
+            }, null, null)), directiveDef(4, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
+                return [p0_0];
+            }, [CheckboxControlValueAccessor]), directiveDef(6, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(8, 16384, null, 0, NgControlStatus, [NgControl], null, null), (_l()(), textDef(9, null, ['', '\n        ']))], function (_ck, _v) {
+            var currVal_7 = _v.context.$implicit.id;
+            var currVal_8 = _v.context.$implicit.checked;
+            _ck(_v, 6, 0, currVal_7, currVal_8);
+        }, function (_ck, _v) {
+            var currVal_0 = nodeValue(_v, 8).ngClassUntouched;
+            var currVal_1 = nodeValue(_v, 8).ngClassTouched;
+            var currVal_2 = nodeValue(_v, 8).ngClassPristine;
+            var currVal_3 = nodeValue(_v, 8).ngClassDirty;
+            var currVal_4 = nodeValue(_v, 8).ngClassValid;
+            var currVal_5 = nodeValue(_v, 8).ngClassInvalid;
+            var currVal_6 = nodeValue(_v, 8).ngClassPending;
+            _ck(_v, 3, 0, currVal_0, currVal_1, currVal_2, currVal_3, currVal_4, currVal_5, currVal_6);
+            var currVal_9 = _v.context.$implicit.label;
+            _ck(_v, 9, 0, currVal_9);
+        });
+    }
+    function View_CreateUserFormComponent_6(_l) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 11, 'span', [], null, null, null, null, null)), (_l()(),
+                textDef(-1, null, ['\n          '])), (_l()(), elementDef(2, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n            '])),
+            (_l()(), elementDef(4, 0, null, null, 5, 'input', [['type', 'checkbox']], [[8, 'id', 0], [2, 'ng-untouched', null], [2, 'ng-touched', null],
+                [2, 'ng-pristine', null], [2, 'ng-dirty', null], [2, 'ng-valid',
+                    null], [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null, 'ngModelChange'], [null, 'change'], [null,
+                    'blur']], function (_v, en, $event) {
+                var ad = true;
+                var _co = _v.component;
+                if (('change' === en)) {
+                    var pd_0 = (nodeValue(_v, 5).onChange($event.target.checked) !== false);
+                    ad = (pd_0 && ad);
+                }
+                if (('blur' === en)) {
+                    var pd_1 = (nodeValue(_v, 5).onTouched() !== false);
+                    ad = (pd_1 && ad);
+                }
+                if (('ngModelChange' === en)) {
+                    var pd_2 = (_co.onServiceChecked(_v.context.$implicit, $event) !== false);
+                    ad = (pd_2 && ad);
+                }
+                return ad;
+            }, null, null)), directiveDef(5, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
+                return [p0_0];
+            }, [CheckboxControlValueAccessor]), directiveDef(7, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(9, 16384, null, 0, NgControlStatus, [NgControl], null, null), (_l()(),
+                textDef(10, null, ['', ' ', '\n          '])), (_l()(), textDef(-1, null, ['\n        ']))], function (_ck, _v) {
+            var currVal_8 = _v.context.$implicit.id;
+            var currVal_9 = _v.context.$implicit.checked;
+            _ck(_v, 7, 0, currVal_8, currVal_9);
+        }, function (_ck, _v) {
+            var currVal_0 = _v.context.$implicit.id;
+            var currVal_1 = nodeValue(_v, 9).ngClassUntouched;
+            var currVal_2 = nodeValue(_v, 9).ngClassTouched;
+            var currVal_3 = nodeValue(_v, 9).ngClassPristine;
+            var currVal_4 = nodeValue(_v, 9).ngClassDirty;
+            var currVal_5 = nodeValue(_v, 9).ngClassValid;
+            var currVal_6 = nodeValue(_v, 9).ngClassInvalid;
+            var currVal_7 = nodeValue(_v, 9).ngClassPending;
+            _ck(_v, 4, 0, currVal_0, currVal_1, currVal_2, currVal_3, currVal_4, currVal_5, currVal_6, currVal_7);
+            var currVal_10 = _v.context.$implicit.name;
+            var currVal_11 = _v.context.$implicit.id;
+            _ck(_v, 10, 0, currVal_10, currVal_11);
+        });
+    }
+    function View_CreateUserFormComponent_7(_l) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 3, 'option', [], null, null, null, null, null)), directiveDef(1, 147456, null, 0, NgSelectOption, [ElementRef, Renderer2, [2, SelectControlValueAccessor]], { value: [0, 'value'] }, null), directiveDef(2, 147456, null, 0, NgSelectMultipleOption, [ElementRef,
+                Renderer2, [8, null]], { value: [0, 'value'] }, null), (_l()(), textDef(3, null, ['', '\n    ']))], function (_ck, _v) {
+            var currVal_0 = _v.context.$implicit.value;
+            _ck(_v, 1, 0, currVal_0);
+            var currVal_1 = _v.context.$implicit.value;
+            _ck(_v, 2, 0, currVal_1);
+        }, function (_ck, _v) {
+            var currVal_2 = _v.context.$implicit.label;
+            _ck(_v, 3, 0, currVal_2);
+        });
+    }
+    function View_CreateUserFormComponent_8(_l) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 3, 'option', [], null, null, null, null, null)), directiveDef(1, 147456, null, 0, NgSelectOption, [ElementRef, Renderer2, [2, SelectControlValueAccessor]], { value: [0, 'value'] }, null), directiveDef(2, 147456, null, 0, NgSelectMultipleOption, [ElementRef,
+                Renderer2, [8, null]], { value: [0, 'value'] }, null), (_l()(), textDef(3, null, ['', '\n      ']))], function (_ck, _v) {
+            var currVal_0 = _v.context.$implicit.value;
+            _ck(_v, 1, 0, currVal_0);
+            var currVal_1 = _v.context.$implicit.value;
+            _ck(_v, 2, 0, currVal_1);
+        }, function (_ck, _v) {
+            var currVal_2 = _v.context.$implicit.label;
+            _ck(_v, 3, 0, currVal_2);
+        });
+    }
+    function View_CreateUserFormComponent_9(_l) {
         return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 11, 'span', [], null, null, null, null, null)), (_l()(),
                 textDef(-1, null, ['\n      '])), (_l()(), elementDef(2, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(4, 0, null, null, 5, 'input', [['type', 'checkbox']], [[2, 'ng-untouched',
                     null], [2, 'ng-touched', null], [2, 'ng-pristine', null],
@@ -53872,8 +54131,8 @@
                 return ad;
             }, null, null)), directiveDef(5, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
                 return [p0_0];
-            }, [CheckboxControlValueAccessor]), directiveDef(7, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(9, 16384, null, 0, NgControlStatus, [NgControl], null, null), (_l()(), textDef(10, null, ['', '\n      '])), (_l()(), textDef(-1, null, ['\n    ']))], function (_ck, _v) {
-            var currVal_7 = _v.context.$implicit.id;
+            }, [CheckboxControlValueAccessor]), directiveDef(7, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(9, 16384, null, 0, NgControlStatus, [NgControl], null, null), (_l()(), textDef(10, null, ['', '  |\n      '])), (_l()(), textDef(-1, null, ['\n    ']))], function (_ck, _v) {
+            var currVal_7 = _v.context.$implicit.name;
             var currVal_8 = _v.context.$implicit.checked;
             _ck(_v, 7, 0, currVal_7, currVal_8);
         }, function (_ck, _v) {
@@ -53885,79 +54144,25 @@
             var currVal_5 = nodeValue(_v, 9).ngClassInvalid;
             var currVal_6 = nodeValue(_v, 9).ngClassPending;
             _ck(_v, 4, 0, currVal_0, currVal_1, currVal_2, currVal_3, currVal_4, currVal_5, currVal_6);
-            var currVal_9 = _v.context.$implicit.label;
+            var currVal_9 = _v.context.$implicit.name;
             _ck(_v, 10, 0, currVal_9);
         });
     }
-    function View_CreateUserFormComponent_6(_l) {
-        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 11, 'span', [], null, null, null, null, null)), (_l()(),
-                textDef(-1, null, ['\n    '])), (_l()(), elementDef(2, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(4, 0, null, null, 5, 'input', [['type', 'checkbox']], [[8, 'id', 0], [2,
-                    'ng-untouched', null], [2, 'ng-touched', null], [2, 'ng-pristine',
-                    null], [2, 'ng-dirty', null], [2, 'ng-valid', null],
-                [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null,
-                    'ngModelChange'], [null, 'change'], [null, 'blur']], function (_v, en, $event) {
-                var ad = true;
-                if (('change' === en)) {
-                    var pd_0 = (nodeValue(_v, 5).onChange($event.target.checked) !== false);
-                    ad = (pd_0 && ad);
-                }
-                if (('blur' === en)) {
-                    var pd_1 = (nodeValue(_v, 5).onTouched() !== false);
-                    ad = (pd_1 && ad);
-                }
-                if (('ngModelChange' === en)) {
-                    var pd_2 = ((_v.context.$implicit.checked = $event) !== false);
-                    ad = (pd_2 && ad);
-                }
-                return ad;
-            }, null, null)), directiveDef(5, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
-                return [p0_0];
-            }, [CheckboxControlValueAccessor]), directiveDef(7, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(9, 16384, null, 0, NgControlStatus, [NgControl], null, null), (_l()(), textDef(10, null, ['', '\n    '])), (_l()(), textDef(-1, null, ['\n  ']))], function (_ck, _v) {
-            var currVal_8 = _v.context.$implicit.id;
-            var currVal_9 = _v.context.$implicit.checked;
-            _ck(_v, 7, 0, currVal_8, currVal_9);
-        }, function (_ck, _v) {
-            var currVal_0 = _v.context.$implicit.id;
-            var currVal_1 = nodeValue(_v, 9).ngClassUntouched;
-            var currVal_2 = nodeValue(_v, 9).ngClassTouched;
-            var currVal_3 = nodeValue(_v, 9).ngClassPristine;
-            var currVal_4 = nodeValue(_v, 9).ngClassDirty;
-            var currVal_5 = nodeValue(_v, 9).ngClassValid;
-            var currVal_6 = nodeValue(_v, 9).ngClassInvalid;
-            var currVal_7 = nodeValue(_v, 9).ngClassPending;
-            _ck(_v, 4, 0, currVal_0, currVal_1, currVal_2, currVal_3, currVal_4, currVal_5, currVal_6, currVal_7);
-            var currVal_10 = _v.context.$implicit.name;
-            _ck(_v, 10, 0, currVal_10);
-        });
-    }
-    function View_CreateUserFormComponent_7(_l) {
+    function View_CreateUserFormComponent_10(_l) {
         return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 3, 'option', [], null, null, null, null, null)), directiveDef(1, 147456, null, 0, NgSelectOption, [ElementRef, Renderer2, [2, SelectControlValueAccessor]], { value: [0, 'value'] }, null), directiveDef(2, 147456, null, 0, NgSelectMultipleOption, [ElementRef,
-                Renderer2, [8, null]], { value: [0, 'value'] }, null), (_l()(), textDef(3, null, ['\n ', '\n']))], function (_ck, _v) {
-            var currVal_0 = _v.context.$implicit.value;
+                Renderer2, [8, null]], { value: [0, 'value'] }, null), (_l()(), textDef(3, null, ['', '\n      ']))], function (_ck, _v) {
+            var currVal_0 = _v.context.$implicit.name;
             _ck(_v, 1, 0, currVal_0);
-            var currVal_1 = _v.context.$implicit.value;
+            var currVal_1 = _v.context.$implicit.name;
             _ck(_v, 2, 0, currVal_1);
         }, function (_ck, _v) {
-            var currVal_2 = _v.context.$implicit.label;
+            var currVal_2 = _v.context.$implicit.name;
             _ck(_v, 3, 0, currVal_2);
         });
     }
-    function View_CreateUserFormComponent_8(_l) {
-        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 3, 'option', [], null, null, null, null, null)), directiveDef(1, 147456, null, 0, NgSelectOption, [ElementRef, Renderer2, [2, SelectControlValueAccessor]], { value: [0, 'value'] }, null), directiveDef(2, 147456, null, 0, NgSelectMultipleOption, [ElementRef,
-                Renderer2, [8, null]], { value: [0, 'value'] }, null), (_l()(), textDef(3, null, ['', '']))], function (_ck, _v) {
-            var currVal_0 = _v.context.$implicit.value;
-            _ck(_v, 1, 0, currVal_0);
-            var currVal_1 = _v.context.$implicit.value;
-            _ck(_v, 2, 0, currVal_1);
-        }, function (_ck, _v) {
-            var currVal_2 = _v.context.$implicit.label;
-            _ck(_v, 3, 0, currVal_2);
-        });
-    }
-    function View_CreateUserFormComponent_9(_l) {
-        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 11, 'div', [['class',
-                    'teams']], null, null, null, null, null)),
-            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(2, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])),
+    function View_CreateUserFormComponent_11(_l) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(),
+                textDef(-1, null, ['\n        '])), (_l()(), elementDef(2, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n          '])),
             (_l()(), elementDef(4, 0, null, null, 5, 'input', [['type', 'checkbox']], [[2, 'ng-untouched', null], [2, 'ng-touched', null], [2, 'ng-pristine',
                     null], [2, 'ng-dirty', null], [2, 'ng-valid', null],
                 [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null,
@@ -53979,139 +54184,7 @@
             }, null, null)), directiveDef(5, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
                 return [p0_0];
             }, [CheckboxControlValueAccessor]), directiveDef(7, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(9, 16384, null, 0, NgControlStatus, [NgControl], null, null), (_l()(),
-                textDef(10, null, ['', '\n      '])), (_l()(), textDef(-1, null, ['\n    ']))], function (_ck, _v) {
-            var currVal_7 = _v.context.$implicit.id;
-            var currVal_8 = _v.context.$implicit.checked;
-            _ck(_v, 7, 0, currVal_7, currVal_8);
-        }, function (_ck, _v) {
-            var currVal_0 = nodeValue(_v, 9).ngClassUntouched;
-            var currVal_1 = nodeValue(_v, 9).ngClassTouched;
-            var currVal_2 = nodeValue(_v, 9).ngClassPristine;
-            var currVal_3 = nodeValue(_v, 9).ngClassDirty;
-            var currVal_4 = nodeValue(_v, 9).ngClassValid;
-            var currVal_5 = nodeValue(_v, 9).ngClassInvalid;
-            var currVal_6 = nodeValue(_v, 9).ngClassPending;
-            _ck(_v, 4, 0, currVal_0, currVal_1, currVal_2, currVal_3, currVal_4, currVal_5, currVal_6);
-            var currVal_9 = _v.context.$implicit.name;
-            _ck(_v, 10, 0, currVal_9);
-        });
-    }
-    function View_CreateUserFormComponent_10(_l) {
-        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(),
-                textDef(-1, null, ['\n      '])), (_l()(), elementDef(2, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(4, 0, null, null, 5, 'input', [['type', 'checkbox']], [[2, 'ng-untouched',
-                    null], [2, 'ng-touched', null], [2, 'ng-pristine', null],
-                [2, 'ng-dirty', null], [2, 'ng-valid', null], [2, 'ng-invalid',
-                    null], [2, 'ng-pending', null]], [[null, 'ngModelChange'],
-                [null, 'change'], [null, 'blur']], function (_v, en, $event) {
-                var ad = true;
-                if (('change' === en)) {
-                    var pd_0 = (nodeValue(_v, 5).onChange($event.target.checked) !== false);
-                    ad = (pd_0 && ad);
-                }
-                if (('blur' === en)) {
-                    var pd_1 = (nodeValue(_v, 5).onTouched() !== false);
-                    ad = (pd_1 && ad);
-                }
-                if (('ngModelChange' === en)) {
-                    var pd_2 = ((_v.context.$implicit.checked = $event) !== false);
-                    ad = (pd_2 && ad);
-                }
-                return ad;
-            }, null, null)), directiveDef(5, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
-                return [p0_0];
-            }, [CheckboxControlValueAccessor]), directiveDef(7, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(9, 16384, null, 0, NgControlStatus, [NgControl], null, null), (_l()(), textDef(10, null, [' ', '\n      '])), (_l()(), textDef(-1, null, ['\n    ']))], function (_ck, _v) {
-            var currVal_7 = _v.context.$implicit.id;
-            var currVal_8 = _v.context.$implicit.checked;
-            _ck(_v, 7, 0, currVal_7, currVal_8);
-        }, function (_ck, _v) {
-            var currVal_0 = nodeValue(_v, 9).ngClassUntouched;
-            var currVal_1 = nodeValue(_v, 9).ngClassTouched;
-            var currVal_2 = nodeValue(_v, 9).ngClassPristine;
-            var currVal_3 = nodeValue(_v, 9).ngClassDirty;
-            var currVal_4 = nodeValue(_v, 9).ngClassValid;
-            var currVal_5 = nodeValue(_v, 9).ngClassInvalid;
-            var currVal_6 = nodeValue(_v, 9).ngClassPending;
-            _ck(_v, 4, 0, currVal_0, currVal_1, currVal_2, currVal_3, currVal_4, currVal_5, currVal_6);
-            var currVal_9 = _v.context.$implicit.name;
-            _ck(_v, 10, 0, currVal_9);
-        });
-    }
-    function View_CreateUserFormComponent_11(_l) {
-        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 11, 'span', [], null, null, null, null, null)), (_l()(),
-                textDef(-1, null, ['\n    '])), (_l()(), elementDef(2, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(4, 0, null, null, 5, 'input', [['type', 'checkbox']], [[2, 'ng-untouched',
-                    null], [2, 'ng-touched', null], [2, 'ng-pristine', null],
-                [2, 'ng-dirty', null], [2, 'ng-valid', null], [2, 'ng-invalid',
-                    null], [2, 'ng-pending', null]], [[null, 'ngModelChange'],
-                [null, 'change'], [null, 'blur']], function (_v, en, $event) {
-                var ad = true;
-                if (('change' === en)) {
-                    var pd_0 = (nodeValue(_v, 5).onChange($event.target.checked) !== false);
-                    ad = (pd_0 && ad);
-                }
-                if (('blur' === en)) {
-                    var pd_1 = (nodeValue(_v, 5).onTouched() !== false);
-                    ad = (pd_1 && ad);
-                }
-                if (('ngModelChange' === en)) {
-                    var pd_2 = ((_v.context.$implicit.checked = $event) !== false);
-                    ad = (pd_2 && ad);
-                }
-                return ad;
-            }, null, null)), directiveDef(5, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
-                return [p0_0];
-            }, [CheckboxControlValueAccessor]), directiveDef(7, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(9, 16384, null, 0, NgControlStatus, [NgControl], null, null), (_l()(), textDef(10, null, ['', '  |\n    '])), (_l()(), textDef(-1, null, ['\n  ']))], function (_ck, _v) {
-            var currVal_7 = _v.context.$implicit.name;
-            var currVal_8 = _v.context.$implicit.checked;
-            _ck(_v, 7, 0, currVal_7, currVal_8);
-        }, function (_ck, _v) {
-            var currVal_0 = nodeValue(_v, 9).ngClassUntouched;
-            var currVal_1 = nodeValue(_v, 9).ngClassTouched;
-            var currVal_2 = nodeValue(_v, 9).ngClassPristine;
-            var currVal_3 = nodeValue(_v, 9).ngClassDirty;
-            var currVal_4 = nodeValue(_v, 9).ngClassValid;
-            var currVal_5 = nodeValue(_v, 9).ngClassInvalid;
-            var currVal_6 = nodeValue(_v, 9).ngClassPending;
-            _ck(_v, 4, 0, currVal_0, currVal_1, currVal_2, currVal_3, currVal_4, currVal_5, currVal_6);
-            var currVal_9 = _v.context.$implicit.name;
-            _ck(_v, 10, 0, currVal_9);
-        });
-    }
-    function View_CreateUserFormComponent_12(_l) {
-        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 3, 'option', [], null, null, null, null, null)), directiveDef(1, 147456, null, 0, NgSelectOption, [ElementRef, Renderer2, [2, SelectControlValueAccessor]], { value: [0, 'value'] }, null), directiveDef(2, 147456, null, 0, NgSelectMultipleOption, [ElementRef,
-                Renderer2, [8, null]], { value: [0, 'value'] }, null), (_l()(), textDef(3, null, ['\n ', '\n']))], function (_ck, _v) {
-            var currVal_0 = _v.context.$implicit.name;
-            _ck(_v, 1, 0, currVal_0);
-            var currVal_1 = _v.context.$implicit.name;
-            _ck(_v, 2, 0, currVal_1);
-        }, function (_ck, _v) {
-            var currVal_2 = _v.context.$implicit.name;
-            _ck(_v, 3, 0, currVal_2);
-        });
-    }
-    function View_CreateUserFormComponent_13(_l) {
-        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(),
-                textDef(-1, null, ['\n      '])), (_l()(), elementDef(2, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(4, 0, null, null, 5, 'input', [['type', 'checkbox']], [[2, 'ng-untouched',
-                    null], [2, 'ng-touched', null], [2, 'ng-pristine', null],
-                [2, 'ng-dirty', null], [2, 'ng-valid', null], [2, 'ng-invalid',
-                    null], [2, 'ng-pending', null]], [[null, 'ngModelChange'],
-                [null, 'change'], [null, 'blur']], function (_v, en, $event) {
-                var ad = true;
-                if (('change' === en)) {
-                    var pd_0 = (nodeValue(_v, 5).onChange($event.target.checked) !== false);
-                    ad = (pd_0 && ad);
-                }
-                if (('blur' === en)) {
-                    var pd_1 = (nodeValue(_v, 5).onTouched() !== false);
-                    ad = (pd_1 && ad);
-                }
-                if (('ngModelChange' === en)) {
-                    var pd_2 = ((_v.context.$implicit.checked = $event) !== false);
-                    ad = (pd_2 && ad);
-                }
-                return ad;
-            }, null, null)), directiveDef(5, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
-                return [p0_0];
-            }, [CheckboxControlValueAccessor]), directiveDef(7, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(9, 16384, null, 0, NgControlStatus, [NgControl], null, null), (_l()(), textDef(10, null, ['', '\n      '])), (_l()(), textDef(-1, null, ['\n    ']))], function (_ck, _v) {
+                textDef(10, null, ['', '\n        '])), (_l()(), textDef(-1, null, ['\n      ']))], function (_ck, _v) {
             var currVal_7 = _v.context.$implicit.id;
             var currVal_8 = _v.context.$implicit.checked;
             _ck(_v, 7, 0, currVal_7, currVal_8);
@@ -54128,9 +54201,9 @@
             _ck(_v, 10, 0, currVal_9);
         });
     }
-    function View_CreateUserFormComponent_14(_l) {
+    function View_CreateUserFormComponent_12(_l) {
         return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 3, 'option', [], null, null, null, null, null)), directiveDef(1, 147456, null, 0, NgSelectOption, [ElementRef, Renderer2, [2, SelectControlValueAccessor]], { value: [0, 'value'] }, null), directiveDef(2, 147456, null, 0, NgSelectMultipleOption, [ElementRef,
-                Renderer2, [8, null]], { value: [0, 'value'] }, null), (_l()(), textDef(3, null, ['', '']))], function (_ck, _v) {
+                Renderer2, [8, null]], { value: [0, 'value'] }, null), (_l()(), textDef(3, null, ['', '\n      ']))], function (_ck, _v) {
             var currVal_0 = _v.context.$implicit.value;
             _ck(_v, 1, 0, currVal_0);
             var currVal_1 = _v.context.$implicit.value;
@@ -54140,7 +54213,7 @@
             _ck(_v, 3, 0, currVal_2);
         });
     }
-    function View_CreateUserFormComponent_15(_l) {
+    function View_CreateUserFormComponent_13(_l) {
         return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 1, 'div', [], null, null, null, null, null)), (_l()(),
                 textDef(1, null, ['ERROR: ', '']))], null, function (_ck, _v) {
             var _co = _v.component;
@@ -54150,61 +54223,19 @@
     }
     function View_CreateUserFormComponent_0(_l) {
         return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 1, 'h2', [], null, null, null, null, null)), (_l()(),
-                textDef(-1, null, [' Create User Form '])), (_l()(), textDef(-1, null, ['\n'])), (_l()(), elementDef(3, 0, null, null, 5, 'textarea', [['cols',
-                    '100'], ['name', 'csv'], ['rows', '4']], [[2, 'ng-untouched', null], [2, 'ng-touched',
-                    null], [2, 'ng-pristine', null], [2, 'ng-dirty', null],
-                [2, 'ng-valid', null], [2, 'ng-invalid', null], [2, 'ng-pending',
-                    null]], [[null, 'ngModelChange'], [null, 'input'],
-                [null, 'blur'], [null, 'compositionstart'], [null, 'compositionend']], function (_v, en, $event) {
-                var ad = true;
-                var _co = _v.component;
-                if (('input' === en)) {
-                    var pd_0 = (nodeValue(_v, 4)._handleInput($event.target.value) !== false);
-                    ad = (pd_0 && ad);
-                }
-                if (('blur' === en)) {
-                    var pd_1 = (nodeValue(_v, 4).onTouched() !== false);
-                    ad = (pd_1 && ad);
-                }
-                if (('compositionstart' === en)) {
-                    var pd_2 = (nodeValue(_v, 4)._compositionStart() !== false);
-                    ad = (pd_2 && ad);
-                }
-                if (('compositionend' === en)) {
-                    var pd_3 = (nodeValue(_v, 4)._compositionEnd($event.target.value) !== false);
-                    ad = (pd_3 && ad);
-                }
-                if (('ngModelChange' === en)) {
-                    var pd_4 = ((_co.csv = $event) !== false);
-                    ad = (pd_4 && ad);
-                }
-                return ad;
-            }, null, null)), directiveDef(4, 16384, null, 0, DefaultValueAccessor, [Renderer2, ElementRef, [2, COMPOSITION_BUFFER_MODE]], null, null),
-            providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
-                return [p0_0];
-            }, [DefaultValueAccessor]), directiveDef(6, 671744, [['textArea', 4]], 0, NgModel, [[8, null], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(8, 16384, null, 0, NgControlStatus, [NgControl], null, null), (_l()(),
-                textDef(-1, null, ['\n'])), (_l()(), elementDef(10, 0, null, null, 1, 'button', [], null, [[null, 'click']], function (_v, en, $event) {
-                var ad = true;
-                var _co = _v.component;
-                if (('click' === en)) {
-                    var pd_0 = (_co.parse(_co.csv) !== false);
-                    ad = (pd_0 && ad);
-                }
-                return ad;
-            }, null, null)), (_l()(), textDef(-1, null, ['Parse'])),
-            (_l()(), textDef(12, null, ['\n', '\n'])), (_l()(), elementDef(13, 0, null, null, 400, 'form', [['novalidate', '']], [[2, 'ng-untouched', null],
-                [2, 'ng-touched', null], [2, 'ng-pristine', null], [2, 'ng-dirty',
-                    null], [2, 'ng-valid', null], [2, 'ng-invalid', null],
-                [2, 'ng-pending', null]], [[null, 'ngSubmit'], [null,
-                    'submit'], [null, 'reset']], function (_v, en, $event) {
+                textDef(-1, null, [' Create User Form '])), (_l()(), textDef(-1, null, ['\n\n'])), (_l()(), elementDef(3, 0, null, null, 400, 'form', [['novalidate',
+                    '']], [[2, 'ng-untouched', null], [2, 'ng-touched', null], [2, 'ng-pristine',
+                    null], [2, 'ng-dirty', null], [2, 'ng-valid', null], [2,
+                    'ng-invalid', null], [2, 'ng-pending', null]], [[null,
+                    'ngSubmit'], [null, 'submit'], [null, 'reset']], function (_v, en, $event) {
                 var ad = true;
                 var _co = _v.component;
                 if (('submit' === en)) {
-                    var pd_0 = (nodeValue(_v, 15).onSubmit($event) !== false);
+                    var pd_0 = (nodeValue(_v, 5).onSubmit($event) !== false);
                     ad = (pd_0 && ad);
                 }
                 if (('reset' === en)) {
-                    var pd_1 = (nodeValue(_v, 15).onReset() !== false);
+                    var pd_1 = (nodeValue(_v, 5).onReset() !== false);
                     ad = (pd_1 && ad);
                 }
                 if (('ngSubmit' === en)) {
@@ -54212,37 +54243,33 @@
                     ad = (pd_2 && ad);
                 }
                 return ad;
-            }, null, null)), directiveDef(14, 16384, null, 0, NgNoValidate, [], null, null), directiveDef(15, 16384, [['createForm',
-                    4]], 0, NgForm, [[8, null], [8, null]], null, { ngSubmit: 'ngSubmit' }),
-            providerDef(2048, null, ControlContainer, null, [NgForm]), directiveDef(17, 16384, null, 0, NgControlStatusGroup, [ControlContainer], null, null), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(19, 0, null, null, 13, 'fieldset', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(21, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Type de compte'])), (_l()(),
-                textDef(-1, null, ['\n    '])), (_l()(), elementDef(24, 0, null, null, 7, 'div', [['class', 'checkbox-list'], ['id', 'account-type'], ['ngModelGroup',
-                    'accounts']], [[2, 'ng-untouched', null], [2, 'ng-touched', null],
-                [2, 'ng-pristine', null], [2, 'ng-dirty', null], [2, 'ng-valid',
-                    null], [2, 'ng-invalid', null], [2, 'ng-pending', null]], null, null, null, null)), directiveDef(25, 212992, null, 0, NgModelGroup, [[1, ControlContainer], [8, null],
-                [8, null]], { name: [0, 'name'] }, null), providerDef(2048, null, ControlContainer, null, [NgModelGroup]), directiveDef(27, 16384, null, 0, NgControlStatusGroup, [ControlContainer], null, null),
-            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_1)), directiveDef(30, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(),
-                textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n  '])),
-            (_l()(), textDef(-1, null, ['\n\n  '])), (_l()(), elementDef(34, 0, null, null, 22, 'fieldset', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])),
-            (_l()(), elementDef(36, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Compte utilisateur'])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(39, 0, null, null, 16, 'div', [['ngModelGroup',
-                    'userInfo']], [[2, 'ng-untouched', null], [2, 'ng-touched', null],
-                [2, 'ng-pristine', null], [2, 'ng-dirty', null], [2, 'ng-valid',
-                    null], [2, 'ng-invalid', null], [2, 'ng-pending', null]], null, null, null, null)), directiveDef(40, 212992, null, 0, NgModelGroup, [[1, ControlContainer], [8, null],
-                [8, null]], { name: [0, 'name'] }, null), providerDef(2048, null, ControlContainer, null, [NgModelGroup]), directiveDef(42, 16384, null, 0, NgControlStatusGroup, [ControlContainer], null, null),
-            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_2)), directiveDef(45, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'] }, null), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(47, 0, null, null, 7, 'div', [['ngModelGroup',
-                    'credentials']], [[2, 'ng-untouched', null], [2, 'ng-touched', null],
-                [2, 'ng-pristine', null], [2, 'ng-dirty', null], [2, 'ng-valid',
-                    null], [2, 'ng-invalid', null], [2, 'ng-pending', null]], null, null, null, null)), directiveDef(48, 212992, null, 0, NgModelGroup, [[1, ControlContainer], [8, null],
-                [8, null]], { name: [0, 'name'] }, null), providerDef(2048, null, ControlContainer, null, [NgModelGroup]), directiveDef(50, 16384, null, 0, NgControlStatusGroup, [ControlContainer], null, null),
-            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_3)), directiveDef(53, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(),
-                textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n'])),
-            (_l()(), textDef(-1, null, ['\n'])), (_l()(), textDef(-1, null, ['\n\n'])),
-            (_l()(), elementDef(58, 0, null, null, 235, 'fieldset', [], null, null, null, null, null)),
-            (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(60, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['SugarCRM'])),
-            (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(63, 0, null, null, 60, 'div', [['ngModelGroup', 'sugar']], [[2, 'ng-untouched', null],
+            }, null, null)), directiveDef(4, 16384, null, 0, NgNoValidate, [], null, null), directiveDef(5, 16384, [['createForm', 4]], 0, NgForm, [[8, null], [8, null]], null, { ngSubmit: 'ngSubmit' }), providerDef(2048, null, ControlContainer, null, [NgForm]), directiveDef(7, 16384, null, 0, NgControlStatusGroup, [ControlContainer], null, null), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(9, 0, null, null, 13, 'fieldset', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(11, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(),
+                textDef(-1, null, ['Type de compte'])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(14, 0, null, null, 7, 'div', [['class',
+                    'checkbox-list'], ['id', 'account-type'], ['ngModelGroup', 'accounts']], [[2, 'ng-untouched',
+                    null], [2, 'ng-touched', null], [2, 'ng-pristine', null],
+                [2, 'ng-dirty', null], [2, 'ng-valid', null], [2, 'ng-invalid', null],
+                [2, 'ng-pending', null]], null, null, null, null)),
+            directiveDef(15, 212992, null, 0, NgModelGroup, [[1, ControlContainer], [8,
+                    null], [8, null]], { name: [0, 'name'] }, null), providerDef(2048, null, ControlContainer, null, [NgModelGroup]), directiveDef(17, 16384, null, 0, NgControlStatusGroup, [ControlContainer], null, null), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_1)),
+            directiveDef(20, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef,
+                IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['a\n  '])), (_l()(), textDef(-1, null, ['\n\n  '])),
+            (_l()(), elementDef(24, 0, null, null, 22, 'fieldset', [], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(26, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Compte utilisateur'])),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(29, 0, null, null, 16, 'div', [['ngModelGroup', 'userInfo']], [[2, 'ng-untouched',
+                    null], [2, 'ng-touched', null], [2, 'ng-pristine', null],
+                [2, 'ng-dirty', null], [2, 'ng-valid', null], [2, 'ng-invalid',
+                    null], [2, 'ng-pending', null]], null, null, null, null)), directiveDef(30, 212992, null, 0, NgModelGroup, [[1, ControlContainer], [8, null], [8, null]], { name: [0, 'name'] }, null), providerDef(2048, null, ControlContainer, null, [NgModelGroup]), directiveDef(32, 16384, null, 0, NgControlStatusGroup, [ControlContainer], null, null), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_2)), directiveDef(35, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'] }, null), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(37, 0, null, null, 7, 'div', [['ngModelGroup', 'credentials']], [[2,
+                    'ng-untouched', null], [2, 'ng-touched', null], [2, 'ng-pristine',
+                    null], [2, 'ng-dirty', null], [2, 'ng-valid', null],
+                [2, 'ng-invalid', null], [2, 'ng-pending', null]], null, null, null, null)), directiveDef(38, 212992, null, 0, NgModelGroup, [[1, ControlContainer], [8, null], [8, null]], { name: [0, 'name'] }, null), providerDef(2048, null, ControlContainer, null, [NgModelGroup]), directiveDef(40, 16384, null, 0, NgControlStatusGroup, [ControlContainer], null, null), (_l()(), textDef(-1, null, ['\n        '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_3)), directiveDef(43, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0,
+                    'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), textDef(-1, null, ['\n    '])),
+            (_l()(), textDef(-1, null, ['a-bis\n  '])), (_l()(), textDef(-1, null, ['\n\n\n  '])), (_l()(), elementDef(48, 0, null, null, 87, 'fieldset', [], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(50, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['SugarCRM'])),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(53, 0, null, null, 81, 'div', [['ngModelGroup', 'sugar']], [[2, 'ng-untouched', null],
                 [2, 'ng-touched', null], [2, 'ng-pristine', null], [2, 'ng-dirty',
                     null], [2, 'ng-valid', null], [2, 'ng-invalid', null],
-                [2, 'ng-pending', null]], null, null, null, null)), directiveDef(64, 212992, null, 0, NgModelGroup, [[1, ControlContainer],
-                [8, null], [8, null]], { name: [0, 'name'] }, null), providerDef(2048, null, ControlContainer, null, [NgModelGroup]), directiveDef(66, 16384, null, 0, NgControlStatusGroup, [ControlContainer], null, null), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(68, 0, null, null, 1, 'button', [], null, [[null,
+                [2, 'ng-pending', null]], null, null, null, null)), directiveDef(54, 212992, null, 0, NgModelGroup, [[1, ControlContainer],
+                [8, null], [8, null]], { name: [0, 'name'] }, null), providerDef(2048, null, ControlContainer, null, [NgModelGroup]), directiveDef(56, 16384, null, 0, NgControlStatusGroup, [ControlContainer], null, null), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(58, 0, null, null, 1, 'button', [], null, [[null,
                     'click']], function (_v, en, $event) {
                 var ad = true;
                 var _co = _v.component;
@@ -54252,7 +54279,7 @@
                 }
                 return ad;
             }, null, null)), (_l()(), textDef(-1, null, ['Ventes - Conseiller'])),
-            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(71, 0, null, null, 1, 'button', [], null, [[null, 'click']], function (_v, en, $event) {
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(61, 0, null, null, 1, 'button', [], null, [[null, 'click']], function (_v, en, $event) {
                 var ad = true;
                 var _co = _v.component;
                 if (('click' === en)) {
@@ -54261,7 +54288,7 @@
                 }
                 return ad;
             }, null, null)), (_l()(), textDef(-1, null, ['Ventes – Junior Manager'])),
-            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(74, 0, null, null, 1, 'button', [], null, [[null, 'click']], function (_v, en, $event) {
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(64, 0, null, null, 1, 'button', [], null, [[null, 'click']], function (_v, en, $event) {
                 var ad = true;
                 var _co = _v.component;
                 if (('click' === en)) {
@@ -54270,7 +54297,7 @@
                 }
                 return ad;
             }, null, null)), (_l()(), textDef(-1, null, ['Ventes - Manager'])),
-            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(77, 0, null, null, 1, 'button', [], null, [[null, 'click']], function (_v, en, $event) {
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(67, 0, null, null, 1, 'button', [], null, [[null, 'click']], function (_v, en, $event) {
                 var ad = true;
                 var _co = _v.component;
                 if (('click' === en)) {
@@ -54279,7 +54306,7 @@
                 }
                 return ad;
             }, null, null)), (_l()(), textDef(-1, null, ['Ventes – Assistant de ventes'])),
-            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(80, 0, null, null, 1, 'button', [], null, [[null, 'click']], function (_v, en, $event) {
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(70, 0, null, null, 1, 'button', [], null, [[null, 'click']], function (_v, en, $event) {
                 var ad = true;
                 var _co = _v.component;
                 if (('click' === en)) {
@@ -54288,7 +54315,7 @@
                 }
                 return ad;
             }, null, null)), (_l()(), textDef(-1, null, ['Agent Qualité'])),
-            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(83, 0, null, null, 1, 'button', [], null, [[null, 'click']], function (_v, en, $event) {
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(73, 0, null, null, 1, 'button', [], null, [[null, 'click']], function (_v, en, $event) {
                 var ad = true;
                 var _co = _v.component;
                 if (('click' === en)) {
@@ -54297,7 +54324,7 @@
                 }
                 return ad;
             }, null, null)), (_l()(), textDef(-1, null, ['Compta'])),
-            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(86, 0, null, null, 1, 'button', [], null, [[null, 'click']], function (_v, en, $event) {
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(76, 0, null, null, 1, 'button', [], null, [[null, 'click']], function (_v, en, $event) {
                 var ad = true;
                 var _co = _v.component;
                 if (('click' === en)) {
@@ -54306,20 +54333,19 @@
                 }
                 return ad;
             }, null, null)), (_l()(), textDef(-1, null, ['Inactif'])),
-            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(89, 0, null, null, 15, 'div', [['class', 'select']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(91, 0, null, null, 1, 'div', [['class', 'subtitle']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Hérite les préférence de l\'utilisateur'])),
-            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(94, 0, null, null, 9, 'select', [['name', 'userToCopyHPfrom']], [[2, 'ng-untouched',
-                    null], [2, 'ng-touched', null], [2, 'ng-pristine', null],
-                [2, 'ng-dirty', null], [2, 'ng-valid', null], [2, 'ng-invalid',
-                    null], [2, 'ng-pending', null]], [[null, 'ngModelChange'],
-                [null, 'change'], [null, 'blur']], function (_v, en, $event) {
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(79, 0, null, null, 12, 'div', [['class', 'select subtitle']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Hérite les préférence de l\'utilisateur\n        '])), (_l()(), elementDef(81, 0, null, null, 9, 'select', [['name', 'userToCopyHPfrom']], [[2,
+                    'ng-untouched', null], [2, 'ng-touched', null], [2, 'ng-pristine',
+                    null], [2, 'ng-dirty', null], [2, 'ng-valid', null],
+                [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null,
+                    'ngModelChange'], [null, 'change'], [null, 'blur']], function (_v, en, $event) {
                 var ad = true;
                 var _co = _v.component;
                 if (('change' === en)) {
-                    var pd_0 = (nodeValue(_v, 95).onChange($event.target.value) !== false);
+                    var pd_0 = (nodeValue(_v, 82).onChange($event.target.value) !== false);
                     ad = (pd_0 && ad);
                 }
                 if (('blur' === en)) {
-                    var pd_1 = (nodeValue(_v, 95).onTouched() !== false);
+                    var pd_1 = (nodeValue(_v, 82).onTouched() !== false);
                     ad = (pd_1 && ad);
                 }
                 if (('ngModelChange' === en)) {
@@ -54327,45 +54353,114 @@
                     ad = (pd_2 && ad);
                 }
                 return ad;
-            }, null, null)), directiveDef(95, 16384, null, 0, SelectControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
+            }, null, null)), directiveDef(82, 16384, null, 0, SelectControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
                 return [p0_0];
-            }, [SelectControlValueAccessor]), directiveDef(97, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(99, 16384, null, 0, NgControlStatus, [NgControl], null, null),
-            (_l()(), textDef(-1, null, ['\n        '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_4)), directiveDef(102, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(),
-                textDef(-1, null, ['\n      '])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(106, 0, null, null, 7, 'div', [['class', 'checkbox-list'], ['id', 'sugar_role']], null, null, null, null, null)),
-            (_l()(), textDef(-1, null, ['\n     '])), (_l()(), elementDef(108, 0, null, null, 1, 'div', [['class', 'subtitle']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Role'])), (_l()(), textDef(-1, null, ['\n     '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_5)),
-            directiveDef(112, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef,
-                IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(115, 0, null, null, 7, 'div', [['class', 'checkbox-list'], ['id', 'sugar_departement']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n   '])), (_l()(), elementDef(117, 0, null, null, 1, 'div', [['class', 'subtitle']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Service'])),
-            (_l()(), textDef(-1, null, ['\n   '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_6)), directiveDef(121, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(),
-                textDef(-1, null, ['\n'])), (_l()(), textDef(-1, null, ['\n'])),
-            (_l()(), textDef(-1, null, ['\n\n'])), (_l()(), elementDef(125, 0, null, null, 15, 'div', [['class', 'select']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n '])), (_l()(), elementDef(127, 0, null, null, 1, 'div', [['class',
-                    'subtitle']], null, null, null, null, null)),
-            (_l()(), textDef(-1, null, ['Bureau'])), (_l()(), textDef(-1, null, ['\n '])), (_l()(), elementDef(130, 0, null, null, 9, 'select', [['name',
-                    'office']], [[2, 'ng-untouched', null], [2, 'ng-touched', null],
+            }, [SelectControlValueAccessor]), directiveDef(84, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(86, 16384, null, 0, NgControlStatus, [NgControl], null, null),
+            (_l()(), textDef(-1, null, ['\n          '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_4)),
+            directiveDef(89, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef,
+                IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(), textDef(-1, null, ['\n        '])), (_l()(),
+                textDef(-1, null, ['\n      '])), (_l()(), textDef(-1, null, ['\n\n      '])), (_l()(), elementDef(93, 0, null, null, 4, 'div', [['class', 'checkbox-list subtitle'], ['id', 'sugar_role']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Role\n       '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_5)), directiveDef(96, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0,
+                    'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), textDef(-1, null, ['\n\n      '])),
+            (_l()(), elementDef(99, 0, null, null, 4, 'div', [['class', 'checkbox-list subtitle'],
+                ['id', 'sugar_departement']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Service\n        '])),
+            (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_6)),
+            directiveDef(102, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef,
+                IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), textDef(-1, null, ['\n\n      '])), (_l()(), elementDef(105, 0, null, null, 13, 'div', [], [[8, 'hidden', 0]], null, null, null, null)), (_l()(), textDef(106, null, ['', '\n        '])), pipeDef(0, JsonPipe, []), (_l()(), elementDef(108, 0, null, null, 9, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Leads min\n          '])),
+            (_l()(), elementDef(110, 0, null, null, 6, 'input', [['name', 'leadsMin'],
+                ['type', 'number']], [[2, 'ng-untouched', null], [2, 'ng-touched', null],
                 [2, 'ng-pristine', null], [2, 'ng-dirty', null], [2, 'ng-valid',
-                    null], [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null, 'ngModelChange'], [null, 'change'], [null,
-                    'blur']], function (_v, en, $event) {
+                    null], [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null, 'ngModelChange'], [null, 'input'], [null,
+                    'blur'], [null, 'compositionstart'], [null, 'compositionend'],
+                [null, 'change']], function (_v, en, $event) {
                 var ad = true;
                 var _co = _v.component;
-                if (('change' === en)) {
-                    var pd_0 = (nodeValue(_v, 131).onChange($event.target.value) !== false);
+                if (('input' === en)) {
+                    var pd_0 = (nodeValue(_v, 111)._handleInput($event.target.value) !== false);
                     ad = (pd_0 && ad);
                 }
                 if (('blur' === en)) {
-                    var pd_1 = (nodeValue(_v, 131).onTouched() !== false);
+                    var pd_1 = (nodeValue(_v, 111).onTouched() !== false);
                     ad = (pd_1 && ad);
                 }
-                if (('ngModelChange' === en)) {
-                    var pd_2 = ((_co.fields.selectedBureau = $event) !== false);
+                if (('compositionstart' === en)) {
+                    var pd_2 = (nodeValue(_v, 111)._compositionStart() !== false);
                     ad = (pd_2 && ad);
                 }
+                if (('compositionend' === en)) {
+                    var pd_3 = (nodeValue(_v, 111)._compositionEnd($event.target.value) !== false);
+                    ad = (pd_3 && ad);
+                }
+                if (('change' === en)) {
+                    var pd_4 = (nodeValue(_v, 112).onChange($event.target.value) !== false);
+                    ad = (pd_4 && ad);
+                }
+                if (('input' === en)) {
+                    var pd_5 = (nodeValue(_v, 112).onChange($event.target.value) !== false);
+                    ad = (pd_5 && ad);
+                }
+                if (('blur' === en)) {
+                    var pd_6 = (nodeValue(_v, 112).onTouched() !== false);
+                    ad = (pd_6 && ad);
+                }
+                if (('ngModelChange' === en)) {
+                    var pd_7 = ((_co.fields.leadsMin = $event) !== false);
+                    ad = (pd_7 && ad);
+                }
                 return ad;
-            }, null, null)), directiveDef(131, 16384, null, 0, SelectControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
-                return [p0_0];
-            }, [SelectControlValueAccessor]), directiveDef(133, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(135, 16384, null, 0, NgControlStatus, [NgControl], null, null),
-            (_l()(), textDef(-1, null, ['\n '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_7)), directiveDef(138, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(),
-                textDef(-1, null, ['\n'])), (_l()(), textDef(-1, null, ['\n'])),
-            (_l()(), textDef(-1, null, ['\n\n'])), (_l()(), elementDef(142, 0, null, null, 1, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Fonction'])),
-            (_l()(), textDef(-1, null, ['\n'])), (_l()(), elementDef(145, 0, null, null, 13, 'select', [['name', 'fonction']], [[2, 'ng-untouched', null],
+            }, null, null)), directiveDef(111, 16384, null, 0, DefaultValueAccessor, [Renderer2, ElementRef, [2, COMPOSITION_BUFFER_MODE]], null, null), directiveDef(112, 16384, null, 0, NumberValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0, p1_0) {
+                return [p0_0, p1_0];
+            }, [DefaultValueAccessor, NumberValueAccessor]), directiveDef(114, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(116, 16384, null, 0, NgControlStatus, [NgControl], null, null),
+            (_l()(), textDef(-1, null, ['\n        '])), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), textDef(-1, null, ['\n\n      '])), (_l()(),
+                elementDef(120, 0, null, null, 13, 'div', [], [[8, 'hidden',
+                        0]], null, null, null, null)), (_l()(),
+                textDef(121, null, ['', '\n        '])), pipeDef(0, JsonPipe, []),
+            (_l()(), elementDef(123, 0, null, null, 9, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Leads max\n          '])), (_l()(), elementDef(125, 0, null, null, 6, 'input', [['name', 'leadsMax'], ['type', 'number']], [[2, 'ng-untouched',
+                    null], [2, 'ng-touched', null], [2, 'ng-pristine', null],
+                [2, 'ng-dirty', null], [2, 'ng-valid', null], [2, 'ng-invalid',
+                    null], [2, 'ng-pending', null]], [[null, 'ngModelChange'],
+                [null, 'input'], [null, 'blur'], [null, 'compositionstart'],
+                [null, 'compositionend'], [null, 'change']], function (_v, en, $event) {
+                var ad = true;
+                var _co = _v.component;
+                if (('input' === en)) {
+                    var pd_0 = (nodeValue(_v, 126)._handleInput($event.target.value) !== false);
+                    ad = (pd_0 && ad);
+                }
+                if (('blur' === en)) {
+                    var pd_1 = (nodeValue(_v, 126).onTouched() !== false);
+                    ad = (pd_1 && ad);
+                }
+                if (('compositionstart' === en)) {
+                    var pd_2 = (nodeValue(_v, 126)._compositionStart() !== false);
+                    ad = (pd_2 && ad);
+                }
+                if (('compositionend' === en)) {
+                    var pd_3 = (nodeValue(_v, 126)._compositionEnd($event.target.value) !== false);
+                    ad = (pd_3 && ad);
+                }
+                if (('change' === en)) {
+                    var pd_4 = (nodeValue(_v, 127).onChange($event.target.value) !== false);
+                    ad = (pd_4 && ad);
+                }
+                if (('input' === en)) {
+                    var pd_5 = (nodeValue(_v, 127).onChange($event.target.value) !== false);
+                    ad = (pd_5 && ad);
+                }
+                if (('blur' === en)) {
+                    var pd_6 = (nodeValue(_v, 127).onTouched() !== false);
+                    ad = (pd_6 && ad);
+                }
+                if (('ngModelChange' === en)) {
+                    var pd_7 = ((_co.fields.leadsMax = $event) !== false);
+                    ad = (pd_7 && ad);
+                }
+                return ad;
+            }, null, null)), directiveDef(126, 16384, null, 0, DefaultValueAccessor, [Renderer2, ElementRef, [2, COMPOSITION_BUFFER_MODE]], null, null), directiveDef(127, 16384, null, 0, NumberValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0, p1_0) {
+                return [p0_0, p1_0];
+            }, [DefaultValueAccessor, NumberValueAccessor]), directiveDef(129, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(131, 16384, null, 0, NgControlStatus, [NgControl], null, null),
+            (_l()(), textDef(-1, null, ['\n        '])), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['b\n  '])), (_l()(), textDef(-1, null, ['\n\n  '])),
+            (_l()(), elementDef(137, 0, null, null, 11, 'div', [['class', 'select subtitle']], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['\n   '])), (_l()(), elementDef(139, 0, null, null, 8, 'select', [['name', 'office']], [[2, 'ng-untouched', null],
                 [2, 'ng-touched', null], [2, 'ng-pristine', null], [2, 'ng-dirty',
                     null], [2, 'ng-valid', null], [2, 'ng-invalid', null],
                 [2, 'ng-pending', null]], [[null, 'ngModelChange'], [null,
@@ -54373,392 +54468,24 @@
                 var ad = true;
                 var _co = _v.component;
                 if (('change' === en)) {
-                    var pd_0 = (nodeValue(_v, 146).onChange($event.target.value) !== false);
+                    var pd_0 = (nodeValue(_v, 140).onChange($event.target.value) !== false);
                     ad = (pd_0 && ad);
                 }
                 if (('blur' === en)) {
-                    var pd_1 = (nodeValue(_v, 146).onTouched() !== false);
+                    var pd_1 = (nodeValue(_v, 140).onTouched() !== false);
                     ad = (pd_1 && ad);
                 }
                 if (('ngModelChange' === en)) {
-                    var pd_2 = ((_co.fields.selectedFunction = $event) !== false);
+                    var pd_2 = ((_co.fields.selectedBureau = $event) !== false);
                     ad = (pd_2 && ad);
                 }
                 return ad;
-            }, null, null)), directiveDef(146, 16384, null, 0, SelectControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
+            }, null, null)), directiveDef(140, 16384, null, 0, SelectControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
                 return [p0_0];
-            }, [SelectControlValueAccessor]), directiveDef(148, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(150, 16384, null, 0, NgControlStatus, [NgControl], null, null),
-            (_l()(), textDef(-1, null, ['\n'])), (_l()(), elementDef(152, 0, null, null, 2, 'option', [], null, null, null, null, null)), directiveDef(153, 147456, null, 0, NgSelectOption, [ElementRef, Renderer2, [2, SelectControlValueAccessor]], { ngValue: [0,
-                    'ngValue'] }, null), directiveDef(154, 147456, null, 0, NgSelectMultipleOption, [ElementRef, Renderer2, [8, null]], { ngValue: [0, 'ngValue'] }, null),
-            (_l()(), textDef(-1, null, ['\n'])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_8)), directiveDef(157, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(),
-                textDef(-1, null, ['\n'])), (_l()(), textDef(-1, null, ['\n\n'])),
-            (_l()(), elementDef(160, 0, null, null, 13, 'fieldset', [], null, null, null, null, null)),
-            (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(162, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Equipe'])),
-            (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(165, 0, null, null, 7, 'div', [['ngModelGroup', 'team']], [[2, 'ng-untouched', null],
-                [2, 'ng-touched', null], [2, 'ng-pristine', null], [2, 'ng-dirty',
-                    null], [2, 'ng-valid', null], [2, 'ng-invalid', null],
-                [2, 'ng-pending', null]], null, null, null, null)), directiveDef(166, 212992, null, 0, NgModelGroup, [[1, ControlContainer],
-                [8, null], [8, null]], { name: [0, 'name'] }, null), providerDef(2048, null, ControlContainer, null, [NgModelGroup]), directiveDef(168, 16384, null, 0, NgControlStatusGroup, [ControlContainer], null, null), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_9)),
-            directiveDef(171, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef,
-                IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n'])), (_l()(), textDef(-1, null, ['\n\n'])), (_l()(),
-                elementDef(175, 0, null, null, 13, 'fieldset', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(177, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Autres'])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(180, 0, null, null, 7, 'div', [['class', 'autres'], ['ngModelGroup', 'others']], [[2, 'ng-untouched',
-                    null], [2, 'ng-touched', null], [2, 'ng-pristine', null],
-                [2, 'ng-dirty', null], [2, 'ng-valid', null], [2, 'ng-invalid',
-                    null], [2, 'ng-pending', null]], null, null, null, null)), directiveDef(181, 212992, null, 0, NgModelGroup, [[1, ControlContainer], [8, null], [8, null]], { name: [0, 'name'] }, null), providerDef(2048, null, ControlContainer, null, [NgModelGroup]), directiveDef(183, 16384, null, 0, NgControlStatusGroup, [ControlContainer], null, null), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_10)), directiveDef(186, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'],
-                ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n'])), (_l()(), textDef(-1, null, ['\n\n'])), (_l()(), elementDef(190, 0, null, null, 7, 'fieldset', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(192, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Destinations'])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_11)),
-            directiveDef(196, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef,
-                IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(), textDef(-1, null, ['\n'])), (_l()(), textDef(-1, null, ['\n\n'])), (_l()(), elementDef(199, 0, null, null, 15, 'div', [['class', 'select']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n '])),
-            (_l()(), elementDef(201, 0, null, null, 1, 'div', [['class', 'subtitle']], null, null, null, null, null)),
-            (_l()(), textDef(-1, null, ['Manager'])), (_l()(), textDef(-1, null, ['\n '])), (_l()(), elementDef(204, 0, null, null, 9, 'select', [['name',
-                    'manager']], [[2, 'ng-untouched', null], [2, 'ng-touched', null],
-                [2, 'ng-pristine', null], [2, 'ng-dirty', null], [2, 'ng-valid',
-                    null], [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null, 'ngModelChange'], [null, 'change'], [null,
-                    'blur']], function (_v, en, $event) {
-                var ad = true;
-                var _co = _v.component;
-                if (('change' === en)) {
-                    var pd_0 = (nodeValue(_v, 205).onChange($event.target.value) !== false);
-                    ad = (pd_0 && ad);
-                }
-                if (('blur' === en)) {
-                    var pd_1 = (nodeValue(_v, 205).onTouched() !== false);
-                    ad = (pd_1 && ad);
-                }
-                if (('ngModelChange' === en)) {
-                    var pd_2 = ((_co.fields.selectedManager = $event) !== false);
-                    ad = (pd_2 && ad);
-                }
-                return ad;
-            }, null, null)), directiveDef(205, 16384, null, 0, SelectControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
-                return [p0_0];
-            }, [SelectControlValueAccessor]), directiveDef(207, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(209, 16384, null, 0, NgControlStatus, [NgControl], null, null),
-            (_l()(), textDef(-1, null, ['\n '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_12)), directiveDef(212, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(),
-                textDef(-1, null, ['\n'])), (_l()(), textDef(-1, null, ['\n'])),
-            (_l()(), textDef(-1, null, ['\n\n'])), (_l()(), elementDef(216, 0, null, null, 10, 'fieldset', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n  '])),
-            (_l()(), elementDef(218, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Organisations'])), (_l()(), textDef(-1, null, ['\n  '])),
-            (_l()(), elementDef(221, 0, null, null, 4, 'div', [['class', 'orgas'],
-                ['ngModuleGroup', 'orgas']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_13)),
-            directiveDef(224, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef,
-                IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n'])), (_l()(), textDef(-1, null, ['\n'])), (_l()(),
-                textDef(-1, null, ['\n'])), (_l()(), elementDef(229, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(231, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Code User Tourplan\n    '])), (_l()(), elementDef(233, 0, null, null, 5, 'input', [['name', 'sugar_tourplan'], ['type', 'text']], [[2, 'ng-untouched',
-                    null], [2, 'ng-touched', null], [2, 'ng-pristine', null],
-                [2, 'ng-dirty', null], [2, 'ng-valid', null], [2, 'ng-invalid',
-                    null], [2, 'ng-pending', null]], [[null, 'ngModelChange'],
-                [null, 'input'], [null, 'blur'], [null, 'compositionstart'],
-                [null, 'compositionend']], function (_v, en, $event) {
-                var ad = true;
-                var _co = _v.component;
-                if (('input' === en)) {
-                    var pd_0 = (nodeValue(_v, 234)._handleInput($event.target.value) !== false);
-                    ad = (pd_0 && ad);
-                }
-                if (('blur' === en)) {
-                    var pd_1 = (nodeValue(_v, 234).onTouched() !== false);
-                    ad = (pd_1 && ad);
-                }
-                if (('compositionstart' === en)) {
-                    var pd_2 = (nodeValue(_v, 234)._compositionStart() !== false);
-                    ad = (pd_2 && ad);
-                }
-                if (('compositionend' === en)) {
-                    var pd_3 = (nodeValue(_v, 234)._compositionEnd($event.target.value) !== false);
-                    ad = (pd_3 && ad);
-                }
-                if (('ngModelChange' === en)) {
-                    var pd_4 = ((_co.fields.codeTourplan = $event) !== false);
-                    ad = (pd_4 && ad);
-                }
-                return ad;
-            }, null, null)), directiveDef(234, 16384, null, 0, DefaultValueAccessor, [Renderer2, ElementRef, [2, COMPOSITION_BUFFER_MODE]], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
-                return [p0_0];
-            }, [DefaultValueAccessor]), directiveDef(236, 671744, null, 0, NgModel, [[2,
-                    ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(238, 16384, null, 0, NgControlStatus, [NgControl], null, null),
-            (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n'])), (_l()(), textDef(-1, null, ['\n\n'])), (_l()(), elementDef(242, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(244, 0, null, null, 8, 'label', [], null, null, null, null, null)),
-            (_l()(), textDef(-1, null, ['Code SON Galileo\n    '])), (_l()(), elementDef(246, 0, null, null, 5, 'input', [['name', 'codeSON'], ['type', 'text']], [[2, 'ng-untouched', null], [2, 'ng-touched', null], [2, 'ng-pristine',
-                    null], [2, 'ng-dirty', null], [2, 'ng-valid', null],
-                [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null,
-                    'ngModelChange'], [null, 'input'], [null, 'blur'], [null,
-                    'compositionstart'], [null, 'compositionend']], function (_v, en, $event) {
-                var ad = true;
-                var _co = _v.component;
-                if (('input' === en)) {
-                    var pd_0 = (nodeValue(_v, 247)._handleInput($event.target.value) !== false);
-                    ad = (pd_0 && ad);
-                }
-                if (('blur' === en)) {
-                    var pd_1 = (nodeValue(_v, 247).onTouched() !== false);
-                    ad = (pd_1 && ad);
-                }
-                if (('compositionstart' === en)) {
-                    var pd_2 = (nodeValue(_v, 247)._compositionStart() !== false);
-                    ad = (pd_2 && ad);
-                }
-                if (('compositionend' === en)) {
-                    var pd_3 = (nodeValue(_v, 247)._compositionEnd($event.target.value) !== false);
-                    ad = (pd_3 && ad);
-                }
-                if (('ngModelChange' === en)) {
-                    var pd_4 = ((_co.fields.codeSON = $event) !== false);
-                    ad = (pd_4 && ad);
-                }
-                return ad;
-            }, null, null)), directiveDef(247, 16384, null, 0, DefaultValueAccessor, [Renderer2, ElementRef, [2, COMPOSITION_BUFFER_MODE]], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
-                return [p0_0];
-            }, [DefaultValueAccessor]), directiveDef(249, 671744, null, 0, NgModel, [[2,
-                    ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(251, 16384, null, 0, NgControlStatus, [NgControl], null, null),
-            (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n'])), (_l()(), textDef(-1, null, ['\n\n'])), (_l()(), elementDef(255, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(257, 0, null, null, 8, 'label', [], null, null, null, null, null)),
-            (_l()(), textDef(-1, null, ['Title\n    '])), (_l()(), elementDef(259, 0, null, null, 5, 'input', [['name', 'title'], ['type', 'text']], [[2, 'ng-untouched',
-                    null], [2, 'ng-touched', null], [2, 'ng-pristine', null],
-                [2, 'ng-dirty', null], [2, 'ng-valid', null], [2, 'ng-invalid',
-                    null], [2, 'ng-pending', null]], [[null, 'ngModelChange'],
-                [null, 'input'], [null, 'blur'], [null, 'compositionstart'],
-                [null, 'compositionend']], function (_v, en, $event) {
-                var ad = true;
-                var _co = _v.component;
-                if (('input' === en)) {
-                    var pd_0 = (nodeValue(_v, 260)._handleInput($event.target.value) !== false);
-                    ad = (pd_0 && ad);
-                }
-                if (('blur' === en)) {
-                    var pd_1 = (nodeValue(_v, 260).onTouched() !== false);
-                    ad = (pd_1 && ad);
-                }
-                if (('compositionstart' === en)) {
-                    var pd_2 = (nodeValue(_v, 260)._compositionStart() !== false);
-                    ad = (pd_2 && ad);
-                }
-                if (('compositionend' === en)) {
-                    var pd_3 = (nodeValue(_v, 260)._compositionEnd($event.target.value) !== false);
-                    ad = (pd_3 && ad);
-                }
-                if (('ngModelChange' === en)) {
-                    var pd_4 = ((_co.fields.title = $event) !== false);
-                    ad = (pd_4 && ad);
-                }
-                return ad;
-            }, null, null)), directiveDef(260, 16384, null, 0, DefaultValueAccessor, [Renderer2, ElementRef, [2, COMPOSITION_BUFFER_MODE]], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
-                return [p0_0];
-            }, [DefaultValueAccessor]), directiveDef(262, 671744, null, 0, NgModel, [[2,
-                    ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(264, 16384, null, 0, NgControlStatus, [NgControl], null, null),
-            (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n'])), (_l()(), textDef(-1, null, ['\n\n'])), (_l()(), elementDef(268, 0, null, null, 24, 'div', [['ngModelGroup', 'inactive']], [[2,
-                    'ng-untouched', null], [2, 'ng-touched', null], [2, 'ng-pristine',
-                    null], [2, 'ng-dirty', null], [2, 'ng-valid', null],
-                [2, 'ng-invalid', null], [2, 'ng-pending', null]], null, null, null, null)), directiveDef(269, 212992, null, 0, NgModelGroup, [[1, ControlContainer], [8, null], [8, null]], { name: [0, 'name'] }, null), providerDef(2048, null, ControlContainer, null, [NgModelGroup]), directiveDef(271, 16384, null, 0, NgControlStatusGroup, [ControlContainer], null, null), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(273, 0, null, null, 8, 'label', [], null, null, null, null, null)),
-            (_l()(), textDef(-1, null, ['Statut inactif\n    '])), (_l()(), elementDef(275, 0, null, null, 5, 'input', [['name', 'inactiveStatus'], ['type',
-                    'checkbox']], [[2, 'ng-untouched', null], [2, 'ng-touched', null],
-                [2, 'ng-pristine', null], [2, 'ng-dirty', null], [2, 'ng-valid',
-                    null], [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null, 'ngModelChange'], [null, 'change'], [null,
-                    'blur']], function (_v, en, $event) {
-                var ad = true;
-                var _co = _v.component;
-                if (('change' === en)) {
-                    var pd_0 = (nodeValue(_v, 276).onChange($event.target.checked) !== false);
-                    ad = (pd_0 && ad);
-                }
-                if (('blur' === en)) {
-                    var pd_1 = (nodeValue(_v, 276).onTouched() !== false);
-                    ad = (pd_1 && ad);
-                }
-                if (('ngModelChange' === en)) {
-                    var pd_2 = ((_co.fields.inactiveStatus = $event) !== false);
-                    ad = (pd_2 && ad);
-                }
-                return ad;
-            }, null, null)), directiveDef(276, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
-                return [p0_0];
-            }, [CheckboxControlValueAccessor]), directiveDef(278, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null],
-                [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }),
-            providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(280, 16384, null, 0, NgControlStatus, [NgControl], null, null),
-            (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(283, 0, null, null, 8, 'label', [], null, null, null, null, null)),
-            (_l()(), textDef(-1, null, ['Statut Employe inactif\n    '])), (_l()(),
-                elementDef(285, 0, null, null, 5, 'input', [['name', 'inactiveEmployee'],
-                    ['type', 'checkbox']], [[2, 'ng-untouched', null], [2, 'ng-touched',
-                        null], [2, 'ng-pristine', null], [2, 'ng-dirty', null],
-                    [2, 'ng-valid', null], [2, 'ng-invalid', null], [2, 'ng-pending',
-                        null]], [[null, 'ngModelChange'], [null,
-                        'change'], [null, 'blur']], function (_v, en, $event) {
-                    var ad = true;
-                    var _co = _v.component;
-                    if (('change' === en)) {
-                        var pd_0 = (nodeValue(_v, 286).onChange($event.target.checked) !== false);
-                        ad = (pd_0 && ad);
-                    }
-                    if (('blur' === en)) {
-                        var pd_1 = (nodeValue(_v, 286).onTouched() !== false);
-                        ad = (pd_1 && ad);
-                    }
-                    if (('ngModelChange' === en)) {
-                        var pd_2 = ((_co.fields.inactiveEmployee = $event) !== false);
-                        ad = (pd_2 && ad);
-                    }
-                    return ad;
-                }, null, null)), directiveDef(286, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
-                return [p0_0];
-            }, [CheckboxControlValueAccessor]), directiveDef(288, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null],
-                [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }),
-            providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(290, 16384, null, 0, NgControlStatus, [NgControl], null, null),
-            (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n'])), (_l()(), textDef(-1, null, ['\n'])), (_l()(), textDef(-1, null, ['\n\n'])), (_l()(), elementDef(295, 0, null, null, 75, 'fieldset', [], null, null, null, null, null)),
-            (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(297, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Telephonie'])),
-            (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(300, 0, null, null, 69, 'div', [['ngModelGroup', 'switchvox']], [[2, 'ng-untouched',
-                    null], [2, 'ng-touched', null], [2, 'ng-pristine', null],
-                [2, 'ng-dirty', null], [2, 'ng-valid', null], [2, 'ng-invalid',
-                    null], [2, 'ng-pending', null]], null, null, null, null)), directiveDef(301, 212992, null, 0, NgModelGroup, [[1, ControlContainer], [8, null], [8, null]], { name: [0, 'name'] }, null), providerDef(2048, null, ControlContainer, null, [NgModelGroup]), directiveDef(303, 16384, null, 0, NgControlStatusGroup, [ControlContainer], null, null), (_l()(), textDef(-1, null, ['\n\n    '])), (_l()(), elementDef(305, 0, null, null, 11, 'div', [], null, null, null, null, null)),
-            (_l()(), textDef(-1, null, ['\n     '])), (_l()(), elementDef(307, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Phone Number\n       '])),
-            (_l()(), elementDef(309, 0, null, null, 5, 'input', [['name', 'phone_number'],
-                ['type', 'tel']], [[2, 'ng-untouched', null], [2, 'ng-touched', null],
-                [2, 'ng-pristine', null], [2, 'ng-dirty', null], [2, 'ng-valid',
-                    null], [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null, 'ngModelChange'], [null, 'input'], [null,
-                    'blur'], [null, 'compositionstart'], [null, 'compositionend']], function (_v, en, $event) {
-                var ad = true;
-                var _co = _v.component;
-                if (('input' === en)) {
-                    var pd_0 = (nodeValue(_v, 310)._handleInput($event.target.value) !== false);
-                    ad = (pd_0 && ad);
-                }
-                if (('blur' === en)) {
-                    var pd_1 = (nodeValue(_v, 310).onTouched() !== false);
-                    ad = (pd_1 && ad);
-                }
-                if (('compositionstart' === en)) {
-                    var pd_2 = (nodeValue(_v, 310)._compositionStart() !== false);
-                    ad = (pd_2 && ad);
-                }
-                if (('compositionend' === en)) {
-                    var pd_3 = (nodeValue(_v, 310)._compositionEnd($event.target.value) !== false);
-                    ad = (pd_3 && ad);
-                }
-                if (('ngModelChange' === en)) {
-                    var pd_4 = ((_co.fields.phoneNumber = $event) !== false);
-                    ad = (pd_4 && ad);
-                }
-                return ad;
-            }, null, null)), directiveDef(310, 16384, null, 0, DefaultValueAccessor, [Renderer2, ElementRef, [2, COMPOSITION_BUFFER_MODE]], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
-                return [p0_0];
-            }, [DefaultValueAccessor]), directiveDef(312, 671744, null, 0, NgModel, [[2,
-                    ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(314, 16384, null, 0, NgControlStatus, [NgControl], null, null),
-            (_l()(), textDef(-1, null, ['\n     '])), (_l()(), textDef(-1, null, ['\n   '])), (_l()(), textDef(-1, null, ['\n   '])), (_l()(), elementDef(318, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(320, 0, null, null, 8, 'label', [], null, null, null, null, null)),
-            (_l()(), textDef(-1, null, ['Extension\n      '])), (_l()(), elementDef(322, 0, null, null, 5, 'input', [['name', 'extension'], ['type', 'tel']], [[2, 'ng-untouched', null], [2, 'ng-touched', null], [2, 'ng-pristine',
-                    null], [2, 'ng-dirty', null], [2, 'ng-valid', null],
-                [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null,
-                    'ngModelChange'], [null, 'input'], [null, 'blur'], [null,
-                    'compositionstart'], [null, 'compositionend']], function (_v, en, $event) {
-                var ad = true;
-                var _co = _v.component;
-                if (('input' === en)) {
-                    var pd_0 = (nodeValue(_v, 323)._handleInput($event.target.value) !== false);
-                    ad = (pd_0 && ad);
-                }
-                if (('blur' === en)) {
-                    var pd_1 = (nodeValue(_v, 323).onTouched() !== false);
-                    ad = (pd_1 && ad);
-                }
-                if (('compositionstart' === en)) {
-                    var pd_2 = (nodeValue(_v, 323)._compositionStart() !== false);
-                    ad = (pd_2 && ad);
-                }
-                if (('compositionend' === en)) {
-                    var pd_3 = (nodeValue(_v, 323)._compositionEnd($event.target.value) !== false);
-                    ad = (pd_3 && ad);
-                }
-                if (('ngModelChange' === en)) {
-                    var pd_4 = ((_co.fields.phoneExtension = $event) !== false);
-                    ad = (pd_4 && ad);
-                }
-                return ad;
-            }, null, null)), directiveDef(323, 16384, null, 0, DefaultValueAccessor, [Renderer2, ElementRef, [2, COMPOSITION_BUFFER_MODE]], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
-                return [p0_0];
-            }, [DefaultValueAccessor]), directiveDef(325, 671744, null, 0, NgModel, [[2,
-                    ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(327, 16384, null, 0, NgControlStatus, [NgControl], null, null),
-            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(331, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(333, 0, null, null, 8, 'label', [], null, null, null, null, null)),
-            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(335, 0, null, null, 5, 'input', [['name', 'codevad'], ['type', 'checkbox']], [[2, 'ng-untouched',
-                    null], [2, 'ng-touched', null], [2, 'ng-pristine', null],
-                [2, 'ng-dirty', null], [2, 'ng-valid', null], [2, 'ng-invalid',
-                    null], [2, 'ng-pending', null]], [[null, 'ngModelChange'],
-                [null, 'change'], [null, 'blur']], function (_v, en, $event) {
-                var ad = true;
-                var _co = _v.component;
-                if (('change' === en)) {
-                    var pd_0 = (nodeValue(_v, 336).onChange($event.target.checked) !== false);
-                    ad = (pd_0 && ad);
-                }
-                if (('blur' === en)) {
-                    var pd_1 = (nodeValue(_v, 336).onTouched() !== false);
-                    ad = (pd_1 && ad);
-                }
-                if (('ngModelChange' === en)) {
-                    var pd_2 = ((_co.fields.codevad = $event) !== false);
-                    ad = (pd_2 && ad);
-                }
-                return ad;
-            }, null, null)), directiveDef(336, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
-                return [p0_0];
-            }, [CheckboxControlValueAccessor]), directiveDef(338, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null],
-                [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }),
-            providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(340, 16384, null, 0, NgControlStatus, [NgControl], null, null),
-            (_l()(), textDef(-1, null, ['Téléphonie a distance\n    '])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(),
-                elementDef(344, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(346, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])), (_l()(),
-                elementDef(348, 0, null, null, 5, 'input', [['name', 'outbound'],
-                    ['type', 'checkbox']], [[2, 'ng-untouched', null], [2, 'ng-touched',
-                        null], [2, 'ng-pristine', null], [2, 'ng-dirty', null],
-                    [2, 'ng-valid', null], [2, 'ng-invalid', null], [2, 'ng-pending',
-                        null]], [[null, 'ngModelChange'], [null,
-                        'change'], [null, 'blur']], function (_v, en, $event) {
-                    var ad = true;
-                    var _co = _v.component;
-                    if (('change' === en)) {
-                        var pd_0 = (nodeValue(_v, 349).onChange($event.target.checked) !== false);
-                        ad = (pd_0 && ad);
-                    }
-                    if (('blur' === en)) {
-                        var pd_1 = (nodeValue(_v, 349).onTouched() !== false);
-                        ad = (pd_1 && ad);
-                    }
-                    if (('ngModelChange' === en)) {
-                        var pd_2 = ((_co.fields.outbound = $event) !== false);
-                        ad = (pd_2 && ad);
-                    }
-                    return ad;
-                }, null, null)), directiveDef(349, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
-                return [p0_0];
-            }, [CheckboxControlValueAccessor]), directiveDef(351, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null],
-                [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }),
-            providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(353, 16384, null, 0, NgControlStatus, [NgControl], null, null),
-            (_l()(), textDef(-1, null, ['Click to call\n    '])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(),
-                elementDef(357, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(359, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])), (_l()(),
-                elementDef(361, 0, null, null, 5, 'input', [['name', 'inbound'],
-                    ['type', 'checkbox']], [[2, 'ng-untouched', null], [2, 'ng-touched',
-                        null], [2, 'ng-pristine', null], [2, 'ng-dirty', null],
-                    [2, 'ng-valid', null], [2, 'ng-invalid', null], [2, 'ng-pending',
-                        null]], [[null, 'ngModelChange'], [null,
-                        'change'], [null, 'blur']], function (_v, en, $event) {
-                    var ad = true;
-                    var _co = _v.component;
-                    if (('change' === en)) {
-                        var pd_0 = (nodeValue(_v, 362).onChange($event.target.checked) !== false);
-                        ad = (pd_0 && ad);
-                    }
-                    if (('blur' === en)) {
-                        var pd_1 = (nodeValue(_v, 362).onTouched() !== false);
-                        ad = (pd_1 && ad);
-                    }
-                    if (('ngModelChange' === en)) {
-                        var pd_2 = ((_co.fields.inbound = $event) !== false);
-                        ad = (pd_2 && ad);
-                    }
-                    return ad;
-                }, null, null)), directiveDef(362, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
-                return [p0_0];
-            }, [CheckboxControlValueAccessor]), directiveDef(364, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null],
-                [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }),
-            providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(366, 16384, null, 0, NgControlStatus, [NgControl], null, null),
-            (_l()(), textDef(-1, null, ['Notifications appels entrants\n    '])), (_l()(),
-                textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n'])),
-            (_l()(), textDef(-1, null, ['\n'])), (_l()(), textDef(-1, null, ['\n\n'])),
-            (_l()(), elementDef(372, 0, null, null, 34, 'fieldset', [], null, null, null, null, null)),
-            (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(374, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Google Apps'])),
-            (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(377, 0, null, null, 15, 'div', [['class', 'select']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n   '])), (_l()(), elementDef(379, 0, null, null, 1, 'div', [['class',
-                    'subtitle']], null, null, null, null, null)),
-            (_l()(), textDef(-1, null, ['Organisation'])), (_l()(), textDef(-1, null, ['\n   '])), (_l()(), elementDef(382, 0, null, null, 9, 'select', [['name', 'organisation']], [[2, 'ng-untouched', null], [2, 'ng-touched',
+            }, [SelectControlValueAccessor]), directiveDef(142, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(144, 16384, null, 0, NgControlStatus, [NgControl], null, null),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_7)), directiveDef(147, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(),
+                textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n\n\n\n  '])),
+            (_l()(), elementDef(150, 0, null, null, 15, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Fonction\n    '])), (_l()(), elementDef(152, 0, null, null, 12, 'select', [['name', 'fonction']], [[2, 'ng-untouched', null], [2, 'ng-touched',
                     null], [2, 'ng-pristine', null], [2, 'ng-dirty', null],
                 [2, 'ng-valid', null], [2, 'ng-invalid', null], [2, 'ng-pending',
                     null]], [[null, 'ngModelChange'], [null,
@@ -54766,11 +54493,421 @@
                 var ad = true;
                 var _co = _v.component;
                 if (('change' === en)) {
-                    var pd_0 = (nodeValue(_v, 383).onChange($event.target.value) !== false);
+                    var pd_0 = (nodeValue(_v, 153).onChange($event.target.value) !== false);
                     ad = (pd_0 && ad);
                 }
                 if (('blur' === en)) {
-                    var pd_1 = (nodeValue(_v, 383).onTouched() !== false);
+                    var pd_1 = (nodeValue(_v, 153).onTouched() !== false);
+                    ad = (pd_1 && ad);
+                }
+                if (('ngModelChange' === en)) {
+                    var pd_2 = ((_co.fields.selectedFunction = $event) !== false);
+                    ad = (pd_2 && ad);
+                }
+                return ad;
+            }, null, null)), directiveDef(153, 16384, null, 0, SelectControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
+                return [p0_0];
+            }, [SelectControlValueAccessor]), directiveDef(155, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(157, 16384, null, 0, NgControlStatus, [NgControl], null, null),
+            (_l()(), elementDef(158, 0, null, null, 2, 'option', [], null, null, null, null, null)), directiveDef(159, 147456, null, 0, NgSelectOption, [ElementRef, Renderer2, [2, SelectControlValueAccessor]], { ngValue: [0, 'ngValue'] }, null), directiveDef(160, 147456, null, 0, NgSelectMultipleOption, [ElementRef, Renderer2, [8, null]], { ngValue: [0, 'ngValue'] }, null), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_8)),
+            directiveDef(163, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef,
+                IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n\n\n  '])),
+            (_l()(), elementDef(167, 0, null, null, 11, 'div', [['ngModelGroup',
+                    'teamWithComponent']], [[2, 'ng-untouched', null], [2, 'ng-touched',
+                    null], [2, 'ng-pristine', null], [2, 'ng-dirty', null],
+                [2, 'ng-valid', null], [2, 'ng-invalid', null], [2, 'ng-pending',
+                    null]], null, null, null, null)),
+            directiveDef(168, 212992, null, 0, NgModelGroup, [[1, ControlContainer],
+                [8, null], [8, null]], { name: [0, 'name'] }, null), providerDef(2048, null, ControlContainer, null, [NgModelGroup]), directiveDef(170, 16384, null, 0, NgControlStatusGroup, [ControlContainer], null, null), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(172, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Equipe'])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(175, 0, null, null, 2, 'mv-checkbox-field', [], null, [[null, 'checkboxesChange']], function (_v, en, $event) {
+                var ad = true;
+                var _co = _v.component;
+                if (('checkboxesChange' === en)) {
+                    var pd_0 = ((_co.fields.teams = $event) !== false);
+                    ad = (pd_0 && ad);
+                }
+                return ad;
+            }, View_CheckboxFieldComponent_0, RenderType_CheckboxFieldComponent)),
+            directiveDef(176, 49152, null, 0, CheckboxFieldComponent, [], { checkboxes: [0,
+                    'checkboxes'] }, null), (_l()(), textDef(-1, null, ['\n    '])),
+            (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n\n\n  '])), (_l()(), elementDef(180, 0, null, null, 10, 'div', [['ngModelGroup', 'othersWithComponent']], [[2, 'ng-untouched', null],
+                [2, 'ng-touched', null], [2, 'ng-pristine', null], [2, 'ng-dirty',
+                    null], [2, 'ng-valid', null], [2, 'ng-invalid', null],
+                [2, 'ng-pending', null]], null, null, null, null)), directiveDef(181, 212992, null, 0, NgModelGroup, [[1, ControlContainer],
+                [8, null], [8, null]], { name: [0, 'name'] }, null), providerDef(2048, null, ControlContainer, null, [NgModelGroup]), directiveDef(183, 16384, null, 0, NgControlStatusGroup, [ControlContainer], null, null), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(185, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Autres'])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(188, 0, null, null, 1, 'mv-checkbox-field', [], null, [[null, 'checkboxesChange']], function (_v, en, $event) {
+                var ad = true;
+                var _co = _v.component;
+                if (('checkboxesChange' === en)) {
+                    var pd_0 = ((_co.fields.autres = $event) !== false);
+                    ad = (pd_0 && ad);
+                }
+                return ad;
+            }, View_CheckboxFieldComponent_0, RenderType_CheckboxFieldComponent)),
+            directiveDef(189, 49152, null, 0, CheckboxFieldComponent, [], { checkboxes: [0,
+                    'checkboxes'] }, null), (_l()(), textDef(-1, null, ['\n  '])),
+            (_l()(), textDef(-1, null, ['\n\n\n  '])), (_l()(), elementDef(192, 0, null, null, 7, 'fieldset', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])),
+            (_l()(), elementDef(194, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Destinations'])), (_l()(), textDef(-1, null, ['\n    '])),
+            (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_9)),
+            directiveDef(198, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef,
+                IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(), textDef(-1, null, ['c\n  '])), (_l()(), textDef(-1, null, ['\n\n  '])), (_l()(), elementDef(201, 0, null, null, 12, 'div', [['class', 'select subtitle']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Manager\n    '])),
+            (_l()(), elementDef(203, 0, null, null, 9, 'select', [['name', 'manager']], [[2, 'ng-untouched', null], [2, 'ng-touched', null], [2, 'ng-pristine',
+                    null], [2, 'ng-dirty', null], [2, 'ng-valid', null],
+                [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null,
+                    'ngModelChange'], [null, 'change'], [null, 'blur']], function (_v, en, $event) {
+                var ad = true;
+                var _co = _v.component;
+                if (('change' === en)) {
+                    var pd_0 = (nodeValue(_v, 204).onChange($event.target.value) !== false);
+                    ad = (pd_0 && ad);
+                }
+                if (('blur' === en)) {
+                    var pd_1 = (nodeValue(_v, 204).onTouched() !== false);
+                    ad = (pd_1 && ad);
+                }
+                if (('ngModelChange' === en)) {
+                    var pd_2 = ((_co.fields.selectedManager = $event) !== false);
+                    ad = (pd_2 && ad);
+                }
+                return ad;
+            }, null, null)), directiveDef(204, 16384, null, 0, SelectControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
+                return [p0_0];
+            }, [SelectControlValueAccessor]), directiveDef(206, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(208, 16384, null, 0, NgControlStatus, [NgControl], null, null),
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_10)), directiveDef(211, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(),
+                textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n  '])),
+            (_l()(), textDef(-1, null, ['\n\n  '])), (_l()(), elementDef(215, 0, null, null, 10, 'fieldset', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])),
+            (_l()(), elementDef(217, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Organisations'])), (_l()(), textDef(-1, null, ['\n    '])),
+            (_l()(), elementDef(220, 0, null, null, 4, 'div', [['class', 'orgas'],
+                ['ngModuleGroup', 'orgas']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])), (_l()(),
+                anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_11)),
+            directiveDef(223, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef,
+                IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['d\n  '])), (_l()(), textDef(-1, null, ['\n\n  '])),
+            (_l()(), elementDef(227, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(229, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Code User Tourplan\n      '])),
+            (_l()(), elementDef(231, 0, null, null, 5, 'input', [['name', 'sugar_tourplan'],
+                ['type', 'text']], [[2, 'ng-untouched', null], [2, 'ng-touched', null],
+                [2, 'ng-pristine', null], [2, 'ng-dirty', null], [2, 'ng-valid',
+                    null], [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null, 'ngModelChange'], [null, 'input'], [null,
+                    'blur'], [null, 'compositionstart'], [null, 'compositionend']], function (_v, en, $event) {
+                var ad = true;
+                var _co = _v.component;
+                if (('input' === en)) {
+                    var pd_0 = (nodeValue(_v, 232)._handleInput($event.target.value) !== false);
+                    ad = (pd_0 && ad);
+                }
+                if (('blur' === en)) {
+                    var pd_1 = (nodeValue(_v, 232).onTouched() !== false);
+                    ad = (pd_1 && ad);
+                }
+                if (('compositionstart' === en)) {
+                    var pd_2 = (nodeValue(_v, 232)._compositionStart() !== false);
+                    ad = (pd_2 && ad);
+                }
+                if (('compositionend' === en)) {
+                    var pd_3 = (nodeValue(_v, 232)._compositionEnd($event.target.value) !== false);
+                    ad = (pd_3 && ad);
+                }
+                if (('ngModelChange' === en)) {
+                    var pd_4 = ((_co.fields.codeTourplan = $event) !== false);
+                    ad = (pd_4 && ad);
+                }
+                return ad;
+            }, null, null)), directiveDef(232, 16384, null, 0, DefaultValueAccessor, [Renderer2, ElementRef, [2, COMPOSITION_BUFFER_MODE]], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
+                return [p0_0];
+            }, [DefaultValueAccessor]), directiveDef(234, 671744, null, 0, NgModel, [[2,
+                    ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(236, 16384, null, 0, NgControlStatus, [NgControl], null, null),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n\n  '])), (_l()(), elementDef(240, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(242, 0, null, null, 8, 'label', [], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Code SON Galileo\n      '])), (_l()(), elementDef(244, 0, null, null, 5, 'input', [['name', 'codeSON'], ['type', 'text']], [[2, 'ng-untouched', null], [2, 'ng-touched', null], [2, 'ng-pristine',
+                    null], [2, 'ng-dirty', null], [2, 'ng-valid', null],
+                [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null,
+                    'ngModelChange'], [null, 'input'], [null, 'blur'], [null,
+                    'compositionstart'], [null, 'compositionend']], function (_v, en, $event) {
+                var ad = true;
+                var _co = _v.component;
+                if (('input' === en)) {
+                    var pd_0 = (nodeValue(_v, 245)._handleInput($event.target.value) !== false);
+                    ad = (pd_0 && ad);
+                }
+                if (('blur' === en)) {
+                    var pd_1 = (nodeValue(_v, 245).onTouched() !== false);
+                    ad = (pd_1 && ad);
+                }
+                if (('compositionstart' === en)) {
+                    var pd_2 = (nodeValue(_v, 245)._compositionStart() !== false);
+                    ad = (pd_2 && ad);
+                }
+                if (('compositionend' === en)) {
+                    var pd_3 = (nodeValue(_v, 245)._compositionEnd($event.target.value) !== false);
+                    ad = (pd_3 && ad);
+                }
+                if (('ngModelChange' === en)) {
+                    var pd_4 = ((_co.fields.codeSON = $event) !== false);
+                    ad = (pd_4 && ad);
+                }
+                return ad;
+            }, null, null)), directiveDef(245, 16384, null, 0, DefaultValueAccessor, [Renderer2, ElementRef, [2, COMPOSITION_BUFFER_MODE]], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
+                return [p0_0];
+            }, [DefaultValueAccessor]), directiveDef(247, 671744, null, 0, NgModel, [[2,
+                    ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(249, 16384, null, 0, NgControlStatus, [NgControl], null, null),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n\n  '])), (_l()(), elementDef(253, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(255, 0, null, null, 8, 'label', [], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Title\n      '])), (_l()(), elementDef(257, 0, null, null, 5, 'input', [['name', 'title'], ['type', 'text']], [[2, 'ng-untouched',
+                    null], [2, 'ng-touched', null], [2, 'ng-pristine', null],
+                [2, 'ng-dirty', null], [2, 'ng-valid', null], [2, 'ng-invalid',
+                    null], [2, 'ng-pending', null]], [[null, 'ngModelChange'],
+                [null, 'input'], [null, 'blur'], [null, 'compositionstart'],
+                [null, 'compositionend']], function (_v, en, $event) {
+                var ad = true;
+                var _co = _v.component;
+                if (('input' === en)) {
+                    var pd_0 = (nodeValue(_v, 258)._handleInput($event.target.value) !== false);
+                    ad = (pd_0 && ad);
+                }
+                if (('blur' === en)) {
+                    var pd_1 = (nodeValue(_v, 258).onTouched() !== false);
+                    ad = (pd_1 && ad);
+                }
+                if (('compositionstart' === en)) {
+                    var pd_2 = (nodeValue(_v, 258)._compositionStart() !== false);
+                    ad = (pd_2 && ad);
+                }
+                if (('compositionend' === en)) {
+                    var pd_3 = (nodeValue(_v, 258)._compositionEnd($event.target.value) !== false);
+                    ad = (pd_3 && ad);
+                }
+                if (('ngModelChange' === en)) {
+                    var pd_4 = ((_co.fields.title = $event) !== false);
+                    ad = (pd_4 && ad);
+                }
+                return ad;
+            }, null, null)), directiveDef(258, 16384, null, 0, DefaultValueAccessor, [Renderer2, ElementRef, [2, COMPOSITION_BUFFER_MODE]], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
+                return [p0_0];
+            }, [DefaultValueAccessor]), directiveDef(260, 671744, null, 0, NgModel, [[2,
+                    ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(262, 16384, null, 0, NgControlStatus, [NgControl], null, null),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n\n  '])), (_l()(), elementDef(266, 0, null, null, 24, 'div', [['ngModelGroup', 'inactive']], [[2,
+                    'ng-untouched', null], [2, 'ng-touched', null], [2, 'ng-pristine',
+                    null], [2, 'ng-dirty', null], [2, 'ng-valid', null],
+                [2, 'ng-invalid', null], [2, 'ng-pending', null]], null, null, null, null)), directiveDef(267, 212992, null, 0, NgModelGroup, [[1, ControlContainer], [8, null], [8, null]], { name: [0, 'name'] }, null), providerDef(2048, null, ControlContainer, null, [NgModelGroup]), directiveDef(269, 16384, null, 0, NgControlStatusGroup, [ControlContainer], null, null), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(271, 0, null, null, 8, 'label', [], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Statut inactif\n      '])), (_l()(), elementDef(273, 0, null, null, 5, 'input', [['name', 'inactiveStatus'], ['type',
+                    'checkbox']], [[2, 'ng-untouched', null], [2, 'ng-touched', null],
+                [2, 'ng-pristine', null], [2, 'ng-dirty', null], [2, 'ng-valid',
+                    null], [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null, 'ngModelChange'], [null, 'change'], [null,
+                    'blur']], function (_v, en, $event) {
+                var ad = true;
+                var _co = _v.component;
+                if (('change' === en)) {
+                    var pd_0 = (nodeValue(_v, 274).onChange($event.target.checked) !== false);
+                    ad = (pd_0 && ad);
+                }
+                if (('blur' === en)) {
+                    var pd_1 = (nodeValue(_v, 274).onTouched() !== false);
+                    ad = (pd_1 && ad);
+                }
+                if (('ngModelChange' === en)) {
+                    var pd_2 = ((_co.fields.inactiveStatus = $event) !== false);
+                    ad = (pd_2 && ad);
+                }
+                return ad;
+            }, null, null)), directiveDef(274, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
+                return [p0_0];
+            }, [CheckboxControlValueAccessor]), directiveDef(276, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null],
+                [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }),
+            providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(278, 16384, null, 0, NgControlStatus, [NgControl], null, null),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(281, 0, null, null, 8, 'label', [], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Statut Employe inactif\n      '])), (_l()(),
+                elementDef(283, 0, null, null, 5, 'input', [['name', 'inactiveEmployee'],
+                    ['type', 'checkbox']], [[2, 'ng-untouched', null], [2, 'ng-touched',
+                        null], [2, 'ng-pristine', null], [2, 'ng-dirty', null],
+                    [2, 'ng-valid', null], [2, 'ng-invalid', null], [2, 'ng-pending',
+                        null]], [[null, 'ngModelChange'], [null,
+                        'change'], [null, 'blur']], function (_v, en, $event) {
+                    var ad = true;
+                    var _co = _v.component;
+                    if (('change' === en)) {
+                        var pd_0 = (nodeValue(_v, 284).onChange($event.target.checked) !== false);
+                        ad = (pd_0 && ad);
+                    }
+                    if (('blur' === en)) {
+                        var pd_1 = (nodeValue(_v, 284).onTouched() !== false);
+                        ad = (pd_1 && ad);
+                    }
+                    if (('ngModelChange' === en)) {
+                        var pd_2 = ((_co.fields.inactiveEmployee = $event) !== false);
+                        ad = (pd_2 && ad);
+                    }
+                    return ad;
+                }, null, null)), directiveDef(284, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
+                return [p0_0];
+            }, [CheckboxControlValueAccessor]), directiveDef(286, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null],
+                [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }),
+            providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(288, 16384, null, 0, NgControlStatus, [NgControl], null, null),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n\n  '])), (_l()(), elementDef(292, 0, null, null, 75, 'fieldset', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(294, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Telephonie'])), (_l()(),
+                textDef(-1, null, ['\n\n    '])), (_l()(), elementDef(297, 0, null, null, 69, 'div', [['ngModelGroup', 'switchvox']], [[2, 'ng-untouched',
+                    null], [2, 'ng-touched', null], [2, 'ng-pristine', null],
+                [2, 'ng-dirty', null], [2, 'ng-valid', null], [2, 'ng-invalid',
+                    null], [2, 'ng-pending', null]], null, null, null, null)), directiveDef(298, 212992, null, 0, NgModelGroup, [[1, ControlContainer], [8, null], [8, null]], { name: [0, 'name'] }, null), providerDef(2048, null, ControlContainer, null, [NgModelGroup]), directiveDef(300, 16384, null, 0, NgControlStatusGroup, [ControlContainer], null, null), (_l()(), textDef(-1, null, ['\n\n      '])), (_l()(), elementDef(302, 0, null, null, 11, 'div', [], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(304, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Phone Number'])),
+            (_l()(), elementDef(306, 0, null, null, 5, 'input', [['name', 'phone_number'],
+                ['type', 'tel']], [[2, 'ng-untouched', null], [2, 'ng-touched', null],
+                [2, 'ng-pristine', null], [2, 'ng-dirty', null], [2, 'ng-valid',
+                    null], [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null, 'ngModelChange'], [null, 'input'], [null,
+                    'blur'], [null, 'compositionstart'], [null, 'compositionend']], function (_v, en, $event) {
+                var ad = true;
+                var _co = _v.component;
+                if (('input' === en)) {
+                    var pd_0 = (nodeValue(_v, 307)._handleInput($event.target.value) !== false);
+                    ad = (pd_0 && ad);
+                }
+                if (('blur' === en)) {
+                    var pd_1 = (nodeValue(_v, 307).onTouched() !== false);
+                    ad = (pd_1 && ad);
+                }
+                if (('compositionstart' === en)) {
+                    var pd_2 = (nodeValue(_v, 307)._compositionStart() !== false);
+                    ad = (pd_2 && ad);
+                }
+                if (('compositionend' === en)) {
+                    var pd_3 = (nodeValue(_v, 307)._compositionEnd($event.target.value) !== false);
+                    ad = (pd_3 && ad);
+                }
+                if (('ngModelChange' === en)) {
+                    var pd_4 = ((_co.fields.phoneNumber = $event) !== false);
+                    ad = (pd_4 && ad);
+                }
+                return ad;
+            }, null, null)), directiveDef(307, 16384, null, 0, DefaultValueAccessor, [Renderer2, ElementRef, [2, COMPOSITION_BUFFER_MODE]], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
+                return [p0_0];
+            }, [DefaultValueAccessor]), directiveDef(309, 671744, null, 0, NgModel, [[2,
+                    ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(311, 16384, null, 0, NgControlStatus, [NgControl], null, null),
+            (_l()(), textDef(-1, null, ['\n        '])), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), textDef(-1, null, ['\n\n      '])), (_l()(),
+                elementDef(315, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(317, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Extension\n          '])),
+            (_l()(), elementDef(319, 0, null, null, 5, 'input', [['name', 'extension'],
+                ['type', 'tel']], [[2, 'ng-untouched', null], [2, 'ng-touched', null],
+                [2, 'ng-pristine', null], [2, 'ng-dirty', null], [2, 'ng-valid',
+                    null], [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null, 'ngModelChange'], [null, 'input'], [null,
+                    'blur'], [null, 'compositionstart'], [null, 'compositionend']], function (_v, en, $event) {
+                var ad = true;
+                var _co = _v.component;
+                if (('input' === en)) {
+                    var pd_0 = (nodeValue(_v, 320)._handleInput($event.target.value) !== false);
+                    ad = (pd_0 && ad);
+                }
+                if (('blur' === en)) {
+                    var pd_1 = (nodeValue(_v, 320).onTouched() !== false);
+                    ad = (pd_1 && ad);
+                }
+                if (('compositionstart' === en)) {
+                    var pd_2 = (nodeValue(_v, 320)._compositionStart() !== false);
+                    ad = (pd_2 && ad);
+                }
+                if (('compositionend' === en)) {
+                    var pd_3 = (nodeValue(_v, 320)._compositionEnd($event.target.value) !== false);
+                    ad = (pd_3 && ad);
+                }
+                if (('ngModelChange' === en)) {
+                    var pd_4 = ((_co.fields.phoneExtension = $event) !== false);
+                    ad = (pd_4 && ad);
+                }
+                return ad;
+            }, null, null)), directiveDef(320, 16384, null, 0, DefaultValueAccessor, [Renderer2, ElementRef, [2, COMPOSITION_BUFFER_MODE]], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
+                return [p0_0];
+            }, [DefaultValueAccessor]), directiveDef(322, 671744, null, 0, NgModel, [[2,
+                    ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(324, 16384, null, 0, NgControlStatus, [NgControl], null, null),
+            (_l()(), textDef(-1, null, ['\n        '])), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), textDef(-1, null, ['\n\n      '])), (_l()(),
+                elementDef(328, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(330, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n          '])), (_l()(),
+                elementDef(332, 0, null, null, 5, 'input', [['name', 'codevad'],
+                    ['type', 'checkbox']], [[2, 'ng-untouched', null], [2, 'ng-touched',
+                        null], [2, 'ng-pristine', null], [2, 'ng-dirty', null],
+                    [2, 'ng-valid', null], [2, 'ng-invalid', null], [2, 'ng-pending',
+                        null]], [[null, 'ngModelChange'], [null,
+                        'change'], [null, 'blur']], function (_v, en, $event) {
+                    var ad = true;
+                    var _co = _v.component;
+                    if (('change' === en)) {
+                        var pd_0 = (nodeValue(_v, 333).onChange($event.target.checked) !== false);
+                        ad = (pd_0 && ad);
+                    }
+                    if (('blur' === en)) {
+                        var pd_1 = (nodeValue(_v, 333).onTouched() !== false);
+                        ad = (pd_1 && ad);
+                    }
+                    if (('ngModelChange' === en)) {
+                        var pd_2 = ((_co.fields.codevad = $event) !== false);
+                        ad = (pd_2 && ad);
+                    }
+                    return ad;
+                }, null, null)), directiveDef(333, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
+                return [p0_0];
+            }, [CheckboxControlValueAccessor]), directiveDef(335, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null],
+                [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }),
+            providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(337, 16384, null, 0, NgControlStatus, [NgControl], null, null),
+            (_l()(), textDef(-1, null, ['Téléphonie a distance\n        '])), (_l()(),
+                textDef(-1, null, ['\n      '])), (_l()(), textDef(-1, null, ['\n\n      '])), (_l()(), elementDef(341, 0, null, null, 11, 'div', [], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(343, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n          '])),
+            (_l()(), elementDef(345, 0, null, null, 5, 'input', [['name', 'outbound'],
+                ['type', 'checkbox']], [[2, 'ng-untouched', null], [2, 'ng-touched', null],
+                [2, 'ng-pristine', null], [2, 'ng-dirty', null], [2, 'ng-valid',
+                    null], [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null, 'ngModelChange'], [null, 'change'], [null,
+                    'blur']], function (_v, en, $event) {
+                var ad = true;
+                var _co = _v.component;
+                if (('change' === en)) {
+                    var pd_0 = (nodeValue(_v, 346).onChange($event.target.checked) !== false);
+                    ad = (pd_0 && ad);
+                }
+                if (('blur' === en)) {
+                    var pd_1 = (nodeValue(_v, 346).onTouched() !== false);
+                    ad = (pd_1 && ad);
+                }
+                if (('ngModelChange' === en)) {
+                    var pd_2 = ((_co.fields.outbound = $event) !== false);
+                    ad = (pd_2 && ad);
+                }
+                return ad;
+            }, null, null)), directiveDef(346, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
+                return [p0_0];
+            }, [CheckboxControlValueAccessor]), directiveDef(348, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null],
+                [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }),
+            providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(350, 16384, null, 0, NgControlStatus, [NgControl], null, null),
+            (_l()(), textDef(-1, null, ['Click to call\n        '])), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), textDef(-1, null, ['\n\n      '])),
+            (_l()(), elementDef(354, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(356, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n          '])), (_l()(),
+                elementDef(358, 0, null, null, 5, 'input', [['name', 'inbound'],
+                    ['type', 'checkbox']], [[2, 'ng-untouched', null], [2, 'ng-touched',
+                        null], [2, 'ng-pristine', null], [2, 'ng-dirty', null],
+                    [2, 'ng-valid', null], [2, 'ng-invalid', null], [2, 'ng-pending',
+                        null]], [[null, 'ngModelChange'], [null,
+                        'change'], [null, 'blur']], function (_v, en, $event) {
+                    var ad = true;
+                    var _co = _v.component;
+                    if (('change' === en)) {
+                        var pd_0 = (nodeValue(_v, 359).onChange($event.target.checked) !== false);
+                        ad = (pd_0 && ad);
+                    }
+                    if (('blur' === en)) {
+                        var pd_1 = (nodeValue(_v, 359).onTouched() !== false);
+                        ad = (pd_1 && ad);
+                    }
+                    if (('ngModelChange' === en)) {
+                        var pd_2 = ((_co.fields.inbound = $event) !== false);
+                        ad = (pd_2 && ad);
+                    }
+                    return ad;
+                }, null, null)), directiveDef(359, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
+                return [p0_0];
+            }, [CheckboxControlValueAccessor]), directiveDef(361, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null],
+                [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }),
+            providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(363, 16384, null, 0, NgControlStatus, [NgControl], null, null),
+            (_l()(), textDef(-1, null, ['Notifications appels entrants\n        '])),
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), textDef(-1, null, ['\n\n    '])), (_l()(), textDef(-1, null, ['e\n  '])), (_l()(), textDef(-1, null, ['\n\n  '])), (_l()(), elementDef(369, 0, null, null, 27, 'fieldset', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(371, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Google Apps'])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(),
+                elementDef(374, 0, null, null, 11, 'div', [['class', 'select subtitle']], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Organisation\n     '])), (_l()(), elementDef(376, 0, null, null, 8, 'select', [['name', 'organisation']], [[2, 'ng-untouched',
+                    null], [2, 'ng-touched', null], [2, 'ng-pristine', null],
+                [2, 'ng-dirty', null], [2, 'ng-valid', null], [2, 'ng-invalid',
+                    null], [2, 'ng-pending', null]], [[null, 'ngModelChange'],
+                [null, 'change'], [null, 'blur']], function (_v, en, $event) {
+                var ad = true;
+                var _co = _v.component;
+                if (('change' === en)) {
+                    var pd_0 = (nodeValue(_v, 377).onChange($event.target.value) !== false);
+                    ad = (pd_0 && ad);
+                }
+                if (('blur' === en)) {
+                    var pd_1 = (nodeValue(_v, 377).onTouched() !== false);
                     ad = (pd_1 && ad);
                 }
                 if (('ngModelChange' === en)) {
@@ -54778,13 +54915,12 @@
                     ad = (pd_2 && ad);
                 }
                 return ad;
-            }, null, null)), directiveDef(383, 16384, null, 0, SelectControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
+            }, null, null)), directiveDef(377, 16384, null, 0, SelectControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
                 return [p0_0];
-            }, [SelectControlValueAccessor]), directiveDef(385, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(387, 16384, null, 0, NgControlStatus, [NgControl], null, null),
-            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_14)), directiveDef(390, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(),
-                textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n'])),
-            (_l()(), textDef(-1, null, ['\n'])), (_l()(), elementDef(394, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n  '])),
-            (_l()(), elementDef(396, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n   '])), (_l()(), elementDef(398, 0, null, null, 5, 'input', [['name', 'groupes'], ['type', 'text']], [[2, 'ng-untouched', null],
+            }, [SelectControlValueAccessor]), directiveDef(379, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(381, 16384, null, 0, NgControlStatus, [NgControl], null, null),
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_12)), directiveDef(384, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(),
+                textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n\n    '])),
+            (_l()(), elementDef(387, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(389, 0, null, null, 5, 'input', [['name', 'groupes'], ['type', 'text']], [[2, 'ng-untouched', null],
                 [2, 'ng-touched', null], [2, 'ng-pristine', null], [2, 'ng-dirty',
                     null], [2, 'ng-valid', null], [2, 'ng-invalid', null],
                 [2, 'ng-pending', null]], [[null, 'ngModelChange'], [null,
@@ -54793,19 +54929,19 @@
                 var ad = true;
                 var _co = _v.component;
                 if (('input' === en)) {
-                    var pd_0 = (nodeValue(_v, 399)._handleInput($event.target.value) !== false);
+                    var pd_0 = (nodeValue(_v, 390)._handleInput($event.target.value) !== false);
                     ad = (pd_0 && ad);
                 }
                 if (('blur' === en)) {
-                    var pd_1 = (nodeValue(_v, 399).onTouched() !== false);
+                    var pd_1 = (nodeValue(_v, 390).onTouched() !== false);
                     ad = (pd_1 && ad);
                 }
                 if (('compositionstart' === en)) {
-                    var pd_2 = (nodeValue(_v, 399)._compositionStart() !== false);
+                    var pd_2 = (nodeValue(_v, 390)._compositionStart() !== false);
                     ad = (pd_2 && ad);
                 }
                 if (('compositionend' === en)) {
-                    var pd_3 = (nodeValue(_v, 399)._compositionEnd($event.target.value) !== false);
+                    var pd_3 = (nodeValue(_v, 390)._compositionEnd($event.target.value) !== false);
                     ad = (pd_3 && ad);
                 }
                 if (('ngModelChange' === en)) {
@@ -54813,346 +54949,358 @@
                     ad = (pd_4 && ad);
                 }
                 return ad;
-            }, null, null)), directiveDef(399, 16384, null, 0, DefaultValueAccessor, [Renderer2, ElementRef, [2, COMPOSITION_BUFFER_MODE]], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
+            }, null, null)), directiveDef(390, 16384, null, 0, DefaultValueAccessor, [Renderer2, ElementRef, [2, COMPOSITION_BUFFER_MODE]], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
                 return [p0_0];
-            }, [DefaultValueAccessor]), directiveDef(401, 671744, null, 0, NgModel, [[2,
-                    ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(403, 16384, null, 0, NgControlStatus, [NgControl], null, null),
-            (_l()(), textDef(-1, null, ['\n   Groupes - Séparer les noms de groupes par des ";" et ne pas mettre @planetveo.com>\n '])),
-            (_l()(), textDef(-1, null, ['\n'])), (_l()(), textDef(-1, null, ['\n'])),
-            (_l()(), textDef(-1, null, ['\n'])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_15)), directiveDef(409, 16384, null, 0, NgIf, [ViewContainerRef, TemplateRef], { ngIf: [0,
-                    'ngIf'] }, null), (_l()(), textDef(-1, null, ['\n\n'])),
-            (_l()(), elementDef(411, 0, null, null, 1, 'button', [['type', 'submit']], null, null, null, null, null)),
-            (_l()(), textDef(-1, null, ['Créer l\'utilisateur\n'])), (_l()(), textDef(-1, null, ['\n'])), (_l()(), textDef(414, null, ['\n\n', '\n'])),
-            pipeDef(0, JsonPipe, [])], function (_ck, _v) {
+            }, [DefaultValueAccessor]), directiveDef(392, 671744, null, 0, NgModel, [[2,
+                    ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(394, 16384, null, 0, NgControlStatus, [NgControl], null, null),
+            (_l()(), textDef(-1, null, ['\n      Groupes - Séparer les noms de groupes par des ";" et ne pas mettre @planetveo.com\n    '])),
+            (_l()(), textDef(-1, null, ['f\n  '])), (_l()(), textDef(-1, null, ['\n\n  '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_13)), directiveDef(399, 16384, null, 0, NgIf, [ViewContainerRef, TemplateRef], { ngIf: [0, 'ngIf'] }, null), (_l()(),
+                textDef(-1, null, ['\n\n  '])), (_l()(), elementDef(401, 0, null, null, 1, 'button', [['type', 'submit']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Créer l\'utilisateur'])), (_l()(), textDef(-1, null, ['\n'])), (_l()(),
+                textDef(404, null, ['\n\n', '\n'])), pipeDef(0, JsonPipe, [])], function (_ck, _v) {
             var _co = _v.component;
-            var currVal_7 = 'csv';
-            var currVal_8 = _co.csv;
-            _ck(_v, 6, 0, currVal_7, currVal_8);
-            var currVal_24 = 'accounts';
-            _ck(_v, 25, 0, currVal_24);
-            var currVal_25 = _co.fields.accounts;
-            var currVal_26 = _co.trackByFn;
-            _ck(_v, 30, 0, currVal_25, currVal_26);
-            var currVal_34 = 'userInfo';
-            _ck(_v, 40, 0, currVal_34);
-            var currVal_35 = _co.fields.civilites;
-            _ck(_v, 45, 0, currVal_35);
-            var currVal_43 = 'credentials';
-            _ck(_v, 48, 0, currVal_43);
-            var currVal_44 = _co.fields.userFields;
-            var currVal_45 = _co.trackByFn;
-            _ck(_v, 53, 0, currVal_44, currVal_45);
-            var currVal_53 = 'sugar';
-            _ck(_v, 64, 0, currVal_53);
-            var currVal_61 = 'userToCopyHPfrom';
-            var currVal_62 = _co.fields.userValue;
-            _ck(_v, 97, 0, currVal_61, currVal_62);
-            var currVal_63 = _co.fields.userTemplates;
-            var currVal_64 = _co.trackByFn;
-            _ck(_v, 102, 0, currVal_63, currVal_64);
-            var currVal_65 = _co.fields.roles;
-            var currVal_66 = _co.trackByFn;
-            _ck(_v, 112, 0, currVal_65, currVal_66);
-            var currVal_67 = _co.fields.services;
-            var currVal_68 = _co.trackByFn;
-            _ck(_v, 121, 0, currVal_67, currVal_68);
-            var currVal_76 = 'office';
-            var currVal_77 = _co.fields.selectedBureau;
-            _ck(_v, 133, 0, currVal_76, currVal_77);
-            var currVal_78 = _co.fields.bureaux;
-            var currVal_79 = _co.trackByFn;
-            _ck(_v, 138, 0, currVal_78, currVal_79);
-            var currVal_87 = 'fonction';
-            var currVal_88 = _co.fields.selectedFunction;
-            _ck(_v, 148, 0, currVal_87, currVal_88);
-            var currVal_89 = null;
-            _ck(_v, 153, 0, currVal_89);
-            var currVal_90 = null;
-            _ck(_v, 154, 0, currVal_90);
-            var currVal_91 = _co.fields.functions;
-            var currVal_92 = _co.trackByFn;
-            _ck(_v, 157, 0, currVal_91, currVal_92);
-            var currVal_100 = 'team';
-            _ck(_v, 166, 0, currVal_100);
-            var currVal_101 = _co.fields.teams;
-            var currVal_102 = _co.trackByFn;
-            _ck(_v, 171, 0, currVal_101, currVal_102);
-            var currVal_110 = 'others';
-            _ck(_v, 181, 0, currVal_110);
-            var currVal_111 = _co.fields.autres;
-            var currVal_112 = _co.trackByFn;
-            _ck(_v, 186, 0, currVal_111, currVal_112);
-            var currVal_113 = _co.fields.destinations;
-            var currVal_114 = _co.trackByFn;
-            _ck(_v, 196, 0, currVal_113, currVal_114);
-            var currVal_122 = 'manager';
-            var currVal_123 = _co.fields.selectedManager;
-            _ck(_v, 207, 0, currVal_122, currVal_123);
-            var currVal_124 = _co.fields.managers;
-            var currVal_125 = _co.trackByFn;
-            _ck(_v, 212, 0, currVal_124, currVal_125);
-            var currVal_126 = _co.fields.orgas;
-            var currVal_127 = _co.trackByFn;
-            _ck(_v, 224, 0, currVal_126, currVal_127);
-            var currVal_135 = 'sugar_tourplan';
-            var currVal_136 = _co.fields.codeTourplan;
-            _ck(_v, 236, 0, currVal_135, currVal_136);
-            var currVal_144 = 'codeSON';
-            var currVal_145 = _co.fields.codeSON;
-            _ck(_v, 249, 0, currVal_144, currVal_145);
-            var currVal_153 = 'title';
-            var currVal_154 = _co.fields.title;
-            _ck(_v, 262, 0, currVal_153, currVal_154);
-            var currVal_162 = 'inactive';
-            _ck(_v, 269, 0, currVal_162);
-            var currVal_170 = 'inactiveStatus';
-            var currVal_171 = _co.fields.inactiveStatus;
-            _ck(_v, 278, 0, currVal_170, currVal_171);
-            var currVal_179 = 'inactiveEmployee';
-            var currVal_180 = _co.fields.inactiveEmployee;
-            _ck(_v, 288, 0, currVal_179, currVal_180);
-            var currVal_188 = 'switchvox';
-            _ck(_v, 301, 0, currVal_188);
-            var currVal_196 = 'phone_number';
-            var currVal_197 = _co.fields.phoneNumber;
-            _ck(_v, 312, 0, currVal_196, currVal_197);
-            var currVal_205 = 'extension';
-            var currVal_206 = _co.fields.phoneExtension;
-            _ck(_v, 325, 0, currVal_205, currVal_206);
-            var currVal_214 = 'codevad';
-            var currVal_215 = _co.fields.codevad;
-            _ck(_v, 338, 0, currVal_214, currVal_215);
-            var currVal_223 = 'outbound';
-            var currVal_224 = _co.fields.outbound;
-            _ck(_v, 351, 0, currVal_223, currVal_224);
-            var currVal_232 = 'inbound';
-            var currVal_233 = _co.fields.inbound;
-            _ck(_v, 364, 0, currVal_232, currVal_233);
-            var currVal_241 = 'organisation';
-            var currVal_242 = _co.fields.selectedOrganisation;
-            _ck(_v, 385, 0, currVal_241, currVal_242);
-            var currVal_243 = _co.fields.orgas;
-            var currVal_244 = _co.trackByFn;
-            _ck(_v, 390, 0, currVal_243, currVal_244);
-            var currVal_252 = 'groupes';
-            var currVal_253 = _co.fields.groupes;
-            _ck(_v, 401, 0, currVal_252, currVal_253);
-            var currVal_254 = _co.errorMsg;
-            _ck(_v, 409, 0, currVal_254);
+            var currVal_14 = 'accounts';
+            _ck(_v, 15, 0, currVal_14);
+            var currVal_15 = _co.fields.accounts;
+            var currVal_16 = _co.trackByFn;
+            _ck(_v, 20, 0, currVal_15, currVal_16);
+            var currVal_24 = 'userInfo';
+            _ck(_v, 30, 0, currVal_24);
+            var currVal_25 = _co.fields.civilites;
+            _ck(_v, 35, 0, currVal_25);
+            var currVal_33 = 'credentials';
+            _ck(_v, 38, 0, currVal_33);
+            var currVal_34 = _co.fields.userFields;
+            var currVal_35 = _co.trackByFn;
+            _ck(_v, 43, 0, currVal_34, currVal_35);
+            var currVal_43 = 'sugar';
+            _ck(_v, 54, 0, currVal_43);
+            var currVal_51 = 'userToCopyHPfrom';
+            var currVal_52 = _co.fields.userValue;
+            _ck(_v, 84, 0, currVal_51, currVal_52);
+            var currVal_53 = _co.fields.userTemplates;
+            var currVal_54 = _co.trackByFn;
+            _ck(_v, 89, 0, currVal_53, currVal_54);
+            var currVal_55 = _co.fields.roles;
+            var currVal_56 = _co.trackByFn;
+            _ck(_v, 96, 0, currVal_55, currVal_56);
+            var currVal_57 = _co.fields.services;
+            var currVal_58 = _co.trackByFn;
+            _ck(_v, 102, 0, currVal_57, currVal_58);
+            var currVal_68 = 'leadsMin';
+            var currVal_69 = _co.fields.leadsMin;
+            _ck(_v, 114, 0, currVal_68, currVal_69);
+            var currVal_79 = 'leadsMax';
+            var currVal_80 = _co.fields.leadsMax;
+            _ck(_v, 129, 0, currVal_79, currVal_80);
+            var currVal_88 = 'office';
+            var currVal_89 = _co.fields.selectedBureau;
+            _ck(_v, 142, 0, currVal_88, currVal_89);
+            var currVal_90 = _co.fields.bureaux;
+            var currVal_91 = _co.trackByFn;
+            _ck(_v, 147, 0, currVal_90, currVal_91);
+            var currVal_99 = 'fonction';
+            var currVal_100 = _co.fields.selectedFunction;
+            _ck(_v, 155, 0, currVal_99, currVal_100);
+            var currVal_101 = null;
+            _ck(_v, 159, 0, currVal_101);
+            var currVal_102 = null;
+            _ck(_v, 160, 0, currVal_102);
+            var currVal_103 = _co.fields.functions;
+            var currVal_104 = _co.trackByFn;
+            _ck(_v, 163, 0, currVal_103, currVal_104);
+            var currVal_112 = 'teamWithComponent';
+            _ck(_v, 168, 0, currVal_112);
+            var currVal_113 = _co.fields.teams;
+            _ck(_v, 176, 0, currVal_113);
+            var currVal_121 = 'othersWithComponent';
+            _ck(_v, 181, 0, currVal_121);
+            var currVal_122 = _co.fields.autres;
+            _ck(_v, 189, 0, currVal_122);
+            var currVal_123 = _co.fields.destinations;
+            var currVal_124 = _co.trackByFn;
+            _ck(_v, 198, 0, currVal_123, currVal_124);
+            var currVal_132 = 'manager';
+            var currVal_133 = _co.fields.selectedManager;
+            _ck(_v, 206, 0, currVal_132, currVal_133);
+            var currVal_134 = _co.fields.managers;
+            var currVal_135 = _co.trackByFn;
+            _ck(_v, 211, 0, currVal_134, currVal_135);
+            var currVal_136 = _co.fields.orgas;
+            var currVal_137 = _co.trackByFn;
+            _ck(_v, 223, 0, currVal_136, currVal_137);
+            var currVal_145 = 'sugar_tourplan';
+            var currVal_146 = _co.fields.codeTourplan;
+            _ck(_v, 234, 0, currVal_145, currVal_146);
+            var currVal_154 = 'codeSON';
+            var currVal_155 = _co.fields.codeSON;
+            _ck(_v, 247, 0, currVal_154, currVal_155);
+            var currVal_163 = 'title';
+            var currVal_164 = _co.fields.title;
+            _ck(_v, 260, 0, currVal_163, currVal_164);
+            var currVal_172 = 'inactive';
+            _ck(_v, 267, 0, currVal_172);
+            var currVal_180 = 'inactiveStatus';
+            var currVal_181 = _co.fields.inactiveStatus;
+            _ck(_v, 276, 0, currVal_180, currVal_181);
+            var currVal_189 = 'inactiveEmployee';
+            var currVal_190 = _co.fields.inactiveEmployee;
+            _ck(_v, 286, 0, currVal_189, currVal_190);
+            var currVal_198 = 'switchvox';
+            _ck(_v, 298, 0, currVal_198);
+            var currVal_206 = 'phone_number';
+            var currVal_207 = _co.fields.phoneNumber;
+            _ck(_v, 309, 0, currVal_206, currVal_207);
+            var currVal_215 = 'extension';
+            var currVal_216 = _co.fields.phoneExtension;
+            _ck(_v, 322, 0, currVal_215, currVal_216);
+            var currVal_224 = 'codevad';
+            var currVal_225 = _co.fields.codevad;
+            _ck(_v, 335, 0, currVal_224, currVal_225);
+            var currVal_233 = 'outbound';
+            var currVal_234 = _co.fields.outbound;
+            _ck(_v, 348, 0, currVal_233, currVal_234);
+            var currVal_242 = 'inbound';
+            var currVal_243 = _co.fields.inbound;
+            _ck(_v, 361, 0, currVal_242, currVal_243);
+            var currVal_251 = 'organisation';
+            var currVal_252 = _co.fields.selectedOrganisation;
+            _ck(_v, 379, 0, currVal_251, currVal_252);
+            var currVal_253 = _co.fields.orgas;
+            var currVal_254 = _co.trackByFn;
+            _ck(_v, 384, 0, currVal_253, currVal_254);
+            var currVal_262 = 'groupes';
+            var currVal_263 = _co.fields.groupes;
+            _ck(_v, 392, 0, currVal_262, currVal_263);
+            var currVal_264 = _co.errorMsg;
+            _ck(_v, 399, 0, currVal_264);
         }, function (_ck, _v) {
             var _co = _v.component;
-            var currVal_0 = nodeValue(_v, 8).ngClassUntouched;
-            var currVal_1 = nodeValue(_v, 8).ngClassTouched;
-            var currVal_2 = nodeValue(_v, 8).ngClassPristine;
-            var currVal_3 = nodeValue(_v, 8).ngClassDirty;
-            var currVal_4 = nodeValue(_v, 8).ngClassValid;
-            var currVal_5 = nodeValue(_v, 8).ngClassInvalid;
-            var currVal_6 = nodeValue(_v, 8).ngClassPending;
+            var currVal_0 = nodeValue(_v, 7).ngClassUntouched;
+            var currVal_1 = nodeValue(_v, 7).ngClassTouched;
+            var currVal_2 = nodeValue(_v, 7).ngClassPristine;
+            var currVal_3 = nodeValue(_v, 7).ngClassDirty;
+            var currVal_4 = nodeValue(_v, 7).ngClassValid;
+            var currVal_5 = nodeValue(_v, 7).ngClassInvalid;
+            var currVal_6 = nodeValue(_v, 7).ngClassPending;
             _ck(_v, 3, 0, currVal_0, currVal_1, currVal_2, currVal_3, currVal_4, currVal_5, currVal_6);
-            var currVal_9 = _co.csv;
-            _ck(_v, 12, 0, currVal_9);
-            var currVal_10 = nodeValue(_v, 17).ngClassUntouched;
-            var currVal_11 = nodeValue(_v, 17).ngClassTouched;
-            var currVal_12 = nodeValue(_v, 17).ngClassPristine;
-            var currVal_13 = nodeValue(_v, 17).ngClassDirty;
-            var currVal_14 = nodeValue(_v, 17).ngClassValid;
-            var currVal_15 = nodeValue(_v, 17).ngClassInvalid;
-            var currVal_16 = nodeValue(_v, 17).ngClassPending;
-            _ck(_v, 13, 0, currVal_10, currVal_11, currVal_12, currVal_13, currVal_14, currVal_15, currVal_16);
-            var currVal_17 = nodeValue(_v, 27).ngClassUntouched;
-            var currVal_18 = nodeValue(_v, 27).ngClassTouched;
-            var currVal_19 = nodeValue(_v, 27).ngClassPristine;
-            var currVal_20 = nodeValue(_v, 27).ngClassDirty;
-            var currVal_21 = nodeValue(_v, 27).ngClassValid;
-            var currVal_22 = nodeValue(_v, 27).ngClassInvalid;
-            var currVal_23 = nodeValue(_v, 27).ngClassPending;
-            _ck(_v, 24, 0, currVal_17, currVal_18, currVal_19, currVal_20, currVal_21, currVal_22, currVal_23);
-            var currVal_27 = nodeValue(_v, 42).ngClassUntouched;
-            var currVal_28 = nodeValue(_v, 42).ngClassTouched;
-            var currVal_29 = nodeValue(_v, 42).ngClassPristine;
-            var currVal_30 = nodeValue(_v, 42).ngClassDirty;
-            var currVal_31 = nodeValue(_v, 42).ngClassValid;
-            var currVal_32 = nodeValue(_v, 42).ngClassInvalid;
-            var currVal_33 = nodeValue(_v, 42).ngClassPending;
-            _ck(_v, 39, 0, currVal_27, currVal_28, currVal_29, currVal_30, currVal_31, currVal_32, currVal_33);
-            var currVal_36 = nodeValue(_v, 50).ngClassUntouched;
-            var currVal_37 = nodeValue(_v, 50).ngClassTouched;
-            var currVal_38 = nodeValue(_v, 50).ngClassPristine;
-            var currVal_39 = nodeValue(_v, 50).ngClassDirty;
-            var currVal_40 = nodeValue(_v, 50).ngClassValid;
-            var currVal_41 = nodeValue(_v, 50).ngClassInvalid;
-            var currVal_42 = nodeValue(_v, 50).ngClassPending;
-            _ck(_v, 47, 0, currVal_36, currVal_37, currVal_38, currVal_39, currVal_40, currVal_41, currVal_42);
-            var currVal_46 = nodeValue(_v, 66).ngClassUntouched;
-            var currVal_47 = nodeValue(_v, 66).ngClassTouched;
-            var currVal_48 = nodeValue(_v, 66).ngClassPristine;
-            var currVal_49 = nodeValue(_v, 66).ngClassDirty;
-            var currVal_50 = nodeValue(_v, 66).ngClassValid;
-            var currVal_51 = nodeValue(_v, 66).ngClassInvalid;
-            var currVal_52 = nodeValue(_v, 66).ngClassPending;
-            _ck(_v, 63, 0, currVal_46, currVal_47, currVal_48, currVal_49, currVal_50, currVal_51, currVal_52);
-            var currVal_54 = nodeValue(_v, 99).ngClassUntouched;
-            var currVal_55 = nodeValue(_v, 99).ngClassTouched;
-            var currVal_56 = nodeValue(_v, 99).ngClassPristine;
-            var currVal_57 = nodeValue(_v, 99).ngClassDirty;
-            var currVal_58 = nodeValue(_v, 99).ngClassValid;
-            var currVal_59 = nodeValue(_v, 99).ngClassInvalid;
-            var currVal_60 = nodeValue(_v, 99).ngClassPending;
-            _ck(_v, 94, 0, currVal_54, currVal_55, currVal_56, currVal_57, currVal_58, currVal_59, currVal_60);
-            var currVal_69 = nodeValue(_v, 135).ngClassUntouched;
-            var currVal_70 = nodeValue(_v, 135).ngClassTouched;
-            var currVal_71 = nodeValue(_v, 135).ngClassPristine;
-            var currVal_72 = nodeValue(_v, 135).ngClassDirty;
-            var currVal_73 = nodeValue(_v, 135).ngClassValid;
-            var currVal_74 = nodeValue(_v, 135).ngClassInvalid;
-            var currVal_75 = nodeValue(_v, 135).ngClassPending;
-            _ck(_v, 130, 0, currVal_69, currVal_70, currVal_71, currVal_72, currVal_73, currVal_74, currVal_75);
-            var currVal_80 = nodeValue(_v, 150).ngClassUntouched;
-            var currVal_81 = nodeValue(_v, 150).ngClassTouched;
-            var currVal_82 = nodeValue(_v, 150).ngClassPristine;
-            var currVal_83 = nodeValue(_v, 150).ngClassDirty;
-            var currVal_84 = nodeValue(_v, 150).ngClassValid;
-            var currVal_85 = nodeValue(_v, 150).ngClassInvalid;
-            var currVal_86 = nodeValue(_v, 150).ngClassPending;
-            _ck(_v, 145, 0, currVal_80, currVal_81, currVal_82, currVal_83, currVal_84, currVal_85, currVal_86);
-            var currVal_93 = nodeValue(_v, 168).ngClassUntouched;
-            var currVal_94 = nodeValue(_v, 168).ngClassTouched;
-            var currVal_95 = nodeValue(_v, 168).ngClassPristine;
-            var currVal_96 = nodeValue(_v, 168).ngClassDirty;
-            var currVal_97 = nodeValue(_v, 168).ngClassValid;
-            var currVal_98 = nodeValue(_v, 168).ngClassInvalid;
-            var currVal_99 = nodeValue(_v, 168).ngClassPending;
-            _ck(_v, 165, 0, currVal_93, currVal_94, currVal_95, currVal_96, currVal_97, currVal_98, currVal_99);
-            var currVal_103 = nodeValue(_v, 183).ngClassUntouched;
-            var currVal_104 = nodeValue(_v, 183).ngClassTouched;
-            var currVal_105 = nodeValue(_v, 183).ngClassPristine;
-            var currVal_106 = nodeValue(_v, 183).ngClassDirty;
-            var currVal_107 = nodeValue(_v, 183).ngClassValid;
-            var currVal_108 = nodeValue(_v, 183).ngClassInvalid;
-            var currVal_109 = nodeValue(_v, 183).ngClassPending;
-            _ck(_v, 180, 0, currVal_103, currVal_104, currVal_105, currVal_106, currVal_107, currVal_108, currVal_109);
-            var currVal_115 = nodeValue(_v, 209).ngClassUntouched;
-            var currVal_116 = nodeValue(_v, 209).ngClassTouched;
-            var currVal_117 = nodeValue(_v, 209).ngClassPristine;
-            var currVal_118 = nodeValue(_v, 209).ngClassDirty;
-            var currVal_119 = nodeValue(_v, 209).ngClassValid;
-            var currVal_120 = nodeValue(_v, 209).ngClassInvalid;
-            var currVal_121 = nodeValue(_v, 209).ngClassPending;
-            _ck(_v, 204, 0, currVal_115, currVal_116, currVal_117, currVal_118, currVal_119, currVal_120, currVal_121);
-            var currVal_128 = nodeValue(_v, 238).ngClassUntouched;
-            var currVal_129 = nodeValue(_v, 238).ngClassTouched;
-            var currVal_130 = nodeValue(_v, 238).ngClassPristine;
-            var currVal_131 = nodeValue(_v, 238).ngClassDirty;
-            var currVal_132 = nodeValue(_v, 238).ngClassValid;
-            var currVal_133 = nodeValue(_v, 238).ngClassInvalid;
-            var currVal_134 = nodeValue(_v, 238).ngClassPending;
-            _ck(_v, 233, 0, currVal_128, currVal_129, currVal_130, currVal_131, currVal_132, currVal_133, currVal_134);
-            var currVal_137 = nodeValue(_v, 251).ngClassUntouched;
-            var currVal_138 = nodeValue(_v, 251).ngClassTouched;
-            var currVal_139 = nodeValue(_v, 251).ngClassPristine;
-            var currVal_140 = nodeValue(_v, 251).ngClassDirty;
-            var currVal_141 = nodeValue(_v, 251).ngClassValid;
-            var currVal_142 = nodeValue(_v, 251).ngClassInvalid;
-            var currVal_143 = nodeValue(_v, 251).ngClassPending;
-            _ck(_v, 246, 0, currVal_137, currVal_138, currVal_139, currVal_140, currVal_141, currVal_142, currVal_143);
-            var currVal_146 = nodeValue(_v, 264).ngClassUntouched;
-            var currVal_147 = nodeValue(_v, 264).ngClassTouched;
-            var currVal_148 = nodeValue(_v, 264).ngClassPristine;
-            var currVal_149 = nodeValue(_v, 264).ngClassDirty;
-            var currVal_150 = nodeValue(_v, 264).ngClassValid;
-            var currVal_151 = nodeValue(_v, 264).ngClassInvalid;
-            var currVal_152 = nodeValue(_v, 264).ngClassPending;
-            _ck(_v, 259, 0, currVal_146, currVal_147, currVal_148, currVal_149, currVal_150, currVal_151, currVal_152);
-            var currVal_155 = nodeValue(_v, 271).ngClassUntouched;
-            var currVal_156 = nodeValue(_v, 271).ngClassTouched;
-            var currVal_157 = nodeValue(_v, 271).ngClassPristine;
-            var currVal_158 = nodeValue(_v, 271).ngClassDirty;
-            var currVal_159 = nodeValue(_v, 271).ngClassValid;
-            var currVal_160 = nodeValue(_v, 271).ngClassInvalid;
-            var currVal_161 = nodeValue(_v, 271).ngClassPending;
-            _ck(_v, 268, 0, currVal_155, currVal_156, currVal_157, currVal_158, currVal_159, currVal_160, currVal_161);
-            var currVal_163 = nodeValue(_v, 280).ngClassUntouched;
-            var currVal_164 = nodeValue(_v, 280).ngClassTouched;
-            var currVal_165 = nodeValue(_v, 280).ngClassPristine;
-            var currVal_166 = nodeValue(_v, 280).ngClassDirty;
-            var currVal_167 = nodeValue(_v, 280).ngClassValid;
-            var currVal_168 = nodeValue(_v, 280).ngClassInvalid;
-            var currVal_169 = nodeValue(_v, 280).ngClassPending;
-            _ck(_v, 275, 0, currVal_163, currVal_164, currVal_165, currVal_166, currVal_167, currVal_168, currVal_169);
-            var currVal_172 = nodeValue(_v, 290).ngClassUntouched;
-            var currVal_173 = nodeValue(_v, 290).ngClassTouched;
-            var currVal_174 = nodeValue(_v, 290).ngClassPristine;
-            var currVal_175 = nodeValue(_v, 290).ngClassDirty;
-            var currVal_176 = nodeValue(_v, 290).ngClassValid;
-            var currVal_177 = nodeValue(_v, 290).ngClassInvalid;
-            var currVal_178 = nodeValue(_v, 290).ngClassPending;
-            _ck(_v, 285, 0, currVal_172, currVal_173, currVal_174, currVal_175, currVal_176, currVal_177, currVal_178);
-            var currVal_181 = nodeValue(_v, 303).ngClassUntouched;
-            var currVal_182 = nodeValue(_v, 303).ngClassTouched;
-            var currVal_183 = nodeValue(_v, 303).ngClassPristine;
-            var currVal_184 = nodeValue(_v, 303).ngClassDirty;
-            var currVal_185 = nodeValue(_v, 303).ngClassValid;
-            var currVal_186 = nodeValue(_v, 303).ngClassInvalid;
-            var currVal_187 = nodeValue(_v, 303).ngClassPending;
-            _ck(_v, 300, 0, currVal_181, currVal_182, currVal_183, currVal_184, currVal_185, currVal_186, currVal_187);
-            var currVal_189 = nodeValue(_v, 314).ngClassUntouched;
-            var currVal_190 = nodeValue(_v, 314).ngClassTouched;
-            var currVal_191 = nodeValue(_v, 314).ngClassPristine;
-            var currVal_192 = nodeValue(_v, 314).ngClassDirty;
-            var currVal_193 = nodeValue(_v, 314).ngClassValid;
-            var currVal_194 = nodeValue(_v, 314).ngClassInvalid;
-            var currVal_195 = nodeValue(_v, 314).ngClassPending;
-            _ck(_v, 309, 0, currVal_189, currVal_190, currVal_191, currVal_192, currVal_193, currVal_194, currVal_195);
-            var currVal_198 = nodeValue(_v, 327).ngClassUntouched;
-            var currVal_199 = nodeValue(_v, 327).ngClassTouched;
-            var currVal_200 = nodeValue(_v, 327).ngClassPristine;
-            var currVal_201 = nodeValue(_v, 327).ngClassDirty;
-            var currVal_202 = nodeValue(_v, 327).ngClassValid;
-            var currVal_203 = nodeValue(_v, 327).ngClassInvalid;
-            var currVal_204 = nodeValue(_v, 327).ngClassPending;
-            _ck(_v, 322, 0, currVal_198, currVal_199, currVal_200, currVal_201, currVal_202, currVal_203, currVal_204);
-            var currVal_207 = nodeValue(_v, 340).ngClassUntouched;
-            var currVal_208 = nodeValue(_v, 340).ngClassTouched;
-            var currVal_209 = nodeValue(_v, 340).ngClassPristine;
-            var currVal_210 = nodeValue(_v, 340).ngClassDirty;
-            var currVal_211 = nodeValue(_v, 340).ngClassValid;
-            var currVal_212 = nodeValue(_v, 340).ngClassInvalid;
-            var currVal_213 = nodeValue(_v, 340).ngClassPending;
-            _ck(_v, 335, 0, currVal_207, currVal_208, currVal_209, currVal_210, currVal_211, currVal_212, currVal_213);
-            var currVal_216 = nodeValue(_v, 353).ngClassUntouched;
-            var currVal_217 = nodeValue(_v, 353).ngClassTouched;
-            var currVal_218 = nodeValue(_v, 353).ngClassPristine;
-            var currVal_219 = nodeValue(_v, 353).ngClassDirty;
-            var currVal_220 = nodeValue(_v, 353).ngClassValid;
-            var currVal_221 = nodeValue(_v, 353).ngClassInvalid;
-            var currVal_222 = nodeValue(_v, 353).ngClassPending;
-            _ck(_v, 348, 0, currVal_216, currVal_217, currVal_218, currVal_219, currVal_220, currVal_221, currVal_222);
-            var currVal_225 = nodeValue(_v, 366).ngClassUntouched;
-            var currVal_226 = nodeValue(_v, 366).ngClassTouched;
-            var currVal_227 = nodeValue(_v, 366).ngClassPristine;
-            var currVal_228 = nodeValue(_v, 366).ngClassDirty;
-            var currVal_229 = nodeValue(_v, 366).ngClassValid;
-            var currVal_230 = nodeValue(_v, 366).ngClassInvalid;
-            var currVal_231 = nodeValue(_v, 366).ngClassPending;
-            _ck(_v, 361, 0, currVal_225, currVal_226, currVal_227, currVal_228, currVal_229, currVal_230, currVal_231);
-            var currVal_234 = nodeValue(_v, 387).ngClassUntouched;
-            var currVal_235 = nodeValue(_v, 387).ngClassTouched;
-            var currVal_236 = nodeValue(_v, 387).ngClassPristine;
-            var currVal_237 = nodeValue(_v, 387).ngClassDirty;
-            var currVal_238 = nodeValue(_v, 387).ngClassValid;
-            var currVal_239 = nodeValue(_v, 387).ngClassInvalid;
-            var currVal_240 = nodeValue(_v, 387).ngClassPending;
-            _ck(_v, 382, 0, currVal_234, currVal_235, currVal_236, currVal_237, currVal_238, currVal_239, currVal_240);
-            var currVal_245 = nodeValue(_v, 403).ngClassUntouched;
-            var currVal_246 = nodeValue(_v, 403).ngClassTouched;
-            var currVal_247 = nodeValue(_v, 403).ngClassPristine;
-            var currVal_248 = nodeValue(_v, 403).ngClassDirty;
-            var currVal_249 = nodeValue(_v, 403).ngClassValid;
-            var currVal_250 = nodeValue(_v, 403).ngClassInvalid;
-            var currVal_251 = nodeValue(_v, 403).ngClassPending;
-            _ck(_v, 398, 0, currVal_245, currVal_246, currVal_247, currVal_248, currVal_249, currVal_250, currVal_251);
-            var currVal_255 = unwrapValue(_v, 414, 0, nodeValue(_v, 415).transform(nodeValue(_v, 15).value));
-            _ck(_v, 414, 0, currVal_255);
+            var currVal_7 = nodeValue(_v, 17).ngClassUntouched;
+            var currVal_8 = nodeValue(_v, 17).ngClassTouched;
+            var currVal_9 = nodeValue(_v, 17).ngClassPristine;
+            var currVal_10 = nodeValue(_v, 17).ngClassDirty;
+            var currVal_11 = nodeValue(_v, 17).ngClassValid;
+            var currVal_12 = nodeValue(_v, 17).ngClassInvalid;
+            var currVal_13 = nodeValue(_v, 17).ngClassPending;
+            _ck(_v, 14, 0, currVal_7, currVal_8, currVal_9, currVal_10, currVal_11, currVal_12, currVal_13);
+            var currVal_17 = nodeValue(_v, 32).ngClassUntouched;
+            var currVal_18 = nodeValue(_v, 32).ngClassTouched;
+            var currVal_19 = nodeValue(_v, 32).ngClassPristine;
+            var currVal_20 = nodeValue(_v, 32).ngClassDirty;
+            var currVal_21 = nodeValue(_v, 32).ngClassValid;
+            var currVal_22 = nodeValue(_v, 32).ngClassInvalid;
+            var currVal_23 = nodeValue(_v, 32).ngClassPending;
+            _ck(_v, 29, 0, currVal_17, currVal_18, currVal_19, currVal_20, currVal_21, currVal_22, currVal_23);
+            var currVal_26 = nodeValue(_v, 40).ngClassUntouched;
+            var currVal_27 = nodeValue(_v, 40).ngClassTouched;
+            var currVal_28 = nodeValue(_v, 40).ngClassPristine;
+            var currVal_29 = nodeValue(_v, 40).ngClassDirty;
+            var currVal_30 = nodeValue(_v, 40).ngClassValid;
+            var currVal_31 = nodeValue(_v, 40).ngClassInvalid;
+            var currVal_32 = nodeValue(_v, 40).ngClassPending;
+            _ck(_v, 37, 0, currVal_26, currVal_27, currVal_28, currVal_29, currVal_30, currVal_31, currVal_32);
+            var currVal_36 = nodeValue(_v, 56).ngClassUntouched;
+            var currVal_37 = nodeValue(_v, 56).ngClassTouched;
+            var currVal_38 = nodeValue(_v, 56).ngClassPristine;
+            var currVal_39 = nodeValue(_v, 56).ngClassDirty;
+            var currVal_40 = nodeValue(_v, 56).ngClassValid;
+            var currVal_41 = nodeValue(_v, 56).ngClassInvalid;
+            var currVal_42 = nodeValue(_v, 56).ngClassPending;
+            _ck(_v, 53, 0, currVal_36, currVal_37, currVal_38, currVal_39, currVal_40, currVal_41, currVal_42);
+            var currVal_44 = nodeValue(_v, 86).ngClassUntouched;
+            var currVal_45 = nodeValue(_v, 86).ngClassTouched;
+            var currVal_46 = nodeValue(_v, 86).ngClassPristine;
+            var currVal_47 = nodeValue(_v, 86).ngClassDirty;
+            var currVal_48 = nodeValue(_v, 86).ngClassValid;
+            var currVal_49 = nodeValue(_v, 86).ngClassInvalid;
+            var currVal_50 = nodeValue(_v, 86).ngClassPending;
+            _ck(_v, 81, 0, currVal_44, currVal_45, currVal_46, currVal_47, currVal_48, currVal_49, currVal_50);
+            var currVal_59 = !_co.displayVentesLeads;
+            _ck(_v, 105, 0, currVal_59);
+            var currVal_60 = unwrapValue(_v, 106, 0, nodeValue(_v, 107).transform(_co.fields.leadsMin));
+            _ck(_v, 106, 0, currVal_60);
+            var currVal_61 = nodeValue(_v, 116).ngClassUntouched;
+            var currVal_62 = nodeValue(_v, 116).ngClassTouched;
+            var currVal_63 = nodeValue(_v, 116).ngClassPristine;
+            var currVal_64 = nodeValue(_v, 116).ngClassDirty;
+            var currVal_65 = nodeValue(_v, 116).ngClassValid;
+            var currVal_66 = nodeValue(_v, 116).ngClassInvalid;
+            var currVal_67 = nodeValue(_v, 116).ngClassPending;
+            _ck(_v, 110, 0, currVal_61, currVal_62, currVal_63, currVal_64, currVal_65, currVal_66, currVal_67);
+            var currVal_70 = !_co.displayVentesLeads;
+            _ck(_v, 120, 0, currVal_70);
+            var currVal_71 = unwrapValue(_v, 121, 0, nodeValue(_v, 122).transform(_co.fields.leadsMax));
+            _ck(_v, 121, 0, currVal_71);
+            var currVal_72 = nodeValue(_v, 131).ngClassUntouched;
+            var currVal_73 = nodeValue(_v, 131).ngClassTouched;
+            var currVal_74 = nodeValue(_v, 131).ngClassPristine;
+            var currVal_75 = nodeValue(_v, 131).ngClassDirty;
+            var currVal_76 = nodeValue(_v, 131).ngClassValid;
+            var currVal_77 = nodeValue(_v, 131).ngClassInvalid;
+            var currVal_78 = nodeValue(_v, 131).ngClassPending;
+            _ck(_v, 125, 0, currVal_72, currVal_73, currVal_74, currVal_75, currVal_76, currVal_77, currVal_78);
+            var currVal_81 = nodeValue(_v, 144).ngClassUntouched;
+            var currVal_82 = nodeValue(_v, 144).ngClassTouched;
+            var currVal_83 = nodeValue(_v, 144).ngClassPristine;
+            var currVal_84 = nodeValue(_v, 144).ngClassDirty;
+            var currVal_85 = nodeValue(_v, 144).ngClassValid;
+            var currVal_86 = nodeValue(_v, 144).ngClassInvalid;
+            var currVal_87 = nodeValue(_v, 144).ngClassPending;
+            _ck(_v, 139, 0, currVal_81, currVal_82, currVal_83, currVal_84, currVal_85, currVal_86, currVal_87);
+            var currVal_92 = nodeValue(_v, 157).ngClassUntouched;
+            var currVal_93 = nodeValue(_v, 157).ngClassTouched;
+            var currVal_94 = nodeValue(_v, 157).ngClassPristine;
+            var currVal_95 = nodeValue(_v, 157).ngClassDirty;
+            var currVal_96 = nodeValue(_v, 157).ngClassValid;
+            var currVal_97 = nodeValue(_v, 157).ngClassInvalid;
+            var currVal_98 = nodeValue(_v, 157).ngClassPending;
+            _ck(_v, 152, 0, currVal_92, currVal_93, currVal_94, currVal_95, currVal_96, currVal_97, currVal_98);
+            var currVal_105 = nodeValue(_v, 170).ngClassUntouched;
+            var currVal_106 = nodeValue(_v, 170).ngClassTouched;
+            var currVal_107 = nodeValue(_v, 170).ngClassPristine;
+            var currVal_108 = nodeValue(_v, 170).ngClassDirty;
+            var currVal_109 = nodeValue(_v, 170).ngClassValid;
+            var currVal_110 = nodeValue(_v, 170).ngClassInvalid;
+            var currVal_111 = nodeValue(_v, 170).ngClassPending;
+            _ck(_v, 167, 0, currVal_105, currVal_106, currVal_107, currVal_108, currVal_109, currVal_110, currVal_111);
+            var currVal_114 = nodeValue(_v, 183).ngClassUntouched;
+            var currVal_115 = nodeValue(_v, 183).ngClassTouched;
+            var currVal_116 = nodeValue(_v, 183).ngClassPristine;
+            var currVal_117 = nodeValue(_v, 183).ngClassDirty;
+            var currVal_118 = nodeValue(_v, 183).ngClassValid;
+            var currVal_119 = nodeValue(_v, 183).ngClassInvalid;
+            var currVal_120 = nodeValue(_v, 183).ngClassPending;
+            _ck(_v, 180, 0, currVal_114, currVal_115, currVal_116, currVal_117, currVal_118, currVal_119, currVal_120);
+            var currVal_125 = nodeValue(_v, 208).ngClassUntouched;
+            var currVal_126 = nodeValue(_v, 208).ngClassTouched;
+            var currVal_127 = nodeValue(_v, 208).ngClassPristine;
+            var currVal_128 = nodeValue(_v, 208).ngClassDirty;
+            var currVal_129 = nodeValue(_v, 208).ngClassValid;
+            var currVal_130 = nodeValue(_v, 208).ngClassInvalid;
+            var currVal_131 = nodeValue(_v, 208).ngClassPending;
+            _ck(_v, 203, 0, currVal_125, currVal_126, currVal_127, currVal_128, currVal_129, currVal_130, currVal_131);
+            var currVal_138 = nodeValue(_v, 236).ngClassUntouched;
+            var currVal_139 = nodeValue(_v, 236).ngClassTouched;
+            var currVal_140 = nodeValue(_v, 236).ngClassPristine;
+            var currVal_141 = nodeValue(_v, 236).ngClassDirty;
+            var currVal_142 = nodeValue(_v, 236).ngClassValid;
+            var currVal_143 = nodeValue(_v, 236).ngClassInvalid;
+            var currVal_144 = nodeValue(_v, 236).ngClassPending;
+            _ck(_v, 231, 0, currVal_138, currVal_139, currVal_140, currVal_141, currVal_142, currVal_143, currVal_144);
+            var currVal_147 = nodeValue(_v, 249).ngClassUntouched;
+            var currVal_148 = nodeValue(_v, 249).ngClassTouched;
+            var currVal_149 = nodeValue(_v, 249).ngClassPristine;
+            var currVal_150 = nodeValue(_v, 249).ngClassDirty;
+            var currVal_151 = nodeValue(_v, 249).ngClassValid;
+            var currVal_152 = nodeValue(_v, 249).ngClassInvalid;
+            var currVal_153 = nodeValue(_v, 249).ngClassPending;
+            _ck(_v, 244, 0, currVal_147, currVal_148, currVal_149, currVal_150, currVal_151, currVal_152, currVal_153);
+            var currVal_156 = nodeValue(_v, 262).ngClassUntouched;
+            var currVal_157 = nodeValue(_v, 262).ngClassTouched;
+            var currVal_158 = nodeValue(_v, 262).ngClassPristine;
+            var currVal_159 = nodeValue(_v, 262).ngClassDirty;
+            var currVal_160 = nodeValue(_v, 262).ngClassValid;
+            var currVal_161 = nodeValue(_v, 262).ngClassInvalid;
+            var currVal_162 = nodeValue(_v, 262).ngClassPending;
+            _ck(_v, 257, 0, currVal_156, currVal_157, currVal_158, currVal_159, currVal_160, currVal_161, currVal_162);
+            var currVal_165 = nodeValue(_v, 269).ngClassUntouched;
+            var currVal_166 = nodeValue(_v, 269).ngClassTouched;
+            var currVal_167 = nodeValue(_v, 269).ngClassPristine;
+            var currVal_168 = nodeValue(_v, 269).ngClassDirty;
+            var currVal_169 = nodeValue(_v, 269).ngClassValid;
+            var currVal_170 = nodeValue(_v, 269).ngClassInvalid;
+            var currVal_171 = nodeValue(_v, 269).ngClassPending;
+            _ck(_v, 266, 0, currVal_165, currVal_166, currVal_167, currVal_168, currVal_169, currVal_170, currVal_171);
+            var currVal_173 = nodeValue(_v, 278).ngClassUntouched;
+            var currVal_174 = nodeValue(_v, 278).ngClassTouched;
+            var currVal_175 = nodeValue(_v, 278).ngClassPristine;
+            var currVal_176 = nodeValue(_v, 278).ngClassDirty;
+            var currVal_177 = nodeValue(_v, 278).ngClassValid;
+            var currVal_178 = nodeValue(_v, 278).ngClassInvalid;
+            var currVal_179 = nodeValue(_v, 278).ngClassPending;
+            _ck(_v, 273, 0, currVal_173, currVal_174, currVal_175, currVal_176, currVal_177, currVal_178, currVal_179);
+            var currVal_182 = nodeValue(_v, 288).ngClassUntouched;
+            var currVal_183 = nodeValue(_v, 288).ngClassTouched;
+            var currVal_184 = nodeValue(_v, 288).ngClassPristine;
+            var currVal_185 = nodeValue(_v, 288).ngClassDirty;
+            var currVal_186 = nodeValue(_v, 288).ngClassValid;
+            var currVal_187 = nodeValue(_v, 288).ngClassInvalid;
+            var currVal_188 = nodeValue(_v, 288).ngClassPending;
+            _ck(_v, 283, 0, currVal_182, currVal_183, currVal_184, currVal_185, currVal_186, currVal_187, currVal_188);
+            var currVal_191 = nodeValue(_v, 300).ngClassUntouched;
+            var currVal_192 = nodeValue(_v, 300).ngClassTouched;
+            var currVal_193 = nodeValue(_v, 300).ngClassPristine;
+            var currVal_194 = nodeValue(_v, 300).ngClassDirty;
+            var currVal_195 = nodeValue(_v, 300).ngClassValid;
+            var currVal_196 = nodeValue(_v, 300).ngClassInvalid;
+            var currVal_197 = nodeValue(_v, 300).ngClassPending;
+            _ck(_v, 297, 0, currVal_191, currVal_192, currVal_193, currVal_194, currVal_195, currVal_196, currVal_197);
+            var currVal_199 = nodeValue(_v, 311).ngClassUntouched;
+            var currVal_200 = nodeValue(_v, 311).ngClassTouched;
+            var currVal_201 = nodeValue(_v, 311).ngClassPristine;
+            var currVal_202 = nodeValue(_v, 311).ngClassDirty;
+            var currVal_203 = nodeValue(_v, 311).ngClassValid;
+            var currVal_204 = nodeValue(_v, 311).ngClassInvalid;
+            var currVal_205 = nodeValue(_v, 311).ngClassPending;
+            _ck(_v, 306, 0, currVal_199, currVal_200, currVal_201, currVal_202, currVal_203, currVal_204, currVal_205);
+            var currVal_208 = nodeValue(_v, 324).ngClassUntouched;
+            var currVal_209 = nodeValue(_v, 324).ngClassTouched;
+            var currVal_210 = nodeValue(_v, 324).ngClassPristine;
+            var currVal_211 = nodeValue(_v, 324).ngClassDirty;
+            var currVal_212 = nodeValue(_v, 324).ngClassValid;
+            var currVal_213 = nodeValue(_v, 324).ngClassInvalid;
+            var currVal_214 = nodeValue(_v, 324).ngClassPending;
+            _ck(_v, 319, 0, currVal_208, currVal_209, currVal_210, currVal_211, currVal_212, currVal_213, currVal_214);
+            var currVal_217 = nodeValue(_v, 337).ngClassUntouched;
+            var currVal_218 = nodeValue(_v, 337).ngClassTouched;
+            var currVal_219 = nodeValue(_v, 337).ngClassPristine;
+            var currVal_220 = nodeValue(_v, 337).ngClassDirty;
+            var currVal_221 = nodeValue(_v, 337).ngClassValid;
+            var currVal_222 = nodeValue(_v, 337).ngClassInvalid;
+            var currVal_223 = nodeValue(_v, 337).ngClassPending;
+            _ck(_v, 332, 0, currVal_217, currVal_218, currVal_219, currVal_220, currVal_221, currVal_222, currVal_223);
+            var currVal_226 = nodeValue(_v, 350).ngClassUntouched;
+            var currVal_227 = nodeValue(_v, 350).ngClassTouched;
+            var currVal_228 = nodeValue(_v, 350).ngClassPristine;
+            var currVal_229 = nodeValue(_v, 350).ngClassDirty;
+            var currVal_230 = nodeValue(_v, 350).ngClassValid;
+            var currVal_231 = nodeValue(_v, 350).ngClassInvalid;
+            var currVal_232 = nodeValue(_v, 350).ngClassPending;
+            _ck(_v, 345, 0, currVal_226, currVal_227, currVal_228, currVal_229, currVal_230, currVal_231, currVal_232);
+            var currVal_235 = nodeValue(_v, 363).ngClassUntouched;
+            var currVal_236 = nodeValue(_v, 363).ngClassTouched;
+            var currVal_237 = nodeValue(_v, 363).ngClassPristine;
+            var currVal_238 = nodeValue(_v, 363).ngClassDirty;
+            var currVal_239 = nodeValue(_v, 363).ngClassValid;
+            var currVal_240 = nodeValue(_v, 363).ngClassInvalid;
+            var currVal_241 = nodeValue(_v, 363).ngClassPending;
+            _ck(_v, 358, 0, currVal_235, currVal_236, currVal_237, currVal_238, currVal_239, currVal_240, currVal_241);
+            var currVal_244 = nodeValue(_v, 381).ngClassUntouched;
+            var currVal_245 = nodeValue(_v, 381).ngClassTouched;
+            var currVal_246 = nodeValue(_v, 381).ngClassPristine;
+            var currVal_247 = nodeValue(_v, 381).ngClassDirty;
+            var currVal_248 = nodeValue(_v, 381).ngClassValid;
+            var currVal_249 = nodeValue(_v, 381).ngClassInvalid;
+            var currVal_250 = nodeValue(_v, 381).ngClassPending;
+            _ck(_v, 376, 0, currVal_244, currVal_245, currVal_246, currVal_247, currVal_248, currVal_249, currVal_250);
+            var currVal_255 = nodeValue(_v, 394).ngClassUntouched;
+            var currVal_256 = nodeValue(_v, 394).ngClassTouched;
+            var currVal_257 = nodeValue(_v, 394).ngClassPristine;
+            var currVal_258 = nodeValue(_v, 394).ngClassDirty;
+            var currVal_259 = nodeValue(_v, 394).ngClassValid;
+            var currVal_260 = nodeValue(_v, 394).ngClassInvalid;
+            var currVal_261 = nodeValue(_v, 394).ngClassPending;
+            _ck(_v, 389, 0, currVal_255, currVal_256, currVal_257, currVal_258, currVal_259, currVal_260, currVal_261);
+            var currVal_265 = unwrapValue(_v, 404, 0, nodeValue(_v, 405).transform(nodeValue(_v, 5).value));
+            _ck(_v, 404, 0, currVal_265);
         });
     }
     function View_CreateUserFormComponent_Host_0(_l) {
@@ -55398,6 +55546,112 @@
      * Do not edit.
      * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride}
      */
+    /* tslint:disable */
+    var styles$2 = [''];
+
+    /**
+     * @fileoverview This file is generated by the Angular template compiler.
+     * Do not edit.
+     * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride}
+     */
+    var styles_ImportComponent = [styles$2];
+    var RenderType_ImportComponent = createRendererType2({ encapsulation: 0,
+        styles: styles_ImportComponent, data: {} });
+    function View_ImportComponent_2(_l) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 1, 'li', [], null, null, null, null, null)), (_l()(),
+                textDef(1, null, ['', '']))], null, function (_ck, _v) {
+            var currVal_0 = _v.context.$implicit;
+            _ck(_v, 1, 0, currVal_0);
+        });
+    }
+    function View_ImportComponent_1(_l) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 4, 'ol', [], null, null, null, null, null)), (_l()(),
+                textDef(-1, null, ['\n  '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_ImportComponent_2)), directiveDef(3, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'],
+                ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
+            var _co = _v.component;
+            var currVal_0 = _co.res;
+            var currVal_1 = _co.trackByFn;
+            _ck(_v, 3, 0, currVal_0, currVal_1);
+        }, null);
+    }
+    function View_ImportComponent_0(_l) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 1, 'h2', [], null, null, null, null, null)), (_l()(),
+                textDef(-1, null, ['Import'])), (_l()(), textDef(-1, null, ['\n\n'])),
+            (_l()(), elementDef(3, 0, null, null, 5, 'textarea', [['cols', '100'],
+                ['name', 'csv'], ['rows', '4']], [[2, 'ng-untouched', null], [2, 'ng-touched',
+                    null], [2, 'ng-pristine', null], [2, 'ng-dirty', null],
+                [2, 'ng-valid', null], [2, 'ng-invalid', null], [2, 'ng-pending',
+                    null]], [[null, 'ngModelChange'], [null, 'input'],
+                [null, 'blur'], [null, 'compositionstart'], [null,
+                    'compositionend']], function (_v, en, $event) {
+                var ad = true;
+                var _co = _v.component;
+                if (('input' === en)) {
+                    var pd_0 = (nodeValue(_v, 4)._handleInput($event.target.value) !== false);
+                    ad = (pd_0 && ad);
+                }
+                if (('blur' === en)) {
+                    var pd_1 = (nodeValue(_v, 4).onTouched() !== false);
+                    ad = (pd_1 && ad);
+                }
+                if (('compositionstart' === en)) {
+                    var pd_2 = (nodeValue(_v, 4)._compositionStart() !== false);
+                    ad = (pd_2 && ad);
+                }
+                if (('compositionend' === en)) {
+                    var pd_3 = (nodeValue(_v, 4)._compositionEnd($event.target.value) !== false);
+                    ad = (pd_3 && ad);
+                }
+                if (('ngModelChange' === en)) {
+                    var pd_4 = ((_co.csv = $event) !== false);
+                    ad = (pd_4 && ad);
+                }
+                return ad;
+            }, null, null)), directiveDef(4, 16384, null, 0, DefaultValueAccessor, [Renderer2, ElementRef, [2, COMPOSITION_BUFFER_MODE]], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
+                return [p0_0];
+            }, [DefaultValueAccessor]), directiveDef(6, 671744, [['textArea', 4]], 0, NgModel, [[8, null], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(8, 16384, null, 0, NgControlStatus, [NgControl], null, null), (_l()(),
+                textDef(-1, null, ['\n'])), (_l()(), elementDef(10, 0, null, null, 1, 'button', [], null, [[null, 'click']], function (_v, en, $event) {
+                var ad = true;
+                var _co = _v.component;
+                if (('click' === en)) {
+                    var pd_0 = (_co.parse(_co.csv) !== false);
+                    ad = (pd_0 && ad);
+                }
+                return ad;
+            }, null, null)), (_l()(), textDef(-1, null, ['Parse'])),
+            (_l()(), textDef(12, null, ['\n', '\n\n'])), (_l()(), anchorDef(16777216, null, null, 1, null, View_ImportComponent_1)), directiveDef(14, 16384, null, 0, NgIf, [ViewContainerRef, TemplateRef], { ngIf: [0, 'ngIf'] }, null), (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
+            var _co = _v.component;
+            var currVal_7 = 'csv';
+            var currVal_8 = _co.csv;
+            _ck(_v, 6, 0, currVal_7, currVal_8);
+            var currVal_10 = !!_co.res;
+            _ck(_v, 14, 0, currVal_10);
+        }, function (_ck, _v) {
+            var _co = _v.component;
+            var currVal_0 = nodeValue(_v, 8).ngClassUntouched;
+            var currVal_1 = nodeValue(_v, 8).ngClassTouched;
+            var currVal_2 = nodeValue(_v, 8).ngClassPristine;
+            var currVal_3 = nodeValue(_v, 8).ngClassDirty;
+            var currVal_4 = nodeValue(_v, 8).ngClassValid;
+            var currVal_5 = nodeValue(_v, 8).ngClassInvalid;
+            var currVal_6 = nodeValue(_v, 8).ngClassPending;
+            _ck(_v, 3, 0, currVal_0, currVal_1, currVal_2, currVal_3, currVal_4, currVal_5, currVal_6);
+            var currVal_9 = _co.csv;
+            _ck(_v, 12, 0, currVal_9);
+        });
+    }
+    function View_ImportComponent_Host_0(_l) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 1, 'mv-import', [], null, null, null, View_ImportComponent_0, RenderType_ImportComponent)), directiveDef(1, 114688, null, 0, ImportComponent, [ParserService], null, null)], function (_ck, _v) {
+            _ck(_v, 1, 0);
+        }, null);
+    }
+    var ImportComponentNgFactory = createComponentFactory('mv-import', ImportComponent, View_ImportComponent_Host_0, {}, {}, []);
+
+    /**
+     * @fileoverview This file is generated by the Angular template compiler.
+     * Do not edit.
+     * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride}
+     */
     var styles_AppComponent = [];
     var RenderType_AppComponent = createRendererType2({ encapsulation: 2, styles: styles_AppComponent,
         data: {} });
@@ -55423,15 +55677,23 @@
     var AppModuleNgFactory = createNgModuleFactory(AppModule, [AppComponent], function (_l) {
         return moduleDef([moduleProvideDef(512, ComponentFactoryResolver, CodegenComponentFactoryResolver, [[8, [HomeComponentNgFactory, UsersComponentNgFactory, UserComponentNgFactory,
                         CreateUserFormComponentNgFactory, DisableUserFormComponentNgFactory,
-                        TeamsComponentNgFactory, RolesComponentNgFactory, AppComponentNgFactory]],
-                [3, ComponentFactoryResolver], NgModuleRef]), moduleProvideDef(4352, LOCALE_ID, 'fr-FR', []), moduleProvideDef(4608, NgLocalization, NgLocaleLocalization, [LOCALE_ID]), moduleProvideDef(5120, APP_ID, _appIdRandomProviderFactory, []), moduleProvideDef(5120, IterableDiffers, _iterableDiffersFactory, []), moduleProvideDef(5120, KeyValueDiffers, _keyValueDiffersFactory, []), moduleProvideDef(4608, DomSanitizer, DomSanitizerImpl, [DOCUMENT]),
-            moduleProvideDef(6144, Sanitizer, null, [DomSanitizer]), moduleProvideDef(4608, HAMMER_GESTURE_CONFIG, HammerGestureConfig, []), moduleProvideDef(5120, EVENT_MANAGER_PLUGINS, function (p0_0, p1_0, p2_0, p2_1) {
+                        TeamsComponentNgFactory, RolesComponentNgFactory, ImportComponentNgFactory,
+                        AppComponentNgFactory]], [3, ComponentFactoryResolver], NgModuleRef]),
+            moduleProvideDef(4352, LOCALE_ID, 'fr-FR', []), moduleProvideDef(4608, NgLocalization, NgLocaleLocalization, [LOCALE_ID]), moduleProvideDef(5120, APP_ID, _appIdRandomProviderFactory, []), moduleProvideDef(5120, IterableDiffers, _iterableDiffersFactory, []),
+            moduleProvideDef(5120, KeyValueDiffers, _keyValueDiffersFactory, []), moduleProvideDef(4608, DomSanitizer, DomSanitizerImpl, [DOCUMENT]), moduleProvideDef(6144, Sanitizer, null, [DomSanitizer]),
+            moduleProvideDef(4608, HAMMER_GESTURE_CONFIG, HammerGestureConfig, []),
+            moduleProvideDef(5120, EVENT_MANAGER_PLUGINS, function (p0_0, p1_0, p2_0, p2_1) {
                 return [new DomEventsPlugin(p0_0), new KeyEventsPlugin(p1_0),
                     new HammerGesturesPlugin(p2_0, p2_1)];
-            }, [DOCUMENT, DOCUMENT, DOCUMENT, HAMMER_GESTURE_CONFIG]),
-            moduleProvideDef(4608, EventManager, EventManager, [EVENT_MANAGER_PLUGINS,
-                NgZone]), moduleProvideDef(135680, DomSharedStylesHost, DomSharedStylesHost, [DOCUMENT]), moduleProvideDef(4608, DomRendererFactory2, DomRendererFactory2, [EventManager, DomSharedStylesHost]), moduleProvideDef(5120, AnimationDriver, instantiateSupportedAnimationDriver, []), moduleProvideDef(5120, AnimationStyleNormalizer, instantiateDefaultStyleNormalizer, []), moduleProvideDef(4608, AnimationEngine, InjectableAnimationEngine, [AnimationDriver,
-                AnimationStyleNormalizer]), moduleProvideDef(5120, RendererFactory2, instantiateRendererFactory, [DomRendererFactory2, AnimationEngine, NgZone]), moduleProvideDef(6144, SharedStylesHost, null, [DomSharedStylesHost]), moduleProvideDef(4608, Testability, Testability, [NgZone]), moduleProvideDef(4608, Meta, Meta, [DOCUMENT]), moduleProvideDef(4608, Title, Title, [DOCUMENT]), moduleProvideDef(4608, AnimationBuilder, BrowserAnimationBuilder, [RendererFactory2,
+            }, [DOCUMENT, DOCUMENT, DOCUMENT, HAMMER_GESTURE_CONFIG]), moduleProvideDef(4608, EventManager, EventManager, [EVENT_MANAGER_PLUGINS, NgZone]),
+            moduleProvideDef(135680, DomSharedStylesHost, DomSharedStylesHost, [DOCUMENT]),
+            moduleProvideDef(4608, DomRendererFactory2, DomRendererFactory2, [EventManager,
+                DomSharedStylesHost]), moduleProvideDef(5120, AnimationDriver, instantiateSupportedAnimationDriver, []),
+            moduleProvideDef(5120, AnimationStyleNormalizer, instantiateDefaultStyleNormalizer, []), moduleProvideDef(4608, AnimationEngine, InjectableAnimationEngine, [AnimationDriver, AnimationStyleNormalizer]),
+            moduleProvideDef(5120, RendererFactory2, instantiateRendererFactory, [DomRendererFactory2, AnimationEngine,
+                NgZone]), moduleProvideDef(6144, SharedStylesHost, null, [DomSharedStylesHost]),
+            moduleProvideDef(4608, Testability, Testability, [NgZone]), moduleProvideDef(4608, Meta, Meta, [DOCUMENT]), moduleProvideDef(4608, Title, Title, [DOCUMENT]),
+            moduleProvideDef(4608, AnimationBuilder, BrowserAnimationBuilder, [RendererFactory2,
                 DOCUMENT$1]), moduleProvideDef(4608, RadioControlRegistry, RadioControlRegistry, []), moduleProvideDef(4608, HttpXsrfTokenExtractor, HttpXsrfCookieExtractor, [DOCUMENT, PLATFORM_ID, XSRF_COOKIE_NAME]),
             moduleProvideDef(4608, HttpXsrfInterceptor, HttpXsrfInterceptor, [HttpXsrfTokenExtractor, XSRF_HEADER_NAME]), moduleProvideDef(5120, HTTP_INTERCEPTORS, function (p0_0) {
                 return [p0_0];
@@ -55458,7 +55720,7 @@
                         { path: 'user', component: UserComponent }, { path: 'create', component: CreateUserFormComponent },
                         { path: 'disable', component: DisableUserFormComponent }, { path: 'teams',
                             component: TeamsComponent }, { path: 'roles', component: RolesComponent },
-                        { path: '**', redirectTo: 'user' }]];
+                        { path: 'import', component: ImportComponent }, { path: '**', redirectTo: 'user' }]];
             }, []), moduleProvideDef(1024, Router, setupRouter, [ApplicationRef, UrlSerializer,
                 ChildrenOutletContexts, Location, Injector, NgModuleFactoryLoader,
                 Compiler, ROUTES, ROUTER_CONFIGURATION, [2, UrlHandlingStrategy],

@@ -110,7 +110,10 @@
     "xlf-translate": "^2.0.2",
     "zone.js": "^0.8.16"
   },
-  "dependencies": {},
+  "dependencies": {
+    "primeicons": "^1.0.0",
+    "primeng": "4.3.0"
+  },
   "scripts": {
     "build": "./node_modules/.bin/gulp build",
     "build:aot": "rm -rf ./src/aot/ && ./node_modules/.bin/ngc -p tsconfig-aot.json && ./node_modules/.bin/rollup -c rollup-config.js",
