@@ -4,6 +4,7 @@ import { UserService } from "../../services/user.service";
 
 @Component({
   selector: "mv-app-users",
+  styleUrls: ["./users.component.css"],
   templateUrl: "./users.component.html",
 })
 

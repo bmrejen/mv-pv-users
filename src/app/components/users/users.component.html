@@ -2,21 +2,35 @@
 
 <h3>Sugar Users</h3>
 
-<div *ngIf="usersFromSugar && usersFromSugar != undefined">
-  <div *ngFor="let user of usersFromSugar ; trackBy: trackByFn">
-    <h4>{{ user.attributes.firstName }} {{ user.attributes.lastName }}</h4>
-    <ul>
-     <li><strong>ID:</strong> {{ user.id }}</li>
-     <li><strong>Type:</strong> {{ user.type }}</li>
-     <li><strong>Phone Home:</strong> {{ user.attributes.phoneHome }}</li>
-     <li><strong>Phone Mobile:</strong> {{ user.attributes.phoneMobile }}</li>
-     <li><strong>Phone Work:</strong> {{ user.attributes.phoneWork }}</li>
-     <li><strong>Phone Other:</strong> {{ user.attributes.phoneOther }}</li>
-     <li><strong>Phone Fax:</strong> {{ user.attributes.phoneFax }}</li>
-     <li><strong>Phone Asterisk:</strong> {{ user.attributes.phoneAsterisk }}</li>
-     <li><strong>E-mail:</strong> {{ user.attributes.email }}</li>
-     <li><strong>Status:</strong> {{ user.attributes.status }}</li>
-     <li><strong>Employee Status</strong> {{ user.attributes.employeeStatus }}</li>
-   </ul>
- </div>
-</div>
+<table *ngIf="usersFromSugar && usersFromSugar != undefined">
+  <tr>
+    <th>First name</th>
+    <th>Last name</th>
+    <th>ID</th>
+    <th>Type</th>
+    <th>Phone Home</th>
+    <th>Phone Mobile</th>
+    <th>Phone Work</th>
+    <th>Phone Other</th>
+    <th>Phone Fax</th>
+    <th>Phone Asterisk</th>
+    <th>Email</th>
+    <th>Status</th>
+    <th>Employee Status</th>
+  </tr>
+  <tr *ngFor="let user of usersFromSugar ; trackBy: trackByFn">
+    <td>{{ user.attributes.firstName }}</td>
+    <td>{{ user.attributes.lastName }}</td>
+    <td>{{ user.id }}</td>
+    <td>{{ user.type }}</td>
+    <td>{{ user.attributes.phoneHome }}</td>
+    <td>{{ user.attributes.phoneMobile }}</td>
+    <td>{{ user.attributes.phoneWork }}</td>
+    <td>{{ user.attributes.phoneOther }}</td>
+    <td>{{ user.attributes.phoneFax }}</td>
+    <td>{{ user.attributes.phoneAsterisk }}</td>
+    <td>{{ user.attributes.email }}</td>
+    <td>{{ user.attributes.status }}</td>
+    <td>{{ user.attributes.employeeStatus }}</td>
+  </tr>
+</table>
