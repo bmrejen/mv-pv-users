@@ -53617,7 +53617,7 @@
     var RenderType_UsersComponent = createRendererType2({ encapsulation: 0,
         styles: styles_UsersComponent, data: {} });
     function View_UsersComponent_2(_l) {
-        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 40, 'tr', [], null, null, null, null, null)), (_l()(),
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 70, 'tr', [], null, null, null, null, null)), (_l()(),
                 textDef(-1, null, ['\n    '])), (_l()(), elementDef(2, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(3, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(5, 0, null, null, 1, 'td', [], null, null, null, null, null)),
             (_l()(), textDef(6, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])),
             (_l()(), elementDef(8, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(9, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(),
@@ -53630,64 +53630,104 @@
                 elementDef(29, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(30, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(),
                 elementDef(32, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(33, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(),
                 elementDef(35, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(36, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(),
-                elementDef(38, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(39, null, ['', ''])), (_l()(), textDef(-1, null, ['\n  ']))], null, function (_ck, _v) {
-            var currVal_0 = _v.context.$implicit.attributes.firstName;
+                elementDef(38, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(39, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(),
+                elementDef(41, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(42, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(),
+                elementDef(44, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(45, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(),
+                elementDef(47, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(48, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(),
+                elementDef(50, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(51, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(),
+                elementDef(53, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(54, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(),
+                elementDef(56, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(57, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(),
+                elementDef(59, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(60, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(),
+                elementDef(62, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(63, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(),
+                elementDef(65, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(66, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(),
+                elementDef(68, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(69, null, ['', ''])), (_l()(), textDef(-1, null, ['\n  ']))], null, function (_ck, _v) {
+            var currVal_0 = _v.context.$implicit.attributes.salutation;
             _ck(_v, 3, 0, currVal_0);
-            var currVal_1 = _v.context.$implicit.attributes.lastName;
+            var currVal_1 = _v.context.$implicit.attributes.firstName;
             _ck(_v, 6, 0, currVal_1);
-            var currVal_2 = _v.context.$implicit.id;
+            var currVal_2 = _v.context.$implicit.attributes.lastName;
             _ck(_v, 9, 0, currVal_2);
-            var currVal_3 = _v.context.$implicit.type;
+            var currVal_3 = _v.context.$implicit.attributes.userName;
             _ck(_v, 12, 0, currVal_3);
-            var currVal_4 = _v.context.$implicit.attributes.phoneHome;
+            var currVal_4 = _v.context.$implicit.attributes.email;
             _ck(_v, 15, 0, currVal_4);
-            var currVal_5 = _v.context.$implicit.attributes.phoneMobile;
+            var currVal_5 = _v.context.$implicit.attributes.department;
             _ck(_v, 18, 0, currVal_5);
-            var currVal_6 = _v.context.$implicit.attributes.phoneWork;
+            var currVal_6 = _v.context.$implicit.attributes.officeId;
             _ck(_v, 21, 0, currVal_6);
-            var currVal_7 = _v.context.$implicit.attributes.phoneOther;
+            var currVal_7 = _v.context.$implicit.attributes.teamId;
             _ck(_v, 24, 0, currVal_7);
-            var currVal_8 = _v.context.$implicit.attributes.phoneFax;
+            var currVal_8 = _v.context.$implicit.attributes.tourplanID;
             _ck(_v, 27, 0, currVal_8);
-            var currVal_9 = _v.context.$implicit.attributes.phoneAsterisk;
+            var currVal_9 = _v.context.$implicit.attributes.swClickToCall;
             _ck(_v, 30, 0, currVal_9);
-            var currVal_10 = _v.context.$implicit.attributes.email;
+            var currVal_10 = _v.context.$implicit.attributes.swCallNotification;
             _ck(_v, 33, 0, currVal_10);
-            var currVal_11 = _v.context.$implicit.attributes.status;
+            var currVal_11 = _v.context.$implicit.attributes.codeSonGalileo;
             _ck(_v, 36, 0, currVal_11);
-            var currVal_12 = _v.context.$implicit.attributes.employeeStatus;
+            var currVal_12 = _v.context.$implicit.id;
             _ck(_v, 39, 0, currVal_12);
+            var currVal_13 = _v.context.$implicit.type;
+            _ck(_v, 42, 0, currVal_13);
+            var currVal_14 = _v.context.$implicit.attributes.phoneHome;
+            _ck(_v, 45, 0, currVal_14);
+            var currVal_15 = _v.context.$implicit.attributes.phoneMobile;
+            _ck(_v, 48, 0, currVal_15);
+            var currVal_16 = _v.context.$implicit.attributes.phoneWork;
+            _ck(_v, 51, 0, currVal_16);
+            var currVal_17 = _v.context.$implicit.attributes.phoneOther;
+            _ck(_v, 54, 0, currVal_17);
+            var currVal_18 = _v.context.$implicit.attributes.phoneFax;
+            _ck(_v, 57, 0, currVal_18);
+            var currVal_19 = _v.context.$implicit.attributes.phoneAsterisk;
+            _ck(_v, 60, 0, currVal_19);
+            var currVal_20 = _v.context.$implicit.attributes.status;
+            _ck(_v, 63, 0, currVal_20);
+            var currVal_21 = _v.context.$implicit.attributes.employeeStatus;
+            _ck(_v, 66, 0, currVal_21);
+            var currVal_22 = _v.context.$implicit.attributes.managerId;
+            _ck(_v, 69, 0, currVal_22);
         });
     }
     function View_UsersComponent_1(_l) {
-        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 47, 'table', [], null, null, null, null, null)), (_l()(),
-                textDef(-1, null, ['\n  '])), (_l()(), elementDef(2, 0, null, null, 45, 'tbody', [], null, null, null, null, null)), (_l()(), elementDef(3, 0, null, null, 40, 'tr', [], null, null, null, null, null)), (_l()(),
-                textDef(-1, null, ['\n    '])), (_l()(), elementDef(5, 0, null, null, 1, 'th', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['First name'])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(8, 0, null, null, 1, 'th', [], null, null, null, null, null)),
-            (_l()(), textDef(-1, null, ['Last name'])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(11, 0, null, null, 1, 'th', [], null, null, null, null, null)),
-            (_l()(), textDef(-1, null, ['ID'])), (_l()(), textDef(-1, null, ['\n    '])),
-            (_l()(), elementDef(14, 0, null, null, 1, 'th', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Type'])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(),
-                elementDef(17, 0, null, null, 1, 'th', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Phone Home'])), (_l()(), textDef(-1, null, ['\n    '])),
-            (_l()(), elementDef(20, 0, null, null, 1, 'th', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Phone Mobile'])), (_l()(), textDef(-1, null, ['\n    '])),
-            (_l()(), elementDef(23, 0, null, null, 1, 'th', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Phone Work'])), (_l()(), textDef(-1, null, ['\n    '])),
-            (_l()(), elementDef(26, 0, null, null, 1, 'th', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Phone Other'])), (_l()(), textDef(-1, null, ['\n    '])),
-            (_l()(), elementDef(29, 0, null, null, 1, 'th', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Phone Fax'])), (_l()(), textDef(-1, null, ['\n    '])),
-            (_l()(), elementDef(32, 0, null, null, 1, 'th', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Phone Asterisk'])), (_l()(), textDef(-1, null, ['\n    '])),
-            (_l()(), elementDef(35, 0, null, null, 1, 'th', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Email'])), (_l()(), textDef(-1, null, ['\n    '])),
-            (_l()(), elementDef(38, 0, null, null, 1, 'th', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Status'])), (_l()(), textDef(-1, null, ['\n    '])),
-            (_l()(), elementDef(41, 0, null, null, 1, 'th', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Employee Status'])), (_l()(), textDef(-1, null, ['\n  '])),
-            (_l()(), textDef(-1, null, ['\n  '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_UsersComponent_2)), directiveDef(46, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(),
-                textDef(-1, null, ['\n']))], function (_ck, _v) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 77, 'table', [], null, null, null, null, null)), (_l()(),
+                textDef(-1, null, ['\n  '])), (_l()(), elementDef(2, 0, null, null, 75, 'tbody', [], null, null, null, null, null)), (_l()(), elementDef(3, 0, null, null, 70, 'tr', [], null, null, null, null, null)), (_l()(),
+                textDef(-1, null, ['\n    '])), (_l()(), elementDef(5, 0, null, null, 1, 'th', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Mr/Mme'])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(8, 0, null, null, 1, 'th', [], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['First name'])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(11, 0, null, null, 1, 'th', [], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Last name'])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(14, 0, null, null, 1, 'th', [], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Username'])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(17, 0, null, null, 1, 'th', [], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Email'])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(20, 0, null, null, 1, 'th', [], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Dept'])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(23, 0, null, null, 1, 'th', [], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Office Id'])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(26, 0, null, null, 1, 'th', [], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Team Id'])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(29, 0, null, null, 1, 'th', [], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Tourplan Id'])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(32, 0, null, null, 1, 'th', [], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['SW ClickToCall'])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(35, 0, null, null, 1, 'th', [], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['SW CallNotification'])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(38, 0, null, null, 1, 'th', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Code SON Galileo'])),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(41, 0, null, null, 1, 'th', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['ID'])),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(44, 0, null, null, 1, 'th', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Type'])),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(47, 0, null, null, 1, 'th', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Phone Home'])),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(50, 0, null, null, 1, 'th', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Phone Mobile'])),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(53, 0, null, null, 1, 'th', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Phone Work'])),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(56, 0, null, null, 1, 'th', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Phone Other'])),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(59, 0, null, null, 1, 'th', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Phone Fax'])),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(62, 0, null, null, 1, 'th', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Phone Asterisk'])),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(65, 0, null, null, 1, 'th', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Status'])),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(68, 0, null, null, 1, 'th', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Employee Status'])),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(71, 0, null, null, 1, 'th', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Manager ID'])),
+            (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_UsersComponent_2)), directiveDef(76, 802816, null, 0, NgForOf, [ViewContainerRef,
+                TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1,
+                    'ngForTrackBy'] }, null), (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
             var _co = _v.component;
             var currVal_0 = _co.usersFromSugar;
             var currVal_1 = _co.trackByFn;
-            _ck(_v, 46, 0, currVal_0, currVal_1);
+            _ck(_v, 76, 0, currVal_0, currVal_1);
         }, null);
     }
     function View_UsersComponent_0(_l) {
         return viewDef(0, [queryDef(402653184, 1, { form: 0 }), (_l()(), elementDef(1, 0, null, null, 1, 'h2', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Users component'])),
             (_l()(), textDef(-1, null, ['\n\n'])), (_l()(), elementDef(4, 0, null, null, 1, 'h3', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Sugar Users'])),
             (_l()(), textDef(-1, null, ['\n\n'])), (_l()(), anchorDef(16777216, null, null, 1, null, View_UsersComponent_1)), directiveDef(8, 16384, null, 0, NgIf, [ViewContainerRef, TemplateRef], { ngIf: [0, 'ngIf'] }, null),
-            (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
+            (_l()(), textDef(-1, null, ['\n\n']))], function (_ck, _v) {
             var _co = _v.component;
             var currVal_0 = (_co.usersFromSugar && (_co.usersFromSugar != undefined));
             _ck(_v, 8, 0, currVal_0);

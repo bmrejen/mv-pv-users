@@ -4,8 +4,18 @@
 
 <table *ngIf="usersFromSugar && usersFromSugar != undefined">
   <tr>
+    <th>Mr/Mme</th>
     <th>First name</th>
     <th>Last name</th>
+    <th>Username</th>
+    <th>Email</th>
+    <th>Dept</th>
+    <th>Office Id</th>
+    <th>Team Id</th>
+    <th>Tourplan Id</th>
+    <th>SW ClickToCall</th>
+    <th>SW CallNotification</th>
+    <th>Code SON Galileo</th>
     <th>ID</th>
     <th>Type</th>
     <th>Phone Home</th>
@@ -14,13 +24,23 @@
     <th>Phone Other</th>
     <th>Phone Fax</th>
     <th>Phone Asterisk</th>
-    <th>Email</th>
     <th>Status</th>
     <th>Employee Status</th>
+    <th>Manager ID</th>
   </tr>
   <tr *ngFor="let user of usersFromSugar ; trackBy: trackByFn">
+    <td>{{ user.attributes.salutation }}</td>
     <td>{{ user.attributes.firstName }}</td>
     <td>{{ user.attributes.lastName }}</td>
+    <td>{{ user.attributes.userName }}</td>
+    <td>{{ user.attributes.email }}</td>
+    <td>{{ user.attributes.department }}</td>
+    <td>{{ user.attributes.officeId }}</td>
+    <td>{{ user.attributes.teamId }}</td>
+    <td>{{ user.attributes.tourplanID }}</td>
+    <td>{{ user.attributes.swClickToCall }}</td>
+    <td>{{ user.attributes.swCallNotification }}</td>
+    <td>{{ user.attributes.codeSonGalileo }}</td>
     <td>{{ user.id }}</td>
     <td>{{ user.type }}</td>
     <td>{{ user.attributes.phoneHome }}</td>
@@ -29,8 +49,9 @@
     <td>{{ user.attributes.phoneOther }}</td>
     <td>{{ user.attributes.phoneFax }}</td>
     <td>{{ user.attributes.phoneAsterisk }}</td>
-    <td>{{ user.attributes.email }}</td>
     <td>{{ user.attributes.status }}</td>
     <td>{{ user.attributes.employeeStatus }}</td>
+    <td>{{ user.attributes.managerId }}</td>
   </tr>
 </table>
+
