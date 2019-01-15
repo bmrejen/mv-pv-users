@@ -34170,12 +34170,12 @@
         UserService.prototype.getTeamsFromSugar = function () {
             return this.getData("teams");
         };
+        UserService.prototype.getRolesFromSugar = function () {
+            return this.getData("roles");
+        };
         UserService.prototype.postDataToSugar = function (body) {
             return this.http.post(this.endPoint, body)
                 .pipe(catchError$1(this.errorHandler));
-        };
-        UserService.prototype.getRolesFromSugar = function () {
-            return this.getData("roles");
         };
         UserService.prototype.errorHandler = function (error) {
             return _throw_1(error);
@@ -34207,6 +34207,7 @@
             this.userService = userService;
             this.parserService = parserService;
             this.displayVentesLeads = false;
+            this.passwordExists = false;
             //
         }
         CreateUserFormComponent.prototype.ngOnInit = function () {
@@ -34234,11 +34235,15 @@
             username.value = "" + first.value[0].toLowerCase() + last.value.toLowerCase();
         };
         CreateUserFormComponent.prototype.setPassword = function (first, last) {
+            if (this.passwordExists) {
+                return;
+            }
             var pwd = this.fields.userFields.find(function (field) { return field.name === "password"; });
             var rndStrg = Math.random()
                 .toString()
                 .substring(2, 7);
             pwd.value = "" + first.value[0].toLowerCase() + last.value[0].toLowerCase() + rndStrg + "!";
+            this.passwordExists = true;
         };
         CreateUserFormComponent.prototype.setVentesLeads = function () {
             console.log("leadsmin", this.fields.leadsMin);
@@ -34686,10 +34691,6 @@
         }
         UsersComponent.prototype.ngOnInit = function () {
             var _this = this;
-            this.userService.getUser()
-                .subscribe(function (users) {
-                _this.users = users.data;
-            });
             this.userService.getUsersFromSugar()
                 .subscribe(function (users) {
                 _this.usersFromSugar = users.data;

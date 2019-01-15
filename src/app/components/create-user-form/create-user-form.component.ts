@@ -14,6 +14,7 @@ export class CreateUserFormComponent implements OnInit {
   public fields;
   public errorMsg;
   public displayVentesLeads = false;
+  public passwordExists = false;
   // CODE TOURPLAN SERA LEFT(user_name, 6)
   constructor(
     private fieldsService: FieldsService,
@@ -53,11 +54,13 @@ export class CreateUserFormComponent implements OnInit {
   }
 
   public setPassword(first, last) {
+    if (this.passwordExists) { return ; }
     const pwd = this.fields.userFields.find((field) => field.name === "password");
     const rndStrg = Math.random()
     .toString()
     .substring(2, 7);
     pwd.value = `${first.value[0].toLowerCase()}${last.value[0].toLowerCase()}${rndStrg}!`;
+    this.passwordExists = true;
   }
 
   public setVentesLeads() {

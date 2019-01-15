@@ -26,13 +26,13 @@ export class UserService {
     return this.getData("teams");
   }
 
+  public getRolesFromSugar(): Observable<any> {
+    return this.getData("roles");
+  }
+
   public postDataToSugar(body) {
     return this.http.post<any>(this.endPoint, body)
     .pipe(catchError(this.errorHandler));
-  }
-
-  public getRolesFromSugar(): Observable<any> {
-    return this.getData("roles");
   }
 
   public errorHandler(error: HttpErrorResponse) {

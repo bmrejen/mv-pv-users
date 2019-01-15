@@ -9,19 +9,16 @@ import { UserService } from "../../services/user.service";
 })
 
 export class UsersComponent implements OnInit {
-  public users: User;
   public usersFromSugar;
 
+  // what is this line for?
   @ViewChild("disableForm") public form: any;
+
   constructor(private userService: UserService) {
     // constructor
   }
 
   public ngOnInit(): void {
-    this.userService.getUser()
-    .subscribe((users) => {
-      this.users = users.data;
-    });
 
     this.userService.getUsersFromSugar()
     .subscribe((users) => {
