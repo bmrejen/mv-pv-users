@@ -1,23 +1,23 @@
 import {
-    Component,
-    OnInit,
+  Component,
+  OnInit,
 } from "@angular/core";
 
 import {
-    Config,
+  Config,
 } from "../config";
 
 @Component({
-    templateUrl: "./home.component.html",
+  templateUrl: "./home.component.html",
 })
 
 export class HomeComponent implements OnInit {
 
-    constructor() {
-        // constructor
-    }
+  constructor() {
+    // constructor
+  }
 
-    public ngOnInit(): void {
-        // init
-    }
+  public ngOnInit(): void {
+    // init
+  }
 }

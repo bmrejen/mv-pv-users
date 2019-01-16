@@ -1,0 +1,18 @@
+export const Functions = [
+{
+  label: "Junior Manager",
+  value: "jm",
+},
+{
+  label: "Manager",
+  value: "mgr",
+},
+{
+  label: "Assistant Ventes",
+  value: "av",
+},
+{
+  label: "Agent qualité",
+  value: "aq",
+},
+];

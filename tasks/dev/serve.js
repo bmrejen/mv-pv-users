@@ -10,9 +10,9 @@ gulp.task('serve', ['build'], function() {
         open: false
     });
 
-    gulp.watch([
-        "src/scss/**/*.scss"
-    ], ['watch:css']);
+    // gulp.watch([
+    //     "src/scss/**/*.scss"
+    // ], ['watch:css']);
 
     gulp.watch([
         "src/**/*.ts",
