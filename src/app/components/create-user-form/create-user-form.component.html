@@ -20,13 +20,14 @@
         </label>
       </div>
       <div ngModelGroup="credentials">
-        <div *ngFor="let userField of fields.userFields ; trackBy: trackByFn">
+        <div *ngFor="let userField of fields.userFields; trackBy: trackByFn">
           <label>
             {{ userField.label }}
-            <input (blur)="credentialClick($event)" [(ngModel)]="userField.value" [name]="userField.name" type="text">
+            <input (blur)="credentialClick(fields.userFields)" [(ngModel)]="userField.value" [name]="userField.name" type="text">
           </label>
         </div>
       </div>
+      <p *ngIf="usernameTaken">Username already taken</p>
     </div>a-bis
   </fieldset>
 
@@ -101,7 +102,17 @@
 
   <div ngModelGroup="othersWithComponent">
     <legend>Autres</legend>
-    <mv-checkbox-field [(checkboxes)]="fields.autres"></mv-checkbox-field>
+    <fieldset>
+      <div *ngFor="let box of fields.autres; trackBy: trackByFn">
+        <label>
+          <input
+          type="checkbox"
+
+          [(ngModel)]="box.checked"
+          [name]="box.id"> {{ box.label }}
+        </label>
+      </div>
+    </fieldset>
   </div>
 
 

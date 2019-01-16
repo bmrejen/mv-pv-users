@@ -15,6 +15,8 @@ export class CreateUserFormComponent implements OnInit {
   public errorMsg;
   public displayVentesLeads = false;
   public passwordExists = false;
+  public usersFromSugar;
+  public usernameTaken = false;
   // CODE TOURPLAN SERA LEFT(user_name, 6)
   constructor(
     private fieldsService: FieldsService,
@@ -29,6 +31,8 @@ export class CreateUserFormComponent implements OnInit {
     this.fields = this.fieldsService.getData();
     this.resetSugar();
     this.getSwitchvoxUsers();
+    this.userService.getUsersFromSugar()
+    .subscribe((users) => this.usersFromSugar = users.data);
   }
 
   public getSwitchvoxUsers() {
@@ -39,18 +43,28 @@ export class CreateUserFormComponent implements OnInit {
   }
 
   public credentialClick(e) {
+    console.log(e);
     const first = this.fields.userFields.find((field) => field.name === "firstname");
     const last = this.fields.userFields.find((field) => field.name === "lastname");
     const username = this.fields.userFields.find((field) => field.name === "username");
-    if (!!first.value && !!last.value) {
+    this.usernameTaken = this.isUsernameTaken(username);
+    if (!!first.value && !!last.value && !username.value) {
       this.setUsername(first, last, username);
       this.setPassword(first, last);
       this.setEmail(username);
+
     }
   }
 
   public setUsername(first, last, username) {
     username.value = `${first.value[0].toLowerCase()}${last.value.toLowerCase()}`;
+  }
+
+  public isUsernameTaken(username) {
+    const res = this.usersFromSugar
+    .find((user) => user.attributes.userName === username.value);
+
+    return(res);
   }
 
   public setPassword(first, last) {
@@ -224,8 +238,6 @@ export class CreateUserFormComponent implements OnInit {
         this.checkStuff(roles, ["Read-only"]);
         this.fields.inactiveStatus = true;
         this.fields.inactiveEmployee = true;
-        // STATUS INACTIF (RADIO)
-        // EMPLOYEE STATUS: INACTIF (RADIO)
         break;
       }
 

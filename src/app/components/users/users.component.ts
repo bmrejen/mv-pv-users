@@ -11,9 +11,6 @@ import { UserService } from "../../services/user.service";
 export class UsersComponent implements OnInit {
   public usersFromSugar;
 
-  // what is this line for?
-  @ViewChild("disableForm") public form: any;
-
   constructor(private userService: UserService) {
     // constructor
   }
@@ -24,6 +21,10 @@ export class UsersComponent implements OnInit {
     .subscribe((users) => {
       this.usersFromSugar = users.data;
     });
+
+    this.userService.getUserById("7ac24a6a-1eb1-db9e-e08d-549eec71bc8d")
+    .subscribe((user) => console.log(user.data));
+
   }
 
   public trackByFn(index, item) {
