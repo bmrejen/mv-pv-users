@@ -28,19 +28,6 @@ export class User {
       swCallNotification: string,
       codeSonGalileo: string,
     }) {
-    // this.defaultConstructor(data);
+    console.log(`Created user ${this.attributes.userName}`);
   }
-
-  // public defaultConstructor(data?: any) {
-    //   const self = this;
-
-    //   if (undefined !== data && null !== data) {
-      //     for (const prop in data) {
-        //       if (prop != null) {
-          //         self[prop] = data[prop];
-          //       }
-          //     }
-          //   }
-          //   console.log("why doesn't this line show ?");
-          // }
-        }
+}

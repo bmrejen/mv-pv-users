@@ -1,14 +1,16 @@
-<h2>Roles component</h2>
+<h2>Sugar Roles</h2>
 
-<div *ngIf="rolesFromSugar && rolesFromSugar != undefined">
-  <div *ngFor="let role of rolesFromSugar ; trackBy: trackByFn">
-    <h4>{{ role.attributes.firstName }} {{ role.attributes.lastName }}</h4>
-    <ul>
-      <li><strong>ID:</strong> {{ role.id }}</li>
-      <li><strong>Type:</strong> {{ role.type }}</li>
-      <li><strong>ID (again):</strong> {{ role.attributes.id }}</li>
-      <li><strong>Name:</strong> {{ role.attributes.name }}</li>
-      <li><strong>Description:</strong> {{ role.attributes.description }}</li>
-   </ul>
- </div>
-</div>
+<table *ngIf="rolesFromSugar && rolesFromSugar != undefined">
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Id</th>
+    <th>Type</th>
+  </tr>
+  <tr *ngFor="let role of rolesFromSugar ; trackBy: trackByFn">
+    <td>{{ role.attributes.name }}</td>
+    <td>{{ role.attributes.description }}</td>
+    <td>{{ role.id }}</td>
+    <td>{{ role.type }}</td>
+  </tr>
+</table>

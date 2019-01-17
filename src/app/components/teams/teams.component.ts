@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { UserService } from "../../services/user.service";
+import { SugarService } from "../../services/sugar.service";
 
 @Component({
   selector: "mv-app-teams",
@@ -10,12 +10,12 @@ export class TeamsComponent implements OnInit {
   public teamsFromSugar;
 
   @ViewChild("disableForm") public form: any;
-  constructor(private userService: UserService) {
+  constructor(private sugarService: SugarService) {
     // constructor
   }
 
   public ngOnInit(): void {
-    this.userService.getTeamsFromSugar()
+    this.sugarService.getTeamsFromSugar()
     .subscribe((teams) => {
       this.teamsFromSugar = teams.data;
     });

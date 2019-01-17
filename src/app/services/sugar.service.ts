@@ -3,9 +3,13 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import { _throw } from "rxjs/observable/throw";
 import { catchError } from "rxjs/operators";
+import { Role } from "../models/role";
+import { User } from "../models/user";
 
 @Injectable()
-export class UserService {
+export class SugarService {
+  public roleList: Role[] = [];
+  public userList: User[] = [];
   private endPoint: string = "http://sh.pvcrm.com/sugarcrm/sugarcrm/api/";
 
   constructor(private http: HttpClient) {
@@ -20,12 +24,37 @@ export class UserService {
     return this.getData(`users/${id}`);
   }
 
+  public createUserList(): User[] {
+    this.getUsersFromSugar()
+    .subscribe((users) => {
+      users.data.forEach((user) => {
+        this.userList.push(new User(
+          user.type,
+          user.id,
+          user.attributes));
+      });
+      console.log("USERLIST", this.userList);
+    });
+
+    return this.userList;
+  }
+
   public getTeamsFromSugar(): Observable<any> {
     return this.getData("teams");
   }
 
-  public getRolesFromSugar(): Observable<any> {
-    return this.getData("roles");
+  public getRolesFromSugar(): Role[] {
+    this.getData("roles")
+    .subscribe((roles) => {
+      roles.data.forEach((role) => {
+        this.roleList.push(new Role(
+          role.type,
+          role.id,
+          role.attributes));
+      });
+    });
+
+    return this.roleList;
   }
 
   public postDataToSugar(body) {

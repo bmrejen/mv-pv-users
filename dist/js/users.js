@@ -34145,6 +34145,26 @@
 
     var throttle = throttle_1.throttle;
 
+    var Role = /** @class */ (function () {
+        function Role(type, id, attributes) {
+            this.type = type;
+            this.id = id;
+            this.attributes = attributes;
+            console.log("Created role " + this.attributes.name);
+        }
+        return Role;
+    }());
+
+    var User = /** @class */ (function () {
+        function User(type, id, attributes) {
+            this.type = type;
+            this.id = id;
+            this.attributes = attributes;
+            console.log("Created user " + this.attributes.userName);
+        }
+        return User;
+    }());
+
     var __decorate$5 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -34154,39 +34174,59 @@
     var __metadata$4 = (undefined && undefined.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var UserService = /** @class */ (function () {
-        function UserService(http) {
+    var SugarService = /** @class */ (function () {
+        function SugarService(http) {
             this.http = http;
+            this.roleList = [];
+            this.userList = [];
             this.endPoint = "http://sh.pvcrm.com/sugarcrm/sugarcrm/api/";
             //
         }
-        UserService.prototype.getUsersFromSugar = function () {
+        SugarService.prototype.getUsersFromSugar = function () {
             return this.getData("users");
         };
-        UserService.prototype.getUserById = function (id) {
+        SugarService.prototype.getUserById = function (id) {
             return this.getData("users/" + id);
         };
-        UserService.prototype.getTeamsFromSugar = function () {
+        SugarService.prototype.createUserList = function () {
+            var _this = this;
+            this.getUsersFromSugar()
+                .subscribe(function (users) {
+                users.data.forEach(function (user) {
+                    _this.userList.push(new User(user.type, user.id, user.attributes));
+                });
+                console.log("USERLIST", _this.userList);
+            });
+            return this.userList;
+        };
+        SugarService.prototype.getTeamsFromSugar = function () {
             return this.getData("teams");
         };
-        UserService.prototype.getRolesFromSugar = function () {
-            return this.getData("roles");
+        SugarService.prototype.getRolesFromSugar = function () {
+            var _this = this;
+            this.getData("roles")
+                .subscribe(function (roles) {
+                roles.data.forEach(function (role) {
+                    _this.roleList.push(new Role(role.type, role.id, role.attributes));
+                });
+            });
+            return this.roleList;
         };
-        UserService.prototype.postDataToSugar = function (body) {
+        SugarService.prototype.postDataToSugar = function (body) {
             return this.http.post(this.endPoint, body)
                 .pipe(catchError$1(this.errorHandler));
         };
-        UserService.prototype.errorHandler = function (error) {
+        SugarService.prototype.errorHandler = function (error) {
             return _throw_1(error);
         };
-        UserService.prototype.getData = function (item) {
+        SugarService.prototype.getData = function (item) {
             return this.http.get(this.endPoint + ("" + item));
         };
-        UserService = __decorate$5([
+        SugarService = __decorate$5([
             Injectable(),
             __metadata$4("design:paramtypes", [HttpClient])
-        ], UserService);
-        return UserService;
+        ], SugarService);
+        return SugarService;
     }());
 
     var __decorate$6 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -34200,10 +34240,10 @@
     };
     var CreateUserFormComponent = /** @class */ (function () {
         // CODE TOURPLAN SERA LEFT(user_name, 6)
-        function CreateUserFormComponent(fieldsService, switchvoxService, userService, parserService) {
+        function CreateUserFormComponent(fieldsService, switchvoxService, sugarService, parserService) {
             this.fieldsService = fieldsService;
             this.switchvoxService = switchvoxService;
-            this.userService = userService;
+            this.sugarService = sugarService;
             this.parserService = parserService;
             this.displayVentesLeads = false;
             this.passwordExists = false;
@@ -34215,7 +34255,7 @@
             this.fields = this.fieldsService.getData();
             this.resetSugar();
             this.getSwitchvoxUsers();
-            this.userService.getUsersFromSugar()
+            this.sugarService.getUsersFromSugar()
                 .subscribe(function (users) { return _this.usersFromSugar = users.data; });
         };
         CreateUserFormComponent.prototype.getSwitchvoxUsers = function () {
@@ -34314,7 +34354,7 @@
         };
         CreateUserFormComponent.prototype.onSubmit = function () {
             var _this = this;
-            this.userService.postDataToSugar(this.fields)
+            this.sugarService.postDataToSugar(this.fields)
                 .subscribe(function (data) { return console.log("DATA- ", data); }, function (error) { return _this.errorMsg = error.statusText; });
         };
         CreateUserFormComponent.prototype.handleClick = function (e, type) {
@@ -34460,7 +34500,7 @@
             }),
             __metadata$5("design:paramtypes", [FieldsService,
                 SwitchVoxService,
-                UserService,
+                SugarService,
                 ParserService])
         ], CreateUserFormComponent);
         return CreateUserFormComponent;
@@ -34579,30 +34619,25 @@
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var RolesComponent = /** @class */ (function () {
-        function RolesComponent(userService) {
-            this.userService = userService;
+        // @ViewChild("disableForm") public form: any;
+        function RolesComponent(sugarService) {
+            this.sugarService = sugarService;
+            this.rolesFromSugar = [];
             // constructor
         }
         RolesComponent.prototype.ngOnInit = function () {
-            var _this = this;
-            this.userService.getRolesFromSugar()
-                .subscribe(function (roles) {
-                _this.rolesFromSugar = roles.data;
-            });
+            this.rolesFromSugar = this.sugarService.getRolesFromSugar();
         };
         RolesComponent.prototype.trackByFn = function (index, item) {
             return index; // or item.id
         };
-        __decorate$a([
-            ViewChild("disableForm"),
-            __metadata$9("design:type", Object)
-        ], RolesComponent.prototype, "form", void 0);
         RolesComponent = __decorate$a([
             Component({
                 selector: "mv-app-roles",
+                styleUrls: ["./roles.component.css"],
                 templateUrl: "./roles.component.html",
             }),
-            __metadata$9("design:paramtypes", [UserService])
+            __metadata$9("design:paramtypes", [SugarService])
         ], RolesComponent);
         return RolesComponent;
     }());
@@ -34617,13 +34652,13 @@
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var TeamsComponent = /** @class */ (function () {
-        function TeamsComponent(userService) {
-            this.userService = userService;
+        function TeamsComponent(sugarService) {
+            this.sugarService = sugarService;
             // constructor
         }
         TeamsComponent.prototype.ngOnInit = function () {
             var _this = this;
-            this.userService.getTeamsFromSugar()
+            this.sugarService.getTeamsFromSugar()
                 .subscribe(function (teams) {
                 _this.teamsFromSugar = teams.data;
             });
@@ -34640,7 +34675,7 @@
                 selector: "mv-app-teams",
                 templateUrl: "./teams.component.html",
             }),
-            __metadata$a("design:paramtypes", [UserService])
+            __metadata$a("design:paramtypes", [SugarService])
         ], TeamsComponent);
         return TeamsComponent;
     }());
@@ -34655,13 +34690,13 @@
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var UserComponent = /** @class */ (function () {
-        function UserComponent(userService) {
-            this.userService = userService;
+        function UserComponent(sugarService) {
+            this.sugarService = sugarService;
             // constructor
         }
         UserComponent.prototype.ngOnInit = function () {
             var _this = this;
-            this.userService.getUserById("cbc425e0-40bc-b51d-f6d2-57d618ec23cf")
+            this.sugarService.getUserById("cbc425e0-40bc-b51d-f6d2-57d618ec23cf")
                 .subscribe(function (user) {
                 _this.user = user.data;
             });
@@ -34678,19 +34713,9 @@
                 selector: "mv-app-user",
                 templateUrl: "./user.component.html",
             }),
-            __metadata$b("design:paramtypes", [UserService])
+            __metadata$b("design:paramtypes", [SugarService])
         ], UserComponent);
         return UserComponent;
-    }());
-
-    var User = /** @class */ (function () {
-        function User(type, id, attributes) {
-            this.type = type;
-            this.id = id;
-            this.attributes = attributes;
-            // this.defaultConstructor(data);
-        }
-        return User;
     }());
 
     var __decorate$d = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -34703,26 +34728,13 @@
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var UsersComponent = /** @class */ (function () {
-        function UsersComponent(userService) {
-            this.userService = userService;
-            this.userList = [];
+        function UsersComponent(sugarService) {
+            this.sugarService = sugarService;
+            this.usersFromSugar = [];
             // constructor
         }
         UsersComponent.prototype.ngOnInit = function () {
-            var _this = this;
-            this.userService.getUsersFromSugar()
-                .subscribe(function (users) {
-                _this.usersFromSugar = users.data;
-                users.data.forEach(function (user) {
-                    _this.userList.push(new User(user.type, user.id, user.attributes));
-                });
-                console.log("USERLIST", _this.userList);
-            });
-            this.userService.getUserById("7ac24a6a-1eb1-db9e-e08d-549eec71bc8d")
-                .subscribe(function (user) {
-                _this.userModel = new User(user.data.type, user.data.id, user.data.attributes);
-                console.log(_this.userModel);
-            });
+            this.usersFromSugar = this.sugarService.createUserList();
         };
         UsersComponent.prototype.trackByFn = function (index, item) {
             return index; // or item.id
@@ -34733,7 +34745,7 @@
                 styleUrls: ["./users.component.css"],
                 templateUrl: "./users.component.html",
             }),
-            __metadata$c("design:paramtypes", [UserService])
+            __metadata$c("design:paramtypes", [SugarService])
         ], UsersComponent);
         return UsersComponent;
     }());
@@ -53595,8 +53607,8 @@
                 providers: [
                     FieldsService,
                     ParserService,
+                    SugarService,
                     SwitchVoxService,
-                    UserService,
                     HttpClient,
                     { provide: APP_BASE_HREF, useValue: "/" },
                     { provide: LOCALE_ID, useValue: "fr-FR" },
@@ -53759,7 +53771,7 @@
         }, null);
     }
     function View_UsersComponent_Host_0(_l) {
-        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 1, 'mv-app-users', [], null, null, null, View_UsersComponent_0, RenderType_UsersComponent)), directiveDef(1, 114688, null, 0, UsersComponent, [UserService], null, null)], function (_ck, _v) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 1, 'mv-app-users', [], null, null, null, View_UsersComponent_0, RenderType_UsersComponent)), directiveDef(1, 114688, null, 0, UsersComponent, [SugarService], null, null)], function (_ck, _v) {
             _ck(_v, 1, 0);
         }, null);
     }
@@ -53829,7 +53841,7 @@
         }, null);
     }
     function View_UserComponent_Host_0(_l) {
-        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 1, 'mv-app-user', [], null, null, null, View_UserComponent_0, RenderType_UserComponent)), directiveDef(1, 114688, null, 0, UserComponent, [UserService], null, null)], function (_ck, _v) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 1, 'mv-app-user', [], null, null, null, View_UserComponent_0, RenderType_UserComponent)), directiveDef(1, 114688, null, 0, UserComponent, [SugarService], null, null)], function (_ck, _v) {
             _ck(_v, 1, 0);
         }, null);
     }
@@ -55448,7 +55460,7 @@
         });
     }
     function View_CreateUserFormComponent_Host_0(_l) {
-        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 1, 'mv-app-create-user-form', [], null, null, null, View_CreateUserFormComponent_0, RenderType_CreateUserFormComponent)), directiveDef(1, 114688, null, 0, CreateUserFormComponent, [FieldsService, SwitchVoxService, UserService, ParserService], null, null)], function (_ck, _v) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 1, 'mv-app-create-user-form', [], null, null, null, View_CreateUserFormComponent_0, RenderType_CreateUserFormComponent)), directiveDef(1, 114688, null, 0, CreateUserFormComponent, [FieldsService, SwitchVoxService, SugarService, ParserService], null, null)], function (_ck, _v) {
             _ck(_v, 1, 0);
         }, null);
     }
@@ -55621,7 +55633,7 @@
         }, null);
     }
     function View_TeamsComponent_Host_0(_l) {
-        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 1, 'mv-app-teams', [], null, null, null, View_TeamsComponent_0, RenderType_TeamsComponent)), directiveDef(1, 114688, null, 0, TeamsComponent, [UserService], null, null)], function (_ck, _v) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 1, 'mv-app-teams', [], null, null, null, View_TeamsComponent_0, RenderType_TeamsComponent)), directiveDef(1, 114688, null, 0, TeamsComponent, [SugarService], null, null)], function (_ck, _v) {
             _ck(_v, 1, 0);
         }, null);
     }
@@ -55632,54 +55644,59 @@
      * Do not edit.
      * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride}
      */
-    var styles_RolesComponent = [];
-    var RenderType_RolesComponent = createRendererType2({ encapsulation: 2,
+    /* tslint:disable */
+    var styles$3 = ['table[_ngcontent-%COMP%] {\n  border-collapse: collapse;\n  width: 100%;\n}\n\ntd[_ngcontent-%COMP%], th[_ngcontent-%COMP%] {\n  border: 1px solid #dddddd;\n  text-align: left;\n  padding: 8px;\n}\n\ntr[_ngcontent-%COMP%]:nth-child(even) {\n  background-color: #dddddd;\n}'];
+
+    /**
+     * @fileoverview This file is generated by the Angular template compiler.
+     * Do not edit.
+     * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride}
+     */
+    var styles_RolesComponent = [styles$3];
+    var RenderType_RolesComponent = createRendererType2({ encapsulation: 0,
         styles: styles_RolesComponent, data: {} });
     function View_RolesComponent_2(_l) {
-        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 32, 'div', [], null, null, null, null, null)), (_l()(),
-                textDef(-1, null, ['\n    '])), (_l()(), elementDef(2, 0, null, null, 1, 'h4', [], null, null, null, null, null)), (_l()(), textDef(3, null, ['', ' ', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(5, 0, null, null, 26, 'ul', [], null, null, null, null, null)),
-            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(7, 0, null, null, 3, 'li', [], null, null, null, null, null)), (_l()(), elementDef(8, 0, null, null, 1, 'strong', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['ID:'])), (_l()(), textDef(10, null, [' ', ''])), (_l()(), textDef(-1, null, ['\n      '])),
-            (_l()(), elementDef(12, 0, null, null, 3, 'li', [], null, null, null, null, null)), (_l()(), elementDef(13, 0, null, null, 1, 'strong', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Type:'])), (_l()(), textDef(15, null, [' ', ''])), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(17, 0, null, null, 3, 'li', [], null, null, null, null, null)), (_l()(), elementDef(18, 0, null, null, 1, 'strong', [], null, null, null, null, null)),
-            (_l()(), textDef(-1, null, ['ID (again):'])), (_l()(), textDef(20, null, [' ', ''])), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(22, 0, null, null, 3, 'li', [], null, null, null, null, null)), (_l()(), elementDef(23, 0, null, null, 1, 'strong', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Name:'])),
-            (_l()(), textDef(25, null, [' ', ''])), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(27, 0, null, null, 3, 'li', [], null, null, null, null, null)),
-            (_l()(), elementDef(28, 0, null, null, 1, 'strong', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Description:'])), (_l()(), textDef(30, null, [' ', ''])),
-            (_l()(), textDef(-1, null, ['\n   '])), (_l()(), textDef(-1, null, ['\n ']))], null, function (_ck, _v) {
-            var currVal_0 = _v.context.$implicit.attributes.firstName;
-            var currVal_1 = _v.context.$implicit.attributes.lastName;
-            _ck(_v, 3, 0, currVal_0, currVal_1);
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 13, 'tr', [], null, null, null, null, null)), (_l()(),
+                textDef(-1, null, ['\n    '])), (_l()(), elementDef(2, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(3, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(5, 0, null, null, 1, 'td', [], null, null, null, null, null)),
+            (_l()(), textDef(6, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])),
+            (_l()(), elementDef(8, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(9, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(),
+                elementDef(11, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(12, null, ['', ''])), (_l()(), textDef(-1, null, ['\n  ']))], null, function (_ck, _v) {
+            var currVal_0 = _v.context.$implicit.attributes.name;
+            _ck(_v, 3, 0, currVal_0);
+            var currVal_1 = _v.context.$implicit.attributes.description;
+            _ck(_v, 6, 0, currVal_1);
             var currVal_2 = _v.context.$implicit.id;
-            _ck(_v, 10, 0, currVal_2);
+            _ck(_v, 9, 0, currVal_2);
             var currVal_3 = _v.context.$implicit.type;
-            _ck(_v, 15, 0, currVal_3);
-            var currVal_4 = _v.context.$implicit.attributes.id;
-            _ck(_v, 20, 0, currVal_4);
-            var currVal_5 = _v.context.$implicit.attributes.name;
-            _ck(_v, 25, 0, currVal_5);
-            var currVal_6 = _v.context.$implicit.attributes.description;
-            _ck(_v, 30, 0, currVal_6);
+            _ck(_v, 12, 0, currVal_3);
         });
     }
     function View_RolesComponent_1(_l) {
-        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 4, 'div', [], null, null, null, null, null)), (_l()(),
-                textDef(-1, null, ['\n  '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_RolesComponent_2)), directiveDef(3, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'],
-                ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 20, 'table', [], null, null, null, null, null)), (_l()(),
+                textDef(-1, null, ['\n  '])), (_l()(), elementDef(2, 0, null, null, 18, 'tbody', [], null, null, null, null, null)), (_l()(), elementDef(3, 0, null, null, 13, 'tr', [], null, null, null, null, null)), (_l()(),
+                textDef(-1, null, ['\n    '])), (_l()(), elementDef(5, 0, null, null, 1, 'th', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Name'])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(8, 0, null, null, 1, 'th', [], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Description'])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(11, 0, null, null, 1, 'th', [], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Id'])), (_l()(), textDef(-1, null, ['\n    '])),
+            (_l()(), elementDef(14, 0, null, null, 1, 'th', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Type'])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(),
+                textDef(-1, null, ['\n  '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_RolesComponent_2)), directiveDef(19, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(),
+                textDef(-1, null, ['\n']))], function (_ck, _v) {
             var _co = _v.component;
             var currVal_0 = _co.rolesFromSugar;
             var currVal_1 = _co.trackByFn;
-            _ck(_v, 3, 0, currVal_0, currVal_1);
+            _ck(_v, 19, 0, currVal_0, currVal_1);
         }, null);
     }
     function View_RolesComponent_0(_l) {
-        return viewDef(0, [queryDef(402653184, 1, { form: 0 }), (_l()(), elementDef(1, 0, null, null, 1, 'h2', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Roles component'])),
-            (_l()(), textDef(-1, null, ['\n\n'])), (_l()(), anchorDef(16777216, null, null, 1, null, View_RolesComponent_1)), directiveDef(5, 16384, null, 0, NgIf, [ViewContainerRef, TemplateRef], { ngIf: [0, 'ngIf'] }, null),
-            (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 1, 'h2', [], null, null, null, null, null)), (_l()(),
+                textDef(-1, null, ['Sugar Roles'])), (_l()(), textDef(-1, null, ['\n\n'])), (_l()(), anchorDef(16777216, null, null, 1, null, View_RolesComponent_1)), directiveDef(4, 16384, null, 0, NgIf, [ViewContainerRef,
+                TemplateRef], { ngIf: [0, 'ngIf'] }, null), (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
             var _co = _v.component;
             var currVal_0 = (_co.rolesFromSugar && (_co.rolesFromSugar != undefined));
-            _ck(_v, 5, 0, currVal_0);
+            _ck(_v, 4, 0, currVal_0);
         }, null);
     }
     function View_RolesComponent_Host_0(_l) {
-        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 1, 'mv-app-roles', [], null, null, null, View_RolesComponent_0, RenderType_RolesComponent)), directiveDef(1, 114688, null, 0, RolesComponent, [UserService], null, null)], function (_ck, _v) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 1, 'mv-app-roles', [], null, null, null, View_RolesComponent_0, RenderType_RolesComponent)), directiveDef(1, 114688, null, 0, RolesComponent, [SugarService], null, null)], function (_ck, _v) {
             _ck(_v, 1, 0);
         }, null);
     }
@@ -55691,14 +55708,14 @@
      * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride}
      */
     /* tslint:disable */
-    var styles$3 = [''];
+    var styles$4 = [''];
 
     /**
      * @fileoverview This file is generated by the Angular template compiler.
      * Do not edit.
      * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride}
      */
-    var styles_ImportComponent = [styles$3];
+    var styles_ImportComponent = [styles$4];
     var RenderType_ImportComponent = createRendererType2({ encapsulation: 0,
         styles: styles_ImportComponent, data: {} });
     function View_ImportComponent_2(_l) {
@@ -55848,8 +55865,7 @@
                 Compiler, Injector, PreloadingStrategy]), moduleProvideDef(4608, PreloadAllModules, PreloadAllModules, []), moduleProvideDef(5120, ROUTER_INITIALIZER, getBootstrapListener, [RouterInitializer]), moduleProvideDef(5120, APP_BOOTSTRAP_LISTENER, function (p0_0) {
                 return [p0_0];
             }, [ROUTER_INITIALIZER]), moduleProvideDef(4608, FieldsService, FieldsService, []), moduleProvideDef(4608, ParserService, ParserService, []),
-            moduleProvideDef(4608, SwitchVoxService, SwitchVoxService, [HttpClient]),
-            moduleProvideDef(4608, UserService, UserService, [HttpClient]), moduleProvideDef(512, CommonModule, CommonModule, []), moduleProvideDef(1024, ErrorHandler, errorHandler, []), moduleProvideDef(1024, NgProbeToken, function () {
+            moduleProvideDef(4608, SugarService, SugarService, [HttpClient]), moduleProvideDef(4608, SwitchVoxService, SwitchVoxService, [HttpClient]), moduleProvideDef(512, CommonModule, CommonModule, []), moduleProvideDef(1024, ErrorHandler, errorHandler, []), moduleProvideDef(1024, NgProbeToken, function () {
                 return [routerNgProbeToken()];
             }, []), moduleProvideDef(512, RouterInitializer, RouterInitializer, [Injector]), moduleProvideDef(1024, APP_INITIALIZER, function (p0_0, p0_1, p1_0) {
                 return [_createNgProbe(p0_0, p0_1), getAppInitializer(p1_0)];

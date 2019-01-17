@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FieldsService } from "../../services/fields.service";
 import { ParserService } from "../../services/parser.service";
 import { SwitchVoxService } from "../../services/switchvox.service";
-import { UserService } from "../../services/user.service";
+import { SugarService } from "../../services/sugar.service";
 
 @Component({
   selector: "mv-app-create-user-form",
@@ -21,7 +21,7 @@ export class CreateUserFormComponent implements OnInit {
   constructor(
     private fieldsService: FieldsService,
     private switchvoxService: SwitchVoxService,
-    private userService: UserService,
+    private sugarService: SugarService,
     private parserService: ParserService,
     ) {
     //
@@ -31,7 +31,7 @@ export class CreateUserFormComponent implements OnInit {
     this.fields = this.fieldsService.getData();
     this.resetSugar();
     this.getSwitchvoxUsers();
-    this.userService.getUsersFromSugar()
+    this.sugarService.getUsersFromSugar()
     .subscribe((users) => this.usersFromSugar = users.data);
   }
 
@@ -138,7 +138,7 @@ export class CreateUserFormComponent implements OnInit {
   }
 
   public onSubmit() {
-    this.userService.postDataToSugar(this.fields)
+    this.sugarService.postDataToSugar(this.fields)
     .subscribe(
       (data) => console.log("DATA- ", data),
       (error) => this.errorMsg = error.statusText);
