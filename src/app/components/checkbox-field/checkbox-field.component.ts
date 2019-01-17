@@ -13,6 +13,4 @@ export class CheckboxFieldComponent {
   public trackByFn(item, id) {
     return id;
   }
-
-
 }

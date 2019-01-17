@@ -34683,6 +34683,16 @@
         return UserComponent;
     }());
 
+    var User = /** @class */ (function () {
+        function User(type, id, attributes) {
+            this.type = type;
+            this.id = id;
+            this.attributes = attributes;
+            // this.defaultConstructor(data);
+        }
+        return User;
+    }());
+
     var __decorate$d = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -34695,6 +34705,7 @@
     var UsersComponent = /** @class */ (function () {
         function UsersComponent(userService) {
             this.userService = userService;
+            this.userList = [];
             // constructor
         }
         UsersComponent.prototype.ngOnInit = function () {
@@ -34702,9 +34713,16 @@
             this.userService.getUsersFromSugar()
                 .subscribe(function (users) {
                 _this.usersFromSugar = users.data;
+                users.data.forEach(function (user) {
+                    _this.userList.push(new User(user.type, user.id, user.attributes));
+                });
+                console.log("USERLIST", _this.userList);
             });
             this.userService.getUserById("7ac24a6a-1eb1-db9e-e08d-549eec71bc8d")
-                .subscribe(function (user) { return console.log(user.data); });
+                .subscribe(function (user) {
+                _this.userModel = new User(user.data.type, user.data.id, user.data.attributes);
+                console.log(_this.userModel);
+            });
         };
         UsersComponent.prototype.trackByFn = function (index, item) {
             return index; // or item.id

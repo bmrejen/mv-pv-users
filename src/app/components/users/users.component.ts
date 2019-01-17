@@ -10,6 +10,8 @@ import { UserService } from "../../services/user.service";
 
 export class UsersComponent implements OnInit {
   public usersFromSugar;
+  public userModel: User;
+  public userList: User[] = [];
 
   constructor(private userService: UserService) {
     // constructor
@@ -20,11 +22,23 @@ export class UsersComponent implements OnInit {
     this.userService.getUsersFromSugar()
     .subscribe((users) => {
       this.usersFromSugar = users.data;
+      users.data.forEach((user) => {
+        this.userList.push(new User(
+          user.type,
+          user.id,
+          user.attributes));
+      });
+      console.log("USERLIST", this.userList);
     });
 
     this.userService.getUserById("7ac24a6a-1eb1-db9e-e08d-549eec71bc8d")
-    .subscribe((user) => console.log(user.data));
-
+    .subscribe((user) => {
+      this.userModel = new User(
+        user.data.type,
+        user.data.id,
+        user.data.attributes);
+      console.log(this.userModel);
+    });
   }
 
   public trackByFn(index, item) {
