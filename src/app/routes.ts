@@ -33,6 +33,10 @@ export const AppRoutes: Routes = [
   component: HomeComponent,
 },
 {
+  path: "users/:id",
+  component: CreateUserFormComponent,
+},
+{
   path: "users",
   component: UsersComponent,
 },
@@ -41,8 +45,8 @@ export const AppRoutes: Routes = [
   component: UserComponent,
 },
 {
-  path: "create",
-  component: CreateUserFormComponent,
+  path: "disable/:id",
+  component: DisableUserFormComponent,
 },
 {
   path: "disable",

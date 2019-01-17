@@ -2,8 +2,11 @@
 
 <h3>Sugar Users</h3>
 
+<button routerLink="/create">Nouvel utilisateur</button>
+
 <table *ngIf="usersFromSugar && usersFromSugar != undefined">
   <tr>
+    <th></th>
     <th>Mr/Mme</th>
     <th>First name</th>
     <th>Last name</th>
@@ -29,6 +32,10 @@
     <th>Manager ID</th>
   </tr>
   <tr *ngFor="let user of usersFromSugar ; trackBy: trackByFn">
+    <td>
+      <button [routerLink]="['/users', user.id]">Edit</button>
+      <button [routerLink]="['/disable', user.id]">Delete</button>
+    </td>
     <td>{{ user.attributes.salutation }}</td>
     <td>{{ user.attributes.firstName }}</td>
     <td>{{ user.attributes.lastName }}</td>

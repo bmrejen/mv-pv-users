@@ -34,8 +34,8 @@ import { UserComponent } from "./app/components/user/user.component";
 import { UsersComponent } from "./app/components/users/users.component";
 import { FieldsService } from "./app/services/fields.service";
 import { ParserService } from "./app/services/parser.service";
-import { SwitchVoxService } from "./app/services/switchvox.service";
 import { SugarService } from "./app/services/sugar.service";
+import { SwitchVoxService } from "./app/services/switchvox.service";
 
 import "./app/rxjs-extensions";
 

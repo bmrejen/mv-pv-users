@@ -1,6 +1,6 @@
 <h2> Create User Form </h2>
 
-<form #createForm="ngForm" (ngSubmit)="onSubmit()">
+<form #createForm="ngForm" (ngSubmit)="onSubmit(createForm.value)">
   <fieldset>
     <legend>Type de compte</legend>
     <div class="checkbox-list" id="account-type" ngModelGroup="accounts">
@@ -227,7 +227,7 @@
 
   <div *ngIf="errorMsg">ERROR: {{ errorMsg }}</div>
 
-  <button type="submit">Créer l'utilisateur</button>
+  <button [disabled]="!createForm.form.valid" type="submit">Créer l'utilisateur</button>
 </form>
 
 {{ createForm.value | json }}

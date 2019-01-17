@@ -10,7 +10,7 @@ import { SugarService } from "../../services/sugar.service";
 export class UserComponent implements OnInit {
   public user: User;
 
-  @ViewChild("disableForm") public form: any;
+  // @ViewChild("disableForm") public form: any;
   constructor(private sugarService: SugarService) {
     // constructor
   }
