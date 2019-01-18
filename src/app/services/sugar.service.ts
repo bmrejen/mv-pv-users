@@ -1,33 +1,60 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
-import { of } from "rxjs/observable/of";
 import { _throw } from "rxjs/observable/throw";
 import { catchError } from "rxjs/operators";
+import { Role } from "../models/role";
+import { User } from "../models/user";
 
 @Injectable()
-export class UserService {
+export class SugarService {
+  public roleList: Role[] = [];
+  public userList: User[] = [];
   private endPoint: string = "http://sh.pvcrm.com/sugarcrm/sugarcrm/api/";
-  private mockUrl: string = this.endPoint + "users/7ac24a6a-1eb1-db9e-e08d-549eec71bc8d";
 
   constructor(private http: HttpClient) {
     //
-  }
-
-  public getUser(): Observable<any> {
-    return this.getData(this.mockUrl);
   }
 
   public getUsersFromSugar(): Observable<any> {
     return this.getData("users");
   }
 
+  public getUserById(id): Observable<any> {
+    return this.getData(`users/${id}`);
+  }
+
+  public createUserList(): User[] {
+    this.getUsersFromSugar()
+    .subscribe((users) => {
+      users.data.forEach((user) => {
+        this.userList.push(new User(
+          user.type,
+          user.id,
+          user.attributes));
+      });
+      console.log("USERLIST", this.userList);
+    });
+
+    return this.userList;
+  }
+
   public getTeamsFromSugar(): Observable<any> {
     return this.getData("teams");
   }
 
-  public getRolesFromSugar(): Observable<any> {
-    return this.getData("roles");
+  public getRolesFromSugar(): Role[] {
+    this.getData("roles")
+    .subscribe((roles) => {
+      roles.data.forEach((role) => {
+        this.roleList.push(new Role(
+          role.type,
+          role.id,
+          role.attributes));
+      });
+    });
+
+    return this.roleList;
   }
 
   public postDataToSugar(body) {

@@ -34,8 +34,8 @@ import { UserComponent } from "./app/components/user/user.component";
 import { UsersComponent } from "./app/components/users/users.component";
 import { FieldsService } from "./app/services/fields.service";
 import { ParserService } from "./app/services/parser.service";
+import { SugarService } from "./app/services/sugar.service";
 import { SwitchVoxService } from "./app/services/switchvox.service";
-import { UserService } from "./app/services/user.service";
 
 import "./app/rxjs-extensions";
 
@@ -65,8 +65,8 @@ import "./app/rxjs-extensions";
   providers: [
   FieldsService,
   ParserService,
+  SugarService,
   SwitchVoxService,
-  UserService,
   HttpClient,
   { provide: APP_BASE_HREF, useValue: "/" },
   { provide: LOCALE_ID, useValue: "fr-FR" },

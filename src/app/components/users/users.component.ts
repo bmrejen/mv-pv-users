@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { User } from "../../models/user";
-import { UserService } from "../../services/user.service";
+import { SugarService } from "../../services/sugar.service";
 
 @Component({
   selector: "mv-app-users",
@@ -9,21 +9,14 @@ import { UserService } from "../../services/user.service";
 })
 
 export class UsersComponent implements OnInit {
-  public usersFromSugar;
+  public usersFromSugar: User[] = [];
 
-  // what is this line for?
-  @ViewChild("disableForm") public form: any;
-
-  constructor(private userService: UserService) {
+  constructor(private sugarService: SugarService) {
     // constructor
   }
 
   public ngOnInit(): void {
-
-    this.userService.getUsersFromSugar()
-    .subscribe((users) => {
-      this.usersFromSugar = users.data;
-    });
+    this.usersFromSugar = this.sugarService.createUserList();
   }
 
   public trackByFn(index, item) {

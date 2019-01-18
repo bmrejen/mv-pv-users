@@ -1,8 +1,9 @@
 import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 import { FieldsService } from "../../services/fields.service";
 import { ParserService } from "../../services/parser.service";
+import { SugarService } from "../../services/sugar.service";
 import { SwitchVoxService } from "../../services/switchvox.service";
-import { UserService } from "../../services/user.service";
 
 @Component({
   selector: "mv-app-create-user-form",
@@ -15,12 +16,15 @@ export class CreateUserFormComponent implements OnInit {
   public errorMsg;
   public displayVentesLeads = false;
   public passwordExists = false;
+  public usersFromSugar;
+  public usernameTaken = false;
   // CODE TOURPLAN SERA LEFT(user_name, 6)
   constructor(
     private fieldsService: FieldsService,
     private switchvoxService: SwitchVoxService,
-    private userService: UserService,
+    private sugarService: SugarService,
     private parserService: ParserService,
+    private route: ActivatedRoute,
     ) {
     //
   }
@@ -29,6 +33,9 @@ export class CreateUserFormComponent implements OnInit {
     this.fields = this.fieldsService.getData();
     this.resetSugar();
     this.getSwitchvoxUsers();
+    this.sugarService.getUsersFromSugar()
+    .subscribe((users) => this.usersFromSugar = users.data);
+    this.route.paramMap.subscribe((params) => console.log(params));
   }
 
   public getSwitchvoxUsers() {
@@ -39,18 +46,28 @@ export class CreateUserFormComponent implements OnInit {
   }
 
   public credentialClick(e) {
+    console.log(e);
     const first = this.fields.userFields.find((field) => field.name === "firstname");
     const last = this.fields.userFields.find((field) => field.name === "lastname");
     const username = this.fields.userFields.find((field) => field.name === "username");
-    if (!!first.value && !!last.value) {
+    this.usernameTaken = this.isUsernameTaken(username);
+    if (!!first.value && !!last.value && !username.value) {
       this.setUsername(first, last, username);
       this.setPassword(first, last);
       this.setEmail(username);
+
     }
   }
 
   public setUsername(first, last, username) {
     username.value = `${first.value[0].toLowerCase()}${last.value.toLowerCase()}`;
+  }
+
+  public isUsernameTaken(username) {
+    const res = this.usersFromSugar
+    .find((user) => user.attributes.userName === username.value);
+
+    return(res);
   }
 
   public setPassword(first, last) {
@@ -123,8 +140,8 @@ export class CreateUserFormComponent implements OnInit {
     });
   }
 
-  public onSubmit() {
-    this.userService.postDataToSugar(this.fields)
+  public onSubmit(form) {
+    this.sugarService.postDataToSugar(form)
     .subscribe(
       (data) => console.log("DATA- ", data),
       (error) => this.errorMsg = error.statusText);
@@ -224,8 +241,6 @@ export class CreateUserFormComponent implements OnInit {
         this.checkStuff(roles, ["Read-only"]);
         this.fields.inactiveStatus = true;
         this.fields.inactiveEmployee = true;
-        // STATUS INACTIF (RADIO)
-        // EMPLOYEE STATUS: INACTIF (RADIO)
         break;
       }
 

@@ -1,6 +1,6 @@
 <h2> Create User Form </h2>
 
-<form #createForm="ngForm" (ngSubmit)="onSubmit()">
+<form #createForm="ngForm" (ngSubmit)="onSubmit(createForm.value)">
   <fieldset>
     <legend>Type de compte</legend>
     <div class="checkbox-list" id="account-type" ngModelGroup="accounts">
@@ -20,13 +20,14 @@
         </label>
       </div>
       <div ngModelGroup="credentials">
-        <div *ngFor="let userField of fields.userFields ; trackBy: trackByFn">
+        <div *ngFor="let userField of fields.userFields; trackBy: trackByFn">
           <label>
             {{ userField.label }}
-            <input (blur)="credentialClick($event)" [(ngModel)]="userField.value" [name]="userField.name" type="text">
+            <input (blur)="credentialClick(fields.userFields)" [(ngModel)]="userField.value" [name]="userField.name" type="text">
           </label>
         </div>
       </div>
+      <p *ngIf="usernameTaken">Username already taken</p>
     </div>a-bis
   </fieldset>
 
@@ -101,7 +102,17 @@
 
   <div ngModelGroup="othersWithComponent">
     <legend>Autres</legend>
-    <mv-checkbox-field [(checkboxes)]="fields.autres"></mv-checkbox-field>
+    <fieldset>
+      <div *ngFor="let box of fields.autres; trackBy: trackByFn">
+        <label>
+          <input
+          type="checkbox"
+
+          [(ngModel)]="box.checked"
+          [name]="box.id"> {{ box.label }}
+        </label>
+      </div>
+    </fieldset>
   </div>
 
 
@@ -216,7 +227,7 @@
 
   <div *ngIf="errorMsg">ERROR: {{ errorMsg }}</div>
 
-  <button type="submit">Créer l'utilisateur</button>
+  <button [disabled]="!createForm.form.valid" type="submit">Créer l'utilisateur</button>
 </form>
 
 {{ createForm.value | json }}

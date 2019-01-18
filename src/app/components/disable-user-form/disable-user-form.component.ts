@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 import { FieldsService } from "../../services/fields.service";
 
 @Component({
@@ -10,7 +11,9 @@ export class DisableUserFormComponent implements OnInit {
 
   public fields;
   public enableAdd: boolean = true;
-  constructor(private fieldsService: FieldsService) {
+  constructor(
+    private fieldsService: FieldsService,
+    private route: ActivatedRoute) {
     //
   }
 
@@ -19,6 +22,7 @@ export class DisableUserFormComponent implements OnInit {
     this.fields.accounts.forEach((account) => {
       account.checked = true;
     });
+    this.route.paramMap.subscribe((params) => console.log(params));
   }
 
   public trackByFn(index, item) {

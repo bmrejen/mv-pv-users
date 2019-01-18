@@ -5,7 +5,7 @@
   <legend>Type de compte</legend>
   <div class="checkbox-list" id="account-type">
     <div *ngFor="let account of fields.accounts ; trackBy: trackByFn">
-      <input type="checkbox" [name]="account.label" [(ngModel)]="account.checked">{{ account.name }}
+      <input type="checkbox" [name]="account.id" [(ngModel)]="account.checked">{{ account.label }}
     </div>
   </div>
 </fieldset>
