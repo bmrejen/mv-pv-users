@@ -20,12 +20,12 @@ export class CreateUserFormComponent implements OnInit {
   public usernameTaken = false;
   // CODE TOURPLAN SERA LEFT(user_name, 6)
   constructor(
-    private fieldsService: FieldsService,
-    private switchvoxService: SwitchVoxService,
-    private sugarService: SugarService,
-    private parserService: ParserService,
-    private route: ActivatedRoute,
-    ) {
+              private fieldsService: FieldsService,
+              private switchvoxService: SwitchVoxService,
+              private sugarService: SugarService,
+              private parserService: ParserService,
+              private route: ActivatedRoute,
+              ) {
     //
   }
 
@@ -35,7 +35,7 @@ export class CreateUserFormComponent implements OnInit {
     this.getSwitchvoxUsers();
     this.sugarService.getUsersFromSugar()
     .subscribe((users) => this.usersFromSugar = users.data);
-    this.route.paramMap.subscribe((params) => console.log(params));
+    this.route.paramMap.subscribe((params) => params.get("id"));
   }
 
   public getSwitchvoxUsers() {
@@ -143,8 +143,8 @@ export class CreateUserFormComponent implements OnInit {
   public onSubmit(form) {
     this.sugarService.postDataToSugar(form)
     .subscribe(
-      (data) => console.log("DATA- ", data),
-      (error) => this.errorMsg = error.statusText);
+               (data) => console.log("DATA- ", data),
+               (error) => this.errorMsg = error.statusText);
   }
 
   public handleClick(e, type) {
@@ -172,16 +172,16 @@ export class CreateUserFormComponent implements OnInit {
         this.checkStuff(roles, ["Sales"]);
         this.checkStuff(services, ["Ventes"]);
         this.checkStuff(autres,
-          [
-          "Global",
-          "Ventes",
-          "Devis Cotation",
-          "ROLE - BI Validation",
-          "ROLE - ViewRCM",
-          "ROLE - View RM",
-          "Ventes",
-          ],
-          );
+                        [
+                        "Global",
+                        "Ventes",
+                        "Devis Cotation",
+                        "ROLE - BI Validation",
+                        "ROLE - ViewRCM",
+                        "ROLE - View RM",
+                        "Ventes",
+                        ],
+                        );
         break;
       }
       case "manager":
@@ -191,13 +191,13 @@ export class CreateUserFormComponent implements OnInit {
         this.checkStuff(roles, ["Team Manager"]);
         this.checkStuff(services, ["Ventes"]);
         this.checkStuff(autres, [
-          "Global",
-          "Devis Cotation",
-          "Devis V3",
-          "ROLE - BI Validation",
-          "Ventes",
-          ],
-          );
+                        "Global",
+                        "Devis Cotation",
+                        "Devis V3",
+                        "ROLE - BI Validation",
+                        "Ventes",
+                        ],
+                        );
         break;
       }
       case "assistant":
@@ -206,12 +206,12 @@ export class CreateUserFormComponent implements OnInit {
         this.checkStuff(roles, ["Reservation"]);
         this.checkStuff(services, ["Ventes"]);
         this.checkStuff(autres, [
-          "Devis V3",
-          "Devis Cotation",
-          "Global",
-          "Reservation",
-          "ROLE - Reservation",
-          ]);
+                        "Devis V3",
+                        "Devis Cotation",
+                        "Global",
+                        "Reservation",
+                        "ROLE - Reservation",
+                        ]);
         break;
       }
       case "qualite":
@@ -276,26 +276,26 @@ export class CreateUserFormComponent implements OnInit {
     this.fields.userValue = "user_default_xx";
     this.fields.selectedManager = null,
     this.eraseFields([
-      this.fields.codeSON,
-      this.fields.codeTourplan,
-      this.fields.codevad,
-      this.fields.groupes,
-      this.fields.inbound,
-      this.fields.outbound,
-      this.fields.phoneExtension,
-      this.fields.phoneNumber,
-      this.fields.selectedBureau,
-      this.fields.selectedFunction,
-      this.fields.selectedOrganisation,
-      this.fields.title,
-      ]);
+                     this.fields.codeSON,
+                     this.fields.codeTourplan,
+                     this.fields.codevad,
+                     this.fields.groupes,
+                     this.fields.inbound,
+                     this.fields.outbound,
+                     this.fields.phoneExtension,
+                     this.fields.phoneNumber,
+                     this.fields.selectedBureau,
+                     this.fields.selectedFunction,
+                     this.fields.selectedOrganisation,
+                     this.fields.title,
+                     ]);
     this.unCheckArrays([
-      this.fields.roles,
-      this.fields.services,
-      this.fields.autres,
-      this.fields.teams,
-      this.fields.destinations,
-      this.fields.orgas,
-      ]);
+                       this.fields.roles,
+                       this.fields.services,
+                       this.fields.autres,
+                       this.fields.teams,
+                       this.fields.destinations,
+                       this.fields.orgas,
+                       ]);
   }
 }
