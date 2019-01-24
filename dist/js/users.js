@@ -40929,7 +40929,7 @@
             this.getSwitchvoxUsers();
             this.sugarService.getUsersFromSugar()
                 .subscribe(function (users) { return _this.usersFromSugar = users.data; });
-            this.route.paramMap.subscribe(function (params) { return console.log(params); });
+            this.route.paramMap.subscribe(function (params) { return params.get("id"); });
         };
         CreateUserFormComponent.prototype.getSwitchvoxUsers = function () {
             this.switchvoxService.getData()

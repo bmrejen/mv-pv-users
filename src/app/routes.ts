@@ -29,8 +29,8 @@ import {
 /* tslint:disable object-literal-sort-keys */
 export const AppRoutes: Routes = [
 {
-  path: "home",
-  component: HomeComponent,
+  path: "/",
+  component: UsersComponent,
 },
 {
   path: "users/:id",

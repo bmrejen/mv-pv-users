@@ -9,7 +9,6 @@ import {
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { FormsModule } from "@angular/forms";
-import { HomeComponent } from "./app/components";
 
 import {
   HttpClient,
@@ -45,7 +44,6 @@ import "./app/rxjs-extensions";
   ],
   declarations: [
   AppComponent,
-  HomeComponent,
   ImportComponent,
   UserComponent,
   UsersComponent,
