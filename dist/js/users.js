@@ -41270,31 +41270,6 @@
     var __metadata$8 = (undefined && undefined.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var HomeComponent = /** @class */ (function () {
-        function HomeComponent() {
-            // constructor
-        }
-        HomeComponent.prototype.ngOnInit = function () {
-            // init
-        };
-        HomeComponent = __decorate$9([
-            Component({
-                templateUrl: "./home.component.html",
-            }),
-            __metadata$8("design:paramtypes", [])
-        ], HomeComponent);
-        return HomeComponent;
-    }());
-
-    var __decorate$a = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-        return c > 3 && r && Object.defineProperty(target, key, r), r;
-    };
-    var __metadata$9 = (undefined && undefined.__metadata) || function (k, v) {
-        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-    };
     var RolesComponent = /** @class */ (function () {
         // @ViewChild("disableForm") public form: any;
         function RolesComponent(sugarService) {
@@ -41308,24 +41283,24 @@
         RolesComponent.prototype.trackByFn = function (index, item) {
             return index; // or item.id
         };
-        RolesComponent = __decorate$a([
+        RolesComponent = __decorate$9([
             Component({
                 selector: "mv-app-roles",
                 styleUrls: ["./roles.component.css"],
                 templateUrl: "./roles.component.html",
             }),
-            __metadata$9("design:paramtypes", [SugarService])
+            __metadata$8("design:paramtypes", [SugarService])
         ], RolesComponent);
         return RolesComponent;
     }());
 
-    var __decorate$b = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var __decorate$a = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var __metadata$a = (undefined && undefined.__metadata) || function (k, v) {
+    var __metadata$9 = (undefined && undefined.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var TeamsComponent = /** @class */ (function () {
@@ -41343,27 +41318,27 @@
         TeamsComponent.prototype.trackByFn = function (index, item) {
             return index; // or item.id
         };
-        __decorate$b([
+        __decorate$a([
             ViewChild("disableForm"),
-            __metadata$a("design:type", Object)
+            __metadata$9("design:type", Object)
         ], TeamsComponent.prototype, "form", void 0);
-        TeamsComponent = __decorate$b([
+        TeamsComponent = __decorate$a([
             Component({
                 selector: "mv-app-teams",
                 templateUrl: "./teams.component.html",
             }),
-            __metadata$a("design:paramtypes", [SugarService])
+            __metadata$9("design:paramtypes", [SugarService])
         ], TeamsComponent);
         return TeamsComponent;
     }());
 
-    var __decorate$c = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var __decorate$b = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var __metadata$b = (undefined && undefined.__metadata) || function (k, v) {
+    var __metadata$a = (undefined && undefined.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var UserComponent = /** @class */ (function () {
@@ -41382,23 +41357,23 @@
         UserComponent.prototype.trackByFn = function (index, item) {
             return index; // or item.id
         };
-        UserComponent = __decorate$c([
+        UserComponent = __decorate$b([
             Component({
                 selector: "mv-app-user",
                 templateUrl: "./user.component.html",
             }),
-            __metadata$b("design:paramtypes", [SugarService])
+            __metadata$a("design:paramtypes", [SugarService])
         ], UserComponent);
         return UserComponent;
     }());
 
-    var __decorate$d = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var __decorate$c = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var __metadata$c = (undefined && undefined.__metadata) || function (k, v) {
+    var __metadata$b = (undefined && undefined.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var UsersComponent = /** @class */ (function () {
@@ -41413,23 +41388,19 @@
         UsersComponent.prototype.trackByFn = function (index, item) {
             return index; // or item.id
         };
-        UsersComponent = __decorate$d([
+        UsersComponent = __decorate$c([
             Component({
                 selector: "mv-app-users",
                 styleUrls: ["./users.component.css"],
                 templateUrl: "./users.component.html",
             }),
-            __metadata$c("design:paramtypes", [SugarService])
+            __metadata$b("design:paramtypes", [SugarService])
         ], UsersComponent);
         return UsersComponent;
     }());
 
     /* tslint:disable object-literal-sort-keys */
     var AppRoutes = [
-        {
-            path: "home",
-            component: HomeComponent,
-        },
         {
             path: "users/:id",
             component: CreateUserFormComponent,
@@ -41462,7 +41433,7 @@
             path: "import",
             component: ImportComponent,
         },
-        { path: "**", redirectTo: "user" },
+        { path: "**", redirectTo: "users" },
     ];
     /* tslint:enable */
 
@@ -53600,13 +53571,13 @@
      */
     FormsModule.ctorParameters = function () { return []; };
 
-    var __decorate$e = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var __decorate$d = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var __metadata$d = (undefined && undefined.__metadata) || function (k, v) {
+    var __metadata$c = (undefined && undefined.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var CheckboxFieldComponent = /** @class */ (function () {
@@ -53615,11 +53586,11 @@
         CheckboxFieldComponent.prototype.trackByFn = function (item, id) {
             return id;
         };
-        __decorate$e([
+        __decorate$d([
             Input(),
-            __metadata$d("design:type", Array)
+            __metadata$c("design:type", Array)
         ], CheckboxFieldComponent.prototype, "checkboxes", void 0);
-        CheckboxFieldComponent = __decorate$e([
+        CheckboxFieldComponent = __decorate$d([
             Component({
                 selector: "mv-checkbox-field",
                 styleUrls: ["./checkbox-field.component.css"],
@@ -53632,7 +53603,7 @@
     // HACK: does nothing, because `toPromise` now lives on the `Observable` itself.
     // leaving this module here to prevent breakage.
 
-    var __decorate$f = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var __decorate$e = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -53641,14 +53612,13 @@
     var AppModule = /** @class */ (function () {
         function AppModule() {
         }
-        AppModule = __decorate$f([
+        AppModule = __decorate$e([
             NgModule({
                 bootstrap: [
                     AppComponent,
                 ],
                 declarations: [
                     AppComponent,
-                    HomeComponent,
                     ImportComponent,
                     UserComponent,
                     UsersComponent,
@@ -53678,25 +53648,6 @@
         ], AppModule);
         return AppModule;
     }());
-
-    /**
-     * @fileoverview This file is generated by the Angular template compiler.
-     * Do not edit.
-     * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride}
-     */
-    var styles_HomeComponent = [];
-    var RenderType_HomeComponent = createRendererType2({ encapsulation: 2,
-        styles: styles_HomeComponent, data: {} });
-    function View_HomeComponent_0(_l) {
-        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 1, 'b', [], null, null, null, null, null)), (_l()(),
-                textDef(-1, null, [' Users '])), (_l()(), textDef(-1, null, ['\n']))], null, null);
-    }
-    function View_HomeComponent_Host_0(_l) {
-        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 1, 'ng-component', [], null, null, null, View_HomeComponent_0, RenderType_HomeComponent)), directiveDef(1, 114688, null, 0, HomeComponent, [], null, null)], function (_ck, _v) {
-            _ck(_v, 1, 0);
-        }, null);
-    }
-    var HomeComponentNgFactory = createComponentFactory('ng-component', HomeComponent, View_HomeComponent_Host_0, {}, {}, []);
 
     /**
      * @fileoverview This file is generated by the Angular template compiler.
@@ -55904,17 +55855,24 @@
      * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride}
      */
     var AppModuleNgFactory = createNgModuleFactory(AppModule, [AppComponent], function (_l) {
-        return moduleDef([moduleProvideDef(512, ComponentFactoryResolver, CodegenComponentFactoryResolver, [[8, [HomeComponentNgFactory, CreateUserFormComponentNgFactory, UsersComponentNgFactory,
-                        UserComponentNgFactory, DisableUserFormComponentNgFactory, TeamsComponentNgFactory,
-                        RolesComponentNgFactory, ImportComponentNgFactory, AppComponentNgFactory]],
-                [3, ComponentFactoryResolver], NgModuleRef]), moduleProvideDef(4352, LOCALE_ID, 'fr-FR', []), moduleProvideDef(4608, NgLocalization, NgLocaleLocalization, [LOCALE_ID]), moduleProvideDef(5120, APP_ID, _appIdRandomProviderFactory, []), moduleProvideDef(5120, IterableDiffers, _iterableDiffersFactory, []), moduleProvideDef(5120, KeyValueDiffers, _keyValueDiffersFactory, []), moduleProvideDef(4608, DomSanitizer, DomSanitizerImpl, [DOCUMENT]),
-            moduleProvideDef(6144, Sanitizer, null, [DomSanitizer]), moduleProvideDef(4608, HAMMER_GESTURE_CONFIG, HammerGestureConfig, []), moduleProvideDef(5120, EVENT_MANAGER_PLUGINS, function (p0_0, p1_0, p2_0, p2_1) {
+        return moduleDef([moduleProvideDef(512, ComponentFactoryResolver, CodegenComponentFactoryResolver, [[8, [CreateUserFormComponentNgFactory, UsersComponentNgFactory, UserComponentNgFactory,
+                        DisableUserFormComponentNgFactory, TeamsComponentNgFactory, RolesComponentNgFactory,
+                        ImportComponentNgFactory, AppComponentNgFactory]], [3, ComponentFactoryResolver],
+                NgModuleRef]), moduleProvideDef(4352, LOCALE_ID, 'fr-FR', []), moduleProvideDef(4608, NgLocalization, NgLocaleLocalization, [LOCALE_ID]), moduleProvideDef(5120, APP_ID, _appIdRandomProviderFactory, []), moduleProvideDef(5120, IterableDiffers, _iterableDiffersFactory, []),
+            moduleProvideDef(5120, KeyValueDiffers, _keyValueDiffersFactory, []), moduleProvideDef(4608, DomSanitizer, DomSanitizerImpl, [DOCUMENT]), moduleProvideDef(6144, Sanitizer, null, [DomSanitizer]),
+            moduleProvideDef(4608, HAMMER_GESTURE_CONFIG, HammerGestureConfig, []),
+            moduleProvideDef(5120, EVENT_MANAGER_PLUGINS, function (p0_0, p1_0, p2_0, p2_1) {
                 return [new DomEventsPlugin(p0_0), new KeyEventsPlugin(p1_0),
                     new HammerGesturesPlugin(p2_0, p2_1)];
-            }, [DOCUMENT, DOCUMENT, DOCUMENT, HAMMER_GESTURE_CONFIG]),
-            moduleProvideDef(4608, EventManager, EventManager, [EVENT_MANAGER_PLUGINS,
-                NgZone]), moduleProvideDef(135680, DomSharedStylesHost, DomSharedStylesHost, [DOCUMENT]), moduleProvideDef(4608, DomRendererFactory2, DomRendererFactory2, [EventManager, DomSharedStylesHost]), moduleProvideDef(5120, AnimationDriver, instantiateSupportedAnimationDriver, []), moduleProvideDef(5120, AnimationStyleNormalizer, instantiateDefaultStyleNormalizer, []), moduleProvideDef(4608, AnimationEngine, InjectableAnimationEngine, [AnimationDriver,
-                AnimationStyleNormalizer]), moduleProvideDef(5120, RendererFactory2, instantiateRendererFactory, [DomRendererFactory2, AnimationEngine, NgZone]), moduleProvideDef(6144, SharedStylesHost, null, [DomSharedStylesHost]), moduleProvideDef(4608, Testability, Testability, [NgZone]), moduleProvideDef(4608, Meta, Meta, [DOCUMENT]), moduleProvideDef(4608, Title, Title, [DOCUMENT]), moduleProvideDef(4608, AnimationBuilder, BrowserAnimationBuilder, [RendererFactory2,
+            }, [DOCUMENT, DOCUMENT, DOCUMENT, HAMMER_GESTURE_CONFIG]), moduleProvideDef(4608, EventManager, EventManager, [EVENT_MANAGER_PLUGINS, NgZone]),
+            moduleProvideDef(135680, DomSharedStylesHost, DomSharedStylesHost, [DOCUMENT]),
+            moduleProvideDef(4608, DomRendererFactory2, DomRendererFactory2, [EventManager,
+                DomSharedStylesHost]), moduleProvideDef(5120, AnimationDriver, instantiateSupportedAnimationDriver, []),
+            moduleProvideDef(5120, AnimationStyleNormalizer, instantiateDefaultStyleNormalizer, []), moduleProvideDef(4608, AnimationEngine, InjectableAnimationEngine, [AnimationDriver, AnimationStyleNormalizer]),
+            moduleProvideDef(5120, RendererFactory2, instantiateRendererFactory, [DomRendererFactory2, AnimationEngine,
+                NgZone]), moduleProvideDef(6144, SharedStylesHost, null, [DomSharedStylesHost]),
+            moduleProvideDef(4608, Testability, Testability, [NgZone]), moduleProvideDef(4608, Meta, Meta, [DOCUMENT]), moduleProvideDef(4608, Title, Title, [DOCUMENT]),
+            moduleProvideDef(4608, AnimationBuilder, BrowserAnimationBuilder, [RendererFactory2,
                 DOCUMENT$1]), moduleProvideDef(4608, RadioControlRegistry, RadioControlRegistry, []), moduleProvideDef(4608, HttpXsrfTokenExtractor, HttpXsrfCookieExtractor, [DOCUMENT, PLATFORM_ID, XSRF_COOKIE_NAME]),
             moduleProvideDef(4608, HttpXsrfInterceptor, HttpXsrfInterceptor, [HttpXsrfTokenExtractor, XSRF_HEADER_NAME]), moduleProvideDef(5120, HTTP_INTERCEPTORS, function (p0_0) {
                 return [p0_0];
@@ -55936,12 +55894,12 @@
             moduleProvideDef(512, InternalFormsSharedModule, InternalFormsSharedModule, []), moduleProvideDef(512, FormsModule, FormsModule, []), moduleProvideDef(512, HttpClientXsrfModule, HttpClientXsrfModule, []), moduleProvideDef(512, HttpClientModule, HttpClientModule, []), moduleProvideDef(1024, ROUTER_FORROOT_GUARD, provideForRootGuard, [[3, Router]]), moduleProvideDef(512, UrlSerializer, DefaultUrlSerializer, []), moduleProvideDef(512, ChildrenOutletContexts, ChildrenOutletContexts, []),
             moduleProvideDef(256, APP_BASE_HREF, '/', []), moduleProvideDef(256, ROUTER_CONFIGURATION, {}, []), moduleProvideDef(1024, LocationStrategy, provideLocationStrategy, [PlatformLocation,
                 [2, APP_BASE_HREF], ROUTER_CONFIGURATION]), moduleProvideDef(512, Location, Location, [LocationStrategy]), moduleProvideDef(512, Compiler, Compiler, []), moduleProvideDef(512, NgModuleFactoryLoader, SystemJsNgModuleLoader, [Compiler, [2, SystemJsNgModuleLoaderConfig]]), moduleProvideDef(1024, ROUTES, function () {
-                return [[{ path: 'home', component: HomeComponent }, { path: 'users/:id',
-                            component: CreateUserFormComponent }, { path: 'users', component: UsersComponent },
-                        { path: 'user', component: UserComponent }, { path: 'disable/:id',
-                            component: DisableUserFormComponent }, { path: 'disable', component: DisableUserFormComponent },
-                        { path: 'teams', component: TeamsComponent }, { path: 'roles', component: RolesComponent },
-                        { path: 'import', component: ImportComponent }, { path: '**', redirectTo: 'user' }]];
+                return [[{ path: 'users/:id', component: CreateUserFormComponent },
+                        { path: 'users', component: UsersComponent }, { path: 'user', component: UserComponent },
+                        { path: 'disable/:id', component: DisableUserFormComponent }, { path: 'disable',
+                            component: DisableUserFormComponent }, { path: 'teams', component: TeamsComponent },
+                        { path: 'roles', component: RolesComponent }, { path: 'import', component: ImportComponent },
+                        { path: '**', redirectTo: 'users' }]];
             }, []), moduleProvideDef(1024, Router, setupRouter, [ApplicationRef, UrlSerializer,
                 ChildrenOutletContexts, Location, Injector, NgModuleFactoryLoader,
                 Compiler, ROUTES, ROUTER_CONFIGURATION, [2, UrlHandlingStrategy],

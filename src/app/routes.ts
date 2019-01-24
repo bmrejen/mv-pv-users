@@ -11,9 +11,6 @@ import {
 } from "./components/import/import.component";
 
 import {
-  HomeComponent,
-} from "./components";
-import {
   RolesComponent,
 } from "./components/roles/roles.component";
 import {
@@ -28,10 +25,6 @@ import {
 
 /* tslint:disable object-literal-sort-keys */
 export const AppRoutes: Routes = [
-{
-  path: "/",
-  component: UsersComponent,
-},
 {
   path: "users/:id",
   component: CreateUserFormComponent,
@@ -64,6 +57,6 @@ export const AppRoutes: Routes = [
   path: "import",
   component: ImportComponent,
 },
-{ path: "**", redirectTo: "user" },
+{ path: "**", redirectTo: "users" },
 ];
 /* tslint:enable */
