@@ -25561,6 +25561,11 @@
     }
     var map_3 = map$1;
 
+
+    var map_2$1 = {
+    	map: map_3
+    };
+
     /* tslint:enable:max-line-length */
     /**
      * Projects each source value to an Observable which is merged in the output
@@ -25625,6 +25630,11 @@
         return mergeMap_1.mergeMap(project, resultSelector, concurrent)(this);
     }
     var mergeMap_3 = mergeMap$1;
+
+
+    var mergeMap_2$1 = {
+    	mergeMap: mergeMap_3
+    };
 
     var __extends$p = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -32823,6 +32833,44 @@
      */
     var VERSION$3 = new Version('4.4.7');
 
+    var Fields = /** @class */ (function () {
+        function Fields(accounts, autres, bureaux, civilites, codeSON, codeTourplan, codevad, destinations, functions, groupes, inactiveEmployee, inactiveStatus, inbound, leadsMax, leadsMin, managers, orgas, outbound, phoneExtension, phoneNumber, roles, selectedBureau, selectedFunction, selectedManager, selectedOrganisation, services, teams, title, userFields, userTemplates, userValue) {
+            this.accounts = accounts;
+            this.autres = autres;
+            this.bureaux = bureaux;
+            this.civilites = civilites;
+            this.codeSON = codeSON;
+            this.codeTourplan = codeTourplan;
+            this.codevad = codevad;
+            this.destinations = destinations;
+            this.functions = functions;
+            this.groupes = groupes;
+            this.inactiveEmployee = inactiveEmployee;
+            this.inactiveStatus = inactiveStatus;
+            this.inbound = inbound;
+            this.leadsMax = leadsMax;
+            this.leadsMin = leadsMin;
+            this.managers = managers;
+            this.orgas = orgas;
+            this.outbound = outbound;
+            this.phoneExtension = phoneExtension;
+            this.phoneNumber = phoneNumber;
+            this.roles = roles;
+            this.selectedBureau = selectedBureau;
+            this.selectedFunction = selectedFunction;
+            this.selectedManager = selectedManager;
+            this.selectedOrganisation = selectedOrganisation;
+            this.services = services;
+            this.teams = teams;
+            this.title = title;
+            this.userFields = userFields;
+            this.userTemplates = userTemplates;
+            this.userValue = userValue;
+            console.log("Created fields");
+        }
+        return Fields;
+    }());
+
     var Accounts = [
         {
             checked: true,
@@ -33831,39 +33879,7 @@
     };
     var FieldsService = /** @class */ (function () {
         function FieldsService() {
-            this.fields = {
-                accounts: Accounts,
-                autres: Autres,
-                bureaux: Bureaux,
-                civilites: Civilites,
-                codeSON: "",
-                codeTourplan: "",
-                codevad: "",
-                destinations: Destinations,
-                functions: Functions,
-                groupes: "",
-                inactiveEmployee: false,
-                inactiveStatus: false,
-                inbound: "",
-                leadsMax: null,
-                leadsMin: null,
-                managers: Managers,
-                orgas: Orgas,
-                outbound: "",
-                phoneExtension: "",
-                phoneNumber: "",
-                roles: Roles,
-                selectedBureau: "",
-                selectedFunction: "",
-                selectedManager: "",
-                selectedOrganisation: "",
-                services: Services$1,
-                teams: Teams,
-                title: "",
-                userFields: UserFields,
-                userTemplates: UserTemplates,
-                userValue: "",
-            };
+            this.fields = new Fields(Accounts, Autres, Bureaux, Civilites, "", "", "", Destinations, Functions, "", false, false, "", null, null, Managers, Orgas, "", "", "", Roles, "", "", "", "", Services$1, Teams, "", UserFields, UserTemplates, "");
             //
         }
         FieldsService.prototype.getData = function () {
@@ -40798,6 +40814,14 @@
         return User;
     }());
 
+    Observable_1.Observable.prototype.map = map_2$1.map;
+
+    Observable_1.Observable.prototype.mergeMap = mergeMap_2$1.mergeMap;
+    Observable_1.Observable.prototype.flatMap = mergeMap_2$1.mergeMap;
+
+    // HACK: does nothing, because `toPromise` now lives on the `Observable` itself.
+    // leaving this module here to prevent breakage.
+
     var __decorate$4 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -40815,11 +40839,16 @@
             this.endPoint = "http://sh.pvcrm.com/sugarcrm/sugarcrm/api/";
             //
         }
-        SugarService.prototype.getUsersFromSugar = function () {
-            return this.getData("users");
-        };
         SugarService.prototype.getUserById = function (id) {
-            return this.getData("users/" + id);
+            console.log("getting user #", id);
+            return this.getData("users/" + id)
+                .map(function (user) { return user.data; })
+                .map(function (user) { return new User(user.type, user.id, user.attributes); })
+                .toPromise()
+                .catch(function (err) {
+                console.error(err);
+                throw (err);
+            });
         };
         SugarService.prototype.createUserList = function () {
             var _this = this;
@@ -40851,6 +40880,9 @@
         };
         SugarService.prototype.errorHandler = function (error) {
             return _throw_1(error);
+        };
+        SugarService.prototype.getUsersFromSugar = function () {
+            return this.getData("users");
         };
         SugarService.prototype.getData = function (item) {
             return this.http.get(this.endPoint + ("" + item));
@@ -40923,26 +40955,17 @@
             //
         }
         CreateUserFormComponent.prototype.ngOnInit = function () {
-            var _this = this;
             this.fields = this.fieldsService.getData();
             this.resetSugar();
-            this.getSwitchvoxUsers();
-            this.sugarService.getUsersFromSugar()
-                .subscribe(function (users) { return _this.usersFromSugar = users.data; });
+            this.usersFromSugar = this.sugarService.createUserList();
             this.route.paramMap.subscribe(function (params) { return params.get("id"); });
-        };
-        CreateUserFormComponent.prototype.getSwitchvoxUsers = function () {
-            this.switchvoxService.getData()
-                .subscribe(function (data) {
-                console.log(data);
-            });
         };
         CreateUserFormComponent.prototype.credentialClick = function (e) {
             console.log(e);
             var first = this.fields.userFields.find(function (field) { return field.name === "firstname"; });
             var last = this.fields.userFields.find(function (field) { return field.name === "lastname"; });
             var username = this.fields.userFields.find(function (field) { return field.name === "username"; });
-            this.usernameTaken = this.isUsernameTaken(username);
+            // this.usernameTaken = this.isUsernameTaken(username);
             if (!!first.value && !!last.value && !username.value) {
                 this.setUsername(first, last, username);
                 this.setPassword(first, last);
@@ -41349,10 +41372,10 @@
         }
         UserComponent.prototype.ngOnInit = function () {
             var _this = this;
-            this.sugarService.getUserById("cbc425e0-40bc-b51d-f6d2-57d618ec23cf")
-                .subscribe(function (user) {
-                _this.user = user.data;
-            });
+            var id = "cbc425e0-40bc-b51d-f6d2-57d618ec23cf";
+            this.sugarService.getUserById(id)
+                .then(function (user) { return _this.user = user; })
+                .then(function (res) { return console.log(_this.user); });
         };
         UserComponent.prototype.trackByFn = function (index, item) {
             return index; // or item.id
@@ -53599,9 +53622,6 @@
         ], CheckboxFieldComponent);
         return CheckboxFieldComponent;
     }());
-
-    // HACK: does nothing, because `toPromise` now lives on the `Observable` itself.
-    // leaving this module here to prevent breakage.
 
     var __decorate$e = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;

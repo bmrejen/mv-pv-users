@@ -5,6 +5,9 @@ import { ParserService } from "../../services/parser.service";
 import { SugarService } from "../../services/sugar.service";
 import { SwitchVoxService } from "../../services/switchvox.service";
 
+import { Fields } from "../../models/fields";
+import { User } from "../../models/user";
+
 @Component({
   selector: "mv-app-create-user-form",
   styleUrls: ["./create-user-form.component.css"],
@@ -12,11 +15,11 @@ import { SwitchVoxService } from "../../services/switchvox.service";
 })
 
 export class CreateUserFormComponent implements OnInit {
-  public fields;
+  public fields: Fields;
   public errorMsg;
   public displayVentesLeads = false;
   public passwordExists = false;
-  public usersFromSugar;
+  public usersFromSugar: User[];
   public usernameTaken = false;
   // CODE TOURPLAN SERA LEFT(user_name, 6)
   constructor(
@@ -32,17 +35,8 @@ export class CreateUserFormComponent implements OnInit {
   public ngOnInit(): void {
     this.fields = this.fieldsService.getData();
     this.resetSugar();
-    this.getSwitchvoxUsers();
-    this.sugarService.getUsersFromSugar()
-    .subscribe((users) => this.usersFromSugar = users.data);
+    this.usersFromSugar = this.sugarService.createUserList();
     this.route.paramMap.subscribe((params) => params.get("id"));
-  }
-
-  public getSwitchvoxUsers() {
-    this.switchvoxService.getData()
-    .subscribe((data) => {
-      console.log(data);
-    });
   }
 
   public credentialClick(e) {
@@ -50,7 +44,7 @@ export class CreateUserFormComponent implements OnInit {
     const first = this.fields.userFields.find((field) => field.name === "firstname");
     const last = this.fields.userFields.find((field) => field.name === "lastname");
     const username = this.fields.userFields.find((field) => field.name === "username");
-    this.usernameTaken = this.isUsernameTaken(username);
+    // this.usernameTaken = this.isUsernameTaken(username);
     if (!!first.value && !!last.value && !username.value) {
       this.setUsername(first, last, username);
       this.setPassword(first, last);

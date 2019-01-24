@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { Fields } from "../models/fields";
 
 import { Accounts } from "../assets/accounts";
 import { Autres } from "../assets/autres";
@@ -18,45 +19,44 @@ import { UserTemplates } from "../assets/user-templates";
 
 export class FieldsService {
 
-  public fields = {
-    accounts : Accounts,
-    autres : Autres,
-    bureaux : Bureaux,
-    civilites : Civilites,
-    codeSON : "",
-    codeTourplan: "",
-    codevad : "",
-    destinations : Destinations,
-    functions : Functions,
-    groupes: "",
-    inactiveEmployee : false,
-    inactiveStatus : false,
-    inbound : "",
-    leadsMax: null,
-    leadsMin: null,
-    managers: Managers,
-    orgas : Orgas,
-    outbound : "",
-    phoneExtension: "",
-    phoneNumber: "",
-    roles : Roles,
-    selectedBureau : "",
-    selectedFunction : "",
-    selectedManager : "",
-    selectedOrganisation: "",
-    services : Services,
-    teams : Teams,
-    title : "",
-    userFields : UserFields,
-    userTemplates : UserTemplates,
-    userValue : "",
-  };
+  public fields: Fields = new Fields(
+                                     Accounts,
+                                     Autres,
+                                     Bureaux,
+                                     Civilites,
+                                     "",
+                                     "",
+                                     "",
+                                     Destinations,
+                                     Functions,
+                                     "",
+                                     false,
+                                     false,
+                                     "",
+                                     null,
+                                     null,
+                                     Managers,
+                                     Orgas,
+                                     "",
+                                     "",
+                                     "",
+                                     Roles,
+                                     "",
+                                     "",
+                                     "",
+                                     "",
+                                     Services,
+                                     Teams,
+                                     "",
+                                     UserFields,
+                                     UserTemplates,
+                                     "");
 
   constructor() {
     //
   }
 
-  public getData() {
+  public getData(): Fields {
     return this.fields;
   }
 }

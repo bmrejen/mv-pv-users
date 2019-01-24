@@ -6,6 +6,10 @@ import { catchError } from "rxjs/operators";
 import { Role } from "../models/role";
 import { User } from "../models/user";
 
+import "rxjs/add/operator/map";
+import "rxjs/add/operator/mergeMap";
+import "rxjs/add/operator/toPromise";
+
 @Injectable()
 export class SugarService {
   public roleList: Role[] = [];
@@ -16,12 +20,20 @@ export class SugarService {
     //
   }
 
-  public getUsersFromSugar(): Observable<any> {
-    return this.getData("users");
-  }
+  public getUserById(id): Promise<User> {
+    console.log("getting user #", id);
 
-  public getUserById(id): Observable<any> {
-    return this.getData(`users/${id}`);
+    return this.getData(`users/${id}`)
+    .map((user) => user.data)
+    .map((user) => new User(
+                            user.type,
+                            user.id,
+                            user.attributes))
+    .toPromise()
+    .catch((err) => {
+      console.error(err);
+      throw(err);
+    });
   }
 
   public createUserList(): User[] {
@@ -29,9 +41,9 @@ export class SugarService {
     .subscribe((users) => {
       users.data.forEach((user) => {
         this.userList.push(new User(
-          user.type,
-          user.id,
-          user.attributes));
+                                    user.type,
+                                    user.id,
+                                    user.attributes));
       });
       console.log("USERLIST", this.userList);
     });
@@ -48,9 +60,9 @@ export class SugarService {
     .subscribe((roles) => {
       roles.data.forEach((role) => {
         this.roleList.push(new Role(
-          role.type,
-          role.id,
-          role.attributes));
+                                    role.type,
+                                    role.id,
+                                    role.attributes));
       });
     });
 
@@ -64,6 +76,10 @@ export class SugarService {
 
   public errorHandler(error: HttpErrorResponse) {
     return _throw(error);
+  }
+
+  private getUsersFromSugar(): Observable<any> {
+    return this.getData("users");
   }
 
   private getData(item: string): Observable<any> {
