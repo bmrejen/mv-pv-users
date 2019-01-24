@@ -21,8 +21,6 @@ export class SugarService {
   }
 
   public getUserById(id): Promise<User> {
-    console.log("getting user #", id);
-
     return this.getData(`users/${id}`)
     .map((user) => user.data)
     .map((user) => new User(
