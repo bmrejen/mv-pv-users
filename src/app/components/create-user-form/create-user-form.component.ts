@@ -21,7 +21,7 @@ export class CreateUserFormComponent implements OnInit {
   public passwordExists = false;
   public usersFromSugar: User[];
   public usernameTaken = false;
-  // CODE TOURPLAN SERA LEFT(user_name, 6)
+
   constructor(
               private fieldsService: FieldsService,
               private switchvoxService: SwitchVoxService,
@@ -37,6 +37,12 @@ export class CreateUserFormComponent implements OnInit {
     this.resetSugar();
     this.usersFromSugar = this.sugarService.createUserList();
     this.route.paramMap.subscribe((params) => params.get("id"));
+  }
+
+  public onParentChange({e, id}) {
+    console.log("in parent", e, id);
+    const myField = this.fields.autres.find((field) => field.id === id);
+    myField.checked = e;
   }
 
   public credentialClick(e) {
