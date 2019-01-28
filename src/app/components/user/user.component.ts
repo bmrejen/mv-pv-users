@@ -20,8 +20,7 @@ export class UserComponent implements OnInit {
     const id = "cbc425e0-40bc-b51d-f6d2-57d618ec23cf";
 
     this.sugarService.getUserById(id)
-    .then((user) => this.user = user)
-    .then((res) => console.log(this.user));
+    .then((user) => this.user = user);
   }
 
   public trackByFn(index, item) {

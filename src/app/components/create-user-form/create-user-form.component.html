@@ -96,7 +96,7 @@
   <div ngModelGroup="tatayoyo">
     <legend>Equipe</legend>
     <mv-checkbox-field
-    (onClick)="onParentChange($event)"
+    (clickEmitter)="onParentChange($event)"
     [checkboxes]="fields.teams"></mv-checkbox-field>
   </div>
 
@@ -132,7 +132,7 @@
   </div>
 
   <fieldset>
-    <div ngModelGroup="orgas">
+    <div ngModelGroup="orgas" class="orgas">
       <legend>Organisations</legend>
       <div *ngFor="let orga of fields.orgas ; trackBy: trackByFn">
         <label>

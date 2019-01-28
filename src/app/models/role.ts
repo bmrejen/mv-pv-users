@@ -17,6 +17,5 @@ export class Role {
     this.type = type;
     this.id = id;
     this.attributes = attributes;
-    console.log(`Created role ${this.attributes.name}`);
   }
 }
