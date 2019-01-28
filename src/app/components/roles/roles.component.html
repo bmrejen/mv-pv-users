@@ -8,8 +8,8 @@
     <th>Type</th>
   </tr>
   <tr *ngFor="let role of rolesFromSugar ; trackBy: trackByFn">
-    <td>{{ role.attributes.name }}</td>
-    <td>{{ role.attributes.description }}</td>
+    <td>{{ role.name }}</td>
+    <td>{{ role.description }}</td>
     <td>{{ role.id }}</td>
     <td>{{ role.type }}</td>
   </tr>

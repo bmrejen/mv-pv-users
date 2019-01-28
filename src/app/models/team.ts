@@ -1,4 +1,4 @@
-export class Role {
+export class Team {
   constructor(
               public type: string = "users",
               public id: string,

@@ -1,13 +1,15 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
+import { Team } from "../../models/team";
 import { SugarService } from "../../services/sugar.service";
 
 @Component({
   selector: "mv-app-teams",
+  styleUrls: ["./teams.component.css"],
   templateUrl: "./teams.component.html",
 })
 
 export class TeamsComponent implements OnInit {
-  public teamsFromSugar;
+  public teamsFromSugar: Team[] = [];
 
   @ViewChild("disableForm") public form: any;
   constructor(private sugarService: SugarService) {
@@ -15,11 +17,7 @@ export class TeamsComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.sugarService.getTeamsFromSugar()
-    .subscribe((teams) => {
-      this.teamsFromSugar = teams.data;
-    });
-
+    this.teamsFromSugar = this.sugarService.getTeamsFromSugar();
   }
 
   public trackByFn(index, item) {

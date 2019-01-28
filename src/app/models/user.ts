@@ -1,40 +1,41 @@
 export class User {
-  public type: string;
-  public id: string;
-  public attributes;
 
   constructor(
-              type: string,
-              id: string,
-              attributes: {
-                id: string,
-                userName: string,
-                salutation: string,
-                lastName: string,
-                firstName: string,
-                phoneHome: string,
-                phoneMobile: string,
-                phoneWork: string,
-                phoneOther: string,
-                phoneFax: string,
-                phoneAsterisk: string,
-                email: string,
-                status: string,
-                employeeStatus: string,
-                title: string,
-                managerId: string,
-                department: string,
-                officeId: string,
-                teamId: string,
-                tourplanID: string,
-                swClickToCall: string,
-                swCallNotification: string,
-                codeSonGalileo: string,
-              }) {
-
-    this.type = type;
-    this.id = id;
-    this.attributes = attributes;
-    console.log(`Created user ${this.attributes.userName}`);
+              public type: string = null,
+              public id: string = null,
+              public userName: string = null,
+              public salutation: string = "Mrs.",
+              public lastName: string = null,
+              public firstName: string = null,
+              public phoneHome: string = null,
+              public phoneMobile: string = null,
+              public phoneWork: string = null,
+              public phoneOther: string = null,
+              public phoneFax: string = null,
+              public phoneAsterisk: string = null,
+              public email: string = null,
+              public status: string = "Active",
+              public employeeStatus: string = "Active",
+              public title: string = null,
+              public managerId: string = null,
+              public department: string = null,
+              public officeId: string = null,
+              public teamId: string = null,
+              public tourplanID: string = null,
+              public swPhoneNumber: string = null,
+              public swExtension: string = null,
+              public swTelephony: boolean = false,
+              public swClickToCall: boolean = false,
+              public swCallNotification: boolean = false,
+              public codeSonGalileo: string = null,
+              public inheritsPreferencesFrom: string = "user_default",
+              public roleId: string = null,
+              public serviceId: string = null,
+              public functionId: string = null,
+              public destinations: string[] = [],
+              public ggOrganisationId: string = null,
+              public ggGroups: string = null,
+              ) {
+    //
   }
 }
