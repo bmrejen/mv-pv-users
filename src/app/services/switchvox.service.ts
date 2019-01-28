@@ -19,7 +19,7 @@ export class SwitchVoxService {
   </request>`;
 
   constructor(
-    private http: HttpClient) {
+              private http: HttpClient) {
     //
   }
 
@@ -28,12 +28,6 @@ export class SwitchVoxService {
     .append("Content-Type", "application/xml")
     .append("Content-Type", "application/x-www-form-urlencoded")
     .append("Authorization", "Basic " + btoa(`${this.username}:${this.password}`));
-
-    console.log(this.endPoint);
-    console.log("-------");
-    console.log(this.body);
-    console.log("-------");
-    console.log(headers);
 
     return this.http.post<any>(this.endPoint, this.body, {headers});
   }
