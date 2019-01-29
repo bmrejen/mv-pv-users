@@ -16,7 +16,7 @@ export class UsersComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.usersFromSugar = this.sugarService.createUserList();
+    this.usersFromSugar = this.sugarService.getUsersFromSugar();
   }
 
   public trackByFn(index, item) {

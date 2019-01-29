@@ -32833,43 +32833,48 @@
      */
     var VERSION$3 = new Version('4.4.7');
 
-    var Fields = /** @class */ (function () {
-        function Fields(accounts, autres, bureaux, civilites, codeSON, codeTourplan, codevad, destinations, functions, groupes, inactiveEmployee, inactiveStatus, inbound, leadsMax, leadsMin, managers, orgas, outbound, phoneExtension, phoneNumber, roles, selectedBureau, selectedFunction, selectedManager, selectedOrganisation, services, teams, title, userFields, userTemplates, userValue) {
-            this.accounts = accounts;
-            this.autres = autres;
-            this.bureaux = bureaux;
-            this.civilites = civilites;
-            this.codeSON = codeSON;
-            this.codeTourplan = codeTourplan;
-            this.codevad = codevad;
-            this.destinations = destinations;
-            this.functions = functions;
-            this.groupes = groupes;
-            this.inactiveEmployee = inactiveEmployee;
-            this.inactiveStatus = inactiveStatus;
-            this.inbound = inbound;
-            this.leadsMax = leadsMax;
-            this.leadsMin = leadsMin;
-            this.managers = managers;
-            this.orgas = orgas;
-            this.outbound = outbound;
-            this.phoneExtension = phoneExtension;
-            this.phoneNumber = phoneNumber;
-            this.roles = roles;
-            this.selectedBureau = selectedBureau;
-            this.selectedFunction = selectedFunction;
-            this.selectedManager = selectedManager;
-            this.selectedOrganisation = selectedOrganisation;
-            this.services = services;
-            this.teams = teams;
-            this.title = title;
-            this.userFields = userFields;
-            this.userTemplates = userTemplates;
-            this.userValue = userValue;
-            console.log("Created fields");
+    var Model = /** @class */ (function () {
+        function Model(data) {
+            var self = this;
+            if (undefined !== data && null !== data) {
+                for (var prop in data) {
+                    if ("attributes" !== prop) {
+                        if (typeof data[prop] !== "function") {
+                            self[prop] = data[prop];
+                            console.log(self[prop]);
+                        }
+                    }
+                }
+                if (undefined !== data.attributes && null !== data.attributes) {
+                    for (var prop in data.attributes) {
+                        if (typeof data.attributes[prop] !== "function") {
+                            self[prop] = data.attributes[prop];
+                            console.log(self[prop]);
+                        }
+                    }
+                }
+            }
+        }
+        return Model;
+    }());
+
+    var __extends$v = (undefined && undefined.__extends) || (function () {
+        var extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return function (d, b) {
+            extendStatics(d, b);
+            function __() { this.constructor = d; }
+            d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+        };
+    })();
+    var Fields = /** @class */ (function (_super) {
+        __extends$v(Fields, _super);
+        function Fields(data) {
+            return _super.call(this, data) || this;
         }
         return Fields;
-    }());
+    }(Model));
 
     var Accounts = [
         {
@@ -33879,7 +33884,42 @@
     };
     var FieldsService = /** @class */ (function () {
         function FieldsService() {
-            this.fields = new Fields(Accounts, Autres, Bureaux, Civilites, "", "", "", Destinations, Functions, "", false, false, "", null, null, Managers, Orgas, "", "", "", Roles, "", "", "", "", Services$1, Teams, "", UserFields, UserTemplates, "");
+            this.fieldsToSend = {
+                data: {
+                    accounts: Accounts,
+                    autres: Autres,
+                    bureaux: Bureaux,
+                    civilites: Civilites,
+                    codeSON: "",
+                    codeTourplan: "",
+                    codevad: "",
+                    destinations: Destinations,
+                    functions: Functions,
+                    groupes: "",
+                    inactiveEmployee: "",
+                    inactiveStatus: "",
+                    inbound: "",
+                    leadsMax: "",
+                    leadsMin: "",
+                    managers: Managers,
+                    orgas: Orgas,
+                    outbound: "",
+                    phoneExtension: "",
+                    phoneNumber: "",
+                    roles: Roles,
+                    selectedBureau: "",
+                    selectedFunction: "",
+                    selectedManager: "",
+                    selectedOrganisation: "",
+                    services: Services$1,
+                    teams: Teams,
+                    title: "",
+                    userFields: UserFields,
+                    userTemplates: UserTemplates,
+                    userValue: "",
+                },
+            };
+            this.fields = new Fields(this.fieldsToSend);
             //
         }
         FieldsService.prototype.getData = function () {
@@ -36001,7 +36041,7 @@
      */
     HttpClientModule.ctorParameters = function () { return []; };
 
-    var __extends$v = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$w = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -36013,7 +36053,7 @@
      * @hide true
      */
     var ErrorObservable = (function (_super) {
-        __extends$v(ErrorObservable, _super);
+        __extends$w(ErrorObservable, _super);
         function ErrorObservable(error, scheduler) {
             _super.call(this);
             this.error = error;
@@ -36090,7 +36130,7 @@
 
     var _throw_1 = ErrorObservable_1.ErrorObservable.create;
 
-    var __extends$w = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$x = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -36101,7 +36141,7 @@
      * @extends {Ignored}
      */
     var AuditSubscriber = (function (_super) {
-        __extends$w(AuditSubscriber, _super);
+        __extends$x(AuditSubscriber, _super);
         function AuditSubscriber(destination, durationSelector) {
             _super.call(this, destination);
             this.durationSelector = durationSelector;
@@ -36148,7 +36188,7 @@
         return AuditSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$x = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$y = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -36169,7 +36209,7 @@
      * @class Action<T>
      */
     var Action = (function (_super) {
-        __extends$x(Action, _super);
+        __extends$y(Action, _super);
         function Action(scheduler, work) {
             _super.call(this);
         }
@@ -36196,7 +36236,7 @@
     	Action: Action_2
     };
 
-    var __extends$y = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$z = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -36209,7 +36249,7 @@
      * @extends {Ignored}
      */
     var AsyncAction = (function (_super) {
-        __extends$y(AsyncAction, _super);
+        __extends$z(AsyncAction, _super);
         function AsyncAction(scheduler, work) {
             _super.call(this, scheduler, work);
             this.scheduler = scheduler;
@@ -36395,14 +36435,14 @@
     	Scheduler: Scheduler_2
     };
 
-    var __extends$z = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$A = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 
     var AsyncScheduler = (function (_super) {
-        __extends$z(AsyncScheduler, _super);
+        __extends$A(AsyncScheduler, _super);
         function AsyncScheduler() {
             _super.apply(this, arguments);
             this.actions = [];
@@ -36523,7 +36563,7 @@
     	isDate: isDate_2
     };
 
-    var __extends$A = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$B = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -36539,7 +36579,7 @@
      * @hide true
      */
     var TimerObservable = (function (_super) {
-        __extends$A(TimerObservable, _super);
+        __extends$B(TimerObservable, _super);
         function TimerObservable(dueTime, period, scheduler) {
             if (dueTime === void 0) { dueTime = 0; }
             _super.call(this);
@@ -36628,7 +36668,7 @@
         return TimerObservable;
     }(Observable_1.Observable));
 
-    var __extends$B = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$C = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -36639,7 +36679,7 @@
      * @extends {Ignored}
      */
     var BufferSubscriber = (function (_super) {
-        __extends$B(BufferSubscriber, _super);
+        __extends$C(BufferSubscriber, _super);
         function BufferSubscriber(destination, closingNotifier) {
             _super.call(this, destination);
             this.buffer = [];
@@ -36656,7 +36696,7 @@
         return BufferSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$C = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$D = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -36667,7 +36707,7 @@
      * @extends {Ignored}
      */
     var BufferCountSubscriber = (function (_super) {
-        __extends$C(BufferCountSubscriber, _super);
+        __extends$D(BufferCountSubscriber, _super);
         function BufferCountSubscriber(destination, bufferSize) {
             _super.call(this, destination);
             this.bufferSize = bufferSize;
@@ -36696,7 +36736,7 @@
      * @extends {Ignored}
      */
     var BufferSkipCountSubscriber = (function (_super) {
-        __extends$C(BufferSkipCountSubscriber, _super);
+        __extends$D(BufferSkipCountSubscriber, _super);
         function BufferSkipCountSubscriber(destination, bufferSize, startBufferEvery) {
             _super.call(this, destination);
             this.bufferSize = bufferSize;
@@ -36732,7 +36772,7 @@
         return BufferSkipCountSubscriber;
     }(Subscriber_1.Subscriber));
 
-    var __extends$D = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$E = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -36749,7 +36789,7 @@
      * @extends {Ignored}
      */
     var BufferTimeSubscriber = (function (_super) {
-        __extends$D(BufferTimeSubscriber, _super);
+        __extends$E(BufferTimeSubscriber, _super);
         function BufferTimeSubscriber(destination, bufferTimeSpan, bufferCreationInterval, maxBufferSize, scheduler) {
             _super.call(this, destination);
             this.bufferTimeSpan = bufferTimeSpan;
@@ -36853,7 +36893,7 @@
         subscriber.closeContext(context);
     }
 
-    var __extends$E = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$F = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -36864,7 +36904,7 @@
      * @extends {Ignored}
      */
     var BufferToggleSubscriber = (function (_super) {
-        __extends$E(BufferToggleSubscriber, _super);
+        __extends$F(BufferToggleSubscriber, _super);
         function BufferToggleSubscriber(destination, openings, closingSelector) {
             _super.call(this, destination);
             this.openings = openings;
@@ -36949,7 +36989,7 @@
         return BufferToggleSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$F = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$G = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -36960,7 +37000,7 @@
      * @extends {Ignored}
      */
     var BufferWhenSubscriber = (function (_super) {
-        __extends$F(BufferWhenSubscriber, _super);
+        __extends$G(BufferWhenSubscriber, _super);
         function BufferWhenSubscriber(destination, closingSelector) {
             _super.call(this, destination);
             this.closingSelector = closingSelector;
@@ -37019,7 +37059,7 @@
         return BufferWhenSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$G = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$H = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -37035,7 +37075,7 @@
      * @extends {Ignored}
      */
     var CombineLatestSubscriber = (function (_super) {
-        __extends$G(CombineLatestSubscriber, _super);
+        __extends$H(CombineLatestSubscriber, _super);
         function CombineLatestSubscriber(destination, project) {
             _super.call(this, destination);
             this.project = project;
@@ -37097,7 +37137,7 @@
         return CombineLatestSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$H = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$I = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -37108,7 +37148,7 @@
      * @extends {Ignored}
      */
     var CountSubscriber = (function (_super) {
-        __extends$H(CountSubscriber, _super);
+        __extends$I(CountSubscriber, _super);
         function CountSubscriber(destination, predicate, source) {
             _super.call(this, destination);
             this.predicate = predicate;
@@ -37144,7 +37184,7 @@
         return CountSubscriber;
     }(Subscriber_1.Subscriber));
 
-    var __extends$I = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$J = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -37155,7 +37195,7 @@
      * @extends {Ignored}
      */
     var DebounceSubscriber = (function (_super) {
-        __extends$I(DebounceSubscriber, _super);
+        __extends$J(DebounceSubscriber, _super);
         function DebounceSubscriber(destination, durationSelector) {
             _super.call(this, destination);
             this.durationSelector = durationSelector;
@@ -37213,7 +37253,7 @@
         return DebounceSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$J = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$K = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -37224,7 +37264,7 @@
      * @extends {Ignored}
      */
     var DebounceTimeSubscriber = (function (_super) {
-        __extends$J(DebounceTimeSubscriber, _super);
+        __extends$K(DebounceTimeSubscriber, _super);
         function DebounceTimeSubscriber(destination, dueTime, scheduler) {
             _super.call(this, destination);
             this.dueTime = dueTime;
@@ -37265,7 +37305,7 @@
         subscriber.debouncedNext();
     }
 
-    var __extends$K = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$L = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -37276,7 +37316,7 @@
      * @extends {Ignored}
      */
     var DelaySubscriber = (function (_super) {
-        __extends$K(DelaySubscriber, _super);
+        __extends$L(DelaySubscriber, _super);
         function DelaySubscriber(destination, delay, scheduler) {
             _super.call(this, destination);
             this.delay = delay;
@@ -37340,7 +37380,7 @@
         return DelayMessage;
     }());
 
-    var __extends$L = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$M = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -37351,7 +37391,7 @@
      * @extends {Ignored}
      */
     var DelayWhenSubscriber = (function (_super) {
-        __extends$L(DelayWhenSubscriber, _super);
+        __extends$M(DelayWhenSubscriber, _super);
         function DelayWhenSubscriber(destination, delayDurationSelector) {
             _super.call(this, destination);
             this.delayDurationSelector = delayDurationSelector;
@@ -37421,7 +37461,7 @@
      * @extends {Ignored}
      */
     var SubscriptionDelayObservable = (function (_super) {
-        __extends$L(SubscriptionDelayObservable, _super);
+        __extends$M(SubscriptionDelayObservable, _super);
         function SubscriptionDelayObservable(/** @deprecated internal use only */ source, subscriptionDelay) {
             _super.call(this);
             this.source = source;
@@ -37438,7 +37478,7 @@
      * @extends {Ignored}
      */
     var SubscriptionDelaySubscriber = (function (_super) {
-        __extends$L(SubscriptionDelaySubscriber, _super);
+        __extends$M(SubscriptionDelaySubscriber, _super);
         function SubscriptionDelaySubscriber(parent, source) {
             _super.call(this);
             this.parent = parent;
@@ -37465,7 +37505,7 @@
         return SubscriptionDelaySubscriber;
     }(Subscriber_1.Subscriber));
 
-    var __extends$M = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$N = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -37476,7 +37516,7 @@
      * @extends {Ignored}
      */
     var DeMaterializeSubscriber = (function (_super) {
-        __extends$M(DeMaterializeSubscriber, _super);
+        __extends$N(DeMaterializeSubscriber, _super);
         function DeMaterializeSubscriber(destination) {
             _super.call(this, destination);
         }
@@ -37523,7 +37563,7 @@
     	Set: Set$1
     };
 
-    var __extends$N = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$O = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -37534,7 +37574,7 @@
      * @extends {Ignored}
      */
     var DistinctSubscriber = (function (_super) {
-        __extends$N(DistinctSubscriber, _super);
+        __extends$O(DistinctSubscriber, _super);
         function DistinctSubscriber(destination, keySelector, flushes) {
             _super.call(this, destination);
             this.keySelector = keySelector;
@@ -37579,7 +37619,7 @@
         return DistinctSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$O = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$P = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -37590,7 +37630,7 @@
      * @extends {Ignored}
      */
     var DistinctUntilChangedSubscriber = (function (_super) {
-        __extends$O(DistinctUntilChangedSubscriber, _super);
+        __extends$P(DistinctUntilChangedSubscriber, _super);
         function DistinctUntilChangedSubscriber(destination, compare, keySelector) {
             _super.call(this, destination);
             this.keySelector = keySelector;
@@ -37629,7 +37669,7 @@
         return DistinctUntilChangedSubscriber;
     }(Subscriber_1.Subscriber));
 
-    var __extends$P = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$Q = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -37640,7 +37680,7 @@
      * @extends {Ignored}
      */
     var ElementAtSubscriber = (function (_super) {
-        __extends$P(ElementAtSubscriber, _super);
+        __extends$Q(ElementAtSubscriber, _super);
         function ElementAtSubscriber(destination, index, defaultValue) {
             _super.call(this, destination);
             this.index = index;
@@ -37667,7 +37707,7 @@
         return ElementAtSubscriber;
     }(Subscriber_1.Subscriber));
 
-    var __extends$Q = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$R = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -37678,7 +37718,7 @@
      * @extends {Ignored}
      */
     var SwitchFirstSubscriber = (function (_super) {
-        __extends$Q(SwitchFirstSubscriber, _super);
+        __extends$R(SwitchFirstSubscriber, _super);
         function SwitchFirstSubscriber(destination) {
             _super.call(this, destination);
             this.hasCompleted = false;
@@ -37706,7 +37746,7 @@
         return SwitchFirstSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$R = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$S = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -37717,7 +37757,7 @@
      * @extends {Ignored}
      */
     var SwitchFirstMapSubscriber = (function (_super) {
-        __extends$R(SwitchFirstMapSubscriber, _super);
+        __extends$S(SwitchFirstMapSubscriber, _super);
         function SwitchFirstMapSubscriber(destination, project, resultSelector) {
             _super.call(this, destination);
             this.project = project;
@@ -37781,7 +37821,7 @@
         return SwitchFirstMapSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$S = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$T = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -37792,7 +37832,7 @@
      * @extends {Ignored}
      */
     var ExpandSubscriber = (function (_super) {
-        __extends$S(ExpandSubscriber, _super);
+        __extends$T(ExpandSubscriber, _super);
         function ExpandSubscriber(destination, project, concurrent, scheduler) {
             _super.call(this, destination);
             this.project = project;
@@ -37861,25 +37901,6 @@
         return ExpandSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$T = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
-        for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-    /**
-     * We need this JSDoc comment for affecting ESDoc.
-     * @ignore
-     * @extends {Ignored}
-     */
-    var FinallySubscriber = (function (_super) {
-        __extends$T(FinallySubscriber, _super);
-        function FinallySubscriber(destination, callback) {
-            _super.call(this, destination);
-            this.add(new Subscription_1.Subscription(callback));
-        }
-        return FinallySubscriber;
-    }(Subscriber_1.Subscriber));
-
     var __extends$U = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
@@ -37890,8 +37911,27 @@
      * @ignore
      * @extends {Ignored}
      */
+    var FinallySubscriber = (function (_super) {
+        __extends$U(FinallySubscriber, _super);
+        function FinallySubscriber(destination, callback) {
+            _super.call(this, destination);
+            this.add(new Subscription_1.Subscription(callback));
+        }
+        return FinallySubscriber;
+    }(Subscriber_1.Subscriber));
+
+    var __extends$V = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+        for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+    /**
+     * We need this JSDoc comment for affecting ESDoc.
+     * @ignore
+     * @extends {Ignored}
+     */
     var FindValueSubscriber = (function (_super) {
-        __extends$U(FindValueSubscriber, _super);
+        __extends$V(FindValueSubscriber, _super);
         function FindValueSubscriber(destination, predicate, source, yieldIndex, thisArg) {
             _super.call(this, destination);
             this.predicate = predicate;
@@ -38017,7 +38057,7 @@
     	FastMap: FastMap_2
     };
 
-    var __extends$V = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$W = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -38028,7 +38068,7 @@
      * @extends {Ignored}
      */
     var GroupBySubscriber = (function (_super) {
-        __extends$V(GroupBySubscriber, _super);
+        __extends$W(GroupBySubscriber, _super);
         function GroupBySubscriber(destination, keySelector, elementSelector, durationSelector, subjectSelector) {
             _super.call(this, destination);
             this.keySelector = keySelector;
@@ -38128,7 +38168,7 @@
      * @extends {Ignored}
      */
     var GroupDurationSubscriber = (function (_super) {
-        __extends$V(GroupDurationSubscriber, _super);
+        __extends$W(GroupDurationSubscriber, _super);
         function GroupDurationSubscriber(key, group, parent) {
             _super.call(this, group);
             this.key = key;
@@ -38156,7 +38196,7 @@
      * @class GroupedObservable<K, T>
      */
     var GroupedObservable = (function (_super) {
-        __extends$V(GroupedObservable, _super);
+        __extends$W(GroupedObservable, _super);
         function GroupedObservable(key, groupSubject, refCountSubscription) {
             _super.call(this);
             this.key = key;
@@ -38180,7 +38220,7 @@
      * @extends {Ignored}
      */
     var InnerRefCountSubscription = (function (_super) {
-        __extends$V(InnerRefCountSubscription, _super);
+        __extends$W(InnerRefCountSubscription, _super);
         function InnerRefCountSubscription(parent) {
             _super.call(this);
             this.parent = parent;
@@ -38199,26 +38239,6 @@
         return InnerRefCountSubscription;
     }(Subscription_1.Subscription));
 
-    var __extends$W = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
-        for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-    /**
-     * We need this JSDoc comment for affecting ESDoc.
-     * @ignore
-     * @extends {Ignored}
-     */
-    var IgnoreElementsSubscriber = (function (_super) {
-        __extends$W(IgnoreElementsSubscriber, _super);
-        function IgnoreElementsSubscriber() {
-            _super.apply(this, arguments);
-        }
-        IgnoreElementsSubscriber.prototype._next = function (unused) {
-        };
-        return IgnoreElementsSubscriber;
-    }(Subscriber_1.Subscriber));
-
     var __extends$X = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
@@ -38229,8 +38249,28 @@
      * @ignore
      * @extends {Ignored}
      */
+    var IgnoreElementsSubscriber = (function (_super) {
+        __extends$X(IgnoreElementsSubscriber, _super);
+        function IgnoreElementsSubscriber() {
+            _super.apply(this, arguments);
+        }
+        IgnoreElementsSubscriber.prototype._next = function (unused) {
+        };
+        return IgnoreElementsSubscriber;
+    }(Subscriber_1.Subscriber));
+
+    var __extends$Y = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+        for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+    /**
+     * We need this JSDoc comment for affecting ESDoc.
+     * @ignore
+     * @extends {Ignored}
+     */
     var IsEmptySubscriber = (function (_super) {
-        __extends$X(IsEmptySubscriber, _super);
+        __extends$Y(IsEmptySubscriber, _super);
         function IsEmptySubscriber(destination) {
             _super.call(this, destination);
         }
@@ -38248,28 +38288,6 @@
         return IsEmptySubscriber;
     }(Subscriber_1.Subscriber));
 
-    var __extends$Y = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
-        for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-    /**
-     * We need this JSDoc comment for affecting ESDoc.
-     * @ignore
-     * @extends {Ignored}
-     */
-    var MapToSubscriber = (function (_super) {
-        __extends$Y(MapToSubscriber, _super);
-        function MapToSubscriber(destination, value) {
-            _super.call(this, destination);
-            this.value = value;
-        }
-        MapToSubscriber.prototype._next = function (x) {
-            this.destination.next(this.value);
-        };
-        return MapToSubscriber;
-    }(Subscriber_1.Subscriber));
-
     var __extends$Z = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
@@ -38280,8 +38298,30 @@
      * @ignore
      * @extends {Ignored}
      */
+    var MapToSubscriber = (function (_super) {
+        __extends$Z(MapToSubscriber, _super);
+        function MapToSubscriber(destination, value) {
+            _super.call(this, destination);
+            this.value = value;
+        }
+        MapToSubscriber.prototype._next = function (x) {
+            this.destination.next(this.value);
+        };
+        return MapToSubscriber;
+    }(Subscriber_1.Subscriber));
+
+    var __extends$_ = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+        for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+    /**
+     * We need this JSDoc comment for affecting ESDoc.
+     * @ignore
+     * @extends {Ignored}
+     */
     var MaterializeSubscriber = (function (_super) {
-        __extends$Z(MaterializeSubscriber, _super);
+        __extends$_(MaterializeSubscriber, _super);
         function MaterializeSubscriber(destination) {
             _super.call(this, destination);
         }
@@ -38301,7 +38341,7 @@
         return MaterializeSubscriber;
     }(Subscriber_1.Subscriber));
 
-    var __extends$_ = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$10 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -38312,7 +38352,7 @@
      * @extends {Ignored}
      */
     var MergeMapToSubscriber = (function (_super) {
-        __extends$_(MergeMapToSubscriber, _super);
+        __extends$10(MergeMapToSubscriber, _super);
         function MergeMapToSubscriber(destination, ish, resultSelector, concurrent) {
             if (concurrent === void 0) { concurrent = Number.POSITIVE_INFINITY; }
             _super.call(this, destination);
@@ -38384,7 +38424,7 @@
         return MergeMapToSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$10 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$11 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -38395,7 +38435,7 @@
      * @extends {Ignored}
      */
     var MergeScanSubscriber = (function (_super) {
-        __extends$10(MergeScanSubscriber, _super);
+        __extends$11(MergeScanSubscriber, _super);
         function MergeScanSubscriber(destination, accumulator, acc, concurrent) {
             _super.call(this, destination);
             this.accumulator = accumulator;
@@ -38459,13 +38499,13 @@
         return MergeScanSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$11 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$12 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
     var OnErrorResumeNextSubscriber = (function (_super) {
-        __extends$11(OnErrorResumeNextSubscriber, _super);
+        __extends$12(OnErrorResumeNextSubscriber, _super);
         function OnErrorResumeNextSubscriber(destination, nextSources) {
             _super.call(this, destination);
             this.destination = destination;
@@ -38495,7 +38535,7 @@
         return OnErrorResumeNextSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$12 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$13 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -38506,7 +38546,7 @@
      * @extends {Ignored}
      */
     var PairwiseSubscriber = (function (_super) {
-        __extends$12(PairwiseSubscriber, _super);
+        __extends$13(PairwiseSubscriber, _super);
         function PairwiseSubscriber(destination) {
             _super.call(this, destination);
             this.hasPrev = false;
@@ -38523,7 +38563,7 @@
         return PairwiseSubscriber;
     }(Subscriber_1.Subscriber));
 
-    var __extends$13 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$14 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -38534,7 +38574,7 @@
      * @class AsyncSubject<T>
      */
     var AsyncSubject = (function (_super) {
-        __extends$13(AsyncSubject, _super);
+        __extends$14(AsyncSubject, _super);
         function AsyncSubject() {
             _super.apply(this, arguments);
             this.value = null;
@@ -38574,7 +38614,7 @@
         return AsyncSubject;
     }(Subject_1.Subject));
 
-    var __extends$14 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$15 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -38586,7 +38626,7 @@
      * @extends {Ignored}
      */
     var QueueAction = (function (_super) {
-        __extends$14(QueueAction, _super);
+        __extends$15(QueueAction, _super);
         function QueueAction(scheduler, work) {
             _super.call(this, scheduler, work);
             this.scheduler = scheduler;
@@ -38627,14 +38667,14 @@
     	QueueAction: QueueAction_2
     };
 
-    var __extends$15 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$16 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 
     var QueueScheduler = (function (_super) {
-        __extends$15(QueueScheduler, _super);
+        __extends$16(QueueScheduler, _super);
         function QueueScheduler() {
             _super.apply(this, arguments);
         }
@@ -38715,7 +38755,7 @@
     	queue: queue_1
     };
 
-    var __extends$16 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$17 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -38730,7 +38770,7 @@
      * @class ReplaySubject<T>
      */
     var ReplaySubject = (function (_super) {
-        __extends$16(ReplaySubject, _super);
+        __extends$17(ReplaySubject, _super);
         function ReplaySubject(bufferSize, windowTime, scheduler) {
             if (bufferSize === void 0) { bufferSize = Number.POSITIVE_INFINITY; }
             if (windowTime === void 0) { windowTime = Number.POSITIVE_INFINITY; }
@@ -38815,7 +38855,7 @@
         return ReplayEvent;
     }());
 
-    var __extends$17 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$18 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -38826,7 +38866,7 @@
      * @extends {Ignored}
      */
     var RaceSubscriber = (function (_super) {
-        __extends$17(RaceSubscriber, _super);
+        __extends$18(RaceSubscriber, _super);
         function RaceSubscriber(destination) {
             _super.call(this, destination);
             this.hasFirst = false;
@@ -38871,7 +38911,7 @@
         return RaceSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$18 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$19 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -38882,7 +38922,7 @@
      * @extends {Ignored}
      */
     var RepeatSubscriber = (function (_super) {
-        __extends$18(RepeatSubscriber, _super);
+        __extends$19(RepeatSubscriber, _super);
         function RepeatSubscriber(destination, count, source) {
             _super.call(this, destination);
             this.count = count;
@@ -38903,7 +38943,7 @@
         return RepeatSubscriber;
     }(Subscriber_1.Subscriber));
 
-    var __extends$19 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1a = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -38914,7 +38954,7 @@
      * @extends {Ignored}
      */
     var RepeatWhenSubscriber = (function (_super) {
-        __extends$19(RepeatWhenSubscriber, _super);
+        __extends$1a(RepeatWhenSubscriber, _super);
         function RepeatWhenSubscriber(destination, notifier, source) {
             _super.call(this, destination);
             this.notifier = notifier;
@@ -38978,7 +39018,7 @@
         return RepeatWhenSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$1a = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1b = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -38989,7 +39029,7 @@
      * @extends {Ignored}
      */
     var RetrySubscriber = (function (_super) {
-        __extends$1a(RetrySubscriber, _super);
+        __extends$1b(RetrySubscriber, _super);
         function RetrySubscriber(destination, count, source) {
             _super.call(this, destination);
             this.count = count;
@@ -39010,7 +39050,7 @@
         return RetrySubscriber;
     }(Subscriber_1.Subscriber));
 
-    var __extends$1b = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1c = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -39021,7 +39061,7 @@
      * @extends {Ignored}
      */
     var RetryWhenSubscriber = (function (_super) {
-        __extends$1b(RetryWhenSubscriber, _super);
+        __extends$1c(RetryWhenSubscriber, _super);
         function RetryWhenSubscriber(destination, notifier, source) {
             _super.call(this, destination);
             this.notifier = notifier;
@@ -39077,7 +39117,7 @@
         return RetryWhenSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$1c = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1d = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -39088,7 +39128,7 @@
      * @extends {Ignored}
      */
     var SampleSubscriber = (function (_super) {
-        __extends$1c(SampleSubscriber, _super);
+        __extends$1d(SampleSubscriber, _super);
         function SampleSubscriber() {
             _super.apply(this, arguments);
             this.hasValue = false;
@@ -39112,7 +39152,7 @@
         return SampleSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$1d = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1e = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -39123,7 +39163,7 @@
      * @extends {Ignored}
      */
     var SampleTimeSubscriber = (function (_super) {
-        __extends$1d(SampleTimeSubscriber, _super);
+        __extends$1e(SampleTimeSubscriber, _super);
         function SampleTimeSubscriber(destination, period, scheduler) {
             _super.call(this, destination);
             this.period = period;
@@ -39149,7 +39189,7 @@
         this.schedule(state, period);
     }
 
-    var __extends$1e = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1f = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -39160,7 +39200,7 @@
      * @extends {Ignored}
      */
     var SequenceEqualSubscriber = (function (_super) {
-        __extends$1e(SequenceEqualSubscriber, _super);
+        __extends$1f(SequenceEqualSubscriber, _super);
         function SequenceEqualSubscriber(destination, compareTo, comparor) {
             _super.call(this, destination);
             this.compareTo = compareTo;
@@ -39224,7 +39264,7 @@
         return SequenceEqualSubscriber;
     }(Subscriber_1.Subscriber));
     var SequenceEqualCompareToSubscriber = (function (_super) {
-        __extends$1e(SequenceEqualCompareToSubscriber, _super);
+        __extends$1f(SequenceEqualCompareToSubscriber, _super);
         function SequenceEqualCompareToSubscriber(destination, parent) {
             _super.call(this, destination);
             this.parent = parent;
@@ -39241,7 +39281,7 @@
         return SequenceEqualCompareToSubscriber;
     }(Subscriber_1.Subscriber));
 
-    var __extends$1f = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1g = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -39252,7 +39292,7 @@
      * @extends {Ignored}
      */
     var SingleSubscriber = (function (_super) {
-        __extends$1f(SingleSubscriber, _super);
+        __extends$1g(SingleSubscriber, _super);
         function SingleSubscriber(destination, predicate, source) {
             _super.call(this, destination);
             this.predicate = predicate;
@@ -39301,7 +39341,7 @@
         return SingleSubscriber;
     }(Subscriber_1.Subscriber));
 
-    var __extends$1g = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1h = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -39312,7 +39352,7 @@
      * @extends {Ignored}
      */
     var SkipSubscriber = (function (_super) {
-        __extends$1g(SkipSubscriber, _super);
+        __extends$1h(SkipSubscriber, _super);
         function SkipSubscriber(destination, total) {
             _super.call(this, destination);
             this.total = total;
@@ -39326,7 +39366,7 @@
         return SkipSubscriber;
     }(Subscriber_1.Subscriber));
 
-    var __extends$1h = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1i = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -39337,7 +39377,7 @@
      * @extends {Ignored}
      */
     var SkipLastSubscriber = (function (_super) {
-        __extends$1h(SkipLastSubscriber, _super);
+        __extends$1i(SkipLastSubscriber, _super);
         function SkipLastSubscriber(destination, _skipCount) {
             _super.call(this, destination);
             this._skipCount = _skipCount;
@@ -39361,7 +39401,7 @@
         return SkipLastSubscriber;
     }(Subscriber_1.Subscriber));
 
-    var __extends$1i = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1j = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -39372,7 +39412,7 @@
      * @extends {Ignored}
      */
     var SkipUntilSubscriber = (function (_super) {
-        __extends$1i(SkipUntilSubscriber, _super);
+        __extends$1j(SkipUntilSubscriber, _super);
         function SkipUntilSubscriber(destination, notifier) {
             _super.call(this, destination);
             this.hasValue = false;
@@ -39404,7 +39444,7 @@
         return SkipUntilSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$1j = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1k = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -39415,7 +39455,7 @@
      * @extends {Ignored}
      */
     var SkipWhileSubscriber = (function (_super) {
-        __extends$1j(SkipWhileSubscriber, _super);
+        __extends$1k(SkipWhileSubscriber, _super);
         function SkipWhileSubscriber(destination, predicate) {
             _super.call(this, destination);
             this.predicate = predicate;
@@ -39443,7 +39483,7 @@
         return SkipWhileSubscriber;
     }(Subscriber_1.Subscriber));
 
-    var __extends$1k = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1l = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -39454,7 +39494,7 @@
      * @extends {Ignored}
      */
     var SwitchMapSubscriber = (function (_super) {
-        __extends$1k(SwitchMapSubscriber, _super);
+        __extends$1l(SwitchMapSubscriber, _super);
         function SwitchMapSubscriber(destination, project, resultSelector) {
             _super.call(this, destination);
             this.project = project;
@@ -39518,7 +39558,7 @@
         return SwitchMapSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$1l = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1m = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -39529,7 +39569,7 @@
      * @extends {Ignored}
      */
     var SwitchMapToSubscriber = (function (_super) {
-        __extends$1l(SwitchMapToSubscriber, _super);
+        __extends$1m(SwitchMapToSubscriber, _super);
         function SwitchMapToSubscriber(destination, inner, resultSelector) {
             _super.call(this, destination);
             this.inner = inner;
@@ -39583,7 +39623,7 @@
         return SwitchMapToSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$1m = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1n = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -39594,7 +39634,7 @@
      * @extends {Ignored}
      */
     var TakeSubscriber = (function (_super) {
-        __extends$1m(TakeSubscriber, _super);
+        __extends$1n(TakeSubscriber, _super);
         function TakeSubscriber(destination, total) {
             _super.call(this, destination);
             this.total = total;
@@ -39614,7 +39654,7 @@
         return TakeSubscriber;
     }(Subscriber_1.Subscriber));
 
-    var __extends$1n = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1o = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -39625,7 +39665,7 @@
      * @extends {Ignored}
      */
     var TakeUntilSubscriber = (function (_super) {
-        __extends$1n(TakeUntilSubscriber, _super);
+        __extends$1o(TakeUntilSubscriber, _super);
         function TakeUntilSubscriber(destination, notifier) {
             _super.call(this, destination);
             this.notifier = notifier;
@@ -39640,7 +39680,7 @@
         return TakeUntilSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$1o = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1p = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -39651,7 +39691,7 @@
      * @extends {Ignored}
      */
     var TakeWhileSubscriber = (function (_super) {
-        __extends$1o(TakeWhileSubscriber, _super);
+        __extends$1p(TakeWhileSubscriber, _super);
         function TakeWhileSubscriber(destination, predicate) {
             _super.call(this, destination);
             this.predicate = predicate;
@@ -39681,7 +39721,7 @@
         return TakeWhileSubscriber;
     }(Subscriber_1.Subscriber));
 
-    var __extends$1p = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1q = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -39692,7 +39732,7 @@
      * @extends {Ignored}
      */
     var DoSubscriber = (function (_super) {
-        __extends$1p(DoSubscriber, _super);
+        __extends$1q(DoSubscriber, _super);
         function DoSubscriber(destination, nextOrObserver, error, complete) {
             _super.call(this, destination);
             var safeSubscriber = new Subscriber_1.Subscriber(nextOrObserver, error, complete);
@@ -39879,7 +39919,7 @@
     var throttle_2 = throttle_1.defaultThrottleConfig;
     var throttle_3 = throttle_1.throttle;
 
-    var __extends$1q = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1r = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -39890,7 +39930,7 @@
      * @extends {Ignored}
      */
     var ThrottleTimeSubscriber = (function (_super) {
-        __extends$1q(ThrottleTimeSubscriber, _super);
+        __extends$1r(ThrottleTimeSubscriber, _super);
         function ThrottleTimeSubscriber(destination, duration, scheduler, leading, trailing) {
             _super.call(this, destination);
             this.duration = duration;
@@ -39934,7 +39974,7 @@
         subscriber.clearThrottle();
     }
 
-    var __extends$1r = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1s = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -39952,7 +39992,7 @@
      * @extends {Ignored}
      */
     var TimeIntervalSubscriber = (function (_super) {
-        __extends$1r(TimeIntervalSubscriber, _super);
+        __extends$1s(TimeIntervalSubscriber, _super);
         function TimeIntervalSubscriber(destination, scheduler) {
             _super.call(this, destination);
             this.scheduler = scheduler;
@@ -39968,7 +40008,7 @@
         return TimeIntervalSubscriber;
     }(Subscriber_1.Subscriber));
 
-    var __extends$1s = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1t = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -39981,7 +40021,7 @@
      * @class TimeoutError
      */
     var TimeoutError = (function (_super) {
-        __extends$1s(TimeoutError, _super);
+        __extends$1t(TimeoutError, _super);
         function TimeoutError() {
             var err = _super.call(this, 'Timeout has occurred');
             this.name = err.name = 'TimeoutError';
@@ -39991,7 +40031,7 @@
         return TimeoutError;
     }(Error));
 
-    var __extends$1t = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1u = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -40002,7 +40042,7 @@
      * @extends {Ignored}
      */
     var TimeoutSubscriber = (function (_super) {
-        __extends$1t(TimeoutSubscriber, _super);
+        __extends$1u(TimeoutSubscriber, _super);
         function TimeoutSubscriber(destination, absoluteTimeout, waitFor, scheduler, errorInstance) {
             _super.call(this, destination);
             this.absoluteTimeout = absoluteTimeout;
@@ -40043,7 +40083,7 @@
         return TimeoutSubscriber;
     }(Subscriber_1.Subscriber));
 
-    var __extends$1u = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1v = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -40054,7 +40094,7 @@
      * @extends {Ignored}
      */
     var TimeoutWithSubscriber = (function (_super) {
-        __extends$1u(TimeoutWithSubscriber, _super);
+        __extends$1v(TimeoutWithSubscriber, _super);
         function TimeoutWithSubscriber(destination, absoluteTimeout, waitFor, withObservable, scheduler) {
             _super.call(this, destination);
             this.absoluteTimeout = absoluteTimeout;
@@ -40097,7 +40137,7 @@
         return TimeoutWithSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$1v = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1w = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -40108,7 +40148,7 @@
      * @extends {Ignored}
      */
     var WindowSubscriber = (function (_super) {
-        __extends$1v(WindowSubscriber, _super);
+        __extends$1w(WindowSubscriber, _super);
         function WindowSubscriber(destination) {
             _super.call(this, destination);
             this.window = new Subject_1.Subject();
@@ -40149,7 +40189,7 @@
         return WindowSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$1w = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1x = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -40160,7 +40200,7 @@
      * @extends {Ignored}
      */
     var WindowCountSubscriber = (function (_super) {
-        __extends$1w(WindowCountSubscriber, _super);
+        __extends$1x(WindowCountSubscriber, _super);
         function WindowCountSubscriber(destination, windowSize, startWindowEvery) {
             _super.call(this, destination);
             this.destination = destination;
@@ -40214,13 +40254,13 @@
         return WindowCountSubscriber;
     }(Subscriber_1.Subscriber));
 
-    var __extends$1x = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1y = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
     var CountedSubject = (function (_super) {
-        __extends$1x(CountedSubject, _super);
+        __extends$1y(CountedSubject, _super);
         function CountedSubject() {
             _super.apply(this, arguments);
             this._numberOfNextedValues = 0;
@@ -40244,7 +40284,7 @@
      * @extends {Ignored}
      */
     var WindowTimeSubscriber = (function (_super) {
-        __extends$1x(WindowTimeSubscriber, _super);
+        __extends$1y(WindowTimeSubscriber, _super);
         function WindowTimeSubscriber(destination, windowTimeSpan, windowCreationInterval, maxWindowSize, scheduler) {
             _super.call(this, destination);
             this.destination = destination;
@@ -40335,7 +40375,7 @@
         subscriber.closeWindow(window);
     }
 
-    var __extends$1y = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1z = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -40346,7 +40386,7 @@
      * @extends {Ignored}
      */
     var WindowToggleSubscriber = (function (_super) {
-        __extends$1y(WindowToggleSubscriber, _super);
+        __extends$1z(WindowToggleSubscriber, _super);
         function WindowToggleSubscriber(destination, openings, closingSelector) {
             _super.call(this, destination);
             this.openings = openings;
@@ -40453,7 +40493,7 @@
         return WindowToggleSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$1z = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1A = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -40464,7 +40504,7 @@
      * @extends {Ignored}
      */
     var WindowSubscriber$1 = (function (_super) {
-        __extends$1z(WindowSubscriber, _super);
+        __extends$1A(WindowSubscriber, _super);
         function WindowSubscriber(destination, closingSelector) {
             _super.call(this, destination);
             this.destination = destination;
@@ -40523,7 +40563,7 @@
         return WindowSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$1A = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1B = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -40534,7 +40574,7 @@
      * @extends {Ignored}
      */
     var WithLatestFromSubscriber = (function (_super) {
-        __extends$1A(WithLatestFromSubscriber, _super);
+        __extends$1B(WithLatestFromSubscriber, _super);
         function WithLatestFromSubscriber(destination, observables, project) {
             _super.call(this, destination);
             this.observables = observables;
@@ -40588,7 +40628,7 @@
         return WithLatestFromSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$1B = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1C = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -40599,7 +40639,7 @@
      * @extends {Ignored}
      */
     var ZipSubscriber = (function (_super) {
-        __extends$1B(ZipSubscriber, _super);
+        __extends$1C(ZipSubscriber, _super);
         function ZipSubscriber(destination, project, values) {
             if (values === void 0) { values = Object.create(null); }
             _super.call(this, destination);
@@ -40742,7 +40782,7 @@
      * @extends {Ignored}
      */
     var ZipBufferIterator = (function (_super) {
-        __extends$1B(ZipBufferIterator, _super);
+        __extends$1C(ZipBufferIterator, _super);
         function ZipBufferIterator(destination, parent, observable) {
             _super.call(this, destination);
             this.parent = parent;
@@ -40794,92 +40834,106 @@
 
     var throttle = throttle_1.throttle;
 
-    var Role = /** @class */ (function () {
-        function Role(type, id, name, description) {
-            if (type === void 0) { type = "users"; }
-            this.type = type;
-            this.id = id;
-            this.name = name;
-            this.description = description;
-            //
+    var __extends$1D = (undefined && undefined.__extends) || (function () {
+        var extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return function (d, b) {
+            extendStatics(d, b);
+            function __() { this.constructor = d; }
+            d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+        };
+    })();
+    var Role = /** @class */ (function (_super) {
+        __extends$1D(Role, _super);
+        function Role(data) {
+            var _this = _super.call(this, data) || this;
+            _this.type = "users";
+            return _this;
         }
         return Role;
-    }());
+    }(Model));
 
-    var User = /** @class */ (function () {
-        function User(type, id, userName, salutation, lastName, firstName, phoneHome, phoneMobile, phoneWork, phoneOther, phoneFax, phoneAsterisk, email, status, employeeStatus, title, managerId, department, officeId, teamId, tourplanID, swPhoneNumber, swExtension, swTelephony, swClickToCall, swCallNotification, codeSonGalileo, inheritsPreferencesFrom, roleId, serviceId, functionId, destinations, ggOrganisationId, ggGroups) {
-            if (type === void 0) { type = null; }
-            if (id === void 0) { id = null; }
-            if (userName === void 0) { userName = null; }
-            if (salutation === void 0) { salutation = "Mrs."; }
-            if (lastName === void 0) { lastName = null; }
-            if (firstName === void 0) { firstName = null; }
-            if (phoneHome === void 0) { phoneHome = null; }
-            if (phoneMobile === void 0) { phoneMobile = null; }
-            if (phoneWork === void 0) { phoneWork = null; }
-            if (phoneOther === void 0) { phoneOther = null; }
-            if (phoneFax === void 0) { phoneFax = null; }
-            if (phoneAsterisk === void 0) { phoneAsterisk = null; }
-            if (email === void 0) { email = null; }
-            if (status === void 0) { status = "Active"; }
-            if (employeeStatus === void 0) { employeeStatus = "Active"; }
-            if (title === void 0) { title = null; }
-            if (managerId === void 0) { managerId = null; }
-            if (department === void 0) { department = null; }
-            if (officeId === void 0) { officeId = null; }
-            if (teamId === void 0) { teamId = null; }
-            if (tourplanID === void 0) { tourplanID = null; }
-            if (swPhoneNumber === void 0) { swPhoneNumber = null; }
-            if (swExtension === void 0) { swExtension = null; }
-            if (swTelephony === void 0) { swTelephony = false; }
-            if (swClickToCall === void 0) { swClickToCall = false; }
-            if (swCallNotification === void 0) { swCallNotification = false; }
-            if (codeSonGalileo === void 0) { codeSonGalileo = null; }
-            if (inheritsPreferencesFrom === void 0) { inheritsPreferencesFrom = "user_default"; }
-            if (roleId === void 0) { roleId = null; }
-            if (serviceId === void 0) { serviceId = null; }
-            if (functionId === void 0) { functionId = null; }
-            if (destinations === void 0) { destinations = []; }
-            if (ggOrganisationId === void 0) { ggOrganisationId = null; }
-            if (ggGroups === void 0) { ggGroups = null; }
-            this.type = type;
-            this.id = id;
-            this.userName = userName;
-            this.salutation = salutation;
-            this.lastName = lastName;
-            this.firstName = firstName;
-            this.phoneHome = phoneHome;
-            this.phoneMobile = phoneMobile;
-            this.phoneWork = phoneWork;
-            this.phoneOther = phoneOther;
-            this.phoneFax = phoneFax;
-            this.phoneAsterisk = phoneAsterisk;
-            this.email = email;
-            this.status = status;
-            this.employeeStatus = employeeStatus;
-            this.title = title;
-            this.managerId = managerId;
-            this.department = department;
-            this.officeId = officeId;
-            this.teamId = teamId;
-            this.tourplanID = tourplanID;
-            this.swPhoneNumber = swPhoneNumber;
-            this.swExtension = swExtension;
-            this.swTelephony = swTelephony;
-            this.swClickToCall = swClickToCall;
-            this.swCallNotification = swCallNotification;
-            this.codeSonGalileo = codeSonGalileo;
-            this.inheritsPreferencesFrom = inheritsPreferencesFrom;
-            this.roleId = roleId;
-            this.serviceId = serviceId;
-            this.functionId = functionId;
-            this.destinations = destinations;
-            this.ggOrganisationId = ggOrganisationId;
-            this.ggGroups = ggGroups;
-            //
+    var __extends$1E = (undefined && undefined.__extends) || (function () {
+        var extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return function (d, b) {
+            extendStatics(d, b);
+            function __() { this.constructor = d; }
+            d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+        };
+    })();
+    var Team = /** @class */ (function (_super) {
+        __extends$1E(Team, _super);
+        function Team(data) {
+            var _this = _super.call(this, data) || this;
+            _this.type = "users";
+            return _this;
+        }
+        return Team;
+    }(Model));
+
+    var __extends$1F = (undefined && undefined.__extends) || (function () {
+        var extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return function (d, b) {
+            extendStatics(d, b);
+            function __() { this.constructor = d; }
+            d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+        };
+    })();
+    var User = /** @class */ (function (_super) {
+        __extends$1F(User, _super);
+        function User(data) {
+            var _this = _super.call(this, data) || this;
+            _this.type = null;
+            _this.id = null;
+            _this.userName = null;
+            _this.salutation = "Mrs.";
+            _this.lastName = null;
+            _this.firstName = null;
+            _this.phoneHome = null;
+            _this.phoneMobile = null;
+            _this.phoneWork = null;
+            _this.phoneOther = null;
+            _this.phoneFax = null;
+            _this.phoneAsterisk = null;
+            _this.email = null;
+            _this.status = "Active";
+            _this.employeeStatus = "Active";
+            _this.title = null;
+            _this.managerId = null;
+            _this.department = null;
+            _this.officeId = null;
+            _this.teamId = null;
+            _this.tourplanID = null;
+            _this.swClickToCall = false;
+            _this.swCallNotification = false;
+            _this.codeSonGalileo = null;
+            _this.swPhoneNumber = null;
+            _this.swExtension = null;
+            _this.swTelephony = false;
+            _this.inheritsPreferencesFrom = "user_default";
+            _this.roleId = null;
+            _this.serviceId = null;
+            _this.functionId = null;
+            _this.destinations = [];
+            _this.ggOrganisationId = null;
+            _this.ggGroups = null;
+            _this.isAdmin = 0;
+            _this.apiPortalUser = 0;
+            _this.assignationNotification = 0;
+            _this.userGroup = 0;
+            _this.defaultTeams = 1;
+            _this.leadsMin = 15;
+            _this.leadsMax = 45;
+            console.log("data passed to super, ", data);
+            return _this;
         }
         return User;
-    }());
+    }(Model));
 
     Observable_1.Observable.prototype.map = map_2$1.map;
 
@@ -40902,26 +40956,27 @@
         function SugarService(http) {
             this.http = http;
             this.roleList = [];
+            this.teamList = [];
             this.userList = [];
+            this.itemList = [];
             this.endPoint = "http://sh.pvcrm.com/sugarcrm/sugarcrm/api/";
             //
         }
         SugarService.prototype.getUserById = function (id) {
             return this.getData("users/" + id)
-                .map(function (user) { return user.data; })
-                .map(function (user) { return new User(user.type, user.id, user.attributes); })
+                .map(function (data) { return new User(data); })
                 .toPromise()
                 .catch(function (err) {
                 console.error(err);
                 throw (err);
             });
         };
-        SugarService.prototype.createUserList = function () {
+        SugarService.prototype.getUsersFromSugar = function () {
             var _this = this;
-            this.getUsersFromSugar()
+            this.getData("users")
                 .subscribe(function (users) {
                 users.data.forEach(function (user) {
-                    _this.userList.push(new User(user.type, user.id, user.attributes.userName, user.attributes.salutation, user.attributes.lastName, user.attributes.firstName, user.attributes.phoneHome, user.attributes.phoneMobile, user.attributes.phoneWork, user.attributes.phoneOther, user.attributes.phoneFax, user.attributes.phoneAsterisk, user.attributes.email, user.attributes.status, user.attributes.employeeStatus, user.attributes.title, user.attributes.managerId, user.attributes.department, user.attributes.officeId, user.attributes.teamId, user.attributes.tourplanID, user.attributes.swClickToCall, user.attributes.swCallNotification, user.attributes.codeSonGalileo));
+                    _this.userList.push(new User(user));
                 });
                 console.log("USERLIST", _this.userList);
             });
@@ -40932,17 +40987,17 @@
             this.getData("teams")
                 .subscribe(function (teams) {
                 teams.data.forEach(function (team) {
-                    _this.roleList.push(new Role(team.type, team.id, team.attributes.name, team.attributes.description));
+                    _this.teamList.push(new Team(team));
                 });
             });
-            return this.roleList;
+            return this.teamList;
         };
         SugarService.prototype.getRolesFromSugar = function () {
             var _this = this;
             this.getData("roles")
                 .subscribe(function (roles) {
                 roles.data.forEach(function (role) {
-                    _this.roleList.push(new Role(role.type, role.id, role.attributes.name, role.attributes.description));
+                    _this.roleList.push(new Role(role));
                 });
             });
             return this.roleList;
@@ -40953,9 +41008,6 @@
         };
         SugarService.prototype.errorHandler = function (error) {
             return _throw_1(error);
-        };
-        SugarService.prototype.getUsersFromSugar = function () {
-            return this.getData("users");
         };
         SugarService.prototype.getData = function (item) {
             return this.http.get(this.endPoint + ("" + item));
@@ -41028,8 +41080,9 @@
         }
         CreateUserFormComponent.prototype.ngOnInit = function () {
             this.fields = this.fieldsService.getData();
+            console.log("this fields", this.fields);
             this.resetSugar();
-            this.usersFromSugar = this.sugarService.createUserList();
+            this.usersFromSugar = this.sugarService.getUsersFromSugar();
             this.route.paramMap.subscribe(function (params) { return params.get("id"); });
         };
         CreateUserFormComponent.prototype.onParentChange = function (_a) {
@@ -41482,7 +41535,7 @@
             // constructor
         }
         UsersComponent.prototype.ngOnInit = function () {
-            this.usersFromSugar = this.sugarService.createUserList();
+            this.usersFromSugar = this.sugarService.getUsersFromSugar();
         };
         UsersComponent.prototype.trackByFn = function (index, item) {
             return index; // or item.id
@@ -47512,7 +47565,7 @@
      */
     BrowserAnimationsModule.ctorParameters = function () { return []; };
 
-    var __extends$1C = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1G = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -47528,7 +47581,7 @@
      * @hide true
      */
     var ForkJoinObservable = (function (_super) {
-        __extends$1C(ForkJoinObservable, _super);
+        __extends$1G(ForkJoinObservable, _super);
         function ForkJoinObservable(sources, resultSelector) {
             _super.call(this);
             this.sources = sources;
@@ -47666,7 +47719,7 @@
      * @extends {Ignored}
      */
     var ForkJoinSubscriber = (function (_super) {
-        __extends$1C(ForkJoinSubscriber, _super);
+        __extends$1G(ForkJoinSubscriber, _super);
         function ForkJoinSubscriber(destination, sources, resultSelector) {
             _super.call(this, destination);
             this.sources = sources;
@@ -53681,11 +53734,11 @@
     };
     var CheckboxFieldComponent = /** @class */ (function () {
         function CheckboxFieldComponent() {
-            this.onClick = new EventEmitter();
+            this.clickEmitter = new EventEmitter();
         }
-        CheckboxFieldComponent.prototype.onChange = function (e, id) {
+        CheckboxFieldComponent.prototype.handleClick = function (e, id) {
             console.log("in child", e, id);
-            this.onClick.emit({ e: e, id: id });
+            this.clickEmitter.emit({ e: e, id: id });
         };
         CheckboxFieldComponent.prototype.trackByFn = function (item, id) {
             return id;
@@ -53697,7 +53750,7 @@
         __decorate$d([
             Output(),
             __metadata$c("design:type", Object)
-        ], CheckboxFieldComponent.prototype, "onClick", void 0);
+        ], CheckboxFieldComponent.prototype, "clickEmitter", void 0);
         CheckboxFieldComponent = __decorate$d([
             Component({
                 selector: "mv-checkbox-field",
@@ -53910,7 +53963,7 @@
     function View_CheckboxFieldComponent_Host_0(_l) {
         return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 2, 'mv-checkbox-field', [], null, null, null, View_CheckboxFieldComponent_0, RenderType_CheckboxFieldComponent)), providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(2, 49152, null, 0, CheckboxFieldComponent, [], null, null)], null, null);
     }
-    var CheckboxFieldComponentNgFactory = createComponentFactory('mv-checkbox-field', CheckboxFieldComponent, View_CheckboxFieldComponent_Host_0, { checkboxes: 'checkboxes' }, { onClick: 'onClick' }, []);
+    var CheckboxFieldComponentNgFactory = createComponentFactory('mv-checkbox-field', CheckboxFieldComponent, View_CheckboxFieldComponent_Host_0, { checkboxes: 'checkboxes' }, { clickEmitter: 'clickEmitter' }, []);
 
     /**
      * @fileoverview This file is generated by the Angular template compiler.
@@ -54627,17 +54680,17 @@
                 [8, null]], { name: [0, 'name'] }, null), providerDef(2048, null, ControlContainer, null, [NgModelGroup]), directiveDef(173, 16384, null, 0, NgControlStatusGroup, [ControlContainer], null, null),
             (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(175, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Equipe'])),
             (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(178, 0, null, null, 2, 'mv-checkbox-field', [], null, [[null,
-                    'onClick']], function (_v, en, $event) {
+                    'clickEmitter']], function (_v, en, $event) {
                 var ad = true;
                 var _co = _v.component;
-                if (('onClick' === en)) {
+                if (('clickEmitter' === en)) {
                     var pd_0 = (_co.onParentChange($event) !== false);
                     ad = (pd_0 && ad);
                 }
                 return ad;
             }, View_CheckboxFieldComponent_0, RenderType_CheckboxFieldComponent)),
             providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(180, 49152, null, 0, CheckboxFieldComponent, [], { checkboxes: [0,
-                    'checkboxes'] }, { onClick: 'onClick' }), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n\n\n\n  '])), (_l()(), elementDef(183, 0, null, null, 12, 'div', [['name', 'othersWithComponent']], [[2, 'ng-untouched', null], [2, 'ng-touched', null], [2, 'ng-pristine',
+                    'checkboxes'] }, { clickEmitter: 'clickEmitter' }), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n\n\n\n  '])), (_l()(), elementDef(183, 0, null, null, 12, 'div', [['name', 'othersWithComponent']], [[2, 'ng-untouched', null], [2, 'ng-touched', null], [2, 'ng-pristine',
                     null], [2, 'ng-dirty', null], [2, 'ng-valid', null],
                 [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null,
                     'ngModelChange']], function (_v, en, $event) {
@@ -54661,9 +54714,12 @@
                 return ad;
             }, View_CheckboxFieldComponent_0, RenderType_CheckboxFieldComponent)),
             providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(193, 49152, null, 0, CheckboxFieldComponent, [], { checkboxes: [0,
-                    'checkboxes'] }, { onClick: 'onClick' }), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n\n\n  '])), (_l()(), elementDef(197, 0, null, null, 13, 'fieldset', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(199, 0, null, null, 10, 'div', [['ngModelGroup', 'destinations']], [[2, 'ng-untouched', null], [2, 'ng-touched', null], [2, 'ng-pristine',
-                    null], [2, 'ng-dirty', null], [2, 'ng-valid', null],
-                [2, 'ng-invalid', null], [2, 'ng-pending', null]], null, null, null, null)), directiveDef(200, 212992, null, 0, NgModelGroup, [[1, ControlContainer], [8, null], [8, null]], { name: [0, 'name'] }, null), providerDef(2048, null, ControlContainer, null, [NgModelGroup]), directiveDef(202, 16384, null, 0, NgControlStatusGroup, [ControlContainer], null, null), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(204, 0, null, null, 1, 'legend', [], null, null, null, null, null)),
+                    'checkboxes'] }, null), (_l()(), textDef(-1, null, ['\n    '])),
+            (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n\n\n  '])), (_l()(), elementDef(197, 0, null, null, 13, 'fieldset', [], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(199, 0, null, null, 10, 'div', [['ngModelGroup', 'destinations']], [[2, 'ng-untouched',
+                    null], [2, 'ng-touched', null], [2, 'ng-pristine', null],
+                [2, 'ng-dirty', null], [2, 'ng-valid', null], [2, 'ng-invalid',
+                    null], [2, 'ng-pending', null]], null, null, null, null)), directiveDef(200, 212992, null, 0, NgModelGroup, [[1, ControlContainer], [8, null], [8, null]], { name: [0, 'name'] }, null), providerDef(2048, null, ControlContainer, null, [NgModelGroup]), directiveDef(202, 16384, null, 0, NgControlStatusGroup, [ControlContainer], null, null), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(204, 0, null, null, 1, 'legend', [], null, null, null, null, null)),
             (_l()(), textDef(-1, null, ['Destinations'])), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_10)), directiveDef(208, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'],
                 ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(), textDef(-1, null, ['c\n    '])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n\n  '])), (_l()(), elementDef(212, 0, null, null, 12, 'div', [['class', 'select subtitle']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Manager\n    '])),
             (_l()(), elementDef(214, 0, null, null, 9, 'select', [['name', 'manager']], [[2, 'ng-untouched', null], [2, 'ng-touched', null], [2, 'ng-pristine',
@@ -54691,21 +54747,22 @@
             (_l()(), textDef(-1, null, ['\n      '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_11)), directiveDef(222, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(),
                 textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n  '])),
             (_l()(), textDef(-1, null, ['\n\n  '])), (_l()(), elementDef(226, 0, null, null, 13, 'fieldset', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])),
-            (_l()(), elementDef(228, 0, null, null, 10, 'div', [['ngModelGroup',
-                    'orgas']], [[2, 'ng-untouched', null], [2, 'ng-touched', null],
+            (_l()(), elementDef(228, 0, null, null, 10, 'div', [['class', 'orgas'],
+                ['ngModelGroup', 'orgas']], [[2, 'ng-untouched', null], [2, 'ng-touched',
+                    null], [2, 'ng-pristine', null], [2, 'ng-dirty', null],
+                [2, 'ng-valid', null], [2, 'ng-invalid', null], [2, 'ng-pending',
+                    null]], null, null, null, null)),
+            directiveDef(229, 212992, null, 0, NgModelGroup, [[1, ControlContainer],
+                [8, null], [8, null]], { name: [0, 'name'] }, null), providerDef(2048, null, ControlContainer, null, [NgModelGroup]), directiveDef(231, 16384, null, 0, NgControlStatusGroup, [ControlContainer], null, null), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(233, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Organisations'])), (_l()(), textDef(-1, null, ['\n      '])), (_l()(),
+                anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_12)),
+            directiveDef(237, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef,
+                IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['d\n  '])), (_l()(), textDef(-1, null, ['\n\n  '])),
+            (_l()(), elementDef(241, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(243, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Code User Tourplan\n      '])),
+            (_l()(), elementDef(245, 0, null, null, 5, 'input', [['name', 'sugar_tourplan'],
+                ['type', 'text']], [[2, 'ng-untouched', null], [2, 'ng-touched', null],
                 [2, 'ng-pristine', null], [2, 'ng-dirty', null], [2, 'ng-valid',
-                    null], [2, 'ng-invalid', null], [2, 'ng-pending', null]], null, null, null, null)), directiveDef(229, 212992, null, 0, NgModelGroup, [[1, ControlContainer], [8, null],
-                [8, null]], { name: [0, 'name'] }, null), providerDef(2048, null, ControlContainer, null, [NgModelGroup]), directiveDef(231, 16384, null, 0, NgControlStatusGroup, [ControlContainer], null, null),
-            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(233, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Organisations'])),
-            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_12)), directiveDef(237, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(),
-                textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['d\n  '])),
-            (_l()(), textDef(-1, null, ['\n\n  '])), (_l()(), elementDef(241, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])),
-            (_l()(), elementDef(243, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Code User Tourplan\n      '])), (_l()(), elementDef(245, 0, null, null, 5, 'input', [['name', 'sugar_tourplan'], ['type', 'text']], [[2,
-                    'ng-untouched', null], [2, 'ng-touched', null], [2, 'ng-pristine',
-                    null], [2, 'ng-dirty', null], [2, 'ng-valid', null],
-                [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null,
-                    'ngModelChange'], [null, 'input'], [null, 'blur'], [null,
-                    'compositionstart'], [null, 'compositionend']], function (_v, en, $event) {
+                    null], [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null, 'ngModelChange'], [null, 'input'], [null,
+                    'blur'], [null, 'compositionstart'], [null, 'compositionend']], function (_v, en, $event) {
                 var ad = true;
                 var _co = _v.component;
                 if (('input' === en)) {
