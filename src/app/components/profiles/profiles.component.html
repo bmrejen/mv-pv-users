@@ -1,0 +1,44 @@
+<fieldset>
+  <legend>Profiles SugarCRM</legend>
+  <div ngModelGroup="sugar">
+    <button (click)="handleClick($event, 'conseiller')">Ventes - Conseiller</button>
+    <button (click)="handleClick($event, 'jm')">Ventes – Junior Manager</button>
+    <button (click)="handleClick($event, 'manager')">Ventes - Manager</button>
+    <button (click)="handleClick($event, 'assistant')">Ventes – Assistant de ventes</button>
+    <button (click)="handleClick($event, 'qualite')">Agent Qualité</button>
+    <button (click)="handleClick($event, 'compta')">Compta</button>
+    <button (click)="handleClick($event, 'inactif')">Inactif</button>
+    <div class="select subtitle">Hérite les préférence de l'utilisateur
+      <select name="userToCopyHPfrom" [(ngModel)]="fields.userValue">
+        <option *ngFor="let user of fields.userTemplates ; trackBy: trackByFn" [value]="user.value" (onChange)="selectTmp($event, user)">{{ user.label }}
+        </option>
+      </select>
+    </div>
+
+    <div class="checkbox-list subtitle" id="sugar_role">ROLE:
+     <span *ngFor="let role of fields.roles ; trackBy: trackByFn">
+      <label><input type="checkbox" [(ngModel)]="role.checked" [name]="role.id">{{ role.label }}
+      </label></span>
+    </div>
+
+    <div class="checkbox-list subtitle" id="sugar_departement">SERVICE:
+      <span *ngFor="let service of fields.services ; trackBy: trackByFn">
+        <label>
+          <input [id]="service.id" type="checkbox" [name]="service.id" [ngModel]="service.checked" (ngModelChange)="onServiceChecked(service, $event)">{{ service.name }}
+        </label>
+      </span>
+    </div>
+
+    <div [hidden]="!displayVentesLeads">{{ fields.leadsMin | json }}
+      <label>Leads min
+        <input type="number" name="leadsMin" [(ngModel)]="fields.leadsMin">
+      </label>
+    </div>
+
+    <div [hidden]="!displayVentesLeads">{{ fields.leadsMax | json }}
+      <label>Leads max
+        <input type="number" name="leadsMax" [(ngModel)]="fields.leadsMax">
+      </label>
+    </div>
+  </div>b
+</fieldset>

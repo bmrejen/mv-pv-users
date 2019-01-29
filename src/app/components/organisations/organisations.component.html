@@ -1,0 +1,14 @@
+<fieldset>
+  <legend>Organisations</legend>
+  <div ngModelGroup="orgas">
+    <div *ngFor="let orga of fields.orgas ; trackBy: trackByFn">
+      <label>
+        <input
+        type="checkbox"
+        [(ngModel)]="orga.checked"
+        [name]="orga.id"
+        >{{ orga.label }}
+      </label>
+    </div>
+  </div>
+</fieldset>

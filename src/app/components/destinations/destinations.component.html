@@ -1,0 +1,14 @@
+<fieldset>
+  <legend>Destinations</legend>
+  <div ngModelGroup="destinations">
+    <span *ngFor="let dest of fields.destinations ; trackBy: trackByFn">
+      <label>
+        <input
+        type="checkbox"
+        [(ngModel)]="dest.checked"
+        [name]="dest.name"
+        >{{ dest.name }}  |
+      </label>
+    </span>c
+  </div>
+</fieldset>

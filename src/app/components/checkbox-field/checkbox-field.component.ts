@@ -11,10 +11,9 @@ import { ControlContainer, NgForm } from "@angular/forms";
 export class CheckboxFieldComponent {
 
   @Input() public checkboxes: any[];
-  @Output() public onClick = new EventEmitter<any>();
+  @Output() public readonly onClick = new EventEmitter<any>();
 
   public onChange(e, id) {
-    console.log("in child", e, id);
     this.onClick.emit({e, id});
   }
 

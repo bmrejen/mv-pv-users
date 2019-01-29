@@ -95,6 +95,5 @@ export class Fields {
     this.userTemplates = userTemplates;
     this.userValue = userValue;
 
-    console.log(`Created fields`);
   }
 }

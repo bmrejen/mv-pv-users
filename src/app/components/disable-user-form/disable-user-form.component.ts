@@ -12,8 +12,8 @@ export class DisableUserFormComponent implements OnInit {
   public fields;
   public enableAdd: boolean = true;
   constructor(
-    private fieldsService: FieldsService,
-    private route: ActivatedRoute) {
+              private fieldsService: FieldsService,
+              private route: ActivatedRoute) {
     //
   }
 
@@ -22,7 +22,7 @@ export class DisableUserFormComponent implements OnInit {
     this.fields.accounts.forEach((account) => {
       account.checked = true;
     });
-    this.route.paramMap.subscribe((params) => console.log(params));
+    this.route.paramMap.subscribe((params) => (params));
   }
 
   public trackByFn(index, item) {

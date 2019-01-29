@@ -1,0 +1,37 @@
+  <fieldset>
+    <legend>Switchvox</legend>
+
+    <div ngModelGroup="switchvox">
+
+      <div>
+        <label>Phone Number
+          <input name="phone_number" type="tel" [(ngModel)]="fields.phoneNumber">
+        </label>
+      </div>
+
+      <div>
+        <label>Extension
+          <input name="extension" type="tel" [(ngModel)]="fields.phoneExtension">
+        </label>
+      </div>
+
+      <div>
+        <label>
+          <input type="checkbox" [(ngModel)]="fields.codevad" name="codevad">Téléphonie a distance
+        </label>
+      </div>
+
+      <div>
+        <label>
+          <input type="checkbox" [(ngModel)]="fields.outbound" name="outbound">Click to call
+        </label>
+      </div>
+
+      <div>
+        <label>
+          <input type="checkbox" [(ngModel)]="fields.inbound" name="inbound">Notifications appels entrants
+        </label>
+      </div>
+
+    </div>
+  </fieldset>

@@ -1,14 +1,14 @@
-<h2>Teams component</h2>
-
-<div *ngIf="teamsFromSugar && teamsFromSugar != undefined">
-  <div *ngFor="let team of teamsFromSugar ; trackBy: trackByFn">
-    <h4>{{ team.attributes.firstName }} {{ team.attributes.lastName }}</h4>
-    <ul>
-      <li><strong>ID:</strong> {{ team.id }}</li>
-      <li><strong>Type:</strong> {{ team.type }}</li>
-      <li><strong>ID (again):</strong> {{ team.attributes.id }}</li>
-      <li><strong>Name:</strong> {{ team.attributes.name }}</li>
-      <li><strong>Description:</strong> {{ team.attributes.description }}</li>
-   </ul>
- </div>
-</div>
+<fieldset>
+  <legend>Teams</legend>
+  <div ngModelGroup="teams">
+    <div *ngFor="let team of fields.teams ; trackBy: trackByFn">
+      <label>
+        <input
+        type="checkbox"
+        [(ngModel)]="team.checked"
+        [name]="team.id"
+        >{{ team.label }}
+      </label>
+    </div>
+  </div>
+</fieldset>

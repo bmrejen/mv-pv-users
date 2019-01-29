@@ -1,0 +1,10 @@
+  <fieldset>
+    <legend>Type de compte</legend>
+    <div class="checkbox-list" id="account-type" ngModelGroup="accounts">
+      <div *ngFor="let account of fields.accounts ; trackBy: trackByFn">
+        <label>
+          <input type="checkbox" [name]="account.id" [(ngModel)]="account.checked">{{ account.label }}
+        </label>
+      </div>
+    </div>
+  </fieldset>
