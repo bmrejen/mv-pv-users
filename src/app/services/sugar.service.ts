@@ -34,14 +34,16 @@ export class SugarService {
     });
   }
 
+  public getUserPromiseFromSugar(): Promise<User[]> {
+    return this.getData("users")
+    .map((users) => users.data)
+    .toPromise();
+  }
+
   public getUsersFromSugar(): User[] {
-    this.getData("users")
-    .subscribe((users) => {
-      users.data.forEach((user) => {
-        this.userList.push(new User(user));
-      });
-      console.log("USERLIST", this.userList);
-    });
+    this.getUserPromiseFromSugar()
+    .then((users) => users.forEach((user) => this.userList.push(new User(user))))
+    .then((data) => console.log("promise over", this.userList));
 
     return this.userList;
   }

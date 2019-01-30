@@ -1,7 +1,7 @@
 import { Model } from "./model";
 
 export class Team extends Model {
-  public type: string = "users";
+  public type: string = (this.type || "default value");
   public id: string;
   public name: string;
   public description: string;

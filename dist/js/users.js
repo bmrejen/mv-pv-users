@@ -32836,20 +32836,18 @@
     var Model = /** @class */ (function () {
         function Model(data) {
             var self = this;
-            if (undefined !== data && null !== data) {
+            if (null != data) {
                 for (var prop in data) {
                     if ("attributes" !== prop) {
                         if (typeof data[prop] !== "function") {
                             self[prop] = data[prop];
-                            console.log(self[prop]);
                         }
                     }
                 }
-                if (undefined !== data.attributes && null !== data.attributes) {
+                if (null != data.attributes) {
                     for (var prop in data.attributes) {
                         if (typeof data.attributes[prop] !== "function") {
                             self[prop] = data.attributes[prop];
-                            console.log(self[prop]);
                         }
                     }
                 }
@@ -40868,7 +40866,7 @@
         __extends$1E(Team, _super);
         function Team(data) {
             var _this = _super.call(this, data) || this;
-            _this.type = "users";
+            _this.type = (_this.type || "default value");
             return _this;
         }
         return Team;
@@ -40888,47 +40886,7 @@
         __extends$1F(User, _super);
         function User(data) {
             var _this = _super.call(this, data) || this;
-            _this.type = null;
-            _this.id = null;
-            _this.userName = null;
-            _this.salutation = "Mrs.";
-            _this.lastName = null;
-            _this.firstName = null;
-            _this.phoneHome = null;
-            _this.phoneMobile = null;
-            _this.phoneWork = null;
-            _this.phoneOther = null;
-            _this.phoneFax = null;
-            _this.phoneAsterisk = null;
-            _this.email = null;
-            _this.status = "Active";
-            _this.employeeStatus = "Active";
-            _this.title = null;
-            _this.managerId = null;
-            _this.department = null;
-            _this.officeId = null;
-            _this.teamId = null;
-            _this.tourplanID = null;
-            _this.swClickToCall = false;
-            _this.swCallNotification = false;
-            _this.codeSonGalileo = null;
-            _this.swPhoneNumber = null;
-            _this.swExtension = null;
-            _this.swTelephony = false;
-            _this.inheritsPreferencesFrom = "user_default";
-            _this.roleId = null;
-            _this.serviceId = null;
-            _this.functionId = null;
-            _this.destinations = [];
-            _this.ggOrganisationId = null;
-            _this.ggGroups = null;
-            _this.isAdmin = 0;
-            _this.apiPortalUser = 0;
-            _this.assignationNotification = 0;
-            _this.userGroup = 0;
-            _this.defaultTeams = 1;
-            _this.leadsMin = 15;
-            _this.leadsMax = 45;
+            _this.phoneWork = (_this.phoneWork || "000-000-000");
             console.log("data passed to super, ", data);
             return _this;
         }
@@ -40971,15 +40929,16 @@
                 throw (err);
             });
         };
+        SugarService.prototype.getUserPromiseFromSugar = function () {
+            return this.getData("users")
+                .map(function (users) { return users.data; })
+                .toPromise();
+        };
         SugarService.prototype.getUsersFromSugar = function () {
             var _this = this;
-            this.getData("users")
-                .subscribe(function (users) {
-                users.data.forEach(function (user) {
-                    _this.userList.push(new User(user));
-                });
-                console.log("USERLIST", _this.userList);
-            });
+            this.getUserPromiseFromSugar()
+                .then(function (users) { return users.forEach(function (user) { return _this.userList.push(new User(user)); }); })
+                .then(function (data) { return console.log("promise over", _this.userList); });
             return this.userList;
         };
         SugarService.prototype.getTeamsFromSugar = function () {
