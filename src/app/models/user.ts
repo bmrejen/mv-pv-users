@@ -10,8 +10,8 @@ export class User extends Model {
   public lastName: string;
   public firstName: string;
   public phoneHome: string;
-  public phoneMobile: string = "default value";
-  public phoneWork: string = "000-000-000";
+  public phoneMobile: string = "N/A";
+  public phoneWork: string = "N/A";
   public phoneOther: string;
   public phoneFax: string;
   public phoneAsterisk: string;
@@ -19,7 +19,7 @@ export class User extends Model {
   public status: string;
   public employeeStatus: string;
   public title: string;
-  public managerId: string;
+  public managerId: string = "N/A";
   public department: string;
   public officeId: string;
   public teamId: string;
@@ -37,7 +37,7 @@ export class User extends Model {
   public functionId: string;
   public destinations: string[];
   public ggOrganisationId: string;
-  public ggGroups: string = "coin coin";
+  public ggGroups: string;
   public isAdmin: number;
   public apiPortalUser: number;
   public assignationNotification: number;
@@ -47,9 +47,8 @@ export class User extends Model {
   public leadsMax: number = 45;
 
   public constructor(data?: any) {
-    // 3. Third one to run
-
     super(data);
+
     // used for mapping with api object
     if (data != null) {
       super.defaultConstructor(data);
