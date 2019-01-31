@@ -1,26 +1,29 @@
-<div>
-  <label>Code User Tourplan
-    <input name="sugar_tourplan" type="text" [(ngModel)]="fields.codeTourplan">
-  </label>
-</div>
+<fieldset class="blue">
+  <legend>Extraneous</legend>
+  <div>
+    <label>Code User Tourplan
+      <input name="sugar_tourplan" type="text" [(ngModel)]="fields.codeTourplan">
+    </label>
+  </div>
 
-<div>
-  <label>Code SON Galileo
-    <input name="codeSON" type="text" [(ngModel)]="fields.codeSON">
-  </label>
-</div>
+  <div>
+    <label>Code SON Galileo
+      <input name="codeSON" type="text" [(ngModel)]="fields.codeSON">
+    </label>
+  </div>
 
-<div>
-  <label>Title
-    <input name="title" type="text" [(ngModel)]="fields.title">
-  </label>
-</div>
+  <div>
+    <label>Title
+      <input name="title" type="text" [(ngModel)]="fields.title">
+    </label>
+  </div>
 
-<div ngModelGroup="inactive">
-  <label>Statut inactif
-    <input type="checkbox" [(ngModel)]="fields.inactiveStatus" name="inactiveStatus">
-  </label>
-  <label>Statut Employe inactif
-    <input type="checkbox" [(ngModel)]="fields.inactiveEmployee" name="inactiveEmployee">
-  </label>
-</div>
+  <div ngModelGroup="inactive">
+    <label>
+      <input type="checkbox" [(ngModel)]="fields.inactiveStatus" name="inactiveStatus">Statut inactif
+    </label>
+    <label>
+      <input type="checkbox" [(ngModel)]="fields.inactiveEmployee" name="inactiveEmployee">Statut Employe inactif
+    </label>
+  </div>
+</fieldset>

@@ -6,6 +6,7 @@ import { Fields } from "../../models/fields";
 
 @Component({
   selector: "mv-destinations",
+  styleUrls: ["./destinations.component.css"],
   templateUrl: "./destinations.component.html",
   viewProviders: [
   {

@@ -11,10 +11,10 @@ import { ControlContainer, NgForm } from "@angular/forms";
 export class CheckboxFieldComponent {
 
   @Input() public checkboxes: any[];
-  @Output() public readonly onClick = new EventEmitter<any>();
+  @Output() public readonly clickEmitter = new EventEmitter<any>();
 
-  public onChange(e, id) {
-    this.onClick.emit({e, id});
+  public boxClicked(e, id) {
+    this.clickEmitter.emit({e, id});
   }
 
   public trackByFn(item, id) {

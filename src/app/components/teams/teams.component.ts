@@ -6,6 +6,7 @@ import { Fields } from "../../models/fields";
 
 @Component({
   selector: "mv-teams",
+  styleUrls: ["./teams.component.css"],
   templateUrl: "./teams.component.html",
   viewProviders: [
   {

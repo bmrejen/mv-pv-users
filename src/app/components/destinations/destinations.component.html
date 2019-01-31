@@ -1,14 +1,14 @@
-<fieldset>
+<fieldset class="blue">
   <legend>Destinations</legend>
-  <div ngModelGroup="destinations">
-    <span *ngFor="let dest of fields.destinations ; trackBy: trackByFn">
+  <div ngModelGroup="destinations" class="destinations">
+    <div *ngFor="let dest of fields.destinations ; trackBy: trackByFn">
       <label>
         <input
         type="checkbox"
         [(ngModel)]="dest.checked"
         [name]="dest.name"
-        >{{ dest.name }}  |
+        >{{ dest.name }}
       </label>
-    </span>c
+    </div>
   </div>
 </fieldset>

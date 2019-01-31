@@ -6,6 +6,7 @@ import { Fields } from "../../models/fields";
 
 @Component({
   selector: "mv-others",
+  styleUrls: ["./others.component.css"],
   templateUrl: "./others.component.html",
   viewProviders: [
   {

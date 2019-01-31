@@ -1,12 +1,12 @@
-<fieldset>
+<fieldset class="blue">
   <legend>Teams</legend>
-  <div ngModelGroup="teams">
+  <div ngModelGroup="teams" class="teams">
     <div *ngFor="let team of fields.teams ; trackBy: trackByFn">
       <label>
         <input
         type="checkbox"
         [(ngModel)]="team.checked"
-        [name]="team.id"
+        [name]="team.label"
         >{{ team.label }}
       </label>
     </div>

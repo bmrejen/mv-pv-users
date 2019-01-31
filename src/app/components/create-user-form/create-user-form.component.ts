@@ -10,7 +10,6 @@ import { User } from "../../models/user";
 
 @Component({
   selector: "mv-app-create-user-form",
-  styleUrls: ["./create-user-form.component.css"],
   templateUrl: "./create-user-form.component.html",
 })
 
