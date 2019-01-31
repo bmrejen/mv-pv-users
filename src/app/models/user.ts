@@ -1,6 +1,8 @@
 import { Model } from "./model";
 
 export class User extends Model {
+  // 2. Second one to run
+
   public type: string;
   public id: string;
   public userName: string;
@@ -8,8 +10,8 @@ export class User extends Model {
   public lastName: string;
   public firstName: string;
   public phoneHome: string;
-  public phoneMobile: string;
-  public phoneWork: string = (this.phoneWork || "000-000-000");
+  public phoneMobile: string = "default value";
+  public phoneWork: string = "000-000-000";
   public phoneOther: string;
   public phoneFax: string;
   public phoneAsterisk: string;
@@ -35,18 +37,22 @@ export class User extends Model {
   public functionId: string;
   public destinations: string[];
   public ggOrganisationId: string;
-  public ggGroups: string;
+  public ggGroups: string = "coin coin";
   public isAdmin: number;
   public apiPortalUser: number;
   public assignationNotification: number;
   public userGroup: number;
   public defaultTeams: number;
   public leadsMin: number;
-  public leadsMax: number;
+  public leadsMax: number = 45;
 
   public constructor(data?: any) {
+    // 3. Third one to run
 
     super(data);
-    console.log("data passed to super, ", data);
+    // used for mapping with api object
+    if (data != null) {
+      super.defaultConstructor(data);
+    }
   }
 }

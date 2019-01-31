@@ -32835,8 +32835,11 @@
 
     var Model = /** @class */ (function () {
         function Model(data) {
+            this.defaultConstructor(data);
+        }
+        Model.prototype.defaultConstructor = function (data) {
             var self = this;
-            if (null != data) {
+            if (undefined !== data && null !== data) {
                 for (var prop in data) {
                     if ("attributes" !== prop) {
                         if (typeof data[prop] !== "function") {
@@ -32844,7 +32847,7 @@
                         }
                     }
                 }
-                if (null != data.attributes) {
+                if (undefined !== data.attributes && null !== data.attributes) {
                     for (var prop in data.attributes) {
                         if (typeof data.attributes[prop] !== "function") {
                             self[prop] = data.attributes[prop];
@@ -32852,7 +32855,7 @@
                     }
                 }
             }
-        }
+        };
         return Model;
     }());
 
@@ -40885,9 +40888,16 @@
     var User = /** @class */ (function (_super) {
         __extends$1F(User, _super);
         function User(data) {
+            // 3. Third one to run
             var _this = _super.call(this, data) || this;
-            _this.phoneWork = (_this.phoneWork || "000-000-000");
-            console.log("data passed to super, ", data);
+            _this.phoneMobile = "default value";
+            _this.phoneWork = "000-000-000";
+            _this.ggGroups = "coin coin";
+            _this.leadsMax = 45;
+            // used for mapping with api object
+            if (data != null) {
+                _super.prototype.defaultConstructor.call(_this, data);
+            }
             return _this;
         }
         return User;
@@ -41491,10 +41501,105 @@
         function UsersComponent(sugarService) {
             this.sugarService = sugarService;
             this.usersFromSugar = [];
+            this.mockList = [];
+            this.myJson = {
+                data: [
+                    {
+                        attributes: {
+                            codeSonGalileo: "",
+                            department: "Ventes",
+                            email: null,
+                            employeeStatus: "Active",
+                            firstName: "Justine",
+                            id: "4ab50c2e-fce7-8385-2e9f-5c2e85737c1a",
+                            lastName: "Chouteau",
+                            managerId: "",
+                            officeId: "1009",
+                            phoneAsterisk: "2083",
+                            phoneFax: null,
+                            phoneHome: null,
+                            phoneMobile: null,
+                            phoneOther: null,
+                            phoneWork: "01 56 67 00 83",
+                            salutation: "",
+                            status: "Active",
+                            swCallNotification: "1",
+                            swClickToCall: "1",
+                            teamId: "",
+                            title: null,
+                            tourplanID: "JCHOUT",
+                            userName: "jchouteau",
+                        },
+                        id: "4ab50c2e-fce7-8385-2e9f-5c2e85737c1a",
+                        type: "users",
+                    },
+                    {
+                        attributes: {
+                            codeSonGalileo: "",
+                            department: "Ventes",
+                            email: null,
+                            employeeStatus: "Active",
+                            firstName: "Justine",
+                            id: "4ab50c2e-fce7-8385-2e9f-5c2e85737c1a",
+                            lastName: "Chouteau",
+                            managerId: "",
+                            officeId: "1009",
+                            phoneAsterisk: "2083",
+                            phoneFax: null,
+                            phoneHome: null,
+                            phoneMobile: null,
+                            phoneOther: null,
+                            phoneWork: "01 56 67 00 83",
+                            salutation: "",
+                            status: "Active",
+                            swCallNotification: "1",
+                            swClickToCall: "1",
+                            teamId: "",
+                            title: null,
+                            tourplanID: "JCHOUT",
+                            userName: "jchouteau",
+                        },
+                        id: "4ab50c2e-fce7-8385-2e9f-5c2e85737c1a",
+                        type: "users",
+                    },
+                    {
+                        attributes: {
+                            codeSonGalileo: "",
+                            department: "Ventes",
+                            email: null,
+                            employeeStatus: "Active",
+                            firstName: "Justine",
+                            id: "4ab50c2e-fce7-8385-2e9f-5c2e85737c1a",
+                            lastName: "Chouteau",
+                            managerId: "",
+                            officeId: "1009",
+                            phoneAsterisk: "2083",
+                            phoneFax: null,
+                            phoneHome: null,
+                            phoneMobile: null,
+                            phoneOther: null,
+                            phoneWork: "01 56 67 00 83",
+                            salutation: "",
+                            status: "Active",
+                            swCallNotification: "1",
+                            swClickToCall: "1",
+                            teamId: "",
+                            title: null,
+                            tourplanID: "JCHOUT",
+                            userName: "jchouteau",
+                        },
+                        id: "4ab50c2e-fce7-8385-2e9f-5c2e85737c1a",
+                        type: "users",
+                    },
+                ],
+            };
             // constructor
         }
         UsersComponent.prototype.ngOnInit = function () {
+            var _this = this;
             this.usersFromSugar = this.sugarService.getUsersFromSugar();
+            this.myJson.data.forEach(function (user) { return _this.mockList.push(new User(user)); });
+            console.log("mocklist", this.mockList);
         };
         UsersComponent.prototype.trackByFn = function (index, item) {
             return index; // or item.id
