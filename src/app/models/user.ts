@@ -1,7 +1,6 @@
 import { Model } from "./model";
 
 export class User extends Model {
-  // 2. Second one to run
 
   public type: string;
   public id: string;
@@ -9,17 +8,15 @@ export class User extends Model {
   public salutation: string;
   public lastName: string;
   public firstName: string;
-  public phoneHome: string;
-  public phoneMobile: string = "N/A";
-  public phoneWork: string = "N/A";
-  public phoneOther: string;
+  public phoneMobile: string;
+  public phoneWork: string;
   public phoneFax: string;
   public phoneAsterisk: string;
   public email: string;
-  public status: string;
-  public employeeStatus: string;
+  public status: string = "Active";
+  public employeeStatus: string = "Active";
   public title: string;
-  public managerId: string = "N/A";
+  public managerId: string;
   public department: string;
   public officeId: string;
   public teamId: string;
@@ -38,12 +35,12 @@ export class User extends Model {
   public destinations: string[];
   public ggOrganisationId: string;
   public ggGroups: string;
-  public isAdmin: number;
-  public apiPortalUser: number;
-  public assignationNotification: number;
+  public isAdmin: string = "0";
+  public apiPortalUser: string = "0";
+  public assignationNotification: string = "0";
   public userGroup: number;
   public defaultTeams: number;
-  public leadsMin: number;
+  public leadsMin: number = 15;
   public leadsMax: number = 45;
 
   public constructor(data?: any) {

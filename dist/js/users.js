@@ -32842,14 +32842,18 @@
             if (undefined !== data && null !== data) {
                 for (var prop in data) {
                     if ("attributes" !== prop) {
-                        if (typeof data[prop] !== "function") {
+                        if (typeof data[prop] !== "function"
+                            && data[prop] != null
+                            && data[prop] !== "") {
                             self[prop] = data[prop];
                         }
                     }
                 }
                 if (undefined !== data.attributes && null !== data.attributes) {
                     for (var prop in data.attributes) {
-                        if (typeof data.attributes[prop] !== "function") {
+                        if (typeof data.attributes[prop] !== "function"
+                            && data.attributes[prop] != null
+                            && data.attributes[prop] !== "") {
                             self[prop] = data.attributes[prop];
                         }
                     }
@@ -40888,11 +40892,10 @@
     var User = /** @class */ (function (_super) {
         __extends$1F(User, _super);
         function User(data) {
-            // 3. Third one to run
             var _this = _super.call(this, data) || this;
-            _this.phoneMobile = "default value";
-            _this.phoneWork = "000-000-000";
-            _this.ggGroups = "coin coin";
+            _this.phoneMobile = "N/A";
+            _this.phoneWork = "N/A";
+            _this.managerId = "N/A";
             _this.leadsMax = 45;
             // used for mapping with api object
             if (data != null) {
