@@ -15,12 +15,12 @@ import { User } from "../../models/user";
 })
 
 export class CreateUserFormComponent implements OnInit {
-  public fields: Fields;
+  public fields;
   public errorMsg;
   public displayVentesLeads = false;
   public passwordExists = false;
   public usersFromSugar: User[];
-  public usernameTaken = false;
+  public usernameTaken;
 
   constructor(
               private fieldsService: FieldsService,
@@ -33,8 +33,10 @@ export class CreateUserFormComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.fields = this.fieldsService.getData();
-    console.log("this fields", this.fields);
+    this.fieldsService.getData()
+    .then((data) => this.fields = new Fields(data[0]))
+    .catch((err) => console.error(err));
+
     this.resetSugar();
     this.usersFromSugar = this.sugarService.getUsersFromSugar();
     this.route.paramMap.subscribe((params) => params.get("id"));
@@ -51,7 +53,8 @@ export class CreateUserFormComponent implements OnInit {
     const first = this.fields.userFields.find((field) => field.name === "firstname");
     const last = this.fields.userFields.find((field) => field.name === "lastname");
     const username = this.fields.userFields.find((field) => field.name === "username");
-    // this.usernameTaken = this.isUsernameTaken(username);
+
+    this.usernameTaken = this.isUsernameTaken(username);
     if (!!first.value && !!last.value && !username.value) {
       this.setUsername(first, last, username);
       this.setPassword(first, last);
@@ -104,7 +107,7 @@ export class CreateUserFormComponent implements OnInit {
         this.displayVentesLeads = e;
       } else {
         this.setVentesLeads();
-        // this.displayVentesLeads = false;
+        this.displayVentesLeads = false;
       }
       console.log(service);
     }

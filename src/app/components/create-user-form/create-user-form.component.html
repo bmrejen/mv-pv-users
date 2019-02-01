@@ -50,9 +50,11 @@
       </div>
 
       <div class="checkbox-list subtitle" id="sugar_role">ROLE:
-       <span *ngFor="let role of fields.roles ; trackBy: trackByFn">
-        <label><input type="checkbox" [(ngModel)]="role.checked" [name]="role.id">{{ role.label }}
-        </label></span>
+        <span *ngFor="let role of fields.roles ; trackBy: trackByFn">
+          <label>
+            <input type="checkbox" [(ngModel)]="role.checked" [name]="role.id">{{ role.label }}
+          </label>
+        </span>
       </div>
 
       <div class="checkbox-list subtitle" id="sugar_departement">SERVICE:
@@ -78,9 +80,10 @@
   </fieldset>
 
   <div class="select subtitle">Bureau
-   <select name="sugar_bureau" [(ngModel)]="fields.selectedBureau" name="office">
-    <option *ngFor="let bureau of fields.bureaux ; trackBy: trackByFn" [value]="bureau.value">{{ bureau.label }}
-    </option></select>
+    <select name="sugar_bureau" [(ngModel)]="fields.selectedBureau" name="office">
+      <option *ngFor="let bureau of fields.bureaux ; trackBy: trackByFn" [value]="bureau.value">{{ bureau.label }}
+      </option>
+    </select>
   </div>
 
 
@@ -93,143 +96,141 @@
   </div>
 
 
-  <div ngModelGroup="tatayoyo">
-    <legend>Equipe</legend>
-    <mv-checkbox-field
-    (clickEmitter)="onParentChange($event)"
-    [checkboxes]="fields.teams"></mv-checkbox-field>
+  <!--   <div ngModelGroup="tatayoyo">
+  <legend>Equipe</legend>
+  <mv-checkbox-field
+  (clickEmitter)="onParentChange($event)"
+  [checkboxes]="fields.teams"></mv-checkbox-field>
+</div> -->
+
+
+<!--
+<div [(ngModel)]="fields.autres" name="othersWithComponent">
+<legend>Autres</legend>
+<mv-checkbox-field [checkboxes]="fields.autres" (onClick)="onParentChange($event)">
+</mv-checkbox-field>
+</div> -->
+
+
+<fieldset>
+  <div ngModelGroup="destinations">
+    <legend>Destinations</legend>
+    <span *ngFor="let dest of fields.destinations ; trackBy: trackByFn">
+      <label>
+        <input
+        type="checkbox"
+        [(ngModel)]="dest.checked"
+        [name]="dest.name"
+        >{{ dest.name }}  |
+      </label>
+    </span>c
   </div>
+</fieldset>
 
+<div class="select subtitle">Manager
+  <select name="manager" [(ngModel)]="fields.selectedManager">
+    <option *ngFor="let manager of fields.managers ; trackBy: trackByFn" [value]="manager.name">{{ manager.name }}
+    </option>
+  </select>
+</div>
 
-
-  <div [(ngModel)]="fields.autres" name="othersWithComponent">
-    <legend>Autres</legend>
-    <mv-checkbox-field [checkboxes]="fields.autres" (onClick)="onParentChange($event)">
-    </mv-checkbox-field>
-  </div>
-
-
-  <fieldset>
-    <div ngModelGroup="destinations">
-      <legend>Destinations</legend>
-      <span *ngFor="let dest of fields.destinations ; trackBy: trackByFn">
-        <label>
-          <input
-          type="checkbox"
-          [(ngModel)]="dest.checked"
-          [name]="dest.name"
-          >{{ dest.name }}  |
-        </label>
-      </span>c
+<fieldset>
+  <div ngModelGroup="orgas" class="orgas">
+    <legend>Organisations</legend>
+    <div *ngFor="let orga of fields.orgas ; trackBy: trackByFn">
+      <label>
+        <input
+        type="checkbox"
+        [(ngModel)]="orga.checked"
+        [name]="orga.id"
+        >{{ orga.label }}
+      </label>
     </div>
-  </fieldset>
+  </div>d
+</fieldset>
 
-  <div class="select subtitle">Manager
-    <select name="manager" [(ngModel)]="fields.selectedManager">
-      <option *ngFor="let manager of fields.managers ; trackBy: trackByFn" [value]="manager.name">{{ manager.name }}
+<div>
+  <label>Code User Tourplan
+    <input name="sugar_tourplan" type="text" [(ngModel)]="fields.codeTourplan">
+  </label>
+</div>
+
+<div>
+  <label>Code SON Galileo
+    <input name="codeSON" type="text" [(ngModel)]="fields.codeSON">
+  </label>
+</div>
+
+<div>
+  <label>Title
+    <input name="title" type="text" [(ngModel)]="fields.title">
+  </label>
+</div>
+
+<div ngModelGroup="inactive">
+  <label>Statut inactif
+    <input type="checkbox" [(ngModel)]="fields.inactiveStatus" name="inactiveStatus">
+  </label>
+  <label>Statut Employe inactif
+    <input type="checkbox" [(ngModel)]="fields.inactiveEmployee" name="inactiveEmployee">
+  </label>
+</div>
+
+<fieldset>
+  <legend>Telephonie</legend>
+  <div ngModelGroup="switchvox">
+    <div>
+      <label>Phone Number
+        <input name="phone_number" type="tel" [(ngModel)]="fields.phoneNumber">
+      </label>
+    </div>
+
+    <div>
+      <label>Extension
+        <input name="extension" type="tel" [(ngModel)]="fields.phoneExtension">
+      </label>
+    </div>
+
+    <div>
+      <label>
+        <input type="checkbox" [(ngModel)]="fields.codevad" name="codevad">Téléphonie a distance
+      </label>
+    </div>
+
+    <div>
+      <label>
+        <input type="checkbox" [(ngModel)]="fields.outbound" name="outbound">Click to call
+      </label>
+    </div>
+
+    <div>
+      <label>
+        <input type="checkbox" [(ngModel)]="fields.inbound" name="inbound">Notifications appels entrants
+      </label>
+    </div>
+  </div>e
+</fieldset>
+
+<fieldset>
+  <legend>Google Apps</legend>
+  <div class="select subtitle">Organisation
+    <select [(ngModel)]="fields.selectedOrganisation" name="organisation">
+      <option *ngFor="let orga of fields.orgas ; trackBy: trackByFn" [value]="orga.value">{{ orga.label }}
       </option>
     </select>
   </div>
 
-  <fieldset>
-    <div ngModelGroup="orgas" class="orgas">
-      <legend>Organisations</legend>
-      <div *ngFor="let orga of fields.orgas ; trackBy: trackByFn">
-        <label>
-          <input
-          type="checkbox"
-          [(ngModel)]="orga.checked"
-          [name]="orga.id"
-          >{{ orga.label }}
-        </label>
-      </div>
-    </div>d
-  </fieldset>
+  <label>
+    <input type="text" name="groupes" [(ngModel)]="fields.groupes">
+    Groupes - Séparer les noms de groupes par des ";" et ne pas mettre @planetveo.com
+  </label>f
+</fieldset>
 
-  <div>
-    <label>Code User Tourplan
-      <input name="sugar_tourplan" type="text" [(ngModel)]="fields.codeTourplan">
-    </label>
-  </div>
+<div *ngIf="errorMsg">ERROR: {{ errorMsg }}</div>
 
-  <div>
-    <label>Code SON Galileo
-      <input name="codeSON" type="text" [(ngModel)]="fields.codeSON">
-    </label>
-  </div>
-
-  <div>
-    <label>Title
-      <input name="title" type="text" [(ngModel)]="fields.title">
-    </label>
-  </div>
-
-  <div ngModelGroup="inactive">
-    <label>Statut inactif
-      <input type="checkbox" [(ngModel)]="fields.inactiveStatus" name="inactiveStatus">
-    </label>
-    <label>Statut Employe inactif
-      <input type="checkbox" [(ngModel)]="fields.inactiveEmployee" name="inactiveEmployee">
-    </label>
-  </div>
-
-  <fieldset>
-    <legend>Telephonie</legend>
-
-    <div ngModelGroup="switchvox">
-
-      <div>
-        <label>Phone Number
-          <input name="phone_number" type="tel" [(ngModel)]="fields.phoneNumber">
-        </label>
-      </div>
-
-      <div>
-        <label>Extension
-          <input name="extension" type="tel" [(ngModel)]="fields.phoneExtension">
-        </label>
-      </div>
-
-      <div>
-        <label>
-          <input type="checkbox" [(ngModel)]="fields.codevad" name="codevad">Téléphonie a distance
-        </label>
-      </div>
-
-      <div>
-        <label>
-          <input type="checkbox" [(ngModel)]="fields.outbound" name="outbound">Click to call
-        </label>
-      </div>
-
-      <div>
-        <label>
-          <input type="checkbox" [(ngModel)]="fields.inbound" name="inbound">Notifications appels entrants
-        </label>
-      </div>
-
-    </div>e
-  </fieldset>
-
-  <fieldset>
-    <legend>Google Apps</legend>
-    <div class="select subtitle">Organisation
-     <select [(ngModel)]="fields.selectedOrganisation" name="organisation">
-      <option *ngFor="let orga of fields.orgas ; trackBy: trackByFn" [value]="orga.value">{{ orga.label }}
-      </option></select>
-    </div>
-
-    <label>
-      <input type="text" name="groupes" [(ngModel)]="fields.groupes">
-      Groupes - Séparer les noms de groupes par des ";" et ne pas mettre @planetveo.com
-    </label>f
-  </fieldset>
-
-  <div *ngIf="errorMsg">ERROR: {{ errorMsg }}</div>
-
-  <button [disabled]="!createForm.form.valid" type="submit">Créer l'utilisateur</button>
+<button [disabled]="!createForm.form.valid" type="submit">Créer l'utilisateur</button>
 </form>
 
 <pre>
-  {{ createForm.value | json }}
+  {{ fields | json }}
 </pre>
