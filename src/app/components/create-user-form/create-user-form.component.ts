@@ -41,13 +41,11 @@ export class CreateUserFormComponent implements OnInit {
   }
 
   public onParentChange({e, id}) {
-    console.log("in parent", e, id);
     const myField = this.fields.autres.find((field) => field.id === id);
     myField.checked = e;
   }
 
   public credentialClick(e) {
-    console.log(e);
     const first = this.fields.userFields.find((field) => field.name === "firstname");
     const last = this.fields.userFields.find((field) => field.name === "lastname");
     const username = this.fields.userFields.find((field) => field.name === "username");
@@ -82,22 +80,16 @@ export class CreateUserFormComponent implements OnInit {
   }
 
   public setVentesLeads() {
-    console.log("leadsmin", this.fields.leadsMin);
-    console.log("leadsmax", this.fields.leadsMax);
     this.fields.leadsMin = 15;
     this.fields.leadsMax = 45;
-    console.log("leadsmin", this.fields.leadsMin);
-    console.log("leadsmax", this.fields.leadsMax);
   }
 
   public eraseVentesLeads() {
     this.fields.leadsMin = null;
     this.fields.leadsMax = null;
-    console.log("erased Ventes");
   }
 
   public onServiceChecked(service, e) {
-    console.log(e);
     if (service.id === "services-Ventes") {
       if (!service.checked) {
         this.eraseVentesLeads();
@@ -106,7 +98,6 @@ export class CreateUserFormComponent implements OnInit {
         this.setVentesLeads();
         // this.displayVentesLeads = false;
       }
-      console.log(service);
     }
   }
 
@@ -142,10 +133,9 @@ export class CreateUserFormComponent implements OnInit {
   }
 
   public onSubmit(form) {
+    let submittedData;
     this.sugarService.postDataToSugar(form)
-    .subscribe(
-               (data) => console.log("DATA- ", data),
-               (error) => this.errorMsg = error.statusText);
+    .subscribe((data) => submittedData = data);
   }
 
   public handleClick(e, type) {

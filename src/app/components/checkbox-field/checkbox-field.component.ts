@@ -14,7 +14,6 @@ export class CheckboxFieldComponent {
   @Output() public readonly clickEmitter = new EventEmitter<any>();
 
   public handleClick(e, id) {
-    console.log("in child", e, id);
     this.clickEmitter.emit({e, id});
   }
 
