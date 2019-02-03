@@ -1,39 +1,54 @@
-export class User {
+import { Model } from "./model";
+
+export class User extends Model {
+
   public type: string;
   public id: string;
-  public attributes;
+  public userName: string;
+  public salutation: string;
+  public lastName: string;
+  public firstName: string;
+  public phoneMobile: string;
+  public phoneWork: string;
+  public phoneFax: string;
+  public phoneAsterisk: string;
+  public email: string;
+  public status: string = "Active";
+  public employeeStatus: string = "Active";
+  public title: string;
+  public managerId: string;
+  public department: string;
+  public officeId: string;
+  public teamId: string;
+  public tourplanID: string;
+  public swClickToCall: boolean;
+  public swCallNotification: boolean;
+  public codeSonGalileo: string;
 
-  constructor(
-              type: string,
-              id: string,
-              attributes: {
-                id: string,
-                userName: string,
-                salutation: string,
-                lastName: string,
-                firstName: string,
-                phoneHome: string,
-                phoneMobile: string,
-                phoneWork: string,
-                phoneOther: string,
-                phoneFax: string,
-                phoneAsterisk: string,
-                email: string,
-                status: string,
-                employeeStatus: string,
-                title: string,
-                managerId: string,
-                department: string,
-                officeId: string,
-                teamId: string,
-                tourplanID: string,
-                swClickToCall: string,
-                swCallNotification: string,
-                codeSonGalileo: string,
-              }) {
+  public swPhoneNumber: string;
+  public swExtension: string;
+  public swTelephony: boolean;
+  public inheritsPreferencesFrom: string;
+  public roleId: string;
+  public serviceId: string;
+  public functionId: string;
+  public destinations: string[];
+  public ggOrganisationId: string;
+  public ggGroups: string;
+  public isAdmin: string = "0";
+  public apiPortalUser: string = "0";
+  public assignationNotification: string = "0";
+  public userGroup: number;
+  public defaultTeams: number;
+  public leadsMin: number = 15;
+  public leadsMax: number = 45;
 
-    this.type = type;
-    this.id = id;
-    this.attributes = attributes;
+  public constructor(data?: any) {
+    super(data);
+
+    // used for mapping with api object
+    if (data != null) {
+      super.defaultConstructor(data);
+    }
   }
 }

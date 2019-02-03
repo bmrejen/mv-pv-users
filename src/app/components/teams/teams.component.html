@@ -1,14 +1,16 @@
 <h2>Teams component</h2>
 
-<div *ngIf="teamsFromSugar && teamsFromSugar != undefined">
-  <div *ngFor="let team of teamsFromSugar ; trackBy: trackByFn">
-    <h4>{{ team.attributes.firstName }} {{ team.attributes.lastName }}</h4>
-    <ul>
-      <li><strong>ID:</strong> {{ team.id }}</li>
-      <li><strong>Type:</strong> {{ team.type }}</li>
-      <li><strong>ID (again):</strong> {{ team.attributes.id }}</li>
-      <li><strong>Name:</strong> {{ team.attributes.name }}</li>
-      <li><strong>Description:</strong> {{ team.attributes.description }}</li>
-   </ul>
- </div>
-</div>
+<table *ngIf="teamsFromSugar && teamsFromSugar != undefined">
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Id</th>
+    <th>Type</th>
+  </tr>
+  <tr *ngFor="let team of teamsFromSugar ; trackBy: trackByFn">
+    <td>{{ team.name }}</td>
+    <td>{{ team.description }}</td>
+    <td>{{ team.id }}</td>
+    <td>{{ team.type }}</td>
+  </tr>
+</table>
