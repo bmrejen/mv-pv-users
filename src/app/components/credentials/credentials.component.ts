@@ -54,7 +54,7 @@ export class CredentialsComponent implements OnInit {
 
   public isUsernameTaken(username) {
     const res = this.usersFromSugar
-    .find((user) => user.attributes.userName === username.value);
+    .find((user) => user.userName === username.value);
 
     return(res);
   }

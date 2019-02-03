@@ -32,8 +32,9 @@ export class CreateUserFormComponent implements OnInit {
 
   public ngOnInit(): void {
     this.fields = this.fieldsService.getData();
+    console.log("this fields", this.fields);
     this.resetSugar();
-    this.usersFromSugar = this.sugarService.createUserList();
+    this.usersFromSugar = this.sugarService.getUsersFromSugar();
     this.route.paramMap.subscribe((params) => params.get("id"));
   }
 
