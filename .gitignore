@@ -2,6 +2,7 @@
 src/aot/*
 !src/aot/.gitkeep
 build/**
+dist/**
 gulp-tsc-tmp-*/
 tmp/*
 
