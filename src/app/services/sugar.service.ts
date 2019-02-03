@@ -43,7 +43,6 @@ export class SugarService {
                                     user.id,
                                     user.attributes));
       });
-      console.log("USERLIST", this.userList);
     });
 
     return this.userList;

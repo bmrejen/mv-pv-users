@@ -35,6 +35,5 @@ export class User {
     this.type = type;
     this.id = id;
     this.attributes = attributes;
-    console.log(`Created user ${this.attributes.userName}`);
   }
 }
