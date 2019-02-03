@@ -2,7 +2,6 @@
 src/aot/*
 !src/aot/.gitkeep
 build/**
-dist/**
 gulp-tsc-tmp-*/
 tmp/*
 
@@ -10,6 +9,7 @@ tmp/*
 coverage
 
 dist/js/quotations-view.js
+dist/*
 
 #node
 node_modules/*
