@@ -1,30 +1,36 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { SugarService } from "../../services/sugar.service";
+import { Component, OnInit } from "@angular/core";
+import { ControlContainer, NgForm } from "@angular/forms";
+import { FieldsService } from "../../services/fields.service";
+
+import { Fields } from "../../models/fields";
 
 @Component({
-  selector: "mv-app-teams",
+  selector: "mv-teams",
+  styleUrls: ["./teams.component.css"],
   templateUrl: "./teams.component.html",
+  viewProviders: [
+  {
+    provide: ControlContainer,
+    useExisting: NgForm,
+  },
+  ],
 })
 
 export class TeamsComponent implements OnInit {
-  public teamsFromSugar;
+  public fields;
 
-  @ViewChild("disableForm") public form: any;
-  constructor(private sugarService: SugarService) {
-    // constructor
+  constructor(private fieldsService: FieldsService) {
+    //
   }
 
   public ngOnInit(): void {
-    this.sugarService.getTeamsFromSugar()
-    .subscribe((teams) => {
-      this.teamsFromSugar = teams.data;
-    });
-
+    this.fields = this.fieldsService.getData();
   }
 
   public trackByFn(index, item) {
     const self = this;
 
-    return index; // or item.id
+    return item.id; // or index
   }
+
 }

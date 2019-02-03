@@ -3,54 +3,67 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import { _throw } from "rxjs/observable/throw";
 import { catchError } from "rxjs/operators";
+
 import { Role } from "../models/role";
+import { Team } from "../models/team";
 import { User } from "../models/user";
+
+import "rxjs/add/operator/map";
+import "rxjs/add/operator/mergeMap";
+import "rxjs/add/operator/toPromise";
 
 @Injectable()
 export class SugarService {
   public roleList: Role[] = [];
+  public teamList: Team[] = [];
   public userList: User[] = [];
+  public itemList = [];
   private endPoint: string = "http://sh.pvcrm.com/sugarcrm/sugarcrm/api/";
 
   constructor(private http: HttpClient) {
     //
   }
 
-  public getUsersFromSugar(): Observable<any> {
-    return this.getData("users");
-  }
-
-  public getUserById(id): Observable<any> {
-    return this.getData(`users/${id}`);
-  }
-
-  public createUserList(): User[] {
-    this.getUsersFromSugar()
-    .subscribe((users) => {
-      users.data.forEach((user) => {
-        this.userList.push(new User(
-          user.type,
-          user.id,
-          user.attributes));
-      });
-      console.log("USERLIST", this.userList);
+  public getUserById(id): Promise<User> {
+    return this.getData(`users/${id}`)
+    .map((data) => new User(data))
+    .toPromise()
+    .catch((err) => {
+      console.error(err);
+      throw(err);
     });
+  }
+
+  public getUserPromiseFromSugar(): Promise<User[]> {
+    return this.getData("users")
+    .map((users) => users.data)
+    .toPromise();
+  }
+
+  public getUsersFromSugar(): User[] {
+    this.getUserPromiseFromSugar()
+    .then((users) => users.forEach((user) => this.userList.push(new User(user))))
+    .then((data) => console.log("promise over", this.userList));
 
     return this.userList;
   }
 
-  public getTeamsFromSugar(): Observable<any> {
-    return this.getData("teams");
+  public getTeamsFromSugar(): Team[] {
+    this.getData("teams")
+    .subscribe((teams) => {
+      teams.data.forEach((team) => {
+        this.teamList.push(new Team(team));
+      });
+    });
+
+    return this.teamList;
   }
 
   public getRolesFromSugar(): Role[] {
     this.getData("roles")
     .subscribe((roles) => {
       roles.data.forEach((role) => {
-        this.roleList.push(new Role(
-          role.type,
-          role.id,
-          role.attributes));
+        this.roleList.push(new Role(role));
       });
     });
 

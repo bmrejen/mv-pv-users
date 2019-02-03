@@ -1,6 +1,9 @@
 import { Routes } from "@angular/router";
 
 import {
+  AccountsComponent,
+} from "./components/accounts/accounts.component";
+import {
   CreateUserFormComponent,
 } from "./components/create-user-form/create-user-form.component";
 import {
@@ -10,9 +13,6 @@ import {
   ImportComponent,
 } from "./components/import/import.component";
 
-import {
-  HomeComponent,
-} from "./components";
 import {
   RolesComponent,
 } from "./components/roles/roles.component";
@@ -29,8 +29,8 @@ import {
 /* tslint:disable object-literal-sort-keys */
 export const AppRoutes: Routes = [
 {
-  path: "home",
-  component: HomeComponent,
+  path: "accounts",
+  component: AccountsComponent,
 },
 {
   path: "users/:id",
@@ -64,6 +64,6 @@ export const AppRoutes: Routes = [
   path: "import",
   component: ImportComponent,
 },
-{ path: "**", redirectTo: "user" },
+{ path: "**", redirectTo: "users" },
 ];
 /* tslint:enable */

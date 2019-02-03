@@ -4,11 +4,10 @@ src/aot/*
 build/**
 gulp-tsc-tmp-*/
 tmp/*
+dist/*
 
 #coverage
 coverage
-
-dist/js/quotations-view.js
 
 #node
 node_modules/*

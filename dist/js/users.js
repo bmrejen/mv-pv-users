@@ -25561,6 +25561,11 @@
     }
     var map_3 = map$1;
 
+
+    var map_2$1 = {
+    	map: map_3
+    };
+
     /* tslint:enable:max-line-length */
     /**
      * Projects each source value to an Observable which is merged in the output
@@ -25625,6 +25630,11 @@
         return mergeMap_1.mergeMap(project, resultSelector, concurrent)(this);
     }
     var mergeMap_3 = mergeMap$1;
+
+
+    var mergeMap_2$1 = {
+    	mergeMap: mergeMap_3
+    };
 
     var __extends$p = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -32823,1081 +32833,6 @@
      */
     var VERSION$3 = new Version('4.4.7');
 
-    var Accounts = [
-        {
-            checked: true,
-            id: "gapps",
-            label: "Google Apps",
-        },
-        {
-            checked: true,
-            id: "sugar",
-            label: "Sugar",
-        },
-        {
-            checked: true,
-            id: "switchvox",
-            label: "SwitchVox",
-        },
-    ];
-
-    var Autres = [
-        {
-            checked: false,
-            id: "autres-Admin Devis Cotation",
-            label: "Admin Devis Cotation",
-        },
-        {
-            checked: false,
-            id: "autres-Afrique",
-            label: "Afrique",
-        },
-        {
-            checked: false,
-            id: "autres-AfriqueDuSud",
-            label: "AfriqueDuSud",
-        },
-        {
-            checked: false,
-            id: "autres-Argentine",
-            label: "Argentine",
-        },
-        {
-            checked: false,
-            id: "autres-Australie",
-            label: "Australie",
-        },
-        {
-            checked: false,
-            id: "autres-Aventure",
-            label: "Aventure",
-        },
-        {
-            checked: false,
-            id: "autres-BackOffice",
-            label: "BackOffice",
-        },
-        {
-            checked: false,
-            id: "autres-Backoffice Manager",
-            label: "Backoffice Manager",
-        },
-        {
-            checked: false,
-            id: "autres-Bahamas",
-            label: "Bahamas",
-        },
-        {
-            checked: false,
-            id: "autres-Bali",
-            label: "Bali",
-        },
-        {
-            checked: false,
-            id: "autres-Birmanie",
-            label: "Birmanie",
-        },
-        {
-            checked: false,
-            id: "autres-Bresil",
-            label: "Bresil",
-        },
-        {
-            checked: false,
-            id: "autres-Canada",
-            label: "Canada",
-        },
-        {
-            checked: false,
-            id: "autres-Chili",
-            label: "Chili",
-        },
-        {
-            checked: false,
-            id: "autres-Chine",
-            label: "Chine",
-        },
-        {
-            checked: false,
-            id: "autres-Coree",
-            label: "Coree",
-        },
-        {
-            checked: false,
-            id: "autres-CostaRica",
-            label: "CostaRica",
-        },
-        {
-            checked: false,
-            id: "autres-Cuba",
-            label: "Cuba",
-        },
-        {
-            checked: false,
-            id: "autres-Devis Cotation",
-            label: "Devis Cotation",
-        },
-        {
-            checked: false,
-            id: "autres-Devis Simplifié",
-            label: "Devis Simplifié",
-        },
-        {
-            checked: false,
-            id: "autres-Devis V2",
-            label: "Devis V2",
-        },
-        {
-            checked: false,
-            id: "autres-Devis V3",
-            label: "Devis V3",
-        },
-        {
-            checked: false,
-            id: "autres-France",
-            label: "France",
-        },
-        {
-            checked: false,
-            id: "autres-Global",
-            label: "Global",
-        },
-        {
-            checked: false,
-            id: "autres-Inde",
-            label: "Inde",
-        },
-        {
-            checked: false,
-            id: "autres-Indonesie",
-            label: "Indonesie",
-        },
-        {
-            checked: false,
-            id: "autres-Iran",
-            label: "Iran",
-        },
-        {
-            checked: false,
-            id: "autres-Islande",
-            label: "Islande",
-        },
-        {
-            checked: false,
-            id: "autres-Japan",
-            label: "Japan",
-        },
-        {
-            checked: false,
-            id: "autres-Japon",
-            label: "Japon",
-        },
-        {
-            checked: false,
-            id: "autres-Kenya",
-            label: "Kenya",
-        },
-        {
-            checked: false,
-            id: "autres-Madagascar",
-            label: "Madagascar",
-        },
-        {
-            checked: false,
-            id: "autres-Malaisie",
-            label: "Malaisie",
-        },
-        {
-            checked: false,
-            id: "autres-Malaysia",
-            label: "Malaysia",
-        },
-        {
-            checked: false,
-            id: "autres-Maldives",
-            label: "Maldives",
-        },
-        {
-            checked: false,
-            id: "autres-Manager",
-            label: "Manager",
-        },
-        {
-            checked: false,
-            id: "autres-MarcoVasco",
-            label: "MarcoVasco",
-        },
-        {
-            checked: false,
-            id: "autres-Maurice",
-            label: "Maurice",
-        },
-        {
-            checked: false,
-            id: "autres-Mexique",
-            label: "Mexique",
-        },
-        {
-            checked: false,
-            id: "autres-Mongolie",
-            label: "Mongolie",
-        },
-        {
-            checked: false,
-            id: "autres-MoyenOrient",
-            label: "MoyenOrient",
-        },
-        {
-            checked: false,
-            id: "autres-Namibie",
-            label: "Namibie",
-        },
-        {
-            checked: false,
-            id: "autres-Noces",
-            label: "Noces",
-        },
-        {
-            checked: false,
-            id: "autres-NouvelleZelande",
-            label: "NouvelleZelande",
-        },
-        {
-            checked: false,
-            id: "autres-Ouzbekistan",
-            label: "Ouzbekistan",
-        },
-        {
-            checked: false,
-            id: "autres-Perou",
-            label: "Perou",
-        },
-        {
-            checked: false,
-            id: "autres-Philippines",
-            label: "Philippines",
-        },
-        {
-            checked: false,
-            id: "autres-Polynesie",
-            label: "Polynesie",
-        },
-        {
-            checked: false,
-            id: "autres-Questionnaire V3",
-            label: "Questionnaire V3",
-        },
-        {
-            checked: false,
-            id: "autres-RD",
-            label: "RD",
-        },
-        {
-            checked: false,
-            id: "autres-Reservation",
-            label: "Reservation",
-        },
-        {
-            checked: false,
-            id: "autres-ROLE - Affaire Validation",
-            label: "ROLE - Affaire Validation",
-        },
-        {
-            checked: false,
-            id: "autres-ROLE - BI Validation",
-            label: "ROLE - BI Validation",
-        },
-        {
-            checked: false,
-            id: "autres-ROLE - Conciergerie",
-            label: "ROLE - Conciergerie",
-        },
-        {
-            checked: false,
-            id: "autres-ROLE - Create Provider",
-            label: "ROLE - Create Provider",
-        },
-        {
-            checked: false,
-            id: "autres-ROLE - Dashlet assurances",
-            label: "ROLE - Dashlet assurances",
-        },
-        {
-            checked: false,
-            id: "autres-ROLE - Exclude review from NPS",
-            label: "ROLE - Exclude review from NPS",
-        },
-        {
-            checked: false,
-            id: "autres-ROLE - Fid",
-            label: "ROLE - Fid",
-        },
-        {
-            checked: false,
-            id: "autres-ROLE - Formation",
-            label: "ROLE - Formation",
-        },
-        {
-            checked: false,
-            id: "autres-ROLE - Import OBJ",
-            label: "ROLE - Import OBJ",
-        },
-        {
-            checked: false,
-            id: "autres-ROLE - Paiement Manuel",
-            label: "ROLE - Paiement Manuel",
-        },
-        {
-            checked: false,
-            id: "autres-ROLE - Production",
-            label: "ROLE - Production",
-        },
-        {
-            checked: false,
-            id: "autres-ROLE - Reservation",
-            label: "ROLE - Reservation",
-        },
-        {
-            checked: false,
-            id: "autres-ROLE - Update Deposite Rate",
-            label: "ROLE - Update Deposite Rate",
-        },
-        {
-            checked: false,
-            id: "autres-ROLE - ViewGDPR",
-            label: "ROLE - ViewGDPR",
-        },
-        {
-            checked: false,
-            id: "autres-ROLE - View Incentive Tracker",
-            label: "ROLE - View Incentive Tracker",
-        },
-        {
-            checked: false,
-            id: "autres-ROLE - View Leads M",
-            label: "ROLE - View Leads M",
-        },
-        {
-            checked: false,
-            id: "autres-ROLE - View OBJ",
-            label: "ROLE - View OBJ",
-        },
-        {
-            checked: false,
-            id: "autres-ROLE - View PPV",
-            label: "ROLE - View PPV",
-        },
-        {
-            checked: false,
-            id: "autres-ROLE - View Product Feeds",
-            label: "ROLE - View Product Feeds",
-        },
-        {
-            checked: false,
-            id: "autres-ROLE - ViewRCM",
-            label: "ROLE - ViewRCM",
-        },
-        {
-            checked: false,
-            id: "autres-ROLE - View RCQ",
-            label: "ROLE - View RCQ",
-        },
-        {
-            checked: false,
-            id: "autres-ROLE - View RM",
-            label: "ROLE - View RM",
-        },
-        {
-            checked: false,
-            id: "autres-ROLE - ViewSEO",
-            label: "ROLE - ViewSEO",
-        },
-        {
-            checked: false,
-            id: "autres-ROLE - View SQ",
-            label: "ROLE - View SQ",
-        },
-        {
-            checked: false,
-            id: "autres-ROLE - View SQ Sales",
-            label: "ROLE - View SQ Sales",
-        },
-        {
-            checked: false,
-            id: "autres-SAV",
-            label: "SAV",
-        },
-        {
-            checked: false,
-            id: "autres-Seychelles",
-            label: "Seychelles",
-        },
-        {
-            checked: false,
-            id: "autres-Tanzanie",
-            label: "Tanzanie",
-        },
-        {
-            checked: false,
-            id: "autres-Team Manager",
-            label: "Team Manager",
-        },
-        {
-            checked: false,
-            id: "autres-Thailande",
-            label: "Thailande",
-        },
-        {
-            checked: false,
-            id: "autres-Usa",
-            label: "Usa",
-        },
-        {
-            checked: false,
-            id: "autres-Ventes",
-            label: "Ventes",
-        },
-        {
-            checked: false,
-            id: "autres-Vietnam",
-            label: "Vietnam",
-        },
-        {
-            checked: false,
-            id: "autres-XTest",
-            label: "XTest",
-        },
-    ];
-
-    var Bureaux = [
-        {
-            label: "*Néant*",
-            value: "",
-        },
-        {
-            label: "Bureau - Backoffice",
-            value: "1006",
-        },
-        {
-            label: "Bureau - Billetterie & Qualité",
-            value: "xxx-pas-de-code-xxx",
-        },
-        {
-            label: "Bureau - Black Pearl 1",
-            value: "1012",
-        },
-        {
-            label: "Bureau - Black Pearl 2",
-            value: "1943",
-        },
-        {
-            label: "Bureau - Comptabilite",
-            value: "1377",
-        },
-        {
-            label: "Bureau - Golden Dragons 1",
-            value: "1014",
-        },
-        {
-            label: "Bureau - Golden Dragons 2",
-            value: "1376",
-        },
-        {
-            label: "Bureau - Guaranis 1",
-            value: "1010",
-        },
-        {
-            label: "Bureau - Guaranis 2",
-            value: "1011",
-        },
-        {
-            label: "Bureau - Iroquois 1",
-            value: "1009",
-        },
-        {
-            label: "Bureau - Iroquois 2",
-            value: "1963",
-        },
-        {
-            label: "Bureau - Marines",
-            value: "1007",
-        },
-        {
-            label: "Bureau - Marines 2",
-            value: "1964",
-        },
-        {
-            label: "Bureau - Masai",
-            value: "1008",
-        },
-        {
-            label: "Bureau - Papagayos 1",
-            value: "1930",
-        },
-        {
-            label: "Bureau - Papagayos 2",
-            value: "1944",
-        },
-        {
-            label: "Bureau - Prestige",
-            value: "1015",
-        },
-        {
-            label: "Bureau - Production",
-            value: "1017",
-        },
-        {
-            label: "Bureau - SG",
-            value: "1690",
-        },
-        {
-            label: "Bureau - Shaolin",
-            value: "1013",
-        },
-        {
-            label: "Bureau - Sharks",
-            value: "1005",
-        },
-    ];
-
-    var Civilites = [
-        {
-            label: "Mr",
-        },
-        {
-            label: "Mme",
-        },
-    ];
-
-    var Destinations = [
-        {
-            checked: false,
-            name: "USA",
-        },
-        {
-            checked: false,
-            name: "Mexique",
-        },
-        {
-            checked: false,
-            name: "Japon",
-        },
-        {
-            checked: false,
-            name: "Dreux",
-        },
-    ];
-
-    var Functions = [
-        {
-            label: "Junior Manager",
-            value: "jm",
-        },
-        {
-            label: "Manager",
-            value: "mgr",
-        },
-        {
-            label: "Assistant Ventes",
-            value: "av",
-        },
-        {
-            label: "Agent qualité",
-            value: "aq",
-        },
-    ];
-
-    var Managers = [
-        {
-            checked: false,
-            name: "Grand Chef",
-        },
-        {
-            checked: false,
-            name: "Grand Sachem",
-        },
-        {
-            checked: false,
-            name: "Grand Manitou",
-        },
-        {
-            checked: false,
-            name: "Manager du service qualité (Aminata)",
-        },
-    ];
-    // pas besoin des checked
-
-    var Orgas = [
-        {
-            checked: false,
-            id: "orgas-",
-            label: "",
-            value: "/",
-        },
-        {
-            checked: false,
-            id: "orgas-BackOffice",
-            label: "BackOffice",
-            value: "/BackOffice",
-        },
-        {
-            checked: false,
-            id: "orgas-Compta",
-            label: "Compta",
-            value: "/Compta",
-        },
-        {
-            checked: false,
-            id: "orgas-EQ Black Pearls",
-            label: "EQ Black Pearls",
-            value: "/EQ Black Pearls",
-        },
-        {
-            checked: false,
-            id: "orgas-EQ Cajuns",
-            label: "EQ Cajuns",
-            value: "/EQ Cajuns",
-        },
-        {
-            checked: false,
-            id: "orgas-EQ Golden Dragons",
-            label: "EQ Golden Dragons",
-            value: "/EQ Golden Dragons",
-        },
-        {
-            checked: false,
-            id: "orgas-EQ Guaranis",
-            label: "EQ Guaranis",
-            value: "/EQ Guaranis",
-        },
-        {
-            checked: false,
-            id: "orgas-EQ Iroquois",
-            label: "EQ Iroquois",
-            value: "/EQ Iroquois",
-        },
-        {
-            checked: false,
-            id: "orgas-EQ Marines",
-            label: "EQ Marines",
-            value: "/EQ Marines",
-        },
-        {
-            checked: false,
-            id: "orgas-EQ Masais",
-            label: "EQ Masais",
-            value: "/EQ Masais",
-        },
-        {
-            checked: false,
-            id: "orgas-EQ Papagayos",
-            label: "EQ Papagayos",
-            value: "/EQ Papagayos",
-        },
-        {
-            checked: false,
-            id: "orgas-EQ Shaolins",
-            label: "EQ Shaolins",
-            value: "/EQ Shaolins",
-        },
-        {
-            checked: false,
-            id: "orgas-EQ Sharks",
-            label: "EQ Sharks",
-            value: "/EQ Sharks",
-        },
-        {
-            checked: false,
-            id: "orgas-IT",
-            label: "IT",
-            value: "/IT",
-        },
-        {
-            checked: false,
-            id: "orgas-Marketing Paris",
-            label: "Marketing Paris",
-            value: "/Marketing Paris",
-        },
-        {
-            checked: false,
-            id: "orgas-Prod / Achats",
-            label: "Prod / Achats",
-            value: "/Prod / Achats",
-        },
-        {
-            checked: false,
-            id: "orgas-SG & Direction",
-            label: "SG & Direction",
-            value: "/SG & Direction",
-        },
-        {
-            checked: false,
-            id: "orgas-Shanghai",
-            label: "Shanghai",
-            value: "/Shanghai",
-        },
-        {
-            checked: false,
-            id: "orgas-Web Tools",
-            label: "Web Tools",
-            value: "/Web Tools",
-        },
-        {
-            checked: false,
-            id: "orgas-X - Congé maternité",
-            label: "X - Congé maternité",
-            value: "/X - Congé maternité",
-        },
-        {
-            checked: false,
-            id: "orgas-X 1 - Pending Legal Do not delete",
-            label: "X 1 - Pending Legal Do not delete",
-            value: "/X 1 - Pending Legal Do not delete",
-        },
-        {
-            checked: false,
-            id: "orgas-X Partis",
-            label: "X Partis",
-            value: "/X Partis",
-        },
-        {
-            checked: false,
-            id: "orgas-X X A EFFACER",
-            label: "X X A EFFACER",
-            value: "/X X A EFFACER",
-        },
-    ];
-
-    var Roles = [
-        {
-            checked: false,
-            id: "roles-Accountant",
-            label: "Accountant",
-            name: "8bd8a755-d4e0-78e0-4dda-4bfcf0aed3e3",
-        },
-        {
-            checked: false,
-            id: "roles-Admin",
-            label: "Admin",
-            name: "dfd8b251-db66-3a60-ca21-4e23e7976bfb",
-        },
-        {
-            checked: false,
-            id: "roles-Bo",
-            label: "Bo",
-            name: "723b4e69-b694-50da-4326-4aaf093df7ca",
-        },
-        {
-            checked: false,
-            id: "roles-HR",
-            label: "HR",
-            name: "bd4b4c2a-0d47-a6ef-fb3e-53169635c764",
-        },
-        {
-            checked: false,
-            id: "roles-Sales",
-            label: "Sales",
-            name: "6f89b1d4-9c9e-3436-ec67-4a702644eb29",
-        },
-        {
-            checked: false,
-            id: "roles-Sales Manager",
-            label: "Sales Manager",
-            name: "b97df828-2842-24ed-0bcf-4a7026b4ec1b",
-        },
-        {
-            checked: false,
-            id: "roles-SAV",
-            label: "SAV",
-            name: "8674a9aa-567d-b961-0b07-4d2ae7dfbc7f",
-        },
-        {
-            checked: false,
-            id: "roles-Superviseur",
-            label: "Superviseur",
-            name: "e6e83aa3-35ce-5390-99ff-4f9b531ea254",
-        },
-        {
-            checked: false,
-            id: "roles-Team Manager",
-            label: "Team Manager",
-            name: "128e2eae-322a-8a0d-e9f0-4cf35b5bfe5b",
-        },
-        {
-            checked: false,
-            id: "roles-Quality Control",
-            label: "Quality Control",
-            name: "xxx-pas-de-code-QC-xxx",
-        },
-        {
-            checked: false,
-            id: "roles-Read-only",
-            label: "Read-only",
-            name: "da7b7380-1839-83c1-4863-4d53bb7481c3",
-        },
-        {
-            checked: false,
-            id: "roles-Reservation",
-            label: "Reservation",
-            name: "xxx-pas-de-code-resa-xxx",
-        },
-    ];
-
-    var Services$1 = [
-        {
-            checked: false,
-            id: "services-Backoffice",
-            name: "Backoffice",
-        },
-        {
-            checked: false,
-            id: "services-Backoffice Billet",
-            name: "Backoffice Billet",
-        },
-        {
-            checked: false,
-            id: "services-Backoffice Carnet",
-            name: "Backoffice Carnet",
-        },
-        {
-            checked: false,
-            id: "services-Backoffice Resa",
-            name: "Backoffice Resa",
-        },
-        {
-            checked: false,
-            id: "services-Comptabilité",
-            name: "Comptabilité",
-        },
-        {
-            checked: false,
-            id: "services-Production",
-            name: "Production",
-        },
-        {
-            checked: false,
-            id: "services-SAV",
-            name: "SAV",
-        },
-        {
-            checked: false,
-            id: "services-Service Qualité",
-            name: "Service Qualité",
-        },
-        {
-            checked: false,
-            id: "services-Ventes",
-            name: "Ventes",
-        },
-    ];
-
-    var Teams = [
-        {
-            checked: false,
-            id: 1,
-            label: "EQ Baguette",
-        },
-        {
-            checked: false,
-            id: 2,
-            label: "EQ Black Pearls",
-        },
-        {
-            checked: false,
-            id: 3,
-            label: "EQ Cajuns",
-        },
-        {
-            checked: false,
-            id: 4,
-            label: "EQ Drakkars",
-        },
-        {
-            checked: false,
-            id: 5,
-            label: "EQ Explorers",
-        },
-        {
-            checked: false,
-            id: 6,
-            label: "EQ Golden Dragons",
-        },
-        {
-            checked: false,
-            id: 7,
-            label: "EQ Guaranis",
-        },
-        {
-            checked: false,
-            id: 8,
-            label: "EQ Iroquois",
-        },
-        {
-            checked: false,
-            id: 9,
-            label: "EQ Islanders",
-        },
-        {
-            checked: false,
-            id: 10,
-            label: "EQ Masais",
-        },
-        {
-            checked: false,
-            id: 11,
-            label: "EQ Nomades",
-        },
-        {
-            checked: false,
-            id: 12,
-            label: "EQ Papagayos",
-        },
-        {
-            checked: false,
-            id: 13,
-            label: "EQ Service Groupe",
-        },
-        {
-            checked: false,
-            id: 14,
-            label: "EQ Seven Seas",
-        },
-        {
-            checked: false,
-            id: 15,
-            label: "EQ Shaolin",
-        },
-        {
-            checked: false,
-            id: 16,
-            label: "EQ Yankees",
-        },
-    ];
-
-    var UserFields = [
-        {
-            label: "Prenom",
-            name: "firstname",
-            value: "",
-        },
-        {
-            label: "Nom",
-            name: "lastname",
-            value: "",
-        },
-        {
-            label: "Username",
-            name: "username",
-            value: "",
-        },
-        {
-            label: "E-mail",
-            name: "email",
-            value: "",
-        },
-        {
-            label: "Mot de passe",
-            name: "password",
-            value: "",
-        },
-    ];
-
-    var UserTemplates = [
-        {
-            label: "user_default_xx",
-            selected: false,
-            value: "user_default_xx",
-        },
-        {
-            label: "user_default",
-            selected: false,
-            value: "user_default",
-        },
-        {
-            label: "user_default_jm",
-            selected: false,
-            value: "user_default_jm",
-        },
-    ];
-
-    var __decorate$2 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-        return c > 3 && r && Object.defineProperty(target, key, r), r;
-    };
-    var __metadata$2 = (undefined && undefined.__metadata) || function (k, v) {
-        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-    };
-    var FieldsService = /** @class */ (function () {
-        function FieldsService() {
-            this.fields = {
-                accounts: Accounts,
-                autres: Autres,
-                bureaux: Bureaux,
-                civilites: Civilites,
-                codeSON: "",
-                codeTourplan: "",
-                codevad: "",
-                destinations: Destinations,
-                functions: Functions,
-                groupes: "",
-                inactiveEmployee: false,
-                inactiveStatus: false,
-                inbound: "",
-                leadsMax: null,
-                leadsMin: null,
-                managers: Managers,
-                orgas: Orgas,
-                outbound: "",
-                phoneExtension: "",
-                phoneNumber: "",
-                roles: Roles,
-                selectedBureau: "",
-                selectedFunction: "",
-                selectedManager: "",
-                selectedOrganisation: "",
-                services: Services$1,
-                teams: Teams,
-                title: "",
-                userFields: UserFields,
-                userTemplates: UserTemplates,
-                userValue: "",
-            };
-            //
-        }
-        FieldsService.prototype.getData = function () {
-            return this.fields;
-        };
-        FieldsService = __decorate$2([
-            Injectable(),
-            __metadata$2("design:paramtypes", [])
-        ], FieldsService);
-        return FieldsService;
-    }());
-
-    var __decorate$3 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-        return c > 3 && r && Object.defineProperty(target, key, r), r;
-    };
-    var ParserService = /** @class */ (function () {
-        function ParserService() {
-        }
-        ParserService.prototype.getData = function (data) {
-            var myData = data
-                .replace(/'/g, "")
-                .replace(/"/g, "")
-                .split(",");
-            return myData;
-        };
-        ParserService = __decorate$3([
-            Injectable()
-        ], ParserService);
-        return ParserService;
-    }());
-
     /**
      * @license
      * Copyright Google Inc. All Rights Reserved.
@@ -35985,7 +34920,133 @@
      */
     HttpClientModule.ctorParameters = function () { return []; };
 
-    var __extends$v = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var Model = /** @class */ (function () {
+        function Model(data) {
+            this.defaultConstructor(data);
+        }
+        Model.prototype.defaultConstructor = function (data) {
+            var self = this;
+            if (undefined !== data && null !== data) {
+                for (var prop in data) {
+                    if ("attributes" !== prop) {
+                        if (typeof data[prop] !== "function"
+                            && data[prop] != null
+                            && data[prop] !== "") {
+                            self[prop] = data[prop];
+                        }
+                    }
+                }
+                if (undefined !== data.attributes && null !== data.attributes) {
+                    for (var prop in data.attributes) {
+                        if (typeof data.attributes[prop] !== "function"
+                            && data.attributes[prop] != null
+                            && data.attributes[prop] !== "") {
+                            self[prop] = data.attributes[prop];
+                        }
+                    }
+                }
+            }
+        };
+        return Model;
+    }());
+
+    var __extends$v = (undefined && undefined.__extends) || (function () {
+        var extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return function (d, b) {
+            extendStatics(d, b);
+            function __() { this.constructor = d; }
+            d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+        };
+    })();
+    var Fields = /** @class */ (function (_super) {
+        __extends$v(Fields, _super);
+        function Fields(data) {
+            var _this = _super.call(this, data) || this;
+            _this.leadsMax = 45;
+            _this.leadsMin = 15;
+            return _this;
+        }
+        return Fields;
+    }(Model));
+
+    var __decorate$2 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    };
+    var __metadata$2 = (undefined && undefined.__metadata) || function (k, v) {
+        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+    };
+    var FieldsService = /** @class */ (function () {
+        function FieldsService(http) {
+            this.http = http;
+            this.myObj = {};
+            this.fields = new Fields();
+            //
+        }
+        FieldsService.prototype.getData = function () {
+            var _this = this;
+            var fields = [
+                "accounts",
+                "autres",
+                "bureaux",
+                "civilites",
+                "destinations",
+                "functions",
+                "managers",
+                "orgas",
+                "roles",
+                "services",
+                "teams",
+                "userFields",
+                "userTemplates",
+            ];
+            var promises = fields.map(function (field) { return _this.getSingleField(field); });
+            return Promise.all(promises)
+                .then(function (result) { return new Promise(function (resolve, reject) { return resolve(result); }); });
+        };
+        FieldsService.prototype.getSingleField = function (field) {
+            var _this = this;
+            return this.http.get("./src/app/assets/" + field + ".json")
+                .map(function (res) {
+                _this.myObj[field] = res["data"];
+                return _this.myObj;
+            })
+                .toPromise();
+        };
+        FieldsService = __decorate$2([
+            Injectable(),
+            __metadata$2("design:paramtypes", [HttpClient])
+        ], FieldsService);
+        return FieldsService;
+    }());
+
+    var __decorate$3 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    };
+    var ParserService = /** @class */ (function () {
+        function ParserService() {
+        }
+        ParserService.prototype.getData = function (data) {
+            var myData = data
+                .replace(/'/g, "")
+                .replace(/"/g, "")
+                .split(",");
+            return myData;
+        };
+        ParserService = __decorate$3([
+            Injectable()
+        ], ParserService);
+        return ParserService;
+    }());
+
+    var __extends$w = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -35997,7 +35058,7 @@
      * @hide true
      */
     var ErrorObservable = (function (_super) {
-        __extends$v(ErrorObservable, _super);
+        __extends$w(ErrorObservable, _super);
         function ErrorObservable(error, scheduler) {
             _super.call(this);
             this.error = error;
@@ -36074,7 +35135,7 @@
 
     var _throw_1 = ErrorObservable_1.ErrorObservable.create;
 
-    var __extends$w = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$x = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -36085,7 +35146,7 @@
      * @extends {Ignored}
      */
     var AuditSubscriber = (function (_super) {
-        __extends$w(AuditSubscriber, _super);
+        __extends$x(AuditSubscriber, _super);
         function AuditSubscriber(destination, durationSelector) {
             _super.call(this, destination);
             this.durationSelector = durationSelector;
@@ -36132,7 +35193,7 @@
         return AuditSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$x = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$y = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -36153,7 +35214,7 @@
      * @class Action<T>
      */
     var Action = (function (_super) {
-        __extends$x(Action, _super);
+        __extends$y(Action, _super);
         function Action(scheduler, work) {
             _super.call(this);
         }
@@ -36180,7 +35241,7 @@
     	Action: Action_2
     };
 
-    var __extends$y = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$z = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -36193,7 +35254,7 @@
      * @extends {Ignored}
      */
     var AsyncAction = (function (_super) {
-        __extends$y(AsyncAction, _super);
+        __extends$z(AsyncAction, _super);
         function AsyncAction(scheduler, work) {
             _super.call(this, scheduler, work);
             this.scheduler = scheduler;
@@ -36379,14 +35440,14 @@
     	Scheduler: Scheduler_2
     };
 
-    var __extends$z = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$A = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 
     var AsyncScheduler = (function (_super) {
-        __extends$z(AsyncScheduler, _super);
+        __extends$A(AsyncScheduler, _super);
         function AsyncScheduler() {
             _super.apply(this, arguments);
             this.actions = [];
@@ -36507,7 +35568,7 @@
     	isDate: isDate_2
     };
 
-    var __extends$A = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$B = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -36523,7 +35584,7 @@
      * @hide true
      */
     var TimerObservable = (function (_super) {
-        __extends$A(TimerObservable, _super);
+        __extends$B(TimerObservable, _super);
         function TimerObservable(dueTime, period, scheduler) {
             if (dueTime === void 0) { dueTime = 0; }
             _super.call(this);
@@ -36612,7 +35673,7 @@
         return TimerObservable;
     }(Observable_1.Observable));
 
-    var __extends$B = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$C = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -36623,7 +35684,7 @@
      * @extends {Ignored}
      */
     var BufferSubscriber = (function (_super) {
-        __extends$B(BufferSubscriber, _super);
+        __extends$C(BufferSubscriber, _super);
         function BufferSubscriber(destination, closingNotifier) {
             _super.call(this, destination);
             this.buffer = [];
@@ -36640,7 +35701,7 @@
         return BufferSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$C = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$D = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -36651,7 +35712,7 @@
      * @extends {Ignored}
      */
     var BufferCountSubscriber = (function (_super) {
-        __extends$C(BufferCountSubscriber, _super);
+        __extends$D(BufferCountSubscriber, _super);
         function BufferCountSubscriber(destination, bufferSize) {
             _super.call(this, destination);
             this.bufferSize = bufferSize;
@@ -36680,7 +35741,7 @@
      * @extends {Ignored}
      */
     var BufferSkipCountSubscriber = (function (_super) {
-        __extends$C(BufferSkipCountSubscriber, _super);
+        __extends$D(BufferSkipCountSubscriber, _super);
         function BufferSkipCountSubscriber(destination, bufferSize, startBufferEvery) {
             _super.call(this, destination);
             this.bufferSize = bufferSize;
@@ -36716,7 +35777,7 @@
         return BufferSkipCountSubscriber;
     }(Subscriber_1.Subscriber));
 
-    var __extends$D = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$E = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -36733,7 +35794,7 @@
      * @extends {Ignored}
      */
     var BufferTimeSubscriber = (function (_super) {
-        __extends$D(BufferTimeSubscriber, _super);
+        __extends$E(BufferTimeSubscriber, _super);
         function BufferTimeSubscriber(destination, bufferTimeSpan, bufferCreationInterval, maxBufferSize, scheduler) {
             _super.call(this, destination);
             this.bufferTimeSpan = bufferTimeSpan;
@@ -36837,7 +35898,7 @@
         subscriber.closeContext(context);
     }
 
-    var __extends$E = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$F = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -36848,7 +35909,7 @@
      * @extends {Ignored}
      */
     var BufferToggleSubscriber = (function (_super) {
-        __extends$E(BufferToggleSubscriber, _super);
+        __extends$F(BufferToggleSubscriber, _super);
         function BufferToggleSubscriber(destination, openings, closingSelector) {
             _super.call(this, destination);
             this.openings = openings;
@@ -36933,7 +35994,7 @@
         return BufferToggleSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$F = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$G = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -36944,7 +36005,7 @@
      * @extends {Ignored}
      */
     var BufferWhenSubscriber = (function (_super) {
-        __extends$F(BufferWhenSubscriber, _super);
+        __extends$G(BufferWhenSubscriber, _super);
         function BufferWhenSubscriber(destination, closingSelector) {
             _super.call(this, destination);
             this.closingSelector = closingSelector;
@@ -37003,7 +36064,7 @@
         return BufferWhenSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$G = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$H = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -37019,7 +36080,7 @@
      * @extends {Ignored}
      */
     var CombineLatestSubscriber = (function (_super) {
-        __extends$G(CombineLatestSubscriber, _super);
+        __extends$H(CombineLatestSubscriber, _super);
         function CombineLatestSubscriber(destination, project) {
             _super.call(this, destination);
             this.project = project;
@@ -37081,7 +36142,7 @@
         return CombineLatestSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$H = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$I = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -37092,7 +36153,7 @@
      * @extends {Ignored}
      */
     var CountSubscriber = (function (_super) {
-        __extends$H(CountSubscriber, _super);
+        __extends$I(CountSubscriber, _super);
         function CountSubscriber(destination, predicate, source) {
             _super.call(this, destination);
             this.predicate = predicate;
@@ -37128,7 +36189,7 @@
         return CountSubscriber;
     }(Subscriber_1.Subscriber));
 
-    var __extends$I = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$J = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -37139,7 +36200,7 @@
      * @extends {Ignored}
      */
     var DebounceSubscriber = (function (_super) {
-        __extends$I(DebounceSubscriber, _super);
+        __extends$J(DebounceSubscriber, _super);
         function DebounceSubscriber(destination, durationSelector) {
             _super.call(this, destination);
             this.durationSelector = durationSelector;
@@ -37197,7 +36258,7 @@
         return DebounceSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$J = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$K = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -37208,7 +36269,7 @@
      * @extends {Ignored}
      */
     var DebounceTimeSubscriber = (function (_super) {
-        __extends$J(DebounceTimeSubscriber, _super);
+        __extends$K(DebounceTimeSubscriber, _super);
         function DebounceTimeSubscriber(destination, dueTime, scheduler) {
             _super.call(this, destination);
             this.dueTime = dueTime;
@@ -37249,7 +36310,7 @@
         subscriber.debouncedNext();
     }
 
-    var __extends$K = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$L = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -37260,7 +36321,7 @@
      * @extends {Ignored}
      */
     var DelaySubscriber = (function (_super) {
-        __extends$K(DelaySubscriber, _super);
+        __extends$L(DelaySubscriber, _super);
         function DelaySubscriber(destination, delay, scheduler) {
             _super.call(this, destination);
             this.delay = delay;
@@ -37324,7 +36385,7 @@
         return DelayMessage;
     }());
 
-    var __extends$L = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$M = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -37335,7 +36396,7 @@
      * @extends {Ignored}
      */
     var DelayWhenSubscriber = (function (_super) {
-        __extends$L(DelayWhenSubscriber, _super);
+        __extends$M(DelayWhenSubscriber, _super);
         function DelayWhenSubscriber(destination, delayDurationSelector) {
             _super.call(this, destination);
             this.delayDurationSelector = delayDurationSelector;
@@ -37405,7 +36466,7 @@
      * @extends {Ignored}
      */
     var SubscriptionDelayObservable = (function (_super) {
-        __extends$L(SubscriptionDelayObservable, _super);
+        __extends$M(SubscriptionDelayObservable, _super);
         function SubscriptionDelayObservable(/** @deprecated internal use only */ source, subscriptionDelay) {
             _super.call(this);
             this.source = source;
@@ -37422,7 +36483,7 @@
      * @extends {Ignored}
      */
     var SubscriptionDelaySubscriber = (function (_super) {
-        __extends$L(SubscriptionDelaySubscriber, _super);
+        __extends$M(SubscriptionDelaySubscriber, _super);
         function SubscriptionDelaySubscriber(parent, source) {
             _super.call(this);
             this.parent = parent;
@@ -37449,7 +36510,7 @@
         return SubscriptionDelaySubscriber;
     }(Subscriber_1.Subscriber));
 
-    var __extends$M = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$N = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -37460,7 +36521,7 @@
      * @extends {Ignored}
      */
     var DeMaterializeSubscriber = (function (_super) {
-        __extends$M(DeMaterializeSubscriber, _super);
+        __extends$N(DeMaterializeSubscriber, _super);
         function DeMaterializeSubscriber(destination) {
             _super.call(this, destination);
         }
@@ -37507,7 +36568,7 @@
     	Set: Set$1
     };
 
-    var __extends$N = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$O = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -37518,7 +36579,7 @@
      * @extends {Ignored}
      */
     var DistinctSubscriber = (function (_super) {
-        __extends$N(DistinctSubscriber, _super);
+        __extends$O(DistinctSubscriber, _super);
         function DistinctSubscriber(destination, keySelector, flushes) {
             _super.call(this, destination);
             this.keySelector = keySelector;
@@ -37563,7 +36624,7 @@
         return DistinctSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$O = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$P = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -37574,7 +36635,7 @@
      * @extends {Ignored}
      */
     var DistinctUntilChangedSubscriber = (function (_super) {
-        __extends$O(DistinctUntilChangedSubscriber, _super);
+        __extends$P(DistinctUntilChangedSubscriber, _super);
         function DistinctUntilChangedSubscriber(destination, compare, keySelector) {
             _super.call(this, destination);
             this.keySelector = keySelector;
@@ -37613,7 +36674,7 @@
         return DistinctUntilChangedSubscriber;
     }(Subscriber_1.Subscriber));
 
-    var __extends$P = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$Q = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -37624,7 +36685,7 @@
      * @extends {Ignored}
      */
     var ElementAtSubscriber = (function (_super) {
-        __extends$P(ElementAtSubscriber, _super);
+        __extends$Q(ElementAtSubscriber, _super);
         function ElementAtSubscriber(destination, index, defaultValue) {
             _super.call(this, destination);
             this.index = index;
@@ -37651,7 +36712,7 @@
         return ElementAtSubscriber;
     }(Subscriber_1.Subscriber));
 
-    var __extends$Q = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$R = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -37662,7 +36723,7 @@
      * @extends {Ignored}
      */
     var SwitchFirstSubscriber = (function (_super) {
-        __extends$Q(SwitchFirstSubscriber, _super);
+        __extends$R(SwitchFirstSubscriber, _super);
         function SwitchFirstSubscriber(destination) {
             _super.call(this, destination);
             this.hasCompleted = false;
@@ -37690,7 +36751,7 @@
         return SwitchFirstSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$R = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$S = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -37701,7 +36762,7 @@
      * @extends {Ignored}
      */
     var SwitchFirstMapSubscriber = (function (_super) {
-        __extends$R(SwitchFirstMapSubscriber, _super);
+        __extends$S(SwitchFirstMapSubscriber, _super);
         function SwitchFirstMapSubscriber(destination, project, resultSelector) {
             _super.call(this, destination);
             this.project = project;
@@ -37765,7 +36826,7 @@
         return SwitchFirstMapSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$S = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$T = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -37776,7 +36837,7 @@
      * @extends {Ignored}
      */
     var ExpandSubscriber = (function (_super) {
-        __extends$S(ExpandSubscriber, _super);
+        __extends$T(ExpandSubscriber, _super);
         function ExpandSubscriber(destination, project, concurrent, scheduler) {
             _super.call(this, destination);
             this.project = project;
@@ -37845,25 +36906,6 @@
         return ExpandSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$T = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
-        for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-    /**
-     * We need this JSDoc comment for affecting ESDoc.
-     * @ignore
-     * @extends {Ignored}
-     */
-    var FinallySubscriber = (function (_super) {
-        __extends$T(FinallySubscriber, _super);
-        function FinallySubscriber(destination, callback) {
-            _super.call(this, destination);
-            this.add(new Subscription_1.Subscription(callback));
-        }
-        return FinallySubscriber;
-    }(Subscriber_1.Subscriber));
-
     var __extends$U = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
@@ -37874,8 +36916,27 @@
      * @ignore
      * @extends {Ignored}
      */
+    var FinallySubscriber = (function (_super) {
+        __extends$U(FinallySubscriber, _super);
+        function FinallySubscriber(destination, callback) {
+            _super.call(this, destination);
+            this.add(new Subscription_1.Subscription(callback));
+        }
+        return FinallySubscriber;
+    }(Subscriber_1.Subscriber));
+
+    var __extends$V = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+        for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+    /**
+     * We need this JSDoc comment for affecting ESDoc.
+     * @ignore
+     * @extends {Ignored}
+     */
     var FindValueSubscriber = (function (_super) {
-        __extends$U(FindValueSubscriber, _super);
+        __extends$V(FindValueSubscriber, _super);
         function FindValueSubscriber(destination, predicate, source, yieldIndex, thisArg) {
             _super.call(this, destination);
             this.predicate = predicate;
@@ -38001,7 +37062,7 @@
     	FastMap: FastMap_2
     };
 
-    var __extends$V = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$W = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -38012,7 +37073,7 @@
      * @extends {Ignored}
      */
     var GroupBySubscriber = (function (_super) {
-        __extends$V(GroupBySubscriber, _super);
+        __extends$W(GroupBySubscriber, _super);
         function GroupBySubscriber(destination, keySelector, elementSelector, durationSelector, subjectSelector) {
             _super.call(this, destination);
             this.keySelector = keySelector;
@@ -38112,7 +37173,7 @@
      * @extends {Ignored}
      */
     var GroupDurationSubscriber = (function (_super) {
-        __extends$V(GroupDurationSubscriber, _super);
+        __extends$W(GroupDurationSubscriber, _super);
         function GroupDurationSubscriber(key, group, parent) {
             _super.call(this, group);
             this.key = key;
@@ -38140,7 +37201,7 @@
      * @class GroupedObservable<K, T>
      */
     var GroupedObservable = (function (_super) {
-        __extends$V(GroupedObservable, _super);
+        __extends$W(GroupedObservable, _super);
         function GroupedObservable(key, groupSubject, refCountSubscription) {
             _super.call(this);
             this.key = key;
@@ -38164,7 +37225,7 @@
      * @extends {Ignored}
      */
     var InnerRefCountSubscription = (function (_super) {
-        __extends$V(InnerRefCountSubscription, _super);
+        __extends$W(InnerRefCountSubscription, _super);
         function InnerRefCountSubscription(parent) {
             _super.call(this);
             this.parent = parent;
@@ -38183,26 +37244,6 @@
         return InnerRefCountSubscription;
     }(Subscription_1.Subscription));
 
-    var __extends$W = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
-        for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-    /**
-     * We need this JSDoc comment for affecting ESDoc.
-     * @ignore
-     * @extends {Ignored}
-     */
-    var IgnoreElementsSubscriber = (function (_super) {
-        __extends$W(IgnoreElementsSubscriber, _super);
-        function IgnoreElementsSubscriber() {
-            _super.apply(this, arguments);
-        }
-        IgnoreElementsSubscriber.prototype._next = function (unused) {
-        };
-        return IgnoreElementsSubscriber;
-    }(Subscriber_1.Subscriber));
-
     var __extends$X = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
@@ -38213,8 +37254,28 @@
      * @ignore
      * @extends {Ignored}
      */
+    var IgnoreElementsSubscriber = (function (_super) {
+        __extends$X(IgnoreElementsSubscriber, _super);
+        function IgnoreElementsSubscriber() {
+            _super.apply(this, arguments);
+        }
+        IgnoreElementsSubscriber.prototype._next = function (unused) {
+        };
+        return IgnoreElementsSubscriber;
+    }(Subscriber_1.Subscriber));
+
+    var __extends$Y = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+        for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+    /**
+     * We need this JSDoc comment for affecting ESDoc.
+     * @ignore
+     * @extends {Ignored}
+     */
     var IsEmptySubscriber = (function (_super) {
-        __extends$X(IsEmptySubscriber, _super);
+        __extends$Y(IsEmptySubscriber, _super);
         function IsEmptySubscriber(destination) {
             _super.call(this, destination);
         }
@@ -38232,28 +37293,6 @@
         return IsEmptySubscriber;
     }(Subscriber_1.Subscriber));
 
-    var __extends$Y = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
-        for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-    /**
-     * We need this JSDoc comment for affecting ESDoc.
-     * @ignore
-     * @extends {Ignored}
-     */
-    var MapToSubscriber = (function (_super) {
-        __extends$Y(MapToSubscriber, _super);
-        function MapToSubscriber(destination, value) {
-            _super.call(this, destination);
-            this.value = value;
-        }
-        MapToSubscriber.prototype._next = function (x) {
-            this.destination.next(this.value);
-        };
-        return MapToSubscriber;
-    }(Subscriber_1.Subscriber));
-
     var __extends$Z = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
@@ -38264,8 +37303,30 @@
      * @ignore
      * @extends {Ignored}
      */
+    var MapToSubscriber = (function (_super) {
+        __extends$Z(MapToSubscriber, _super);
+        function MapToSubscriber(destination, value) {
+            _super.call(this, destination);
+            this.value = value;
+        }
+        MapToSubscriber.prototype._next = function (x) {
+            this.destination.next(this.value);
+        };
+        return MapToSubscriber;
+    }(Subscriber_1.Subscriber));
+
+    var __extends$_ = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+        for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+    /**
+     * We need this JSDoc comment for affecting ESDoc.
+     * @ignore
+     * @extends {Ignored}
+     */
     var MaterializeSubscriber = (function (_super) {
-        __extends$Z(MaterializeSubscriber, _super);
+        __extends$_(MaterializeSubscriber, _super);
         function MaterializeSubscriber(destination) {
             _super.call(this, destination);
         }
@@ -38285,7 +37346,7 @@
         return MaterializeSubscriber;
     }(Subscriber_1.Subscriber));
 
-    var __extends$_ = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$10 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -38296,7 +37357,7 @@
      * @extends {Ignored}
      */
     var MergeMapToSubscriber = (function (_super) {
-        __extends$_(MergeMapToSubscriber, _super);
+        __extends$10(MergeMapToSubscriber, _super);
         function MergeMapToSubscriber(destination, ish, resultSelector, concurrent) {
             if (concurrent === void 0) { concurrent = Number.POSITIVE_INFINITY; }
             _super.call(this, destination);
@@ -38368,7 +37429,7 @@
         return MergeMapToSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$10 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$11 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -38379,7 +37440,7 @@
      * @extends {Ignored}
      */
     var MergeScanSubscriber = (function (_super) {
-        __extends$10(MergeScanSubscriber, _super);
+        __extends$11(MergeScanSubscriber, _super);
         function MergeScanSubscriber(destination, accumulator, acc, concurrent) {
             _super.call(this, destination);
             this.accumulator = accumulator;
@@ -38443,13 +37504,13 @@
         return MergeScanSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$11 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$12 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
     var OnErrorResumeNextSubscriber = (function (_super) {
-        __extends$11(OnErrorResumeNextSubscriber, _super);
+        __extends$12(OnErrorResumeNextSubscriber, _super);
         function OnErrorResumeNextSubscriber(destination, nextSources) {
             _super.call(this, destination);
             this.destination = destination;
@@ -38479,7 +37540,7 @@
         return OnErrorResumeNextSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$12 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$13 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -38490,7 +37551,7 @@
      * @extends {Ignored}
      */
     var PairwiseSubscriber = (function (_super) {
-        __extends$12(PairwiseSubscriber, _super);
+        __extends$13(PairwiseSubscriber, _super);
         function PairwiseSubscriber(destination) {
             _super.call(this, destination);
             this.hasPrev = false;
@@ -38507,7 +37568,7 @@
         return PairwiseSubscriber;
     }(Subscriber_1.Subscriber));
 
-    var __extends$13 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$14 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -38518,7 +37579,7 @@
      * @class AsyncSubject<T>
      */
     var AsyncSubject = (function (_super) {
-        __extends$13(AsyncSubject, _super);
+        __extends$14(AsyncSubject, _super);
         function AsyncSubject() {
             _super.apply(this, arguments);
             this.value = null;
@@ -38558,7 +37619,7 @@
         return AsyncSubject;
     }(Subject_1.Subject));
 
-    var __extends$14 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$15 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -38570,7 +37631,7 @@
      * @extends {Ignored}
      */
     var QueueAction = (function (_super) {
-        __extends$14(QueueAction, _super);
+        __extends$15(QueueAction, _super);
         function QueueAction(scheduler, work) {
             _super.call(this, scheduler, work);
             this.scheduler = scheduler;
@@ -38611,14 +37672,14 @@
     	QueueAction: QueueAction_2
     };
 
-    var __extends$15 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$16 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 
     var QueueScheduler = (function (_super) {
-        __extends$15(QueueScheduler, _super);
+        __extends$16(QueueScheduler, _super);
         function QueueScheduler() {
             _super.apply(this, arguments);
         }
@@ -38699,7 +37760,7 @@
     	queue: queue_1
     };
 
-    var __extends$16 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$17 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -38714,7 +37775,7 @@
      * @class ReplaySubject<T>
      */
     var ReplaySubject = (function (_super) {
-        __extends$16(ReplaySubject, _super);
+        __extends$17(ReplaySubject, _super);
         function ReplaySubject(bufferSize, windowTime, scheduler) {
             if (bufferSize === void 0) { bufferSize = Number.POSITIVE_INFINITY; }
             if (windowTime === void 0) { windowTime = Number.POSITIVE_INFINITY; }
@@ -38799,7 +37860,7 @@
         return ReplayEvent;
     }());
 
-    var __extends$17 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$18 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -38810,7 +37871,7 @@
      * @extends {Ignored}
      */
     var RaceSubscriber = (function (_super) {
-        __extends$17(RaceSubscriber, _super);
+        __extends$18(RaceSubscriber, _super);
         function RaceSubscriber(destination) {
             _super.call(this, destination);
             this.hasFirst = false;
@@ -38855,7 +37916,7 @@
         return RaceSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$18 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$19 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -38866,7 +37927,7 @@
      * @extends {Ignored}
      */
     var RepeatSubscriber = (function (_super) {
-        __extends$18(RepeatSubscriber, _super);
+        __extends$19(RepeatSubscriber, _super);
         function RepeatSubscriber(destination, count, source) {
             _super.call(this, destination);
             this.count = count;
@@ -38887,7 +37948,7 @@
         return RepeatSubscriber;
     }(Subscriber_1.Subscriber));
 
-    var __extends$19 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1a = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -38898,7 +37959,7 @@
      * @extends {Ignored}
      */
     var RepeatWhenSubscriber = (function (_super) {
-        __extends$19(RepeatWhenSubscriber, _super);
+        __extends$1a(RepeatWhenSubscriber, _super);
         function RepeatWhenSubscriber(destination, notifier, source) {
             _super.call(this, destination);
             this.notifier = notifier;
@@ -38962,7 +38023,7 @@
         return RepeatWhenSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$1a = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1b = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -38973,7 +38034,7 @@
      * @extends {Ignored}
      */
     var RetrySubscriber = (function (_super) {
-        __extends$1a(RetrySubscriber, _super);
+        __extends$1b(RetrySubscriber, _super);
         function RetrySubscriber(destination, count, source) {
             _super.call(this, destination);
             this.count = count;
@@ -38994,7 +38055,7 @@
         return RetrySubscriber;
     }(Subscriber_1.Subscriber));
 
-    var __extends$1b = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1c = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -39005,7 +38066,7 @@
      * @extends {Ignored}
      */
     var RetryWhenSubscriber = (function (_super) {
-        __extends$1b(RetryWhenSubscriber, _super);
+        __extends$1c(RetryWhenSubscriber, _super);
         function RetryWhenSubscriber(destination, notifier, source) {
             _super.call(this, destination);
             this.notifier = notifier;
@@ -39061,7 +38122,7 @@
         return RetryWhenSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$1c = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1d = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -39072,7 +38133,7 @@
      * @extends {Ignored}
      */
     var SampleSubscriber = (function (_super) {
-        __extends$1c(SampleSubscriber, _super);
+        __extends$1d(SampleSubscriber, _super);
         function SampleSubscriber() {
             _super.apply(this, arguments);
             this.hasValue = false;
@@ -39096,7 +38157,7 @@
         return SampleSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$1d = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1e = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -39107,7 +38168,7 @@
      * @extends {Ignored}
      */
     var SampleTimeSubscriber = (function (_super) {
-        __extends$1d(SampleTimeSubscriber, _super);
+        __extends$1e(SampleTimeSubscriber, _super);
         function SampleTimeSubscriber(destination, period, scheduler) {
             _super.call(this, destination);
             this.period = period;
@@ -39133,7 +38194,7 @@
         this.schedule(state, period);
     }
 
-    var __extends$1e = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1f = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -39144,7 +38205,7 @@
      * @extends {Ignored}
      */
     var SequenceEqualSubscriber = (function (_super) {
-        __extends$1e(SequenceEqualSubscriber, _super);
+        __extends$1f(SequenceEqualSubscriber, _super);
         function SequenceEqualSubscriber(destination, compareTo, comparor) {
             _super.call(this, destination);
             this.compareTo = compareTo;
@@ -39208,7 +38269,7 @@
         return SequenceEqualSubscriber;
     }(Subscriber_1.Subscriber));
     var SequenceEqualCompareToSubscriber = (function (_super) {
-        __extends$1e(SequenceEqualCompareToSubscriber, _super);
+        __extends$1f(SequenceEqualCompareToSubscriber, _super);
         function SequenceEqualCompareToSubscriber(destination, parent) {
             _super.call(this, destination);
             this.parent = parent;
@@ -39225,7 +38286,7 @@
         return SequenceEqualCompareToSubscriber;
     }(Subscriber_1.Subscriber));
 
-    var __extends$1f = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1g = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -39236,7 +38297,7 @@
      * @extends {Ignored}
      */
     var SingleSubscriber = (function (_super) {
-        __extends$1f(SingleSubscriber, _super);
+        __extends$1g(SingleSubscriber, _super);
         function SingleSubscriber(destination, predicate, source) {
             _super.call(this, destination);
             this.predicate = predicate;
@@ -39285,7 +38346,7 @@
         return SingleSubscriber;
     }(Subscriber_1.Subscriber));
 
-    var __extends$1g = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1h = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -39296,7 +38357,7 @@
      * @extends {Ignored}
      */
     var SkipSubscriber = (function (_super) {
-        __extends$1g(SkipSubscriber, _super);
+        __extends$1h(SkipSubscriber, _super);
         function SkipSubscriber(destination, total) {
             _super.call(this, destination);
             this.total = total;
@@ -39310,7 +38371,7 @@
         return SkipSubscriber;
     }(Subscriber_1.Subscriber));
 
-    var __extends$1h = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1i = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -39321,7 +38382,7 @@
      * @extends {Ignored}
      */
     var SkipLastSubscriber = (function (_super) {
-        __extends$1h(SkipLastSubscriber, _super);
+        __extends$1i(SkipLastSubscriber, _super);
         function SkipLastSubscriber(destination, _skipCount) {
             _super.call(this, destination);
             this._skipCount = _skipCount;
@@ -39345,7 +38406,7 @@
         return SkipLastSubscriber;
     }(Subscriber_1.Subscriber));
 
-    var __extends$1i = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1j = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -39356,7 +38417,7 @@
      * @extends {Ignored}
      */
     var SkipUntilSubscriber = (function (_super) {
-        __extends$1i(SkipUntilSubscriber, _super);
+        __extends$1j(SkipUntilSubscriber, _super);
         function SkipUntilSubscriber(destination, notifier) {
             _super.call(this, destination);
             this.hasValue = false;
@@ -39388,7 +38449,7 @@
         return SkipUntilSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$1j = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1k = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -39399,7 +38460,7 @@
      * @extends {Ignored}
      */
     var SkipWhileSubscriber = (function (_super) {
-        __extends$1j(SkipWhileSubscriber, _super);
+        __extends$1k(SkipWhileSubscriber, _super);
         function SkipWhileSubscriber(destination, predicate) {
             _super.call(this, destination);
             this.predicate = predicate;
@@ -39427,7 +38488,7 @@
         return SkipWhileSubscriber;
     }(Subscriber_1.Subscriber));
 
-    var __extends$1k = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1l = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -39438,7 +38499,7 @@
      * @extends {Ignored}
      */
     var SwitchMapSubscriber = (function (_super) {
-        __extends$1k(SwitchMapSubscriber, _super);
+        __extends$1l(SwitchMapSubscriber, _super);
         function SwitchMapSubscriber(destination, project, resultSelector) {
             _super.call(this, destination);
             this.project = project;
@@ -39502,7 +38563,7 @@
         return SwitchMapSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$1l = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1m = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -39513,7 +38574,7 @@
      * @extends {Ignored}
      */
     var SwitchMapToSubscriber = (function (_super) {
-        __extends$1l(SwitchMapToSubscriber, _super);
+        __extends$1m(SwitchMapToSubscriber, _super);
         function SwitchMapToSubscriber(destination, inner, resultSelector) {
             _super.call(this, destination);
             this.inner = inner;
@@ -39567,7 +38628,7 @@
         return SwitchMapToSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$1m = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1n = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -39578,7 +38639,7 @@
      * @extends {Ignored}
      */
     var TakeSubscriber = (function (_super) {
-        __extends$1m(TakeSubscriber, _super);
+        __extends$1n(TakeSubscriber, _super);
         function TakeSubscriber(destination, total) {
             _super.call(this, destination);
             this.total = total;
@@ -39598,7 +38659,7 @@
         return TakeSubscriber;
     }(Subscriber_1.Subscriber));
 
-    var __extends$1n = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1o = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -39609,7 +38670,7 @@
      * @extends {Ignored}
      */
     var TakeUntilSubscriber = (function (_super) {
-        __extends$1n(TakeUntilSubscriber, _super);
+        __extends$1o(TakeUntilSubscriber, _super);
         function TakeUntilSubscriber(destination, notifier) {
             _super.call(this, destination);
             this.notifier = notifier;
@@ -39624,7 +38685,7 @@
         return TakeUntilSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$1o = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1p = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -39635,7 +38696,7 @@
      * @extends {Ignored}
      */
     var TakeWhileSubscriber = (function (_super) {
-        __extends$1o(TakeWhileSubscriber, _super);
+        __extends$1p(TakeWhileSubscriber, _super);
         function TakeWhileSubscriber(destination, predicate) {
             _super.call(this, destination);
             this.predicate = predicate;
@@ -39665,7 +38726,7 @@
         return TakeWhileSubscriber;
     }(Subscriber_1.Subscriber));
 
-    var __extends$1p = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1q = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -39676,7 +38737,7 @@
      * @extends {Ignored}
      */
     var DoSubscriber = (function (_super) {
-        __extends$1p(DoSubscriber, _super);
+        __extends$1q(DoSubscriber, _super);
         function DoSubscriber(destination, nextOrObserver, error, complete) {
             _super.call(this, destination);
             var safeSubscriber = new Subscriber_1.Subscriber(nextOrObserver, error, complete);
@@ -39863,7 +38924,7 @@
     var throttle_2 = throttle_1.defaultThrottleConfig;
     var throttle_3 = throttle_1.throttle;
 
-    var __extends$1q = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1r = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -39874,7 +38935,7 @@
      * @extends {Ignored}
      */
     var ThrottleTimeSubscriber = (function (_super) {
-        __extends$1q(ThrottleTimeSubscriber, _super);
+        __extends$1r(ThrottleTimeSubscriber, _super);
         function ThrottleTimeSubscriber(destination, duration, scheduler, leading, trailing) {
             _super.call(this, destination);
             this.duration = duration;
@@ -39918,7 +38979,7 @@
         subscriber.clearThrottle();
     }
 
-    var __extends$1r = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1s = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -39936,7 +38997,7 @@
      * @extends {Ignored}
      */
     var TimeIntervalSubscriber = (function (_super) {
-        __extends$1r(TimeIntervalSubscriber, _super);
+        __extends$1s(TimeIntervalSubscriber, _super);
         function TimeIntervalSubscriber(destination, scheduler) {
             _super.call(this, destination);
             this.scheduler = scheduler;
@@ -39952,7 +39013,7 @@
         return TimeIntervalSubscriber;
     }(Subscriber_1.Subscriber));
 
-    var __extends$1s = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1t = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -39965,7 +39026,7 @@
      * @class TimeoutError
      */
     var TimeoutError = (function (_super) {
-        __extends$1s(TimeoutError, _super);
+        __extends$1t(TimeoutError, _super);
         function TimeoutError() {
             var err = _super.call(this, 'Timeout has occurred');
             this.name = err.name = 'TimeoutError';
@@ -39975,7 +39036,7 @@
         return TimeoutError;
     }(Error));
 
-    var __extends$1t = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1u = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -39986,7 +39047,7 @@
      * @extends {Ignored}
      */
     var TimeoutSubscriber = (function (_super) {
-        __extends$1t(TimeoutSubscriber, _super);
+        __extends$1u(TimeoutSubscriber, _super);
         function TimeoutSubscriber(destination, absoluteTimeout, waitFor, scheduler, errorInstance) {
             _super.call(this, destination);
             this.absoluteTimeout = absoluteTimeout;
@@ -40027,7 +39088,7 @@
         return TimeoutSubscriber;
     }(Subscriber_1.Subscriber));
 
-    var __extends$1u = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1v = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -40038,7 +39099,7 @@
      * @extends {Ignored}
      */
     var TimeoutWithSubscriber = (function (_super) {
-        __extends$1u(TimeoutWithSubscriber, _super);
+        __extends$1v(TimeoutWithSubscriber, _super);
         function TimeoutWithSubscriber(destination, absoluteTimeout, waitFor, withObservable, scheduler) {
             _super.call(this, destination);
             this.absoluteTimeout = absoluteTimeout;
@@ -40081,7 +39142,7 @@
         return TimeoutWithSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$1v = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1w = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -40092,7 +39153,7 @@
      * @extends {Ignored}
      */
     var WindowSubscriber = (function (_super) {
-        __extends$1v(WindowSubscriber, _super);
+        __extends$1w(WindowSubscriber, _super);
         function WindowSubscriber(destination) {
             _super.call(this, destination);
             this.window = new Subject_1.Subject();
@@ -40133,7 +39194,7 @@
         return WindowSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$1w = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1x = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -40144,7 +39205,7 @@
      * @extends {Ignored}
      */
     var WindowCountSubscriber = (function (_super) {
-        __extends$1w(WindowCountSubscriber, _super);
+        __extends$1x(WindowCountSubscriber, _super);
         function WindowCountSubscriber(destination, windowSize, startWindowEvery) {
             _super.call(this, destination);
             this.destination = destination;
@@ -40198,13 +39259,13 @@
         return WindowCountSubscriber;
     }(Subscriber_1.Subscriber));
 
-    var __extends$1x = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1y = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
     var CountedSubject = (function (_super) {
-        __extends$1x(CountedSubject, _super);
+        __extends$1y(CountedSubject, _super);
         function CountedSubject() {
             _super.apply(this, arguments);
             this._numberOfNextedValues = 0;
@@ -40228,7 +39289,7 @@
      * @extends {Ignored}
      */
     var WindowTimeSubscriber = (function (_super) {
-        __extends$1x(WindowTimeSubscriber, _super);
+        __extends$1y(WindowTimeSubscriber, _super);
         function WindowTimeSubscriber(destination, windowTimeSpan, windowCreationInterval, maxWindowSize, scheduler) {
             _super.call(this, destination);
             this.destination = destination;
@@ -40319,7 +39380,7 @@
         subscriber.closeWindow(window);
     }
 
-    var __extends$1y = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1z = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -40330,7 +39391,7 @@
      * @extends {Ignored}
      */
     var WindowToggleSubscriber = (function (_super) {
-        __extends$1y(WindowToggleSubscriber, _super);
+        __extends$1z(WindowToggleSubscriber, _super);
         function WindowToggleSubscriber(destination, openings, closingSelector) {
             _super.call(this, destination);
             this.openings = openings;
@@ -40437,7 +39498,7 @@
         return WindowToggleSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$1z = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1A = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -40448,7 +39509,7 @@
      * @extends {Ignored}
      */
     var WindowSubscriber$1 = (function (_super) {
-        __extends$1z(WindowSubscriber, _super);
+        __extends$1A(WindowSubscriber, _super);
         function WindowSubscriber(destination, closingSelector) {
             _super.call(this, destination);
             this.destination = destination;
@@ -40507,7 +39568,7 @@
         return WindowSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$1A = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1B = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -40518,7 +39579,7 @@
      * @extends {Ignored}
      */
     var WithLatestFromSubscriber = (function (_super) {
-        __extends$1A(WithLatestFromSubscriber, _super);
+        __extends$1B(WithLatestFromSubscriber, _super);
         function WithLatestFromSubscriber(destination, observables, project) {
             _super.call(this, destination);
             this.observables = observables;
@@ -40572,7 +39633,7 @@
         return WithLatestFromSubscriber;
     }(OuterSubscriber_1.OuterSubscriber));
 
-    var __extends$1B = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1C = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -40583,7 +39644,7 @@
      * @extends {Ignored}
      */
     var ZipSubscriber = (function (_super) {
-        __extends$1B(ZipSubscriber, _super);
+        __extends$1C(ZipSubscriber, _super);
         function ZipSubscriber(destination, project, values) {
             if (values === void 0) { values = Object.create(null); }
             _super.call(this, destination);
@@ -40726,7 +39787,7 @@
      * @extends {Ignored}
      */
     var ZipBufferIterator = (function (_super) {
-        __extends$1B(ZipBufferIterator, _super);
+        __extends$1C(ZipBufferIterator, _super);
         function ZipBufferIterator(destination, parent, observable) {
             _super.call(this, destination);
             this.parent = parent;
@@ -40778,25 +39839,80 @@
 
     var throttle = throttle_1.throttle;
 
-    var Role = /** @class */ (function () {
-        function Role(type, id, attributes) {
-            this.type = type;
-            this.id = id;
-            this.attributes = attributes;
-            console.log("Created role " + this.attributes.name);
+    var __extends$1D = (undefined && undefined.__extends) || (function () {
+        var extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return function (d, b) {
+            extendStatics(d, b);
+            function __() { this.constructor = d; }
+            d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+        };
+    })();
+    var Role = /** @class */ (function (_super) {
+        __extends$1D(Role, _super);
+        function Role(data) {
+            var _this = _super.call(this, data) || this;
+            _this.type = "users";
+            return _this;
         }
         return Role;
-    }());
+    }(Model));
 
-    var User = /** @class */ (function () {
-        function User(type, id, attributes) {
-            this.type = type;
-            this.id = id;
-            this.attributes = attributes;
-            console.log("Created user " + this.attributes.userName);
+    var __extends$1E = (undefined && undefined.__extends) || (function () {
+        var extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return function (d, b) {
+            extendStatics(d, b);
+            function __() { this.constructor = d; }
+            d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+        };
+    })();
+    var Team = /** @class */ (function (_super) {
+        __extends$1E(Team, _super);
+        function Team(data) {
+            var _this = _super.call(this, data) || this;
+            _this.type = (_this.type || "default value");
+            return _this;
+        }
+        return Team;
+    }(Model));
+
+    var __extends$1F = (undefined && undefined.__extends) || (function () {
+        var extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return function (d, b) {
+            extendStatics(d, b);
+            function __() { this.constructor = d; }
+            d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+        };
+    })();
+    var User = /** @class */ (function (_super) {
+        __extends$1F(User, _super);
+        function User(data) {
+            var _this = _super.call(this, data) || this;
+            _this.phoneMobile = "N/A";
+            _this.phoneWork = "N/A";
+            _this.managerId = "N/A";
+            _this.leadsMax = 45;
+            // used for mapping with api object
+            if (data != null) {
+                _super.prototype.defaultConstructor.call(_this, data);
+            }
+            return _this;
         }
         return User;
-    }());
+    }(Model));
+
+    Observable_1.Observable.prototype.map = map_2$1.map;
+
+    Observable_1.Observable.prototype.mergeMap = mergeMap_2$1.mergeMap;
+    Observable_1.Observable.prototype.flatMap = mergeMap_2$1.mergeMap;
+
+    // HACK: does nothing, because `toPromise` now lives on the `Observable` itself.
+    // leaving this module here to prevent breakage.
 
     var __decorate$4 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -40811,36 +39927,49 @@
         function SugarService(http) {
             this.http = http;
             this.roleList = [];
+            this.teamList = [];
             this.userList = [];
+            this.itemList = [];
             this.endPoint = "http://sh.pvcrm.com/sugarcrm/sugarcrm/api/";
             //
         }
-        SugarService.prototype.getUsersFromSugar = function () {
-            return this.getData("users");
-        };
         SugarService.prototype.getUserById = function (id) {
-            return this.getData("users/" + id);
-        };
-        SugarService.prototype.createUserList = function () {
-            var _this = this;
-            this.getUsersFromSugar()
-                .subscribe(function (users) {
-                users.data.forEach(function (user) {
-                    _this.userList.push(new User(user.type, user.id, user.attributes));
-                });
-                console.log("USERLIST", _this.userList);
+            return this.getData("users/" + id)
+                .map(function (data) { return new User(data); })
+                .toPromise()
+                .catch(function (err) {
+                console.error(err);
+                throw (err);
             });
+        };
+        SugarService.prototype.getUserPromiseFromSugar = function () {
+            return this.getData("users")
+                .map(function (users) { return users.data; })
+                .toPromise();
+        };
+        SugarService.prototype.getUsersFromSugar = function () {
+            var _this = this;
+            this.getUserPromiseFromSugar()
+                .then(function (users) { return users.forEach(function (user) { return _this.userList.push(new User(user)); }); })
+                .then(function (data) { return console.log("promise over", _this.userList); });
             return this.userList;
         };
         SugarService.prototype.getTeamsFromSugar = function () {
-            return this.getData("teams");
+            var _this = this;
+            this.getData("teams")
+                .subscribe(function (teams) {
+                teams.data.forEach(function (team) {
+                    _this.teamList.push(new Team(team));
+                });
+            });
+            return this.teamList;
         };
         SugarService.prototype.getRolesFromSugar = function () {
             var _this = this;
             this.getData("roles")
                 .subscribe(function (roles) {
                 roles.data.forEach(function (role) {
-                    _this.roleList.push(new Role(role.type, role.id, role.attributes));
+                    _this.roleList.push(new Role(role));
                 });
             });
             return this.roleList;
@@ -40910,7 +40039,6 @@
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var CreateUserFormComponent = /** @class */ (function () {
-        // CODE TOURPLAN SERA LEFT(user_name, 6)
         function CreateUserFormComponent(fieldsService, switchvoxService, sugarService, parserService, route) {
             this.fieldsService = fieldsService;
             this.switchvoxService = switchvoxService;
@@ -40919,23 +40047,22 @@
             this.route = route;
             this.displayVentesLeads = false;
             this.passwordExists = false;
-            this.usernameTaken = false;
             //
         }
         CreateUserFormComponent.prototype.ngOnInit = function () {
             var _this = this;
-            this.fields = this.fieldsService.getData();
+            this.fieldsService.getData()
+                .then(function (data) { return _this.fields = new Fields(data[0]); })
+                .catch(function (err) { return console.error(err); });
             this.resetSugar();
-            this.getSwitchvoxUsers();
-            this.sugarService.getUsersFromSugar()
-                .subscribe(function (users) { return _this.usersFromSugar = users.data; });
-            this.route.paramMap.subscribe(function (params) { return console.log(params); });
+            this.usersFromSugar = this.sugarService.getUsersFromSugar();
+            this.route.paramMap.subscribe(function (params) { return params.get("id"); });
         };
-        CreateUserFormComponent.prototype.getSwitchvoxUsers = function () {
-            this.switchvoxService.getData()
-                .subscribe(function (data) {
-                console.log(data);
-            });
+        CreateUserFormComponent.prototype.onParentChange = function (_a) {
+            var e = _a.e, id = _a.id;
+            console.log("in parent", e, id);
+            var myField = this.fields.autres.find(function (field) { return field.id === id; });
+            myField.checked = e;
         };
         CreateUserFormComponent.prototype.credentialClick = function (e) {
             console.log(e);
@@ -40954,7 +40081,7 @@
         };
         CreateUserFormComponent.prototype.isUsernameTaken = function (username) {
             var res = this.usersFromSugar
-                .find(function (user) { return user.attributes.userName === username.value; });
+                .find(function (user) { return user.userName === username.value; });
             return (res);
         };
         CreateUserFormComponent.prototype.setPassword = function (first, last) {
@@ -40990,7 +40117,7 @@
                 }
                 else {
                     this.setVentesLeads();
-                    // this.displayVentesLeads = false;
+                    this.displayVentesLeads = false;
                 }
                 console.log(service);
             }
@@ -41270,31 +40397,6 @@
     var __metadata$8 = (undefined && undefined.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var HomeComponent = /** @class */ (function () {
-        function HomeComponent() {
-            // constructor
-        }
-        HomeComponent.prototype.ngOnInit = function () {
-            // init
-        };
-        HomeComponent = __decorate$9([
-            Component({
-                templateUrl: "./home.component.html",
-            }),
-            __metadata$8("design:paramtypes", [])
-        ], HomeComponent);
-        return HomeComponent;
-    }());
-
-    var __decorate$a = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-        return c > 3 && r && Object.defineProperty(target, key, r), r;
-    };
-    var __metadata$9 = (undefined && undefined.__metadata) || function (k, v) {
-        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-    };
     var RolesComponent = /** @class */ (function () {
         // @ViewChild("disableForm") public form: any;
         function RolesComponent(sugarService) {
@@ -41308,15 +40410,51 @@
         RolesComponent.prototype.trackByFn = function (index, item) {
             return index; // or item.id
         };
-        RolesComponent = __decorate$a([
+        RolesComponent = __decorate$9([
             Component({
                 selector: "mv-app-roles",
                 styleUrls: ["./roles.component.css"],
                 templateUrl: "./roles.component.html",
             }),
-            __metadata$9("design:paramtypes", [SugarService])
+            __metadata$8("design:paramtypes", [SugarService])
         ], RolesComponent);
         return RolesComponent;
+    }());
+
+    var __decorate$a = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    };
+    var __metadata$9 = (undefined && undefined.__metadata) || function (k, v) {
+        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+    };
+    var TeamsComponent = /** @class */ (function () {
+        function TeamsComponent(sugarService) {
+            this.sugarService = sugarService;
+            this.teamsFromSugar = [];
+            // constructor
+        }
+        TeamsComponent.prototype.ngOnInit = function () {
+            this.teamsFromSugar = this.sugarService.getTeamsFromSugar();
+        };
+        TeamsComponent.prototype.trackByFn = function (index, item) {
+            return index; // or item.id
+        };
+        __decorate$a([
+            ViewChild("disableForm"),
+            __metadata$9("design:type", Object)
+        ], TeamsComponent.prototype, "form", void 0);
+        TeamsComponent = __decorate$a([
+            Component({
+                selector: "mv-app-teams",
+                styleUrls: ["./teams.component.css"],
+                templateUrl: "./teams.component.html",
+            }),
+            __metadata$9("design:paramtypes", [SugarService])
+        ], TeamsComponent);
+        return TeamsComponent;
     }());
 
     var __decorate$b = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -41328,33 +40466,30 @@
     var __metadata$a = (undefined && undefined.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var TeamsComponent = /** @class */ (function () {
-        function TeamsComponent(sugarService) {
+    var UserComponent = /** @class */ (function () {
+        // @ViewChild("disableForm") public form: any;
+        function UserComponent(sugarService) {
             this.sugarService = sugarService;
             // constructor
         }
-        TeamsComponent.prototype.ngOnInit = function () {
+        UserComponent.prototype.ngOnInit = function () {
             var _this = this;
-            this.sugarService.getTeamsFromSugar()
-                .subscribe(function (teams) {
-                _this.teamsFromSugar = teams.data;
-            });
+            var id = "cbc425e0-40bc-b51d-f6d2-57d618ec23cf";
+            this.sugarService.getUserById(id)
+                .then(function (user) { return _this.user = user; })
+                .then(function (res) { return console.log(_this.user); });
         };
-        TeamsComponent.prototype.trackByFn = function (index, item) {
+        UserComponent.prototype.trackByFn = function (index, item) {
             return index; // or item.id
         };
-        __decorate$b([
-            ViewChild("disableForm"),
-            __metadata$a("design:type", Object)
-        ], TeamsComponent.prototype, "form", void 0);
-        TeamsComponent = __decorate$b([
+        UserComponent = __decorate$b([
             Component({
-                selector: "mv-app-teams",
-                templateUrl: "./teams.component.html",
+                selector: "mv-app-user",
+                templateUrl: "./user.component.html",
             }),
             __metadata$a("design:paramtypes", [SugarService])
-        ], TeamsComponent);
-        return TeamsComponent;
+        ], UserComponent);
+        return UserComponent;
     }());
 
     var __decorate$c = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -41366,70 +40501,126 @@
     var __metadata$b = (undefined && undefined.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var UserComponent = /** @class */ (function () {
-        // @ViewChild("disableForm") public form: any;
-        function UserComponent(sugarService) {
-            this.sugarService = sugarService;
-            // constructor
-        }
-        UserComponent.prototype.ngOnInit = function () {
-            var _this = this;
-            this.sugarService.getUserById("cbc425e0-40bc-b51d-f6d2-57d618ec23cf")
-                .subscribe(function (user) {
-                _this.user = user.data;
-            });
-        };
-        UserComponent.prototype.trackByFn = function (index, item) {
-            return index; // or item.id
-        };
-        UserComponent = __decorate$c([
-            Component({
-                selector: "mv-app-user",
-                templateUrl: "./user.component.html",
-            }),
-            __metadata$b("design:paramtypes", [SugarService])
-        ], UserComponent);
-        return UserComponent;
-    }());
-
-    var __decorate$d = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-        return c > 3 && r && Object.defineProperty(target, key, r), r;
-    };
-    var __metadata$c = (undefined && undefined.__metadata) || function (k, v) {
-        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-    };
     var UsersComponent = /** @class */ (function () {
         function UsersComponent(sugarService) {
             this.sugarService = sugarService;
             this.usersFromSugar = [];
+            this.mockList = [];
+            this.myJson = {
+                data: [
+                    {
+                        attributes: {
+                            codeSonGalileo: "",
+                            department: "Ventes",
+                            email: null,
+                            employeeStatus: "Active",
+                            firstName: "Justine",
+                            id: "4ab50c2e-fce7-8385-2e9f-5c2e85737c1a",
+                            lastName: "Chouteau",
+                            managerId: "",
+                            officeId: "1009",
+                            phoneAsterisk: "2083",
+                            phoneFax: null,
+                            phoneHome: null,
+                            phoneMobile: null,
+                            phoneOther: null,
+                            phoneWork: "01 56 67 00 83",
+                            salutation: "",
+                            status: "Active",
+                            swCallNotification: "1",
+                            swClickToCall: "1",
+                            teamId: "",
+                            title: null,
+                            tourplanID: "JCHOUT",
+                            userName: "jchouteau",
+                        },
+                        id: "4ab50c2e-fce7-8385-2e9f-5c2e85737c1a",
+                        type: "users",
+                    },
+                    {
+                        attributes: {
+                            codeSonGalileo: "",
+                            department: "Ventes",
+                            email: null,
+                            employeeStatus: "Active",
+                            firstName: "Justine",
+                            id: "4ab50c2e-fce7-8385-2e9f-5c2e85737c1a",
+                            lastName: "Chouteau",
+                            managerId: "",
+                            officeId: "1009",
+                            phoneAsterisk: "2083",
+                            phoneFax: null,
+                            phoneHome: null,
+                            phoneMobile: null,
+                            phoneOther: null,
+                            phoneWork: "01 56 67 00 83",
+                            salutation: "",
+                            status: "Active",
+                            swCallNotification: "1",
+                            swClickToCall: "1",
+                            teamId: "",
+                            title: null,
+                            tourplanID: "JCHOUT",
+                            userName: "jchouteau",
+                        },
+                        id: "4ab50c2e-fce7-8385-2e9f-5c2e85737c1a",
+                        type: "users",
+                    },
+                    {
+                        attributes: {
+                            codeSonGalileo: "",
+                            department: "Ventes",
+                            email: null,
+                            employeeStatus: "Active",
+                            firstName: "Justine",
+                            id: "4ab50c2e-fce7-8385-2e9f-5c2e85737c1a",
+                            lastName: "Chouteau",
+                            managerId: "",
+                            officeId: "1009",
+                            phoneAsterisk: "2083",
+                            phoneFax: null,
+                            phoneHome: null,
+                            phoneMobile: null,
+                            phoneOther: null,
+                            phoneWork: "01 56 67 00 83",
+                            salutation: "",
+                            status: "Active",
+                            swCallNotification: "1",
+                            swClickToCall: "1",
+                            teamId: "",
+                            title: null,
+                            tourplanID: "JCHOUT",
+                            userName: "jchouteau",
+                        },
+                        id: "4ab50c2e-fce7-8385-2e9f-5c2e85737c1a",
+                        type: "users",
+                    },
+                ],
+            };
             // constructor
         }
         UsersComponent.prototype.ngOnInit = function () {
-            this.usersFromSugar = this.sugarService.createUserList();
+            var _this = this;
+            this.usersFromSugar = this.sugarService.getUsersFromSugar();
+            this.myJson.data.forEach(function (user) { return _this.mockList.push(new User(user)); });
+            console.log("mocklist", this.mockList);
         };
         UsersComponent.prototype.trackByFn = function (index, item) {
             return index; // or item.id
         };
-        UsersComponent = __decorate$d([
+        UsersComponent = __decorate$c([
             Component({
                 selector: "mv-app-users",
                 styleUrls: ["./users.component.css"],
                 templateUrl: "./users.component.html",
             }),
-            __metadata$c("design:paramtypes", [SugarService])
+            __metadata$b("design:paramtypes", [SugarService])
         ], UsersComponent);
         return UsersComponent;
     }());
 
     /* tslint:disable object-literal-sort-keys */
     var AppRoutes = [
-        {
-            path: "home",
-            component: HomeComponent,
-        },
         {
             path: "users/:id",
             component: CreateUserFormComponent,
@@ -41462,7 +40653,7 @@
             path: "import",
             component: ImportComponent,
         },
-        { path: "**", redirectTo: "user" },
+        { path: "**", redirectTo: "users" },
     ];
     /* tslint:enable */
 
@@ -47442,7 +46633,7 @@
      */
     BrowserAnimationsModule.ctorParameters = function () { return []; };
 
-    var __extends$1C = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1G = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -47458,7 +46649,7 @@
      * @hide true
      */
     var ForkJoinObservable = (function (_super) {
-        __extends$1C(ForkJoinObservable, _super);
+        __extends$1G(ForkJoinObservable, _super);
         function ForkJoinObservable(sources, resultSelector) {
             _super.call(this);
             this.sources = sources;
@@ -47596,7 +46787,7 @@
      * @extends {Ignored}
      */
     var ForkJoinSubscriber = (function (_super) {
-        __extends$1C(ForkJoinSubscriber, _super);
+        __extends$1G(ForkJoinSubscriber, _super);
         function ForkJoinSubscriber(destination, sources, resultSelector) {
             _super.call(this, destination);
             this.sources = sources;
@@ -53600,39 +52791,46 @@
      */
     FormsModule.ctorParameters = function () { return []; };
 
-    var __decorate$e = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var __decorate$d = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var __metadata$d = (undefined && undefined.__metadata) || function (k, v) {
+    var __metadata$c = (undefined && undefined.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var CheckboxFieldComponent = /** @class */ (function () {
         function CheckboxFieldComponent() {
+            this.clickEmitter = new EventEmitter();
         }
+        CheckboxFieldComponent.prototype.handleClick = function (e, id) {
+            console.log("in child", e, id);
+            this.clickEmitter.emit({ e: e, id: id });
+        };
         CheckboxFieldComponent.prototype.trackByFn = function (item, id) {
             return id;
         };
-        __decorate$e([
+        __decorate$d([
             Input(),
-            __metadata$d("design:type", Array)
+            __metadata$c("design:type", Array)
         ], CheckboxFieldComponent.prototype, "checkboxes", void 0);
-        CheckboxFieldComponent = __decorate$e([
+        __decorate$d([
+            Output(),
+            __metadata$c("design:type", Object)
+        ], CheckboxFieldComponent.prototype, "clickEmitter", void 0);
+        CheckboxFieldComponent = __decorate$d([
             Component({
                 selector: "mv-checkbox-field",
                 styleUrls: ["./checkbox-field.component.css"],
                 templateUrl: "./checkbox-field.component.html",
+                viewProviders: [{ provide: ControlContainer, useExisting: NgForm }],
             })
         ], CheckboxFieldComponent);
         return CheckboxFieldComponent;
     }());
 
-    // HACK: does nothing, because `toPromise` now lives on the `Observable` itself.
-    // leaving this module here to prevent breakage.
-
-    var __decorate$f = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var __decorate$e = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -53641,14 +52839,13 @@
     var AppModule = /** @class */ (function () {
         function AppModule() {
         }
-        AppModule = __decorate$f([
+        AppModule = __decorate$e([
             NgModule({
                 bootstrap: [
                     AppComponent,
                 ],
                 declarations: [
                     AppComponent,
-                    HomeComponent,
                     ImportComponent,
                     UserComponent,
                     UsersComponent,
@@ -53684,98 +52881,8 @@
      * Do not edit.
      * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride}
      */
-    var styles_HomeComponent = [];
-    var RenderType_HomeComponent = createRendererType2({ encapsulation: 2,
-        styles: styles_HomeComponent, data: {} });
-    function View_HomeComponent_0(_l) {
-        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 1, 'b', [], null, null, null, null, null)), (_l()(),
-                textDef(-1, null, [' Users '])), (_l()(), textDef(-1, null, ['\n']))], null, null);
-    }
-    function View_HomeComponent_Host_0(_l) {
-        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 1, 'ng-component', [], null, null, null, View_HomeComponent_0, RenderType_HomeComponent)), directiveDef(1, 114688, null, 0, HomeComponent, [], null, null)], function (_ck, _v) {
-            _ck(_v, 1, 0);
-        }, null);
-    }
-    var HomeComponentNgFactory = createComponentFactory('ng-component', HomeComponent, View_HomeComponent_Host_0, {}, {}, []);
-
-    /**
-     * @fileoverview This file is generated by the Angular template compiler.
-     * Do not edit.
-     * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride}
-     */
     /* tslint:disable */
     var styles = ['.orgas[_ngcontent-%COMP%] {\n display: flex;\n justify-content: flex-start;\n flex-flow: column wrap;\n height: 120px;\n}'];
-
-    /**
-     * @fileoverview This file is generated by the Angular template compiler.
-     * Do not edit.
-     * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride}
-     */
-    /* tslint:disable */
-    var styles$1 = ['div[_ngcontent-%COMP%] {\n  display: flex;\n}'];
-
-    /**
-     * @fileoverview This file is generated by the Angular template compiler.
-     * Do not edit.
-     * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride}
-     */
-    var styles_CheckboxFieldComponent = [styles$1];
-    var RenderType_CheckboxFieldComponent = createRendererType2({ encapsulation: 0,
-        styles: styles_CheckboxFieldComponent, data: {} });
-    function View_CheckboxFieldComponent_1(_l) {
-        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(),
-                textDef(-1, null, ['\n    '])), (_l()(), elementDef(2, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(4, 0, null, null, 5, 'input', [['type', 'checkbox']], [[2, 'ng-untouched',
-                    null], [2, 'ng-touched', null], [2, 'ng-pristine', null],
-                [2, 'ng-dirty', null], [2, 'ng-valid', null], [2, 'ng-invalid',
-                    null], [2, 'ng-pending', null]], [[null, 'ngModelChange'],
-                [null, 'change'], [null, 'blur']], function (_v, en, $event) {
-                var ad = true;
-                if (('change' === en)) {
-                    var pd_0 = (nodeValue(_v, 5).onChange($event.target.checked) !== false);
-                    ad = (pd_0 && ad);
-                }
-                if (('blur' === en)) {
-                    var pd_1 = (nodeValue(_v, 5).onTouched() !== false);
-                    ad = (pd_1 && ad);
-                }
-                if (('ngModelChange' === en)) {
-                    var pd_2 = ((_v.context.$implicit.checked = $event) !== false);
-                    ad = (pd_2 && ad);
-                }
-                return ad;
-            }, null, null)), directiveDef(5, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
-                return [p0_0];
-            }, [CheckboxControlValueAccessor]), directiveDef(7, 671744, null, 0, NgModel, [[8, null], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(9, 16384, null, 0, NgControlStatus, [NgControl], null, null), (_l()(), textDef(10, null, [' ', '\n    '])), (_l()(), textDef(-1, null, ['\n  ']))], function (_ck, _v) {
-            var currVal_7 = _v.context.$implicit.id;
-            var currVal_8 = _v.context.$implicit.checked;
-            _ck(_v, 7, 0, currVal_7, currVal_8);
-        }, function (_ck, _v) {
-            var currVal_0 = nodeValue(_v, 9).ngClassUntouched;
-            var currVal_1 = nodeValue(_v, 9).ngClassTouched;
-            var currVal_2 = nodeValue(_v, 9).ngClassPristine;
-            var currVal_3 = nodeValue(_v, 9).ngClassDirty;
-            var currVal_4 = nodeValue(_v, 9).ngClassValid;
-            var currVal_5 = nodeValue(_v, 9).ngClassInvalid;
-            var currVal_6 = nodeValue(_v, 9).ngClassPending;
-            _ck(_v, 4, 0, currVal_0, currVal_1, currVal_2, currVal_3, currVal_4, currVal_5, currVal_6);
-            var currVal_9 = _v.context.$implicit.label;
-            _ck(_v, 10, 0, currVal_9);
-        });
-    }
-    function View_CheckboxFieldComponent_0(_l) {
-        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 4, 'fieldset', [], null, null, null, null, null)), (_l()(),
-                textDef(-1, null, ['\n  '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CheckboxFieldComponent_1)), directiveDef(3, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0,
-                    'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(), textDef(-1, null, ['\n'])), (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
-            var _co = _v.component;
-            var currVal_0 = _co.checkboxes;
-            var currVal_1 = _co.trackByFn;
-            _ck(_v, 3, 0, currVal_0, currVal_1);
-        }, null);
-    }
-    function View_CheckboxFieldComponent_Host_0(_l) {
-        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 1, 'mv-checkbox-field', [], null, null, null, View_CheckboxFieldComponent_0, RenderType_CheckboxFieldComponent)), directiveDef(1, 49152, null, 0, CheckboxFieldComponent, [], null, null)], null, null);
-    }
-    var CheckboxFieldComponentNgFactory = createComponentFactory('mv-checkbox-field', CheckboxFieldComponent, View_CheckboxFieldComponent_Host_0, { checkboxes: 'checkboxes' }, {}, []);
 
     /**
      * @fileoverview This file is generated by the Angular template compiler.
@@ -53973,19 +53080,19 @@
         });
     }
     function View_CreateUserFormComponent_6(_l) {
-        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 9, 'span', [], null, null, null, null, null)), (_l()(),
-                textDef(-1, null, ['\n        '])), (_l()(), elementDef(2, 0, null, null, 7, 'label', [], null, null, null, null, null)), (_l()(), elementDef(3, 0, null, null, 5, 'input', [['type', 'checkbox']], [[2, 'ng-untouched', null], [2, 'ng-touched',
-                    null], [2, 'ng-pristine', null], [2, 'ng-dirty', null],
-                [2, 'ng-valid', null], [2, 'ng-invalid', null], [2, 'ng-pending',
-                    null]], [[null, 'ngModelChange'], [null, 'change'],
-                [null, 'blur']], function (_v, en, $event) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 11, 'span', [], null, null, null, null, null)), (_l()(),
+                textDef(-1, null, ['\n          '])), (_l()(), elementDef(2, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n            '])),
+            (_l()(), elementDef(4, 0, null, null, 5, 'input', [['type', 'checkbox']], [[2, 'ng-untouched', null], [2, 'ng-touched', null], [2, 'ng-pristine',
+                    null], [2, 'ng-dirty', null], [2, 'ng-valid', null],
+                [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null,
+                    'ngModelChange'], [null, 'change'], [null, 'blur']], function (_v, en, $event) {
                 var ad = true;
                 if (('change' === en)) {
-                    var pd_0 = (nodeValue(_v, 4).onChange($event.target.checked) !== false);
+                    var pd_0 = (nodeValue(_v, 5).onChange($event.target.checked) !== false);
                     ad = (pd_0 && ad);
                 }
                 if (('blur' === en)) {
-                    var pd_1 = (nodeValue(_v, 4).onTouched() !== false);
+                    var pd_1 = (nodeValue(_v, 5).onTouched() !== false);
                     ad = (pd_1 && ad);
                 }
                 if (('ngModelChange' === en)) {
@@ -53993,23 +53100,24 @@
                     ad = (pd_2 && ad);
                 }
                 return ad;
-            }, null, null)), directiveDef(4, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
+            }, null, null)), directiveDef(5, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
                 return [p0_0];
-            }, [CheckboxControlValueAccessor]), directiveDef(6, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(8, 16384, null, 0, NgControlStatus, [NgControl], null, null), (_l()(), textDef(9, null, ['', '\n        ']))], function (_ck, _v) {
+            }, [CheckboxControlValueAccessor]), directiveDef(7, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(9, 16384, null, 0, NgControlStatus, [NgControl], null, null), (_l()(),
+                textDef(10, null, ['', '\n          '])), (_l()(), textDef(-1, null, ['\n        ']))], function (_ck, _v) {
             var currVal_7 = _v.context.$implicit.id;
             var currVal_8 = _v.context.$implicit.checked;
-            _ck(_v, 6, 0, currVal_7, currVal_8);
+            _ck(_v, 7, 0, currVal_7, currVal_8);
         }, function (_ck, _v) {
-            var currVal_0 = nodeValue(_v, 8).ngClassUntouched;
-            var currVal_1 = nodeValue(_v, 8).ngClassTouched;
-            var currVal_2 = nodeValue(_v, 8).ngClassPristine;
-            var currVal_3 = nodeValue(_v, 8).ngClassDirty;
-            var currVal_4 = nodeValue(_v, 8).ngClassValid;
-            var currVal_5 = nodeValue(_v, 8).ngClassInvalid;
-            var currVal_6 = nodeValue(_v, 8).ngClassPending;
-            _ck(_v, 3, 0, currVal_0, currVal_1, currVal_2, currVal_3, currVal_4, currVal_5, currVal_6);
+            var currVal_0 = nodeValue(_v, 9).ngClassUntouched;
+            var currVal_1 = nodeValue(_v, 9).ngClassTouched;
+            var currVal_2 = nodeValue(_v, 9).ngClassPristine;
+            var currVal_3 = nodeValue(_v, 9).ngClassDirty;
+            var currVal_4 = nodeValue(_v, 9).ngClassValid;
+            var currVal_5 = nodeValue(_v, 9).ngClassInvalid;
+            var currVal_6 = nodeValue(_v, 9).ngClassPending;
+            _ck(_v, 4, 0, currVal_0, currVal_1, currVal_2, currVal_3, currVal_4, currVal_5, currVal_6);
             var currVal_9 = _v.context.$implicit.label;
-            _ck(_v, 9, 0, currVal_9);
+            _ck(_v, 10, 0, currVal_9);
         });
     }
     function View_CreateUserFormComponent_7(_l) {
@@ -54037,7 +53145,7 @@
             }, null, null)), directiveDef(5, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
                 return [p0_0];
             }, [CheckboxControlValueAccessor]), directiveDef(7, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(9, 16384, null, 0, NgControlStatus, [NgControl], null, null), (_l()(),
-                textDef(10, null, ['', ' ', '\n          '])), (_l()(), textDef(-1, null, ['\n        ']))], function (_ck, _v) {
+                textDef(10, null, ['', '\n          '])), (_l()(), textDef(-1, null, ['\n        ']))], function (_ck, _v) {
             var currVal_8 = _v.context.$implicit.id;
             var currVal_9 = _v.context.$implicit.checked;
             _ck(_v, 7, 0, currVal_8, currVal_9);
@@ -54052,13 +53160,12 @@
             var currVal_7 = nodeValue(_v, 9).ngClassPending;
             _ck(_v, 4, 0, currVal_0, currVal_1, currVal_2, currVal_3, currVal_4, currVal_5, currVal_6, currVal_7);
             var currVal_10 = _v.context.$implicit.name;
-            var currVal_11 = _v.context.$implicit.id;
-            _ck(_v, 10, 0, currVal_10, currVal_11);
+            _ck(_v, 10, 0, currVal_10);
         });
     }
     function View_CreateUserFormComponent_8(_l) {
         return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 3, 'option', [], null, null, null, null, null)), directiveDef(1, 147456, null, 0, NgSelectOption, [ElementRef, Renderer2, [2, SelectControlValueAccessor]], { value: [0, 'value'] }, null), directiveDef(2, 147456, null, 0, NgSelectMultipleOption, [ElementRef,
-                Renderer2, [8, null]], { value: [0, 'value'] }, null), (_l()(), textDef(3, null, ['', '\n    ']))], function (_ck, _v) {
+                Renderer2, [8, null]], { value: [0, 'value'] }, null), (_l()(), textDef(3, null, ['', '\n      ']))], function (_ck, _v) {
             var currVal_0 = _v.context.$implicit.value;
             _ck(_v, 1, 0, currVal_0);
             var currVal_1 = _v.context.$implicit.value;
@@ -54081,47 +53188,6 @@
         });
     }
     function View_CreateUserFormComponent_10(_l) {
-        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(),
-                textDef(-1, null, ['\n        '])), (_l()(), elementDef(2, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n          '])),
-            (_l()(), elementDef(4, 0, null, null, 5, 'input', [['type', 'checkbox']], [[2, 'ng-untouched', null], [2, 'ng-touched', null], [2, 'ng-pristine',
-                    null], [2, 'ng-dirty', null], [2, 'ng-valid', null],
-                [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null,
-                    'ngModelChange'], [null, 'change'], [null, 'blur']], function (_v, en, $event) {
-                var ad = true;
-                if (('change' === en)) {
-                    var pd_0 = (nodeValue(_v, 5).onChange($event.target.checked) !== false);
-                    ad = (pd_0 && ad);
-                }
-                if (('blur' === en)) {
-                    var pd_1 = (nodeValue(_v, 5).onTouched() !== false);
-                    ad = (pd_1 && ad);
-                }
-                if (('ngModelChange' === en)) {
-                    var pd_2 = ((_v.context.$implicit.checked = $event) !== false);
-                    ad = (pd_2 && ad);
-                }
-                return ad;
-            }, null, null)), directiveDef(5, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
-                return [p0_0];
-            }, [CheckboxControlValueAccessor]), directiveDef(7, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(9, 16384, null, 0, NgControlStatus, [NgControl], null, null), (_l()(),
-                textDef(10, null, [' ', '\n        '])), (_l()(), textDef(-1, null, ['\n      ']))], function (_ck, _v) {
-            var currVal_7 = _v.context.$implicit.id;
-            var currVal_8 = _v.context.$implicit.checked;
-            _ck(_v, 7, 0, currVal_7, currVal_8);
-        }, function (_ck, _v) {
-            var currVal_0 = nodeValue(_v, 9).ngClassUntouched;
-            var currVal_1 = nodeValue(_v, 9).ngClassTouched;
-            var currVal_2 = nodeValue(_v, 9).ngClassPristine;
-            var currVal_3 = nodeValue(_v, 9).ngClassDirty;
-            var currVal_4 = nodeValue(_v, 9).ngClassValid;
-            var currVal_5 = nodeValue(_v, 9).ngClassInvalid;
-            var currVal_6 = nodeValue(_v, 9).ngClassPending;
-            _ck(_v, 4, 0, currVal_0, currVal_1, currVal_2, currVal_3, currVal_4, currVal_5, currVal_6);
-            var currVal_9 = _v.context.$implicit.label;
-            _ck(_v, 10, 0, currVal_9);
-        });
-    }
-    function View_CreateUserFormComponent_11(_l) {
         return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 11, 'span', [], null, null, null, null, null)), (_l()(),
                 textDef(-1, null, ['\n      '])), (_l()(), elementDef(2, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(4, 0, null, null, 5, 'input', [['type', 'checkbox']], [[2, 'ng-untouched',
                     null], [2, 'ng-touched', null], [2, 'ng-pristine', null],
@@ -54161,9 +53227,9 @@
             _ck(_v, 10, 0, currVal_9);
         });
     }
-    function View_CreateUserFormComponent_12(_l) {
+    function View_CreateUserFormComponent_11(_l) {
         return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 3, 'option', [], null, null, null, null, null)), directiveDef(1, 147456, null, 0, NgSelectOption, [ElementRef, Renderer2, [2, SelectControlValueAccessor]], { value: [0, 'value'] }, null), directiveDef(2, 147456, null, 0, NgSelectMultipleOption, [ElementRef,
-                Renderer2, [8, null]], { value: [0, 'value'] }, null), (_l()(), textDef(3, null, ['', '\n      ']))], function (_ck, _v) {
+                Renderer2, [8, null]], { value: [0, 'value'] }, null), (_l()(), textDef(3, null, ['', '\n    ']))], function (_ck, _v) {
             var currVal_0 = _v.context.$implicit.name;
             _ck(_v, 1, 0, currVal_0);
             var currVal_1 = _v.context.$implicit.name;
@@ -54173,13 +53239,13 @@
             _ck(_v, 3, 0, currVal_2);
         });
     }
-    function View_CreateUserFormComponent_13(_l) {
+    function View_CreateUserFormComponent_12(_l) {
         return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(),
-                textDef(-1, null, ['\n        '])), (_l()(), elementDef(2, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n          '])),
-            (_l()(), elementDef(4, 0, null, null, 5, 'input', [['type', 'checkbox']], [[2, 'ng-untouched', null], [2, 'ng-touched', null], [2, 'ng-pristine',
-                    null], [2, 'ng-dirty', null], [2, 'ng-valid', null],
-                [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null,
-                    'ngModelChange'], [null, 'change'], [null, 'blur']], function (_v, en, $event) {
+                textDef(-1, null, ['\n      '])), (_l()(), elementDef(2, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(4, 0, null, null, 5, 'input', [['type', 'checkbox']], [[2, 'ng-untouched',
+                    null], [2, 'ng-touched', null], [2, 'ng-pristine', null],
+                [2, 'ng-dirty', null], [2, 'ng-valid', null], [2, 'ng-invalid',
+                    null], [2, 'ng-pending', null]], [[null, 'ngModelChange'],
+                [null, 'change'], [null, 'blur']], function (_v, en, $event) {
                 var ad = true;
                 if (('change' === en)) {
                     var pd_0 = (nodeValue(_v, 5).onChange($event.target.checked) !== false);
@@ -54196,8 +53262,7 @@
                 return ad;
             }, null, null)), directiveDef(5, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
                 return [p0_0];
-            }, [CheckboxControlValueAccessor]), directiveDef(7, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(9, 16384, null, 0, NgControlStatus, [NgControl], null, null), (_l()(),
-                textDef(10, null, ['', '\n        '])), (_l()(), textDef(-1, null, ['\n      ']))], function (_ck, _v) {
+            }, [CheckboxControlValueAccessor]), directiveDef(7, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(9, 16384, null, 0, NgControlStatus, [NgControl], null, null), (_l()(), textDef(10, null, ['', '\n      '])), (_l()(), textDef(-1, null, ['\n    ']))], function (_ck, _v) {
             var currVal_7 = _v.context.$implicit.id;
             var currVal_8 = _v.context.$implicit.checked;
             _ck(_v, 7, 0, currVal_7, currVal_8);
@@ -54214,7 +53279,7 @@
             _ck(_v, 10, 0, currVal_9);
         });
     }
-    function View_CreateUserFormComponent_14(_l) {
+    function View_CreateUserFormComponent_13(_l) {
         return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 3, 'option', [], null, null, null, null, null)), directiveDef(1, 147456, null, 0, NgSelectOption, [ElementRef, Renderer2, [2, SelectControlValueAccessor]], { value: [0, 'value'] }, null), directiveDef(2, 147456, null, 0, NgSelectMultipleOption, [ElementRef,
                 Renderer2, [8, null]], { value: [0, 'value'] }, null), (_l()(), textDef(3, null, ['', '\n      ']))], function (_ck, _v) {
             var currVal_0 = _v.context.$implicit.value;
@@ -54226,7 +53291,7 @@
             _ck(_v, 3, 0, currVal_2);
         });
     }
-    function View_CreateUserFormComponent_15(_l) {
+    function View_CreateUserFormComponent_14(_l) {
         return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 1, 'div', [], null, null, null, null, null)), (_l()(),
                 textDef(1, null, ['ERROR: ', '']))], null, function (_ck, _v) {
             var _co = _v.component;
@@ -54236,7 +53301,7 @@
     }
     function View_CreateUserFormComponent_0(_l) {
         return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 1, 'h2', [], null, null, null, null, null)), (_l()(),
-                textDef(-1, null, [' Create User Form '])), (_l()(), textDef(-1, null, ['\n\n'])), (_l()(), elementDef(3, 0, null, null, 406, 'form', [['novalidate',
+                textDef(-1, null, [' Create User Form '])), (_l()(), textDef(-1, null, ['\n\n'])), (_l()(), elementDef(3, 0, null, null, 391, 'form', [['novalidate',
                     '']], [[2, 'ng-untouched', null], [2, 'ng-touched', null], [2, 'ng-pristine',
                     null], [2, 'ng-dirty', null], [2, 'ng-valid', null], [2,
                     'ng-invalid', null], [2, 'ng-pending', null]], [[null,
@@ -54374,10 +53439,10 @@
             (_l()(), textDef(-1, null, ['\n          '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_5)),
             directiveDef(92, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef,
                 IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(), textDef(-1, null, ['\n        '])), (_l()(),
-                textDef(-1, null, ['\n      '])), (_l()(), textDef(-1, null, ['\n\n      '])), (_l()(), elementDef(96, 0, null, null, 4, 'div', [['class', 'checkbox-list subtitle'], ['id', 'sugar_role']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Role\n       '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_6)), directiveDef(99, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0,
+                textDef(-1, null, ['\n      '])), (_l()(), textDef(-1, null, ['\n\n      '])), (_l()(), elementDef(96, 0, null, null, 4, 'div', [['class', 'checkbox-list subtitle'], ['id', 'sugar_role']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['ROLE:\n        '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_6)), directiveDef(99, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0,
                     'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), textDef(-1, null, ['\n\n      '])),
             (_l()(), elementDef(102, 0, null, null, 4, 'div', [['class', 'checkbox-list subtitle'],
-                ['id', 'sugar_departement']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Service\n        '])),
+                ['id', 'sugar_departement']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['SERVICE:\n        '])),
             (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_7)),
             directiveDef(105, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef,
                 IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), textDef(-1, null, ['\n\n      '])), (_l()(), elementDef(108, 0, null, null, 13, 'div', [], [[8, 'hidden', 0]], null, null, null, null)), (_l()(), textDef(109, null, ['', '\n        '])), pipeDef(0, JsonPipe, []), (_l()(), elementDef(111, 0, null, null, 9, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Leads min\n          '])),
@@ -54474,8 +53539,8 @@
                 return [p0_0, p1_0];
             }, [DefaultValueAccessor, NumberValueAccessor]), directiveDef(132, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(134, 16384, null, 0, NgControlStatus, [NgControl], null, null),
             (_l()(), textDef(-1, null, ['\n        '])), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['b\n  '])), (_l()(), textDef(-1, null, ['\n\n  '])),
-            (_l()(), elementDef(140, 0, null, null, 11, 'div', [['class', 'select subtitle']], null, null, null, null, null)),
-            (_l()(), textDef(-1, null, ['\n   '])), (_l()(), elementDef(142, 0, null, null, 8, 'select', [['name', 'office']], [[2, 'ng-untouched', null],
+            (_l()(), elementDef(140, 0, null, null, 12, 'div', [['class', 'select subtitle']], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Bureau\n    '])), (_l()(), elementDef(142, 0, null, null, 9, 'select', [['name', 'office']], [[2, 'ng-untouched', null],
                 [2, 'ng-touched', null], [2, 'ng-pristine', null], [2, 'ng-dirty',
                     null], [2, 'ng-valid', null], [2, 'ng-invalid', null],
                 [2, 'ng-pending', null]], [[null, 'ngModelChange'], [null,
@@ -54498,21 +53563,21 @@
             }, null, null)), directiveDef(143, 16384, null, 0, SelectControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
                 return [p0_0];
             }, [SelectControlValueAccessor]), directiveDef(145, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(147, 16384, null, 0, NgControlStatus, [NgControl], null, null),
-            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_8)), directiveDef(150, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(),
-                textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n\n\n\n  '])),
-            (_l()(), elementDef(153, 0, null, null, 15, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Fonction\n    '])), (_l()(), elementDef(155, 0, null, null, 12, 'select', [['name', 'fonction']], [[2, 'ng-untouched', null], [2, 'ng-touched',
-                    null], [2, 'ng-pristine', null], [2, 'ng-dirty', null],
-                [2, 'ng-valid', null], [2, 'ng-invalid', null], [2, 'ng-pending',
-                    null]], [[null, 'ngModelChange'], [null,
-                    'change'], [null, 'blur']], function (_v, en, $event) {
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_8)), directiveDef(150, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(),
+                textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n  '])),
+            (_l()(), textDef(-1, null, ['\n\n\n\n  '])), (_l()(), elementDef(154, 0, null, null, 15, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Fonction\n    '])),
+            (_l()(), elementDef(156, 0, null, null, 12, 'select', [['name', 'fonction']], [[2, 'ng-untouched', null], [2, 'ng-touched', null], [2, 'ng-pristine',
+                    null], [2, 'ng-dirty', null], [2, 'ng-valid', null],
+                [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null,
+                    'ngModelChange'], [null, 'change'], [null, 'blur']], function (_v, en, $event) {
                 var ad = true;
                 var _co = _v.component;
                 if (('change' === en)) {
-                    var pd_0 = (nodeValue(_v, 156).onChange($event.target.value) !== false);
+                    var pd_0 = (nodeValue(_v, 157).onChange($event.target.value) !== false);
                     ad = (pd_0 && ad);
                 }
                 if (('blur' === en)) {
-                    var pd_1 = (nodeValue(_v, 156).onTouched() !== false);
+                    var pd_1 = (nodeValue(_v, 157).onTouched() !== false);
                     ad = (pd_1 && ad);
                 }
                 if (('ngModelChange' === en)) {
@@ -54520,50 +53585,31 @@
                     ad = (pd_2 && ad);
                 }
                 return ad;
-            }, null, null)), directiveDef(156, 16384, null, 0, SelectControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
+            }, null, null)), directiveDef(157, 16384, null, 0, SelectControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
                 return [p0_0];
-            }, [SelectControlValueAccessor]), directiveDef(158, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(160, 16384, null, 0, NgControlStatus, [NgControl], null, null),
-            (_l()(), elementDef(161, 0, null, null, 2, 'option', [], null, null, null, null, null)), directiveDef(162, 147456, null, 0, NgSelectOption, [ElementRef, Renderer2, [2, SelectControlValueAccessor]], { ngValue: [0, 'ngValue'] }, null), directiveDef(163, 147456, null, 0, NgSelectMultipleOption, [ElementRef, Renderer2, [8, null]], { ngValue: [0, 'ngValue'] }, null), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_9)),
-            directiveDef(166, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef,
+            }, [SelectControlValueAccessor]), directiveDef(159, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(161, 16384, null, 0, NgControlStatus, [NgControl], null, null),
+            (_l()(), elementDef(162, 0, null, null, 2, 'option', [], null, null, null, null, null)), directiveDef(163, 147456, null, 0, NgSelectOption, [ElementRef, Renderer2, [2, SelectControlValueAccessor]], { ngValue: [0, 'ngValue'] }, null), directiveDef(164, 147456, null, 0, NgSelectMultipleOption, [ElementRef, Renderer2, [8, null]], { ngValue: [0, 'ngValue'] }, null), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_9)),
+            directiveDef(167, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef,
                 IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n\n\n  '])),
-            (_l()(), elementDef(170, 0, null, null, 11, 'div', [['ngModelGroup',
-                    'teamWithComponent']], [[2, 'ng-untouched', null], [2, 'ng-touched',
-                    null], [2, 'ng-pristine', null], [2, 'ng-dirty', null],
-                [2, 'ng-valid', null], [2, 'ng-invalid', null], [2, 'ng-pending',
-                    null]], null, null, null, null)),
-            directiveDef(171, 212992, null, 0, NgModelGroup, [[1, ControlContainer],
-                [8, null], [8, null]], { name: [0, 'name'] }, null), providerDef(2048, null, ControlContainer, null, [NgModelGroup]), directiveDef(173, 16384, null, 0, NgControlStatusGroup, [ControlContainer], null, null), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(175, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Equipe'])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(178, 0, null, null, 2, 'mv-checkbox-field', [], null, [[null, 'checkboxesChange']], function (_v, en, $event) {
-                var ad = true;
-                var _co = _v.component;
-                if (('checkboxesChange' === en)) {
-                    var pd_0 = ((_co.fields.teams = $event) !== false);
-                    ad = (pd_0 && ad);
-                }
-                return ad;
-            }, View_CheckboxFieldComponent_0, RenderType_CheckboxFieldComponent)),
-            directiveDef(179, 49152, null, 0, CheckboxFieldComponent, [], { checkboxes: [0,
-                    'checkboxes'] }, null), (_l()(), textDef(-1, null, ['\n    '])),
-            (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n\n\n  '])), (_l()(), elementDef(183, 0, null, null, 13, 'div', [['ngModelGroup', 'othersWithComponent']], [[2, 'ng-untouched', null],
-                [2, 'ng-touched', null], [2, 'ng-pristine', null], [2, 'ng-dirty',
-                    null], [2, 'ng-valid', null], [2, 'ng-invalid', null],
-                [2, 'ng-pending', null]], null, null, null, null)), directiveDef(184, 212992, null, 0, NgModelGroup, [[1, ControlContainer],
-                [8, null], [8, null]], { name: [0, 'name'] }, null), providerDef(2048, null, ControlContainer, null, [NgModelGroup]), directiveDef(186, 16384, null, 0, NgControlStatusGroup, [ControlContainer], null, null), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(188, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Autres'])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(191, 0, null, null, 4, 'fieldset', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_10)), directiveDef(194, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'],
-                ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n\n\n  '])), (_l()(), elementDef(198, 0, null, null, 7, 'fieldset', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(200, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Destinations'])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(),
-                anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_11)),
-            directiveDef(204, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef,
-                IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(), textDef(-1, null, ['c\n  '])), (_l()(), textDef(-1, null, ['\n\n  '])), (_l()(), elementDef(207, 0, null, null, 12, 'div', [['class', 'select subtitle']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Manager\n    '])),
-            (_l()(), elementDef(209, 0, null, null, 9, 'select', [['name', 'manager']], [[2, 'ng-untouched', null], [2, 'ng-touched', null], [2, 'ng-pristine',
+            (_l()(), textDef(-1, null, ['\n\n\n'])), (_l()(), textDef(-1, null, ['\n\n\n'])), (_l()(), elementDef(173, 0, null, null, 13, 'fieldset', [], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(175, 0, null, null, 10, 'div', [['ngModelGroup', 'destinations']], [[2, 'ng-untouched',
+                    null], [2, 'ng-touched', null], [2, 'ng-pristine', null],
+                [2, 'ng-dirty', null], [2, 'ng-valid', null], [2, 'ng-invalid',
+                    null], [2, 'ng-pending', null]], null, null, null, null)), directiveDef(176, 212992, null, 0, NgModelGroup, [[1, ControlContainer], [8, null], [8, null]], { name: [0, 'name'] }, null), providerDef(2048, null, ControlContainer, null, [NgModelGroup]), directiveDef(178, 16384, null, 0, NgControlStatusGroup, [ControlContainer], null, null), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(180, 0, null, null, 1, 'legend', [], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Destinations'])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_10)), directiveDef(184, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'],
+                ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(), textDef(-1, null, ['c\n  '])), (_l()(), textDef(-1, null, ['\n'])), (_l()(), textDef(-1, null, ['\n\n'])), (_l()(), elementDef(188, 0, null, null, 12, 'div', [['class', 'select subtitle']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Manager\n  '])),
+            (_l()(), elementDef(190, 0, null, null, 9, 'select', [['name', 'manager']], [[2, 'ng-untouched', null], [2, 'ng-touched', null], [2, 'ng-pristine',
                     null], [2, 'ng-dirty', null], [2, 'ng-valid', null],
                 [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null,
                     'ngModelChange'], [null, 'change'], [null, 'blur']], function (_v, en, $event) {
                 var ad = true;
                 var _co = _v.component;
                 if (('change' === en)) {
-                    var pd_0 = (nodeValue(_v, 210).onChange($event.target.value) !== false);
+                    var pd_0 = (nodeValue(_v, 191).onChange($event.target.value) !== false);
                     ad = (pd_0 && ad);
                 }
                 if (('blur' === en)) {
-                    var pd_1 = (nodeValue(_v, 210).onTouched() !== false);
+                    var pd_1 = (nodeValue(_v, 191).onTouched() !== false);
                     ad = (pd_1 && ad);
                 }
                 if (('ngModelChange' === en)) {
@@ -54571,20 +53617,24 @@
                     ad = (pd_2 && ad);
                 }
                 return ad;
-            }, null, null)), directiveDef(210, 16384, null, 0, SelectControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
+            }, null, null)), directiveDef(191, 16384, null, 0, SelectControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
                 return [p0_0];
-            }, [SelectControlValueAccessor]), directiveDef(212, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(214, 16384, null, 0, NgControlStatus, [NgControl], null, null),
-            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_12)), directiveDef(217, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(),
-                textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n  '])),
-            (_l()(), textDef(-1, null, ['\n\n  '])), (_l()(), elementDef(221, 0, null, null, 10, 'fieldset', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])),
-            (_l()(), elementDef(223, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Organisations'])), (_l()(), textDef(-1, null, ['\n    '])),
-            (_l()(), elementDef(226, 0, null, null, 4, 'div', [['class', 'orgas'],
-                ['ngModuleGroup', 'orgas']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])), (_l()(),
-                anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_13)),
-            directiveDef(229, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef,
-                IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['d\n  '])), (_l()(), textDef(-1, null, ['\n\n  '])),
-            (_l()(), elementDef(233, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(235, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Code User Tourplan\n      '])),
-            (_l()(), elementDef(237, 0, null, null, 5, 'input', [['name', 'sugar_tourplan'],
+            }, [SelectControlValueAccessor]), directiveDef(193, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(195, 16384, null, 0, NgControlStatus, [NgControl], null, null),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_11)), directiveDef(198, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(),
+                textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n'])),
+            (_l()(), textDef(-1, null, ['\n\n'])), (_l()(), elementDef(202, 0, null, null, 13, 'fieldset', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n  '])),
+            (_l()(), elementDef(204, 0, null, null, 10, 'div', [['class', 'orgas'],
+                ['ngModelGroup', 'orgas']], [[2, 'ng-untouched', null], [2, 'ng-touched',
+                    null], [2, 'ng-pristine', null], [2, 'ng-dirty', null],
+                [2, 'ng-valid', null], [2, 'ng-invalid', null], [2, 'ng-pending',
+                    null]], null, null, null, null)),
+            directiveDef(205, 212992, null, 0, NgModelGroup, [[1, ControlContainer],
+                [8, null], [8, null]], { name: [0, 'name'] }, null), providerDef(2048, null, ControlContainer, null, [NgModelGroup]), directiveDef(207, 16384, null, 0, NgControlStatusGroup, [ControlContainer], null, null), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(209, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Organisations'])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(),
+                anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_12)),
+            directiveDef(213, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef,
+                IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['d\n'])), (_l()(), textDef(-1, null, ['\n\n'])), (_l()(),
+                elementDef(217, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(219, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Code User Tourplan\n    '])),
+            (_l()(), elementDef(221, 0, null, null, 5, 'input', [['name', 'sugar_tourplan'],
                 ['type', 'text']], [[2, 'ng-untouched', null], [2, 'ng-touched', null],
                 [2, 'ng-pristine', null], [2, 'ng-dirty', null], [2, 'ng-valid',
                     null], [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null, 'ngModelChange'], [null, 'input'], [null,
@@ -54592,19 +53642,19 @@
                 var ad = true;
                 var _co = _v.component;
                 if (('input' === en)) {
-                    var pd_0 = (nodeValue(_v, 238)._handleInput($event.target.value) !== false);
+                    var pd_0 = (nodeValue(_v, 222)._handleInput($event.target.value) !== false);
                     ad = (pd_0 && ad);
                 }
                 if (('blur' === en)) {
-                    var pd_1 = (nodeValue(_v, 238).onTouched() !== false);
+                    var pd_1 = (nodeValue(_v, 222).onTouched() !== false);
                     ad = (pd_1 && ad);
                 }
                 if (('compositionstart' === en)) {
-                    var pd_2 = (nodeValue(_v, 238)._compositionStart() !== false);
+                    var pd_2 = (nodeValue(_v, 222)._compositionStart() !== false);
                     ad = (pd_2 && ad);
                 }
                 if (('compositionend' === en)) {
-                    var pd_3 = (nodeValue(_v, 238)._compositionEnd($event.target.value) !== false);
+                    var pd_3 = (nodeValue(_v, 222)._compositionEnd($event.target.value) !== false);
                     ad = (pd_3 && ad);
                 }
                 if (('ngModelChange' === en)) {
@@ -54612,12 +53662,12 @@
                     ad = (pd_4 && ad);
                 }
                 return ad;
-            }, null, null)), directiveDef(238, 16384, null, 0, DefaultValueAccessor, [Renderer2, ElementRef, [2, COMPOSITION_BUFFER_MODE]], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
+            }, null, null)), directiveDef(222, 16384, null, 0, DefaultValueAccessor, [Renderer2, ElementRef, [2, COMPOSITION_BUFFER_MODE]], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
                 return [p0_0];
-            }, [DefaultValueAccessor]), directiveDef(240, 671744, null, 0, NgModel, [[2,
-                    ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(242, 16384, null, 0, NgControlStatus, [NgControl], null, null),
-            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n\n  '])), (_l()(), elementDef(246, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(248, 0, null, null, 8, 'label', [], null, null, null, null, null)),
-            (_l()(), textDef(-1, null, ['Code SON Galileo\n      '])), (_l()(), elementDef(250, 0, null, null, 5, 'input', [['name', 'codeSON'], ['type', 'text']], [[2, 'ng-untouched', null], [2, 'ng-touched', null], [2, 'ng-pristine',
+            }, [DefaultValueAccessor]), directiveDef(224, 671744, null, 0, NgModel, [[2,
+                    ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(226, 16384, null, 0, NgControlStatus, [NgControl], null, null),
+            (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n'])), (_l()(), textDef(-1, null, ['\n\n'])), (_l()(), elementDef(230, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(232, 0, null, null, 8, 'label', [], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Code SON Galileo\n    '])), (_l()(), elementDef(234, 0, null, null, 5, 'input', [['name', 'codeSON'], ['type', 'text']], [[2, 'ng-untouched', null], [2, 'ng-touched', null], [2, 'ng-pristine',
                     null], [2, 'ng-dirty', null], [2, 'ng-valid', null],
                 [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null,
                     'ngModelChange'], [null, 'input'], [null, 'blur'], [null,
@@ -54625,19 +53675,19 @@
                 var ad = true;
                 var _co = _v.component;
                 if (('input' === en)) {
-                    var pd_0 = (nodeValue(_v, 251)._handleInput($event.target.value) !== false);
+                    var pd_0 = (nodeValue(_v, 235)._handleInput($event.target.value) !== false);
                     ad = (pd_0 && ad);
                 }
                 if (('blur' === en)) {
-                    var pd_1 = (nodeValue(_v, 251).onTouched() !== false);
+                    var pd_1 = (nodeValue(_v, 235).onTouched() !== false);
                     ad = (pd_1 && ad);
                 }
                 if (('compositionstart' === en)) {
-                    var pd_2 = (nodeValue(_v, 251)._compositionStart() !== false);
+                    var pd_2 = (nodeValue(_v, 235)._compositionStart() !== false);
                     ad = (pd_2 && ad);
                 }
                 if (('compositionend' === en)) {
-                    var pd_3 = (nodeValue(_v, 251)._compositionEnd($event.target.value) !== false);
+                    var pd_3 = (nodeValue(_v, 235)._compositionEnd($event.target.value) !== false);
                     ad = (pd_3 && ad);
                 }
                 if (('ngModelChange' === en)) {
@@ -54645,12 +53695,12 @@
                     ad = (pd_4 && ad);
                 }
                 return ad;
-            }, null, null)), directiveDef(251, 16384, null, 0, DefaultValueAccessor, [Renderer2, ElementRef, [2, COMPOSITION_BUFFER_MODE]], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
+            }, null, null)), directiveDef(235, 16384, null, 0, DefaultValueAccessor, [Renderer2, ElementRef, [2, COMPOSITION_BUFFER_MODE]], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
                 return [p0_0];
-            }, [DefaultValueAccessor]), directiveDef(253, 671744, null, 0, NgModel, [[2,
-                    ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(255, 16384, null, 0, NgControlStatus, [NgControl], null, null),
-            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n\n  '])), (_l()(), elementDef(259, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(261, 0, null, null, 8, 'label', [], null, null, null, null, null)),
-            (_l()(), textDef(-1, null, ['Title\n      '])), (_l()(), elementDef(263, 0, null, null, 5, 'input', [['name', 'title'], ['type', 'text']], [[2, 'ng-untouched',
+            }, [DefaultValueAccessor]), directiveDef(237, 671744, null, 0, NgModel, [[2,
+                    ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(239, 16384, null, 0, NgControlStatus, [NgControl], null, null),
+            (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n'])), (_l()(), textDef(-1, null, ['\n\n'])), (_l()(), elementDef(243, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(245, 0, null, null, 8, 'label', [], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Title\n    '])), (_l()(), elementDef(247, 0, null, null, 5, 'input', [['name', 'title'], ['type', 'text']], [[2, 'ng-untouched',
                     null], [2, 'ng-touched', null], [2, 'ng-pristine', null],
                 [2, 'ng-dirty', null], [2, 'ng-valid', null], [2, 'ng-invalid',
                     null], [2, 'ng-pending', null]], [[null, 'ngModelChange'],
@@ -54659,19 +53709,19 @@
                 var ad = true;
                 var _co = _v.component;
                 if (('input' === en)) {
-                    var pd_0 = (nodeValue(_v, 264)._handleInput($event.target.value) !== false);
+                    var pd_0 = (nodeValue(_v, 248)._handleInput($event.target.value) !== false);
                     ad = (pd_0 && ad);
                 }
                 if (('blur' === en)) {
-                    var pd_1 = (nodeValue(_v, 264).onTouched() !== false);
+                    var pd_1 = (nodeValue(_v, 248).onTouched() !== false);
                     ad = (pd_1 && ad);
                 }
                 if (('compositionstart' === en)) {
-                    var pd_2 = (nodeValue(_v, 264)._compositionStart() !== false);
+                    var pd_2 = (nodeValue(_v, 248)._compositionStart() !== false);
                     ad = (pd_2 && ad);
                 }
                 if (('compositionend' === en)) {
-                    var pd_3 = (nodeValue(_v, 264)._compositionEnd($event.target.value) !== false);
+                    var pd_3 = (nodeValue(_v, 248)._compositionEnd($event.target.value) !== false);
                     ad = (pd_3 && ad);
                 }
                 if (('ngModelChange' === en)) {
@@ -54679,15 +53729,15 @@
                     ad = (pd_4 && ad);
                 }
                 return ad;
-            }, null, null)), directiveDef(264, 16384, null, 0, DefaultValueAccessor, [Renderer2, ElementRef, [2, COMPOSITION_BUFFER_MODE]], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
+            }, null, null)), directiveDef(248, 16384, null, 0, DefaultValueAccessor, [Renderer2, ElementRef, [2, COMPOSITION_BUFFER_MODE]], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
                 return [p0_0];
-            }, [DefaultValueAccessor]), directiveDef(266, 671744, null, 0, NgModel, [[2,
-                    ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(268, 16384, null, 0, NgControlStatus, [NgControl], null, null),
-            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n\n  '])), (_l()(), elementDef(272, 0, null, null, 24, 'div', [['ngModelGroup', 'inactive']], [[2,
+            }, [DefaultValueAccessor]), directiveDef(250, 671744, null, 0, NgModel, [[2,
+                    ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(252, 16384, null, 0, NgControlStatus, [NgControl], null, null),
+            (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n'])), (_l()(), textDef(-1, null, ['\n\n'])), (_l()(), elementDef(256, 0, null, null, 24, 'div', [['ngModelGroup', 'inactive']], [[2,
                     'ng-untouched', null], [2, 'ng-touched', null], [2, 'ng-pristine',
                     null], [2, 'ng-dirty', null], [2, 'ng-valid', null],
-                [2, 'ng-invalid', null], [2, 'ng-pending', null]], null, null, null, null)), directiveDef(273, 212992, null, 0, NgModelGroup, [[1, ControlContainer], [8, null], [8, null]], { name: [0, 'name'] }, null), providerDef(2048, null, ControlContainer, null, [NgModelGroup]), directiveDef(275, 16384, null, 0, NgControlStatusGroup, [ControlContainer], null, null), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(277, 0, null, null, 8, 'label', [], null, null, null, null, null)),
-            (_l()(), textDef(-1, null, ['Statut inactif\n      '])), (_l()(), elementDef(279, 0, null, null, 5, 'input', [['name', 'inactiveStatus'], ['type',
+                [2, 'ng-invalid', null], [2, 'ng-pending', null]], null, null, null, null)), directiveDef(257, 212992, null, 0, NgModelGroup, [[1, ControlContainer], [8, null], [8, null]], { name: [0, 'name'] }, null), providerDef(2048, null, ControlContainer, null, [NgModelGroup]), directiveDef(259, 16384, null, 0, NgControlStatusGroup, [ControlContainer], null, null), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(261, 0, null, null, 8, 'label', [], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Statut inactif\n    '])), (_l()(), elementDef(263, 0, null, null, 5, 'input', [['name', 'inactiveStatus'], ['type',
                     'checkbox']], [[2, 'ng-untouched', null], [2, 'ng-touched', null],
                 [2, 'ng-pristine', null], [2, 'ng-dirty', null], [2, 'ng-valid',
                     null], [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null, 'ngModelChange'], [null, 'change'], [null,
@@ -54695,11 +53745,11 @@
                 var ad = true;
                 var _co = _v.component;
                 if (('change' === en)) {
-                    var pd_0 = (nodeValue(_v, 280).onChange($event.target.checked) !== false);
+                    var pd_0 = (nodeValue(_v, 264).onChange($event.target.checked) !== false);
                     ad = (pd_0 && ad);
                 }
                 if (('blur' === en)) {
-                    var pd_1 = (nodeValue(_v, 280).onTouched() !== false);
+                    var pd_1 = (nodeValue(_v, 264).onTouched() !== false);
                     ad = (pd_1 && ad);
                 }
                 if (('ngModelChange' === en)) {
@@ -54707,14 +53757,14 @@
                     ad = (pd_2 && ad);
                 }
                 return ad;
-            }, null, null)), directiveDef(280, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
+            }, null, null)), directiveDef(264, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
                 return [p0_0];
-            }, [CheckboxControlValueAccessor]), directiveDef(282, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null],
+            }, [CheckboxControlValueAccessor]), directiveDef(266, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null],
                 [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }),
-            providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(284, 16384, null, 0, NgControlStatus, [NgControl], null, null),
-            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(287, 0, null, null, 8, 'label', [], null, null, null, null, null)),
-            (_l()(), textDef(-1, null, ['Statut Employe inactif\n      '])), (_l()(),
-                elementDef(289, 0, null, null, 5, 'input', [['name', 'inactiveEmployee'],
+            providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(268, 16384, null, 0, NgControlStatus, [NgControl], null, null),
+            (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(271, 0, null, null, 8, 'label', [], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Statut Employe inactif\n    '])), (_l()(),
+                elementDef(273, 0, null, null, 5, 'input', [['name', 'inactiveEmployee'],
                     ['type', 'checkbox']], [[2, 'ng-untouched', null], [2, 'ng-touched',
                         null], [2, 'ng-pristine', null], [2, 'ng-dirty', null],
                     [2, 'ng-valid', null], [2, 'ng-invalid', null], [2, 'ng-pending',
@@ -54723,11 +53773,11 @@
                     var ad = true;
                     var _co = _v.component;
                     if (('change' === en)) {
-                        var pd_0 = (nodeValue(_v, 290).onChange($event.target.checked) !== false);
+                        var pd_0 = (nodeValue(_v, 274).onChange($event.target.checked) !== false);
                         ad = (pd_0 && ad);
                     }
                     if (('blur' === en)) {
-                        var pd_1 = (nodeValue(_v, 290).onTouched() !== false);
+                        var pd_1 = (nodeValue(_v, 274).onTouched() !== false);
                         ad = (pd_1 && ad);
                     }
                     if (('ngModelChange' === en)) {
@@ -54735,18 +53785,18 @@
                         ad = (pd_2 && ad);
                     }
                     return ad;
-                }, null, null)), directiveDef(290, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
+                }, null, null)), directiveDef(274, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
                 return [p0_0];
-            }, [CheckboxControlValueAccessor]), directiveDef(292, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null],
+            }, [CheckboxControlValueAccessor]), directiveDef(276, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null],
                 [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }),
-            providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(294, 16384, null, 0, NgControlStatus, [NgControl], null, null),
-            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n\n  '])), (_l()(), elementDef(298, 0, null, null, 75, 'fieldset', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(300, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Telephonie'])), (_l()(),
-                textDef(-1, null, ['\n\n    '])), (_l()(), elementDef(303, 0, null, null, 69, 'div', [['ngModelGroup', 'switchvox']], [[2, 'ng-untouched',
+            providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(278, 16384, null, 0, NgControlStatus, [NgControl], null, null),
+            (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n'])), (_l()(), textDef(-1, null, ['\n\n'])), (_l()(), elementDef(282, 0, null, null, 75, 'fieldset', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(284, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Telephonie'])), (_l()(),
+                textDef(-1, null, ['\n  '])), (_l()(), elementDef(287, 0, null, null, 69, 'div', [['ngModelGroup', 'switchvox']], [[2, 'ng-untouched',
                     null], [2, 'ng-touched', null], [2, 'ng-pristine', null],
                 [2, 'ng-dirty', null], [2, 'ng-valid', null], [2, 'ng-invalid',
-                    null], [2, 'ng-pending', null]], null, null, null, null)), directiveDef(304, 212992, null, 0, NgModelGroup, [[1, ControlContainer], [8, null], [8, null]], { name: [0, 'name'] }, null), providerDef(2048, null, ControlContainer, null, [NgModelGroup]), directiveDef(306, 16384, null, 0, NgControlStatusGroup, [ControlContainer], null, null), (_l()(), textDef(-1, null, ['\n\n      '])), (_l()(), elementDef(308, 0, null, null, 11, 'div', [], null, null, null, null, null)),
-            (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(310, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Phone Number'])),
-            (_l()(), elementDef(312, 0, null, null, 5, 'input', [['name', 'phone_number'],
+                    null], [2, 'ng-pending', null]], null, null, null, null)), directiveDef(288, 212992, null, 0, NgModelGroup, [[1, ControlContainer], [8, null], [8, null]], { name: [0, 'name'] }, null), providerDef(2048, null, ControlContainer, null, [NgModelGroup]), directiveDef(290, 16384, null, 0, NgControlStatusGroup, [ControlContainer], null, null), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(292, 0, null, null, 11, 'div', [], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(294, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Phone Number\n        '])),
+            (_l()(), elementDef(296, 0, null, null, 5, 'input', [['name', 'phone_number'],
                 ['type', 'tel']], [[2, 'ng-untouched', null], [2, 'ng-touched', null],
                 [2, 'ng-pristine', null], [2, 'ng-dirty', null], [2, 'ng-valid',
                     null], [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null, 'ngModelChange'], [null, 'input'], [null,
@@ -54754,19 +53804,19 @@
                 var ad = true;
                 var _co = _v.component;
                 if (('input' === en)) {
-                    var pd_0 = (nodeValue(_v, 313)._handleInput($event.target.value) !== false);
+                    var pd_0 = (nodeValue(_v, 297)._handleInput($event.target.value) !== false);
                     ad = (pd_0 && ad);
                 }
                 if (('blur' === en)) {
-                    var pd_1 = (nodeValue(_v, 313).onTouched() !== false);
+                    var pd_1 = (nodeValue(_v, 297).onTouched() !== false);
                     ad = (pd_1 && ad);
                 }
                 if (('compositionstart' === en)) {
-                    var pd_2 = (nodeValue(_v, 313)._compositionStart() !== false);
+                    var pd_2 = (nodeValue(_v, 297)._compositionStart() !== false);
                     ad = (pd_2 && ad);
                 }
                 if (('compositionend' === en)) {
-                    var pd_3 = (nodeValue(_v, 313)._compositionEnd($event.target.value) !== false);
+                    var pd_3 = (nodeValue(_v, 297)._compositionEnd($event.target.value) !== false);
                     ad = (pd_3 && ad);
                 }
                 if (('ngModelChange' === en)) {
@@ -54774,33 +53824,32 @@
                     ad = (pd_4 && ad);
                 }
                 return ad;
-            }, null, null)), directiveDef(313, 16384, null, 0, DefaultValueAccessor, [Renderer2, ElementRef, [2, COMPOSITION_BUFFER_MODE]], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
+            }, null, null)), directiveDef(297, 16384, null, 0, DefaultValueAccessor, [Renderer2, ElementRef, [2, COMPOSITION_BUFFER_MODE]], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
                 return [p0_0];
-            }, [DefaultValueAccessor]), directiveDef(315, 671744, null, 0, NgModel, [[2,
-                    ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(317, 16384, null, 0, NgControlStatus, [NgControl], null, null),
-            (_l()(), textDef(-1, null, ['\n        '])), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), textDef(-1, null, ['\n\n      '])), (_l()(),
-                elementDef(321, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(323, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Extension\n          '])),
-            (_l()(), elementDef(325, 0, null, null, 5, 'input', [['name', 'extension'],
-                ['type', 'tel']], [[2, 'ng-untouched', null], [2, 'ng-touched', null],
-                [2, 'ng-pristine', null], [2, 'ng-dirty', null], [2, 'ng-valid',
-                    null], [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null, 'ngModelChange'], [null, 'input'], [null,
-                    'blur'], [null, 'compositionstart'], [null, 'compositionend']], function (_v, en, $event) {
+            }, [DefaultValueAccessor]), directiveDef(299, 671744, null, 0, NgModel, [[2,
+                    ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(301, 16384, null, 0, NgControlStatus, [NgControl], null, null),
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n\n    '])), (_l()(), elementDef(305, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(307, 0, null, null, 8, 'label', [], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Extension\n        '])), (_l()(), elementDef(309, 0, null, null, 5, 'input', [['name', 'extension'], ['type', 'tel']], [[2, 'ng-untouched', null], [2, 'ng-touched', null], [2, 'ng-pristine',
+                    null], [2, 'ng-dirty', null], [2, 'ng-valid', null],
+                [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null,
+                    'ngModelChange'], [null, 'input'], [null, 'blur'], [null,
+                    'compositionstart'], [null, 'compositionend']], function (_v, en, $event) {
                 var ad = true;
                 var _co = _v.component;
                 if (('input' === en)) {
-                    var pd_0 = (nodeValue(_v, 326)._handleInput($event.target.value) !== false);
+                    var pd_0 = (nodeValue(_v, 310)._handleInput($event.target.value) !== false);
                     ad = (pd_0 && ad);
                 }
                 if (('blur' === en)) {
-                    var pd_1 = (nodeValue(_v, 326).onTouched() !== false);
+                    var pd_1 = (nodeValue(_v, 310).onTouched() !== false);
                     ad = (pd_1 && ad);
                 }
                 if (('compositionstart' === en)) {
-                    var pd_2 = (nodeValue(_v, 326)._compositionStart() !== false);
+                    var pd_2 = (nodeValue(_v, 310)._compositionStart() !== false);
                     ad = (pd_2 && ad);
                 }
                 if (('compositionend' === en)) {
-                    var pd_3 = (nodeValue(_v, 326)._compositionEnd($event.target.value) !== false);
+                    var pd_3 = (nodeValue(_v, 310)._compositionEnd($event.target.value) !== false);
                     ad = (pd_3 && ad);
                 }
                 if (('ngModelChange' === en)) {
@@ -54808,98 +53857,12 @@
                     ad = (pd_4 && ad);
                 }
                 return ad;
-            }, null, null)), directiveDef(326, 16384, null, 0, DefaultValueAccessor, [Renderer2, ElementRef, [2, COMPOSITION_BUFFER_MODE]], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
+            }, null, null)), directiveDef(310, 16384, null, 0, DefaultValueAccessor, [Renderer2, ElementRef, [2, COMPOSITION_BUFFER_MODE]], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
                 return [p0_0];
-            }, [DefaultValueAccessor]), directiveDef(328, 671744, null, 0, NgModel, [[2,
-                    ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(330, 16384, null, 0, NgControlStatus, [NgControl], null, null),
-            (_l()(), textDef(-1, null, ['\n        '])), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), textDef(-1, null, ['\n\n      '])), (_l()(),
-                elementDef(334, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(336, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n          '])), (_l()(),
-                elementDef(338, 0, null, null, 5, 'input', [['name', 'codevad'],
-                    ['type', 'checkbox']], [[2, 'ng-untouched', null], [2, 'ng-touched',
-                        null], [2, 'ng-pristine', null], [2, 'ng-dirty', null],
-                    [2, 'ng-valid', null], [2, 'ng-invalid', null], [2, 'ng-pending',
-                        null]], [[null, 'ngModelChange'], [null,
-                        'change'], [null, 'blur']], function (_v, en, $event) {
-                    var ad = true;
-                    var _co = _v.component;
-                    if (('change' === en)) {
-                        var pd_0 = (nodeValue(_v, 339).onChange($event.target.checked) !== false);
-                        ad = (pd_0 && ad);
-                    }
-                    if (('blur' === en)) {
-                        var pd_1 = (nodeValue(_v, 339).onTouched() !== false);
-                        ad = (pd_1 && ad);
-                    }
-                    if (('ngModelChange' === en)) {
-                        var pd_2 = ((_co.fields.codevad = $event) !== false);
-                        ad = (pd_2 && ad);
-                    }
-                    return ad;
-                }, null, null)), directiveDef(339, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
-                return [p0_0];
-            }, [CheckboxControlValueAccessor]), directiveDef(341, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null],
-                [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }),
-            providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(343, 16384, null, 0, NgControlStatus, [NgControl], null, null),
-            (_l()(), textDef(-1, null, ['Téléphonie a distance\n        '])), (_l()(),
-                textDef(-1, null, ['\n      '])), (_l()(), textDef(-1, null, ['\n\n      '])), (_l()(), elementDef(347, 0, null, null, 11, 'div', [], null, null, null, null, null)),
-            (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(349, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n          '])),
-            (_l()(), elementDef(351, 0, null, null, 5, 'input', [['name', 'outbound'],
-                ['type', 'checkbox']], [[2, 'ng-untouched', null], [2, 'ng-touched', null],
-                [2, 'ng-pristine', null], [2, 'ng-dirty', null], [2, 'ng-valid',
-                    null], [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null, 'ngModelChange'], [null, 'change'], [null,
-                    'blur']], function (_v, en, $event) {
-                var ad = true;
-                var _co = _v.component;
-                if (('change' === en)) {
-                    var pd_0 = (nodeValue(_v, 352).onChange($event.target.checked) !== false);
-                    ad = (pd_0 && ad);
-                }
-                if (('blur' === en)) {
-                    var pd_1 = (nodeValue(_v, 352).onTouched() !== false);
-                    ad = (pd_1 && ad);
-                }
-                if (('ngModelChange' === en)) {
-                    var pd_2 = ((_co.fields.outbound = $event) !== false);
-                    ad = (pd_2 && ad);
-                }
-                return ad;
-            }, null, null)), directiveDef(352, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
-                return [p0_0];
-            }, [CheckboxControlValueAccessor]), directiveDef(354, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null],
-                [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }),
-            providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(356, 16384, null, 0, NgControlStatus, [NgControl], null, null),
-            (_l()(), textDef(-1, null, ['Click to call\n        '])), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), textDef(-1, null, ['\n\n      '])),
-            (_l()(), elementDef(360, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(362, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n          '])), (_l()(),
-                elementDef(364, 0, null, null, 5, 'input', [['name', 'inbound'],
-                    ['type', 'checkbox']], [[2, 'ng-untouched', null], [2, 'ng-touched',
-                        null], [2, 'ng-pristine', null], [2, 'ng-dirty', null],
-                    [2, 'ng-valid', null], [2, 'ng-invalid', null], [2, 'ng-pending',
-                        null]], [[null, 'ngModelChange'], [null,
-                        'change'], [null, 'blur']], function (_v, en, $event) {
-                    var ad = true;
-                    var _co = _v.component;
-                    if (('change' === en)) {
-                        var pd_0 = (nodeValue(_v, 365).onChange($event.target.checked) !== false);
-                        ad = (pd_0 && ad);
-                    }
-                    if (('blur' === en)) {
-                        var pd_1 = (nodeValue(_v, 365).onTouched() !== false);
-                        ad = (pd_1 && ad);
-                    }
-                    if (('ngModelChange' === en)) {
-                        var pd_2 = ((_co.fields.inbound = $event) !== false);
-                        ad = (pd_2 && ad);
-                    }
-                    return ad;
-                }, null, null)), directiveDef(365, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
-                return [p0_0];
-            }, [CheckboxControlValueAccessor]), directiveDef(367, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null],
-                [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }),
-            providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(369, 16384, null, 0, NgControlStatus, [NgControl], null, null),
-            (_l()(), textDef(-1, null, ['Notifications appels entrants\n        '])),
-            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), textDef(-1, null, ['\n\n    '])), (_l()(), textDef(-1, null, ['e\n  '])), (_l()(), textDef(-1, null, ['\n\n  '])), (_l()(), elementDef(375, 0, null, null, 27, 'fieldset', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(377, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Google Apps'])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(),
-                elementDef(380, 0, null, null, 11, 'div', [['class', 'select subtitle']], null, null, null, null, null)),
-            (_l()(), textDef(-1, null, ['Organisation\n     '])), (_l()(), elementDef(382, 0, null, null, 8, 'select', [['name', 'organisation']], [[2, 'ng-untouched',
+            }, [DefaultValueAccessor]), directiveDef(312, 671744, null, 0, NgModel, [[2,
+                    ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(314, 16384, null, 0, NgControlStatus, [NgControl], null, null),
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n\n    '])), (_l()(), elementDef(318, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(320, 0, null, null, 8, 'label', [], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(322, 0, null, null, 5, 'input', [['name', 'codevad'], ['type', 'checkbox']], [[2, 'ng-untouched',
                     null], [2, 'ng-touched', null], [2, 'ng-pristine', null],
                 [2, 'ng-dirty', null], [2, 'ng-valid', null], [2, 'ng-invalid',
                     null], [2, 'ng-pending', null]], [[null, 'ngModelChange'],
@@ -54907,11 +53870,94 @@
                 var ad = true;
                 var _co = _v.component;
                 if (('change' === en)) {
-                    var pd_0 = (nodeValue(_v, 383).onChange($event.target.value) !== false);
+                    var pd_0 = (nodeValue(_v, 323).onChange($event.target.checked) !== false);
                     ad = (pd_0 && ad);
                 }
                 if (('blur' === en)) {
-                    var pd_1 = (nodeValue(_v, 383).onTouched() !== false);
+                    var pd_1 = (nodeValue(_v, 323).onTouched() !== false);
+                    ad = (pd_1 && ad);
+                }
+                if (('ngModelChange' === en)) {
+                    var pd_2 = ((_co.fields.codevad = $event) !== false);
+                    ad = (pd_2 && ad);
+                }
+                return ad;
+            }, null, null)), directiveDef(323, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
+                return [p0_0];
+            }, [CheckboxControlValueAccessor]), directiveDef(325, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null],
+                [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }),
+            providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(327, 16384, null, 0, NgControlStatus, [NgControl], null, null),
+            (_l()(), textDef(-1, null, ['Téléphonie a distance\n      '])), (_l()(),
+                textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n\n    '])),
+            (_l()(), elementDef(331, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(333, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])), (_l()(),
+                elementDef(335, 0, null, null, 5, 'input', [['name', 'outbound'],
+                    ['type', 'checkbox']], [[2, 'ng-untouched', null], [2, 'ng-touched',
+                        null], [2, 'ng-pristine', null], [2, 'ng-dirty', null],
+                    [2, 'ng-valid', null], [2, 'ng-invalid', null], [2, 'ng-pending',
+                        null]], [[null, 'ngModelChange'], [null,
+                        'change'], [null, 'blur']], function (_v, en, $event) {
+                    var ad = true;
+                    var _co = _v.component;
+                    if (('change' === en)) {
+                        var pd_0 = (nodeValue(_v, 336).onChange($event.target.checked) !== false);
+                        ad = (pd_0 && ad);
+                    }
+                    if (('blur' === en)) {
+                        var pd_1 = (nodeValue(_v, 336).onTouched() !== false);
+                        ad = (pd_1 && ad);
+                    }
+                    if (('ngModelChange' === en)) {
+                        var pd_2 = ((_co.fields.outbound = $event) !== false);
+                        ad = (pd_2 && ad);
+                    }
+                    return ad;
+                }, null, null)), directiveDef(336, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
+                return [p0_0];
+            }, [CheckboxControlValueAccessor]), directiveDef(338, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null],
+                [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }),
+            providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(340, 16384, null, 0, NgControlStatus, [NgControl], null, null),
+            (_l()(), textDef(-1, null, ['Click to call\n      '])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n\n    '])),
+            (_l()(), elementDef(344, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(346, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])), (_l()(),
+                elementDef(348, 0, null, null, 5, 'input', [['name', 'inbound'],
+                    ['type', 'checkbox']], [[2, 'ng-untouched', null], [2, 'ng-touched',
+                        null], [2, 'ng-pristine', null], [2, 'ng-dirty', null],
+                    [2, 'ng-valid', null], [2, 'ng-invalid', null], [2, 'ng-pending',
+                        null]], [[null, 'ngModelChange'], [null,
+                        'change'], [null, 'blur']], function (_v, en, $event) {
+                    var ad = true;
+                    var _co = _v.component;
+                    if (('change' === en)) {
+                        var pd_0 = (nodeValue(_v, 349).onChange($event.target.checked) !== false);
+                        ad = (pd_0 && ad);
+                    }
+                    if (('blur' === en)) {
+                        var pd_1 = (nodeValue(_v, 349).onTouched() !== false);
+                        ad = (pd_1 && ad);
+                    }
+                    if (('ngModelChange' === en)) {
+                        var pd_2 = ((_co.fields.inbound = $event) !== false);
+                        ad = (pd_2 && ad);
+                    }
+                    return ad;
+                }, null, null)), directiveDef(349, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
+                return [p0_0];
+            }, [CheckboxControlValueAccessor]), directiveDef(351, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null],
+                [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }),
+            providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(353, 16384, null, 0, NgControlStatus, [NgControl], null, null),
+            (_l()(), textDef(-1, null, ['Notifications appels entrants\n      '])),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['e\n'])), (_l()(), textDef(-1, null, ['\n\n'])), (_l()(), elementDef(359, 0, null, null, 28, 'fieldset', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(361, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Google Apps'])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(364, 0, null, null, 12, 'div', [['class', 'select subtitle']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Organisation\n    '])), (_l()(), elementDef(366, 0, null, null, 9, 'select', [['name', 'organisation']], [[2, 'ng-untouched', null],
+                [2, 'ng-touched', null], [2, 'ng-pristine', null], [2, 'ng-dirty',
+                    null], [2, 'ng-valid', null], [2, 'ng-invalid', null],
+                [2, 'ng-pending', null]], [[null, 'ngModelChange'], [null,
+                    'change'], [null, 'blur']], function (_v, en, $event) {
+                var ad = true;
+                var _co = _v.component;
+                if (('change' === en)) {
+                    var pd_0 = (nodeValue(_v, 367).onChange($event.target.value) !== false);
+                    ad = (pd_0 && ad);
+                }
+                if (('blur' === en)) {
+                    var pd_1 = (nodeValue(_v, 367).onTouched() !== false);
                     ad = (pd_1 && ad);
                 }
                 if (('ngModelChange' === en)) {
@@ -54919,33 +53965,33 @@
                     ad = (pd_2 && ad);
                 }
                 return ad;
-            }, null, null)), directiveDef(383, 16384, null, 0, SelectControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
+            }, null, null)), directiveDef(367, 16384, null, 0, SelectControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
                 return [p0_0];
-            }, [SelectControlValueAccessor]), directiveDef(385, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(387, 16384, null, 0, NgControlStatus, [NgControl], null, null),
-            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_14)), directiveDef(390, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(),
-                textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n\n    '])),
-            (_l()(), elementDef(393, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(395, 0, null, null, 5, 'input', [['name', 'groupes'], ['type', 'text']], [[2, 'ng-untouched', null],
-                [2, 'ng-touched', null], [2, 'ng-pristine', null], [2, 'ng-dirty',
-                    null], [2, 'ng-valid', null], [2, 'ng-invalid', null],
-                [2, 'ng-pending', null]], [[null, 'ngModelChange'], [null,
-                    'input'], [null, 'blur'], [null, 'compositionstart'], [null,
-                    'compositionend']], function (_v, en, $event) {
+            }, [SelectControlValueAccessor]), directiveDef(369, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(371, 16384, null, 0, NgControlStatus, [NgControl], null, null),
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_13)), directiveDef(374, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(),
+                textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n  '])),
+            (_l()(), textDef(-1, null, ['\n\n  '])), (_l()(), elementDef(378, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])),
+            (_l()(), elementDef(380, 0, null, null, 5, 'input', [['name', 'groupes'],
+                ['type', 'text']], [[2, 'ng-untouched', null], [2, 'ng-touched', null],
+                [2, 'ng-pristine', null], [2, 'ng-dirty', null], [2, 'ng-valid',
+                    null], [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null, 'ngModelChange'], [null, 'input'], [null,
+                    'blur'], [null, 'compositionstart'], [null, 'compositionend']], function (_v, en, $event) {
                 var ad = true;
                 var _co = _v.component;
                 if (('input' === en)) {
-                    var pd_0 = (nodeValue(_v, 396)._handleInput($event.target.value) !== false);
+                    var pd_0 = (nodeValue(_v, 381)._handleInput($event.target.value) !== false);
                     ad = (pd_0 && ad);
                 }
                 if (('blur' === en)) {
-                    var pd_1 = (nodeValue(_v, 396).onTouched() !== false);
+                    var pd_1 = (nodeValue(_v, 381).onTouched() !== false);
                     ad = (pd_1 && ad);
                 }
                 if (('compositionstart' === en)) {
-                    var pd_2 = (nodeValue(_v, 396)._compositionStart() !== false);
+                    var pd_2 = (nodeValue(_v, 381)._compositionStart() !== false);
                     ad = (pd_2 && ad);
                 }
                 if (('compositionend' === en)) {
-                    var pd_3 = (nodeValue(_v, 396)._compositionEnd($event.target.value) !== false);
+                    var pd_3 = (nodeValue(_v, 381)._compositionEnd($event.target.value) !== false);
                     ad = (pd_3 && ad);
                 }
                 if (('ngModelChange' === en)) {
@@ -54953,14 +53999,15 @@
                     ad = (pd_4 && ad);
                 }
                 return ad;
-            }, null, null)), directiveDef(396, 16384, null, 0, DefaultValueAccessor, [Renderer2, ElementRef, [2, COMPOSITION_BUFFER_MODE]], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
+            }, null, null)), directiveDef(381, 16384, null, 0, DefaultValueAccessor, [Renderer2, ElementRef, [2, COMPOSITION_BUFFER_MODE]], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
                 return [p0_0];
-            }, [DefaultValueAccessor]), directiveDef(398, 671744, null, 0, NgModel, [[2,
-                    ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(400, 16384, null, 0, NgControlStatus, [NgControl], null, null),
-            (_l()(), textDef(-1, null, ['\n      Groupes - Séparer les noms de groupes par des ";" et ne pas mettre @planetveo.com\n    '])),
-            (_l()(), textDef(-1, null, ['f\n  '])), (_l()(), textDef(-1, null, ['\n\n  '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_15)), directiveDef(405, 16384, null, 0, NgIf, [ViewContainerRef, TemplateRef], { ngIf: [0, 'ngIf'] }, null), (_l()(),
-                textDef(-1, null, ['\n\n  '])), (_l()(), elementDef(407, 0, null, null, 1, 'button', [['type', 'submit']], [[8, 'disabled', 0]], null, null, null, null)), (_l()(), textDef(-1, null, ['Créer l\'utilisateur'])), (_l()(), textDef(-1, null, ['\n'])), (_l()(),
-                textDef(410, null, ['\n\n', '\n'])), pipeDef(0, JsonPipe, [])], function (_ck, _v) {
+            }, [DefaultValueAccessor]), directiveDef(383, 671744, null, 0, NgModel, [[2,
+                    ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(385, 16384, null, 0, NgControlStatus, [NgControl], null, null),
+            (_l()(), textDef(-1, null, ['\n    Groupes - Séparer les noms de groupes par des ";" et ne pas mettre @planetveo.com\n  '])),
+            (_l()(), textDef(-1, null, ['f\n'])), (_l()(), textDef(-1, null, ['\n\n'])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_14)), directiveDef(390, 16384, null, 0, NgIf, [ViewContainerRef, TemplateRef], { ngIf: [0, 'ngIf'] }, null), (_l()(),
+                textDef(-1, null, ['\n\n'])), (_l()(), elementDef(392, 0, null, null, 1, 'button', [['type', 'submit']], [[8, 'disabled', 0]], null, null, null, null)), (_l()(), textDef(-1, null, ['Créer l\'utilisateur'])), (_l()(), textDef(-1, null, ['\n'])), (_l()(),
+                textDef(-1, null, ['\n\n'])), (_l()(), elementDef(396, 0, null, null, 2, 'pre', [], null, null, null, null, null)), (_l()(), textDef(397, null, ['  ', '\n'])),
+            pipeDef(0, JsonPipe, []), (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
             var _co = _v.component;
             var currVal_14 = 'accounts';
             _ck(_v, 15, 0, currVal_14);
@@ -55006,80 +54053,75 @@
             _ck(_v, 150, 0, currVal_91, currVal_92);
             var currVal_100 = 'fonction';
             var currVal_101 = _co.fields.selectedFunction;
-            _ck(_v, 158, 0, currVal_100, currVal_101);
+            _ck(_v, 159, 0, currVal_100, currVal_101);
             var currVal_102 = null;
-            _ck(_v, 162, 0, currVal_102);
+            _ck(_v, 163, 0, currVal_102);
             var currVal_103 = null;
-            _ck(_v, 163, 0, currVal_103);
+            _ck(_v, 164, 0, currVal_103);
             var currVal_104 = _co.fields.functions;
             var currVal_105 = _co.trackByFn;
-            _ck(_v, 166, 0, currVal_104, currVal_105);
-            var currVal_113 = 'teamWithComponent';
-            _ck(_v, 171, 0, currVal_113);
-            var currVal_114 = _co.fields.teams;
-            _ck(_v, 179, 0, currVal_114);
-            var currVal_122 = 'othersWithComponent';
-            _ck(_v, 184, 0, currVal_122);
-            var currVal_123 = _co.fields.autres;
-            var currVal_124 = _co.trackByFn;
-            _ck(_v, 194, 0, currVal_123, currVal_124);
-            var currVal_125 = _co.fields.destinations;
+            _ck(_v, 167, 0, currVal_104, currVal_105);
+            var currVal_113 = 'destinations';
+            _ck(_v, 176, 0, currVal_113);
+            var currVal_114 = _co.fields.destinations;
+            var currVal_115 = _co.trackByFn;
+            _ck(_v, 184, 0, currVal_114, currVal_115);
+            var currVal_123 = 'manager';
+            var currVal_124 = _co.fields.selectedManager;
+            _ck(_v, 193, 0, currVal_123, currVal_124);
+            var currVal_125 = _co.fields.managers;
             var currVal_126 = _co.trackByFn;
-            _ck(_v, 204, 0, currVal_125, currVal_126);
-            var currVal_134 = 'manager';
-            var currVal_135 = _co.fields.selectedManager;
-            _ck(_v, 212, 0, currVal_134, currVal_135);
-            var currVal_136 = _co.fields.managers;
-            var currVal_137 = _co.trackByFn;
-            _ck(_v, 217, 0, currVal_136, currVal_137);
-            var currVal_138 = _co.fields.orgas;
-            var currVal_139 = _co.trackByFn;
-            _ck(_v, 229, 0, currVal_138, currVal_139);
-            var currVal_147 = 'sugar_tourplan';
-            var currVal_148 = _co.fields.codeTourplan;
-            _ck(_v, 240, 0, currVal_147, currVal_148);
-            var currVal_156 = 'codeSON';
-            var currVal_157 = _co.fields.codeSON;
-            _ck(_v, 253, 0, currVal_156, currVal_157);
-            var currVal_165 = 'title';
-            var currVal_166 = _co.fields.title;
-            _ck(_v, 266, 0, currVal_165, currVal_166);
-            var currVal_174 = 'inactive';
-            _ck(_v, 273, 0, currVal_174);
-            var currVal_182 = 'inactiveStatus';
-            var currVal_183 = _co.fields.inactiveStatus;
-            _ck(_v, 282, 0, currVal_182, currVal_183);
-            var currVal_191 = 'inactiveEmployee';
-            var currVal_192 = _co.fields.inactiveEmployee;
-            _ck(_v, 292, 0, currVal_191, currVal_192);
-            var currVal_200 = 'switchvox';
-            _ck(_v, 304, 0, currVal_200);
-            var currVal_208 = 'phone_number';
-            var currVal_209 = _co.fields.phoneNumber;
-            _ck(_v, 315, 0, currVal_208, currVal_209);
-            var currVal_217 = 'extension';
-            var currVal_218 = _co.fields.phoneExtension;
-            _ck(_v, 328, 0, currVal_217, currVal_218);
-            var currVal_226 = 'codevad';
-            var currVal_227 = _co.fields.codevad;
-            _ck(_v, 341, 0, currVal_226, currVal_227);
-            var currVal_235 = 'outbound';
-            var currVal_236 = _co.fields.outbound;
-            _ck(_v, 354, 0, currVal_235, currVal_236);
-            var currVal_244 = 'inbound';
-            var currVal_245 = _co.fields.inbound;
-            _ck(_v, 367, 0, currVal_244, currVal_245);
-            var currVal_253 = 'organisation';
-            var currVal_254 = _co.fields.selectedOrganisation;
-            _ck(_v, 385, 0, currVal_253, currVal_254);
-            var currVal_255 = _co.fields.orgas;
-            var currVal_256 = _co.trackByFn;
-            _ck(_v, 390, 0, currVal_255, currVal_256);
-            var currVal_264 = 'groupes';
-            var currVal_265 = _co.fields.groupes;
-            _ck(_v, 398, 0, currVal_264, currVal_265);
-            var currVal_266 = _co.errorMsg;
-            _ck(_v, 405, 0, currVal_266);
+            _ck(_v, 198, 0, currVal_125, currVal_126);
+            var currVal_134 = 'orgas';
+            _ck(_v, 205, 0, currVal_134);
+            var currVal_135 = _co.fields.orgas;
+            var currVal_136 = _co.trackByFn;
+            _ck(_v, 213, 0, currVal_135, currVal_136);
+            var currVal_144 = 'sugar_tourplan';
+            var currVal_145 = _co.fields.codeTourplan;
+            _ck(_v, 224, 0, currVal_144, currVal_145);
+            var currVal_153 = 'codeSON';
+            var currVal_154 = _co.fields.codeSON;
+            _ck(_v, 237, 0, currVal_153, currVal_154);
+            var currVal_162 = 'title';
+            var currVal_163 = _co.fields.title;
+            _ck(_v, 250, 0, currVal_162, currVal_163);
+            var currVal_171 = 'inactive';
+            _ck(_v, 257, 0, currVal_171);
+            var currVal_179 = 'inactiveStatus';
+            var currVal_180 = _co.fields.inactiveStatus;
+            _ck(_v, 266, 0, currVal_179, currVal_180);
+            var currVal_188 = 'inactiveEmployee';
+            var currVal_189 = _co.fields.inactiveEmployee;
+            _ck(_v, 276, 0, currVal_188, currVal_189);
+            var currVal_197 = 'switchvox';
+            _ck(_v, 288, 0, currVal_197);
+            var currVal_205 = 'phone_number';
+            var currVal_206 = _co.fields.phoneNumber;
+            _ck(_v, 299, 0, currVal_205, currVal_206);
+            var currVal_214 = 'extension';
+            var currVal_215 = _co.fields.phoneExtension;
+            _ck(_v, 312, 0, currVal_214, currVal_215);
+            var currVal_223 = 'codevad';
+            var currVal_224 = _co.fields.codevad;
+            _ck(_v, 325, 0, currVal_223, currVal_224);
+            var currVal_232 = 'outbound';
+            var currVal_233 = _co.fields.outbound;
+            _ck(_v, 338, 0, currVal_232, currVal_233);
+            var currVal_241 = 'inbound';
+            var currVal_242 = _co.fields.inbound;
+            _ck(_v, 351, 0, currVal_241, currVal_242);
+            var currVal_250 = 'organisation';
+            var currVal_251 = _co.fields.selectedOrganisation;
+            _ck(_v, 369, 0, currVal_250, currVal_251);
+            var currVal_252 = _co.fields.orgas;
+            var currVal_253 = _co.trackByFn;
+            _ck(_v, 374, 0, currVal_252, currVal_253);
+            var currVal_261 = 'groupes';
+            var currVal_262 = _co.fields.groupes;
+            _ck(_v, 383, 0, currVal_261, currVal_262);
+            var currVal_263 = _co.errorMsg;
+            _ck(_v, 390, 0, currVal_263);
         }, function (_ck, _v) {
             var _co = _v.component;
             var currVal_0 = nodeValue(_v, 7).ngClassUntouched;
@@ -55162,154 +54204,154 @@
             var currVal_87 = nodeValue(_v, 147).ngClassInvalid;
             var currVal_88 = nodeValue(_v, 147).ngClassPending;
             _ck(_v, 142, 0, currVal_82, currVal_83, currVal_84, currVal_85, currVal_86, currVal_87, currVal_88);
-            var currVal_93 = nodeValue(_v, 160).ngClassUntouched;
-            var currVal_94 = nodeValue(_v, 160).ngClassTouched;
-            var currVal_95 = nodeValue(_v, 160).ngClassPristine;
-            var currVal_96 = nodeValue(_v, 160).ngClassDirty;
-            var currVal_97 = nodeValue(_v, 160).ngClassValid;
-            var currVal_98 = nodeValue(_v, 160).ngClassInvalid;
-            var currVal_99 = nodeValue(_v, 160).ngClassPending;
-            _ck(_v, 155, 0, currVal_93, currVal_94, currVal_95, currVal_96, currVal_97, currVal_98, currVal_99);
-            var currVal_106 = nodeValue(_v, 173).ngClassUntouched;
-            var currVal_107 = nodeValue(_v, 173).ngClassTouched;
-            var currVal_108 = nodeValue(_v, 173).ngClassPristine;
-            var currVal_109 = nodeValue(_v, 173).ngClassDirty;
-            var currVal_110 = nodeValue(_v, 173).ngClassValid;
-            var currVal_111 = nodeValue(_v, 173).ngClassInvalid;
-            var currVal_112 = nodeValue(_v, 173).ngClassPending;
-            _ck(_v, 170, 0, currVal_106, currVal_107, currVal_108, currVal_109, currVal_110, currVal_111, currVal_112);
-            var currVal_115 = nodeValue(_v, 186).ngClassUntouched;
-            var currVal_116 = nodeValue(_v, 186).ngClassTouched;
-            var currVal_117 = nodeValue(_v, 186).ngClassPristine;
-            var currVal_118 = nodeValue(_v, 186).ngClassDirty;
-            var currVal_119 = nodeValue(_v, 186).ngClassValid;
-            var currVal_120 = nodeValue(_v, 186).ngClassInvalid;
-            var currVal_121 = nodeValue(_v, 186).ngClassPending;
-            _ck(_v, 183, 0, currVal_115, currVal_116, currVal_117, currVal_118, currVal_119, currVal_120, currVal_121);
-            var currVal_127 = nodeValue(_v, 214).ngClassUntouched;
-            var currVal_128 = nodeValue(_v, 214).ngClassTouched;
-            var currVal_129 = nodeValue(_v, 214).ngClassPristine;
-            var currVal_130 = nodeValue(_v, 214).ngClassDirty;
-            var currVal_131 = nodeValue(_v, 214).ngClassValid;
-            var currVal_132 = nodeValue(_v, 214).ngClassInvalid;
-            var currVal_133 = nodeValue(_v, 214).ngClassPending;
-            _ck(_v, 209, 0, currVal_127, currVal_128, currVal_129, currVal_130, currVal_131, currVal_132, currVal_133);
-            var currVal_140 = nodeValue(_v, 242).ngClassUntouched;
-            var currVal_141 = nodeValue(_v, 242).ngClassTouched;
-            var currVal_142 = nodeValue(_v, 242).ngClassPristine;
-            var currVal_143 = nodeValue(_v, 242).ngClassDirty;
-            var currVal_144 = nodeValue(_v, 242).ngClassValid;
-            var currVal_145 = nodeValue(_v, 242).ngClassInvalid;
-            var currVal_146 = nodeValue(_v, 242).ngClassPending;
-            _ck(_v, 237, 0, currVal_140, currVal_141, currVal_142, currVal_143, currVal_144, currVal_145, currVal_146);
-            var currVal_149 = nodeValue(_v, 255).ngClassUntouched;
-            var currVal_150 = nodeValue(_v, 255).ngClassTouched;
-            var currVal_151 = nodeValue(_v, 255).ngClassPristine;
-            var currVal_152 = nodeValue(_v, 255).ngClassDirty;
-            var currVal_153 = nodeValue(_v, 255).ngClassValid;
-            var currVal_154 = nodeValue(_v, 255).ngClassInvalid;
-            var currVal_155 = nodeValue(_v, 255).ngClassPending;
-            _ck(_v, 250, 0, currVal_149, currVal_150, currVal_151, currVal_152, currVal_153, currVal_154, currVal_155);
-            var currVal_158 = nodeValue(_v, 268).ngClassUntouched;
-            var currVal_159 = nodeValue(_v, 268).ngClassTouched;
-            var currVal_160 = nodeValue(_v, 268).ngClassPristine;
-            var currVal_161 = nodeValue(_v, 268).ngClassDirty;
-            var currVal_162 = nodeValue(_v, 268).ngClassValid;
-            var currVal_163 = nodeValue(_v, 268).ngClassInvalid;
-            var currVal_164 = nodeValue(_v, 268).ngClassPending;
-            _ck(_v, 263, 0, currVal_158, currVal_159, currVal_160, currVal_161, currVal_162, currVal_163, currVal_164);
-            var currVal_167 = nodeValue(_v, 275).ngClassUntouched;
-            var currVal_168 = nodeValue(_v, 275).ngClassTouched;
-            var currVal_169 = nodeValue(_v, 275).ngClassPristine;
-            var currVal_170 = nodeValue(_v, 275).ngClassDirty;
-            var currVal_171 = nodeValue(_v, 275).ngClassValid;
-            var currVal_172 = nodeValue(_v, 275).ngClassInvalid;
-            var currVal_173 = nodeValue(_v, 275).ngClassPending;
-            _ck(_v, 272, 0, currVal_167, currVal_168, currVal_169, currVal_170, currVal_171, currVal_172, currVal_173);
-            var currVal_175 = nodeValue(_v, 284).ngClassUntouched;
-            var currVal_176 = nodeValue(_v, 284).ngClassTouched;
-            var currVal_177 = nodeValue(_v, 284).ngClassPristine;
-            var currVal_178 = nodeValue(_v, 284).ngClassDirty;
-            var currVal_179 = nodeValue(_v, 284).ngClassValid;
-            var currVal_180 = nodeValue(_v, 284).ngClassInvalid;
-            var currVal_181 = nodeValue(_v, 284).ngClassPending;
-            _ck(_v, 279, 0, currVal_175, currVal_176, currVal_177, currVal_178, currVal_179, currVal_180, currVal_181);
-            var currVal_184 = nodeValue(_v, 294).ngClassUntouched;
-            var currVal_185 = nodeValue(_v, 294).ngClassTouched;
-            var currVal_186 = nodeValue(_v, 294).ngClassPristine;
-            var currVal_187 = nodeValue(_v, 294).ngClassDirty;
-            var currVal_188 = nodeValue(_v, 294).ngClassValid;
-            var currVal_189 = nodeValue(_v, 294).ngClassInvalid;
-            var currVal_190 = nodeValue(_v, 294).ngClassPending;
-            _ck(_v, 289, 0, currVal_184, currVal_185, currVal_186, currVal_187, currVal_188, currVal_189, currVal_190);
-            var currVal_193 = nodeValue(_v, 306).ngClassUntouched;
-            var currVal_194 = nodeValue(_v, 306).ngClassTouched;
-            var currVal_195 = nodeValue(_v, 306).ngClassPristine;
-            var currVal_196 = nodeValue(_v, 306).ngClassDirty;
-            var currVal_197 = nodeValue(_v, 306).ngClassValid;
-            var currVal_198 = nodeValue(_v, 306).ngClassInvalid;
-            var currVal_199 = nodeValue(_v, 306).ngClassPending;
-            _ck(_v, 303, 0, currVal_193, currVal_194, currVal_195, currVal_196, currVal_197, currVal_198, currVal_199);
-            var currVal_201 = nodeValue(_v, 317).ngClassUntouched;
-            var currVal_202 = nodeValue(_v, 317).ngClassTouched;
-            var currVal_203 = nodeValue(_v, 317).ngClassPristine;
-            var currVal_204 = nodeValue(_v, 317).ngClassDirty;
-            var currVal_205 = nodeValue(_v, 317).ngClassValid;
-            var currVal_206 = nodeValue(_v, 317).ngClassInvalid;
-            var currVal_207 = nodeValue(_v, 317).ngClassPending;
-            _ck(_v, 312, 0, currVal_201, currVal_202, currVal_203, currVal_204, currVal_205, currVal_206, currVal_207);
-            var currVal_210 = nodeValue(_v, 330).ngClassUntouched;
-            var currVal_211 = nodeValue(_v, 330).ngClassTouched;
-            var currVal_212 = nodeValue(_v, 330).ngClassPristine;
-            var currVal_213 = nodeValue(_v, 330).ngClassDirty;
-            var currVal_214 = nodeValue(_v, 330).ngClassValid;
-            var currVal_215 = nodeValue(_v, 330).ngClassInvalid;
-            var currVal_216 = nodeValue(_v, 330).ngClassPending;
-            _ck(_v, 325, 0, currVal_210, currVal_211, currVal_212, currVal_213, currVal_214, currVal_215, currVal_216);
-            var currVal_219 = nodeValue(_v, 343).ngClassUntouched;
-            var currVal_220 = nodeValue(_v, 343).ngClassTouched;
-            var currVal_221 = nodeValue(_v, 343).ngClassPristine;
-            var currVal_222 = nodeValue(_v, 343).ngClassDirty;
-            var currVal_223 = nodeValue(_v, 343).ngClassValid;
-            var currVal_224 = nodeValue(_v, 343).ngClassInvalid;
-            var currVal_225 = nodeValue(_v, 343).ngClassPending;
-            _ck(_v, 338, 0, currVal_219, currVal_220, currVal_221, currVal_222, currVal_223, currVal_224, currVal_225);
-            var currVal_228 = nodeValue(_v, 356).ngClassUntouched;
-            var currVal_229 = nodeValue(_v, 356).ngClassTouched;
-            var currVal_230 = nodeValue(_v, 356).ngClassPristine;
-            var currVal_231 = nodeValue(_v, 356).ngClassDirty;
-            var currVal_232 = nodeValue(_v, 356).ngClassValid;
-            var currVal_233 = nodeValue(_v, 356).ngClassInvalid;
-            var currVal_234 = nodeValue(_v, 356).ngClassPending;
-            _ck(_v, 351, 0, currVal_228, currVal_229, currVal_230, currVal_231, currVal_232, currVal_233, currVal_234);
-            var currVal_237 = nodeValue(_v, 369).ngClassUntouched;
-            var currVal_238 = nodeValue(_v, 369).ngClassTouched;
-            var currVal_239 = nodeValue(_v, 369).ngClassPristine;
-            var currVal_240 = nodeValue(_v, 369).ngClassDirty;
-            var currVal_241 = nodeValue(_v, 369).ngClassValid;
-            var currVal_242 = nodeValue(_v, 369).ngClassInvalid;
-            var currVal_243 = nodeValue(_v, 369).ngClassPending;
-            _ck(_v, 364, 0, currVal_237, currVal_238, currVal_239, currVal_240, currVal_241, currVal_242, currVal_243);
-            var currVal_246 = nodeValue(_v, 387).ngClassUntouched;
-            var currVal_247 = nodeValue(_v, 387).ngClassTouched;
-            var currVal_248 = nodeValue(_v, 387).ngClassPristine;
-            var currVal_249 = nodeValue(_v, 387).ngClassDirty;
-            var currVal_250 = nodeValue(_v, 387).ngClassValid;
-            var currVal_251 = nodeValue(_v, 387).ngClassInvalid;
-            var currVal_252 = nodeValue(_v, 387).ngClassPending;
-            _ck(_v, 382, 0, currVal_246, currVal_247, currVal_248, currVal_249, currVal_250, currVal_251, currVal_252);
-            var currVal_257 = nodeValue(_v, 400).ngClassUntouched;
-            var currVal_258 = nodeValue(_v, 400).ngClassTouched;
-            var currVal_259 = nodeValue(_v, 400).ngClassPristine;
-            var currVal_260 = nodeValue(_v, 400).ngClassDirty;
-            var currVal_261 = nodeValue(_v, 400).ngClassValid;
-            var currVal_262 = nodeValue(_v, 400).ngClassInvalid;
-            var currVal_263 = nodeValue(_v, 400).ngClassPending;
-            _ck(_v, 395, 0, currVal_257, currVal_258, currVal_259, currVal_260, currVal_261, currVal_262, currVal_263);
-            var currVal_267 = !nodeValue(_v, 5).form.valid;
-            _ck(_v, 407, 0, currVal_267);
-            var currVal_268 = unwrapValue(_v, 410, 0, nodeValue(_v, 411).transform(nodeValue(_v, 5).value));
-            _ck(_v, 410, 0, currVal_268);
+            var currVal_93 = nodeValue(_v, 161).ngClassUntouched;
+            var currVal_94 = nodeValue(_v, 161).ngClassTouched;
+            var currVal_95 = nodeValue(_v, 161).ngClassPristine;
+            var currVal_96 = nodeValue(_v, 161).ngClassDirty;
+            var currVal_97 = nodeValue(_v, 161).ngClassValid;
+            var currVal_98 = nodeValue(_v, 161).ngClassInvalid;
+            var currVal_99 = nodeValue(_v, 161).ngClassPending;
+            _ck(_v, 156, 0, currVal_93, currVal_94, currVal_95, currVal_96, currVal_97, currVal_98, currVal_99);
+            var currVal_106 = nodeValue(_v, 178).ngClassUntouched;
+            var currVal_107 = nodeValue(_v, 178).ngClassTouched;
+            var currVal_108 = nodeValue(_v, 178).ngClassPristine;
+            var currVal_109 = nodeValue(_v, 178).ngClassDirty;
+            var currVal_110 = nodeValue(_v, 178).ngClassValid;
+            var currVal_111 = nodeValue(_v, 178).ngClassInvalid;
+            var currVal_112 = nodeValue(_v, 178).ngClassPending;
+            _ck(_v, 175, 0, currVal_106, currVal_107, currVal_108, currVal_109, currVal_110, currVal_111, currVal_112);
+            var currVal_116 = nodeValue(_v, 195).ngClassUntouched;
+            var currVal_117 = nodeValue(_v, 195).ngClassTouched;
+            var currVal_118 = nodeValue(_v, 195).ngClassPristine;
+            var currVal_119 = nodeValue(_v, 195).ngClassDirty;
+            var currVal_120 = nodeValue(_v, 195).ngClassValid;
+            var currVal_121 = nodeValue(_v, 195).ngClassInvalid;
+            var currVal_122 = nodeValue(_v, 195).ngClassPending;
+            _ck(_v, 190, 0, currVal_116, currVal_117, currVal_118, currVal_119, currVal_120, currVal_121, currVal_122);
+            var currVal_127 = nodeValue(_v, 207).ngClassUntouched;
+            var currVal_128 = nodeValue(_v, 207).ngClassTouched;
+            var currVal_129 = nodeValue(_v, 207).ngClassPristine;
+            var currVal_130 = nodeValue(_v, 207).ngClassDirty;
+            var currVal_131 = nodeValue(_v, 207).ngClassValid;
+            var currVal_132 = nodeValue(_v, 207).ngClassInvalid;
+            var currVal_133 = nodeValue(_v, 207).ngClassPending;
+            _ck(_v, 204, 0, currVal_127, currVal_128, currVal_129, currVal_130, currVal_131, currVal_132, currVal_133);
+            var currVal_137 = nodeValue(_v, 226).ngClassUntouched;
+            var currVal_138 = nodeValue(_v, 226).ngClassTouched;
+            var currVal_139 = nodeValue(_v, 226).ngClassPristine;
+            var currVal_140 = nodeValue(_v, 226).ngClassDirty;
+            var currVal_141 = nodeValue(_v, 226).ngClassValid;
+            var currVal_142 = nodeValue(_v, 226).ngClassInvalid;
+            var currVal_143 = nodeValue(_v, 226).ngClassPending;
+            _ck(_v, 221, 0, currVal_137, currVal_138, currVal_139, currVal_140, currVal_141, currVal_142, currVal_143);
+            var currVal_146 = nodeValue(_v, 239).ngClassUntouched;
+            var currVal_147 = nodeValue(_v, 239).ngClassTouched;
+            var currVal_148 = nodeValue(_v, 239).ngClassPristine;
+            var currVal_149 = nodeValue(_v, 239).ngClassDirty;
+            var currVal_150 = nodeValue(_v, 239).ngClassValid;
+            var currVal_151 = nodeValue(_v, 239).ngClassInvalid;
+            var currVal_152 = nodeValue(_v, 239).ngClassPending;
+            _ck(_v, 234, 0, currVal_146, currVal_147, currVal_148, currVal_149, currVal_150, currVal_151, currVal_152);
+            var currVal_155 = nodeValue(_v, 252).ngClassUntouched;
+            var currVal_156 = nodeValue(_v, 252).ngClassTouched;
+            var currVal_157 = nodeValue(_v, 252).ngClassPristine;
+            var currVal_158 = nodeValue(_v, 252).ngClassDirty;
+            var currVal_159 = nodeValue(_v, 252).ngClassValid;
+            var currVal_160 = nodeValue(_v, 252).ngClassInvalid;
+            var currVal_161 = nodeValue(_v, 252).ngClassPending;
+            _ck(_v, 247, 0, currVal_155, currVal_156, currVal_157, currVal_158, currVal_159, currVal_160, currVal_161);
+            var currVal_164 = nodeValue(_v, 259).ngClassUntouched;
+            var currVal_165 = nodeValue(_v, 259).ngClassTouched;
+            var currVal_166 = nodeValue(_v, 259).ngClassPristine;
+            var currVal_167 = nodeValue(_v, 259).ngClassDirty;
+            var currVal_168 = nodeValue(_v, 259).ngClassValid;
+            var currVal_169 = nodeValue(_v, 259).ngClassInvalid;
+            var currVal_170 = nodeValue(_v, 259).ngClassPending;
+            _ck(_v, 256, 0, currVal_164, currVal_165, currVal_166, currVal_167, currVal_168, currVal_169, currVal_170);
+            var currVal_172 = nodeValue(_v, 268).ngClassUntouched;
+            var currVal_173 = nodeValue(_v, 268).ngClassTouched;
+            var currVal_174 = nodeValue(_v, 268).ngClassPristine;
+            var currVal_175 = nodeValue(_v, 268).ngClassDirty;
+            var currVal_176 = nodeValue(_v, 268).ngClassValid;
+            var currVal_177 = nodeValue(_v, 268).ngClassInvalid;
+            var currVal_178 = nodeValue(_v, 268).ngClassPending;
+            _ck(_v, 263, 0, currVal_172, currVal_173, currVal_174, currVal_175, currVal_176, currVal_177, currVal_178);
+            var currVal_181 = nodeValue(_v, 278).ngClassUntouched;
+            var currVal_182 = nodeValue(_v, 278).ngClassTouched;
+            var currVal_183 = nodeValue(_v, 278).ngClassPristine;
+            var currVal_184 = nodeValue(_v, 278).ngClassDirty;
+            var currVal_185 = nodeValue(_v, 278).ngClassValid;
+            var currVal_186 = nodeValue(_v, 278).ngClassInvalid;
+            var currVal_187 = nodeValue(_v, 278).ngClassPending;
+            _ck(_v, 273, 0, currVal_181, currVal_182, currVal_183, currVal_184, currVal_185, currVal_186, currVal_187);
+            var currVal_190 = nodeValue(_v, 290).ngClassUntouched;
+            var currVal_191 = nodeValue(_v, 290).ngClassTouched;
+            var currVal_192 = nodeValue(_v, 290).ngClassPristine;
+            var currVal_193 = nodeValue(_v, 290).ngClassDirty;
+            var currVal_194 = nodeValue(_v, 290).ngClassValid;
+            var currVal_195 = nodeValue(_v, 290).ngClassInvalid;
+            var currVal_196 = nodeValue(_v, 290).ngClassPending;
+            _ck(_v, 287, 0, currVal_190, currVal_191, currVal_192, currVal_193, currVal_194, currVal_195, currVal_196);
+            var currVal_198 = nodeValue(_v, 301).ngClassUntouched;
+            var currVal_199 = nodeValue(_v, 301).ngClassTouched;
+            var currVal_200 = nodeValue(_v, 301).ngClassPristine;
+            var currVal_201 = nodeValue(_v, 301).ngClassDirty;
+            var currVal_202 = nodeValue(_v, 301).ngClassValid;
+            var currVal_203 = nodeValue(_v, 301).ngClassInvalid;
+            var currVal_204 = nodeValue(_v, 301).ngClassPending;
+            _ck(_v, 296, 0, currVal_198, currVal_199, currVal_200, currVal_201, currVal_202, currVal_203, currVal_204);
+            var currVal_207 = nodeValue(_v, 314).ngClassUntouched;
+            var currVal_208 = nodeValue(_v, 314).ngClassTouched;
+            var currVal_209 = nodeValue(_v, 314).ngClassPristine;
+            var currVal_210 = nodeValue(_v, 314).ngClassDirty;
+            var currVal_211 = nodeValue(_v, 314).ngClassValid;
+            var currVal_212 = nodeValue(_v, 314).ngClassInvalid;
+            var currVal_213 = nodeValue(_v, 314).ngClassPending;
+            _ck(_v, 309, 0, currVal_207, currVal_208, currVal_209, currVal_210, currVal_211, currVal_212, currVal_213);
+            var currVal_216 = nodeValue(_v, 327).ngClassUntouched;
+            var currVal_217 = nodeValue(_v, 327).ngClassTouched;
+            var currVal_218 = nodeValue(_v, 327).ngClassPristine;
+            var currVal_219 = nodeValue(_v, 327).ngClassDirty;
+            var currVal_220 = nodeValue(_v, 327).ngClassValid;
+            var currVal_221 = nodeValue(_v, 327).ngClassInvalid;
+            var currVal_222 = nodeValue(_v, 327).ngClassPending;
+            _ck(_v, 322, 0, currVal_216, currVal_217, currVal_218, currVal_219, currVal_220, currVal_221, currVal_222);
+            var currVal_225 = nodeValue(_v, 340).ngClassUntouched;
+            var currVal_226 = nodeValue(_v, 340).ngClassTouched;
+            var currVal_227 = nodeValue(_v, 340).ngClassPristine;
+            var currVal_228 = nodeValue(_v, 340).ngClassDirty;
+            var currVal_229 = nodeValue(_v, 340).ngClassValid;
+            var currVal_230 = nodeValue(_v, 340).ngClassInvalid;
+            var currVal_231 = nodeValue(_v, 340).ngClassPending;
+            _ck(_v, 335, 0, currVal_225, currVal_226, currVal_227, currVal_228, currVal_229, currVal_230, currVal_231);
+            var currVal_234 = nodeValue(_v, 353).ngClassUntouched;
+            var currVal_235 = nodeValue(_v, 353).ngClassTouched;
+            var currVal_236 = nodeValue(_v, 353).ngClassPristine;
+            var currVal_237 = nodeValue(_v, 353).ngClassDirty;
+            var currVal_238 = nodeValue(_v, 353).ngClassValid;
+            var currVal_239 = nodeValue(_v, 353).ngClassInvalid;
+            var currVal_240 = nodeValue(_v, 353).ngClassPending;
+            _ck(_v, 348, 0, currVal_234, currVal_235, currVal_236, currVal_237, currVal_238, currVal_239, currVal_240);
+            var currVal_243 = nodeValue(_v, 371).ngClassUntouched;
+            var currVal_244 = nodeValue(_v, 371).ngClassTouched;
+            var currVal_245 = nodeValue(_v, 371).ngClassPristine;
+            var currVal_246 = nodeValue(_v, 371).ngClassDirty;
+            var currVal_247 = nodeValue(_v, 371).ngClassValid;
+            var currVal_248 = nodeValue(_v, 371).ngClassInvalid;
+            var currVal_249 = nodeValue(_v, 371).ngClassPending;
+            _ck(_v, 366, 0, currVal_243, currVal_244, currVal_245, currVal_246, currVal_247, currVal_248, currVal_249);
+            var currVal_254 = nodeValue(_v, 385).ngClassUntouched;
+            var currVal_255 = nodeValue(_v, 385).ngClassTouched;
+            var currVal_256 = nodeValue(_v, 385).ngClassPristine;
+            var currVal_257 = nodeValue(_v, 385).ngClassDirty;
+            var currVal_258 = nodeValue(_v, 385).ngClassValid;
+            var currVal_259 = nodeValue(_v, 385).ngClassInvalid;
+            var currVal_260 = nodeValue(_v, 385).ngClassPending;
+            _ck(_v, 380, 0, currVal_254, currVal_255, currVal_256, currVal_257, currVal_258, currVal_259, currVal_260);
+            var currVal_264 = !nodeValue(_v, 5).form.valid;
+            _ck(_v, 392, 0, currVal_264);
+            var currVal_265 = unwrapValue(_v, 397, 0, nodeValue(_v, 398).transform(_co.fields));
+            _ck(_v, 397, 0, currVal_265);
         });
     }
     function View_CreateUserFormComponent_Host_0(_l) {
@@ -55325,14 +54367,14 @@
      * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride}
      */
     /* tslint:disable */
-    var styles$2 = ['table[_ngcontent-%COMP%] {\n  border-collapse: collapse;\n  width: 100%;\n}\n\ntd[_ngcontent-%COMP%], th[_ngcontent-%COMP%] {\n  border: 1px solid #dddddd;\n  text-align: left;\n  padding: 8px;\n}\n\ntr[_ngcontent-%COMP%]:nth-child(even) {\n  background-color: #dddddd;\n}'];
+    var styles$1 = ['table[_ngcontent-%COMP%] {\n  border-collapse: collapse;\n  width: 100%;\n}\n\ntd[_ngcontent-%COMP%], th[_ngcontent-%COMP%] {\n  border: 1px solid #dddddd;\n  text-align: left;\n  padding: 8px;\n}\n\ntr[_ngcontent-%COMP%]:nth-child(even) {\n  background-color: #dddddd;\n}'];
 
     /**
      * @fileoverview This file is generated by the Angular template compiler.
      * Do not edit.
      * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride}
      */
-    var styles_UsersComponent = [styles$2];
+    var styles_UsersComponent = [styles$1];
     var RenderType_UsersComponent = createRendererType2({ encapsulation: 0,
         styles: styles_UsersComponent, data: {} });
     function View_UsersComponent_2(_l) {
@@ -55361,51 +54403,51 @@
             var currVal_1 = _ck(_v, 11, 0, '/disable', _v.context.$implicit.id);
             _ck(_v, 10, 0, currVal_1);
         }, function (_ck, _v) {
-            var currVal_2 = _v.context.$implicit.attributes.salutation;
+            var currVal_2 = _v.context.$implicit.salutation;
             _ck(_v, 16, 0, currVal_2);
-            var currVal_3 = _v.context.$implicit.attributes.firstName;
+            var currVal_3 = _v.context.$implicit.firstName;
             _ck(_v, 19, 0, currVal_3);
-            var currVal_4 = _v.context.$implicit.attributes.lastName;
+            var currVal_4 = _v.context.$implicit.lastName;
             _ck(_v, 22, 0, currVal_4);
-            var currVal_5 = _v.context.$implicit.attributes.userName;
+            var currVal_5 = _v.context.$implicit.userName;
             _ck(_v, 25, 0, currVal_5);
-            var currVal_6 = _v.context.$implicit.attributes.email;
+            var currVal_6 = _v.context.$implicit.email;
             _ck(_v, 28, 0, currVal_6);
-            var currVal_7 = _v.context.$implicit.attributes.department;
+            var currVal_7 = _v.context.$implicit.department;
             _ck(_v, 31, 0, currVal_7);
-            var currVal_8 = _v.context.$implicit.attributes.officeId;
+            var currVal_8 = _v.context.$implicit.officeId;
             _ck(_v, 34, 0, currVal_8);
-            var currVal_9 = _v.context.$implicit.attributes.teamId;
+            var currVal_9 = _v.context.$implicit.teamId;
             _ck(_v, 37, 0, currVal_9);
-            var currVal_10 = _v.context.$implicit.attributes.tourplanID;
+            var currVal_10 = _v.context.$implicit.tourplanID;
             _ck(_v, 40, 0, currVal_10);
-            var currVal_11 = _v.context.$implicit.attributes.swClickToCall;
+            var currVal_11 = _v.context.$implicit.swClickToCall;
             _ck(_v, 43, 0, currVal_11);
-            var currVal_12 = _v.context.$implicit.attributes.swCallNotification;
+            var currVal_12 = _v.context.$implicit.swCallNotification;
             _ck(_v, 46, 0, currVal_12);
-            var currVal_13 = _v.context.$implicit.attributes.codeSonGalileo;
+            var currVal_13 = _v.context.$implicit.codeSonGalileo;
             _ck(_v, 49, 0, currVal_13);
             var currVal_14 = _v.context.$implicit.id;
             _ck(_v, 52, 0, currVal_14);
             var currVal_15 = _v.context.$implicit.type;
             _ck(_v, 55, 0, currVal_15);
-            var currVal_16 = _v.context.$implicit.attributes.phoneHome;
+            var currVal_16 = _v.context.$implicit.phoneHome;
             _ck(_v, 58, 0, currVal_16);
-            var currVal_17 = _v.context.$implicit.attributes.phoneMobile;
+            var currVal_17 = _v.context.$implicit.phoneMobile;
             _ck(_v, 61, 0, currVal_17);
-            var currVal_18 = _v.context.$implicit.attributes.phoneWork;
+            var currVal_18 = _v.context.$implicit.phoneWork;
             _ck(_v, 64, 0, currVal_18);
-            var currVal_19 = _v.context.$implicit.attributes.phoneOther;
+            var currVal_19 = _v.context.$implicit.phoneOther;
             _ck(_v, 67, 0, currVal_19);
-            var currVal_20 = _v.context.$implicit.attributes.phoneFax;
+            var currVal_20 = _v.context.$implicit.phoneFax;
             _ck(_v, 70, 0, currVal_20);
-            var currVal_21 = _v.context.$implicit.attributes.phoneAsterisk;
+            var currVal_21 = _v.context.$implicit.phoneAsterisk;
             _ck(_v, 73, 0, currVal_21);
-            var currVal_22 = _v.context.$implicit.attributes.status;
+            var currVal_22 = _v.context.$implicit.status;
             _ck(_v, 76, 0, currVal_22);
-            var currVal_23 = _v.context.$implicit.attributes.employeeStatus;
+            var currVal_23 = _v.context.$implicit.employeeStatus;
             _ck(_v, 79, 0, currVal_23);
-            var currVal_24 = _v.context.$implicit.attributes.managerId;
+            var currVal_24 = _v.context.$implicit.managerId;
             _ck(_v, 82, 0, currVal_24);
         });
     }
@@ -55654,41 +54696,46 @@
      * Do not edit.
      * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride}
      */
-    var styles_TeamsComponent = [];
-    var RenderType_TeamsComponent = createRendererType2({ encapsulation: 2,
+    /* tslint:disable */
+    var styles$2 = ['table[_ngcontent-%COMP%] {\n  border-collapse: collapse;\n  width: 100%;\n}\n\ntd[_ngcontent-%COMP%], th[_ngcontent-%COMP%] {\n  border: 1px solid #dddddd;\n  text-align: left;\n  padding: 8px;\n}\n\ntr[_ngcontent-%COMP%]:nth-child(even) {\n  background-color: #dddddd;\n}'];
+
+    /**
+     * @fileoverview This file is generated by the Angular template compiler.
+     * Do not edit.
+     * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride}
+     */
+    var styles_TeamsComponent = [styles$2];
+    var RenderType_TeamsComponent = createRendererType2({ encapsulation: 0,
         styles: styles_TeamsComponent, data: {} });
     function View_TeamsComponent_2(_l) {
-        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 32, 'div', [], null, null, null, null, null)), (_l()(),
-                textDef(-1, null, ['\n    '])), (_l()(), elementDef(2, 0, null, null, 1, 'h4', [], null, null, null, null, null)), (_l()(), textDef(3, null, ['', ' ', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(5, 0, null, null, 26, 'ul', [], null, null, null, null, null)),
-            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(7, 0, null, null, 3, 'li', [], null, null, null, null, null)), (_l()(), elementDef(8, 0, null, null, 1, 'strong', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['ID:'])), (_l()(), textDef(10, null, [' ', ''])), (_l()(), textDef(-1, null, ['\n      '])),
-            (_l()(), elementDef(12, 0, null, null, 3, 'li', [], null, null, null, null, null)), (_l()(), elementDef(13, 0, null, null, 1, 'strong', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Type:'])), (_l()(), textDef(15, null, [' ', ''])), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(17, 0, null, null, 3, 'li', [], null, null, null, null, null)), (_l()(), elementDef(18, 0, null, null, 1, 'strong', [], null, null, null, null, null)),
-            (_l()(), textDef(-1, null, ['ID (again):'])), (_l()(), textDef(20, null, [' ', ''])), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(22, 0, null, null, 3, 'li', [], null, null, null, null, null)), (_l()(), elementDef(23, 0, null, null, 1, 'strong', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Name:'])),
-            (_l()(), textDef(25, null, [' ', ''])), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(27, 0, null, null, 3, 'li', [], null, null, null, null, null)),
-            (_l()(), elementDef(28, 0, null, null, 1, 'strong', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Description:'])), (_l()(), textDef(30, null, [' ', ''])),
-            (_l()(), textDef(-1, null, ['\n   '])), (_l()(), textDef(-1, null, ['\n ']))], null, function (_ck, _v) {
-            var currVal_0 = _v.context.$implicit.attributes.firstName;
-            var currVal_1 = _v.context.$implicit.attributes.lastName;
-            _ck(_v, 3, 0, currVal_0, currVal_1);
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 13, 'tr', [], null, null, null, null, null)), (_l()(),
+                textDef(-1, null, ['\n    '])), (_l()(), elementDef(2, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(3, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(5, 0, null, null, 1, 'td', [], null, null, null, null, null)),
+            (_l()(), textDef(6, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])),
+            (_l()(), elementDef(8, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(9, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(),
+                elementDef(11, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(12, null, ['', ''])), (_l()(), textDef(-1, null, ['\n  ']))], null, function (_ck, _v) {
+            var currVal_0 = _v.context.$implicit.name;
+            _ck(_v, 3, 0, currVal_0);
+            var currVal_1 = _v.context.$implicit.description;
+            _ck(_v, 6, 0, currVal_1);
             var currVal_2 = _v.context.$implicit.id;
-            _ck(_v, 10, 0, currVal_2);
+            _ck(_v, 9, 0, currVal_2);
             var currVal_3 = _v.context.$implicit.type;
-            _ck(_v, 15, 0, currVal_3);
-            var currVal_4 = _v.context.$implicit.attributes.id;
-            _ck(_v, 20, 0, currVal_4);
-            var currVal_5 = _v.context.$implicit.attributes.name;
-            _ck(_v, 25, 0, currVal_5);
-            var currVal_6 = _v.context.$implicit.attributes.description;
-            _ck(_v, 30, 0, currVal_6);
+            _ck(_v, 12, 0, currVal_3);
         });
     }
     function View_TeamsComponent_1(_l) {
-        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 4, 'div', [], null, null, null, null, null)), (_l()(),
-                textDef(-1, null, ['\n  '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_TeamsComponent_2)), directiveDef(3, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'],
-                ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 20, 'table', [], null, null, null, null, null)), (_l()(),
+                textDef(-1, null, ['\n  '])), (_l()(), elementDef(2, 0, null, null, 18, 'tbody', [], null, null, null, null, null)), (_l()(), elementDef(3, 0, null, null, 13, 'tr', [], null, null, null, null, null)), (_l()(),
+                textDef(-1, null, ['\n    '])), (_l()(), elementDef(5, 0, null, null, 1, 'th', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Name'])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(8, 0, null, null, 1, 'th', [], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Description'])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(11, 0, null, null, 1, 'th', [], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Id'])), (_l()(), textDef(-1, null, ['\n    '])),
+            (_l()(), elementDef(14, 0, null, null, 1, 'th', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Type'])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(),
+                textDef(-1, null, ['\n  '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_TeamsComponent_2)), directiveDef(19, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(),
+                textDef(-1, null, ['\n']))], function (_ck, _v) {
             var _co = _v.component;
             var currVal_0 = _co.teamsFromSugar;
             var currVal_1 = _co.trackByFn;
-            _ck(_v, 3, 0, currVal_0, currVal_1);
+            _ck(_v, 19, 0, currVal_0, currVal_1);
         }, null);
     }
     function View_TeamsComponent_0(_l) {
@@ -55729,9 +54776,9 @@
             (_l()(), textDef(6, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])),
             (_l()(), elementDef(8, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(9, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(),
                 elementDef(11, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(12, null, ['', ''])), (_l()(), textDef(-1, null, ['\n  ']))], null, function (_ck, _v) {
-            var currVal_0 = _v.context.$implicit.attributes.name;
+            var currVal_0 = _v.context.$implicit.name;
             _ck(_v, 3, 0, currVal_0);
-            var currVal_1 = _v.context.$implicit.attributes.description;
+            var currVal_1 = _v.context.$implicit.description;
             _ck(_v, 6, 0, currVal_1);
             var currVal_2 = _v.context.$implicit.id;
             _ck(_v, 9, 0, currVal_2);
@@ -55904,17 +54951,24 @@
      * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride}
      */
     var AppModuleNgFactory = createNgModuleFactory(AppModule, [AppComponent], function (_l) {
-        return moduleDef([moduleProvideDef(512, ComponentFactoryResolver, CodegenComponentFactoryResolver, [[8, [HomeComponentNgFactory, CreateUserFormComponentNgFactory, UsersComponentNgFactory,
-                        UserComponentNgFactory, DisableUserFormComponentNgFactory, TeamsComponentNgFactory,
-                        RolesComponentNgFactory, ImportComponentNgFactory, AppComponentNgFactory]],
-                [3, ComponentFactoryResolver], NgModuleRef]), moduleProvideDef(4352, LOCALE_ID, 'fr-FR', []), moduleProvideDef(4608, NgLocalization, NgLocaleLocalization, [LOCALE_ID]), moduleProvideDef(5120, APP_ID, _appIdRandomProviderFactory, []), moduleProvideDef(5120, IterableDiffers, _iterableDiffersFactory, []), moduleProvideDef(5120, KeyValueDiffers, _keyValueDiffersFactory, []), moduleProvideDef(4608, DomSanitizer, DomSanitizerImpl, [DOCUMENT]),
-            moduleProvideDef(6144, Sanitizer, null, [DomSanitizer]), moduleProvideDef(4608, HAMMER_GESTURE_CONFIG, HammerGestureConfig, []), moduleProvideDef(5120, EVENT_MANAGER_PLUGINS, function (p0_0, p1_0, p2_0, p2_1) {
+        return moduleDef([moduleProvideDef(512, ComponentFactoryResolver, CodegenComponentFactoryResolver, [[8, [CreateUserFormComponentNgFactory, UsersComponentNgFactory, UserComponentNgFactory,
+                        DisableUserFormComponentNgFactory, TeamsComponentNgFactory, RolesComponentNgFactory,
+                        ImportComponentNgFactory, AppComponentNgFactory]], [3, ComponentFactoryResolver],
+                NgModuleRef]), moduleProvideDef(4352, LOCALE_ID, 'fr-FR', []), moduleProvideDef(4608, NgLocalization, NgLocaleLocalization, [LOCALE_ID]), moduleProvideDef(5120, APP_ID, _appIdRandomProviderFactory, []), moduleProvideDef(5120, IterableDiffers, _iterableDiffersFactory, []),
+            moduleProvideDef(5120, KeyValueDiffers, _keyValueDiffersFactory, []), moduleProvideDef(4608, DomSanitizer, DomSanitizerImpl, [DOCUMENT]), moduleProvideDef(6144, Sanitizer, null, [DomSanitizer]),
+            moduleProvideDef(4608, HAMMER_GESTURE_CONFIG, HammerGestureConfig, []),
+            moduleProvideDef(5120, EVENT_MANAGER_PLUGINS, function (p0_0, p1_0, p2_0, p2_1) {
                 return [new DomEventsPlugin(p0_0), new KeyEventsPlugin(p1_0),
                     new HammerGesturesPlugin(p2_0, p2_1)];
-            }, [DOCUMENT, DOCUMENT, DOCUMENT, HAMMER_GESTURE_CONFIG]),
-            moduleProvideDef(4608, EventManager, EventManager, [EVENT_MANAGER_PLUGINS,
-                NgZone]), moduleProvideDef(135680, DomSharedStylesHost, DomSharedStylesHost, [DOCUMENT]), moduleProvideDef(4608, DomRendererFactory2, DomRendererFactory2, [EventManager, DomSharedStylesHost]), moduleProvideDef(5120, AnimationDriver, instantiateSupportedAnimationDriver, []), moduleProvideDef(5120, AnimationStyleNormalizer, instantiateDefaultStyleNormalizer, []), moduleProvideDef(4608, AnimationEngine, InjectableAnimationEngine, [AnimationDriver,
-                AnimationStyleNormalizer]), moduleProvideDef(5120, RendererFactory2, instantiateRendererFactory, [DomRendererFactory2, AnimationEngine, NgZone]), moduleProvideDef(6144, SharedStylesHost, null, [DomSharedStylesHost]), moduleProvideDef(4608, Testability, Testability, [NgZone]), moduleProvideDef(4608, Meta, Meta, [DOCUMENT]), moduleProvideDef(4608, Title, Title, [DOCUMENT]), moduleProvideDef(4608, AnimationBuilder, BrowserAnimationBuilder, [RendererFactory2,
+            }, [DOCUMENT, DOCUMENT, DOCUMENT, HAMMER_GESTURE_CONFIG]), moduleProvideDef(4608, EventManager, EventManager, [EVENT_MANAGER_PLUGINS, NgZone]),
+            moduleProvideDef(135680, DomSharedStylesHost, DomSharedStylesHost, [DOCUMENT]),
+            moduleProvideDef(4608, DomRendererFactory2, DomRendererFactory2, [EventManager,
+                DomSharedStylesHost]), moduleProvideDef(5120, AnimationDriver, instantiateSupportedAnimationDriver, []),
+            moduleProvideDef(5120, AnimationStyleNormalizer, instantiateDefaultStyleNormalizer, []), moduleProvideDef(4608, AnimationEngine, InjectableAnimationEngine, [AnimationDriver, AnimationStyleNormalizer]),
+            moduleProvideDef(5120, RendererFactory2, instantiateRendererFactory, [DomRendererFactory2, AnimationEngine,
+                NgZone]), moduleProvideDef(6144, SharedStylesHost, null, [DomSharedStylesHost]),
+            moduleProvideDef(4608, Testability, Testability, [NgZone]), moduleProvideDef(4608, Meta, Meta, [DOCUMENT]), moduleProvideDef(4608, Title, Title, [DOCUMENT]),
+            moduleProvideDef(4608, AnimationBuilder, BrowserAnimationBuilder, [RendererFactory2,
                 DOCUMENT$1]), moduleProvideDef(4608, RadioControlRegistry, RadioControlRegistry, []), moduleProvideDef(4608, HttpXsrfTokenExtractor, HttpXsrfCookieExtractor, [DOCUMENT, PLATFORM_ID, XSRF_COOKIE_NAME]),
             moduleProvideDef(4608, HttpXsrfInterceptor, HttpXsrfInterceptor, [HttpXsrfTokenExtractor, XSRF_HEADER_NAME]), moduleProvideDef(5120, HTTP_INTERCEPTORS, function (p0_0) {
                 return [p0_0];
@@ -55924,7 +54978,7 @@
             moduleProvideDef(4608, NoPreloading, NoPreloading, []), moduleProvideDef(6144, PreloadingStrategy, null, [NoPreloading]), moduleProvideDef(135680, RouterPreloader, RouterPreloader, [Router, NgModuleFactoryLoader,
                 Compiler, Injector, PreloadingStrategy]), moduleProvideDef(4608, PreloadAllModules, PreloadAllModules, []), moduleProvideDef(5120, ROUTER_INITIALIZER, getBootstrapListener, [RouterInitializer]), moduleProvideDef(5120, APP_BOOTSTRAP_LISTENER, function (p0_0) {
                 return [p0_0];
-            }, [ROUTER_INITIALIZER]), moduleProvideDef(4608, FieldsService, FieldsService, []), moduleProvideDef(4608, ParserService, ParserService, []),
+            }, [ROUTER_INITIALIZER]), moduleProvideDef(4608, FieldsService, FieldsService, [HttpClient]), moduleProvideDef(4608, ParserService, ParserService, []),
             moduleProvideDef(4608, SugarService, SugarService, [HttpClient]), moduleProvideDef(4608, SwitchVoxService, SwitchVoxService, [HttpClient]), moduleProvideDef(512, CommonModule, CommonModule, []), moduleProvideDef(1024, ErrorHandler, errorHandler, []), moduleProvideDef(1024, NgProbeToken, function () {
                 return [routerNgProbeToken()];
             }, []), moduleProvideDef(512, RouterInitializer, RouterInitializer, [Injector]), moduleProvideDef(1024, APP_INITIALIZER, function (p0_0, p0_1, p1_0) {
@@ -55936,12 +54990,12 @@
             moduleProvideDef(512, InternalFormsSharedModule, InternalFormsSharedModule, []), moduleProvideDef(512, FormsModule, FormsModule, []), moduleProvideDef(512, HttpClientXsrfModule, HttpClientXsrfModule, []), moduleProvideDef(512, HttpClientModule, HttpClientModule, []), moduleProvideDef(1024, ROUTER_FORROOT_GUARD, provideForRootGuard, [[3, Router]]), moduleProvideDef(512, UrlSerializer, DefaultUrlSerializer, []), moduleProvideDef(512, ChildrenOutletContexts, ChildrenOutletContexts, []),
             moduleProvideDef(256, APP_BASE_HREF, '/', []), moduleProvideDef(256, ROUTER_CONFIGURATION, {}, []), moduleProvideDef(1024, LocationStrategy, provideLocationStrategy, [PlatformLocation,
                 [2, APP_BASE_HREF], ROUTER_CONFIGURATION]), moduleProvideDef(512, Location, Location, [LocationStrategy]), moduleProvideDef(512, Compiler, Compiler, []), moduleProvideDef(512, NgModuleFactoryLoader, SystemJsNgModuleLoader, [Compiler, [2, SystemJsNgModuleLoaderConfig]]), moduleProvideDef(1024, ROUTES, function () {
-                return [[{ path: 'home', component: HomeComponent }, { path: 'users/:id',
-                            component: CreateUserFormComponent }, { path: 'users', component: UsersComponent },
-                        { path: 'user', component: UserComponent }, { path: 'disable/:id',
-                            component: DisableUserFormComponent }, { path: 'disable', component: DisableUserFormComponent },
-                        { path: 'teams', component: TeamsComponent }, { path: 'roles', component: RolesComponent },
-                        { path: 'import', component: ImportComponent }, { path: '**', redirectTo: 'user' }]];
+                return [[{ path: 'users/:id', component: CreateUserFormComponent },
+                        { path: 'users', component: UsersComponent }, { path: 'user', component: UserComponent },
+                        { path: 'disable/:id', component: DisableUserFormComponent }, { path: 'disable',
+                            component: DisableUserFormComponent }, { path: 'teams', component: TeamsComponent },
+                        { path: 'roles', component: RolesComponent }, { path: 'import', component: ImportComponent },
+                        { path: '**', redirectTo: 'users' }]];
             }, []), moduleProvideDef(1024, Router, setupRouter, [ApplicationRef, UrlSerializer,
                 ChildrenOutletContexts, Location, Injector, NgModuleFactoryLoader,
                 Compiler, ROUTES, ROUTER_CONFIGURATION, [2, UrlHandlingStrategy],
