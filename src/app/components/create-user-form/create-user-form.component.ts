@@ -14,11 +14,11 @@ import { User } from "../../models/user";
 })
 
 export class CreateUserFormComponent implements OnInit {
-  public fields: Fields;
+  public fields;
   public errorMsg;
   public passwordExists = false;
   public usersFromSugar: User[];
-  public usernameTaken = false;
+  public usernameTaken;
 
   constructor(
               private fieldsService: FieldsService,
