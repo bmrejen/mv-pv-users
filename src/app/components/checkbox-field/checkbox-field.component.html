@@ -18,7 +18,7 @@
   <input
   type="checkbox"
   [(ngModel)]="box.checked"
-  (ngModelChange)="handleClick($event, box.id)"
+  (ngModelChange)="boxClicked($event, box.id)"
   [name]="box.id"> {{ box.label }}
   </label>
 </div> -->

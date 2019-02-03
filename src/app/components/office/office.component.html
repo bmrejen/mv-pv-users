@@ -1,0 +1,5 @@
+  <div class="select subtitle">Office
+   <select name="sugar_bureau" [(ngModel)]="fields.selectedBureau" name="office">
+    <option *ngFor="let bureau of fields.bureaux ; trackBy: trackByFn" [value]="bureau.value">{{ bureau.label }}
+    </option></select>
+  </div>

@@ -1,0 +1,13 @@
+  <fieldset class="blue">
+    <legend>Google Apps</legend>
+    <div class="select subtitle">Organisation
+     <select [(ngModel)]="fields.selectedOrganisation" name="organisation">
+      <option *ngFor="let orga of fields.orgas ; trackBy: trackByFn" [value]="orga.value">{{ orga.label }}
+      </option></select>
+    </div>
+
+    <label>
+      <input type="text" name="groupes" [(ngModel)]="fields.groupes">
+      Groupes - Séparer les noms de groupes par des ";" et ne pas mettre @planetveo.com
+    </label>
+  </fieldset>

@@ -13,7 +13,7 @@ export class CheckboxFieldComponent {
   @Input() public checkboxes: any[];
   @Output() public readonly clickEmitter = new EventEmitter<any>();
 
-  public handleClick(e, id) {
+  public boxClicked(e, id) {
     this.clickEmitter.emit({e, id});
   }
 
