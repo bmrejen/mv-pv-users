@@ -10,7 +10,6 @@ import { SugarService } from "../../services/sugar.service";
 
 export class UsersComponent implements OnInit {
   public usersFromSugar: User[] = [];
-  public mockList: User[] = [];
 
   public myJson = {
     data: [
@@ -110,8 +109,6 @@ export class UsersComponent implements OnInit {
 
   public ngOnInit(): void {
     this.usersFromSugar = this.sugarService.getUsersFromSugar();
-    this.myJson.data.forEach((user) => this.mockList.push(new User(user)));
-    console.log("mocklist", this.mockList);
   }
 
   public trackByFn(index, item) {

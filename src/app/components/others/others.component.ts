@@ -5,9 +5,9 @@ import { FieldsService } from "../../services/fields.service";
 import { Fields } from "../../models/fields";
 
 @Component({
-  selector: "mv-teams",
-  styleUrls: ["./teams.component.css"],
-  templateUrl: "./teams.component.html",
+  selector: "mv-others",
+  styleUrls: ["./others.component.css"],
+  templateUrl: "./others.component.html",
   viewProviders: [
   {
     provide: ControlContainer,
@@ -16,7 +16,7 @@ import { Fields } from "../../models/fields";
   ],
 })
 
-export class TeamsComponent implements OnInit {
+export class OthersComponent implements OnInit {
   public fields;
 
   constructor(private fieldsService: FieldsService) {
