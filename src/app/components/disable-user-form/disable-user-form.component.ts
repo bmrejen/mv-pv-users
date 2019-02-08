@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { FieldsService } from "../../services/fields.service";
 
+import { Fields } from "../../models/fields";
+
 @Component({
   selector: "mv-app-disable-user-form",
   templateUrl: "./disable-user-form.component.html",
@@ -9,7 +11,7 @@ import { FieldsService } from "../../services/fields.service";
 
 export class DisableUserFormComponent implements OnInit {
 
-  public fields;
+  public fields: Fields;
   public enableAdd: boolean = true;
   constructor(
               private fieldsService: FieldsService,
@@ -18,7 +20,9 @@ export class DisableUserFormComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.fields = this.fieldsService.getData();
+    this.fieldsService.getData()
+    .then((res) => this.fields = new Fields(res[0]));
+
     this.fields.accounts.forEach((account) => {
       account.checked = true;
     });

@@ -14,7 +14,7 @@ import { User } from "../../models/user";
 })
 
 export class CreateUserFormComponent implements OnInit {
-  public fields;
+  public fields: Fields;
   public errorMsg;
   public passwordExists = false;
   public usersFromSugar: User[];
@@ -31,9 +31,9 @@ export class CreateUserFormComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.fields = this.fieldsService.getData();
-    console.log("this fields", this.fields);
-    this.resetSugar();
+    this.fieldsService.getData()
+    .then((res) => this.fields = new Fields(res[0]));
+
     this.usersFromSugar = this.sugarService.getUsersFromSugar();
     this.route.paramMap.subscribe((params) => params.get("id"));
   }
@@ -71,8 +71,8 @@ export class CreateUserFormComponent implements OnInit {
   private resetSugar() {
     this.fields.inactiveStatus = false,
     this.fields.inactiveEmployee = false,
-    this.fields.leadsMin = null;
-    this.fields.leadsMax = null;
+    this.fields.leadsMin = 15;
+    this.fields.leadsMax = 45;
     this.fields.userValue = "user_default_xx";
     this.fields.selectedManager = null,
     this.eraseFields([

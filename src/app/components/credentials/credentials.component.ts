@@ -17,7 +17,7 @@ import { User } from "../../models/user";
 })
 
 export class CredentialsComponent implements OnInit {
-  public fields;
+  public fields: Fields;
   public passwordExists = false;
   public usersFromSugar: User[];
   public usernameTaken = false;
@@ -27,7 +27,8 @@ export class CredentialsComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.fields = this.fieldsService.getData();
+    this.fieldsService.getData()
+    .then((res) => this.fields = new Fields(res[0]));
   }
 
   public credentialClick(e) {
