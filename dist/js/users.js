@@ -32764,9 +32764,7 @@
             if (undefined !== data && null !== data) {
                 for (var prop in data) {
                     if ("attributes" !== prop) {
-                        if (typeof data[prop] !== "function"
-                            && data[prop] != null
-                            && data[prop] !== "") {
+                        if (typeof data[prop] !== "function" && data[prop] != null && data[prop] !== "") {
                             self[prop] = data[prop];
                         }
                     }
