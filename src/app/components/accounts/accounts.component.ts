@@ -6,8 +6,9 @@ import { Fields } from "../../models/fields";
 
 @Component({
   selector: "mv-accounts",
-  styleUrls: ["./accounts.component.css"],
   templateUrl: "./accounts.component.html",
+
+  // do I still need to keep this ?
   viewProviders: [
   {
     provide: ControlContainer,
@@ -17,15 +18,19 @@ import { Fields } from "../../models/fields";
 })
 
 export class AccountsComponent implements OnInit {
-  public fields: Fields;
+  public fields: Fields = null;
+  // public accounts;
+  // @Input() public accountFields;
 
   constructor(private fieldsService: FieldsService) {
-    //
   }
 
   public ngOnInit(): void {
-    this.fieldsService.getData()
-    .then((res) => this.fields = new Fields(res[0]));
+    // this.accounts = this.accountFields;
+    // console.log("this.accounts", this.accountFields);
+
+    this.fieldsService.getSingleField("accounts")
+    .then((res) => this.fields = new Fields(res));
   }
 
   public trackByFn(index, item) {

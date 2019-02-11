@@ -23,10 +23,8 @@ export class DisableUserFormComponent implements OnInit {
     this.fieldsService.getData()
     .then((res) => this.fields = new Fields(res[0]));
 
-    this.fields.accounts.forEach((account) => {
-      account.checked = true;
-    });
     this.route.paramMap.subscribe((params) => (params));
+
   }
 
   public trackByFn(index, item) {

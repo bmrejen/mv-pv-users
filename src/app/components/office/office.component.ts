@@ -23,8 +23,8 @@ export class OfficeComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.fieldsService.getData()
-    .then((res) => this.fields = new Fields(res[0]));
+    this.fieldsService.getSingleField("offices")
+    .then((res) => this.fields = new Fields(res));
   }
 
   public trackByFn(index, item) {

@@ -4,13 +4,13 @@ export class Fields extends Model {
 
   // Json-related properties must have same name as their json file
   public accounts: any[];
-  public autres: any[];
-  public bureaux: any[];
   public civilites: any[];
   public destinations: any[];
   public functions: any[];
   public managers: any[];
+  public offices: any[];
   public orgas: any[];
+  public others: any[];
   public roles: any[];
   public services: any[];
   public teams: any[];
@@ -30,9 +30,9 @@ export class Fields extends Model {
   public outbound: string = "";
   public phoneExtension: string = "";
   public phoneNumber: string = "";
-  public selectedBureau: string = "";
   public selectedFunction: string = "";
   public selectedManager: string = "";
+  public selectedOffice: string = "";
   public selectedOrganisation: string = "";
   public title: string = "";
   public userValue: string = "";

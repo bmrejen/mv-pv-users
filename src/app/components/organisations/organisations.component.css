@@ -1,7 +1,0 @@
-.organisations {
-  display: flex;
-  flex-direction: column;
-  height: 80px;
-  flex-wrap: wrap;
-  background-color: aliceblue;
-}

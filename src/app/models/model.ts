@@ -21,10 +21,9 @@ export abstract class Model {
           if (typeof data.attributes[prop] !== "function"
               && data.attributes[prop] != null
               && data.attributes[prop] !== "") {
-            self[prop] = data.attributes[prop];
+            self[prop] = data.attributes[prop]; }
         }
       }
     }
   }
-}
 }

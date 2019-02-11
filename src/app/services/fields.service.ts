@@ -15,13 +15,13 @@ export class FieldsService {
   public getData() {
     const fields = [
     "accounts",
-    "autres",
-    "bureaux",
     "civilites",
     "destinations",
     "functions",
     "managers",
+    "offices",
     "orgas",
+    "others",
     "roles",
     "services",
     "teams",

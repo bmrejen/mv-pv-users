@@ -1,4 +1,4 @@
-<fieldset class="blue">
+<fieldset class="blue" *ngIf = "fields != null && fields.teams != null">
   <legend>Teams</legend>
   <div ngModelGroup="teams" class="teams">
     <div *ngFor="let team of fields.teams ; trackBy: trackByFn">

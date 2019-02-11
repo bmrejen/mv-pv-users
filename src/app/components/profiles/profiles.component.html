@@ -1,6 +1,6 @@
-<fieldset class="blue">
-  <legend>Profiles SugarCRM</legend>
-  <div ngModelGroup="sugar">
+<div *ngIf="fields != null && fields.userTemplates != null && fields.roles != null && fields.services != null">
+  <fieldset class="blue">
+    <legend>Profiles SugarCRM</legend>
     <button (click)="handleClick($event, 'conseiller')">Ventes - Conseiller</button>
     <button (click)="handleClick($event, 'jm')">Ventes – Junior Manager</button>
     <button (click)="handleClick($event, 'manager')">Ventes - Manager</button>
@@ -40,5 +40,5 @@
         <input type="number" name="leadsMax" [(ngModel)]="fields.leadsMax">
       </label>
     </div>
-  </div>
-</fieldset>
+  </fieldset>
+</div>

@@ -1,4 +1,4 @@
-<fieldset class="blue">
+<fieldset class="blue" *ngIf = "fields != null">
   <legend>Extraneous</legend>
   <div>
     <label>Code User Tourplan
@@ -18,7 +18,7 @@
     </label>
   </div>
 
-  <div ngModelGroup="inactive">
+  <div>
     <label>
       <input type="checkbox" [(ngModel)]="fields.inactiveStatus" name="inactiveStatus">Statut inactif
     </label>

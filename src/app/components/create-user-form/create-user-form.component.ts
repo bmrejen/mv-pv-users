@@ -34,20 +34,20 @@ export class CreateUserFormComponent implements OnInit {
     this.fieldsService.getData()
     .then((res) => this.fields = new Fields(res[0]));
 
-    this.usersFromSugar = this.sugarService.getUsersFromSugar();
-    this.route.paramMap.subscribe((params) => params.get("id"));
+    // this.usersFromSugar = this.sugarService.getUsersFromSugar();
+    // this.route.paramMap.subscribe((params) => params.get("id"));
   }
 
   public onParentChange({e, id}) {
-    const myField = this.fields.autres.find((field) => field.id === id);
-    myField.checked = e;
+    // const myField = this.fields.others.find((field) => field.id === id);
+    // myField.checked = e;
   }
 
   public onSubmit(form) {
-    this.sugarService.postDataToSugar(form)
-    .subscribe(
-               (data) => console.log("DATA- ", data),
-               (error) => this.errorMsg = error.statusText);
+    // this.sugarService.postDataToSugar(form)
+    // .subscribe(
+    //            (data) => console.log("DATA- ", data),
+    //            (error) => this.errorMsg = error.statusText);
   }
 
   public trackByFn(index, item) {
@@ -84,15 +84,15 @@ export class CreateUserFormComponent implements OnInit {
                      this.fields.outbound,
                      this.fields.phoneExtension,
                      this.fields.phoneNumber,
-                     this.fields.selectedBureau,
                      this.fields.selectedFunction,
+                     this.fields.selectedOffice,
                      this.fields.selectedOrganisation,
                      this.fields.title,
                      ]);
     this.unCheckArrays([
                        this.fields.roles,
                        this.fields.services,
-                       this.fields.autres,
+                       this.fields.others,
                        this.fields.teams,
                        this.fields.destinations,
                        this.fields.orgas,
