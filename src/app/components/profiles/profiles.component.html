@@ -15,13 +15,13 @@
       </select>
     </div>
 
-    <div class="checkbox-list subtitle" id="sugar_role">ROLE:
+    <div class="checkbox-list subtitle" id="sugar_role" ngModelGroup="roles">ROLE:
      <span *ngFor="let role of fields.roles ; trackBy: trackByFn">
       <label><input type="checkbox" [(ngModel)]="role.checked" [name]="role.id">{{ role.label }}
       </label></span>
     </div>
 
-    <div class="checkbox-list subtitle" id="sugar_departement">SERVICE:
+    <div class="checkbox-list subtitle" id="sugar_departement" ngModelGroup="services">SERVICE:
       <span *ngFor="let service of fields.services ; trackBy: trackByFn">
         <label>
           <input [id]="service.id" type="checkbox" [name]="service.id" [ngModel]="service.checked" (ngModelChange)="onServiceChecked(service, $event)">{{ service.name }}
