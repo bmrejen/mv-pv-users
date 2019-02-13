@@ -1,10 +1,13 @@
-<h2>Users component</h2>
+<h1>Sugar Users</h1>
+<h2>{{ filter }} users: {{ filteredUsers.length }}</h2>
 
-<h3>Sugar Users</h3>
-
+<button (click)="filterUsers('active')">Actifs</button>
+<button (click)="filterUsers('inactive')">Inactifs</button>
+<button (click)="filterUsers('all')">Tous</button>
+<br><br>
 <button routerLink="/create">Nouvel utilisateur</button>
 
-<table *ngIf="usersFromSugar && usersFromSugar != undefined">
+<table *ngIf="filteredUsers && filteredUsers != undefined">
   <tr>
     <th></th>
     <th>Mr/Mme</th>
@@ -31,8 +34,9 @@
     <th>Employee Status</th>
     <th>Manager ID</th>
   </tr>
-  <tr *ngFor="let user of usersFromSugar ; trackBy: trackByFn">
+  <tr *ngFor="let user of filteredUsers; trackBy: trackByFn">
     <td>
+      <p># {{filteredUsers.indexOf(user) +1 }}</p>
       <button [routerLink]="['/users', user.id]">Edit</button>
       <button [routerLink]="['/disable', user.id]">Delete</button>
     </td>
@@ -61,4 +65,3 @@
     <td>{{ user.managerId }}</td>
   </tr>
 </table>
-

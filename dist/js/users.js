@@ -46120,8 +46120,7 @@
         SugarService.prototype.getUsersFromSugar = function () {
             var _this = this;
             this.getUserPromiseFromSugar()
-                .then(function (users) { return users.forEach(function (user) { return _this.userList.push(new User(user)); }); })
-                .then(function (data) { return console.log("promise over", _this.userList); });
+                .then(function (users) { return users.forEach(function (user) { return _this.userList.push(new User(user)); }); });
             return this.userList;
         };
         SugarService.prototype.getTeamsFromSugar = function () {
@@ -46487,10 +46486,33 @@
         function UsersComponent(sugarService) {
             this.sugarService = sugarService;
             this.usersFromSugar = [];
+            this.filteredUsers = [];
+            this.filter = "All";
             // constructor
         }
         UsersComponent.prototype.ngOnInit = function () {
-            this.usersFromSugar = this.sugarService.getUsersFromSugar();
+            this.filteredUsers = this.usersFromSugar = this.sugarService.getUsersFromSugar();
+        };
+        UsersComponent.prototype.filterUsers = function (prop) {
+            switch (prop) {
+                case "inactive":
+                    this.filter = "Inactive";
+                    // tslint:disable-next-line:max-line-length
+                    this.filteredUsers = this.usersFromSugar.filter(function (user) { return user.status !== "Active" || user.employeeStatus !== "Active"; });
+                    break;
+                case "active":
+                    this.filter = "Active";
+                    // tslint:disable-next-line:max-line-length
+                    this.filteredUsers = this.usersFromSugar.filter(function (user) { return user.status === "Active" && user.employeeStatus === "Active"; });
+                    break;
+                case "all":
+                    this.filter = "All";
+                    this.filteredUsers = this.usersFromSugar;
+                    break;
+                default:
+                    console.error("Users not filtered");
+                    break;
+            }
         };
         UsersComponent.prototype.trackByFn = function (index, item) {
             return index; // or item.id
@@ -52603,10 +52625,8 @@
             username.value = "" + first.value[0].toLowerCase() + last.value.toLowerCase();
         };
         CredentialsComponent.prototype.isUsernameTaken = function (username) {
-            var res = this.usersFromSugar
+            return this.usersFromSugar
                 .find(function (user) { return user.userName === username.value; });
-            console.log(res);
-            return (res);
         };
         CredentialsComponent.prototype.setPassword = function (first, last) {
             if (this.passwordExists) {
@@ -55128,77 +55148,80 @@
     var RenderType_UsersComponent = createRendererType2({ encapsulation: 0,
         styles: styles_UsersComponent, data: {} });
     function View_UsersComponent_2(_l) {
-        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 83, 'tr', [], null, null, null, null, null)), (_l()(),
-                textDef(-1, null, ['\n    '])), (_l()(), elementDef(2, 0, null, null, 11, 'td', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(4, 0, null, null, 3, 'button', [], null, [[null,
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 86, 'tr', [], null, null, null, null, null)), (_l()(),
+                textDef(-1, null, ['\n    '])), (_l()(), elementDef(2, 0, null, null, 14, 'td', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(4, 0, null, null, 1, 'p', [], null, null, null, null, null)), (_l()(), textDef(5, null, ['# ', ''])), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(7, 0, null, null, 3, 'button', [], null, [[null,
                     'click']], function (_v, en, $event) {
                 var ad = true;
                 if (('click' === en)) {
-                    var pd_0 = (nodeValue(_v, 5).onClick() !== false);
+                    var pd_0 = (nodeValue(_v, 8).onClick() !== false);
                     ad = (pd_0 && ad);
                 }
                 return ad;
-            }, null, null)), directiveDef(5, 16384, null, 0, RouterLink, [Router, ActivatedRoute, [8, null], Renderer2, ElementRef], { routerLink: [0,
-                    'routerLink'] }, null), pureArrayDef(6, 2), (_l()(), textDef(-1, null, ['Edit'])), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(9, 0, null, null, 3, 'button', [], null, [[null,
+            }, null, null)), directiveDef(8, 16384, null, 0, RouterLink, [Router, ActivatedRoute, [8, null], Renderer2, ElementRef], { routerLink: [0,
+                    'routerLink'] }, null), pureArrayDef(9, 2), (_l()(), textDef(-1, null, ['Edit'])), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(12, 0, null, null, 3, 'button', [], null, [[null,
                     'click']], function (_v, en, $event) {
                 var ad = true;
                 if (('click' === en)) {
-                    var pd_0 = (nodeValue(_v, 10).onClick() !== false);
+                    var pd_0 = (nodeValue(_v, 13).onClick() !== false);
                     ad = (pd_0 && ad);
                 }
                 return ad;
-            }, null, null)), directiveDef(10, 16384, null, 0, RouterLink, [Router, ActivatedRoute, [8, null], Renderer2, ElementRef], { routerLink: [0,
-                    'routerLink'] }, null), pureArrayDef(11, 2), (_l()(), textDef(-1, null, ['Delete'])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(15, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(16, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(18, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(19, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(21, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(22, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(24, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(25, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(27, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(28, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(30, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(31, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(33, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(34, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(36, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(37, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(39, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(40, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(42, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(43, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(45, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(46, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(48, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(49, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(51, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(52, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(54, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(55, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(57, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(58, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(60, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(61, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(63, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(64, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(66, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(67, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(69, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(70, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(72, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(73, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(75, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(76, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(78, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(79, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(81, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(82, null, ['', ''])), (_l()(), textDef(-1, null, ['\n  ']))], function (_ck, _v) {
-            var currVal_0 = _ck(_v, 6, 0, '/users', _v.context.$implicit.id);
-            _ck(_v, 5, 0, currVal_0);
-            var currVal_1 = _ck(_v, 11, 0, '/disable', _v.context.$implicit.id);
-            _ck(_v, 10, 0, currVal_1);
+            }, null, null)), directiveDef(13, 16384, null, 0, RouterLink, [Router, ActivatedRoute, [8, null], Renderer2, ElementRef], { routerLink: [0,
+                    'routerLink'] }, null), pureArrayDef(14, 2), (_l()(), textDef(-1, null, ['Delete'])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(18, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(19, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(21, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(22, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(24, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(25, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(27, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(28, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(30, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(31, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(33, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(34, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(36, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(37, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(39, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(40, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(42, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(43, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(45, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(46, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(48, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(49, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(51, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(52, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(54, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(55, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(57, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(58, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(60, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(61, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(63, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(64, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(66, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(67, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(69, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(70, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(72, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(73, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(75, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(76, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(78, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(79, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(81, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(82, null, ['', ''])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(84, 0, null, null, 1, 'td', [], null, null, null, null, null)), (_l()(), textDef(85, null, ['', ''])), (_l()(), textDef(-1, null, ['\n  ']))], function (_ck, _v) {
+            var currVal_1 = _ck(_v, 9, 0, '/users', _v.context.$implicit.id);
+            _ck(_v, 8, 0, currVal_1);
+            var currVal_2 = _ck(_v, 14, 0, '/disable', _v.context.$implicit.id);
+            _ck(_v, 13, 0, currVal_2);
         }, function (_ck, _v) {
-            var currVal_2 = _v.context.$implicit.salutation;
-            _ck(_v, 16, 0, currVal_2);
-            var currVal_3 = _v.context.$implicit.firstName;
+            var _co = _v.component;
+            var currVal_0 = (_co.filteredUsers.indexOf(_v.context.$implicit) + 1);
+            _ck(_v, 5, 0, currVal_0);
+            var currVal_3 = _v.context.$implicit.salutation;
             _ck(_v, 19, 0, currVal_3);
-            var currVal_4 = _v.context.$implicit.lastName;
+            var currVal_4 = _v.context.$implicit.firstName;
             _ck(_v, 22, 0, currVal_4);
-            var currVal_5 = _v.context.$implicit.userName;
+            var currVal_5 = _v.context.$implicit.lastName;
             _ck(_v, 25, 0, currVal_5);
-            var currVal_6 = _v.context.$implicit.email;
+            var currVal_6 = _v.context.$implicit.userName;
             _ck(_v, 28, 0, currVal_6);
-            var currVal_7 = _v.context.$implicit.department;
+            var currVal_7 = _v.context.$implicit.email;
             _ck(_v, 31, 0, currVal_7);
-            var currVal_8 = _v.context.$implicit.officeId;
+            var currVal_8 = _v.context.$implicit.department;
             _ck(_v, 34, 0, currVal_8);
-            var currVal_9 = _v.context.$implicit.teamId;
+            var currVal_9 = _v.context.$implicit.officeId;
             _ck(_v, 37, 0, currVal_9);
-            var currVal_10 = _v.context.$implicit.tourplanID;
+            var currVal_10 = _v.context.$implicit.teamId;
             _ck(_v, 40, 0, currVal_10);
-            var currVal_11 = _v.context.$implicit.swClickToCall;
+            var currVal_11 = _v.context.$implicit.tourplanID;
             _ck(_v, 43, 0, currVal_11);
-            var currVal_12 = _v.context.$implicit.swCallNotification;
+            var currVal_12 = _v.context.$implicit.swClickToCall;
             _ck(_v, 46, 0, currVal_12);
-            var currVal_13 = _v.context.$implicit.codeSonGalileo;
+            var currVal_13 = _v.context.$implicit.swCallNotification;
             _ck(_v, 49, 0, currVal_13);
-            var currVal_14 = _v.context.$implicit.id;
+            var currVal_14 = _v.context.$implicit.codeSonGalileo;
             _ck(_v, 52, 0, currVal_14);
-            var currVal_15 = _v.context.$implicit.type;
+            var currVal_15 = _v.context.$implicit.id;
             _ck(_v, 55, 0, currVal_15);
-            var currVal_16 = _v.context.$implicit.phoneHome;
+            var currVal_16 = _v.context.$implicit.type;
             _ck(_v, 58, 0, currVal_16);
-            var currVal_17 = _v.context.$implicit.phoneMobile;
+            var currVal_17 = _v.context.$implicit.phoneHome;
             _ck(_v, 61, 0, currVal_17);
-            var currVal_18 = _v.context.$implicit.phoneWork;
+            var currVal_18 = _v.context.$implicit.phoneMobile;
             _ck(_v, 64, 0, currVal_18);
-            var currVal_19 = _v.context.$implicit.phoneOther;
+            var currVal_19 = _v.context.$implicit.phoneWork;
             _ck(_v, 67, 0, currVal_19);
-            var currVal_20 = _v.context.$implicit.phoneFax;
+            var currVal_20 = _v.context.$implicit.phoneOther;
             _ck(_v, 70, 0, currVal_20);
-            var currVal_21 = _v.context.$implicit.phoneAsterisk;
+            var currVal_21 = _v.context.$implicit.phoneFax;
             _ck(_v, 73, 0, currVal_21);
-            var currVal_22 = _v.context.$implicit.status;
+            var currVal_22 = _v.context.$implicit.phoneAsterisk;
             _ck(_v, 76, 0, currVal_22);
-            var currVal_23 = _v.context.$implicit.employeeStatus;
+            var currVal_23 = _v.context.$implicit.status;
             _ck(_v, 79, 0, currVal_23);
-            var currVal_24 = _v.context.$implicit.managerId;
+            var currVal_24 = _v.context.$implicit.employeeStatus;
             _ck(_v, 82, 0, currVal_24);
+            var currVal_25 = _v.context.$implicit.managerId;
+            _ck(_v, 85, 0, currVal_25);
         });
     }
     function View_UsersComponent_1(_l) {
@@ -55220,33 +55243,62 @@
             (_l()(), textDef(-1, null, ['\n  '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_UsersComponent_2)), directiveDef(78, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(),
                 textDef(-1, null, ['\n']))], function (_ck, _v) {
             var _co = _v.component;
-            var currVal_0 = _co.usersFromSugar;
+            var currVal_0 = _co.filteredUsers;
             var currVal_1 = _co.trackByFn;
             _ck(_v, 78, 0, currVal_0, currVal_1);
         }, null);
     }
     function View_UsersComponent_0(_l) {
-        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 1, 'h2', [], null, null, null, null, null)), (_l()(),
-                textDef(-1, null, ['Users component'])), (_l()(), textDef(-1, null, ['\n\n'])), (_l()(), elementDef(3, 0, null, null, 1, 'h3', [], null, null, null, null, null)), (_l()(),
-                textDef(-1, null, ['Sugar Users'])), (_l()(), textDef(-1, null, ['\n\n'])), (_l()(), elementDef(6, 0, null, null, 2, 'button', [['routerLink',
-                    '/create']], null, [[null, 'click']], function (_v, en, $event) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 1, 'h1', [], null, null, null, null, null)), (_l()(),
+                textDef(-1, null, ['Sugar Users'])), (_l()(), textDef(-1, null, ['\n'])), (_l()(), elementDef(3, 0, null, null, 1, 'h2', [], null, null, null, null, null)), (_l()(),
+                textDef(4, null, ['', ' users: ', ''])), (_l()(), textDef(-1, null, ['\n\n'])), (_l()(), elementDef(6, 0, null, null, 1, 'button', [], null, [[null, 'click']], function (_v, en, $event) {
                 var ad = true;
+                var _co = _v.component;
                 if (('click' === en)) {
-                    var pd_0 = (nodeValue(_v, 7).onClick() !== false);
+                    var pd_0 = (_co.filterUsers('active') !== false);
                     ad = (pd_0 && ad);
                 }
                 return ad;
-            }, null, null)), directiveDef(7, 16384, null, 0, RouterLink, [Router,
-                ActivatedRoute, [8, null], Renderer2, ElementRef], { routerLink: [0,
-                    'routerLink'] }, null), (_l()(), textDef(-1, null, ['Nouvel utilisateur'])),
-            (_l()(), textDef(-1, null, ['\n\n'])), (_l()(), anchorDef(16777216, null, null, 1, null, View_UsersComponent_1)), directiveDef(11, 16384, null, 0, NgIf, [ViewContainerRef, TemplateRef], { ngIf: [0, 'ngIf'] }, null),
-            (_l()(), textDef(-1, null, ['\n\n']))], function (_ck, _v) {
+            }, null, null)), (_l()(), textDef(-1, null, ['Actifs'])),
+            (_l()(), textDef(-1, null, ['\n'])), (_l()(), elementDef(9, 0, null, null, 1, 'button', [], null, [[null, 'click']], function (_v, en, $event) {
+                var ad = true;
+                var _co = _v.component;
+                if (('click' === en)) {
+                    var pd_0 = (_co.filterUsers('inactive') !== false);
+                    ad = (pd_0 && ad);
+                }
+                return ad;
+            }, null, null)), (_l()(), textDef(-1, null, ['Inactifs'])),
+            (_l()(), textDef(-1, null, ['\n'])), (_l()(), elementDef(12, 0, null, null, 1, 'button', [], null, [[null, 'click']], function (_v, en, $event) {
+                var ad = true;
+                var _co = _v.component;
+                if (('click' === en)) {
+                    var pd_0 = (_co.filterUsers('all') !== false);
+                    ad = (pd_0 && ad);
+                }
+                return ad;
+            }, null, null)), (_l()(), textDef(-1, null, ['Tous'])),
+            (_l()(), textDef(-1, null, ['\n'])), (_l()(), elementDef(15, 0, null, null, 0, 'br', [], null, null, null, null, null)), (_l()(), elementDef(16, 0, null, null, 0, 'br', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n'])), (_l()(), elementDef(18, 0, null, null, 2, 'button', [['routerLink', '/create']], null, [[null, 'click']], function (_v, en, $event) {
+                var ad = true;
+                if (('click' === en)) {
+                    var pd_0 = (nodeValue(_v, 19).onClick() !== false);
+                    ad = (pd_0 && ad);
+                }
+                return ad;
+            }, null, null)), directiveDef(19, 16384, null, 0, RouterLink, [Router, ActivatedRoute, [8, null], Renderer2, ElementRef], { routerLink: [0, 'routerLink'] }, null), (_l()(), textDef(-1, null, ['Nouvel utilisateur'])), (_l()(), textDef(-1, null, ['\n\n'])), (_l()(),
+                anchorDef(16777216, null, null, 1, null, View_UsersComponent_1)),
+            directiveDef(23, 16384, null, 0, NgIf, [ViewContainerRef, TemplateRef], { ngIf: [0, 'ngIf'] }, null), (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
             var _co = _v.component;
-            var currVal_0 = '/create';
-            _ck(_v, 7, 0, currVal_0);
-            var currVal_1 = (_co.usersFromSugar && (_co.usersFromSugar != undefined));
-            _ck(_v, 11, 0, currVal_1);
-        }, null);
+            var currVal_2 = '/create';
+            _ck(_v, 19, 0, currVal_2);
+            var currVal_3 = (_co.filteredUsers && (_co.filteredUsers != undefined));
+            _ck(_v, 23, 0, currVal_3);
+        }, function (_ck, _v) {
+            var _co = _v.component;
+            var currVal_0 = _co.filter;
+            var currVal_1 = _co.filteredUsers.length;
+            _ck(_v, 4, 0, currVal_0, currVal_1);
+        });
     }
     function View_UsersComponent_Host_0(_l) {
         return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 1, 'mv-app-users', [], null, null, null, View_UsersComponent_0, RenderType_UsersComponent)), directiveDef(1, 114688, null, 0, UsersComponent, [SugarService], null, null)], function (_ck, _v) {

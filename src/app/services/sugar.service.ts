@@ -42,8 +42,7 @@ export class SugarService {
 
   public getUsersFromSugar(): User[] {
     this.getUserPromiseFromSugar()
-    .then((users) => users.forEach((user) => this.userList.push(new User(user))))
-    .then((data) => console.log("promise over", this.userList));
+    .then((users) => users.forEach((user) => this.userList.push(new User(user))));
 
     return this.userList;
   }
