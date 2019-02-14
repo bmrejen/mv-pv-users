@@ -36,7 +36,7 @@
   </tr>
   <tr *ngFor="let user of filteredUsers; trackBy: trackByFn">
     <td>
-      <p># {{filteredUsers.indexOf(user) +1 }}</p>
+      <p># {{ filteredUsers.indexOf(user) +1 }}</p>
       <button [routerLink]="['/users', user.id]">Edit</button>
       <button [routerLink]="['/disable', user.id]">Delete</button>
     </td>

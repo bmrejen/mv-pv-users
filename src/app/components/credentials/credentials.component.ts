@@ -8,6 +8,7 @@ import { User } from "../../models/user";
 
 @Component({
   selector: "mv-credentials",
+  styleUrls: ["./credentials.component.css"],
   templateUrl: "./credentials.component.html",
   viewProviders: [
   {
@@ -22,6 +23,7 @@ export class CredentialsComponent implements OnInit {
   public passwordExists = false;
   public usersFromSugar: User[];
   public usernameTaken;
+  public usernameStatus;
 
   constructor(private fieldsService: FieldsService,
               private sugar: SugarService) {
@@ -40,6 +42,7 @@ export class CredentialsComponent implements OnInit {
 
     this.usersFromSugar = this.usersFromSugar || this.sugar.getUsersFromSugar();
     this.usernameTaken = this.isUsernameTaken(username);
+    this.usernameStatus = this.usernameTaken ? "Username already taken. Choose another one" : "Username available :)";
 
     if (!!first.value && !!last.value && !username.value) {
       this.setUsername(first, last, username);
@@ -59,8 +62,8 @@ export class CredentialsComponent implements OnInit {
 
   public isUsernameTaken(username) {
 
-    return this.usersFromSugar
-    .find((user) => user.userName === username.value);
+    return (this.usersFromSugar
+            .find((user) => user.userName === username.value) !== undefined);
   }
 
   public setPassword(first, last) {
