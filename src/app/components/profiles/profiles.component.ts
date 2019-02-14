@@ -1,8 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { ControlContainer, NgForm } from "@angular/forms";
+
 import { FieldsService } from "../../services/fields.service";
+import { SugarService } from "../../services/sugar.service";
 
 import { Fields } from "../../models/fields";
+import { User } from "../../models/user";
 
 @Component({
   selector: "mv-profiles",
@@ -18,14 +21,43 @@ import { Fields } from "../../models/fields";
 export class ProfilesComponent implements OnInit {
   public fields: Fields;
   public displayVentesLeads = false;
+  public allUsersFromSugar: User[] = [];
+  public activeUsersFromSugar: User[];
 
-  constructor(private fieldsService: FieldsService) {
+  constructor(private fieldsService: FieldsService,
+              private sugarService: SugarService) {
     //
   }
 
   public ngOnInit(): void {
     this.fieldsService.getData()
     .then((res) => this.fields = new Fields(res[0]));
+
+    this.sugarService.getUsersFromSugar()
+
+    // populate usersFromSugar array
+    .then((users) => users.forEach((user) => this.allUsersFromSugar.push(new User(user))))
+
+    // filter active users
+    .then((users) => this.activeUsersFromSugar = this.allUsersFromSugar.filter((user) => user.status === "Active"))
+
+    // create userTemplates from userlist
+    .then((data) => {
+      return this.activeUsersFromSugar.map((user) => {
+        return {
+          label: user.userName,
+          selected: false,
+          value: user.userName};
+        });
+    })
+
+    // push them into fields
+    .then((templates) => {
+      if (templates !== undefined && templates !== null) {
+        this.fields.userTemplates.push(...templates);
+      }
+    })
+    .catch((err) => console.log(err));
   }
 
   public handleClick(e, type) {

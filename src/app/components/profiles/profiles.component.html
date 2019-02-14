@@ -8,9 +8,12 @@
     <button (click)="handleClick($event, 'qualite')">Agent Qualité</button>
     <button (click)="handleClick($event, 'compta')">Compta</button>
     <button (click)="handleClick($event, 'inactif')">Inactif</button>
+
+
     <div class="select subtitle">Hérite les préférence de l'utilisateur
       <select name="userToCopyHPfrom" [(ngModel)]="fields.userValue">
-        <option *ngFor="let user of fields.userTemplates ; trackBy: trackByFn" [value]="user.value" (onChange)="selectTmp($event, user)">{{ user.label }}
+        <option *ngFor="let user of fields.userTemplates ; trackBy: trackByFn" [value]="user.value">
+          {{ user.label | uppercase }}
         </option>
       </select>
     </div>

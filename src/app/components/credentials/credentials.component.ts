@@ -21,7 +21,7 @@ import { User } from "../../models/user";
 export class CredentialsComponent implements OnInit {
   public fields: Fields;
   public passwordExists = false;
-  public usersFromSugar: User[];
+  public usersFromSugar: User[] = [];
   public usernameTaken;
   public usernameStatus;
 
@@ -33,6 +33,9 @@ export class CredentialsComponent implements OnInit {
   public ngOnInit(): void {
     this.fieldsService.getSingleField("civilites")
     .then((res) => this.fields = new Fields(res));
+
+    this.sugar.getUsersFromSugar()
+    .then((users) => users.forEach((user) => this.usersFromSugar.push(new User(user))));
   }
 
   public credentialClick(e) {
@@ -40,7 +43,6 @@ export class CredentialsComponent implements OnInit {
     const last = this.fields.userFields.find((field) => field.name === "lastname");
     const username = this.fields.userFields.find((field) => field.name === "username");
 
-    this.usersFromSugar = this.usersFromSugar || this.sugar.getUsersFromSugar();
     this.usernameTaken = this.isUsernameTaken(username);
     this.usernameStatus = this.usernameTaken ? "Username already taken. Choose another one" : "Username available :)";
 
