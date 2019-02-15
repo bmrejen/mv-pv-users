@@ -40311,6 +40311,10 @@
             component: CreateUserFormComponent,
         },
         {
+            path: "create",
+            component: CreateUserFormComponent,
+        },
+        {
             path: "users",
             component: UsersComponent,
         },
@@ -55878,7 +55882,8 @@
             moduleProvideDef(256, APP_BASE_HREF, '/', []), moduleProvideDef(256, ROUTER_CONFIGURATION, {}, []), moduleProvideDef(1024, LocationStrategy, provideLocationStrategy, [PlatformLocation,
                 [2, APP_BASE_HREF], ROUTER_CONFIGURATION]), moduleProvideDef(512, Location, Location, [LocationStrategy]), moduleProvideDef(512, Compiler, Compiler, []), moduleProvideDef(512, NgModuleFactoryLoader, SystemJsNgModuleLoader, [Compiler, [2, SystemJsNgModuleLoaderConfig]]), moduleProvideDef(1024, ROUTES, function () {
                 return [[{ path: 'users/:id', component: CreateUserFormComponent },
-                        { path: 'users', component: UsersComponent }, { path: 'user', component: UserComponent },
+                        { path: 'create', component: CreateUserFormComponent }, { path: 'users',
+                            component: UsersComponent }, { path: 'user', component: UserComponent },
                         { path: 'disable/:id', component: DisableUserFormComponent }, { path: 'disable',
                             component: DisableUserFormComponent }, { path: 'roles', component: RolesComponent },
                         { path: 'import', component: ImportComponent }, { path: '**', redirectTo: 'users' }]];

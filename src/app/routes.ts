@@ -30,6 +30,10 @@ export const AppRoutes: Routes = [
   component: CreateUserFormComponent,
 },
 {
+  path: "create",
+  component: CreateUserFormComponent,
+},
+{
   path: "users",
   component: UsersComponent,
 },
