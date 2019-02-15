@@ -40019,42 +40019,6 @@
         return CreateUserFormComponent;
     }());
 
-    var __decorate$7 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-        return c > 3 && r && Object.defineProperty(target, key, r), r;
-    };
-    var __metadata$6 = (undefined && undefined.__metadata) || function (k, v) {
-        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-    };
-    var DisableUserFormComponent = /** @class */ (function () {
-        function DisableUserFormComponent(fieldsService, route) {
-            this.fieldsService = fieldsService;
-            this.route = route;
-            this.enableAdd = true;
-            //
-        }
-        DisableUserFormComponent.prototype.ngOnInit = function () {
-            var _this = this;
-            this.fieldsService.getData()
-                .then(function (res) { return _this.fields = new Fields(res[0]); });
-            this.route.paramMap.subscribe(function (params) { return (params); });
-        };
-        DisableUserFormComponent.prototype.trackByFn = function (index, item) {
-            return item.id;
-        };
-        DisableUserFormComponent = __decorate$7([
-            Component({
-                selector: "mv-app-disable-user-form",
-                templateUrl: "./disable-user-form.component.html",
-            }),
-            __metadata$6("design:paramtypes", [FieldsService,
-                ActivatedRoute])
-        ], DisableUserFormComponent);
-        return DisableUserFormComponent;
-    }());
-
     var __extends$1D = (undefined && undefined.__extends) || (function () {
         var extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -40082,6 +40046,56 @@
         }
         return User;
     }(Model));
+
+    var __decorate$7 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    };
+    var __metadata$6 = (undefined && undefined.__metadata) || function (k, v) {
+        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+    };
+    var DisableUserFormComponent = /** @class */ (function () {
+        function DisableUserFormComponent(fieldsService, route, sugar) {
+            this.fieldsService = fieldsService;
+            this.route = route;
+            this.sugar = sugar;
+            this.users = [];
+            this.enableAdd = true;
+            this.disableGoogle = false;
+            this.changePassword = false;
+            this.disableSugarAccount = false;
+            //
+        }
+        DisableUserFormComponent.prototype.ngOnInit = function () {
+            var _this = this;
+            this.fieldsService.getData()
+                .then(function (res) { return _this.fields = new Fields(res[0]); })
+                .then(function (res) { return console.log(_this.fields); });
+            this.sugar.getUsersFromSugar()
+                .then(function (users) { return users.forEach(function (user) {
+                user["checked"] = false;
+                _this.users.push(new User(user));
+            }); })
+                .then(function (res) { return console.log("this.users", _this.users); });
+            this.route.paramMap.subscribe(function (params) { return (params); });
+        };
+        DisableUserFormComponent.prototype.trackByFn = function (index, item) {
+            return item.id;
+        };
+        DisableUserFormComponent = __decorate$7([
+            Component({
+                selector: "mv-app-disable-user-form",
+                styleUrls: ["./disable-user-form.css"],
+                templateUrl: "./disable-user-form.component.html",
+            }),
+            __metadata$6("design:paramtypes", [FieldsService,
+                ActivatedRoute,
+                SugarService])
+        ], DisableUserFormComponent);
+        return DisableUserFormComponent;
+    }());
 
     var __decorate$8 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -40282,8 +40296,6 @@
             this.sugarService.getUsersFromSugar()
                 .then(function (users) { return users.forEach(function (user) { return _this.usersFromSugar.push(new User(user)); }); })
                 .then(function (users) { return _this.filteredUsers = _this.usersFromSugar; });
-            this.sugarService.getUsersByTeam("Drakkars")
-                .then(function (res) { return console.log(res); });
         };
         UsersComponent.prototype.filterUsers = function (prop) {
             switch (prop) {
@@ -55497,16 +55509,24 @@
      * Do not edit.
      * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride}
      */
-    var styles_DisableUserFormComponent = [];
-    var RenderType_DisableUserFormComponent = createRendererType2({ encapsulation: 2,
+    /* tslint:disable */
+    var styles$6 = ['.users[_ngcontent-%COMP%] {\n  display: flex;\n  flex-wrap: wrap;\n  flex-direction: column;\n  height: 2000px;\n}'];
+
+    /**
+     * @fileoverview This file is generated by the Angular template compiler.
+     * Do not edit.
+     * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride}
+     */
+    var styles_DisableUserFormComponent = [styles$6];
+    var RenderType_DisableUserFormComponent = createRendererType2({ encapsulation: 0,
         styles: styles_DisableUserFormComponent, data: {} });
-    function View_DisableUserFormComponent_1(_l) {
+    function View_DisableUserFormComponent_2(_l) {
         return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 8, 'div', [], null, null, null, null, null)), (_l()(),
-                textDef(-1, null, ['\n      '])), (_l()(), elementDef(2, 0, null, null, 5, 'input', [['type', 'checkbox']], [[2, 'ng-untouched', null], [2, 'ng-touched',
-                    null], [2, 'ng-pristine', null], [2, 'ng-dirty', null],
-                [2, 'ng-valid', null], [2, 'ng-invalid', null], [2, 'ng-pending',
-                    null]], [[null, 'ngModelChange'], [null, 'change'],
-                [null, 'blur']], function (_v, en, $event) {
+                textDef(-1, null, ['\n        '])), (_l()(), elementDef(2, 0, null, null, 5, 'input', [['type', 'checkbox']], [[2, 'ng-untouched', null],
+                [2, 'ng-touched', null], [2, 'ng-pristine', null], [2, 'ng-dirty',
+                    null], [2, 'ng-valid', null], [2, 'ng-invalid', null],
+                [2, 'ng-pending', null]], [[null, 'ngModelChange'], [null,
+                    'change'], [null, 'blur']], function (_v, en, $event) {
                 var ad = true;
                 if (('change' === en)) {
                     var pd_0 = (nodeValue(_v, 3).onChange($event.target.checked) !== false);
@@ -55523,7 +55543,7 @@
                 return ad;
             }, null, null)), directiveDef(3, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
                 return [p0_0];
-            }, [CheckboxControlValueAccessor]), directiveDef(5, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(7, 16384, null, 0, NgControlStatus, [NgControl], null, null), (_l()(), textDef(8, null, ['', '\n    ']))], function (_ck, _v) {
+            }, [CheckboxControlValueAccessor]), directiveDef(5, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(7, 16384, null, 0, NgControlStatus, [NgControl], null, null), (_l()(), textDef(8, null, ['', '\n      ']))], function (_ck, _v) {
             var currVal_7 = _v.context.$implicit.id;
             var currVal_8 = _v.context.$implicit.checked;
             _ck(_v, 5, 0, currVal_7, currVal_8);
@@ -55540,9 +55560,91 @@
             _ck(_v, 8, 0, currVal_9);
         });
     }
+    function View_DisableUserFormComponent_1(_l) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 4, 'div', [], null, null, null, null, null)), (_l()(),
+                textDef(-1, null, ['\n      '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_DisableUserFormComponent_2)), directiveDef(3, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(),
+                textDef(-1, null, ['\n    ']))], function (_ck, _v) {
+            var _co = _v.component;
+            var currVal_0 = _co.fields.accounts;
+            var currVal_1 = _co.trackByFn;
+            _ck(_v, 3, 0, currVal_0, currVal_1);
+        }, null);
+    }
+    function View_DisableUserFormComponent_5(_l) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(),
+                textDef(-1, null, ['\n          '])), (_l()(), elementDef(2, 0, null, null, 5, 'input', [['type', 'checkbox']], [[2, 'ng-untouched', null],
+                [2, 'ng-touched', null], [2, 'ng-pristine', null], [2, 'ng-dirty',
+                    null], [2, 'ng-valid', null], [2, 'ng-invalid', null],
+                [2, 'ng-pending', null]], [[null, 'ngModelChange'], [null,
+                    'change'], [null, 'blur']], function (_v, en, $event) {
+                var ad = true;
+                if (('change' === en)) {
+                    var pd_0 = (nodeValue(_v, 3).onChange($event.target.checked) !== false);
+                    ad = (pd_0 && ad);
+                }
+                if (('blur' === en)) {
+                    var pd_1 = (nodeValue(_v, 3).onTouched() !== false);
+                    ad = (pd_1 && ad);
+                }
+                if (('ngModelChange' === en)) {
+                    var pd_2 = ((_v.parent.context.$implicit.checked = $event) !== false);
+                    ad = (pd_2 && ad);
+                }
+                return ad;
+            }, null, null)), directiveDef(3, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
+                return [p0_0];
+            }, [CheckboxControlValueAccessor]), directiveDef(5, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(7, 16384, null, 0, NgControlStatus, [NgControl], null, null), (_l()(), textDef(8, null, ['', '\n        ']))], function (_ck, _v) {
+            var currVal_7 = _v.parent.context.$implicit.userName;
+            var currVal_8 = _v.parent.context.$implicit.checked;
+            _ck(_v, 5, 0, currVal_7, currVal_8);
+        }, function (_ck, _v) {
+            var currVal_0 = nodeValue(_v, 7).ngClassUntouched;
+            var currVal_1 = nodeValue(_v, 7).ngClassTouched;
+            var currVal_2 = nodeValue(_v, 7).ngClassPristine;
+            var currVal_3 = nodeValue(_v, 7).ngClassDirty;
+            var currVal_4 = nodeValue(_v, 7).ngClassValid;
+            var currVal_5 = nodeValue(_v, 7).ngClassInvalid;
+            var currVal_6 = nodeValue(_v, 7).ngClassPending;
+            _ck(_v, 2, 0, currVal_0, currVal_1, currVal_2, currVal_3, currVal_4, currVal_5, currVal_6);
+            var currVal_9 = _v.parent.context.$implicit.userName;
+            _ck(_v, 8, 0, currVal_9);
+        });
+    }
+    function View_DisableUserFormComponent_4(_l) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 7, 'div', [['ngModelGroup',
+                    'users']], [[2, 'ng-untouched', null], [2, 'ng-touched', null], [2,
+                    'ng-pristine', null], [2, 'ng-dirty', null], [2, 'ng-valid', null],
+                [2, 'ng-invalid', null], [2, 'ng-pending', null]], null, null, null, null)), directiveDef(1, 212992, null, 0, NgModelGroup, [[1, ControlContainer], [8, null], [8, null]], { name: [0, 'name'] }, null), providerDef(2048, null, ControlContainer, null, [NgModelGroup]), directiveDef(3, 16384, null, 0, NgControlStatusGroup, [ControlContainer], null, null), (_l()(), textDef(-1, null, ['\n        '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_DisableUserFormComponent_5)), directiveDef(6, 16384, null, 0, NgIf, [ViewContainerRef,
+                TemplateRef], { ngIf: [0, 'ngIf'] }, null), (_l()(), textDef(-1, null, ['\n      ']))], function (_ck, _v) {
+            var currVal_7 = 'users';
+            _ck(_v, 1, 0, currVal_7);
+            var currVal_8 = (_v.context.$implicit.userName != null);
+            _ck(_v, 6, 0, currVal_8);
+        }, function (_ck, _v) {
+            var currVal_0 = nodeValue(_v, 3).ngClassUntouched;
+            var currVal_1 = nodeValue(_v, 3).ngClassTouched;
+            var currVal_2 = nodeValue(_v, 3).ngClassPristine;
+            var currVal_3 = nodeValue(_v, 3).ngClassDirty;
+            var currVal_4 = nodeValue(_v, 3).ngClassValid;
+            var currVal_5 = nodeValue(_v, 3).ngClassInvalid;
+            var currVal_6 = nodeValue(_v, 3).ngClassPending;
+            _ck(_v, 0, 0, currVal_0, currVal_1, currVal_2, currVal_3, currVal_4, currVal_5, currVal_6);
+        });
+    }
+    function View_DisableUserFormComponent_3(_l) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 4, 'div', [['class',
+                    'users']], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_DisableUserFormComponent_4)), directiveDef(3, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(),
+                textDef(-1, null, ['\n    ']))], function (_ck, _v) {
+            var _co = _v.component;
+            var currVal_0 = _co.users;
+            var currVal_1 = _co.trackByFn;
+            _ck(_v, 3, 0, currVal_0, currVal_1);
+        }, null);
+    }
     function View_DisableUserFormComponent_0(_l) {
         return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 1, 'h2', [], null, null, null, null, null)), (_l()(),
-                textDef(-1, null, [' Disable User Form '])), (_l()(), textDef(-1, null, ['\n\n'])), (_l()(), elementDef(3, 0, null, null, 82, 'form', [['novalidate',
+                textDef(-1, null, [' Disable User Form '])), (_l()(), textDef(-1, null, ['\n\n'])), (_l()(), elementDef(3, 0, null, null, 75, 'form', [['novalidate',
                     '']], [[2, 'ng-untouched', null], [2, 'ng-touched', null], [2, 'ng-pristine',
                     null], [2, 'ng-dirty', null], [2, 'ng-valid', null], [2,
                     'ng-invalid', null], [2, 'ng-pending', null]], [[null,
@@ -55557,35 +55659,142 @@
                     ad = (pd_1 && ad);
                 }
                 return ad;
-            }, null, null)), directiveDef(4, 16384, null, 0, NgNoValidate, [], null, null), directiveDef(5, 16384, null, 0, NgForm, [[8, null],
-                [8, null]], null, null), providerDef(2048, null, ControlContainer, null, [NgForm]), directiveDef(7, 16384, null, 0, NgControlStatusGroup, [ControlContainer], null, null), (_l()(), textDef(-1, null, ['\n '])), (_l()(), elementDef(9, 0, null, null, 10, 'fieldset', [], null, null, null, null, null)), (_l()(),
-                textDef(-1, null, ['\n  '])), (_l()(), elementDef(11, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Type de compte'])), (_l()(),
-                textDef(-1, null, ['\n  '])), (_l()(), elementDef(14, 0, null, null, 4, 'div', [['class', 'checkbox-list'], ['id', 'account-type']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_DisableUserFormComponent_1)), directiveDef(17, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'],
-                ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n'])), (_l()(), textDef(-1, null, ['\n'])), (_l()(), elementDef(21, 0, null, null, 60, 'fieldset', [], null, null, null, null, null)), (_l()(),
-                textDef(-1, null, ['\n  '])), (_l()(), elementDef(23, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Action'])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(26, 0, null, null, 22, 'div', [['class', 'select']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n   '])), (_l()(), elementDef(28, 0, null, null, 1, 'div', [['class', 'subtitle']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Compte utilisateur a desactiver'])), (_l()(), textDef(-1, null, ['\n   '])),
-            (_l()(), elementDef(31, 0, null, null, 16, 'select', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(33, 0, null, null, 3, 'option', [], null, null, null, null, null)), directiveDef(34, 147456, null, 0, NgSelectOption, [ElementRef,
-                Renderer2, [8, null]], null, null), directiveDef(35, 147456, null, 0, NgSelectMultipleOption, [ElementRef, Renderer2, [8, null]], null, null), (_l()(), textDef(-1, null, ['*Néant*'])),
-            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(38, 0, null, null, 3, 'option', [], null, null, null, null, null)), directiveDef(39, 147456, null, 0, NgSelectOption, [ElementRef, Renderer2, [8, null]], null, null),
-            directiveDef(40, 147456, null, 0, NgSelectMultipleOption, [ElementRef, Renderer2, [8, null]], null, null), (_l()(), textDef(-1, null, ['Utilisateur 1'])),
-            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(43, 0, null, null, 3, 'option', [], null, null, null, null, null)), directiveDef(44, 147456, null, 0, NgSelectOption, [ElementRef, Renderer2, [8, null]], null, null),
-            directiveDef(45, 147456, null, 0, NgSelectMultipleOption, [ElementRef, Renderer2, [8, null]], null, null), (_l()(), textDef(-1, null, ['Utilisateur 2'])),
-            (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n'])), (_l()(), textDef(-1, null, ['\n'])), (_l()(), elementDef(50, 0, null, null, 6, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n '])), (_l()(), elementDef(52, 0, null, null, 1, 'label', [['for',
-                    'password']], null, null, null, null, null)),
-            (_l()(), textDef(-1, null, ['Nouveau mot de passe'])), (_l()(), textDef(-1, null, ['\n '])), (_l()(), elementDef(55, 0, null, null, 0, 'input', [['name', 'password'], ['type', 'text']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n'])), (_l()(), textDef(-1, null, ['\n'])), (_l()(), elementDef(58, 0, null, null, 22, 'div', [['class', 'checkbox-list'], ['id', 'account-type']], null, null, null, null, null)),
-            (_l()(), textDef(-1, null, ['\n '])), (_l()(), elementDef(60, 0, null, null, 1, 'div', [['class', 'subtitle']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Action'])), (_l()(), textDef(-1, null, ['\n '])), (_l()(), elementDef(63, 0, null, null, 3, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(65, 0, null, null, 0, 'input', [['type',
-                    'checkbox']], null, null, null, null, null)),
-            (_l()(), textDef(-1, null, ['Gapps - Retirer des boucles\n'])), (_l()(),
-                textDef(-1, null, ['\n'])), (_l()(), elementDef(68, 0, null, null, 3, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(70, 0, null, null, 0, 'input', [['type', 'checkbox']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Gapps - Changer le mot de passe\n'])), (_l()(), textDef(-1, null, ['\n'])), (_l()(), elementDef(73, 0, null, null, 3, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(75, 0, null, null, 0, 'input', [['type', 'checkbox']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Sugar - Desactiver le compte\n'])), (_l()(), textDef(-1, null, ['\n'])), (_l()(), elementDef(78, 0, null, null, 1, 'div', [['class',
-                    'clear-fix']], null, null, null, null, null)),
-            (_l()(), textDef(-1, null, ['\n'])), (_l()(), textDef(-1, null, ['\n'])),
-            (_l()(), textDef(-1, null, ['\n'])), (_l()(), textDef(-1, null, ['\n'])),
-            (_l()(), elementDef(83, 0, null, null, 1, 'button', [], [[8,
+            }, null, null)), directiveDef(4, 16384, null, 0, NgNoValidate, [], null, null), directiveDef(5, 16384, [['disableForm', 4]], 0, NgForm, [[8, null], [8, null]], null, null), providerDef(2048, null, ControlContainer, null, [NgForm]), directiveDef(7, 16384, null, 0, NgControlStatusGroup, [ControlContainer], null, null), (_l()(), textDef(-1, null, ['\n\n  '])), (_l()(), elementDef(9, 0, null, null, 7, 'fieldset', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(11, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(),
+                textDef(-1, null, ['Type de compte'])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_DisableUserFormComponent_1)), directiveDef(15, 16384, null, 0, NgIf, [ViewContainerRef,
+                TemplateRef], { ngIf: [0, 'ngIf'] }, null), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n\n  '])), (_l()(), elementDef(18, 0, null, null, 7, 'fieldset', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(20, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(),
+                textDef(-1, null, ['Compte utilisateur a desactiver'])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_DisableUserFormComponent_3)), directiveDef(24, 16384, null, 0, NgIf, [ViewContainerRef, TemplateRef], { ngIf: [0, 'ngIf'] }, null),
+            (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n\n\n  '])), (_l()(), elementDef(27, 0, null, null, 47, 'fieldset', [], null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(29, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Action'])),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(32, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])),
+            (_l()(), elementDef(34, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Nouveau mot de passe\n        '])), (_l()(), elementDef(36, 0, null, null, 5, 'input', [['name', 'password'], ['type', 'text']], [[2, 'ng-untouched', null], [2, 'ng-touched', null], [2, 'ng-pristine',
+                    null], [2, 'ng-dirty', null], [2, 'ng-valid', null],
+                [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null,
+                    'ngModelChange'], [null, 'input'], [null, 'blur'], [null,
+                    'compositionstart'], [null, 'compositionend']], function (_v, en, $event) {
+                var ad = true;
+                var _co = _v.component;
+                if (('input' === en)) {
+                    var pd_0 = (nodeValue(_v, 37)._handleInput($event.target.value) !== false);
+                    ad = (pd_0 && ad);
+                }
+                if (('blur' === en)) {
+                    var pd_1 = (nodeValue(_v, 37).onTouched() !== false);
+                    ad = (pd_1 && ad);
+                }
+                if (('compositionstart' === en)) {
+                    var pd_2 = (nodeValue(_v, 37)._compositionStart() !== false);
+                    ad = (pd_2 && ad);
+                }
+                if (('compositionend' === en)) {
+                    var pd_3 = (nodeValue(_v, 37)._compositionEnd($event.target.value) !== false);
+                    ad = (pd_3 && ad);
+                }
+                if (('ngModelChange' === en)) {
+                    var pd_4 = ((_co.password = $event) !== false);
+                    ad = (pd_4 && ad);
+                }
+                return ad;
+            }, null, null)), directiveDef(37, 16384, null, 0, DefaultValueAccessor, [Renderer2, ElementRef, [2, COMPOSITION_BUFFER_MODE]], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
+                return [p0_0];
+            }, [DefaultValueAccessor]), directiveDef(39, 671744, null, 0, NgModel, [[2,
+                    ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(41, 16384, null, 0, NgControlStatus, [NgControl], null, null),
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n\n    '])), (_l()(), elementDef(45, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(47, 0, null, null, 5, 'input', [['name', 'disableGoogle'], ['type', 'checkbox']], [[2, 'ng-untouched', null],
+                [2, 'ng-touched', null], [2, 'ng-pristine', null], [2, 'ng-dirty',
+                    null], [2, 'ng-valid', null], [2, 'ng-invalid', null],
+                [2, 'ng-pending', null]], [[null, 'ngModelChange'], [null,
+                    'change'], [null, 'blur']], function (_v, en, $event) {
+                var ad = true;
+                var _co = _v.component;
+                if (('change' === en)) {
+                    var pd_0 = (nodeValue(_v, 48).onChange($event.target.checked) !== false);
+                    ad = (pd_0 && ad);
+                }
+                if (('blur' === en)) {
+                    var pd_1 = (nodeValue(_v, 48).onTouched() !== false);
+                    ad = (pd_1 && ad);
+                }
+                if (('ngModelChange' === en)) {
+                    var pd_2 = ((_co.disableGoogle = $event) !== false);
+                    ad = (pd_2 && ad);
+                }
+                return ad;
+            }, null, null)), directiveDef(48, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
+                return [p0_0];
+            }, [CheckboxControlValueAccessor]), directiveDef(50, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(52, 16384, null, 0, NgControlStatus, [NgControl], null, null),
+            (_l()(), textDef(-1, null, ['Gapps - Retirer des boucles\n    '])), (_l()(),
+                textDef(-1, null, ['\n    '])), (_l()(), elementDef(55, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])),
+            (_l()(), elementDef(57, 0, null, null, 5, 'input', [['name', 'changePassword'],
+                ['type', 'checkbox']], [[2, 'ng-untouched', null], [2, 'ng-touched', null],
+                [2, 'ng-pristine', null], [2, 'ng-dirty', null], [2, 'ng-valid',
+                    null], [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null, 'ngModelChange'], [null, 'change'], [null,
+                    'blur']], function (_v, en, $event) {
+                var ad = true;
+                var _co = _v.component;
+                if (('change' === en)) {
+                    var pd_0 = (nodeValue(_v, 58).onChange($event.target.checked) !== false);
+                    ad = (pd_0 && ad);
+                }
+                if (('blur' === en)) {
+                    var pd_1 = (nodeValue(_v, 58).onTouched() !== false);
+                    ad = (pd_1 && ad);
+                }
+                if (('ngModelChange' === en)) {
+                    var pd_2 = ((_co.changePassword = $event) !== false);
+                    ad = (pd_2 && ad);
+                }
+                return ad;
+            }, null, null)), directiveDef(58, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
+                return [p0_0];
+            }, [CheckboxControlValueAccessor]), directiveDef(60, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(62, 16384, null, 0, NgControlStatus, [NgControl], null, null),
+            (_l()(), textDef(-1, null, ['Gapps - Changer le mot de passe\n    '])),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(65, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])),
+            (_l()(), elementDef(67, 0, null, null, 5, 'input', [['name', 'disableSugarAccount'],
+                ['type', 'checkbox']], [[2, 'ng-untouched', null], [2, 'ng-touched', null],
+                [2, 'ng-pristine', null], [2, 'ng-dirty', null], [2, 'ng-valid',
+                    null], [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null, 'ngModelChange'], [null, 'change'], [null,
+                    'blur']], function (_v, en, $event) {
+                var ad = true;
+                var _co = _v.component;
+                if (('change' === en)) {
+                    var pd_0 = (nodeValue(_v, 68).onChange($event.target.checked) !== false);
+                    ad = (pd_0 && ad);
+                }
+                if (('blur' === en)) {
+                    var pd_1 = (nodeValue(_v, 68).onTouched() !== false);
+                    ad = (pd_1 && ad);
+                }
+                if (('ngModelChange' === en)) {
+                    var pd_2 = ((_co.disableSugarAccount = $event) !== false);
+                    ad = (pd_2 && ad);
+                }
+                return ad;
+            }, null, null)), directiveDef(68, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
+                return [p0_0];
+            }, [CheckboxControlValueAccessor]), directiveDef(70, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(72, 16384, null, 0, NgControlStatus, [NgControl], null, null),
+            (_l()(), textDef(-1, null, ['Sugar - Desactiver le compte\n    '])), (_l()(),
+                textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n\n  '])),
+            (_l()(), elementDef(76, 0, null, null, 1, 'button', [], [[8,
                     'disabled', 0]], null, null, null, null)),
-            (_l()(), textDef(-1, null, ['Desactiver l\'utilisateur'])), (_l()(), textDef(-1, null, ['\n'])), (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
+            (_l()(), textDef(-1, null, ['Desactiver l\'utilisateur'])), (_l()(), textDef(-1, null, ['\n'])), (_l()(), textDef(-1, null, ['\n'])), (_l()(),
+                elementDef(80, 0, null, null, 2, 'pre', [], null, null, null, null, null)), (_l()(), textDef(81, null, ['  ', '\n'])), pipeDef(0, JsonPipe, []), (_l()(),
+                textDef(-1, null, ['\n']))], function (_ck, _v) {
             var _co = _v.component;
-            var currVal_7 = _co.fields.accounts;
-            var currVal_8 = _co.trackByFn;
-            _ck(_v, 17, 0, currVal_7, currVal_8);
+            var currVal_7 = ((_co.fields != null) && (_co.fields.accounts != null));
+            _ck(_v, 15, 0, currVal_7);
+            var currVal_8 = (_co.users != null);
+            _ck(_v, 24, 0, currVal_8);
+            var currVal_16 = 'password';
+            var currVal_17 = _co.password;
+            _ck(_v, 39, 0, currVal_16, currVal_17);
+            var currVal_25 = 'disableGoogle';
+            var currVal_26 = _co.disableGoogle;
+            _ck(_v, 50, 0, currVal_25, currVal_26);
+            var currVal_34 = 'changePassword';
+            var currVal_35 = _co.changePassword;
+            _ck(_v, 60, 0, currVal_34, currVal_35);
+            var currVal_43 = 'disableSugarAccount';
+            var currVal_44 = _co.disableSugarAccount;
+            _ck(_v, 70, 0, currVal_43, currVal_44);
         }, function (_ck, _v) {
             var _co = _v.component;
             var currVal_0 = nodeValue(_v, 7).ngClassUntouched;
@@ -55596,12 +55805,46 @@
             var currVal_5 = nodeValue(_v, 7).ngClassInvalid;
             var currVal_6 = nodeValue(_v, 7).ngClassPending;
             _ck(_v, 3, 0, currVal_0, currVal_1, currVal_2, currVal_3, currVal_4, currVal_5, currVal_6);
-            var currVal_9 = !_co.enableAdd;
-            _ck(_v, 83, 0, currVal_9);
+            var currVal_9 = nodeValue(_v, 41).ngClassUntouched;
+            var currVal_10 = nodeValue(_v, 41).ngClassTouched;
+            var currVal_11 = nodeValue(_v, 41).ngClassPristine;
+            var currVal_12 = nodeValue(_v, 41).ngClassDirty;
+            var currVal_13 = nodeValue(_v, 41).ngClassValid;
+            var currVal_14 = nodeValue(_v, 41).ngClassInvalid;
+            var currVal_15 = nodeValue(_v, 41).ngClassPending;
+            _ck(_v, 36, 0, currVal_9, currVal_10, currVal_11, currVal_12, currVal_13, currVal_14, currVal_15);
+            var currVal_18 = nodeValue(_v, 52).ngClassUntouched;
+            var currVal_19 = nodeValue(_v, 52).ngClassTouched;
+            var currVal_20 = nodeValue(_v, 52).ngClassPristine;
+            var currVal_21 = nodeValue(_v, 52).ngClassDirty;
+            var currVal_22 = nodeValue(_v, 52).ngClassValid;
+            var currVal_23 = nodeValue(_v, 52).ngClassInvalid;
+            var currVal_24 = nodeValue(_v, 52).ngClassPending;
+            _ck(_v, 47, 0, currVal_18, currVal_19, currVal_20, currVal_21, currVal_22, currVal_23, currVal_24);
+            var currVal_27 = nodeValue(_v, 62).ngClassUntouched;
+            var currVal_28 = nodeValue(_v, 62).ngClassTouched;
+            var currVal_29 = nodeValue(_v, 62).ngClassPristine;
+            var currVal_30 = nodeValue(_v, 62).ngClassDirty;
+            var currVal_31 = nodeValue(_v, 62).ngClassValid;
+            var currVal_32 = nodeValue(_v, 62).ngClassInvalid;
+            var currVal_33 = nodeValue(_v, 62).ngClassPending;
+            _ck(_v, 57, 0, currVal_27, currVal_28, currVal_29, currVal_30, currVal_31, currVal_32, currVal_33);
+            var currVal_36 = nodeValue(_v, 72).ngClassUntouched;
+            var currVal_37 = nodeValue(_v, 72).ngClassTouched;
+            var currVal_38 = nodeValue(_v, 72).ngClassPristine;
+            var currVal_39 = nodeValue(_v, 72).ngClassDirty;
+            var currVal_40 = nodeValue(_v, 72).ngClassValid;
+            var currVal_41 = nodeValue(_v, 72).ngClassInvalid;
+            var currVal_42 = nodeValue(_v, 72).ngClassPending;
+            _ck(_v, 67, 0, currVal_36, currVal_37, currVal_38, currVal_39, currVal_40, currVal_41, currVal_42);
+            var currVal_45 = !_co.enableAdd;
+            _ck(_v, 76, 0, currVal_45);
+            var currVal_46 = unwrapValue(_v, 81, 0, nodeValue(_v, 82).transform(nodeValue(_v, 5).value));
+            _ck(_v, 81, 0, currVal_46);
         });
     }
     function View_DisableUserFormComponent_Host_0(_l) {
-        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 1, 'mv-app-disable-user-form', [], null, null, null, View_DisableUserFormComponent_0, RenderType_DisableUserFormComponent)), directiveDef(1, 114688, null, 0, DisableUserFormComponent, [FieldsService, ActivatedRoute], null, null)], function (_ck, _v) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 1, 'mv-app-disable-user-form', [], null, null, null, View_DisableUserFormComponent_0, RenderType_DisableUserFormComponent)), directiveDef(1, 114688, null, 0, DisableUserFormComponent, [FieldsService, ActivatedRoute, SugarService], null, null)], function (_ck, _v) {
             _ck(_v, 1, 0);
         }, null);
     }
@@ -55613,14 +55856,14 @@
      * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride}
      */
     /* tslint:disable */
-    var styles$6 = ['table[_ngcontent-%COMP%] {\n  border-collapse: collapse;\n  width: 100%;\n}\n\ntd[_ngcontent-%COMP%], th[_ngcontent-%COMP%] {\n  border: 1px solid #dddddd;\n  text-align: left;\n  padding: 8px;\n}\n\ntr[_ngcontent-%COMP%]:nth-child(even) {\n  background-color: #dddddd;\n}'];
+    var styles$7 = ['table[_ngcontent-%COMP%] {\n  border-collapse: collapse;\n  width: 100%;\n}\n\ntd[_ngcontent-%COMP%], th[_ngcontent-%COMP%] {\n  border: 1px solid #dddddd;\n  text-align: left;\n  padding: 8px;\n}\n\ntr[_ngcontent-%COMP%]:nth-child(even) {\n  background-color: #dddddd;\n}'];
 
     /**
      * @fileoverview This file is generated by the Angular template compiler.
      * Do not edit.
      * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride}
      */
-    var styles_RolesComponent = [styles$6];
+    var styles_RolesComponent = [styles$7];
     var RenderType_RolesComponent = createRendererType2({ encapsulation: 0,
         styles: styles_RolesComponent, data: {} });
     function View_RolesComponent_2(_l) {
@@ -55676,14 +55919,14 @@
      * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride}
      */
     /* tslint:disable */
-    var styles$7 = ['table[_ngcontent-%COMP%] {\n  border-collapse: collapse;\n  width: 100%;\n}\n\nthead[_ngcontent-%COMP%]    > td[_ngcontent-%COMP%], th[_ngcontent-%COMP%] {\n  border: 1px solid #dddddd;\n  text-align: left;\n  padding: 8px;\n  background-color: #dddddd;\n}\n\ntbody[_ngcontent-%COMP%]    > tr[_ngcontent-%COMP%]:nth-child(even) {\n  background-color: #dddddd;\n}\n\ntextarea[_ngcontent-%COMP%] {\n  width: 100%;\n}'];
+    var styles$8 = ['table[_ngcontent-%COMP%] {\n  border-collapse: collapse;\n  width: 100%;\n}\n\nthead[_ngcontent-%COMP%]    > td[_ngcontent-%COMP%], th[_ngcontent-%COMP%] {\n  border: 1px solid #dddddd;\n  text-align: left;\n  padding: 8px;\n  background-color: #dddddd;\n}\n\ntbody[_ngcontent-%COMP%]    > tr[_ngcontent-%COMP%]:nth-child(even) {\n  background-color: #dddddd;\n}\n\ntextarea[_ngcontent-%COMP%] {\n  width: 100%;\n}'];
 
     /**
      * @fileoverview This file is generated by the Angular template compiler.
      * Do not edit.
      * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride}
      */
-    var styles_ImportComponent = [styles$7];
+    var styles_ImportComponent = [styles$8];
     var RenderType_ImportComponent = createRendererType2({ encapsulation: 0,
         styles: styles_ImportComponent, data: {} });
     function View_ImportComponent_2(_l) {
