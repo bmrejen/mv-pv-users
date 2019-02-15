@@ -39856,6 +39856,20 @@
         SugarService.prototype.getUsersFromSugar = function () {
             return this.getData("users");
         };
+        SugarService.prototype.getUserByUsername = function (username) {
+            return this.getData("users")
+                .then(function (users) { return users.filter(function (user) { return user.attributes["userName"] === username; }); })
+                .then(function (user) { return user[0]; });
+        };
+        SugarService.prototype.getUserByEmail = function (email) {
+            return this.getData("users")
+                .then(function (users) { return users.filter(function (user) { return user.attributes["email"] === email; }); })
+                .then(function (user) { return user[0]; });
+        };
+        SugarService.prototype.getUsersByTeam = function (team) {
+            return this.getData("users")
+                .then(function (users) { return users.filter(function (user) { return user.attributes["teamId"] === team; }); });
+        };
         SugarService.prototype.getRolesFromSugar = function () {
             return this.getData("roles");
         };
@@ -40268,6 +40282,8 @@
             this.sugarService.getUsersFromSugar()
                 .then(function (users) { return users.forEach(function (user) { return _this.usersFromSugar.push(new User(user)); }); })
                 .then(function (users) { return _this.filteredUsers = _this.usersFromSugar; });
+            this.sugarService.getUsersByTeam("Drakkars")
+                .then(function (res) { return console.log(res); });
         };
         UsersComponent.prototype.filterUsers = function (prop) {
             switch (prop) {

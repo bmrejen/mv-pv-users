@@ -32,6 +32,23 @@ export class SugarService {
     return this.getData("users");
   }
 
+  public getUserByUsername(username): Promise<User> {
+    return this.getData("users")
+    .then((users) => users.filter((user) => user.attributes["userName"] === username))
+    .then((user) => user[0]);
+  }
+
+  public getUserByEmail(email): Promise<User> {
+    return this.getData("users")
+    .then((users) => users.filter((user) => user.attributes["email"] === email))
+    .then((user) => user[0]);
+  }
+
+  public getUsersByTeam(team): Promise<User[]> {
+    return this.getData("users")
+    .then((users) => users.filter((user) => user.attributes["teamId"] === team));
+  }
+
   public getRolesFromSugar(): Promise<Role[]> {
     return this.getData("roles");
   }
