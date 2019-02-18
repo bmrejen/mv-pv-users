@@ -1,44 +1,62 @@
 <h2> Disable User Form </h2>
 
-<form>
- <fieldset>
-  <legend>Type de compte</legend>
-  <div class="checkbox-list" id="account-type">
-    <div *ngFor="let account of fields.accounts ; trackBy: trackByFn">
-      <input type="checkbox" [name]="account.id" [(ngModel)]="account.checked">{{ account.label }}
+<form #disableForm="ngForm">
+
+  <fieldset>
+    <legend>Type de compte</legend>
+    <div *ngIf="fields != null && fields.accounts != null">
+      <div *ngFor="let account of fields.accounts ; trackBy: trackByFn">
+        <input type="checkbox" [name]="account.id" [(ngModel)]="account.checked">{{ account.label }}
+      </div>
     </div>
-  </div>
-</fieldset>
-<fieldset>
-  <legend>Action</legend>
-  <div class="select">
-   <div class="subtitle">Compte utilisateur a desactiver</div>
-   <select>
-    <option>*Néant*</option>
-    <option>Utilisateur 1</option>
-    <option>Utilisateur 2</option>
-  </select>
-</div>
-<div>
- <label for=password>Nouveau mot de passe</label>
- <input name=password type=text>
-</div>
-<div class="checkbox-list" id="account-type">
- <div class="subtitle">Action</div>
- <label>
-  <input type=checkbox>Gapps - Retirer des boucles
-</label>
-<label>
-  <input type=checkbox>Gapps - Changer le mot de passe
-</label>
-<label>
-  <input type=checkbox>Sugar - Desactiver le compte
-</label>
-<div class=clear-fix>
-</div>
-</div>
-</fieldset>
-<button
-[disabled]="!enableAdd"
->Desactiver l'utilisateur</button>
+  </fieldset>
+
+  <fieldset>
+    <legend>Compte utilisateur a desactiver</legend>
+    <div *ngIf="users != null" class="users">
+      <div *ngFor="let user of users ; trackBy: trackByFn" ngModelGroup="users">
+        <label *ngIf="user.userName != null">
+          <input
+          type="checkbox"
+          [name]="user.userName"
+          [(ngModel)]="user.checked"
+          >{{ user.userName }}
+        </label>
+      </div>
+    </div>
+  </fieldset>
+
+
+  <fieldset>
+    <legend>Action</legend>
+    <div>
+      <label>Nouveau mot de passe
+        <input type=text name="password" [(ngModel)]="password">
+      </label>
+    </div>
+
+    <label>
+      <input
+      type=checkbox
+      name="disableGoogle"
+      [(ngModel)]="disableGoogle">Gapps - Retirer des boucles
+    </label>
+    <label>
+      <input
+      type=checkbox
+      name="changePassword"
+      [(ngModel)]="changePassword">Gapps - Changer le mot de passe
+    </label>
+    <label>
+      <input
+      type=checkbox
+      name="disableSugarAccount"
+      [(ngModel)]="disableSugarAccount">Sugar - Desactiver le compte
+    </label>
+  </fieldset>
+
+  <button [disabled]="!enableAdd">Desactiver l'utilisateur</button>
 </form>
+<pre>
+  {{ disableForm.value | json }}
+</pre>
