@@ -25,49 +25,15 @@ export class SugarService {
   }
 
   public getUserById(id): Promise<User> {
-    return this.getData(`users/${id}`)
-    .map((data) => new User(data))
-    .toPromise()
-    .catch((err) => {
-      console.error(err);
-      throw(err);
-    });
+    return this.getData(`users/${id}`);
   }
 
-  public getUserPromiseFromSugar(): Promise<User[]> {
-    return this.getData("users")
-    .map((users) => users.data)
-    .toPromise();
+  public getUsersFromSugar(): Promise<User[]> {
+    return this.getData("users");
   }
 
-  public getUsersFromSugar(): User[] {
-    this.getUserPromiseFromSugar()
-    .then((users) => users.forEach((user) => this.userList.push(new User(user))))
-    .then((data) => console.log("promise over", this.userList));
-
-    return this.userList;
-  }
-
-  public getTeamsFromSugar(): Team[] {
-    this.getData("teams")
-    .subscribe((teams) => {
-      teams.data.forEach((team) => {
-        this.teamList.push(new Team(team));
-      });
-    });
-
-    return this.teamList;
-  }
-
-  public getRolesFromSugar(): Role[] {
-    this.getData("roles")
-    .subscribe((roles) => {
-      roles.data.forEach((role) => {
-        this.roleList.push(new Role(role));
-      });
-    });
-
-    return this.roleList;
+  public getRolesFromSugar(): Promise<Role[]> {
+    return this.getData("roles");
   }
 
   public postDataToSugar(body) {
@@ -79,7 +45,9 @@ export class SugarService {
     return _throw(error);
   }
 
-  private getData(item: string): Observable<any> {
-    return this.http.get<any>(this.endPoint + `${item}`);
+  private getData(item: string): Promise<any> {
+    return this.http.get<any>(this.endPoint + `${item}`)
+    .map((array) => array["data"])
+    .toPromise();
   }
 }

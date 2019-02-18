@@ -1,6 +1,6 @@
-<fieldset class="blue">
-  <legend>Profiles SugarCRM</legend>
-  <div ngModelGroup="sugar">
+<div *ngIf="fields != null && fields.userTemplates != null && fields.roles != null && fields.services != null">
+  <fieldset class="blue">
+    <legend>Profiles SugarCRM</legend>
     <button (click)="handleClick($event, 'conseiller')">Ventes - Conseiller</button>
     <button (click)="handleClick($event, 'jm')">Ventes – Junior Manager</button>
     <button (click)="handleClick($event, 'manager')">Ventes - Manager</button>
@@ -8,20 +8,23 @@
     <button (click)="handleClick($event, 'qualite')">Agent Qualité</button>
     <button (click)="handleClick($event, 'compta')">Compta</button>
     <button (click)="handleClick($event, 'inactif')">Inactif</button>
+
+
     <div class="select subtitle">Hérite les préférence de l'utilisateur
       <select name="userToCopyHPfrom" [(ngModel)]="fields.userValue">
-        <option *ngFor="let user of fields.userTemplates ; trackBy: trackByFn" [value]="user.value" (onChange)="selectTmp($event, user)">{{ user.label }}
+        <option *ngFor="let user of fields.userTemplates ; trackBy: trackByFn" [value]="user.value">
+          {{ user.label | uppercase }}
         </option>
       </select>
     </div>
 
-    <div class="checkbox-list subtitle" id="sugar_role">ROLE:
+    <div class="checkbox-list subtitle" id="sugar_role" ngModelGroup="roles">ROLE:
      <span *ngFor="let role of fields.roles ; trackBy: trackByFn">
       <label><input type="checkbox" [(ngModel)]="role.checked" [name]="role.id">{{ role.label }}
       </label></span>
     </div>
 
-    <div class="checkbox-list subtitle" id="sugar_departement">SERVICE:
+    <div class="checkbox-list subtitle" id="sugar_departement" ngModelGroup="services">SERVICE:
       <span *ngFor="let service of fields.services ; trackBy: trackByFn">
         <label>
           <input [id]="service.id" type="checkbox" [name]="service.id" [ngModel]="service.checked" (ngModelChange)="onServiceChecked(service, $event)">{{ service.name }}
@@ -40,5 +43,5 @@
         <input type="number" name="leadsMax" [(ngModel)]="fields.leadsMax">
       </label>
     </div>
-  </div>
-</fieldset>
+  </fieldset>
+</div>

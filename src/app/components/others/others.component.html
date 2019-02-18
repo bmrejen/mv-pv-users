@@ -1,13 +1,13 @@
-<fieldset class="blue">
+<fieldset class="blue" *ngIf = "fields != null && fields.others != null">
   <legend>Others</legend>
-  <div ngModelGroup="autres" class="others">
-    <div *ngFor="let autre of fields.autres ; trackBy: trackByFn">
+  <div ngModelGroup="others" class="others">
+    <div *ngFor="let other of fields.others ; trackBy: trackByFn">
       <label>
         <input
         type="checkbox"
-        [(ngModel)]="autre.checked"
-        [name]="autre.id"
-        >{{ autre.label }}
+        [(ngModel)]="other.checked"
+        [name]="other.id"
+        >{{ other.label }}
       </label>
     </div>
   </div>

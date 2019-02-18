@@ -14,7 +14,7 @@ import { User } from "../../models/user";
 })
 
 export class CreateUserFormComponent implements OnInit {
-  public fields;
+  public fields: Fields;
   public errorMsg;
   public passwordExists = false;
   public usersFromSugar: User[];
@@ -31,23 +31,23 @@ export class CreateUserFormComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.fields = this.fieldsService.getData();
-    console.log("this fields", this.fields);
-    this.resetSugar();
-    this.usersFromSugar = this.sugarService.getUsersFromSugar();
-    this.route.paramMap.subscribe((params) => params.get("id"));
+    this.fieldsService.getData()
+    .then((res) => this.fields = new Fields(res[0]));
+
+    // this.usersFromSugar = this.sugarService.getUsersFromSugar();
+    // this.route.paramMap.subscribe((params) => params.get("id"));
   }
 
   public onParentChange({e, id}) {
-    const myField = this.fields.autres.find((field) => field.id === id);
-    myField.checked = e;
+    // const myField = this.fields.others.find((field) => field.id === id);
+    // myField.checked = e;
   }
 
   public onSubmit(form) {
-    this.sugarService.postDataToSugar(form)
-    .subscribe(
-               (data) => console.log("DATA- ", data),
-               (error) => this.errorMsg = error.statusText);
+    // this.sugarService.postDataToSugar(form)
+    // .subscribe(
+    //            (data) => console.log("DATA- ", data),
+    //            (error) => this.errorMsg = error.statusText);
   }
 
   public trackByFn(index, item) {
@@ -71,8 +71,8 @@ export class CreateUserFormComponent implements OnInit {
   private resetSugar() {
     this.fields.inactiveStatus = false,
     this.fields.inactiveEmployee = false,
-    this.fields.leadsMin = null;
-    this.fields.leadsMax = null;
+    this.fields.leadsMin = 15;
+    this.fields.leadsMax = 45;
     this.fields.userValue = "user_default_xx";
     this.fields.selectedManager = null,
     this.eraseFields([
@@ -84,15 +84,15 @@ export class CreateUserFormComponent implements OnInit {
                      this.fields.outbound,
                      this.fields.phoneExtension,
                      this.fields.phoneNumber,
-                     this.fields.selectedBureau,
                      this.fields.selectedFunction,
+                     this.fields.selectedOffice,
                      this.fields.selectedOrganisation,
                      this.fields.title,
                      ]);
     this.unCheckArrays([
                        this.fields.roles,
                        this.fields.services,
-                       this.fields.autres,
+                       this.fields.others,
                        this.fields.teams,
                        this.fields.destinations,
                        this.fields.orgas,

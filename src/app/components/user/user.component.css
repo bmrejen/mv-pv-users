@@ -3,13 +3,8 @@ table {
   width: 100%;
 }
 
-thead > td, th {
+td, th {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
-  background-color: #dddddd;
-}
-
-tbody > tr:nth-child(even) {
-  background-color: #dddddd;
 }

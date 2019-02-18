@@ -16,14 +16,15 @@ import { Fields } from "../../models/fields";
 })
 
 export class FunctionComponent implements OnInit {
-  public fields;
+  public fields: Fields;
 
   constructor(private fieldsService: FieldsService) {
     //
   }
 
   public ngOnInit(): void {
-    this.fields = this.fieldsService.getData();
+    this.fieldsService.getSingleField("functions")
+    .then((res) => this.fields = new Fields(res));
   }
 
   public trackByFn(index, item) {

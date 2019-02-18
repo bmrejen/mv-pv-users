@@ -1,8 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { ControlContainer, NgForm } from "@angular/forms";
+
 import { FieldsService } from "../../services/fields.service";
 
 import { Fields } from "../../models/fields";
+import { User } from "../../models/user";
 
 @Component({
   selector: "mv-office",
@@ -16,14 +18,15 @@ import { Fields } from "../../models/fields";
 })
 
 export class OfficeComponent implements OnInit {
-  public fields;
+  public fields: Fields;
 
   constructor(private fieldsService: FieldsService) {
     //
   }
 
   public ngOnInit(): void {
-    this.fields = this.fieldsService.getData();
+    this.fieldsService.getSingleField("offices")
+    .then((res) => this.fields = new Fields(res));
   }
 
   public trackByFn(index, item) {

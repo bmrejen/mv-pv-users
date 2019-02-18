@@ -1,8 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { ControlContainer, NgForm } from "@angular/forms";
+
 import { FieldsService } from "../../services/fields.service";
+import { SugarService } from "../../services/sugar.service";
 
 import { Fields } from "../../models/fields";
+import { User } from "../../models/user";
 
 @Component({
   selector: "mv-profiles",
@@ -16,21 +19,51 @@ import { Fields } from "../../models/fields";
 })
 
 export class ProfilesComponent implements OnInit {
-  public fields;
+  public fields: Fields;
   public displayVentesLeads = false;
+  public allUsersFromSugar: User[] = [];
+  public activeUsersFromSugar: User[];
 
-  constructor(private fieldsService: FieldsService) {
+  constructor(private fieldsService: FieldsService,
+              private sugarService: SugarService) {
     //
   }
 
   public ngOnInit(): void {
-    this.fields = this.fieldsService.getData();
+    this.fieldsService.getData()
+    .then((res) => this.fields = new Fields(res[0]));
+
+    this.sugarService.getUsersFromSugar()
+
+    // populate usersFromSugar array
+    .then((users) => users.forEach((user) => this.allUsersFromSugar.push(new User(user))))
+
+    // filter active users
+    .then((users) => this.activeUsersFromSugar = this.allUsersFromSugar.filter((user) => user.status === "Active"))
+
+    // create userTemplates from userlist
+    .then((data) => {
+      return this.activeUsersFromSugar.map((user) => {
+        return {
+          label: user.userName,
+          selected: false,
+          value: user.userName};
+        });
+    })
+
+    // push them into fields
+    .then((templates) => {
+      if (templates !== undefined && templates !== null) {
+        this.fields.userTemplates.push(...templates);
+      }
+    })
+    .catch((err) => console.log(err));
   }
 
   public handleClick(e, type) {
     const roles = this.fields.roles;
     const services = this.fields.services;
-    const autres = this.fields.autres;
+    const others = this.fields.others;
     const orgas = this.fields.orgas;
 
     this.resetSugar();
@@ -40,7 +73,7 @@ export class ProfilesComponent implements OnInit {
         this.fields.userValue = "user_default";
         this.checkStuff(roles, ["Sales"]);
         this.checkStuff(services, ["Ventes"]);
-        this.checkStuff(autres, ["Global", "Ventes", "Devis Cotation", "ROLE - Reservation"]);
+        this.checkStuff(others, ["Global", "Ventes", "Devis Cotation", "ROLE - Reservation"]);
         break;
       }
 
@@ -51,7 +84,7 @@ export class ProfilesComponent implements OnInit {
 
         this.checkStuff(roles, ["Sales"]);
         this.checkStuff(services, ["Ventes"]);
-        this.checkStuff(autres,
+        this.checkStuff(others,
                         [
                         "Global",
                         "Ventes",
@@ -70,7 +103,7 @@ export class ProfilesComponent implements OnInit {
 
         this.checkStuff(roles, ["Team Manager"]);
         this.checkStuff(services, ["Ventes"]);
-        this.checkStuff(autres, [
+        this.checkStuff(others, [
                         "Global",
                         "Devis Cotation",
                         "Devis V3",
@@ -85,7 +118,7 @@ export class ProfilesComponent implements OnInit {
         this.fields.selectedFunction = "av";
         this.checkStuff(roles, ["Reservation"]);
         this.checkStuff(services, ["Ventes"]);
-        this.checkStuff(autres, [
+        this.checkStuff(others, [
                         "Devis V3",
                         "Devis Cotation",
                         "Global",
@@ -97,22 +130,22 @@ export class ProfilesComponent implements OnInit {
       case "qualite":
       {
         this.fields.selectedFunction = "aq";
-        this.fields.selectedBureau = "Bureau - Billetterie & Qualité";
+        this.fields.selectedOffice = "Bureau - Billetterie & Qualité";
         this.fields.selectedManager = "Manager du service qualité (Aminata)";
 
         this.checkStuff(roles, ["Quality Control"]);
         this.checkStuff(services, ["Service Qualité"]);
-        this.checkStuff(autres, ["BackOffice", "Global", "SAV"]);
+        this.checkStuff(others, ["BackOffice", "Global", "SAV"]);
         this.checkStuff(orgas, ["BackOffice"]);
         break;
       }
       case "compta":
       {
-        this.fields.selectedBureau = "1377";
+        this.fields.selectedOffice = "1377";
 
         this.checkStuff(roles, ["Accountant"]);
         this.checkStuff(services, ["Comptabilité"]);
-        this.checkStuff(autres, ["Global", "ROLE - Affaire Validation", "ROLE - Create Provider"]);
+        this.checkStuff(others, ["Global", "ROLE - Affaire Validation", "ROLE - Create Provider"]);
         this.checkStuff(orgas, ["Compta"]);
         break;
       }
@@ -164,8 +197,8 @@ export class ProfilesComponent implements OnInit {
       case this.fields.services:
       prefix = "services";
       break;
-      case this.fields.autres:
-      prefix = "autres";
+      case this.fields.others:
+      prefix = "others";
       break;
 
       default:
@@ -173,7 +206,7 @@ export class ProfilesComponent implements OnInit {
       break;
     }
     arr.forEach((element) => {
-      const myOther = where.find((autre) => autre.id === `${prefix}-${element}`);
+      const myOther = where.find((other) => other.id === `${prefix}-${element}`);
       if (!!myOther) { myOther.checked = true; }
     });
   }
@@ -212,7 +245,7 @@ export class ProfilesComponent implements OnInit {
                      this.fields.outbound,
                      this.fields.phoneExtension,
                      this.fields.phoneNumber,
-                     this.fields.selectedBureau,
+                     this.fields.selectedOffice,
                      this.fields.selectedFunction,
                      this.fields.selectedOrganisation,
                      this.fields.title,
@@ -220,7 +253,7 @@ export class ProfilesComponent implements OnInit {
     this.unCheckArrays([
                        this.fields.roles,
                        this.fields.services,
-                       this.fields.autres,
+                       this.fields.others,
                        this.fields.teams,
                        this.fields.destinations,
                        this.fields.orgas,

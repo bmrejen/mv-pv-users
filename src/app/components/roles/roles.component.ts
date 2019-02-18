@@ -17,7 +17,12 @@ export class RolesComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.rolesFromSugar = this.sugarService.getRolesFromSugar();
+    this.sugarService.getRolesFromSugar()
+    .then((roles) => {
+      roles.forEach((role) => {
+        this.rolesFromSugar.push(new Role(role));
+      });
+    });
   }
 
   public trackByFn(index, item) {

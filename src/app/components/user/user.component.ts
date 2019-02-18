@@ -4,6 +4,7 @@ import { SugarService } from "../../services/sugar.service";
 
 @Component({
   selector: "mv-app-user",
+  styleUrls: ["./user.component.css"],
   templateUrl: "./user.component.html",
 })
 
@@ -17,10 +18,10 @@ export class UserComponent implements OnInit {
 
   public ngOnInit(): void {
 
-    const id = "cbc425e0-40bc-b51d-f6d2-57d618ec23cf";
+    const id = "4fd88823-0f55-2688-0f84-5bee19677712";
 
     this.sugarService.getUserById(id)
-    .then((user) => this.user = user);
+    .then((user) => this.user = new User(user));
   }
 
   public trackByFn(index, item) {

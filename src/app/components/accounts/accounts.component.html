@@ -1,10 +1,10 @@
+<div *ngIf="fields != null && fields.accounts != null">
   <fieldset class="blue">
     <legend>Accounts</legend>
-    <div class="accounts" id="account-type" ngModelGroup="accounts">
-      <div *ngFor="let account of fields.accounts ; trackBy: trackByFn">
-        <label>
-          <input type="checkbox" [name]="account.id" [(ngModel)]="account.checked">{{ account.label }}
-        </label>
-      </div>
+    <div *ngFor="let account of fields.accounts ; trackBy: trackByFn" class="accounts">
+      <label>
+        <input type="checkbox" [name]="account.id" [(ngModel)]="account.checked">{{ account.label }}
+      </label>
     </div>
   </fieldset>
+</div>

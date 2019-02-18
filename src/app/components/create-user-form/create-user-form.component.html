@@ -1,6 +1,7 @@
 <h2> Create User Form </h2>
 
 <form #createForm="ngForm" (ngSubmit)="onSubmit(createForm.value)">
+
   <mv-accounts></mv-accounts>
   <mv-credentials></mv-credentials>
 
@@ -11,7 +12,6 @@
   <mv-manager></mv-manager>
 
   <mv-destinations></mv-destinations>
-  <mv-organisations></mv-organisations>
   <mv-teams></mv-teams>
   <mv-others></mv-others>
   <mv-extraneous></mv-extraneous>
@@ -21,7 +21,8 @@
   <div *ngIf="errorMsg">ERROR: {{ errorMsg }}</div>
   <button [disabled]="!createForm.form.valid" type="submit">Créer l'utilisateur</button>
 </form>
+FORM VALUE
+<pre> {{ createForm.value | json }} </pre>
 
-<pre>
-  {{ fields | json }}
-</pre>
+FIELDS
+<pre>{{ fields | json }}</pre>
