@@ -34,7 +34,7 @@ export class DisableUserFormComponent implements OnInit {
     .then((res) => this.fields = new Fields(res[0]))
     .then((res) => console.log(this.fields));
 
-    this.sugar.getUsersFromSugar()
+    this.sugar.getUsers()
     .then((users) => users.forEach((user) => {
       user["checked"] = false;
       this.users.push(new User(user));

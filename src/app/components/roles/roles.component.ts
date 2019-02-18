@@ -17,7 +17,7 @@ export class RolesComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.sugarService.getRolesFromSugar()
+    this.sugarService.getRoles()
     .then((roles) => {
       roles.forEach((role) => {
         this.rolesFromSugar.push(new Role(role));

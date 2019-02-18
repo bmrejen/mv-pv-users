@@ -49,7 +49,7 @@ export class SugarService {
     .then((users) => users.filter((user) => user.attributes["teamId"] === team));
   }
 
-  public getRolesFromSugar(): Promise<Role[]> {
+  public getRoles(): Promise<Role[]> {
     return this.getData("roles");
   }
 
