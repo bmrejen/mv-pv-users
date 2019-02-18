@@ -34,7 +34,7 @@ export class CreateUserFormComponent implements OnInit {
     this.fieldsService.getData()
     .then((res) => this.fields = new Fields(res[0]));
 
-    // this.usersFromSugar = this.sugarService.getUsersFromSugar();
+    // this.usersFromSugar = this.sugarService.getUsers();
     // this.route.paramMap.subscribe((params) => params.get("id"));
   }
 

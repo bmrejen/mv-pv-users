@@ -28,7 +28,7 @@ export class SugarService {
     return this.getData(`users/${id}`);
   }
 
-  public getUsersFromSugar(): Promise<User[]> {
+  public getUsers(): Promise<User[]> {
     return this.getData("users");
   }
 

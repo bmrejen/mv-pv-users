@@ -39853,7 +39853,7 @@
         SugarService.prototype.getUserById = function (id) {
             return this.getData("users/" + id);
         };
-        SugarService.prototype.getUsersFromSugar = function () {
+        SugarService.prototype.getUsers = function () {
             return this.getData("users");
         };
         SugarService.prototype.getUserByUsername = function (username) {
@@ -39948,7 +39948,7 @@
             var _this = this;
             this.fieldsService.getData()
                 .then(function (res) { return _this.fields = new Fields(res[0]); });
-            // this.usersFromSugar = this.sugarService.getUsersFromSugar();
+            // this.usersFromSugar = this.sugarService.getUsers();
             // this.route.paramMap.subscribe((params) => params.get("id"));
         };
         CreateUserFormComponent.prototype.onParentChange = function (_a) {
@@ -40279,11 +40279,9 @@
         }
         UsersComponent.prototype.ngOnInit = function () {
             var _this = this;
-            this.sugarService.getUsersFromSugar()
+            this.sugarService.getUsers()
                 .then(function (users) { return users.forEach(function (user) { return _this.usersFromSugar.push(new User(user)); }); })
                 .then(function (users) { return _this.filteredUsers = _this.usersFromSugar; });
-            this.sugarService.getUsersByTeam("Drakkars")
-                .then(function (res) { return console.log(res); });
         };
         UsersComponent.prototype.filterUsers = function (prop) {
             switch (prop) {
@@ -52590,7 +52588,7 @@
             var _this = this;
             this.fieldsService.getSingleField("civilites")
                 .then(function (res) { return _this.fields = new Fields(res); });
-            this.sugar.getUsersFromSugar()
+            this.sugar.getUsers()
                 .then(function (users) { return users.forEach(function (user) { return _this.usersFromSugar.push(new User(user)); }); });
         };
         CredentialsComponent.prototype.credentialClick = function (e) {
@@ -52937,7 +52935,7 @@
             var _this = this;
             this.fieldsService.getData()
                 .then(function (res) { return _this.fields = new Fields(res[0]); });
-            this.sugarService.getUsersFromSugar()
+            this.sugarService.getUsers()
                 // populate usersFromSugar array
                 .then(function (users) { return users.forEach(function (user) { return _this.allUsersFromSugar.push(new User(user)); }); })
                 // filter active users
