@@ -18,7 +18,7 @@ export class UsersComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.sugarService.getUsersFromSugar()
+    this.sugarService.getUsers()
     .then((users) => users.forEach((user) => this.usersFromSugar.push(new User(user))))
     .then((users) => this.filteredUsers = this.usersFromSugar);
   }

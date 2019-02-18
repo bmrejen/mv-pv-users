@@ -39853,8 +39853,22 @@
         SugarService.prototype.getUserById = function (id) {
             return this.getData("users/" + id);
         };
-        SugarService.prototype.getUsersFromSugar = function () {
+        SugarService.prototype.getUsers = function () {
             return this.getData("users");
+        };
+        SugarService.prototype.getUserByUsername = function (username) {
+            return this.getData("users")
+                .then(function (users) { return users.filter(function (user) { return user.attributes["userName"] === username; }); })
+                .then(function (user) { return user[0]; });
+        };
+        SugarService.prototype.getUserByEmail = function (email) {
+            return this.getData("users")
+                .then(function (users) { return users.filter(function (user) { return user.attributes["email"] === email; }); })
+                .then(function (user) { return user[0]; });
+        };
+        SugarService.prototype.getUsersByTeam = function (team) {
+            return this.getData("users")
+                .then(function (users) { return users.filter(function (user) { return user.attributes["teamId"] === team; }); });
         };
         SugarService.prototype.getRolesFromSugar = function () {
             return this.getData("roles");
@@ -39934,7 +39948,7 @@
             var _this = this;
             this.fieldsService.getData()
                 .then(function (res) { return _this.fields = new Fields(res[0]); });
-            // this.usersFromSugar = this.sugarService.getUsersFromSugar();
+            // this.usersFromSugar = this.sugarService.getUsers();
             // this.route.paramMap.subscribe((params) => params.get("id"));
         };
         CreateUserFormComponent.prototype.onParentChange = function (_a) {
@@ -40265,7 +40279,7 @@
         }
         UsersComponent.prototype.ngOnInit = function () {
             var _this = this;
-            this.sugarService.getUsersFromSugar()
+            this.sugarService.getUsers()
                 .then(function (users) { return users.forEach(function (user) { return _this.usersFromSugar.push(new User(user)); }); })
                 .then(function (users) { return _this.filteredUsers = _this.usersFromSugar; });
         };
@@ -52578,7 +52592,7 @@
             var _this = this;
             this.fieldsService.getSingleField("civilites")
                 .then(function (res) { return _this.fields = new Fields(res); });
-            this.sugar.getUsersFromSugar()
+            this.sugar.getUsers()
                 .then(function (users) { return users.forEach(function (user) { return _this.usersFromSugar.push(new User(user)); }); });
         };
         CredentialsComponent.prototype.credentialClick = function (e) {
@@ -52925,7 +52939,7 @@
             var _this = this;
             this.fieldsService.getData()
                 .then(function (res) { return _this.fields = new Fields(res[0]); });
-            this.sugarService.getUsersFromSugar()
+            this.sugarService.getUsers()
                 // populate usersFromSugar array
                 .then(function (users) { return users.forEach(function (user) { return _this.allUsersFromSugar.push(new User(user)); }); })
                 // filter active users

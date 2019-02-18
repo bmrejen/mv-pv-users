@@ -34,7 +34,7 @@ export class CredentialsComponent implements OnInit {
     this.fieldsService.getSingleField("civilites")
     .then((res) => this.fields = new Fields(res));
 
-    this.sugar.getUsersFromSugar()
+    this.sugar.getUsers()
     .then((users) => users.forEach((user) => this.usersFromSugar.push(new User(user))));
   }
 

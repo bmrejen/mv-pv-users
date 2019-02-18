@@ -33,7 +33,7 @@ export class ProfilesComponent implements OnInit {
     this.fieldsService.getData()
     .then((res) => this.fields = new Fields(res[0]));
 
-    this.sugarService.getUsersFromSugar()
+    this.sugarService.getUsers()
 
     // populate usersFromSugar array
     .then((users) => users.forEach((user) => this.allUsersFromSugar.push(new User(user))))
