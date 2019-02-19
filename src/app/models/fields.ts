@@ -20,14 +20,14 @@ export class Fields extends Model {
   // Non-json properties are not added to class if not initialized
   public codeSON: string = "";
   public codeTourplan: string = "";
-  public codevad: string = "";
+  public codevad: boolean = false;
   public groupes: string = "";
   public inactiveEmployee: boolean = false;
   public inactiveStatus: boolean = false;
-  public inbound: string = "";
+  public inbound: boolean = false;
   public leadsMax: number = 45;
   public leadsMin: number = 15;
-  public outbound: string = "";
+  public outbound: boolean = false;
   public phoneExtension: string = "";
   public phoneNumber: string = "";
   public selectedFunction: string = "";
@@ -35,7 +35,7 @@ export class Fields extends Model {
   public selectedOffice: string = "";
   public selectedOrganisation: string = "";
   public title: string = "";
-  public userValue: string = "";
+  public userValue: string = "user_default";
 
   constructor(data?: any) {
     super(data);

@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { ControlContainer, NgForm } from "@angular/forms";
 
 import { FieldsService } from "../../services/fields.service";
@@ -19,6 +19,32 @@ import { User } from "../../models/user";
 })
 
 export class ProfilesComponent implements OnInit {
+  @Input() public roles;
+  @Input() public services;
+  @Input() public userTemplates;
+  @Input() public userValue;
+  @Input() public selectedFunction;
+  @Input() public selectedManager;
+  @Input() public selectedOffice;
+  @Input() public orgas;
+  @Input() public others;
+  @Input() public inactiveEmployee;
+  @Input() public inactiveStatus;
+  @Input() public leadsMin;
+  @Input() public leadsMax;
+  @Input() public destinations;
+  @Input() public teams;
+  @Input() public codeSON;
+  @Input() public codeTourplan;
+  @Input() public codevad;
+  @Input() public groupes;
+  @Input() public inbound;
+  @Input() public outbound;
+  @Input() public phoneExtension;
+  @Input() public phoneNumber;
+  @Input() public selectedOrganisation;
+  @Input() public title;
+
   public fields: Fields;
   public displayVentesLeads = false;
   public allUsersFromSugar: User[] = [];
@@ -54,23 +80,23 @@ export class ProfilesComponent implements OnInit {
     // push them into fields
     .then((templates) => {
       if (templates !== undefined && templates !== null) {
-        this.fields.userTemplates.push(...templates);
+        this.userTemplates.push(...templates);
       }
     })
     .catch((err) => console.log(err));
   }
 
   public handleClick(e, type) {
-    const roles = this.fields.roles;
-    const services = this.fields.services;
-    const others = this.fields.others;
-    const orgas = this.fields.orgas;
+    const roles = this.roles;
+    const services = this.services;
+    const others = this.others;
+    const orgas = this.orgas;
 
     this.resetSugar();
     switch (type) {
       case "conseiller":
       {
-        this.fields.userValue = "user_default";
+        this.userValue = "user_default";
         this.checkStuff(roles, ["Sales"]);
         this.checkStuff(services, ["Ventes"]);
         this.checkStuff(others, ["Global", "Ventes", "Devis Cotation", "ROLE - Reservation"]);
@@ -79,8 +105,8 @@ export class ProfilesComponent implements OnInit {
 
       case "jm":
       {
-        this.fields.userValue = "user_default_jm";
-        this.fields.selectedFunction = "jm";
+        this.userValue = "user_default_jm";
+        this.selectedFunction = "jm";
 
         this.checkStuff(roles, ["Sales"]);
         this.checkStuff(services, ["Ventes"]);
@@ -99,14 +125,13 @@ export class ProfilesComponent implements OnInit {
       }
       case "manager":
       {
-        this.fields.selectedFunction = "mgr";
+        this.selectedFunction = "mgr";
 
         this.checkStuff(roles, ["Team Manager"]);
         this.checkStuff(services, ["Ventes"]);
         this.checkStuff(others, [
                         "Global",
-                        "Devis Cotation",
-                        "Devis V3",
+                        "Devis Cotation",                        "Devis V3",
                         "ROLE - BI Validation",
                         "Ventes",
                         ],
@@ -115,7 +140,7 @@ export class ProfilesComponent implements OnInit {
       }
       case "assistant":
       {
-        this.fields.selectedFunction = "av";
+        this.selectedFunction = "av";
         this.checkStuff(roles, ["Reservation"]);
         this.checkStuff(services, ["Ventes"]);
         this.checkStuff(others, [
@@ -129,9 +154,9 @@ export class ProfilesComponent implements OnInit {
       }
       case "qualite":
       {
-        this.fields.selectedFunction = "aq";
-        this.fields.selectedOffice = "Bureau - Billetterie & Qualité";
-        this.fields.selectedManager = "Manager du service qualité (Aminata)";
+        this.selectedFunction = "aq";
+        this.selectedOffice = "Bureau - Billetterie & Qualité";
+        this.selectedManager = "Manager du service qualité (Aminata)";
 
         this.checkStuff(roles, ["Quality Control"]);
         this.checkStuff(services, ["Service Qualité"]);
@@ -141,7 +166,7 @@ export class ProfilesComponent implements OnInit {
       }
       case "compta":
       {
-        this.fields.selectedOffice = "1377";
+        this.selectedOffice = "1377";
 
         this.checkStuff(roles, ["Accountant"]);
         this.checkStuff(services, ["Comptabilité"]);
@@ -152,8 +177,8 @@ export class ProfilesComponent implements OnInit {
       case "inactif":
       {
         this.checkStuff(roles, ["Read-only"]);
-        this.fields.inactiveStatus = true;
-        this.fields.inactiveEmployee = true;
+        this.inactiveStatus = true;
+        this.inactiveEmployee = true;
         break;
       }
 
@@ -164,13 +189,13 @@ export class ProfilesComponent implements OnInit {
   }
 
   public setVentesLeads() {
-    this.fields.leadsMin = 15;
-    this.fields.leadsMax = 45;
+    this.leadsMin = 15;
+    this.leadsMax = 45;
   }
 
   public eraseVentesLeads() {
-    this.fields.leadsMin = null;
-    this.fields.leadsMax = null;
+    this.leadsMin = null;
+    this.leadsMax = null;
   }
 
   public onServiceChecked(service, e) {
@@ -188,16 +213,16 @@ export class ProfilesComponent implements OnInit {
   public checkStuff(where, arr) {
     let prefix;
     switch (where) {
-      case this.fields.roles:
+      case this.roles:
       prefix = "roles";
       break;
-      case this.fields.orgas:
+      case this.orgas:
       prefix = "orgas";
       break;
-      case this.fields.services:
+      case this.services:
       prefix = "services";
       break;
-      case this.fields.others:
+      case this.others:
       prefix = "others";
       break;
 
@@ -230,33 +255,33 @@ export class ProfilesComponent implements OnInit {
   }
 
   private resetSugar() {
-    this.fields.inactiveStatus = false,
-    this.fields.inactiveEmployee = false,
-    this.fields.leadsMin = null;
-    this.fields.leadsMax = null;
-    this.fields.userValue = "user_default_xx";
-    this.fields.selectedManager = null,
+    this.inactiveStatus = false,
+    this.inactiveEmployee = false,
+    this.leadsMin = null;
+    this.leadsMax = null;
+    this.userValue = "user_default_xx";
+    this.selectedManager = null,
     this.eraseFields([
-                     this.fields.codeSON,
-                     this.fields.codeTourplan,
-                     this.fields.codevad,
-                     this.fields.groupes,
-                     this.fields.inbound,
-                     this.fields.outbound,
-                     this.fields.phoneExtension,
-                     this.fields.phoneNumber,
-                     this.fields.selectedOffice,
-                     this.fields.selectedFunction,
-                     this.fields.selectedOrganisation,
-                     this.fields.title,
+                     this.codeSON,
+                     this.codeTourplan,
+                     this.codevad,
+                     this.groupes,
+                     this.inbound,
+                     this.outbound,
+                     this.phoneExtension,
+                     this.phoneNumber,
+                     this.selectedOffice,
+                     this.selectedFunction,
+                     this.selectedOrganisation,
+                     this.title,
                      ]);
     this.unCheckArrays([
-                       this.fields.roles,
-                       this.fields.services,
-                       this.fields.others,
-                       this.fields.teams,
-                       this.fields.destinations,
-                       this.fields.orgas,
+                       this.roles,
+                       this.services,
+                       this.others,
+                       this.teams,
+                       this.destinations,
+                       this.orgas,
                        ]);
   }
 
