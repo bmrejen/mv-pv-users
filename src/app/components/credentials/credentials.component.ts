@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { ControlContainer, NgForm } from "@angular/forms";
 import { FieldsService } from "../../services/fields.service";
 import { SugarService } from "../../services/sugar.service";
@@ -19,7 +19,9 @@ import { User } from "../../models/user";
 })
 
 export class CredentialsComponent implements OnInit {
-  public fields: Fields;
+  @Input() public civilites;
+  @Input() public userFields;
+
   public passwordExists = false;
   public usersFromSugar: User[] = [];
   public usernameTaken;
@@ -31,17 +33,12 @@ export class CredentialsComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.fieldsService.getSingleField("civilites")
-    .then((res) => this.fields = new Fields(res));
-
     this.sugar.getUsers()
     .then((users) => users.forEach((user) => this.usersFromSugar.push(new User(user))));
   }
 
   public credentialClick(e) {
-    const first = this.fields.userFields.find((field) => field.name === "firstname");
-    const last = this.fields.userFields.find((field) => field.name === "lastname");
-    const username = this.fields.userFields.find((field) => field.name === "username");
+    const [first, last, username ] = [ this.userFields[0], this.userFields[1], this.userFields[2] ];
 
     this.usernameTaken = this.isUsernameTaken(username);
     this.usernameStatus = this.usernameTaken ? "Username already taken. Choose another one" : "Username available :)";
@@ -54,7 +51,7 @@ export class CredentialsComponent implements OnInit {
   }
 
   public setEmail(username) {
-    const email = this.fields.userFields.find((field) => field.name === "email");
+    const email = this.userFields[3];
     email.value = `${username.value}@marcovasco.fr`;
   }
 
@@ -70,7 +67,7 @@ export class CredentialsComponent implements OnInit {
 
   public setPassword(first, last) {
     if (this.passwordExists) { return ; }
-    const pwd = this.fields.userFields.find((field) => field.name === "password");
+    const pwd = this.userFields.find((field) => field.name === "password");
     const rndStrg = Math.random()
     .toString()
     .substring(2, 7);

@@ -1,4 +1,4 @@
-<div *ngIf="fields != null && fields.userTemplates != null && fields.roles != null && fields.services != null">
+<div *ngIf="userTemplates != null && roles != null && services != null">
   <fieldset class="blue">
     <legend>Profiles SugarCRM</legend>
     <button (click)="handleClick($event, 'conseiller')">Ventes - Conseiller</button>
@@ -11,36 +11,36 @@
 
 
     <div class="select subtitle">Hérite les préférence de l'utilisateur
-      <select name="userToCopyHPfrom" [(ngModel)]="fields.userValue">
-        <option *ngFor="let user of fields.userTemplates ; trackBy: trackByFn" [value]="user.value">
-          {{ user.label | uppercase }}
+      <select name="userToCopyHPfrom" [(ngModel)]="userValue">
+        <option *ngFor="let user of userTemplates ; trackBy: trackByFn" [value]="user.value">
+          {{ userTemplates.indexOf(user)+1 }}. {{ user.label | uppercase }}
         </option>
       </select>
     </div>
 
     <div class="checkbox-list subtitle" id="sugar_role" ngModelGroup="roles">ROLE:
-     <span *ngFor="let role of fields.roles ; trackBy: trackByFn">
+     <span *ngFor="let role of roles ; trackBy: trackByFn">
       <label><input type="checkbox" [(ngModel)]="role.checked" [name]="role.id">{{ role.label }}
       </label></span>
     </div>
 
     <div class="checkbox-list subtitle" id="sugar_departement" ngModelGroup="services">SERVICE:
-      <span *ngFor="let service of fields.services ; trackBy: trackByFn">
+      <span *ngFor="let service of services ; trackBy: trackByFn">
         <label>
           <input [id]="service.id" type="checkbox" [name]="service.id" [ngModel]="service.checked" (ngModelChange)="onServiceChecked(service, $event)">{{ service.name }}
         </label>
       </span>
     </div>
 
-    <div [hidden]="!displayVentesLeads">{{ fields.leadsMin | json }}
+    <div [hidden]="!displayVentesLeads">{{ leadsMin | json }}
       <label>Leads min
-        <input type="number" name="leadsMin" [(ngModel)]="fields.leadsMin">
+        <input type="number" name="leadsMin" [(ngModel)]="leadsMin">
       </label>
     </div>
 
-    <div [hidden]="!displayVentesLeads">{{ fields.leadsMax | json }}
+    <div [hidden]="!displayVentesLeads">{{ leadsMax | json }}
       <label>Leads max
-        <input type="number" name="leadsMax" [(ngModel)]="fields.leadsMax">
+        <input type="number" name="leadsMax" [(ngModel)]="leadsMax">
       </label>
     </div>
   </fieldset>

@@ -1,6 +1,6 @@
-<div *ngIf = "fields != null && fields.offices != null">Office
-  <select [(ngModel)]="fields.selectedOffice" name="office">
-    <option *ngFor="let office of fields.offices ; trackBy: trackByFn" [value]="office.value">
+<div *ngIf = "offices != null">Office
+  <select [(ngModel)]="selectedOffice" name="office">
+    <option *ngFor="let office of offices ; trackBy: trackByFn" [value]="office.value">
       {{ office.label }}
     </option>
   </select>

@@ -1,6 +1,6 @@
-<div *ngIf="fields != null && fields.managers != null">Manager
-  <select name="manager" [(ngModel)]="fields.selectedManager">
-    <option *ngFor="let manager of fields.managers ; trackBy: trackByFn" [value]="manager.name">{{ manager.name }}
+<div *ngIf="managers != null">Manager
+  <select name="manager" [(ngModel)]="selectedManager">
+    <option *ngFor="let manager of managers ; trackBy: trackByFn" [value]="manager.name">{{ manager.name }}
     </option>
   </select>
 </div>

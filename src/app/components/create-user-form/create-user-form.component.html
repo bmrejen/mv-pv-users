@@ -2,24 +2,70 @@
 
 <form #createForm="ngForm" (ngSubmit)="onSubmit(createForm.value)">
 
-  <mv-accounts></mv-accounts>
-  <mv-credentials></mv-credentials>
+  <ng-container *ngIf="fields && fields !== null">
+    <mv-accounts [accounts]="fields.accounts"></mv-accounts>
+    <mv-credentials [civilites]="fields.civilites" [userFields]="fields.userFields"></mv-credentials>
 
-  <mv-profiles></mv-profiles>
+    <mv-profiles
+    [title]="fields.title"
+    [selectedOrganisation]="fields.selectedOrganisation"
+    [selectedFunction]="fields.selectedFunction"
+    [selectedOffice]="fields.selectedOffice"
+    [phoneNumber]="fields.phoneNumber"
+    [phoneExtension]="fields.phoneExtension"
+    [outbound]="fields.outbound"
+    [inbound]="fields.inbound"
+    [groupes]="fields.groupes"
+    [codevad]="fields.codevad"
+    [codeTourplan]="fields.codeTourplan"
+    [codeSON]="fields.codeSON"
+    [destinations]="fields.destinations"
+    [teams]="fields.teams"
+    [leadsMax]="fields.leadsMax"
+    [leadsMin]="fields.leadsMin"
+    [inactiveStatus]="fields.inactiveStatus"
+    [inactiveEmployee]="fields.inactiveEmployee"
+    [selectedManager]="fields.selectedManager"
+    [others]="fields.others"
+    [orgas]="fields.orgas"
+    [userValue]="fields.userValue"
+    [userTemplates]="fields.userTemplates"
+    [services]="fields.services"
+    [roles]="fields.roles"
 
-  <mv-office></mv-office>
-  <mv-function></mv-function>
-  <mv-manager></mv-manager>
+    ></mv-profiles>
 
-  <mv-destinations></mv-destinations>
-  <mv-teams></mv-teams>
-  <mv-others></mv-others>
-  <mv-extraneous></mv-extraneous>
-  <mv-switchvox></mv-switchvox>
-  <mv-gapps></mv-gapps>
+    <mv-office [offices]="fields.offices" [selectedOffice]="fields.selectedOffice"></mv-office>
+    <mv-function [functions]="fields.functions" [selectedFunction]="fields.selectedFunction"></mv-function>
+    <mv-manager [managers]="fields.managers" [selectedManager]="fields.selectedManager"></mv-manager>
 
-  <div *ngIf="errorMsg">ERROR: {{ errorMsg }}</div>
-  <button [disabled]="!createForm.form.valid" type="submit">Créer l'utilisateur</button>
+    <mv-destinations [destinations]="fields.destinations"></mv-destinations>
+    <mv-teams [teams]="fields.teams"></mv-teams>
+    <mv-others [others]="fields.others"></mv-others>
+    <mv-extraneous
+    [codeTourplan]="fields.codeTourplan"
+    [codeSON]="fields.codeSON"
+    [title]="fields.title"
+    [inactiveEmployee]="fields.inactiveEmployee"
+    [inactiveStatus]="fields.inactiveStatus"
+
+    ></mv-extraneous>
+    <mv-switchvox
+    [phoneNumber]="fields.phoneNumber"
+    [phoneExtension]="fields.phoneExtension"
+    [codevad]="fields.codevad"
+    [outbound]="fields.outbound"
+    [inbound]="fields.inbound"
+    ></mv-switchvox>
+    <mv-gapps
+    [orgas]="fields.orgas"
+    [selectedOrganisation]="fields.selectedOrganisation"
+    [groupes]="fields.groupes"
+    ></mv-gapps>
+
+    <div *ngIf="errorMsg">ERROR: {{ errorMsg }}</div>
+    <button [disabled]="!createForm.form.valid" type="submit">Créer l'utilisateur</button>
+  </ng-container>
 </form>
 FORM VALUE
 <pre> {{ createForm.value | json }} </pre>

@@ -1,29 +1,29 @@
-<fieldset class="blue" *ngIf = "fields != null">
+<fieldset class="blue" *ngIf = "1 != null">
   <legend>Extraneous</legend>
   <div>
     <label>Code User Tourplan
-      <input name="sugar_tourplan" type="text" [(ngModel)]="fields.codeTourplan">
+      <input name="sugar_tourplan" type="text" [(ngModel)]="codeTourplan">
     </label>
   </div>
 
   <div>
     <label>Code SON Galileo
-      <input name="codeSON" type="text" [(ngModel)]="fields.codeSON">
+      <input name="codeSON" type="text" [(ngModel)]="codeSON">
     </label>
   </div>
 
   <div>
     <label>Title
-      <input name="title" type="text" [(ngModel)]="fields.title">
+      <input name="title" type="text" [(ngModel)]="title">
     </label>
   </div>
 
   <div>
     <label>
-      <input type="checkbox" [(ngModel)]="fields.inactiveStatus" name="inactiveStatus">Statut inactif
+      <input type="checkbox" [(ngModel)]="inactiveStatus" name="inactiveStatus">Statut inactif
     </label>
     <label>
-      <input type="checkbox" [(ngModel)]="fields.inactiveEmployee" name="inactiveEmployee">Statut Employe inactif
+      <input type="checkbox" [(ngModel)]="inactiveEmployee" name="inactiveEmployee">Statut Employe inactif
     </label>
   </div>
 </fieldset>

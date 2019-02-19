@@ -1,33 +1,33 @@
-<fieldset class="blue" *ngIf = "fields != null">
+<fieldset class="blue" *ngIf = "1 != null">
   <legend>Switchvox</legend>
 
   <div>
     <label>Phone Number
-      <input name="phone_number" type="tel" [(ngModel)]="fields.phoneNumber">
+      <input name="phone_number" type="tel" [(ngModel)]="phoneNumber">
     </label>
   </div>
 
   <div>
     <label>Extension
-      <input name="extension" type="tel" [(ngModel)]="fields.phoneExtension">
+      <input name="extension" type="tel" [(ngModel)]="phoneExtension">
     </label>
   </div>
 
   <div>
     <label>
-      <input type="checkbox" [(ngModel)]="fields.codevad" name="codevad">Téléphonie a distance
+      <input type="checkbox" [(ngModel)]="codevad" name="codevad">Téléphonie a distance
     </label>
   </div>
 
   <div>
     <label>
-      <input type="checkbox" [(ngModel)]="fields.outbound" name="outbound">Click to call
+      <input type="checkbox" [(ngModel)]="outbound" name="outbound">Click to call
     </label>
   </div>
 
   <div>
     <label>
-      <input type="checkbox" [(ngModel)]="fields.inbound" name="inbound">Notifications appels entrants
+      <input type="checkbox" [(ngModel)]="inbound" name="inbound">Notifications appels entrants
     </label>
   </div>
 </fieldset>

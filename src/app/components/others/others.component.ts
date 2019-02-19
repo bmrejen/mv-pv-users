@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { ControlContainer, NgForm } from "@angular/forms";
 import { FieldsService } from "../../services/fields.service";
 
@@ -17,15 +17,14 @@ import { Fields } from "../../models/fields";
 })
 
 export class OthersComponent implements OnInit {
-  public fields: Fields;
+  @Input() public others;
 
   constructor(private fieldsService: FieldsService) {
     //
   }
 
   public ngOnInit(): void {
-    this.fieldsService.getSingleField("others")
-    .then((res) => this.fields = new Fields(res));
+    //
   }
 
   public trackByFn(index, item) {

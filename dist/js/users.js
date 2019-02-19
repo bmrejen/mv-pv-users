@@ -34934,14 +34934,14 @@
             // Non-json properties are not added to class if not initialized
             _this.codeSON = "";
             _this.codeTourplan = "";
-            _this.codevad = "";
+            _this.codevad = false;
             _this.groupes = "";
             _this.inactiveEmployee = false;
             _this.inactiveStatus = false;
-            _this.inbound = "";
+            _this.inbound = false;
             _this.leadsMax = 45;
             _this.leadsMin = 15;
-            _this.outbound = "";
+            _this.outbound = false;
             _this.phoneExtension = "";
             _this.phoneNumber = "";
             _this.selectedFunction = "";
@@ -34949,7 +34949,7 @@
             _this.selectedOffice = "";
             _this.selectedOrganisation = "";
             _this.title = "";
-            _this.userValue = "";
+            _this.userValue = "user_default";
             return _this;
         }
         return Fields;
@@ -39870,7 +39870,7 @@
             return this.getData("users")
                 .then(function (users) { return users.filter(function (user) { return user.attributes["teamId"] === team; }); });
         };
-        SugarService.prototype.getRolesFromSugar = function () {
+        SugarService.prototype.getRoles = function () {
             return this.getData("roles");
         };
         SugarService.prototype.postDataToSugar = function (body) {
@@ -39947,7 +39947,10 @@
         CreateUserFormComponent.prototype.ngOnInit = function () {
             var _this = this;
             this.fieldsService.getData()
-                .then(function (res) { return _this.fields = new Fields(res[0]); });
+                .then(function (res) {
+                _this.fields = new Fields(res[0]);
+                console.log(_this.fields);
+            });
             // this.usersFromSugar = this.sugarService.getUsers();
             // this.route.paramMap.subscribe((params) => params.get("id"));
         };
@@ -40073,7 +40076,7 @@
             this.fieldsService.getData()
                 .then(function (res) { return _this.fields = new Fields(res[0]); })
                 .then(function (res) { return console.log(_this.fields); });
-            this.sugar.getUsersFromSugar()
+            this.sugar.getUsers()
                 .then(function (users) { return users.forEach(function (user) {
                 user["checked"] = false;
                 _this.users.push(new User(user));
@@ -40218,7 +40221,7 @@
         }
         RolesComponent.prototype.ngOnInit = function () {
             var _this = this;
-            this.sugarService.getRolesFromSugar()
+            this.sugarService.getRoles()
                 .then(function (roles) {
                 roles.forEach(function (role) {
                     _this.rolesFromSugar.push(new Role(role));
@@ -52514,22 +52517,19 @@
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var AccountsComponent = /** @class */ (function () {
-        // public accounts;
-        // @Input() public accountFields;
         function AccountsComponent(fieldsService) {
             this.fieldsService = fieldsService;
-            this.fields = null;
         }
         AccountsComponent.prototype.ngOnInit = function () {
-            // this.accounts = this.accountFields;
-            // console.log("this.accounts", this.accountFields);
-            var _this = this;
-            this.fieldsService.getSingleField("accounts")
-                .then(function (res) { return _this.fields = new Fields(res); });
+            //
         };
         AccountsComponent.prototype.trackByFn = function (index, item) {
             return item.id; // or index
         };
+        __decorate$c([
+            Input(),
+            __metadata$b("design:type", Object)
+        ], AccountsComponent.prototype, "accounts", void 0);
         AccountsComponent = __decorate$c([
             Component({
                 selector: "mv-accounts",
@@ -52604,15 +52604,11 @@
         }
         CredentialsComponent.prototype.ngOnInit = function () {
             var _this = this;
-            this.fieldsService.getSingleField("civilites")
-                .then(function (res) { return _this.fields = new Fields(res); });
             this.sugar.getUsers()
                 .then(function (users) { return users.forEach(function (user) { return _this.usersFromSugar.push(new User(user)); }); });
         };
         CredentialsComponent.prototype.credentialClick = function (e) {
-            var first = this.fields.userFields.find(function (field) { return field.name === "firstname"; });
-            var last = this.fields.userFields.find(function (field) { return field.name === "lastname"; });
-            var username = this.fields.userFields.find(function (field) { return field.name === "username"; });
+            var _a = [this.userFields[0], this.userFields[1], this.userFields[2]], first = _a[0], last = _a[1], username = _a[2];
             this.usernameTaken = this.isUsernameTaken(username);
             this.usernameStatus = this.usernameTaken ? "Username already taken. Choose another one" : "Username available :)";
             if (!!first.value && !!last.value && !username.value) {
@@ -52622,7 +52618,7 @@
             }
         };
         CredentialsComponent.prototype.setEmail = function (username) {
-            var email = this.fields.userFields.find(function (field) { return field.name === "email"; });
+            var email = this.userFields[3];
             email.value = username.value + "@marcovasco.fr";
         };
         CredentialsComponent.prototype.setUsername = function (first, last, username) {
@@ -52636,7 +52632,7 @@
             if (this.passwordExists) {
                 return;
             }
-            var pwd = this.fields.userFields.find(function (field) { return field.name === "password"; });
+            var pwd = this.userFields.find(function (field) { return field.name === "password"; });
             var rndStrg = Math.random()
                 .toString()
                 .substring(2, 7);
@@ -52646,6 +52642,14 @@
         CredentialsComponent.prototype.trackByFn = function (index, item) {
             return item.id; // or index
         };
+        __decorate$e([
+            Input(),
+            __metadata$d("design:type", Object)
+        ], CredentialsComponent.prototype, "civilites", void 0);
+        __decorate$e([
+            Input(),
+            __metadata$d("design:type", Object)
+        ], CredentialsComponent.prototype, "userFields", void 0);
         CredentialsComponent = __decorate$e([
             Component({
                 selector: "mv-credentials",
@@ -52679,13 +52683,15 @@
             //
         }
         DestinationsComponent.prototype.ngOnInit = function () {
-            var _this = this;
-            this.fieldsService.getSingleField("destinations")
-                .then(function (res) { return _this.fields = new Fields(res); });
+            //
         };
         DestinationsComponent.prototype.trackByFn = function (index, item) {
             return item.id; // or index
         };
+        __decorate$f([
+            Input(),
+            __metadata$e("design:type", Object)
+        ], DestinationsComponent.prototype, "destinations", void 0);
         DestinationsComponent = __decorate$f([
             Component({
                 selector: "mv-destinations",
@@ -52718,13 +52724,31 @@
             //
         }
         ExtraneousComponent.prototype.ngOnInit = function () {
-            var _this = this;
-            this.fieldsService.getData()
-                .then(function (res) { return _this.fields = new Fields(res[0]); });
+            //
         };
         ExtraneousComponent.prototype.trackByFn = function (index, item) {
             return item.id; // or index
         };
+        __decorate$g([
+            Input(),
+            __metadata$f("design:type", Object)
+        ], ExtraneousComponent.prototype, "codeTourplan", void 0);
+        __decorate$g([
+            Input(),
+            __metadata$f("design:type", Object)
+        ], ExtraneousComponent.prototype, "codeSON", void 0);
+        __decorate$g([
+            Input(),
+            __metadata$f("design:type", Object)
+        ], ExtraneousComponent.prototype, "title", void 0);
+        __decorate$g([
+            Input(),
+            __metadata$f("design:type", Object)
+        ], ExtraneousComponent.prototype, "inactiveStatus", void 0);
+        __decorate$g([
+            Input(),
+            __metadata$f("design:type", Object)
+        ], ExtraneousComponent.prototype, "inactiveEmployee", void 0);
         ExtraneousComponent = __decorate$g([
             Component({
                 selector: "mv-extraneous",
@@ -52756,13 +52780,19 @@
             //
         }
         FunctionComponent.prototype.ngOnInit = function () {
-            var _this = this;
-            this.fieldsService.getSingleField("functions")
-                .then(function (res) { return _this.fields = new Fields(res); });
+            //
         };
         FunctionComponent.prototype.trackByFn = function (index, item) {
             return item.id; // or index
         };
+        __decorate$h([
+            Input(),
+            __metadata$g("design:type", Object)
+        ], FunctionComponent.prototype, "functions", void 0);
+        __decorate$h([
+            Input(),
+            __metadata$g("design:type", Object)
+        ], FunctionComponent.prototype, "selectedFunction", void 0);
         FunctionComponent = __decorate$h([
             Component({
                 selector: "mv-function",
@@ -52794,13 +52824,23 @@
             //
         }
         GappsComponent.prototype.ngOnInit = function () {
-            var _this = this;
-            this.fieldsService.getData()
-                .then(function (res) { return _this.fields = new Fields(res[0]); });
+            //
         };
         GappsComponent.prototype.trackByFn = function (index, item) {
             return item.id; // or index
         };
+        __decorate$i([
+            Input(),
+            __metadata$h("design:type", Object)
+        ], GappsComponent.prototype, "orgas", void 0);
+        __decorate$i([
+            Input(),
+            __metadata$h("design:type", Object)
+        ], GappsComponent.prototype, "selectedOrganisation", void 0);
+        __decorate$i([
+            Input(),
+            __metadata$h("design:type", Object)
+        ], GappsComponent.prototype, "groupes", void 0);
         GappsComponent = __decorate$i([
             Component({
                 selector: "mv-gapps",
@@ -52832,13 +52872,19 @@
             //
         }
         ManagerComponent.prototype.ngOnInit = function () {
-            var _this = this;
-            this.fieldsService.getSingleField("managers")
-                .then(function (res) { return _this.fields = new Fields(res); });
+            //
         };
         ManagerComponent.prototype.trackByFn = function (index, item) {
             return item.id; // or index
         };
+        __decorate$j([
+            Input(),
+            __metadata$i("design:type", Object)
+        ], ManagerComponent.prototype, "managers", void 0);
+        __decorate$j([
+            Input(),
+            __metadata$i("design:type", Object)
+        ], ManagerComponent.prototype, "selectedManager", void 0);
         ManagerComponent = __decorate$j([
             Component({
                 selector: "mv-manager",
@@ -52870,13 +52916,19 @@
             //
         }
         OfficeComponent.prototype.ngOnInit = function () {
-            var _this = this;
-            this.fieldsService.getSingleField("offices")
-                .then(function (res) { return _this.fields = new Fields(res); });
+            //
         };
         OfficeComponent.prototype.trackByFn = function (index, item) {
             return item.id; // or index
         };
+        __decorate$k([
+            Input(),
+            __metadata$j("design:type", Object)
+        ], OfficeComponent.prototype, "offices", void 0);
+        __decorate$k([
+            Input(),
+            __metadata$j("design:type", Object)
+        ], OfficeComponent.prototype, "selectedOffice", void 0);
         OfficeComponent = __decorate$k([
             Component({
                 selector: "mv-office",
@@ -52908,13 +52960,15 @@
             //
         }
         OthersComponent.prototype.ngOnInit = function () {
-            var _this = this;
-            this.fieldsService.getSingleField("others")
-                .then(function (res) { return _this.fields = new Fields(res); });
+            //
         };
         OthersComponent.prototype.trackByFn = function (index, item) {
             return item.id; // or index
         };
+        __decorate$l([
+            Input(),
+            __metadata$k("design:type", Object)
+        ], OthersComponent.prototype, "others", void 0);
         OthersComponent = __decorate$l([
             Component({
                 selector: "mv-others",
@@ -52972,21 +53026,21 @@
                 .then(function (templates) {
                 var _a;
                 if (templates !== undefined && templates !== null) {
-                    (_a = _this.fields.userTemplates).push.apply(_a, templates);
+                    (_a = _this.userTemplates).push.apply(_a, templates);
                 }
             })
                 .catch(function (err) { return console.log(err); });
         };
         ProfilesComponent.prototype.handleClick = function (e, type) {
-            var roles = this.fields.roles;
-            var services = this.fields.services;
-            var others = this.fields.others;
-            var orgas = this.fields.orgas;
+            var roles = this.roles;
+            var services = this.services;
+            var others = this.others;
+            var orgas = this.orgas;
             this.resetSugar();
             switch (type) {
                 case "conseiller":
                     {
-                        this.fields.userValue = "user_default";
+                        this.userValue = "user_default";
                         this.checkStuff(roles, ["Sales"]);
                         this.checkStuff(services, ["Ventes"]);
                         this.checkStuff(others, ["Global", "Ventes", "Devis Cotation", "ROLE - Reservation"]);
@@ -52994,8 +53048,8 @@
                     }
                 case "jm":
                     {
-                        this.fields.userValue = "user_default_jm";
-                        this.fields.selectedFunction = "jm";
+                        this.userValue = "user_default_jm";
+                        this.selectedFunction = "jm";
                         this.checkStuff(roles, ["Sales"]);
                         this.checkStuff(services, ["Ventes"]);
                         this.checkStuff(others, [
@@ -53011,13 +53065,12 @@
                     }
                 case "manager":
                     {
-                        this.fields.selectedFunction = "mgr";
+                        this.selectedFunction = "mgr";
                         this.checkStuff(roles, ["Team Manager"]);
                         this.checkStuff(services, ["Ventes"]);
                         this.checkStuff(others, [
                             "Global",
-                            "Devis Cotation",
-                            "Devis V3",
+                            "Devis Cotation", "Devis V3",
                             "ROLE - BI Validation",
                             "Ventes",
                         ]);
@@ -53025,7 +53078,7 @@
                     }
                 case "assistant":
                     {
-                        this.fields.selectedFunction = "av";
+                        this.selectedFunction = "av";
                         this.checkStuff(roles, ["Reservation"]);
                         this.checkStuff(services, ["Ventes"]);
                         this.checkStuff(others, [
@@ -53039,9 +53092,9 @@
                     }
                 case "qualite":
                     {
-                        this.fields.selectedFunction = "aq";
-                        this.fields.selectedOffice = "Bureau - Billetterie & Qualité";
-                        this.fields.selectedManager = "Manager du service qualité (Aminata)";
+                        this.selectedFunction = "aq";
+                        this.selectedOffice = "Bureau - Billetterie & Qualité";
+                        this.selectedManager = "Manager du service qualité (Aminata)";
                         this.checkStuff(roles, ["Quality Control"]);
                         this.checkStuff(services, ["Service Qualité"]);
                         this.checkStuff(others, ["BackOffice", "Global", "SAV"]);
@@ -53050,7 +53103,7 @@
                     }
                 case "compta":
                     {
-                        this.fields.selectedOffice = "1377";
+                        this.selectedOffice = "1377";
                         this.checkStuff(roles, ["Accountant"]);
                         this.checkStuff(services, ["Comptabilité"]);
                         this.checkStuff(others, ["Global", "ROLE - Affaire Validation", "ROLE - Create Provider"]);
@@ -53060,8 +53113,8 @@
                 case "inactif":
                     {
                         this.checkStuff(roles, ["Read-only"]);
-                        this.fields.inactiveStatus = true;
-                        this.fields.inactiveEmployee = true;
+                        this.inactiveStatus = true;
+                        this.inactiveEmployee = true;
                         break;
                     }
                 default:
@@ -53070,12 +53123,12 @@
             }
         };
         ProfilesComponent.prototype.setVentesLeads = function () {
-            this.fields.leadsMin = 15;
-            this.fields.leadsMax = 45;
+            this.leadsMin = 15;
+            this.leadsMax = 45;
         };
         ProfilesComponent.prototype.eraseVentesLeads = function () {
-            this.fields.leadsMin = null;
-            this.fields.leadsMax = null;
+            this.leadsMin = null;
+            this.leadsMax = null;
         };
         ProfilesComponent.prototype.onServiceChecked = function (service, e) {
             if (service.id === "services-Ventes") {
@@ -53092,16 +53145,16 @@
         ProfilesComponent.prototype.checkStuff = function (where, arr) {
             var prefix;
             switch (where) {
-                case this.fields.roles:
+                case this.roles:
                     prefix = "roles";
                     break;
-                case this.fields.orgas:
+                case this.orgas:
                     prefix = "orgas";
                     break;
-                case this.fields.services:
+                case this.services:
                     prefix = "services";
                     break;
-                case this.fields.others:
+                case this.others:
                     prefix = "others";
                     break;
                 default:
@@ -53129,35 +53182,135 @@
             arrays.forEach(function (array) { return _this.unCheck(array); });
         };
         ProfilesComponent.prototype.resetSugar = function () {
-            this.fields.inactiveStatus = false,
-                this.fields.inactiveEmployee = false,
-                this.fields.leadsMin = null;
-            this.fields.leadsMax = null;
-            this.fields.userValue = "user_default_xx";
-            this.fields.selectedManager = null,
+            this.inactiveStatus = false,
+                this.inactiveEmployee = false,
+                this.leadsMin = null;
+            this.leadsMax = null;
+            this.userValue = "user_default_xx";
+            this.selectedManager = null,
                 this.eraseFields([
-                    this.fields.codeSON,
-                    this.fields.codeTourplan,
-                    this.fields.codevad,
-                    this.fields.groupes,
-                    this.fields.inbound,
-                    this.fields.outbound,
-                    this.fields.phoneExtension,
-                    this.fields.phoneNumber,
-                    this.fields.selectedOffice,
-                    this.fields.selectedFunction,
-                    this.fields.selectedOrganisation,
-                    this.fields.title,
+                    this.codeSON,
+                    this.codeTourplan,
+                    this.codevad,
+                    this.groupes,
+                    this.inbound,
+                    this.outbound,
+                    this.phoneExtension,
+                    this.phoneNumber,
+                    this.selectedOffice,
+                    this.selectedFunction,
+                    this.selectedOrganisation,
+                    this.title,
                 ]);
             this.unCheckArrays([
-                this.fields.roles,
-                this.fields.services,
-                this.fields.others,
-                this.fields.teams,
-                this.fields.destinations,
-                this.fields.orgas,
+                this.roles,
+                this.services,
+                this.others,
+                this.teams,
+                this.destinations,
+                this.orgas,
             ]);
         };
+        __decorate$m([
+            Input(),
+            __metadata$l("design:type", Object)
+        ], ProfilesComponent.prototype, "roles", void 0);
+        __decorate$m([
+            Input(),
+            __metadata$l("design:type", Object)
+        ], ProfilesComponent.prototype, "services", void 0);
+        __decorate$m([
+            Input(),
+            __metadata$l("design:type", Object)
+        ], ProfilesComponent.prototype, "userTemplates", void 0);
+        __decorate$m([
+            Input(),
+            __metadata$l("design:type", Object)
+        ], ProfilesComponent.prototype, "userValue", void 0);
+        __decorate$m([
+            Input(),
+            __metadata$l("design:type", Object)
+        ], ProfilesComponent.prototype, "selectedFunction", void 0);
+        __decorate$m([
+            Input(),
+            __metadata$l("design:type", Object)
+        ], ProfilesComponent.prototype, "selectedManager", void 0);
+        __decorate$m([
+            Input(),
+            __metadata$l("design:type", Object)
+        ], ProfilesComponent.prototype, "selectedOffice", void 0);
+        __decorate$m([
+            Input(),
+            __metadata$l("design:type", Object)
+        ], ProfilesComponent.prototype, "orgas", void 0);
+        __decorate$m([
+            Input(),
+            __metadata$l("design:type", Object)
+        ], ProfilesComponent.prototype, "others", void 0);
+        __decorate$m([
+            Input(),
+            __metadata$l("design:type", Object)
+        ], ProfilesComponent.prototype, "inactiveEmployee", void 0);
+        __decorate$m([
+            Input(),
+            __metadata$l("design:type", Object)
+        ], ProfilesComponent.prototype, "inactiveStatus", void 0);
+        __decorate$m([
+            Input(),
+            __metadata$l("design:type", Object)
+        ], ProfilesComponent.prototype, "leadsMin", void 0);
+        __decorate$m([
+            Input(),
+            __metadata$l("design:type", Object)
+        ], ProfilesComponent.prototype, "leadsMax", void 0);
+        __decorate$m([
+            Input(),
+            __metadata$l("design:type", Object)
+        ], ProfilesComponent.prototype, "destinations", void 0);
+        __decorate$m([
+            Input(),
+            __metadata$l("design:type", Object)
+        ], ProfilesComponent.prototype, "teams", void 0);
+        __decorate$m([
+            Input(),
+            __metadata$l("design:type", Object)
+        ], ProfilesComponent.prototype, "codeSON", void 0);
+        __decorate$m([
+            Input(),
+            __metadata$l("design:type", Object)
+        ], ProfilesComponent.prototype, "codeTourplan", void 0);
+        __decorate$m([
+            Input(),
+            __metadata$l("design:type", Object)
+        ], ProfilesComponent.prototype, "codevad", void 0);
+        __decorate$m([
+            Input(),
+            __metadata$l("design:type", Object)
+        ], ProfilesComponent.prototype, "groupes", void 0);
+        __decorate$m([
+            Input(),
+            __metadata$l("design:type", Object)
+        ], ProfilesComponent.prototype, "inbound", void 0);
+        __decorate$m([
+            Input(),
+            __metadata$l("design:type", Object)
+        ], ProfilesComponent.prototype, "outbound", void 0);
+        __decorate$m([
+            Input(),
+            __metadata$l("design:type", Object)
+        ], ProfilesComponent.prototype, "phoneExtension", void 0);
+        __decorate$m([
+            Input(),
+            __metadata$l("design:type", Object)
+        ], ProfilesComponent.prototype, "phoneNumber", void 0);
+        __decorate$m([
+            Input(),
+            __metadata$l("design:type", Object)
+        ], ProfilesComponent.prototype, "selectedOrganisation", void 0);
+        __decorate$m([
+            Input(),
+            __metadata$l("design:type", Object)
+        ], ProfilesComponent.prototype, "title", void 0);
         ProfilesComponent = __decorate$m([
             Component({
                 selector: "mv-profiles",
@@ -53190,13 +53343,31 @@
             //
         }
         SwitchvoxComponent.prototype.ngOnInit = function () {
-            var _this = this;
-            this.fieldsService.getData()
-                .then(function (res) { return _this.fields = new Fields(res[0]); });
+            //
         };
         SwitchvoxComponent.prototype.trackByFn = function (index, item) {
             return item.id; // or index
         };
+        __decorate$n([
+            Input(),
+            __metadata$m("design:type", Object)
+        ], SwitchvoxComponent.prototype, "phoneNumber", void 0);
+        __decorate$n([
+            Input(),
+            __metadata$m("design:type", Object)
+        ], SwitchvoxComponent.prototype, "phoneExtension", void 0);
+        __decorate$n([
+            Input(),
+            __metadata$m("design:type", Object)
+        ], SwitchvoxComponent.prototype, "codevad", void 0);
+        __decorate$n([
+            Input(),
+            __metadata$m("design:type", Object)
+        ], SwitchvoxComponent.prototype, "outbound", void 0);
+        __decorate$n([
+            Input(),
+            __metadata$m("design:type", Object)
+        ], SwitchvoxComponent.prototype, "inbound", void 0);
         SwitchvoxComponent = __decorate$n([
             Component({
                 selector: "mv-switchvox",
@@ -53228,13 +53399,15 @@
             //
         }
         TeamsComponent.prototype.ngOnInit = function () {
-            var _this = this;
-            this.fieldsService.getSingleField("teams")
-                .then(function (res) { return _this.fields = new Fields(res); });
+            //
         };
         TeamsComponent.prototype.trackByFn = function (index, item) {
             return item.id; // or index
         };
+        __decorate$o([
+            Input(),
+            __metadata$n("design:type", Object)
+        ], TeamsComponent.prototype, "teams", void 0);
         TeamsComponent = __decorate$o([
             Component({
                 selector: "mv-teams",
@@ -53364,7 +53537,7 @@
                 textDef(-1, null, ['\n  '])), (_l()(), elementDef(2, 0, null, null, 7, 'fieldset', [['class', 'blue']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(4, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Accounts'])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_AccountsComponent_2)), directiveDef(8, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(),
                 textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
             var _co = _v.component;
-            var currVal_0 = _co.fields.accounts;
+            var currVal_0 = _co.accounts;
             var currVal_1 = _co.trackByFn;
             _ck(_v, 8, 0, currVal_0, currVal_1);
         }, null);
@@ -53373,7 +53546,7 @@
         return viewDef(0, [(_l()(), anchorDef(16777216, null, null, 1, null, View_AccountsComponent_1)), directiveDef(1, 16384, null, 0, NgIf, [ViewContainerRef,
                 TemplateRef], { ngIf: [0, 'ngIf'] }, null), (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
             var _co = _v.component;
-            var currVal_0 = ((_co.fields != null) && (_co.fields.accounts != null));
+            var currVal_0 = (_co.accounts != null);
             _ck(_v, 1, 0, currVal_0);
         }, null);
     }
@@ -53382,7 +53555,7 @@
             _ck(_v, 2, 0);
         }, null);
     }
-    var AccountsComponentNgFactory = createComponentFactory('mv-accounts', AccountsComponent, View_AccountsComponent_Host_0, {}, {}, []);
+    var AccountsComponentNgFactory = createComponentFactory('mv-accounts', AccountsComponent, View_AccountsComponent_Host_0, { accounts: 'accounts' }, {}, []);
 
     /**
      * @fileoverview This file is generated by the Angular template compiler.
@@ -53498,7 +53671,7 @@
                     ad = (pd_3 && ad);
                 }
                 if (('blur' === en)) {
-                    var pd_4 = (_co.credentialClick(_co.fields.userFields) !== false);
+                    var pd_4 = (_co.credentialClick(_co.userFields) !== false);
                     ad = (pd_4 && ad);
                 }
                 if (('ngModelChange' === en)) {
@@ -53548,11 +53721,11 @@
             var _co = _v.component;
             var currVal_7 = 'userInfo';
             _ck(_v, 8, 0, currVal_7);
-            var currVal_8 = _co.fields.civilites;
+            var currVal_8 = _co.civilites;
             _ck(_v, 13, 0, currVal_8);
             var currVal_16 = 'credentials';
             _ck(_v, 16, 0, currVal_16);
-            var currVal_17 = _co.fields.userFields;
+            var currVal_17 = _co.userFields;
             var currVal_18 = _co.trackByFn;
             _ck(_v, 21, 0, currVal_17, currVal_18);
         }, function (_ck, _v) {
@@ -53578,7 +53751,7 @@
         return viewDef(0, [(_l()(), anchorDef(16777216, null, null, 1, null, View_CredentialsComponent_1)), directiveDef(1, 16384, null, 0, NgIf, [ViewContainerRef,
                 TemplateRef], { ngIf: [0, 'ngIf'] }, null), (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
             var _co = _v.component;
-            var currVal_0 = ((_co.fields != null) && (_co.fields.civilites != null));
+            var currVal_0 = (_co.civilites != null);
             _ck(_v, 1, 0, currVal_0);
         }, null);
     }
@@ -53587,7 +53760,8 @@
             _ck(_v, 2, 0);
         }, null);
     }
-    var CredentialsComponentNgFactory = createComponentFactory('mv-credentials', CredentialsComponent, View_CredentialsComponent_Host_0, {}, {}, []);
+    var CredentialsComponentNgFactory = createComponentFactory('mv-credentials', CredentialsComponent, View_CredentialsComponent_Host_0, { civilites: 'civilites',
+        userFields: 'userFields' }, {}, []);
 
     /**
      * @fileoverview This file is generated by the Angular template compiler.
@@ -53599,14 +53773,16 @@
         styles: styles_ProfilesComponent, data: {} });
     function View_ProfilesComponent_2(_l) {
         return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 4, 'option', [], null, null, null, null, null)), directiveDef(1, 147456, null, 0, NgSelectOption, [ElementRef, Renderer2, [2, SelectControlValueAccessor]], { value: [0, 'value'] }, null), directiveDef(2, 147456, null, 0, NgSelectMultipleOption, [ElementRef,
-                Renderer2, [8, null]], { value: [0, 'value'] }, null), (_l()(), textDef(3, null, ['\n          ', '\n        '])), purePipeDef(4, 1)], function (_ck, _v) {
+                Renderer2, [8, null]], { value: [0, 'value'] }, null), (_l()(), textDef(3, null, ['\n          ', '. ', '\n        '])), purePipeDef(4, 1)], function (_ck, _v) {
             var currVal_0 = _v.context.$implicit.value;
             _ck(_v, 1, 0, currVal_0);
             var currVal_1 = _v.context.$implicit.value;
             _ck(_v, 2, 0, currVal_1);
         }, function (_ck, _v) {
-            var currVal_2 = unwrapValue(_v, 3, 0, _ck(_v, 4, 0, nodeValue(_v.parent.parent, 0), _v.context.$implicit.label));
-            _ck(_v, 3, 0, currVal_2);
+            var _co = _v.component;
+            var currVal_2 = (_co.userTemplates.indexOf(_v.context.$implicit) + 1);
+            var currVal_3 = unwrapValue(_v, 3, 1, _ck(_v, 4, 0, nodeValue(_v.parent.parent, 0), _v.context.$implicit.label));
+            _ck(_v, 3, 0, currVal_2, currVal_3);
         });
     }
     function View_ProfilesComponent_3(_l) {
@@ -53774,7 +53950,7 @@
                     ad = (pd_1 && ad);
                 }
                 if (('ngModelChange' === en)) {
-                    var pd_2 = ((_co.fields.userValue = $event) !== false);
+                    var pd_2 = ((_co.userValue = $event) !== false);
                     ad = (pd_2 && ad);
                 }
                 return ad;
@@ -53837,7 +54013,7 @@
                     ad = (pd_6 && ad);
                 }
                 if (('ngModelChange' === en)) {
-                    var pd_7 = ((_co.fields.leadsMin = $event) !== false);
+                    var pd_7 = ((_co.leadsMin = $event) !== false);
                     ad = (pd_7 && ad);
                 }
                 return ad;
@@ -53881,7 +54057,7 @@
                     ad = (pd_6 && ad);
                 }
                 if (('ngModelChange' === en)) {
-                    var pd_7 = ((_co.fields.leadsMax = $event) !== false);
+                    var pd_7 = ((_co.leadsMax = $event) !== false);
                     ad = (pd_7 && ad);
                 }
                 return ad;
@@ -53891,26 +54067,26 @@
             (_l()(), textDef(-1, null, ['\n      '])), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
             var _co = _v.component;
             var currVal_7 = 'userToCopyHPfrom';
-            var currVal_8 = _co.fields.userValue;
+            var currVal_8 = _co.userValue;
             _ck(_v, 33, 0, currVal_7, currVal_8);
-            var currVal_9 = _co.fields.userTemplates;
+            var currVal_9 = _co.userTemplates;
             var currVal_10 = _co.trackByFn;
             _ck(_v, 38, 0, currVal_9, currVal_10);
             var currVal_18 = 'roles';
             _ck(_v, 43, 0, currVal_18);
-            var currVal_19 = _co.fields.roles;
+            var currVal_19 = _co.roles;
             var currVal_20 = _co.trackByFn;
             _ck(_v, 48, 0, currVal_19, currVal_20);
             var currVal_28 = 'services';
             _ck(_v, 52, 0, currVal_28);
-            var currVal_29 = _co.fields.services;
+            var currVal_29 = _co.services;
             var currVal_30 = _co.trackByFn;
             _ck(_v, 57, 0, currVal_29, currVal_30);
             var currVal_40 = 'leadsMin';
-            var currVal_41 = _co.fields.leadsMin;
+            var currVal_41 = _co.leadsMin;
             _ck(_v, 69, 0, currVal_40, currVal_41);
             var currVal_51 = 'leadsMax';
-            var currVal_52 = _co.fields.leadsMax;
+            var currVal_52 = _co.leadsMax;
             _ck(_v, 84, 0, currVal_51, currVal_52);
         }, function (_ck, _v) {
             var _co = _v.component;
@@ -53940,7 +54116,7 @@
             _ck(_v, 51, 0, currVal_21, currVal_22, currVal_23, currVal_24, currVal_25, currVal_26, currVal_27);
             var currVal_31 = !_co.displayVentesLeads;
             _ck(_v, 60, 0, currVal_31);
-            var currVal_32 = unwrapValue(_v, 61, 0, nodeValue(_v, 62).transform(_co.fields.leadsMin));
+            var currVal_32 = unwrapValue(_v, 61, 0, nodeValue(_v, 62).transform(_co.leadsMin));
             _ck(_v, 61, 0, currVal_32);
             var currVal_33 = nodeValue(_v, 71).ngClassUntouched;
             var currVal_34 = nodeValue(_v, 71).ngClassTouched;
@@ -53952,7 +54128,7 @@
             _ck(_v, 65, 0, currVal_33, currVal_34, currVal_35, currVal_36, currVal_37, currVal_38, currVal_39);
             var currVal_42 = !_co.displayVentesLeads;
             _ck(_v, 75, 0, currVal_42);
-            var currVal_43 = unwrapValue(_v, 76, 0, nodeValue(_v, 77).transform(_co.fields.leadsMax));
+            var currVal_43 = unwrapValue(_v, 76, 0, nodeValue(_v, 77).transform(_co.leadsMax));
             _ck(_v, 76, 0, currVal_43);
             var currVal_44 = nodeValue(_v, 86).ngClassUntouched;
             var currVal_45 = nodeValue(_v, 86).ngClassTouched;
@@ -53968,7 +54144,7 @@
         return viewDef(0, [pipeDef(0, UpperCasePipe, []), (_l()(), anchorDef(16777216, null, null, 1, null, View_ProfilesComponent_1)), directiveDef(2, 16384, null, 0, NgIf, [ViewContainerRef, TemplateRef], { ngIf: [0,
                     'ngIf'] }, null), (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
             var _co = _v.component;
-            var currVal_0 = ((((_co.fields != null) && (_co.fields.userTemplates != null)) && (_co.fields.roles != null)) && (_co.fields.services != null));
+            var currVal_0 = (((_co.userTemplates != null) && (_co.roles != null)) && (_co.services != null));
             _ck(_v, 2, 0, currVal_0);
         }, null);
     }
@@ -53977,7 +54153,14 @@
             _ck(_v, 2, 0);
         }, null);
     }
-    var ProfilesComponentNgFactory = createComponentFactory('mv-profiles', ProfilesComponent, View_ProfilesComponent_Host_0, {}, {}, []);
+    var ProfilesComponentNgFactory = createComponentFactory('mv-profiles', ProfilesComponent, View_ProfilesComponent_Host_0, { roles: 'roles', services: 'services',
+        userTemplates: 'userTemplates', userValue: 'userValue', selectedFunction: 'selectedFunction',
+        selectedManager: 'selectedManager', selectedOffice: 'selectedOffice', orgas: 'orgas',
+        others: 'others', inactiveEmployee: 'inactiveEmployee', inactiveStatus: 'inactiveStatus',
+        leadsMin: 'leadsMin', leadsMax: 'leadsMax', destinations: 'destinations', teams: 'teams',
+        codeSON: 'codeSON', codeTourplan: 'codeTourplan', codevad: 'codevad', groupes: 'groupes',
+        inbound: 'inbound', outbound: 'outbound', phoneExtension: 'phoneExtension', phoneNumber: 'phoneNumber',
+        selectedOrganisation: 'selectedOrganisation', title: 'title' }, {}, []);
 
     /**
      * @fileoverview This file is generated by the Angular template compiler.
@@ -54017,7 +54200,7 @@
                     ad = (pd_1 && ad);
                 }
                 if (('ngModelChange' === en)) {
-                    var pd_2 = ((_co.fields.selectedOffice = $event) !== false);
+                    var pd_2 = ((_co.selectedOffice = $event) !== false);
                     ad = (pd_2 && ad);
                 }
                 return ad;
@@ -54027,9 +54210,9 @@
                 TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
             var _co = _v.component;
             var currVal_7 = 'office';
-            var currVal_8 = _co.fields.selectedOffice;
+            var currVal_8 = _co.selectedOffice;
             _ck(_v, 5, 0, currVal_7, currVal_8);
-            var currVal_9 = _co.fields.offices;
+            var currVal_9 = _co.offices;
             var currVal_10 = _co.trackByFn;
             _ck(_v, 10, 0, currVal_9, currVal_10);
         }, function (_ck, _v) {
@@ -54047,7 +54230,7 @@
         return viewDef(0, [(_l()(), anchorDef(16777216, null, null, 1, null, View_OfficeComponent_1)), directiveDef(1, 16384, null, 0, NgIf, [ViewContainerRef,
                 TemplateRef], { ngIf: [0, 'ngIf'] }, null), (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
             var _co = _v.component;
-            var currVal_0 = ((_co.fields != null) && (_co.fields.offices != null));
+            var currVal_0 = (_co.offices != null);
             _ck(_v, 1, 0, currVal_0);
         }, null);
     }
@@ -54056,7 +54239,7 @@
             _ck(_v, 2, 0);
         }, null);
     }
-    var OfficeComponentNgFactory = createComponentFactory('mv-office', OfficeComponent, View_OfficeComponent_Host_0, {}, {}, []);
+    var OfficeComponentNgFactory = createComponentFactory('mv-office', OfficeComponent, View_OfficeComponent_Host_0, { offices: 'offices', selectedOffice: 'selectedOffice' }, {}, []);
 
     /**
      * @fileoverview This file is generated by the Angular template compiler.
@@ -54096,7 +54279,7 @@
                     ad = (pd_1 && ad);
                 }
                 if (('ngModelChange' === en)) {
-                    var pd_2 = ((_co.fields.selectedFunction = $event) !== false);
+                    var pd_2 = ((_co.selectedFunction = $event) !== false);
                     ad = (pd_2 && ad);
                 }
                 return ad;
@@ -54107,13 +54290,13 @@
                     'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
             var _co = _v.component;
             var currVal_7 = 'fonction';
-            var currVal_8 = _co.fields.selectedFunction;
+            var currVal_8 = _co.selectedFunction;
             _ck(_v, 5, 0, currVal_7, currVal_8);
             var currVal_9 = null;
             _ck(_v, 9, 0, currVal_9);
             var currVal_10 = null;
             _ck(_v, 10, 0, currVal_10);
-            var currVal_11 = _co.fields.functions;
+            var currVal_11 = _co.functions;
             var currVal_12 = _co.trackByFn;
             _ck(_v, 13, 0, currVal_11, currVal_12);
         }, function (_ck, _v) {
@@ -54131,7 +54314,7 @@
         return viewDef(0, [(_l()(), anchorDef(16777216, null, null, 1, null, View_FunctionComponent_1)), directiveDef(1, 16384, null, 0, NgIf, [ViewContainerRef,
                 TemplateRef], { ngIf: [0, 'ngIf'] }, null), (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
             var _co = _v.component;
-            var currVal_0 = ((_co.fields != null) && (_co.fields.functions != null));
+            var currVal_0 = (_co.functions != null);
             _ck(_v, 1, 0, currVal_0);
         }, null);
     }
@@ -54140,7 +54323,7 @@
             _ck(_v, 2, 0);
         }, null);
     }
-    var FunctionComponentNgFactory = createComponentFactory('mv-function', FunctionComponent, View_FunctionComponent_Host_0, {}, {}, []);
+    var FunctionComponentNgFactory = createComponentFactory('mv-function', FunctionComponent, View_FunctionComponent_Host_0, { functions: 'functions', selectedFunction: 'selectedFunction' }, {}, []);
 
     /**
      * @fileoverview This file is generated by the Angular template compiler.
@@ -54180,7 +54363,7 @@
                     ad = (pd_1 && ad);
                 }
                 if (('ngModelChange' === en)) {
-                    var pd_2 = ((_co.fields.selectedManager = $event) !== false);
+                    var pd_2 = ((_co.selectedManager = $event) !== false);
                     ad = (pd_2 && ad);
                 }
                 return ad;
@@ -54190,9 +54373,9 @@
                 TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
             var _co = _v.component;
             var currVal_7 = 'manager';
-            var currVal_8 = _co.fields.selectedManager;
+            var currVal_8 = _co.selectedManager;
             _ck(_v, 5, 0, currVal_7, currVal_8);
-            var currVal_9 = _co.fields.managers;
+            var currVal_9 = _co.managers;
             var currVal_10 = _co.trackByFn;
             _ck(_v, 10, 0, currVal_9, currVal_10);
         }, function (_ck, _v) {
@@ -54210,7 +54393,7 @@
         return viewDef(0, [(_l()(), anchorDef(16777216, null, null, 1, null, View_ManagerComponent_1)), directiveDef(1, 16384, null, 0, NgIf, [ViewContainerRef,
                 TemplateRef], { ngIf: [0, 'ngIf'] }, null), (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
             var _co = _v.component;
-            var currVal_0 = ((_co.fields != null) && (_co.fields.managers != null));
+            var currVal_0 = (_co.managers != null);
             _ck(_v, 1, 0, currVal_0);
         }, null);
     }
@@ -54219,7 +54402,7 @@
             _ck(_v, 2, 0);
         }, null);
     }
-    var ManagerComponentNgFactory = createComponentFactory('mv-manager', ManagerComponent, View_ManagerComponent_Host_0, {}, {}, []);
+    var ManagerComponentNgFactory = createComponentFactory('mv-manager', ManagerComponent, View_ManagerComponent_Host_0, { managers: 'managers', selectedManager: 'selectedManager' }, {}, []);
 
     /**
      * @fileoverview This file is generated by the Angular template compiler.
@@ -54287,7 +54470,7 @@
             var _co = _v.component;
             var currVal_7 = 'destinations';
             _ck(_v, 6, 0, currVal_7);
-            var currVal_8 = _co.fields.destinations;
+            var currVal_8 = _co.destinations;
             var currVal_9 = _co.trackByFn;
             _ck(_v, 11, 0, currVal_8, currVal_9);
         }, function (_ck, _v) {
@@ -54305,7 +54488,7 @@
         return viewDef(0, [(_l()(), anchorDef(16777216, null, null, 1, null, View_DestinationsComponent_1)), directiveDef(1, 16384, null, 0, NgIf, [ViewContainerRef,
                 TemplateRef], { ngIf: [0, 'ngIf'] }, null), (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
             var _co = _v.component;
-            var currVal_0 = ((_co.fields != null) && (_co.fields.destinations != null));
+            var currVal_0 = (_co.destinations != null);
             _ck(_v, 1, 0, currVal_0);
         }, null);
     }
@@ -54314,7 +54497,7 @@
             _ck(_v, 2, 0);
         }, null);
     }
-    var DestinationsComponentNgFactory = createComponentFactory('mv-destinations', DestinationsComponent, View_DestinationsComponent_Host_0, {}, {}, []);
+    var DestinationsComponentNgFactory = createComponentFactory('mv-destinations', DestinationsComponent, View_DestinationsComponent_Host_0, { destinations: 'destinations' }, {}, []);
 
     /**
      * @fileoverview This file is generated by the Angular template compiler.
@@ -54385,7 +54568,7 @@
             var _co = _v.component;
             var currVal_7 = 'teams';
             _ck(_v, 6, 0, currVal_7);
-            var currVal_8 = _co.fields.teams;
+            var currVal_8 = _co.teams;
             var currVal_9 = _co.trackByFn;
             _ck(_v, 11, 0, currVal_8, currVal_9);
         }, function (_ck, _v) {
@@ -54403,7 +54586,7 @@
         return viewDef(0, [(_l()(), anchorDef(16777216, null, null, 1, null, View_TeamsComponent_1)), directiveDef(1, 16384, null, 0, NgIf, [ViewContainerRef,
                 TemplateRef], { ngIf: [0, 'ngIf'] }, null), (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
             var _co = _v.component;
-            var currVal_0 = ((_co.fields != null) && (_co.fields.teams != null));
+            var currVal_0 = (_co.teams != null);
             _ck(_v, 1, 0, currVal_0);
         }, null);
     }
@@ -54413,7 +54596,7 @@
             _ck(_v, 2, 0);
         }, null);
     }
-    var TeamsComponentNgFactory = createComponentFactory('mv-teams', TeamsComponent, View_TeamsComponent_Host_0, {}, {}, []);
+    var TeamsComponentNgFactory = createComponentFactory('mv-teams', TeamsComponent, View_TeamsComponent_Host_0, { teams: 'teams' }, {}, []);
 
     /**
      * @fileoverview This file is generated by the Angular template compiler.
@@ -54484,7 +54667,7 @@
             var _co = _v.component;
             var currVal_7 = 'others';
             _ck(_v, 6, 0, currVal_7);
-            var currVal_8 = _co.fields.others;
+            var currVal_8 = _co.others;
             var currVal_9 = _co.trackByFn;
             _ck(_v, 11, 0, currVal_8, currVal_9);
         }, function (_ck, _v) {
@@ -54502,7 +54685,7 @@
         return viewDef(0, [(_l()(), anchorDef(16777216, null, null, 1, null, View_OthersComponent_1)), directiveDef(1, 16384, null, 0, NgIf, [ViewContainerRef,
                 TemplateRef], { ngIf: [0, 'ngIf'] }, null), (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
             var _co = _v.component;
-            var currVal_0 = ((_co.fields != null) && (_co.fields.others != null));
+            var currVal_0 = (_co.others != null);
             _ck(_v, 1, 0, currVal_0);
         }, null);
     }
@@ -54511,7 +54694,7 @@
             _ck(_v, 2, 0);
         }, null);
     }
-    var OthersComponentNgFactory = createComponentFactory('mv-others', OthersComponent, View_OthersComponent_Host_0, {}, {}, []);
+    var OthersComponentNgFactory = createComponentFactory('mv-others', OthersComponent, View_OthersComponent_Host_0, { others: 'others' }, {}, []);
 
     /**
      * @fileoverview This file is generated by the Angular template compiler.
@@ -54550,7 +54733,7 @@
                     ad = (pd_3 && ad);
                 }
                 if (('ngModelChange' === en)) {
-                    var pd_4 = ((_co.fields.codeTourplan = $event) !== false);
+                    var pd_4 = ((_co.codeTourplan = $event) !== false);
                     ad = (pd_4 && ad);
                 }
                 return ad;
@@ -54583,7 +54766,7 @@
                     ad = (pd_3 && ad);
                 }
                 if (('ngModelChange' === en)) {
-                    var pd_4 = ((_co.fields.codeSON = $event) !== false);
+                    var pd_4 = ((_co.codeSON = $event) !== false);
                     ad = (pd_4 && ad);
                 }
                 return ad;
@@ -54617,7 +54800,7 @@
                     ad = (pd_3 && ad);
                 }
                 if (('ngModelChange' === en)) {
-                    var pd_4 = ((_co.fields.title = $event) !== false);
+                    var pd_4 = ((_co.title = $event) !== false);
                     ad = (pd_4 && ad);
                 }
                 return ad;
@@ -54641,7 +54824,7 @@
                     ad = (pd_1 && ad);
                 }
                 if (('ngModelChange' === en)) {
-                    var pd_2 = ((_co.fields.inactiveStatus = $event) !== false);
+                    var pd_2 = ((_co.inactiveStatus = $event) !== false);
                     ad = (pd_2 && ad);
                 }
                 return ad;
@@ -54666,7 +54849,7 @@
                         ad = (pd_1 && ad);
                     }
                     if (('ngModelChange' === en)) {
-                        var pd_2 = ((_co.fields.inactiveEmployee = $event) !== false);
+                        var pd_2 = ((_co.inactiveEmployee = $event) !== false);
                         ad = (pd_2 && ad);
                     }
                     return ad;
@@ -54677,19 +54860,19 @@
                 textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
             var _co = _v.component;
             var currVal_7 = 'sugar_tourplan';
-            var currVal_8 = _co.fields.codeTourplan;
+            var currVal_8 = _co.codeTourplan;
             _ck(_v, 12, 0, currVal_7, currVal_8);
             var currVal_16 = 'codeSON';
-            var currVal_17 = _co.fields.codeSON;
+            var currVal_17 = _co.codeSON;
             _ck(_v, 25, 0, currVal_16, currVal_17);
             var currVal_25 = 'title';
-            var currVal_26 = _co.fields.title;
+            var currVal_26 = _co.title;
             _ck(_v, 38, 0, currVal_25, currVal_26);
             var currVal_34 = 'inactiveStatus';
-            var currVal_35 = _co.fields.inactiveStatus;
+            var currVal_35 = _co.inactiveStatus;
             _ck(_v, 51, 0, currVal_34, currVal_35);
             var currVal_43 = 'inactiveEmployee';
-            var currVal_44 = _co.fields.inactiveEmployee;
+            var currVal_44 = _co.inactiveEmployee;
             _ck(_v, 61, 0, currVal_43, currVal_44);
         }, function (_ck, _v) {
             var currVal_0 = nodeValue(_v, 14).ngClassUntouched;
@@ -54737,8 +54920,7 @@
     function View_ExtraneousComponent_0(_l) {
         return viewDef(0, [(_l()(), anchorDef(16777216, null, null, 1, null, View_ExtraneousComponent_1)), directiveDef(1, 16384, null, 0, NgIf, [ViewContainerRef,
                 TemplateRef], { ngIf: [0, 'ngIf'] }, null), (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
-            var _co = _v.component;
-            var currVal_0 = (_co.fields != null);
+            var currVal_0 = (1 != null);
             _ck(_v, 1, 0, currVal_0);
         }, null);
     }
@@ -54747,7 +54929,8 @@
             _ck(_v, 2, 0);
         }, null);
     }
-    var ExtraneousComponentNgFactory = createComponentFactory('mv-extraneous', ExtraneousComponent, View_ExtraneousComponent_Host_0, {}, {}, []);
+    var ExtraneousComponentNgFactory = createComponentFactory('mv-extraneous', ExtraneousComponent, View_ExtraneousComponent_Host_0, { codeTourplan: 'codeTourplan',
+        codeSON: 'codeSON', title: 'title', inactiveStatus: 'inactiveStatus', inactiveEmployee: 'inactiveEmployee' }, {}, []);
 
     /**
      * @fileoverview This file is generated by the Angular template compiler.
@@ -54786,7 +54969,7 @@
                     ad = (pd_3 && ad);
                 }
                 if (('ngModelChange' === en)) {
-                    var pd_4 = ((_co.fields.phoneNumber = $event) !== false);
+                    var pd_4 = ((_co.phoneNumber = $event) !== false);
                     ad = (pd_4 && ad);
                 }
                 return ad;
@@ -54819,7 +55002,7 @@
                     ad = (pd_3 && ad);
                 }
                 if (('ngModelChange' === en)) {
-                    var pd_4 = ((_co.fields.phoneExtension = $event) !== false);
+                    var pd_4 = ((_co.phoneExtension = $event) !== false);
                     ad = (pd_4 && ad);
                 }
                 return ad;
@@ -54844,7 +55027,7 @@
                     ad = (pd_1 && ad);
                 }
                 if (('ngModelChange' === en)) {
-                    var pd_2 = ((_co.fields.codevad = $event) !== false);
+                    var pd_2 = ((_co.codevad = $event) !== false);
                     ad = (pd_2 && ad);
                 }
                 return ad;
@@ -54870,7 +55053,7 @@
                         ad = (pd_1 && ad);
                     }
                     if (('ngModelChange' === en)) {
-                        var pd_2 = ((_co.fields.outbound = $event) !== false);
+                        var pd_2 = ((_co.outbound = $event) !== false);
                         ad = (pd_2 && ad);
                     }
                     return ad;
@@ -54895,7 +55078,7 @@
                         ad = (pd_1 && ad);
                     }
                     if (('ngModelChange' === en)) {
-                        var pd_2 = ((_co.fields.inbound = $event) !== false);
+                        var pd_2 = ((_co.inbound = $event) !== false);
                         ad = (pd_2 && ad);
                     }
                     return ad;
@@ -54906,19 +55089,19 @@
                 textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
             var _co = _v.component;
             var currVal_7 = 'phone_number';
-            var currVal_8 = _co.fields.phoneNumber;
+            var currVal_8 = _co.phoneNumber;
             _ck(_v, 12, 0, currVal_7, currVal_8);
             var currVal_16 = 'extension';
-            var currVal_17 = _co.fields.phoneExtension;
+            var currVal_17 = _co.phoneExtension;
             _ck(_v, 25, 0, currVal_16, currVal_17);
             var currVal_25 = 'codevad';
-            var currVal_26 = _co.fields.codevad;
+            var currVal_26 = _co.codevad;
             _ck(_v, 38, 0, currVal_25, currVal_26);
             var currVal_34 = 'outbound';
-            var currVal_35 = _co.fields.outbound;
+            var currVal_35 = _co.outbound;
             _ck(_v, 51, 0, currVal_34, currVal_35);
             var currVal_43 = 'inbound';
-            var currVal_44 = _co.fields.inbound;
+            var currVal_44 = _co.inbound;
             _ck(_v, 64, 0, currVal_43, currVal_44);
         }, function (_ck, _v) {
             var currVal_0 = nodeValue(_v, 14).ngClassUntouched;
@@ -54966,8 +55149,7 @@
     function View_SwitchvoxComponent_0(_l) {
         return viewDef(0, [(_l()(), anchorDef(16777216, null, null, 1, null, View_SwitchvoxComponent_1)), directiveDef(1, 16384, null, 0, NgIf, [ViewContainerRef,
                 TemplateRef], { ngIf: [0, 'ngIf'] }, null), (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
-            var _co = _v.component;
-            var currVal_0 = (_co.fields != null);
+            var currVal_0 = (1 != null);
             _ck(_v, 1, 0, currVal_0);
         }, null);
     }
@@ -54976,7 +55158,8 @@
             _ck(_v, 2, 0);
         }, null);
     }
-    var SwitchvoxComponentNgFactory = createComponentFactory('mv-switchvox', SwitchvoxComponent, View_SwitchvoxComponent_Host_0, {}, {}, []);
+    var SwitchvoxComponentNgFactory = createComponentFactory('mv-switchvox', SwitchvoxComponent, View_SwitchvoxComponent_Host_0, { phoneNumber: 'phoneNumber',
+        phoneExtension: 'phoneExtension', codevad: 'codevad', outbound: 'outbound', inbound: 'inbound' }, {}, []);
 
     /**
      * @fileoverview This file is generated by the Angular template compiler.
@@ -54988,7 +55171,7 @@
         styles: styles_GappsComponent, data: {} });
     function View_GappsComponent_2(_l) {
         return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 3, 'option', [], null, null, null, null, null)), directiveDef(1, 147456, null, 0, NgSelectOption, [ElementRef, Renderer2, [2, SelectControlValueAccessor]], { value: [0, 'value'] }, null), directiveDef(2, 147456, null, 0, NgSelectMultipleOption, [ElementRef,
-                Renderer2, [8, null]], { value: [0, 'value'] }, null), (_l()(), textDef(3, null, ['', '\n    ']))], function (_ck, _v) {
+                Renderer2, [8, null]], { value: [0, 'value'] }, null), (_l()(), textDef(3, null, ['', '\n      ']))], function (_ck, _v) {
             var currVal_0 = _v.context.$implicit.value;
             _ck(_v, 1, 0, currVal_0);
             var currVal_1 = _v.context.$implicit.value;
@@ -55001,7 +55184,7 @@
     function View_GappsComponent_1(_l) {
         return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 27, 'fieldset', [['class', 'blue']], null, null, null, null, null)),
             (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(2, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Google Apps'])),
-            (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(5, 0, null, null, 11, 'div', [['class', 'select subtitle']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Organisation\n   '])), (_l()(), elementDef(7, 0, null, null, 8, 'select', [['name', 'organisation']], [[2, 'ng-untouched', null], [2,
+            (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(5, 0, null, null, 11, 'div', [['class', 'select subtitle']], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Organisation\n    '])), (_l()(), elementDef(7, 0, null, null, 8, 'select', [['name', 'organisation']], [[2, 'ng-untouched', null], [2,
                     'ng-touched', null], [2, 'ng-pristine', null], [2, 'ng-dirty',
                     null], [2, 'ng-valid', null], [2, 'ng-invalid', null],
                 [2, 'ng-pending', null]], [[null, 'ngModelChange'], [null,
@@ -55017,16 +55200,16 @@
                     ad = (pd_1 && ad);
                 }
                 if (('ngModelChange' === en)) {
-                    var pd_2 = ((_co.fields.selectedOrganisation = $event) !== false);
+                    var pd_2 = ((_co.selectedOrganisation = $event) !== false);
                     ad = (pd_2 && ad);
                 }
                 return ad;
             }, null, null)), directiveDef(8, 16384, null, 0, SelectControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
                 return [p0_0];
             }, [SelectControlValueAccessor]), directiveDef(10, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(12, 16384, null, 0, NgControlStatus, [NgControl], null, null),
-            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_GappsComponent_2)), directiveDef(15, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(),
-                textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n\n  '])),
-            (_l()(), elementDef(18, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(20, 0, null, null, 5, 'input', [['name', 'groupes'], ['type', 'text']], [[2, 'ng-untouched', null],
+            (_l()(), textDef(-1, null, ['\n      '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_GappsComponent_2)), directiveDef(15, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'], ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(),
+                textDef(-1, null, ['\n    '])), (_l()(), textDef(-1, null, ['\n\n    '])),
+            (_l()(), elementDef(18, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n      '])), (_l()(), elementDef(20, 0, null, null, 5, 'input', [['name', 'groupes'], ['type', 'text']], [[2, 'ng-untouched', null],
                 [2, 'ng-touched', null], [2, 'ng-pristine', null], [2, 'ng-dirty',
                     null], [2, 'ng-valid', null], [2, 'ng-invalid', null],
                 [2, 'ng-pending', null]], [[null, 'ngModelChange'], [null,
@@ -55051,7 +55234,7 @@
                     ad = (pd_3 && ad);
                 }
                 if (('ngModelChange' === en)) {
-                    var pd_4 = ((_co.fields.groupes = $event) !== false);
+                    var pd_4 = ((_co.groupes = $event) !== false);
                     ad = (pd_4 && ad);
                 }
                 return ad;
@@ -55059,17 +55242,17 @@
                 return [p0_0];
             }, [DefaultValueAccessor]), directiveDef(23, 671744, null, 0, NgModel, [[2,
                     ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(25, 16384, null, 0, NgControlStatus, [NgControl], null, null),
-            (_l()(), textDef(-1, null, ['\n    Groupes - Séparer les noms de groupes par des ";" et ne pas mettre @planetveo.com\n  '])),
-            (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
+            (_l()(), textDef(-1, null, ['\n      Groupes - Séparer les noms de groupes par des ";" et ne pas mettre @planetveo.com\n    '])),
+            (_l()(), textDef(-1, null, ['\n  ']))], function (_ck, _v) {
             var _co = _v.component;
             var currVal_7 = 'organisation';
-            var currVal_8 = _co.fields.selectedOrganisation;
+            var currVal_8 = _co.selectedOrganisation;
             _ck(_v, 10, 0, currVal_7, currVal_8);
-            var currVal_9 = _co.fields.orgas;
+            var currVal_9 = _co.orgas;
             var currVal_10 = _co.trackByFn;
             _ck(_v, 15, 0, currVal_9, currVal_10);
             var currVal_18 = 'groupes';
-            var currVal_19 = _co.fields.groupes;
+            var currVal_19 = _co.groupes;
             _ck(_v, 23, 0, currVal_18, currVal_19);
         }, function (_ck, _v) {
             var currVal_0 = nodeValue(_v, 12).ngClassUntouched;
@@ -55094,7 +55277,7 @@
         return viewDef(0, [(_l()(), anchorDef(16777216, null, null, 1, null, View_GappsComponent_1)), directiveDef(1, 16384, null, 0, NgIf, [ViewContainerRef,
                 TemplateRef], { ngIf: [0, 'ngIf'] }, null), (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
             var _co = _v.component;
-            var currVal_0 = (((_co.fields != null) && (_co.fields.orgas != null)) && (_co.fields.groupes != null));
+            var currVal_0 = ((_co.orgas != null) && (_co.selectedOrganisation != null));
             _ck(_v, 1, 0, currVal_0);
         }, null);
     }
@@ -55104,7 +55287,8 @@
             _ck(_v, 2, 0);
         }, null);
     }
-    var GappsComponentNgFactory = createComponentFactory('mv-gapps', GappsComponent, View_GappsComponent_Host_0, {}, {}, []);
+    var GappsComponentNgFactory = createComponentFactory('mv-gapps', GappsComponent, View_GappsComponent_Host_0, { orgas: 'orgas', selectedOrganisation: 'selectedOrganisation',
+        groupes: 'groupes' }, {}, []);
 
     /**
      * @fileoverview This file is generated by the Angular template compiler.
@@ -55114,7 +55298,7 @@
     var styles_CreateUserFormComponent = [];
     var RenderType_CreateUserFormComponent = createRendererType2({ encapsulation: 2,
         styles: styles_CreateUserFormComponent, data: {} });
-    function View_CreateUserFormComponent_1(_l) {
+    function View_CreateUserFormComponent_2(_l) {
         return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 1, 'div', [], null, null, null, null, null)), (_l()(),
                 textDef(1, null, ['ERROR: ', '']))], null, function (_ck, _v) {
             var _co = _v.component;
@@ -55122,9 +55306,121 @@
             _ck(_v, 1, 0, currVal_0);
         });
     }
+    function View_CreateUserFormComponent_1(_l) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 55, null, null, null, null, null, null, null)),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(2, 0, null, null, 2, 'mv-accounts', [], null, null, null, View_AccountsComponent_0, RenderType_AccountsComponent)),
+            providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(4, 114688, null, 0, AccountsComponent, [FieldsService], { accounts: [0,
+                    'accounts'] }, null), (_l()(), textDef(-1, null, ['\n    '])),
+            (_l()(), elementDef(6, 0, null, null, 2, 'mv-credentials', [], null, null, null, View_CredentialsComponent_0, RenderType_CredentialsComponent)), providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(8, 114688, null, 0, CredentialsComponent, [FieldsService, SugarService], { civilites: [0, 'civilites'], userFields: [1,
+                    'userFields'] }, null), (_l()(), textDef(-1, null, ['\n\n    '])),
+            (_l()(), elementDef(10, 0, null, null, 2, 'mv-profiles', [], null, null, null, View_ProfilesComponent_0, RenderType_ProfilesComponent)),
+            providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(12, 114688, null, 0, ProfilesComponent, [FieldsService, SugarService], { roles: [0, 'roles'], services: [1, 'services'], userTemplates: [2, 'userTemplates'],
+                userValue: [3, 'userValue'], selectedFunction: [4, 'selectedFunction'], selectedManager: [5,
+                    'selectedManager'], selectedOffice: [6, 'selectedOffice'], orgas: [7,
+                    'orgas'], others: [8, 'others'], inactiveEmployee: [9, 'inactiveEmployee'],
+                inactiveStatus: [10, 'inactiveStatus'], leadsMin: [11, 'leadsMin'], leadsMax: [12,
+                    'leadsMax'], destinations: [13, 'destinations'], teams: [14, 'teams'],
+                codeSON: [15, 'codeSON'], codeTourplan: [16, 'codeTourplan'], codevad: [17,
+                    'codevad'], groupes: [18, 'groupes'], inbound: [19, 'inbound'], outbound: [20,
+                    'outbound'], phoneExtension: [21, 'phoneExtension'], phoneNumber: [22,
+                    'phoneNumber'], selectedOrganisation: [23, 'selectedOrganisation'],
+                title: [24, 'title'] }, null), (_l()(), textDef(-1, null, ['\n\n    '])), (_l()(), elementDef(14, 0, null, null, 2, 'mv-office', [], null, null, null, View_OfficeComponent_0, RenderType_OfficeComponent)), providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(16, 114688, null, 0, OfficeComponent, [FieldsService], { offices: [0, 'offices'], selectedOffice: [1, 'selectedOffice'] }, null), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(18, 0, null, null, 2, 'mv-function', [], null, null, null, View_FunctionComponent_0, RenderType_FunctionComponent)),
+            providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(20, 114688, null, 0, FunctionComponent, [FieldsService], { functions: [0,
+                    'functions'], selectedFunction: [1, 'selectedFunction'] }, null),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(22, 0, null, null, 2, 'mv-manager', [], null, null, null, View_ManagerComponent_0, RenderType_ManagerComponent)), providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(24, 114688, null, 0, ManagerComponent, [FieldsService], { managers: [0,
+                    'managers'], selectedManager: [1, 'selectedManager'] }, null), (_l()(),
+                textDef(-1, null, ['\n\n    '])), (_l()(), elementDef(26, 0, null, null, 2, 'mv-destinations', [], null, null, null, View_DestinationsComponent_0, RenderType_DestinationsComponent)),
+            providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(28, 114688, null, 0, DestinationsComponent, [FieldsService], { destinations: [0,
+                    'destinations'] }, null), (_l()(), textDef(-1, null, ['\n    '])),
+            (_l()(), elementDef(30, 0, null, null, 2, 'mv-teams', [], null, null, null, View_TeamsComponent_0, RenderType_TeamsComponent)),
+            providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(32, 114688, null, 0, TeamsComponent, [FieldsService], { teams: [0, 'teams'] }, null), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(34, 0, null, null, 2, 'mv-others', [], null, null, null, View_OthersComponent_0, RenderType_OthersComponent)),
+            providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(36, 114688, null, 0, OthersComponent, [FieldsService], { others: [0,
+                    'others'] }, null), (_l()(), textDef(-1, null, ['\n    '])),
+            (_l()(), elementDef(38, 0, null, null, 2, 'mv-extraneous', [], null, null, null, View_ExtraneousComponent_0, RenderType_ExtraneousComponent)), providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(40, 114688, null, 0, ExtraneousComponent, [FieldsService], { codeTourplan: [0, 'codeTourplan'], codeSON: [1, 'codeSON'],
+                title: [2, 'title'], inactiveStatus: [3, 'inactiveStatus'], inactiveEmployee: [4,
+                    'inactiveEmployee'] }, null), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(42, 0, null, null, 2, 'mv-switchvox', [], null, null, null, View_SwitchvoxComponent_0, RenderType_SwitchvoxComponent)), providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(44, 114688, null, 0, SwitchvoxComponent, [FieldsService], { phoneNumber: [0, 'phoneNumber'], phoneExtension: [1, 'phoneExtension'],
+                codevad: [2, 'codevad'], outbound: [3, 'outbound'], inbound: [4, 'inbound'] }, null), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(46, 0, null, null, 2, 'mv-gapps', [], null, null, null, View_GappsComponent_0, RenderType_GappsComponent)),
+            providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(48, 114688, null, 0, GappsComponent, [FieldsService], { orgas: [0, 'orgas'],
+                selectedOrganisation: [1, 'selectedOrganisation'], groupes: [2, 'groupes'] }, null), (_l()(), textDef(-1, null, ['\n\n    '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_2)),
+            directiveDef(51, 16384, null, 0, NgIf, [ViewContainerRef, TemplateRef], { ngIf: [0, 'ngIf'] }, null), (_l()(), textDef(-1, null, ['\n    '])),
+            (_l()(), elementDef(53, 0, null, null, 1, 'button', [['type', 'submit']], [[8, 'disabled', 0]], null, null, null, null)),
+            (_l()(), textDef(-1, null, ['Créer l\'utilisateur'])), (_l()(), textDef(-1, null, ['\n  ']))], function (_ck, _v) {
+            var _co = _v.component;
+            var currVal_0 = _co.fields.accounts;
+            _ck(_v, 4, 0, currVal_0);
+            var currVal_1 = _co.fields.civilites;
+            var currVal_2 = _co.fields.userFields;
+            _ck(_v, 8, 0, currVal_1, currVal_2);
+            var currVal_3 = _co.fields.roles;
+            var currVal_4 = _co.fields.services;
+            var currVal_5 = _co.fields.userTemplates;
+            var currVal_6 = _co.fields.userValue;
+            var currVal_7 = _co.fields.selectedFunction;
+            var currVal_8 = _co.fields.selectedManager;
+            var currVal_9 = _co.fields.selectedOffice;
+            var currVal_10 = _co.fields.orgas;
+            var currVal_11 = _co.fields.others;
+            var currVal_12 = _co.fields.inactiveEmployee;
+            var currVal_13 = _co.fields.inactiveStatus;
+            var currVal_14 = _co.fields.leadsMin;
+            var currVal_15 = _co.fields.leadsMax;
+            var currVal_16 = _co.fields.destinations;
+            var currVal_17 = _co.fields.teams;
+            var currVal_18 = _co.fields.codeSON;
+            var currVal_19 = _co.fields.codeTourplan;
+            var currVal_20 = _co.fields.codevad;
+            var currVal_21 = _co.fields.groupes;
+            var currVal_22 = _co.fields.inbound;
+            var currVal_23 = _co.fields.outbound;
+            var currVal_24 = _co.fields.phoneExtension;
+            var currVal_25 = _co.fields.phoneNumber;
+            var currVal_26 = _co.fields.selectedOrganisation;
+            var currVal_27 = _co.fields.title;
+            _ck(_v, 12, 1, [currVal_3, currVal_4, currVal_5, currVal_6, currVal_7, currVal_8, currVal_9,
+                currVal_10, currVal_11, currVal_12, currVal_13, currVal_14, currVal_15, currVal_16,
+                currVal_17, currVal_18, currVal_19, currVal_20, currVal_21, currVal_22, currVal_23,
+                currVal_24, currVal_25, currVal_26, currVal_27]);
+            var currVal_28 = _co.fields.offices;
+            var currVal_29 = _co.fields.selectedOffice;
+            _ck(_v, 16, 0, currVal_28, currVal_29);
+            var currVal_30 = _co.fields.functions;
+            var currVal_31 = _co.fields.selectedFunction;
+            _ck(_v, 20, 0, currVal_30, currVal_31);
+            var currVal_32 = _co.fields.managers;
+            var currVal_33 = _co.fields.selectedManager;
+            _ck(_v, 24, 0, currVal_32, currVal_33);
+            var currVal_34 = _co.fields.destinations;
+            _ck(_v, 28, 0, currVal_34);
+            var currVal_35 = _co.fields.teams;
+            _ck(_v, 32, 0, currVal_35);
+            var currVal_36 = _co.fields.others;
+            _ck(_v, 36, 0, currVal_36);
+            var currVal_37 = _co.fields.codeTourplan;
+            var currVal_38 = _co.fields.codeSON;
+            var currVal_39 = _co.fields.title;
+            var currVal_40 = _co.fields.inactiveStatus;
+            var currVal_41 = _co.fields.inactiveEmployee;
+            _ck(_v, 40, 0, currVal_37, currVal_38, currVal_39, currVal_40, currVal_41);
+            var currVal_42 = _co.fields.phoneNumber;
+            var currVal_43 = _co.fields.phoneExtension;
+            var currVal_44 = _co.fields.codevad;
+            var currVal_45 = _co.fields.outbound;
+            var currVal_46 = _co.fields.inbound;
+            _ck(_v, 44, 0, currVal_42, currVal_43, currVal_44, currVal_45, currVal_46);
+            var currVal_47 = _co.fields.orgas;
+            var currVal_48 = _co.fields.selectedOrganisation;
+            var currVal_49 = _co.fields.groupes;
+            _ck(_v, 48, 0, currVal_47, currVal_48, currVal_49);
+            var currVal_50 = _co.errorMsg;
+            _ck(_v, 51, 0, currVal_50);
+        }, function (_ck, _v) {
+            var currVal_51 = !nodeValue(_v.parent, 5).form.valid;
+            _ck(_v, 53, 0, currVal_51);
+        });
+    }
     function View_CreateUserFormComponent_0(_l) {
         return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 1, 'h2', [], null, null, null, null, null)), (_l()(),
-                textDef(-1, null, [' Create User Form '])), (_l()(), textDef(-1, null, ['\n\n'])), (_l()(), elementDef(3, 0, null, null, 59, 'form', [['novalidate',
+                textDef(-1, null, [' Create User Form '])), (_l()(), textDef(-1, null, ['\n\n'])), (_l()(), elementDef(3, 0, null, null, 8, 'form', [['novalidate',
                     '']], [[2, 'ng-untouched', null], [2, 'ng-touched', null], [2, 'ng-pristine',
                     null], [2, 'ng-dirty', null], [2, 'ng-valid', null], [2,
                     'ng-invalid', null], [2, 'ng-pending', null]], [[null,
@@ -55144,42 +55440,14 @@
                     ad = (pd_2 && ad);
                 }
                 return ad;
-            }, null, null)), directiveDef(4, 16384, null, 0, NgNoValidate, [], null, null), directiveDef(5, 16384, [['createForm', 4]], 0, NgForm, [[8, null], [8, null]], null, { ngSubmit: 'ngSubmit' }), providerDef(2048, null, ControlContainer, null, [NgForm]), directiveDef(7, 16384, null, 0, NgControlStatusGroup, [ControlContainer], null, null), (_l()(), textDef(-1, null, ['\n\n  '])), (_l()(), elementDef(9, 0, null, null, 2, 'mv-accounts', [], null, null, null, View_AccountsComponent_0, RenderType_AccountsComponent)),
-            providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(11, 114688, null, 0, AccountsComponent, [FieldsService], null, null), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(13, 0, null, null, 2, 'mv-credentials', [], null, null, null, View_CredentialsComponent_0, RenderType_CredentialsComponent)),
-            providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(15, 114688, null, 0, CredentialsComponent, [FieldsService, SugarService], null, null), (_l()(), textDef(-1, null, ['\n\n  '])),
-            (_l()(), elementDef(17, 0, null, null, 2, 'mv-profiles', [], null, null, null, View_ProfilesComponent_0, RenderType_ProfilesComponent)),
-            providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(19, 114688, null, 0, ProfilesComponent, [FieldsService, SugarService], null, null), (_l()(), textDef(-1, null, ['\n\n  '])),
-            (_l()(), elementDef(21, 0, null, null, 2, 'mv-office', [], null, null, null, View_OfficeComponent_0, RenderType_OfficeComponent)),
-            providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(23, 114688, null, 0, OfficeComponent, [FieldsService], null, null), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(25, 0, null, null, 2, 'mv-function', [], null, null, null, View_FunctionComponent_0, RenderType_FunctionComponent)),
-            providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(27, 114688, null, 0, FunctionComponent, [FieldsService], null, null), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(29, 0, null, null, 2, 'mv-manager', [], null, null, null, View_ManagerComponent_0, RenderType_ManagerComponent)),
-            providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(31, 114688, null, 0, ManagerComponent, [FieldsService], null, null), (_l()(), textDef(-1, null, ['\n\n  '])), (_l()(), elementDef(33, 0, null, null, 2, 'mv-destinations', [], null, null, null, View_DestinationsComponent_0, RenderType_DestinationsComponent)),
-            providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(35, 114688, null, 0, DestinationsComponent, [FieldsService], null, null), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(37, 0, null, null, 2, 'mv-teams', [], null, null, null, View_TeamsComponent_0, RenderType_TeamsComponent)),
-            providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(39, 114688, null, 0, TeamsComponent, [FieldsService], null, null), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(41, 0, null, null, 2, 'mv-others', [], null, null, null, View_OthersComponent_0, RenderType_OthersComponent)),
-            providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(43, 114688, null, 0, OthersComponent, [FieldsService], null, null), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(45, 0, null, null, 2, 'mv-extraneous', [], null, null, null, View_ExtraneousComponent_0, RenderType_ExtraneousComponent)),
-            providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(47, 114688, null, 0, ExtraneousComponent, [FieldsService], null, null), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(49, 0, null, null, 2, 'mv-switchvox', [], null, null, null, View_SwitchvoxComponent_0, RenderType_SwitchvoxComponent)),
-            providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(51, 114688, null, 0, SwitchvoxComponent, [FieldsService], null, null), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(53, 0, null, null, 2, 'mv-gapps', [], null, null, null, View_GappsComponent_0, RenderType_GappsComponent)),
-            providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(55, 114688, null, 0, GappsComponent, [FieldsService], null, null), (_l()(), textDef(-1, null, ['\n\n  '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_1)),
-            directiveDef(58, 16384, null, 0, NgIf, [ViewContainerRef, TemplateRef], { ngIf: [0, 'ngIf'] }, null), (_l()(), textDef(-1, null, ['\n  '])),
-            (_l()(), elementDef(60, 0, null, null, 1, 'button', [['type', 'submit']], [[8, 'disabled', 0]], null, null, null, null)),
-            (_l()(), textDef(-1, null, ['Créer l\'utilisateur'])), (_l()(), textDef(-1, null, ['\n'])), (_l()(), textDef(-1, null, ['\nFORM VALUE\n'])),
-            (_l()(), elementDef(64, 0, null, null, 2, 'pre', [], null, null, null, null, null)), (_l()(), textDef(65, null, [' ', ' '])), pipeDef(0, JsonPipe, []), (_l()(),
-                textDef(-1, null, ['\n\nFIELDS\n'])), (_l()(), elementDef(68, 0, null, null, 2, 'pre', [], null, null, null, null, null)), (_l()(), textDef(69, null, ['', ''])),
-            pipeDef(0, JsonPipe, []), (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
+            }, null, null)), directiveDef(4, 16384, null, 0, NgNoValidate, [], null, null), directiveDef(5, 16384, [['createForm', 4]], 0, NgForm, [[8, null], [8, null]], null, { ngSubmit: 'ngSubmit' }), providerDef(2048, null, ControlContainer, null, [NgForm]), directiveDef(7, 16384, null, 0, NgControlStatusGroup, [ControlContainer], null, null), (_l()(), textDef(-1, null, ['\n\n  '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_1)),
+            directiveDef(10, 16384, null, 0, NgIf, [ViewContainerRef, TemplateRef], { ngIf: [0, 'ngIf'] }, null), (_l()(), textDef(-1, null, ['\n'])),
+            (_l()(), textDef(-1, null, ['\nFORM VALUE\n'])), (_l()(), elementDef(13, 0, null, null, 2, 'pre', [], null, null, null, null, null)), (_l()(), textDef(14, null, [' ', ' '])),
+            pipeDef(0, JsonPipe, []), (_l()(), textDef(-1, null, ['\n\nFIELDS\n'])),
+            (_l()(), elementDef(17, 0, null, null, 2, 'pre', [], null, null, null, null, null)), (_l()(), textDef(18, null, ['', ''])), pipeDef(0, JsonPipe, []), (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
             var _co = _v.component;
-            _ck(_v, 11, 0);
-            _ck(_v, 15, 0);
-            _ck(_v, 19, 0);
-            _ck(_v, 23, 0);
-            _ck(_v, 27, 0);
-            _ck(_v, 31, 0);
-            _ck(_v, 35, 0);
-            _ck(_v, 39, 0);
-            _ck(_v, 43, 0);
-            _ck(_v, 47, 0);
-            _ck(_v, 51, 0);
-            _ck(_v, 55, 0);
-            var currVal_7 = _co.errorMsg;
-            _ck(_v, 58, 0, currVal_7);
+            var currVal_7 = (_co.fields && (_co.fields !== null));
+            _ck(_v, 10, 0, currVal_7);
         }, function (_ck, _v) {
             var _co = _v.component;
             var currVal_0 = nodeValue(_v, 7).ngClassUntouched;
@@ -55190,12 +55458,10 @@
             var currVal_5 = nodeValue(_v, 7).ngClassInvalid;
             var currVal_6 = nodeValue(_v, 7).ngClassPending;
             _ck(_v, 3, 0, currVal_0, currVal_1, currVal_2, currVal_3, currVal_4, currVal_5, currVal_6);
-            var currVal_8 = !nodeValue(_v, 5).form.valid;
-            _ck(_v, 60, 0, currVal_8);
-            var currVal_9 = unwrapValue(_v, 65, 0, nodeValue(_v, 66).transform(nodeValue(_v, 5).value));
-            _ck(_v, 65, 0, currVal_9);
-            var currVal_10 = unwrapValue(_v, 69, 0, nodeValue(_v, 70).transform(_co.fields));
-            _ck(_v, 69, 0, currVal_10);
+            var currVal_8 = unwrapValue(_v, 14, 0, nodeValue(_v, 15).transform(nodeValue(_v, 5).value));
+            _ck(_v, 14, 0, currVal_8);
+            var currVal_9 = unwrapValue(_v, 18, 0, nodeValue(_v, 19).transform(_co.fields));
+            _ck(_v, 18, 0, currVal_9);
         });
     }
     function View_CreateUserFormComponent_Host_0(_l) {

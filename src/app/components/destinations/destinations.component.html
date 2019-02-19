@@ -1,7 +1,7 @@
-<fieldset class="blue" *ngIf = "fields != null && fields.destinations != null">
+<fieldset class="blue" *ngIf = "destinations != null">
   <legend>Destinations</legend>
   <div ngModelGroup="destinations" class="destinations">
-    <div *ngFor="let dest of fields.destinations ; trackBy: trackByFn">
+    <div *ngFor="let dest of destinations ; trackBy: trackByFn">
       <label>
         <input
         type="checkbox"
