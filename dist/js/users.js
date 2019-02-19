@@ -39856,6 +39856,10 @@
         SugarService.prototype.getUsers = function () {
             return this.getData("users");
         };
+        SugarService.prototype.getManagers = function () {
+            return this.getData("users")
+                .then(function (users) { return users.filter(function (user) { return user.attributes["title"] === "Manager"; }); });
+        };
         SugarService.prototype.getUserByUsername = function (username) {
             return this.getData("users")
                 .then(function (users) { return users.filter(function (user) { return user.attributes["userName"] === username; }); })
@@ -40295,8 +40299,11 @@
             // constructor
         }
         UsersComponent.prototype.ngOnInit = function () {
+            // this.sugarService.getUsers()
+            // .then((users) => users.forEach((user) => this.usersFromSugar.push(new User(user))))
+            // .then((users) => this.filteredUsers = this.usersFromSugar);
             var _this = this;
-            this.sugarService.getUsers()
+            this.sugarService.getManagers()
                 .then(function (users) { return users.forEach(function (user) { return _this.usersFromSugar.push(new User(user)); }); })
                 .then(function (users) { return _this.filteredUsers = _this.usersFromSugar; });
         };

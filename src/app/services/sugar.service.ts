@@ -32,6 +32,11 @@ export class SugarService {
     return this.getData("users");
   }
 
+  public getManagers(): Promise<User[]> {
+    return this.getData("users")
+    .then((users) => users.filter((user) => user.attributes["title"] === "Manager"));
+  }
+
   public getUserByUsername(username): Promise<User> {
     return this.getData("users")
     .then((users) => users.filter((user) => user.attributes["userName"] === username))
