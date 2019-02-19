@@ -39856,6 +39856,10 @@
         SugarService.prototype.getUsers = function () {
             return this.getData("users");
         };
+        SugarService.prototype.getManagers = function () {
+            return this.getData("users")
+                .then(function (users) { return users.filter(function (user) { return user.attributes["title"] === "Manager"; }); });
+        };
         SugarService.prototype.getUserByUsername = function (username) {
             return this.getData("users")
                 .then(function (users) { return users.filter(function (user) { return user.attributes["userName"] === username; }); })
@@ -39870,7 +39874,7 @@
             return this.getData("users")
                 .then(function (users) { return users.filter(function (user) { return user.attributes["teamId"] === team; }); });
         };
-        SugarService.prototype.getRolesFromSugar = function () {
+        SugarService.prototype.getRoles = function () {
             return this.getData("roles");
         };
         SugarService.prototype.postDataToSugar = function (body) {
@@ -40073,7 +40077,7 @@
             this.fieldsService.getData()
                 .then(function (res) { return _this.fields = new Fields(res[0]); })
                 .then(function (res) { return console.log(_this.fields); });
-            this.sugar.getUsersFromSugar()
+            this.sugar.getUsers()
                 .then(function (users) { return users.forEach(function (user) {
                 user["checked"] = false;
                 _this.users.push(new User(user));
@@ -40218,7 +40222,7 @@
         }
         RolesComponent.prototype.ngOnInit = function () {
             var _this = this;
-            this.sugarService.getRolesFromSugar()
+            this.sugarService.getRoles()
                 .then(function (roles) {
                 roles.forEach(function (role) {
                     _this.rolesFromSugar.push(new Role(role));
@@ -40292,8 +40296,11 @@
             // constructor
         }
         UsersComponent.prototype.ngOnInit = function () {
+            // this.sugarService.getUsers()
+            // .then((users) => users.forEach((user) => this.usersFromSugar.push(new User(user))))
+            // .then((users) => this.filteredUsers = this.usersFromSugar);
             var _this = this;
-            this.sugarService.getUsers()
+            this.sugarService.getManagers()
                 .then(function (users) { return users.forEach(function (user) { return _this.usersFromSugar.push(new User(user)); }); })
                 .then(function (users) { return _this.filteredUsers = _this.usersFromSugar; });
         };
