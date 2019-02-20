@@ -44,6 +44,7 @@ import { UsersComponent } from "./app/components/users/users.component";
 
 import { FieldsService } from "./app/services/fields.service";
 import { ParserService } from "./app/services/parser.service";
+import { SugarResolverService } from "./app/services/sugar-resolver.service";
 import { SugarService } from "./app/services/sugar.service";
 import { SwitchVoxService } from "./app/services/switchvox.service";
 
@@ -86,6 +87,7 @@ import "./app/rxjs-extensions";
   FieldsService,
   ParserService,
   SugarService,
+  SugarResolverService,
   SwitchVoxService,
   HttpClient,
   { provide: APP_BASE_HREF, useValue: "/" },

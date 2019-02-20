@@ -2,9 +2,14 @@
 
 <form #createForm="ngForm" (ngSubmit)="onSubmit(createForm.value)">
 
-  <ng-container *ngIf="fields && fields !== null">
+  <ng-container *ngIf="fields != null">
     <mv-accounts [accounts]="fields.accounts"></mv-accounts>
-    <mv-credentials [civilites]="fields.civilites" [userFields]="fields.userFields"></mv-credentials>
+    <mv-credentials
+    [currentUser]="currentUser"
+    [civilites]="fields.civilites"
+    [userFields]="fields.userFields"
+    [usersFromSugar]="usersFromSugar"
+    ></mv-credentials>
 
     <mv-profiles
     [title]="fields.title"
@@ -48,6 +53,7 @@
     [title]="fields.title"
     [inactiveEmployee]="fields.inactiveEmployee"
     [inactiveStatus]="fields.inactiveStatus"
+    [currentUser]="currentUser"
 
     ></mv-extraneous>
     <mv-switchvox

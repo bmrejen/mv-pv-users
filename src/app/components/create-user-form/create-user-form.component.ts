@@ -17,8 +17,9 @@ export class CreateUserFormComponent implements OnInit {
   public fields: Fields;
   public errorMsg;
   public passwordExists = false;
-  public usersFromSugar: User[];
+  public usersFromSugar: User[] = [];
   public usernameTaken;
+  public currentUser: User;
 
   constructor(
               private fieldsService: FieldsService,
@@ -32,13 +33,14 @@ export class CreateUserFormComponent implements OnInit {
 
   public ngOnInit(): void {
     this.fieldsService.getData()
-    .then((res) => {
-      this.fields = new Fields(res[0]);
-      console.log(this.fields);
-    });
+    .then((res) => this.fields = new Fields(res[0]));
 
-    // this.usersFromSugar = this.sugarService.getUsers();
-    // this.route.paramMap.subscribe((params) => params.get("id"));
+    this.route.data
+    .subscribe((data) => {
+      const [ usr, users ] = [ data.userData[0], data.userData[1] ];
+      this.currentUser = new User(usr);
+      users.forEach((user) => this.usersFromSugar.push(new User(user)));
+    });
   }
 
   public onParentChange({e, id}) {
