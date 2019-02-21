@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core";
 import { ActivatedRoute, ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/router";
 import { SugarService } from "./sugar.service";
 
-import { User } from "../models/user";
 import { Team } from "../models/team";
+import { User } from "../models/user";
 
 @Injectable()
 
