@@ -39,13 +39,11 @@ export class CreateUserFormComponent implements OnInit {
 
     this.route.data
     .subscribe((data) => {
-      const [ usr, users ] = [ data.userData[0], data.userData[1] ];
+      const [ usr, users, teams ] = [ data.userData[0], data.userData[1], data.userData[2] ];
       this.currentUser = new User(usr);
       users.forEach((user) => this.usersFromSugar.push(new User(user)));
+      teams.forEach((team) => this.teams.push(new Team(team)));
     });
-
-    this.sugarService.getTeams()
-    .then((teams) => teams.forEach((team) => this.teams.push(new Team(team))));
   }
 
   public onParentChange({e, id}) {

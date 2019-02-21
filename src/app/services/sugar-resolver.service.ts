@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { ActivatedRoute, ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/router";
 import { SugarService } from "./sugar.service";
 
+import { Team } from "../models/team";
 import { User } from "../models/user";
 
 @Injectable()
@@ -21,8 +22,9 @@ export class SugarResolverService implements Resolve<Promise<User[]>> {
 
     const userPromise: Promise<User> = this.sugar.getUserById(id);
     const usersPromise: Promise<User[]> = this.sugar.getUsers();
+    const teamsPromise: Promise<Team[]> = this.sugar.getTeams();
 
-    const promises: [Promise<User>, Promise<User[]>] = [ userPromise, usersPromise ];
+    const promises: [Promise<User>, Promise<User[]>, Promise<Team[]> ] = [ userPromise, usersPromise, teamsPromise ];
 
     return new Promise((resolve, reject) => {
       Promise.all(promises)
