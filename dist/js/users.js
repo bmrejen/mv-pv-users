@@ -39856,6 +39856,10 @@
         SugarService.prototype.getUsers = function () {
             return this.getData("users");
         };
+        SugarService.prototype.getTeams = function () {
+            return this.getData("teams")
+                .then(function (items) { return items.filter(function (item) { return item.attributes["name"].startsWith("EQ "); }); });
+        };
         SugarService.prototype.getManagers = function () {
             return this.getData("users")
                 .then(function (users) { return users.filter(function (user) { return user.attributes["title"] === "Manager"; }); });
@@ -39939,8 +39943,26 @@
             d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
         };
     })();
+    var Team = /** @class */ (function (_super) {
+        __extends$1D(Team, _super);
+        function Team(data) {
+            return _super.call(this, data) || this;
+        }
+        return Team;
+    }(Model));
+
+    var __extends$1E = (undefined && undefined.__extends) || (function () {
+        var extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return function (d, b) {
+            extendStatics(d, b);
+            function __() { this.constructor = d; }
+            d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+        };
+    })();
     var User = /** @class */ (function (_super) {
-        __extends$1D(User, _super);
+        __extends$1E(User, _super);
         function User(data) {
             var _this = _super.call(this, data) || this;
             _this.status = "Active";
@@ -39975,6 +39997,7 @@
             this.route = route;
             this.passwordExists = false;
             this.usersFromSugar = [];
+            this.teams = [];
             //
         }
         CreateUserFormComponent.prototype.ngOnInit = function () {
@@ -39987,6 +40010,8 @@
                 _this.currentUser = new User(usr);
                 users.forEach(function (user) { return _this.usersFromSugar.push(new User(user)); });
             });
+            this.sugarService.getTeams()
+                .then(function (teams) { return teams.forEach(function (team) { return _this.teams.push(new Team(team)); }); });
         };
         CreateUserFormComponent.prototype.onParentChange = function (_a) {
             var e = _a.e, id = _a.id;
@@ -40189,7 +40214,7 @@
         return ImportComponent;
     }());
 
-    var __extends$1E = (undefined && undefined.__extends) || (function () {
+    var __extends$1F = (undefined && undefined.__extends) || (function () {
         var extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
             function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -40200,7 +40225,7 @@
         };
     })();
     var Role = /** @class */ (function (_super) {
-        __extends$1E(Role, _super);
+        __extends$1F(Role, _super);
         function Role(data) {
             var _this = _super.call(this, data) || this;
             _this.type = "users";
@@ -46387,7 +46412,7 @@
      */
     BrowserAnimationsModule.ctorParameters = function () { return []; };
 
-    var __extends$1F = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1G = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -46403,7 +46428,7 @@
      * @hide true
      */
     var ForkJoinObservable = (function (_super) {
-        __extends$1F(ForkJoinObservable, _super);
+        __extends$1G(ForkJoinObservable, _super);
         function ForkJoinObservable(sources, resultSelector) {
             _super.call(this);
             this.sources = sources;
@@ -46541,7 +46566,7 @@
      * @extends {Ignored}
      */
     var ForkJoinSubscriber = (function (_super) {
-        __extends$1F(ForkJoinSubscriber, _super);
+        __extends$1G(ForkJoinSubscriber, _super);
         function ForkJoinSubscriber(destination, sources, resultSelector) {
             _super.call(this, destination);
             this.sources = sources;
@@ -52771,12 +52796,6 @@
             //
         }
         ExtraneousComponent.prototype.ngOnInit = function () {
-            console.log("this.codeTourplan", this.codeTourplan);
-            console.log("this.codeSON", this.codeSON);
-            console.log("this.title", this.title);
-            console.log("this.inactiveStatus", this.inactiveStatus);
-            console.log("this.inactiveEmployee", this.inactiveEmployee);
-            console.log("this.currentUser", this.currentUser);
             this.codeTourplan = this.currentUser.tourplanID;
             this.inactiveEmployee = this.currentUser.employeeStatus !== "Active";
             this.inactiveStatus = this.currentUser.status !== "Active";
