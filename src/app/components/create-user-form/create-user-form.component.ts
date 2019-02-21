@@ -6,6 +6,7 @@ import { SugarService } from "../../services/sugar.service";
 import { SwitchVoxService } from "../../services/switchvox.service";
 
 import { Fields } from "../../models/fields";
+import { Team } from "../../models/team";
 import { User } from "../../models/user";
 
 @Component({
@@ -20,6 +21,7 @@ export class CreateUserFormComponent implements OnInit {
   public usersFromSugar: User[] = [];
   public usernameTaken;
   public currentUser: User;
+  public teams: Team[] = [];
 
   constructor(
               private fieldsService: FieldsService,
@@ -41,6 +43,9 @@ export class CreateUserFormComponent implements OnInit {
       this.currentUser = new User(usr);
       users.forEach((user) => this.usersFromSugar.push(new User(user)));
     });
+
+    this.sugarService.getTeams()
+    .then((teams) => teams.forEach((team) => this.teams.push(new Team(team))));
   }
 
   public onParentChange({e, id}) {
