@@ -39929,6 +39929,34 @@
         return SwitchVoxService;
     }());
 
+    var __extends$1D = (undefined && undefined.__extends) || (function () {
+        var extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return function (d, b) {
+            extendStatics(d, b);
+            function __() { this.constructor = d; }
+            d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+        };
+    })();
+    var User = /** @class */ (function (_super) {
+        __extends$1D(User, _super);
+        function User(data) {
+            var _this = _super.call(this, data) || this;
+            _this.status = "Active";
+            _this.employeeStatus = "Active";
+            _this.isAdmin = "0";
+            _this.apiPortalUser = "0";
+            _this.assignationNotification = "0";
+            // used for mapping with api object
+            if (data != null) {
+                _super.prototype.defaultConstructor.call(_this, data);
+            }
+            return _this;
+        }
+        return User;
+    }(Model));
+
     var __decorate$6 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -39946,17 +39974,19 @@
             this.parserService = parserService;
             this.route = route;
             this.passwordExists = false;
+            this.usersFromSugar = [];
             //
         }
         CreateUserFormComponent.prototype.ngOnInit = function () {
             var _this = this;
             this.fieldsService.getData()
-                .then(function (res) {
-                _this.fields = new Fields(res[0]);
-                console.log(_this.fields);
+                .then(function (res) { return _this.fields = new Fields(res[0]); });
+            this.route.data
+                .subscribe(function (data) {
+                var _a = [data.userData[0], data.userData[1]], usr = _a[0], users = _a[1];
+                _this.currentUser = new User(usr);
+                users.forEach(function (user) { return _this.usersFromSugar.push(new User(user)); });
             });
-            // this.usersFromSugar = this.sugarService.getUsers();
-            // this.route.paramMap.subscribe((params) => params.get("id"));
         };
         CreateUserFormComponent.prototype.onParentChange = function (_a) {
             var e = _a.e, id = _a.id;
@@ -40025,34 +40055,6 @@
         ], CreateUserFormComponent);
         return CreateUserFormComponent;
     }());
-
-    var __extends$1D = (undefined && undefined.__extends) || (function () {
-        var extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return function (d, b) {
-            extendStatics(d, b);
-            function __() { this.constructor = d; }
-            d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-        };
-    })();
-    var User = /** @class */ (function (_super) {
-        __extends$1D(User, _super);
-        function User(data) {
-            var _this = _super.call(this, data) || this;
-            _this.status = "Active";
-            _this.employeeStatus = "Active";
-            _this.isAdmin = "0";
-            _this.apiPortalUser = "0";
-            _this.assignationNotification = "0";
-            // used for mapping with api object
-            if (data != null) {
-                _super.prototype.defaultConstructor.call(_this, data);
-            }
-            return _this;
-        }
-        return User;
-    }(Model));
 
     var __decorate$7 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -40339,11 +40341,43 @@
         return UsersComponent;
     }());
 
+    var __decorate$c = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    };
+    var __metadata$b = (undefined && undefined.__metadata) || function (k, v) {
+        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+    };
+    var SugarResolverService = /** @class */ (function () {
+        function SugarResolverService(sugar) {
+            this.sugar = sugar;
+            //
+        }
+        SugarResolverService.prototype.resolve = function (route, state) {
+            var id = route.params.id;
+            var userPromise = this.sugar.getUserById(id);
+            var usersPromise = this.sugar.getUsers();
+            var promises = [userPromise, usersPromise];
+            return new Promise(function (resolve, reject) {
+                Promise.all(promises)
+                    .then(function (res) { return resolve(res); }, function (error) { return reject("Probleme"); });
+            });
+        };
+        SugarResolverService = __decorate$c([
+            Injectable(),
+            __metadata$b("design:paramtypes", [SugarService])
+        ], SugarResolverService);
+        return SugarResolverService;
+    }());
+
     /* tslint:disable object-literal-sort-keys */
     var AppRoutes = [
         {
             path: "users/:id",
             component: CreateUserFormComponent,
+            resolve: { userData: SugarResolverService },
         },
         {
             path: "create",
@@ -52511,13 +52545,13 @@
      */
     FormsModule.ctorParameters = function () { return []; };
 
-    var __decorate$c = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var __decorate$d = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var __metadata$b = (undefined && undefined.__metadata) || function (k, v) {
+    var __metadata$c = (undefined && undefined.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var AccountsComponent = /** @class */ (function () {
@@ -52530,11 +52564,11 @@
         AccountsComponent.prototype.trackByFn = function (index, item) {
             return item.id; // or index
         };
-        __decorate$c([
+        __decorate$d([
             Input(),
-            __metadata$b("design:type", Object)
+            __metadata$c("design:type", Object)
         ], AccountsComponent.prototype, "accounts", void 0);
-        AccountsComponent = __decorate$c([
+        AccountsComponent = __decorate$d([
             Component({
                 selector: "mv-accounts",
                 templateUrl: "./accounts.component.html",
@@ -52546,18 +52580,18 @@
                     },
                 ],
             }),
-            __metadata$b("design:paramtypes", [FieldsService])
+            __metadata$c("design:paramtypes", [FieldsService])
         ], AccountsComponent);
         return AccountsComponent;
     }());
 
-    var __decorate$d = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var __decorate$e = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var __metadata$c = (undefined && undefined.__metadata) || function (k, v) {
+    var __metadata$d = (undefined && undefined.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var CheckboxFieldComponent = /** @class */ (function () {
@@ -52570,15 +52604,15 @@
         CheckboxFieldComponent.prototype.trackByFn = function (item, id) {
             return id;
         };
-        __decorate$d([
+        __decorate$e([
             Input(),
-            __metadata$c("design:type", Array)
+            __metadata$d("design:type", Array)
         ], CheckboxFieldComponent.prototype, "checkboxes", void 0);
-        __decorate$d([
+        __decorate$e([
             Output(),
-            __metadata$c("design:type", Object)
+            __metadata$d("design:type", Object)
         ], CheckboxFieldComponent.prototype, "clickEmitter", void 0);
-        CheckboxFieldComponent = __decorate$d([
+        CheckboxFieldComponent = __decorate$e([
             Component({
                 selector: "mv-checkbox-field",
                 styleUrls: ["./checkbox-field.component.css"],
@@ -52589,27 +52623,29 @@
         return CheckboxFieldComponent;
     }());
 
-    var __decorate$e = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var __decorate$f = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var __metadata$d = (undefined && undefined.__metadata) || function (k, v) {
+    var __metadata$e = (undefined && undefined.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var CredentialsComponent = /** @class */ (function () {
-        function CredentialsComponent(fieldsService, sugar) {
+        function CredentialsComponent(fieldsService) {
             this.fieldsService = fieldsService;
-            this.sugar = sugar;
             this.passwordExists = false;
-            this.usersFromSugar = [];
             //
         }
         CredentialsComponent.prototype.ngOnInit = function () {
-            var _this = this;
-            this.sugar.getUsers()
-                .then(function (users) { return users.forEach(function (user) { return _this.usersFromSugar.push(new User(user)); }); });
+            this.prefillForm();
+        };
+        CredentialsComponent.prototype.prefillForm = function () {
+            this.userFields[0].value = this.currentUser.firstName;
+            this.userFields[1].value = this.currentUser.lastName;
+            this.userFields[2].value = this.currentUser.userName;
+            this.userFields[3].value = this.currentUser.email;
         };
         CredentialsComponent.prototype.credentialClick = function (e) {
             var _a = [this.userFields[0], this.userFields[1], this.userFields[2]], first = _a[0], last = _a[1], username = _a[2];
@@ -52646,15 +52682,23 @@
         CredentialsComponent.prototype.trackByFn = function (index, item) {
             return item.id; // or index
         };
-        __decorate$e([
+        __decorate$f([
             Input(),
-            __metadata$d("design:type", Object)
+            __metadata$e("design:type", Object)
         ], CredentialsComponent.prototype, "civilites", void 0);
-        __decorate$e([
+        __decorate$f([
             Input(),
-            __metadata$d("design:type", Object)
+            __metadata$e("design:type", Object)
         ], CredentialsComponent.prototype, "userFields", void 0);
-        CredentialsComponent = __decorate$e([
+        __decorate$f([
+            Input(),
+            __metadata$e("design:type", User)
+        ], CredentialsComponent.prototype, "currentUser", void 0);
+        __decorate$f([
+            Input(),
+            __metadata$e("design:type", Array)
+        ], CredentialsComponent.prototype, "usersFromSugar", void 0);
+        CredentialsComponent = __decorate$f([
             Component({
                 selector: "mv-credentials",
                 styleUrls: ["./credentials.component.css"],
@@ -52666,19 +52710,18 @@
                     },
                 ],
             }),
-            __metadata$d("design:paramtypes", [FieldsService,
-                SugarService])
+            __metadata$e("design:paramtypes", [FieldsService])
         ], CredentialsComponent);
         return CredentialsComponent;
     }());
 
-    var __decorate$f = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var __decorate$g = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var __metadata$e = (undefined && undefined.__metadata) || function (k, v) {
+    var __metadata$f = (undefined && undefined.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var DestinationsComponent = /** @class */ (function () {
@@ -52692,11 +52735,11 @@
         DestinationsComponent.prototype.trackByFn = function (index, item) {
             return item.id; // or index
         };
-        __decorate$f([
+        __decorate$g([
             Input(),
-            __metadata$e("design:type", Object)
+            __metadata$f("design:type", Object)
         ], DestinationsComponent.prototype, "destinations", void 0);
-        DestinationsComponent = __decorate$f([
+        DestinationsComponent = __decorate$g([
             Component({
                 selector: "mv-destinations",
                 styleUrls: ["./destinations.component.css"],
@@ -52708,18 +52751,18 @@
                     },
                 ],
             }),
-            __metadata$e("design:paramtypes", [FieldsService])
+            __metadata$f("design:paramtypes", [FieldsService])
         ], DestinationsComponent);
         return DestinationsComponent;
     }());
 
-    var __decorate$g = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var __decorate$h = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var __metadata$f = (undefined && undefined.__metadata) || function (k, v) {
+    var __metadata$g = (undefined && undefined.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var ExtraneousComponent = /** @class */ (function () {
@@ -52728,32 +52771,44 @@
             //
         }
         ExtraneousComponent.prototype.ngOnInit = function () {
-            //
+            console.log("this.codeTourplan", this.codeTourplan);
+            console.log("this.codeSON", this.codeSON);
+            console.log("this.title", this.title);
+            console.log("this.inactiveStatus", this.inactiveStatus);
+            console.log("this.inactiveEmployee", this.inactiveEmployee);
+            console.log("this.currentUser", this.currentUser);
+            this.codeTourplan = this.currentUser.tourplanID;
+            this.inactiveEmployee = this.currentUser.employeeStatus !== "Active";
+            this.inactiveStatus = this.currentUser.status !== "Active";
         };
         ExtraneousComponent.prototype.trackByFn = function (index, item) {
             return item.id; // or index
         };
-        __decorate$g([
+        __decorate$h([
             Input(),
-            __metadata$f("design:type", Object)
+            __metadata$g("design:type", Object)
         ], ExtraneousComponent.prototype, "codeTourplan", void 0);
-        __decorate$g([
+        __decorate$h([
             Input(),
-            __metadata$f("design:type", Object)
+            __metadata$g("design:type", Object)
         ], ExtraneousComponent.prototype, "codeSON", void 0);
-        __decorate$g([
+        __decorate$h([
             Input(),
-            __metadata$f("design:type", Object)
+            __metadata$g("design:type", Object)
         ], ExtraneousComponent.prototype, "title", void 0);
-        __decorate$g([
+        __decorate$h([
             Input(),
-            __metadata$f("design:type", Object)
+            __metadata$g("design:type", Object)
         ], ExtraneousComponent.prototype, "inactiveStatus", void 0);
-        __decorate$g([
+        __decorate$h([
             Input(),
-            __metadata$f("design:type", Object)
+            __metadata$g("design:type", Object)
         ], ExtraneousComponent.prototype, "inactiveEmployee", void 0);
-        ExtraneousComponent = __decorate$g([
+        __decorate$h([
+            Input(),
+            __metadata$g("design:type", Object)
+        ], ExtraneousComponent.prototype, "currentUser", void 0);
+        ExtraneousComponent = __decorate$h([
             Component({
                 selector: "mv-extraneous",
                 templateUrl: "./extraneous.component.html",
@@ -52764,18 +52819,18 @@
                     },
                 ],
             }),
-            __metadata$f("design:paramtypes", [FieldsService])
+            __metadata$g("design:paramtypes", [FieldsService])
         ], ExtraneousComponent);
         return ExtraneousComponent;
     }());
 
-    var __decorate$h = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var __decorate$i = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var __metadata$g = (undefined && undefined.__metadata) || function (k, v) {
+    var __metadata$h = (undefined && undefined.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var FunctionComponent = /** @class */ (function () {
@@ -52789,15 +52844,15 @@
         FunctionComponent.prototype.trackByFn = function (index, item) {
             return item.id; // or index
         };
-        __decorate$h([
+        __decorate$i([
             Input(),
-            __metadata$g("design:type", Object)
+            __metadata$h("design:type", Object)
         ], FunctionComponent.prototype, "functions", void 0);
-        __decorate$h([
+        __decorate$i([
             Input(),
-            __metadata$g("design:type", Object)
+            __metadata$h("design:type", Object)
         ], FunctionComponent.prototype, "selectedFunction", void 0);
-        FunctionComponent = __decorate$h([
+        FunctionComponent = __decorate$i([
             Component({
                 selector: "mv-function",
                 templateUrl: "./function.component.html",
@@ -52808,18 +52863,18 @@
                     },
                 ],
             }),
-            __metadata$g("design:paramtypes", [FieldsService])
+            __metadata$h("design:paramtypes", [FieldsService])
         ], FunctionComponent);
         return FunctionComponent;
     }());
 
-    var __decorate$i = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var __decorate$j = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var __metadata$h = (undefined && undefined.__metadata) || function (k, v) {
+    var __metadata$i = (undefined && undefined.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var GappsComponent = /** @class */ (function () {
@@ -52833,19 +52888,19 @@
         GappsComponent.prototype.trackByFn = function (index, item) {
             return item.id; // or index
         };
-        __decorate$i([
+        __decorate$j([
             Input(),
-            __metadata$h("design:type", Object)
+            __metadata$i("design:type", Object)
         ], GappsComponent.prototype, "orgas", void 0);
-        __decorate$i([
+        __decorate$j([
             Input(),
-            __metadata$h("design:type", Object)
+            __metadata$i("design:type", Object)
         ], GappsComponent.prototype, "selectedOrganisation", void 0);
-        __decorate$i([
+        __decorate$j([
             Input(),
-            __metadata$h("design:type", Object)
+            __metadata$i("design:type", Object)
         ], GappsComponent.prototype, "groupes", void 0);
-        GappsComponent = __decorate$i([
+        GappsComponent = __decorate$j([
             Component({
                 selector: "mv-gapps",
                 templateUrl: "./gapps.component.html",
@@ -52856,18 +52911,18 @@
                     },
                 ],
             }),
-            __metadata$h("design:paramtypes", [FieldsService])
+            __metadata$i("design:paramtypes", [FieldsService])
         ], GappsComponent);
         return GappsComponent;
     }());
 
-    var __decorate$j = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var __decorate$k = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var __metadata$i = (undefined && undefined.__metadata) || function (k, v) {
+    var __metadata$j = (undefined && undefined.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var ManagerComponent = /** @class */ (function () {
@@ -52881,15 +52936,15 @@
         ManagerComponent.prototype.trackByFn = function (index, item) {
             return item.id; // or index
         };
-        __decorate$j([
+        __decorate$k([
             Input(),
-            __metadata$i("design:type", Object)
+            __metadata$j("design:type", Object)
         ], ManagerComponent.prototype, "managers", void 0);
-        __decorate$j([
+        __decorate$k([
             Input(),
-            __metadata$i("design:type", Object)
+            __metadata$j("design:type", Object)
         ], ManagerComponent.prototype, "selectedManager", void 0);
-        ManagerComponent = __decorate$j([
+        ManagerComponent = __decorate$k([
             Component({
                 selector: "mv-manager",
                 templateUrl: "./manager.component.html",
@@ -52900,18 +52955,18 @@
                     },
                 ],
             }),
-            __metadata$i("design:paramtypes", [FieldsService])
+            __metadata$j("design:paramtypes", [FieldsService])
         ], ManagerComponent);
         return ManagerComponent;
     }());
 
-    var __decorate$k = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var __decorate$l = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var __metadata$j = (undefined && undefined.__metadata) || function (k, v) {
+    var __metadata$k = (undefined && undefined.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var OfficeComponent = /** @class */ (function () {
@@ -52925,15 +52980,15 @@
         OfficeComponent.prototype.trackByFn = function (index, item) {
             return item.id; // or index
         };
-        __decorate$k([
+        __decorate$l([
             Input(),
-            __metadata$j("design:type", Object)
+            __metadata$k("design:type", Object)
         ], OfficeComponent.prototype, "offices", void 0);
-        __decorate$k([
+        __decorate$l([
             Input(),
-            __metadata$j("design:type", Object)
+            __metadata$k("design:type", Object)
         ], OfficeComponent.prototype, "selectedOffice", void 0);
-        OfficeComponent = __decorate$k([
+        OfficeComponent = __decorate$l([
             Component({
                 selector: "mv-office",
                 templateUrl: "./office.component.html",
@@ -52944,18 +52999,18 @@
                     },
                 ],
             }),
-            __metadata$j("design:paramtypes", [FieldsService])
+            __metadata$k("design:paramtypes", [FieldsService])
         ], OfficeComponent);
         return OfficeComponent;
     }());
 
-    var __decorate$l = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var __decorate$m = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var __metadata$k = (undefined && undefined.__metadata) || function (k, v) {
+    var __metadata$l = (undefined && undefined.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var OthersComponent = /** @class */ (function () {
@@ -52969,11 +53024,11 @@
         OthersComponent.prototype.trackByFn = function (index, item) {
             return item.id; // or index
         };
-        __decorate$l([
+        __decorate$m([
             Input(),
-            __metadata$k("design:type", Object)
+            __metadata$l("design:type", Object)
         ], OthersComponent.prototype, "others", void 0);
-        OthersComponent = __decorate$l([
+        OthersComponent = __decorate$m([
             Component({
                 selector: "mv-others",
                 styleUrls: ["./others.component.css"],
@@ -52985,18 +53040,18 @@
                     },
                 ],
             }),
-            __metadata$k("design:paramtypes", [FieldsService])
+            __metadata$l("design:paramtypes", [FieldsService])
         ], OthersComponent);
         return OthersComponent;
     }());
 
-    var __decorate$m = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var __decorate$n = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var __metadata$l = (undefined && undefined.__metadata) || function (k, v) {
+    var __metadata$m = (undefined && undefined.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var ProfilesComponent = /** @class */ (function () {
@@ -53215,107 +53270,107 @@
                 this.orgas,
             ]);
         };
-        __decorate$m([
+        __decorate$n([
             Input(),
-            __metadata$l("design:type", Object)
+            __metadata$m("design:type", Object)
         ], ProfilesComponent.prototype, "roles", void 0);
-        __decorate$m([
+        __decorate$n([
             Input(),
-            __metadata$l("design:type", Object)
+            __metadata$m("design:type", Object)
         ], ProfilesComponent.prototype, "services", void 0);
-        __decorate$m([
+        __decorate$n([
             Input(),
-            __metadata$l("design:type", Object)
+            __metadata$m("design:type", Object)
         ], ProfilesComponent.prototype, "userTemplates", void 0);
-        __decorate$m([
+        __decorate$n([
             Input(),
-            __metadata$l("design:type", Object)
+            __metadata$m("design:type", Object)
         ], ProfilesComponent.prototype, "userValue", void 0);
-        __decorate$m([
+        __decorate$n([
             Input(),
-            __metadata$l("design:type", Object)
+            __metadata$m("design:type", Object)
         ], ProfilesComponent.prototype, "selectedFunction", void 0);
-        __decorate$m([
+        __decorate$n([
             Input(),
-            __metadata$l("design:type", Object)
+            __metadata$m("design:type", Object)
         ], ProfilesComponent.prototype, "selectedManager", void 0);
-        __decorate$m([
+        __decorate$n([
             Input(),
-            __metadata$l("design:type", Object)
+            __metadata$m("design:type", Object)
         ], ProfilesComponent.prototype, "selectedOffice", void 0);
-        __decorate$m([
+        __decorate$n([
             Input(),
-            __metadata$l("design:type", Object)
+            __metadata$m("design:type", Object)
         ], ProfilesComponent.prototype, "orgas", void 0);
-        __decorate$m([
+        __decorate$n([
             Input(),
-            __metadata$l("design:type", Object)
+            __metadata$m("design:type", Object)
         ], ProfilesComponent.prototype, "others", void 0);
-        __decorate$m([
+        __decorate$n([
             Input(),
-            __metadata$l("design:type", Object)
+            __metadata$m("design:type", Object)
         ], ProfilesComponent.prototype, "inactiveEmployee", void 0);
-        __decorate$m([
+        __decorate$n([
             Input(),
-            __metadata$l("design:type", Object)
+            __metadata$m("design:type", Object)
         ], ProfilesComponent.prototype, "inactiveStatus", void 0);
-        __decorate$m([
+        __decorate$n([
             Input(),
-            __metadata$l("design:type", Object)
+            __metadata$m("design:type", Object)
         ], ProfilesComponent.prototype, "leadsMin", void 0);
-        __decorate$m([
+        __decorate$n([
             Input(),
-            __metadata$l("design:type", Object)
+            __metadata$m("design:type", Object)
         ], ProfilesComponent.prototype, "leadsMax", void 0);
-        __decorate$m([
+        __decorate$n([
             Input(),
-            __metadata$l("design:type", Object)
+            __metadata$m("design:type", Object)
         ], ProfilesComponent.prototype, "destinations", void 0);
-        __decorate$m([
+        __decorate$n([
             Input(),
-            __metadata$l("design:type", Object)
+            __metadata$m("design:type", Object)
         ], ProfilesComponent.prototype, "teams", void 0);
-        __decorate$m([
+        __decorate$n([
             Input(),
-            __metadata$l("design:type", Object)
+            __metadata$m("design:type", Object)
         ], ProfilesComponent.prototype, "codeSON", void 0);
-        __decorate$m([
+        __decorate$n([
             Input(),
-            __metadata$l("design:type", Object)
+            __metadata$m("design:type", Object)
         ], ProfilesComponent.prototype, "codeTourplan", void 0);
-        __decorate$m([
+        __decorate$n([
             Input(),
-            __metadata$l("design:type", Object)
+            __metadata$m("design:type", Object)
         ], ProfilesComponent.prototype, "codevad", void 0);
-        __decorate$m([
+        __decorate$n([
             Input(),
-            __metadata$l("design:type", Object)
+            __metadata$m("design:type", Object)
         ], ProfilesComponent.prototype, "groupes", void 0);
-        __decorate$m([
+        __decorate$n([
             Input(),
-            __metadata$l("design:type", Object)
+            __metadata$m("design:type", Object)
         ], ProfilesComponent.prototype, "inbound", void 0);
-        __decorate$m([
+        __decorate$n([
             Input(),
-            __metadata$l("design:type", Object)
+            __metadata$m("design:type", Object)
         ], ProfilesComponent.prototype, "outbound", void 0);
-        __decorate$m([
+        __decorate$n([
             Input(),
-            __metadata$l("design:type", Object)
+            __metadata$m("design:type", Object)
         ], ProfilesComponent.prototype, "phoneExtension", void 0);
-        __decorate$m([
+        __decorate$n([
             Input(),
-            __metadata$l("design:type", Object)
+            __metadata$m("design:type", Object)
         ], ProfilesComponent.prototype, "phoneNumber", void 0);
-        __decorate$m([
+        __decorate$n([
             Input(),
-            __metadata$l("design:type", Object)
+            __metadata$m("design:type", Object)
         ], ProfilesComponent.prototype, "selectedOrganisation", void 0);
-        __decorate$m([
+        __decorate$n([
             Input(),
-            __metadata$l("design:type", Object)
+            __metadata$m("design:type", Object)
         ], ProfilesComponent.prototype, "title", void 0);
-        ProfilesComponent = __decorate$m([
+        ProfilesComponent = __decorate$n([
             Component({
                 selector: "mv-profiles",
                 templateUrl: "./profiles.component.html",
@@ -53326,19 +53381,19 @@
                     },
                 ],
             }),
-            __metadata$l("design:paramtypes", [FieldsService,
+            __metadata$m("design:paramtypes", [FieldsService,
                 SugarService])
         ], ProfilesComponent);
         return ProfilesComponent;
     }());
 
-    var __decorate$n = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var __decorate$o = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var __metadata$m = (undefined && undefined.__metadata) || function (k, v) {
+    var __metadata$n = (undefined && undefined.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var SwitchvoxComponent = /** @class */ (function () {
@@ -53352,27 +53407,27 @@
         SwitchvoxComponent.prototype.trackByFn = function (index, item) {
             return item.id; // or index
         };
-        __decorate$n([
+        __decorate$o([
             Input(),
-            __metadata$m("design:type", Object)
+            __metadata$n("design:type", Object)
         ], SwitchvoxComponent.prototype, "phoneNumber", void 0);
-        __decorate$n([
+        __decorate$o([
             Input(),
-            __metadata$m("design:type", Object)
+            __metadata$n("design:type", Object)
         ], SwitchvoxComponent.prototype, "phoneExtension", void 0);
-        __decorate$n([
+        __decorate$o([
             Input(),
-            __metadata$m("design:type", Object)
+            __metadata$n("design:type", Object)
         ], SwitchvoxComponent.prototype, "codevad", void 0);
-        __decorate$n([
+        __decorate$o([
             Input(),
-            __metadata$m("design:type", Object)
+            __metadata$n("design:type", Object)
         ], SwitchvoxComponent.prototype, "outbound", void 0);
-        __decorate$n([
+        __decorate$o([
             Input(),
-            __metadata$m("design:type", Object)
+            __metadata$n("design:type", Object)
         ], SwitchvoxComponent.prototype, "inbound", void 0);
-        SwitchvoxComponent = __decorate$n([
+        SwitchvoxComponent = __decorate$o([
             Component({
                 selector: "mv-switchvox",
                 templateUrl: "./switchvox.component.html",
@@ -53383,18 +53438,18 @@
                     },
                 ],
             }),
-            __metadata$m("design:paramtypes", [FieldsService])
+            __metadata$n("design:paramtypes", [FieldsService])
         ], SwitchvoxComponent);
         return SwitchvoxComponent;
     }());
 
-    var __decorate$o = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var __decorate$p = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var __metadata$n = (undefined && undefined.__metadata) || function (k, v) {
+    var __metadata$o = (undefined && undefined.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var TeamsComponent = /** @class */ (function () {
@@ -53408,11 +53463,11 @@
         TeamsComponent.prototype.trackByFn = function (index, item) {
             return item.id; // or index
         };
-        __decorate$o([
+        __decorate$p([
             Input(),
-            __metadata$n("design:type", Object)
+            __metadata$o("design:type", Object)
         ], TeamsComponent.prototype, "teams", void 0);
-        TeamsComponent = __decorate$o([
+        TeamsComponent = __decorate$p([
             Component({
                 selector: "mv-teams",
                 styleUrls: ["./teams.component.css"],
@@ -53424,12 +53479,12 @@
                     },
                 ],
             }),
-            __metadata$n("design:paramtypes", [FieldsService])
+            __metadata$o("design:paramtypes", [FieldsService])
         ], TeamsComponent);
         return TeamsComponent;
     }());
 
-    var __decorate$p = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var __decorate$q = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -53438,7 +53493,7 @@
     var AppModule = /** @class */ (function () {
         function AppModule() {
         }
-        AppModule = __decorate$p([
+        AppModule = __decorate$q([
             NgModule({
                 bootstrap: [
                     AppComponent,
@@ -53476,6 +53531,7 @@
                     FieldsService,
                     ParserService,
                     SugarService,
+                    SugarResolverService,
                     SwitchVoxService,
                     HttpClient,
                     { provide: APP_BASE_HREF, useValue: "/" },
@@ -53755,17 +53811,17 @@
         return viewDef(0, [(_l()(), anchorDef(16777216, null, null, 1, null, View_CredentialsComponent_1)), directiveDef(1, 16384, null, 0, NgIf, [ViewContainerRef,
                 TemplateRef], { ngIf: [0, 'ngIf'] }, null), (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
             var _co = _v.component;
-            var currVal_0 = (_co.civilites != null);
+            var currVal_0 = ((_co.civilites != null) && (_co.currentUser != null));
             _ck(_v, 1, 0, currVal_0);
         }, null);
     }
     function View_CredentialsComponent_Host_0(_l) {
-        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 2, 'mv-credentials', [], null, null, null, View_CredentialsComponent_0, RenderType_CredentialsComponent)), providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(2, 114688, null, 0, CredentialsComponent, [FieldsService, SugarService], null, null)], function (_ck, _v) {
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 2, 'mv-credentials', [], null, null, null, View_CredentialsComponent_0, RenderType_CredentialsComponent)), providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(2, 114688, null, 0, CredentialsComponent, [FieldsService], null, null)], function (_ck, _v) {
             _ck(_v, 2, 0);
         }, null);
     }
     var CredentialsComponentNgFactory = createComponentFactory('mv-credentials', CredentialsComponent, View_CredentialsComponent_Host_0, { civilites: 'civilites',
-        userFields: 'userFields' }, {}, []);
+        userFields: 'userFields', currentUser: 'currentUser', usersFromSugar: 'usersFromSugar' }, {}, []);
 
     /**
      * @fileoverview This file is generated by the Angular template compiler.
@@ -54934,7 +54990,8 @@
         }, null);
     }
     var ExtraneousComponentNgFactory = createComponentFactory('mv-extraneous', ExtraneousComponent, View_ExtraneousComponent_Host_0, { codeTourplan: 'codeTourplan',
-        codeSON: 'codeSON', title: 'title', inactiveStatus: 'inactiveStatus', inactiveEmployee: 'inactiveEmployee' }, {}, []);
+        codeSON: 'codeSON', title: 'title', inactiveStatus: 'inactiveStatus', inactiveEmployee: 'inactiveEmployee',
+        currentUser: 'currentUser' }, {}, []);
 
     /**
      * @fileoverview This file is generated by the Angular template compiler.
@@ -55315,9 +55372,9 @@
             (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(2, 0, null, null, 2, 'mv-accounts', [], null, null, null, View_AccountsComponent_0, RenderType_AccountsComponent)),
             providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(4, 114688, null, 0, AccountsComponent, [FieldsService], { accounts: [0,
                     'accounts'] }, null), (_l()(), textDef(-1, null, ['\n    '])),
-            (_l()(), elementDef(6, 0, null, null, 2, 'mv-credentials', [], null, null, null, View_CredentialsComponent_0, RenderType_CredentialsComponent)), providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(8, 114688, null, 0, CredentialsComponent, [FieldsService, SugarService], { civilites: [0, 'civilites'], userFields: [1,
-                    'userFields'] }, null), (_l()(), textDef(-1, null, ['\n\n    '])),
-            (_l()(), elementDef(10, 0, null, null, 2, 'mv-profiles', [], null, null, null, View_ProfilesComponent_0, RenderType_ProfilesComponent)),
+            (_l()(), elementDef(6, 0, null, null, 2, 'mv-credentials', [], null, null, null, View_CredentialsComponent_0, RenderType_CredentialsComponent)), providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(8, 114688, null, 0, CredentialsComponent, [FieldsService], { civilites: [0, 'civilites'], userFields: [1, 'userFields'],
+                currentUser: [2, 'currentUser'], usersFromSugar: [3, 'usersFromSugar'] }, null),
+            (_l()(), textDef(-1, null, ['\n\n    '])), (_l()(), elementDef(10, 0, null, null, 2, 'mv-profiles', [], null, null, null, View_ProfilesComponent_0, RenderType_ProfilesComponent)),
             providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(12, 114688, null, 0, ProfilesComponent, [FieldsService, SugarService], { roles: [0, 'roles'], services: [1, 'services'], userTemplates: [2, 'userTemplates'],
                 userValue: [3, 'userValue'], selectedFunction: [4, 'selectedFunction'], selectedManager: [5,
                     'selectedManager'], selectedOffice: [6, 'selectedOffice'], orgas: [7,
@@ -55342,9 +55399,12 @@
                     'others'] }, null), (_l()(), textDef(-1, null, ['\n    '])),
             (_l()(), elementDef(38, 0, null, null, 2, 'mv-extraneous', [], null, null, null, View_ExtraneousComponent_0, RenderType_ExtraneousComponent)), providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(40, 114688, null, 0, ExtraneousComponent, [FieldsService], { codeTourplan: [0, 'codeTourplan'], codeSON: [1, 'codeSON'],
                 title: [2, 'title'], inactiveStatus: [3, 'inactiveStatus'], inactiveEmployee: [4,
-                    'inactiveEmployee'] }, null), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(42, 0, null, null, 2, 'mv-switchvox', [], null, null, null, View_SwitchvoxComponent_0, RenderType_SwitchvoxComponent)), providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(44, 114688, null, 0, SwitchvoxComponent, [FieldsService], { phoneNumber: [0, 'phoneNumber'], phoneExtension: [1, 'phoneExtension'],
-                codevad: [2, 'codevad'], outbound: [3, 'outbound'], inbound: [4, 'inbound'] }, null), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(46, 0, null, null, 2, 'mv-gapps', [], null, null, null, View_GappsComponent_0, RenderType_GappsComponent)),
-            providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(48, 114688, null, 0, GappsComponent, [FieldsService], { orgas: [0, 'orgas'],
+                    'inactiveEmployee'], currentUser: [5, 'currentUser'] }, null),
+            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(42, 0, null, null, 2, 'mv-switchvox', [], null, null, null, View_SwitchvoxComponent_0, RenderType_SwitchvoxComponent)),
+            providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(44, 114688, null, 0, SwitchvoxComponent, [FieldsService], { phoneNumber: [0,
+                    'phoneNumber'], phoneExtension: [1, 'phoneExtension'], codevad: [2, 'codevad'],
+                outbound: [3, 'outbound'], inbound: [4, 'inbound'] }, null), (_l()(),
+                textDef(-1, null, ['\n    '])), (_l()(), elementDef(46, 0, null, null, 2, 'mv-gapps', [], null, null, null, View_GappsComponent_0, RenderType_GappsComponent)), providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(48, 114688, null, 0, GappsComponent, [FieldsService], { orgas: [0, 'orgas'],
                 selectedOrganisation: [1, 'selectedOrganisation'], groupes: [2, 'groupes'] }, null), (_l()(), textDef(-1, null, ['\n\n    '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_2)),
             directiveDef(51, 16384, null, 0, NgIf, [ViewContainerRef, TemplateRef], { ngIf: [0, 'ngIf'] }, null), (_l()(), textDef(-1, null, ['\n    '])),
             (_l()(), elementDef(53, 0, null, null, 1, 'button', [['type', 'submit']], [[8, 'disabled', 0]], null, null, null, null)),
@@ -55354,72 +55414,75 @@
             _ck(_v, 4, 0, currVal_0);
             var currVal_1 = _co.fields.civilites;
             var currVal_2 = _co.fields.userFields;
-            _ck(_v, 8, 0, currVal_1, currVal_2);
-            var currVal_3 = _co.fields.roles;
-            var currVal_4 = _co.fields.services;
-            var currVal_5 = _co.fields.userTemplates;
-            var currVal_6 = _co.fields.userValue;
-            var currVal_7 = _co.fields.selectedFunction;
-            var currVal_8 = _co.fields.selectedManager;
-            var currVal_9 = _co.fields.selectedOffice;
-            var currVal_10 = _co.fields.orgas;
-            var currVal_11 = _co.fields.others;
-            var currVal_12 = _co.fields.inactiveEmployee;
-            var currVal_13 = _co.fields.inactiveStatus;
-            var currVal_14 = _co.fields.leadsMin;
-            var currVal_15 = _co.fields.leadsMax;
-            var currVal_16 = _co.fields.destinations;
-            var currVal_17 = _co.fields.teams;
-            var currVal_18 = _co.fields.codeSON;
-            var currVal_19 = _co.fields.codeTourplan;
-            var currVal_20 = _co.fields.codevad;
-            var currVal_21 = _co.fields.groupes;
-            var currVal_22 = _co.fields.inbound;
-            var currVal_23 = _co.fields.outbound;
-            var currVal_24 = _co.fields.phoneExtension;
-            var currVal_25 = _co.fields.phoneNumber;
-            var currVal_26 = _co.fields.selectedOrganisation;
-            var currVal_27 = _co.fields.title;
-            _ck(_v, 12, 1, [currVal_3, currVal_4, currVal_5, currVal_6, currVal_7, currVal_8, currVal_9,
-                currVal_10, currVal_11, currVal_12, currVal_13, currVal_14, currVal_15, currVal_16,
-                currVal_17, currVal_18, currVal_19, currVal_20, currVal_21, currVal_22, currVal_23,
-                currVal_24, currVal_25, currVal_26, currVal_27]);
-            var currVal_28 = _co.fields.offices;
-            var currVal_29 = _co.fields.selectedOffice;
-            _ck(_v, 16, 0, currVal_28, currVal_29);
-            var currVal_30 = _co.fields.functions;
-            var currVal_31 = _co.fields.selectedFunction;
-            _ck(_v, 20, 0, currVal_30, currVal_31);
-            var currVal_32 = _co.fields.managers;
-            var currVal_33 = _co.fields.selectedManager;
-            _ck(_v, 24, 0, currVal_32, currVal_33);
-            var currVal_34 = _co.fields.destinations;
-            _ck(_v, 28, 0, currVal_34);
-            var currVal_35 = _co.fields.teams;
-            _ck(_v, 32, 0, currVal_35);
-            var currVal_36 = _co.fields.others;
-            _ck(_v, 36, 0, currVal_36);
-            var currVal_37 = _co.fields.codeTourplan;
-            var currVal_38 = _co.fields.codeSON;
-            var currVal_39 = _co.fields.title;
-            var currVal_40 = _co.fields.inactiveStatus;
-            var currVal_41 = _co.fields.inactiveEmployee;
-            _ck(_v, 40, 0, currVal_37, currVal_38, currVal_39, currVal_40, currVal_41);
-            var currVal_42 = _co.fields.phoneNumber;
-            var currVal_43 = _co.fields.phoneExtension;
-            var currVal_44 = _co.fields.codevad;
-            var currVal_45 = _co.fields.outbound;
-            var currVal_46 = _co.fields.inbound;
-            _ck(_v, 44, 0, currVal_42, currVal_43, currVal_44, currVal_45, currVal_46);
-            var currVal_47 = _co.fields.orgas;
-            var currVal_48 = _co.fields.selectedOrganisation;
-            var currVal_49 = _co.fields.groupes;
-            _ck(_v, 48, 0, currVal_47, currVal_48, currVal_49);
-            var currVal_50 = _co.errorMsg;
-            _ck(_v, 51, 0, currVal_50);
+            var currVal_3 = _co.currentUser;
+            var currVal_4 = _co.usersFromSugar;
+            _ck(_v, 8, 0, currVal_1, currVal_2, currVal_3, currVal_4);
+            var currVal_5 = _co.fields.roles;
+            var currVal_6 = _co.fields.services;
+            var currVal_7 = _co.fields.userTemplates;
+            var currVal_8 = _co.fields.userValue;
+            var currVal_9 = _co.fields.selectedFunction;
+            var currVal_10 = _co.fields.selectedManager;
+            var currVal_11 = _co.fields.selectedOffice;
+            var currVal_12 = _co.fields.orgas;
+            var currVal_13 = _co.fields.others;
+            var currVal_14 = _co.fields.inactiveEmployee;
+            var currVal_15 = _co.fields.inactiveStatus;
+            var currVal_16 = _co.fields.leadsMin;
+            var currVal_17 = _co.fields.leadsMax;
+            var currVal_18 = _co.fields.destinations;
+            var currVal_19 = _co.fields.teams;
+            var currVal_20 = _co.fields.codeSON;
+            var currVal_21 = _co.fields.codeTourplan;
+            var currVal_22 = _co.fields.codevad;
+            var currVal_23 = _co.fields.groupes;
+            var currVal_24 = _co.fields.inbound;
+            var currVal_25 = _co.fields.outbound;
+            var currVal_26 = _co.fields.phoneExtension;
+            var currVal_27 = _co.fields.phoneNumber;
+            var currVal_28 = _co.fields.selectedOrganisation;
+            var currVal_29 = _co.fields.title;
+            _ck(_v, 12, 1, [currVal_5, currVal_6, currVal_7, currVal_8, currVal_9, currVal_10, currVal_11,
+                currVal_12, currVal_13, currVal_14, currVal_15, currVal_16, currVal_17, currVal_18,
+                currVal_19, currVal_20, currVal_21, currVal_22, currVal_23, currVal_24, currVal_25,
+                currVal_26, currVal_27, currVal_28, currVal_29]);
+            var currVal_30 = _co.fields.offices;
+            var currVal_31 = _co.fields.selectedOffice;
+            _ck(_v, 16, 0, currVal_30, currVal_31);
+            var currVal_32 = _co.fields.functions;
+            var currVal_33 = _co.fields.selectedFunction;
+            _ck(_v, 20, 0, currVal_32, currVal_33);
+            var currVal_34 = _co.fields.managers;
+            var currVal_35 = _co.fields.selectedManager;
+            _ck(_v, 24, 0, currVal_34, currVal_35);
+            var currVal_36 = _co.fields.destinations;
+            _ck(_v, 28, 0, currVal_36);
+            var currVal_37 = _co.fields.teams;
+            _ck(_v, 32, 0, currVal_37);
+            var currVal_38 = _co.fields.others;
+            _ck(_v, 36, 0, currVal_38);
+            var currVal_39 = _co.fields.codeTourplan;
+            var currVal_40 = _co.fields.codeSON;
+            var currVal_41 = _co.fields.title;
+            var currVal_42 = _co.fields.inactiveStatus;
+            var currVal_43 = _co.fields.inactiveEmployee;
+            var currVal_44 = _co.currentUser;
+            _ck(_v, 40, 0, currVal_39, currVal_40, currVal_41, currVal_42, currVal_43, currVal_44);
+            var currVal_45 = _co.fields.phoneNumber;
+            var currVal_46 = _co.fields.phoneExtension;
+            var currVal_47 = _co.fields.codevad;
+            var currVal_48 = _co.fields.outbound;
+            var currVal_49 = _co.fields.inbound;
+            _ck(_v, 44, 0, currVal_45, currVal_46, currVal_47, currVal_48, currVal_49);
+            var currVal_50 = _co.fields.orgas;
+            var currVal_51 = _co.fields.selectedOrganisation;
+            var currVal_52 = _co.fields.groupes;
+            _ck(_v, 48, 0, currVal_50, currVal_51, currVal_52);
+            var currVal_53 = _co.errorMsg;
+            _ck(_v, 51, 0, currVal_53);
         }, function (_ck, _v) {
-            var currVal_51 = !nodeValue(_v.parent, 5).form.valid;
-            _ck(_v, 53, 0, currVal_51);
+            var currVal_54 = !nodeValue(_v.parent, 5).form.valid;
+            _ck(_v, 53, 0, currVal_54);
         });
     }
     function View_CreateUserFormComponent_0(_l) {
@@ -55450,7 +55513,7 @@
             pipeDef(0, JsonPipe, []), (_l()(), textDef(-1, null, ['\n\nFIELDS\n'])),
             (_l()(), elementDef(17, 0, null, null, 2, 'pre', [], null, null, null, null, null)), (_l()(), textDef(18, null, ['', ''])), pipeDef(0, JsonPipe, []), (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
             var _co = _v.component;
-            var currVal_7 = (_co.fields && (_co.fields !== null));
+            var currVal_7 = (_co.fields != null);
             _ck(_v, 10, 0, currVal_7);
         }, function (_ck, _v) {
             var _co = _v.component;
@@ -56399,7 +56462,9 @@
                 Compiler, Injector, PreloadingStrategy]), moduleProvideDef(4608, PreloadAllModules, PreloadAllModules, []), moduleProvideDef(5120, ROUTER_INITIALIZER, getBootstrapListener, [RouterInitializer]), moduleProvideDef(5120, APP_BOOTSTRAP_LISTENER, function (p0_0) {
                 return [p0_0];
             }, [ROUTER_INITIALIZER]), moduleProvideDef(4608, FieldsService, FieldsService, [HttpClient]), moduleProvideDef(4608, ParserService, ParserService, []),
-            moduleProvideDef(4608, SugarService, SugarService, [HttpClient]), moduleProvideDef(4608, SwitchVoxService, SwitchVoxService, [HttpClient]), moduleProvideDef(512, CommonModule, CommonModule, []), moduleProvideDef(1024, ErrorHandler, errorHandler, []), moduleProvideDef(1024, NgProbeToken, function () {
+            moduleProvideDef(4608, SugarService, SugarService, [HttpClient]), moduleProvideDef(4608, SugarResolverService, SugarResolverService, [SugarService]),
+            moduleProvideDef(4608, SwitchVoxService, SwitchVoxService, [HttpClient]),
+            moduleProvideDef(512, CommonModule, CommonModule, []), moduleProvideDef(1024, ErrorHandler, errorHandler, []), moduleProvideDef(1024, NgProbeToken, function () {
                 return [routerNgProbeToken()];
             }, []), moduleProvideDef(512, RouterInitializer, RouterInitializer, [Injector]), moduleProvideDef(1024, APP_INITIALIZER, function (p0_0, p0_1, p1_0) {
                 return [_createNgProbe(p0_0, p0_1), getAppInitializer(p1_0)];
@@ -56410,7 +56475,7 @@
             moduleProvideDef(512, InternalFormsSharedModule, InternalFormsSharedModule, []), moduleProvideDef(512, FormsModule, FormsModule, []), moduleProvideDef(512, HttpClientXsrfModule, HttpClientXsrfModule, []), moduleProvideDef(512, HttpClientModule, HttpClientModule, []), moduleProvideDef(1024, ROUTER_FORROOT_GUARD, provideForRootGuard, [[3, Router]]), moduleProvideDef(512, UrlSerializer, DefaultUrlSerializer, []), moduleProvideDef(512, ChildrenOutletContexts, ChildrenOutletContexts, []),
             moduleProvideDef(256, APP_BASE_HREF, '/', []), moduleProvideDef(256, ROUTER_CONFIGURATION, {}, []), moduleProvideDef(1024, LocationStrategy, provideLocationStrategy, [PlatformLocation,
                 [2, APP_BASE_HREF], ROUTER_CONFIGURATION]), moduleProvideDef(512, Location, Location, [LocationStrategy]), moduleProvideDef(512, Compiler, Compiler, []), moduleProvideDef(512, NgModuleFactoryLoader, SystemJsNgModuleLoader, [Compiler, [2, SystemJsNgModuleLoaderConfig]]), moduleProvideDef(1024, ROUTES, function () {
-                return [[{ path: 'users/:id', component: CreateUserFormComponent },
+                return [[{ path: 'users/:id', component: CreateUserFormComponent, resolve: { userData: SugarResolverService } },
                         { path: 'create', component: CreateUserFormComponent }, { path: 'users',
                             component: UsersComponent }, { path: 'user', component: UserComponent },
                         { path: 'disable/:id', component: DisableUserFormComponent }, { path: 'disable',

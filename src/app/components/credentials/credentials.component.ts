@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { ControlContainer, NgForm } from "@angular/forms";
 import { FieldsService } from "../../services/fields.service";
-import { SugarService } from "../../services/sugar.service";
+
+import { ActivatedRoute } from "@angular/router";
 
 import { Fields } from "../../models/fields";
 import { User } from "../../models/user";
@@ -21,24 +22,30 @@ import { User } from "../../models/user";
 export class CredentialsComponent implements OnInit {
   @Input() public civilites;
   @Input() public userFields;
+  @Input() public currentUser: User;
+  @Input() public usersFromSugar: User[];
 
   public passwordExists = false;
-  public usersFromSugar: User[] = [];
   public usernameTaken;
   public usernameStatus;
 
-  constructor(private fieldsService: FieldsService,
-              private sugar: SugarService) {
+  constructor(private fieldsService: FieldsService) {
     //
   }
 
   public ngOnInit(): void {
-    this.sugar.getUsers()
-    .then((users) => users.forEach((user) => this.usersFromSugar.push(new User(user))));
+    this.prefillForm();
+  }
+
+  public prefillForm(): any {
+    this.userFields[0].value = this.currentUser.firstName;
+    this.userFields[1].value = this.currentUser.lastName;
+    this.userFields[2].value = this.currentUser.userName;
+    this.userFields[3].value = this.currentUser.email;
   }
 
   public credentialClick(e) {
-    const [first, last, username ] = [ this.userFields[0], this.userFields[1], this.userFields[2] ];
+    const [ first, last, username ] = [ this.userFields[0], this.userFields[1], this.userFields[2] ];
 
     this.usernameTaken = this.isUsernameTaken(username);
     this.usernameStatus = this.usernameTaken ? "Username already taken. Choose another one" : "Username available :)";

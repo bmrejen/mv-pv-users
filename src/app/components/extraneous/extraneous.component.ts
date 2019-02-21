@@ -16,18 +16,21 @@ import { Fields } from "../../models/fields";
 })
 
 export class ExtraneousComponent implements OnInit {
-  @Input () public codeTourplan;
-  @Input () public codeSON;
-  @Input () public title;
-  @Input () public inactiveStatus;
-  @Input () public inactiveEmployee;
+  @Input() public codeTourplan;
+  @Input() public codeSON;
+  @Input() public title;
+  @Input() public inactiveStatus;
+  @Input() public inactiveEmployee;
+  @Input() public currentUser;
 
   constructor(private fieldsService: FieldsService) {
     //
   }
 
   public ngOnInit(): void {
-    //
+    this.codeTourplan = this.currentUser.tourplanID;
+    this.inactiveEmployee = this.currentUser.employeeStatus !== "Active";
+    this.inactiveStatus = this.currentUser.status !== "Active";
   }
 
   public trackByFn(index, item) {

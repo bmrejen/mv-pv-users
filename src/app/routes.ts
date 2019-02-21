@@ -4,6 +4,9 @@ import {
   CreateUserFormComponent,
 } from "./components/create-user-form/create-user-form.component";
 import {
+  CredentialsComponent,
+} from "./components/credentials/credentials.component";
+import {
   DisableUserFormComponent,
 } from "./components/disable-user-form/disable-user-form.component";
 import {
@@ -23,11 +26,14 @@ import {
   UsersComponent,
 } from "./components/users/users.component";
 
+import { SugarResolverService } from "./services/sugar-resolver.service";
+
 /* tslint:disable object-literal-sort-keys */
 export const AppRoutes: Routes = [
 {
   path: "users/:id",
   component: CreateUserFormComponent,
+  resolve: { userData: SugarResolverService },
 },
 {
   path: "create",
