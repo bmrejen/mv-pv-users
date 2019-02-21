@@ -1,6 +1,6 @@
 .destinations {
   display: flex;
   flex-direction: column;
-  height: 50px;
+  height: 150px;
   flex-wrap: wrap;
 }

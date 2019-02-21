@@ -34976,7 +34976,6 @@
             var fields = [
                 "accounts",
                 "civilites",
-                "destinations",
                 "functions",
                 "managers",
                 "offices",
@@ -39859,6 +39858,10 @@
             return this.getData("teams")
                 .then(function (items) { return items.filter(function (item) { return item.attributes["name"].startsWith("EQ "); }); });
         };
+        SugarService.prototype.getDestinations = function () {
+            return this.getData("teams")
+                .then(function (items) { return items.filter(function (item) { return item.attributes["name"].startsWith("DESTI - "); }); });
+        };
         SugarService.prototype.getManagers = function () {
             return this.getData("users")
                 .then(function (users) { return users.filter(function (user) { return user.attributes["title"] === "Manager"; }); });
@@ -39942,14 +39945,14 @@
             d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
         };
     })();
-    var Team = /** @class */ (function (_super) {
-        __extends$1D(Team, _super);
-        function Team(data) {
+    var Destination = /** @class */ (function (_super) {
+        __extends$1D(Destination, _super);
+        function Destination(data) {
             var _this = _super.call(this, data) || this;
             _this.checked = false;
             return _this;
         }
-        return Team;
+        return Destination;
     }(Model));
 
     var __extends$1E = (undefined && undefined.__extends) || (function () {
@@ -39962,8 +39965,28 @@
             d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
         };
     })();
+    var Team = /** @class */ (function (_super) {
+        __extends$1E(Team, _super);
+        function Team(data) {
+            var _this = _super.call(this, data) || this;
+            _this.checked = false;
+            return _this;
+        }
+        return Team;
+    }(Model));
+
+    var __extends$1F = (undefined && undefined.__extends) || (function () {
+        var extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return function (d, b) {
+            extendStatics(d, b);
+            function __() { this.constructor = d; }
+            d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+        };
+    })();
     var User = /** @class */ (function (_super) {
-        __extends$1E(User, _super);
+        __extends$1F(User, _super);
         function User(data) {
             var _this = _super.call(this, data) || this;
             _this.status = "Active";
@@ -39999,6 +40022,7 @@
             this.passwordExists = false;
             this.usersFromSugar = [];
             this.teams = [];
+            this.destinations = [];
             //
         }
         CreateUserFormComponent.prototype.ngOnInit = function () {
@@ -40007,10 +40031,12 @@
                 .then(function (res) { return _this.fields = new Fields(res[0]); });
             this.route.data
                 .subscribe(function (data) {
-                var _a = [data.userData[0], data.userData[1], data.userData[2]], usr = _a[0], users = _a[1], teams = _a[2];
+                var myArr = data.userData;
+                var _a = myArr.slice(), usr = _a[0], users = _a[1], teams = _a[2], destinations = _a[3];
                 _this.currentUser = new User(usr);
                 users.forEach(function (user) { return _this.usersFromSugar.push(new User(user)); });
                 teams.forEach(function (team) { return _this.teams.push(new Team(team)); });
+                destinations.forEach(function (dest) { return _this.destinations.push(new Destination(dest)); });
             });
         };
         CreateUserFormComponent.prototype.onParentChange = function (_a) {
@@ -40214,7 +40240,7 @@
         return ImportComponent;
     }());
 
-    var __extends$1F = (undefined && undefined.__extends) || (function () {
+    var __extends$1G = (undefined && undefined.__extends) || (function () {
         var extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
             function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -40225,7 +40251,7 @@
         };
     })();
     var Role = /** @class */ (function (_super) {
-        __extends$1F(Role, _super);
+        __extends$1G(Role, _super);
         function Role(data) {
             var _this = _super.call(this, data) || this;
             _this.type = "users";
@@ -40385,7 +40411,8 @@
             var userPromise = this.sugar.getUserById(id);
             var usersPromise = this.sugar.getUsers();
             var teamsPromise = this.sugar.getTeams();
-            var promises = [userPromise, usersPromise, teamsPromise];
+            var destinationsPromise = this.sugar.getDestinations();
+            var promises = [userPromise, usersPromise, teamsPromise, destinationsPromise];
             return new Promise(function (resolve, reject) {
                 Promise.all(promises)
                     .then(function (res) { return resolve(res); }, function (error) { return reject("Probleme"); });
@@ -46413,7 +46440,7 @@
      */
     BrowserAnimationsModule.ctorParameters = function () { return []; };
 
-    var __extends$1G = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1H = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -46429,7 +46456,7 @@
      * @hide true
      */
     var ForkJoinObservable = (function (_super) {
-        __extends$1G(ForkJoinObservable, _super);
+        __extends$1H(ForkJoinObservable, _super);
         function ForkJoinObservable(sources, resultSelector) {
             _super.call(this);
             this.sources = sources;
@@ -46567,7 +46594,7 @@
      * @extends {Ignored}
      */
     var ForkJoinSubscriber = (function (_super) {
-        __extends$1G(ForkJoinSubscriber, _super);
+        __extends$1H(ForkJoinSubscriber, _super);
         function ForkJoinSubscriber(destination, sources, resultSelector) {
             _super.call(this, destination);
             this.sources = sources;
@@ -52756,7 +52783,7 @@
             //
         }
         DestinationsComponent.prototype.ngOnInit = function () {
-            //
+            console.log("component dests", this.dests);
         };
         DestinationsComponent.prototype.trackByFn = function (index, item) {
             return item.id; // or index
@@ -52765,6 +52792,10 @@
             Input(),
             __metadata$f("design:type", Object)
         ], DestinationsComponent.prototype, "destinations", void 0);
+        __decorate$g([
+            Input(),
+            __metadata$f("design:type", Object)
+        ], DestinationsComponent.prototype, "dests", void 0);
         DestinationsComponent = __decorate$g([
             Component({
                 selector: "mv-destinations",
@@ -53510,17 +53541,41 @@
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
+    var AlphabeticalPipe = /** @class */ (function () {
+        function AlphabeticalPipe() {
+        }
+        AlphabeticalPipe.prototype.transform = function (destinations) {
+            function compare(a, b) {
+                return a.name < b.name ? -1 : 1;
+            }
+            return Array.prototype.sort.call(destinations, compare);
+        };
+        AlphabeticalPipe = __decorate$q([
+            Pipe({
+                name: "alphabetical",
+            })
+        ], AlphabeticalPipe);
+        return AlphabeticalPipe;
+    }());
+
+    var __decorate$r = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    };
     var AppModule = /** @class */ (function () {
         function AppModule() {
         }
-        AppModule = __decorate$q([
+        AppModule = __decorate$r([
             NgModule({
                 bootstrap: [
                     AppComponent,
                 ],
                 declarations: [
-                    AppComponent,
                     AccountsComponent,
+                    AlphabeticalPipe,
+                    AppComponent,
                     CheckboxFieldComponent,
                     CredentialsComponent,
                     CreateUserFormComponent,
@@ -54490,7 +54545,7 @@
      * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride}
      */
     /* tslint:disable */
-    var styles$1 = ['.destinations[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  height: 50px;\n  flex-wrap: wrap;\n}'];
+    var styles$1 = ['.destinations[_ngcontent-%COMP%] {\n  display: flex;\n  flex-direction: column;\n  height: 150px;\n  flex-wrap: wrap;\n}'];
 
     /**
      * @fileoverview This file is generated by the Angular template compiler.
@@ -54501,8 +54556,8 @@
     var RenderType_DestinationsComponent = createRendererType2({ encapsulation: 0,
         styles: styles_DestinationsComponent, data: {} });
     function View_DestinationsComponent_2(_l) {
-        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 11, 'div', [], null, null, null, null, null)), (_l()(),
-                textDef(-1, null, ['\n      '])), (_l()(), elementDef(2, 0, null, null, 8, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(4, 0, null, null, 5, 'input', [['type', 'checkbox']], [[2, 'ng-untouched',
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 12, 'div', [], null, null, null, null, null)), (_l()(),
+                textDef(-1, null, ['\n      '])), (_l()(), elementDef(2, 0, null, null, 9, 'label', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['\n        '])), (_l()(), elementDef(4, 0, null, null, 5, 'input', [['type', 'checkbox']], [[2, 'ng-untouched',
                     null], [2, 'ng-touched', null], [2, 'ng-pristine', null],
                 [2, 'ng-dirty', null], [2, 'ng-valid', null], [2, 'ng-invalid',
                     null], [2, 'ng-pending', null]], [[null, 'ngModelChange'],
@@ -54523,7 +54578,7 @@
                 return ad;
             }, null, null)), directiveDef(5, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
                 return [p0_0];
-            }, [CheckboxControlValueAccessor]), directiveDef(7, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(9, 16384, null, 0, NgControlStatus, [NgControl], null, null), (_l()(), textDef(10, null, ['', '\n      '])), (_l()(), textDef(-1, null, ['\n    ']))], function (_ck, _v) {
+            }, [CheckboxControlValueAccessor]), directiveDef(7, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(9, 16384, null, 0, NgControlStatus, [NgControl], null, null), (_l()(), textDef(10, null, ['', '\n      '])), pipeDef(0, SlicePipe, []), (_l()(), textDef(-1, null, ['\n    ']))], function (_ck, _v) {
             var currVal_7 = _v.context.$implicit.name;
             var currVal_8 = _v.context.$implicit.checked;
             _ck(_v, 7, 0, currVal_7, currVal_8);
@@ -54536,21 +54591,22 @@
             var currVal_5 = nodeValue(_v, 9).ngClassInvalid;
             var currVal_6 = nodeValue(_v, 9).ngClassPending;
             _ck(_v, 4, 0, currVal_0, currVal_1, currVal_2, currVal_3, currVal_4, currVal_5, currVal_6);
-            var currVal_9 = _v.context.$implicit.name;
+            var currVal_9 = unwrapValue(_v, 10, 0, nodeValue(_v, 11).transform(_v.context.$implicit.name, 7));
             _ck(_v, 10, 0, currVal_9);
         });
     }
     function View_DestinationsComponent_1(_l) {
-        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 13, 'fieldset', [['class', 'blue']], null, null, null, null, null)),
+        return viewDef(0, [(_l()(), elementDef(0, 0, null, null, 14, 'fieldset', [['class', 'blue']], null, null, null, null, null)),
             (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(2, 0, null, null, 1, 'legend', [], null, null, null, null, null)), (_l()(), textDef(-1, null, ['Destinations'])),
-            (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(5, 0, null, null, 7, 'div', [['class', 'destinations'], ['ngModelGroup', 'destinations']], [[2, 'ng-untouched', null], [2, 'ng-touched', null], [2, 'ng-pristine',
+            (_l()(), textDef(-1, null, ['\n  '])), (_l()(), elementDef(5, 0, null, null, 8, 'div', [['class', 'destinations'], ['ngModelGroup', 'destinations']], [[2, 'ng-untouched', null], [2, 'ng-touched', null], [2, 'ng-pristine',
                     null], [2, 'ng-dirty', null], [2, 'ng-valid', null],
-                [2, 'ng-invalid', null], [2, 'ng-pending', null]], null, null, null, null)), directiveDef(6, 212992, null, 0, NgModelGroup, [[1, ControlContainer], [8, null], [8, null]], { name: [0, 'name'] }, null), providerDef(2048, null, ControlContainer, null, [NgModelGroup]), directiveDef(8, 16384, null, 0, NgControlStatusGroup, [ControlContainer], null, null), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_DestinationsComponent_2)), directiveDef(11, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'],
-                ngForTrackBy: [1, 'ngForTrackBy'] }, null), (_l()(), textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
+                [2, 'ng-invalid', null], [2, 'ng-pending', null]], null, null, null, null)), directiveDef(6, 212992, null, 0, NgModelGroup, [[1, ControlContainer], [8, null], [8, null]], { name: [0, 'name'] }, null), providerDef(2048, null, ControlContainer, null, [NgModelGroup]), directiveDef(8, 16384, null, 0, NgControlStatusGroup, [ControlContainer], null, null), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), anchorDef(16777216, null, null, 2, null, View_DestinationsComponent_2)), directiveDef(11, 802816, null, 0, NgForOf, [ViewContainerRef, TemplateRef, IterableDiffers], { ngForOf: [0, 'ngForOf'],
+                ngForTrackBy: [1, 'ngForTrackBy'] }, null), purePipeDef(12, 1), (_l()(),
+                textDef(-1, null, ['\n  '])), (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
             var _co = _v.component;
             var currVal_7 = 'destinations';
             _ck(_v, 6, 0, currVal_7);
-            var currVal_8 = _co.destinations;
+            var currVal_8 = unwrapValue(_v, 11, 0, _ck(_v, 12, 0, nodeValue(_v.parent, 0), _co.dests));
             var currVal_9 = _co.trackByFn;
             _ck(_v, 11, 0, currVal_8, currVal_9);
         }, function (_ck, _v) {
@@ -54565,11 +54621,11 @@
         });
     }
     function View_DestinationsComponent_0(_l) {
-        return viewDef(0, [(_l()(), anchorDef(16777216, null, null, 1, null, View_DestinationsComponent_1)), directiveDef(1, 16384, null, 0, NgIf, [ViewContainerRef,
-                TemplateRef], { ngIf: [0, 'ngIf'] }, null), (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
+        return viewDef(0, [pipeDef(0, AlphabeticalPipe, []), (_l()(), anchorDef(16777216, null, null, 1, null, View_DestinationsComponent_1)), directiveDef(2, 16384, null, 0, NgIf, [ViewContainerRef, TemplateRef], { ngIf: [0,
+                    'ngIf'] }, null), (_l()(), textDef(-1, null, ['\n']))], function (_ck, _v) {
             var _co = _v.component;
-            var currVal_0 = (_co.destinations != null);
-            _ck(_v, 1, 0, currVal_0);
+            var currVal_0 = (_co.dests != null);
+            _ck(_v, 2, 0, currVal_0);
         }, null);
     }
     function View_DestinationsComponent_Host_0(_l) {
@@ -54577,7 +54633,8 @@
             _ck(_v, 2, 0);
         }, null);
     }
-    var DestinationsComponentNgFactory = createComponentFactory('mv-destinations', DestinationsComponent, View_DestinationsComponent_Host_0, { destinations: 'destinations' }, {}, []);
+    var DestinationsComponentNgFactory = createComponentFactory('mv-destinations', DestinationsComponent, View_DestinationsComponent_Host_0, { destinations: 'destinations',
+        dests: 'dests' }, {}, []);
 
     /**
      * @fileoverview This file is generated by the Angular template compiler.
@@ -55412,19 +55469,13 @@
                     'managers'], selectedManager: [1, 'selectedManager'] }, null), (_l()(),
                 textDef(-1, null, ['\n\n    '])), (_l()(), elementDef(26, 0, null, null, 2, 'mv-destinations', [], null, null, null, View_DestinationsComponent_0, RenderType_DestinationsComponent)),
             providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(28, 114688, null, 0, DestinationsComponent, [FieldsService], { destinations: [0,
-                    'destinations'] }, null), (_l()(), textDef(-1, null, ['\n    '])),
-            (_l()(), elementDef(30, 0, null, null, 2, 'mv-teams', [], null, null, null, View_TeamsComponent_0, RenderType_TeamsComponent)),
-            providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(32, 114688, null, 0, TeamsComponent, [FieldsService], { teams: [0, 'teams'] }, null), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(34, 0, null, null, 2, 'mv-others', [], null, null, null, View_OthersComponent_0, RenderType_OthersComponent)),
-            providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(36, 114688, null, 0, OthersComponent, [FieldsService], { others: [0,
-                    'others'] }, null), (_l()(), textDef(-1, null, ['\n    '])),
-            (_l()(), elementDef(38, 0, null, null, 2, 'mv-extraneous', [], null, null, null, View_ExtraneousComponent_0, RenderType_ExtraneousComponent)), providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(40, 114688, null, 0, ExtraneousComponent, [FieldsService], { codeTourplan: [0, 'codeTourplan'], codeSON: [1, 'codeSON'],
-                title: [2, 'title'], inactiveStatus: [3, 'inactiveStatus'], inactiveEmployee: [4,
-                    'inactiveEmployee'], currentUser: [5, 'currentUser'] }, null),
-            (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(42, 0, null, null, 2, 'mv-switchvox', [], null, null, null, View_SwitchvoxComponent_0, RenderType_SwitchvoxComponent)),
-            providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(44, 114688, null, 0, SwitchvoxComponent, [FieldsService], { phoneNumber: [0,
-                    'phoneNumber'], phoneExtension: [1, 'phoneExtension'], codevad: [2, 'codevad'],
-                outbound: [3, 'outbound'], inbound: [4, 'inbound'] }, null), (_l()(),
-                textDef(-1, null, ['\n    '])), (_l()(), elementDef(46, 0, null, null, 2, 'mv-gapps', [], null, null, null, View_GappsComponent_0, RenderType_GappsComponent)), providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(48, 114688, null, 0, GappsComponent, [FieldsService], { orgas: [0, 'orgas'],
+                    'destinations'], dests: [1, 'dests'] }, null), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(30, 0, null, null, 2, 'mv-teams', [], null, null, null, View_TeamsComponent_0, RenderType_TeamsComponent)), providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(32, 114688, null, 0, TeamsComponent, [FieldsService], { teams: [0, 'teams'] }, null), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(34, 0, null, null, 2, 'mv-others', [], null, null, null, View_OthersComponent_0, RenderType_OthersComponent)), providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(36, 114688, null, 0, OthersComponent, [FieldsService], { others: [0, 'others'] }, null), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(38, 0, null, null, 2, 'mv-extraneous', [], null, null, null, View_ExtraneousComponent_0, RenderType_ExtraneousComponent)), providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(40, 114688, null, 0, ExtraneousComponent, [FieldsService], { codeTourplan: [0,
+                    'codeTourplan'], codeSON: [1, 'codeSON'], title: [2, 'title'], inactiveStatus: [3,
+                    'inactiveStatus'], inactiveEmployee: [4, 'inactiveEmployee'], currentUser: [5,
+                    'currentUser'] }, null), (_l()(), textDef(-1, null, ['\n    '])),
+            (_l()(), elementDef(42, 0, null, null, 2, 'mv-switchvox', [], null, null, null, View_SwitchvoxComponent_0, RenderType_SwitchvoxComponent)), providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(44, 114688, null, 0, SwitchvoxComponent, [FieldsService], { phoneNumber: [0, 'phoneNumber'], phoneExtension: [1, 'phoneExtension'],
+                codevad: [2, 'codevad'], outbound: [3, 'outbound'], inbound: [4, 'inbound'] }, null), (_l()(), textDef(-1, null, ['\n    '])), (_l()(), elementDef(46, 0, null, null, 2, 'mv-gapps', [], null, null, null, View_GappsComponent_0, RenderType_GappsComponent)),
+            providerDef(14336, null, ControlContainer, null, [NgForm]), directiveDef(48, 114688, null, 0, GappsComponent, [FieldsService], { orgas: [0, 'orgas'],
                 selectedOrganisation: [1, 'selectedOrganisation'], groupes: [2, 'groupes'] }, null), (_l()(), textDef(-1, null, ['\n\n    '])), (_l()(), anchorDef(16777216, null, null, 1, null, View_CreateUserFormComponent_2)),
             directiveDef(51, 16384, null, 0, NgIf, [ViewContainerRef, TemplateRef], { ngIf: [0, 'ngIf'] }, null), (_l()(), textDef(-1, null, ['\n    '])),
             (_l()(), elementDef(53, 0, null, null, 1, 'button', [['type', 'submit']], [[8, 'disabled', 0]], null, null, null, null)),
@@ -55476,33 +55527,34 @@
             var currVal_35 = _co.fields.selectedManager;
             _ck(_v, 24, 0, currVal_34, currVal_35);
             var currVal_36 = _co.fields.destinations;
-            _ck(_v, 28, 0, currVal_36);
-            var currVal_37 = _co.teams;
-            _ck(_v, 32, 0, currVal_37);
-            var currVal_38 = _co.fields.others;
-            _ck(_v, 36, 0, currVal_38);
-            var currVal_39 = _co.fields.codeTourplan;
-            var currVal_40 = _co.fields.codeSON;
-            var currVal_41 = _co.fields.title;
-            var currVal_42 = _co.fields.inactiveStatus;
-            var currVal_43 = _co.fields.inactiveEmployee;
-            var currVal_44 = _co.currentUser;
-            _ck(_v, 40, 0, currVal_39, currVal_40, currVal_41, currVal_42, currVal_43, currVal_44);
-            var currVal_45 = _co.fields.phoneNumber;
-            var currVal_46 = _co.fields.phoneExtension;
-            var currVal_47 = _co.fields.codevad;
-            var currVal_48 = _co.fields.outbound;
-            var currVal_49 = _co.fields.inbound;
-            _ck(_v, 44, 0, currVal_45, currVal_46, currVal_47, currVal_48, currVal_49);
-            var currVal_50 = _co.fields.orgas;
-            var currVal_51 = _co.fields.selectedOrganisation;
-            var currVal_52 = _co.fields.groupes;
-            _ck(_v, 48, 0, currVal_50, currVal_51, currVal_52);
-            var currVal_53 = _co.errorMsg;
-            _ck(_v, 51, 0, currVal_53);
+            var currVal_37 = _co.destinations;
+            _ck(_v, 28, 0, currVal_36, currVal_37);
+            var currVal_38 = _co.teams;
+            _ck(_v, 32, 0, currVal_38);
+            var currVal_39 = _co.fields.others;
+            _ck(_v, 36, 0, currVal_39);
+            var currVal_40 = _co.fields.codeTourplan;
+            var currVal_41 = _co.fields.codeSON;
+            var currVal_42 = _co.fields.title;
+            var currVal_43 = _co.fields.inactiveStatus;
+            var currVal_44 = _co.fields.inactiveEmployee;
+            var currVal_45 = _co.currentUser;
+            _ck(_v, 40, 0, currVal_40, currVal_41, currVal_42, currVal_43, currVal_44, currVal_45);
+            var currVal_46 = _co.fields.phoneNumber;
+            var currVal_47 = _co.fields.phoneExtension;
+            var currVal_48 = _co.fields.codevad;
+            var currVal_49 = _co.fields.outbound;
+            var currVal_50 = _co.fields.inbound;
+            _ck(_v, 44, 0, currVal_46, currVal_47, currVal_48, currVal_49, currVal_50);
+            var currVal_51 = _co.fields.orgas;
+            var currVal_52 = _co.fields.selectedOrganisation;
+            var currVal_53 = _co.fields.groupes;
+            _ck(_v, 48, 0, currVal_51, currVal_52, currVal_53);
+            var currVal_54 = _co.errorMsg;
+            _ck(_v, 51, 0, currVal_54);
         }, function (_ck, _v) {
-            var currVal_54 = !nodeValue(_v.parent, 5).form.valid;
-            _ck(_v, 53, 0, currVal_54);
+            var currVal_55 = !nodeValue(_v.parent, 5).form.valid;
+            _ck(_v, 53, 0, currVal_55);
         });
     }
     function View_CreateUserFormComponent_0(_l) {
