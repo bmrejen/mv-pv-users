@@ -34984,7 +34984,6 @@
                 "others",
                 "roles",
                 "services",
-                "teams",
                 "userFields",
                 "userTemplates",
             ];
@@ -39946,7 +39945,9 @@
     var Team = /** @class */ (function (_super) {
         __extends$1D(Team, _super);
         function Team(data) {
-            return _super.call(this, data) || this;
+            var _this = _super.call(this, data) || this;
+            _this.checked = false;
+            return _this;
         }
         return Team;
     }(Model));
@@ -40006,12 +40007,11 @@
                 .then(function (res) { return _this.fields = new Fields(res[0]); });
             this.route.data
                 .subscribe(function (data) {
-                var _a = [data.userData[0], data.userData[1]], usr = _a[0], users = _a[1];
+                var _a = [data.userData[0], data.userData[1], data.userData[2]], usr = _a[0], users = _a[1], teams = _a[2];
                 _this.currentUser = new User(usr);
                 users.forEach(function (user) { return _this.usersFromSugar.push(new User(user)); });
+                teams.forEach(function (team) { return _this.teams.push(new Team(team)); });
             });
-            this.sugarService.getTeams()
-                .then(function (teams) { return teams.forEach(function (team) { return _this.teams.push(new Team(team)); }); });
         };
         CreateUserFormComponent.prototype.onParentChange = function (_a) {
             var e = _a.e, id = _a.id;
@@ -40384,7 +40384,8 @@
             var id = route.params.id;
             var userPromise = this.sugar.getUserById(id);
             var usersPromise = this.sugar.getUsers();
-            var promises = [userPromise, usersPromise];
+            var teamsPromise = this.sugar.getTeams();
+            var promises = [userPromise, usersPromise, teamsPromise];
             return new Promise(function (resolve, reject) {
                 Promise.all(promises)
                     .then(function (res) { return resolve(res); }, function (error) { return reject("Probleme"); });
@@ -54618,7 +54619,7 @@
             }, null, null)), directiveDef(5, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
                 return [p0_0];
             }, [CheckboxControlValueAccessor]), directiveDef(7, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(9, 16384, null, 0, NgControlStatus, [NgControl], null, null), (_l()(), textDef(10, null, ['', '\n      '])), (_l()(), textDef(-1, null, ['\n    ']))], function (_ck, _v) {
-            var currVal_7 = _v.context.$implicit.label;
+            var currVal_7 = _v.context.$implicit.name;
             var currVal_8 = _v.context.$implicit.checked;
             _ck(_v, 7, 0, currVal_7, currVal_8);
         }, function (_ck, _v) {
@@ -54630,7 +54631,7 @@
             var currVal_5 = nodeValue(_v, 9).ngClassInvalid;
             var currVal_6 = nodeValue(_v, 9).ngClassPending;
             _ck(_v, 4, 0, currVal_0, currVal_1, currVal_2, currVal_3, currVal_4, currVal_5, currVal_6);
-            var currVal_9 = _v.context.$implicit.label;
+            var currVal_9 = _v.context.$implicit.name;
             _ck(_v, 10, 0, currVal_9);
         });
     }
@@ -55476,7 +55477,7 @@
             _ck(_v, 24, 0, currVal_34, currVal_35);
             var currVal_36 = _co.fields.destinations;
             _ck(_v, 28, 0, currVal_36);
-            var currVal_37 = _co.fields.teams;
+            var currVal_37 = _co.teams;
             _ck(_v, 32, 0, currVal_37);
             var currVal_38 = _co.fields.others;
             _ck(_v, 36, 0, currVal_38);

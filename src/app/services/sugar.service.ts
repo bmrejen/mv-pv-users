@@ -32,7 +32,7 @@ export class SugarService {
     return this.getData("users");
   }
 
-  public getTeams(): Promise<User[]> {
+  public getTeams(): Promise<Team[]> {
     return this.getData("teams")
     .then((items) => items.filter((item) => item.attributes["name"].startsWith("EQ ")));
   }
