@@ -6,14 +6,14 @@ var minifier    = require('gulp-uglify/minifier');
 var wrap        = require('gulp-css-wrap');
 
 gulp.task('minify:assets', [
-    'minify:js',
+    // 'minify:js',
     'wrap:css',
     'minify:css'
 ]);
 
 gulp.task('minify:js', [
     'minify:js:vendors',
-    'minify:js:workers',
+    // 'minify:js:workers',
 ]);
 
 gulp.task('wrap:css', ['build:css'], function () {

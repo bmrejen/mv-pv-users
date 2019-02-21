@@ -40299,11 +40299,8 @@
             // constructor
         }
         UsersComponent.prototype.ngOnInit = function () {
-            // this.sugarService.getUsers()
-            // .then((users) => users.forEach((user) => this.usersFromSugar.push(new User(user))))
-            // .then((users) => this.filteredUsers = this.usersFromSugar);
             var _this = this;
-            this.sugarService.getManagers()
+            this.sugarService.getUsers()
                 .then(function (users) { return users.forEach(function (user) { return _this.usersFromSugar.push(new User(user)); }); })
                 .then(function (users) { return _this.filteredUsers = _this.usersFromSugar; });
         };
