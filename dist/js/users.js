@@ -39856,10 +39856,6 @@
         SugarService.prototype.getUsers = function () {
             return this.getData("users");
         };
-        SugarService.prototype.getTeams = function () {
-            return this.getData("teams")
-                .then(function (items) { return items.filter(function (item) { return item.attributes["name"].startsWith("EQ "); }); });
-        };
         SugarService.prototype.getManagers = function () {
             return this.getData("users")
                 .then(function (users) { return users.filter(function (user) { return user.attributes["title"] === "Manager"; }); });
@@ -39888,6 +39884,10 @@
         SugarService.prototype.errorHandler = function (error) {
             return _throw_1(error);
         };
+        SugarService.prototype.getTeams = function () {
+            return this.getData("teams")
+                .then(function (items) { return items.filter(function (item) { return isTeamMember(item); }); });
+        };
         SugarService.prototype.getData = function (item) {
             return this.http.get(this.endPoint + ("" + item))
                 .map(function (array) { return array["data"]; })
@@ -39899,6 +39899,10 @@
         ], SugarService);
         return SugarService;
     }());
+    function isTeamMember(item) {
+        var prefixTeam = "EQ ";
+        return item.attributes["name"].startsWith(prefixTeam);
+    }
 
     var __decorate$5 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
