@@ -42,6 +42,7 @@ import { TeamsComponent } from "./app/components/teams/teams.component";
 import { UserComponent } from "./app/components/user/user.component";
 import { UsersComponent } from "./app/components/users/users.component";
 
+import { ManagersResolverService } from "./app/resolvers/managers-resolver.service";
 import { FieldsService } from "./app/services/fields.service";
 import { ParserService } from "./app/services/parser.service";
 import { SugarResolverService } from "./app/services/sugar-resolver.service";
@@ -88,6 +89,7 @@ import "./app/rxjs-extensions";
   ],
   providers: [
   FieldsService,
+  ManagersResolverService,
   ParserService,
   SugarService,
   SugarResolverService,
