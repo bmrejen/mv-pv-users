@@ -24,7 +24,6 @@ export class FieldsService {
     "others",
     "roles",
     "services",
-    "teams",
     "userFields",
     "userTemplates",
     ];

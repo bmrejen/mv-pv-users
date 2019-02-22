@@ -34984,7 +34984,6 @@
                 "others",
                 "roles",
                 "services",
-                "teams",
                 "userFields",
                 "userTemplates",
             ];
@@ -39856,6 +39855,10 @@
         SugarService.prototype.getUsers = function () {
             return this.getData("users");
         };
+        SugarService.prototype.getTeams = function () {
+            return this.getData("teams")
+                .then(function (items) { return items.filter(function (item) { return item.attributes["name"].startsWith("EQ "); }); });
+        };
         SugarService.prototype.getManagers = function () {
             return this.getData("users")
                 .then(function (users) { return users.filter(function (user) { return user.attributes["title"] === "Manager"; }); });
@@ -39939,8 +39942,28 @@
             d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
         };
     })();
+    var Team = /** @class */ (function (_super) {
+        __extends$1D(Team, _super);
+        function Team(data) {
+            var _this = _super.call(this, data) || this;
+            _this.checked = false;
+            return _this;
+        }
+        return Team;
+    }(Model));
+
+    var __extends$1E = (undefined && undefined.__extends) || (function () {
+        var extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return function (d, b) {
+            extendStatics(d, b);
+            function __() { this.constructor = d; }
+            d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+        };
+    })();
     var User = /** @class */ (function (_super) {
-        __extends$1D(User, _super);
+        __extends$1E(User, _super);
         function User(data) {
             var _this = _super.call(this, data) || this;
             _this.status = "Active";
@@ -39975,6 +39998,7 @@
             this.route = route;
             this.passwordExists = false;
             this.usersFromSugar = [];
+            this.teams = [];
             //
         }
         CreateUserFormComponent.prototype.ngOnInit = function () {
@@ -39983,9 +40007,10 @@
                 .then(function (res) { return _this.fields = new Fields(res[0]); });
             this.route.data
                 .subscribe(function (data) {
-                var _a = [data.userData[0], data.userData[1]], usr = _a[0], users = _a[1];
+                var _a = [data.userData[0], data.userData[1], data.userData[2]], usr = _a[0], users = _a[1], teams = _a[2];
                 _this.currentUser = new User(usr);
                 users.forEach(function (user) { return _this.usersFromSugar.push(new User(user)); });
+                teams.forEach(function (team) { return _this.teams.push(new Team(team)); });
             });
         };
         CreateUserFormComponent.prototype.onParentChange = function (_a) {
@@ -40189,7 +40214,7 @@
         return ImportComponent;
     }());
 
-    var __extends$1E = (undefined && undefined.__extends) || (function () {
+    var __extends$1F = (undefined && undefined.__extends) || (function () {
         var extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
             function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
@@ -40200,7 +40225,7 @@
         };
     })();
     var Role = /** @class */ (function (_super) {
-        __extends$1E(Role, _super);
+        __extends$1F(Role, _super);
         function Role(data) {
             var _this = _super.call(this, data) || this;
             _this.type = "users";
@@ -40359,7 +40384,8 @@
             var id = route.params.id;
             var userPromise = this.sugar.getUserById(id);
             var usersPromise = this.sugar.getUsers();
-            var promises = [userPromise, usersPromise];
+            var teamsPromise = this.sugar.getTeams();
+            var promises = [userPromise, usersPromise, teamsPromise];
             return new Promise(function (resolve, reject) {
                 Promise.all(promises)
                     .then(function (res) { return resolve(res); }, function (error) { return reject("Probleme"); });
@@ -46387,7 +46413,7 @@
      */
     BrowserAnimationsModule.ctorParameters = function () { return []; };
 
-    var __extends$1F = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
+    var __extends$1G = (commonjsGlobal && commonjsGlobal.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -46403,7 +46429,7 @@
      * @hide true
      */
     var ForkJoinObservable = (function (_super) {
-        __extends$1F(ForkJoinObservable, _super);
+        __extends$1G(ForkJoinObservable, _super);
         function ForkJoinObservable(sources, resultSelector) {
             _super.call(this);
             this.sources = sources;
@@ -46541,7 +46567,7 @@
      * @extends {Ignored}
      */
     var ForkJoinSubscriber = (function (_super) {
-        __extends$1F(ForkJoinSubscriber, _super);
+        __extends$1G(ForkJoinSubscriber, _super);
         function ForkJoinSubscriber(destination, sources, resultSelector) {
             _super.call(this, destination);
             this.sources = sources;
@@ -52771,12 +52797,6 @@
             //
         }
         ExtraneousComponent.prototype.ngOnInit = function () {
-            console.log("this.codeTourplan", this.codeTourplan);
-            console.log("this.codeSON", this.codeSON);
-            console.log("this.title", this.title);
-            console.log("this.inactiveStatus", this.inactiveStatus);
-            console.log("this.inactiveEmployee", this.inactiveEmployee);
-            console.log("this.currentUser", this.currentUser);
             this.codeTourplan = this.currentUser.tourplanID;
             this.inactiveEmployee = this.currentUser.employeeStatus !== "Active";
             this.inactiveStatus = this.currentUser.status !== "Active";
@@ -54599,7 +54619,7 @@
             }, null, null)), directiveDef(5, 16384, null, 0, CheckboxControlValueAccessor, [Renderer2, ElementRef], null, null), providerDef(1024, null, NG_VALUE_ACCESSOR, function (p0_0) {
                 return [p0_0];
             }, [CheckboxControlValueAccessor]), directiveDef(7, 671744, null, 0, NgModel, [[2, ControlContainer], [8, null], [8, null], [2, NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), providerDef(2048, null, NgControl, null, [NgModel]), directiveDef(9, 16384, null, 0, NgControlStatus, [NgControl], null, null), (_l()(), textDef(10, null, ['', '\n      '])), (_l()(), textDef(-1, null, ['\n    ']))], function (_ck, _v) {
-            var currVal_7 = _v.context.$implicit.label;
+            var currVal_7 = _v.context.$implicit.name;
             var currVal_8 = _v.context.$implicit.checked;
             _ck(_v, 7, 0, currVal_7, currVal_8);
         }, function (_ck, _v) {
@@ -54611,7 +54631,7 @@
             var currVal_5 = nodeValue(_v, 9).ngClassInvalid;
             var currVal_6 = nodeValue(_v, 9).ngClassPending;
             _ck(_v, 4, 0, currVal_0, currVal_1, currVal_2, currVal_3, currVal_4, currVal_5, currVal_6);
-            var currVal_9 = _v.context.$implicit.label;
+            var currVal_9 = _v.context.$implicit.name;
             _ck(_v, 10, 0, currVal_9);
         });
     }
@@ -55457,7 +55477,7 @@
             _ck(_v, 24, 0, currVal_34, currVal_35);
             var currVal_36 = _co.fields.destinations;
             _ck(_v, 28, 0, currVal_36);
-            var currVal_37 = _co.fields.teams;
+            var currVal_37 = _co.teams;
             _ck(_v, 32, 0, currVal_37);
             var currVal_38 = _co.fields.others;
             _ck(_v, 36, 0, currVal_38);
