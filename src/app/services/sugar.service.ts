@@ -4,6 +4,7 @@ import { Observable } from "rxjs/Observable";
 import { _throw } from "rxjs/observable/throw";
 import { catchError } from "rxjs/operators";
 
+import { Destination } from "../models/destination";
 import { Role } from "../models/role";
 import { Team } from "../models/team";
 import { User } from "../models/user";
@@ -35,6 +36,11 @@ export class SugarService {
   public getTeams(): Promise<Team[]> {
     return this.getData("teams")
     .then((items) => items.filter((item) => item.attributes["name"].startsWith("EQ ")));
+  }
+
+  public getDestinations(): Promise<Destination[]> {
+    return this.getData("teams")
+    .then((items) => items.filter((item) => item.attributes["name"].startsWith("DESTI - ")));
   }
 
   public getManagers(): Promise<User[]> {

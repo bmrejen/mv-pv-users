@@ -16,7 +16,6 @@ export class FieldsService {
     const fields = [
     "accounts",
     "civilites",
-    "destinations",
     "functions",
     "managers",
     "offices",
