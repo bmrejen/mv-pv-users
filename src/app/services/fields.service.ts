@@ -22,7 +22,6 @@ export class FieldsService {
     "offices",
     "orgas",
     "others",
-    "roles",
     "services",
     "teams",
     "userFields",

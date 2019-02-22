@@ -5,6 +5,8 @@ build/**
 gulp-tsc-tmp-*/
 tmp/*
 dist/*
+/dist/*
+/dist
 
 #coverage
 coverage

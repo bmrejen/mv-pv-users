@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, ActivatedRouteSnapshot } from "@angular/router";
 import { FieldsService } from "../../services/fields.service";
 import { ParserService } from "../../services/parser.service";
 import { SugarService } from "../../services/sugar.service";
