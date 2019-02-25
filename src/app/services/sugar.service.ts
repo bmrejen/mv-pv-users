@@ -33,11 +33,6 @@ export class SugarService {
     return this.getData("users");
   }
 
-  public getTeams(): Promise<Team[]> {
-    return this.getData("teams")
-    .then((items) => items.filter((item) => item.attributes["name"].startsWith("EQ ")));
-  }
-
   public getDestinations(): Promise<Destination[]> {
     return this.getData("teams")
     .then((items) => items.filter((item) => item.attributes["name"].startsWith("DESTI - ")));
@@ -78,9 +73,20 @@ export class SugarService {
     return _throw(error);
   }
 
+  public getTeams(): Promise<User[]> {
+    return this.getData("teams")
+    .then((items) => items.filter((item) => isTeamMember(item)));
+  }
+
   private getData(item: string): Promise<any> {
     return this.http.get<any>(this.endPoint + `${item}`)
     .map((array) => array["data"])
     .toPromise();
   }
+}
+
+function isTeamMember(item): boolean {
+  const prefixTeam = "EQ ";
+
+  return item.attributes["name"].startsWith(prefixTeam);
 }
