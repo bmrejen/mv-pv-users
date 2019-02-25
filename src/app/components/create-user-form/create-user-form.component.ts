@@ -39,6 +39,8 @@ export class CreateUserFormComponent implements OnInit {
     .subscribe((data) => {
       if (data.user != null) {
         this.currentUser = new User(data.user);
+      } else {
+        this.currentUser = new User({firstName: "Ben"});
       }
 
       this.managers = data.managers;
