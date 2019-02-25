@@ -16,7 +16,6 @@ export class FieldsService {
     const fields = [
     "accounts",
     "civilites",
-    "destinations",
     "functions",
     "managers",
     "offices",
@@ -24,7 +23,6 @@ export class FieldsService {
     "others",
     "roles",
     "services",
-    "teams",
     "userFields",
     "userTemplates",
     ];

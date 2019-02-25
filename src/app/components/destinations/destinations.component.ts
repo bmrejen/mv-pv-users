@@ -18,13 +18,14 @@ import { Fields } from "../../models/fields";
 
 export class DestinationsComponent implements OnInit {
   @Input() public destinations;
+  @Input() public dests;
 
   constructor(private fieldsService: FieldsService) {
     //
   }
 
   public ngOnInit(): void {
-    //
+    console.log("component dests", this.dests);
   }
 
   public trackByFn(index, item) {

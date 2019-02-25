@@ -44,8 +44,8 @@
     <mv-function [functions]="fields.functions" [selectedFunction]="fields.selectedFunction"></mv-function>
     <mv-manager [managers]="fields.managers" [selectedManager]="fields.selectedManager"></mv-manager>
 
-    <mv-destinations [destinations]="fields.destinations"></mv-destinations>
-    <mv-teams [teams]="fields.teams"></mv-teams>
+    <mv-destinations [destinations]="fields.destinations" [dests]="destinations"></mv-destinations>
+    <mv-teams [teams]="teams"></mv-teams>
     <mv-others [others]="fields.others"></mv-others>
     <mv-extraneous
     [codeTourplan]="fields.codeTourplan"
