@@ -48,6 +48,8 @@ import { SugarResolverService } from "./app/services/sugar-resolver.service";
 import { SugarService } from "./app/services/sugar.service";
 import { SwitchVoxService } from "./app/services/switchvox.service";
 
+import { AlphabeticalPipe } from "./app/pipes/alphabetical.pipe";
+
 import "./app/rxjs-extensions";
 
 @NgModule({
@@ -55,8 +57,9 @@ import "./app/rxjs-extensions";
   AppComponent,
   ],
   declarations: [
-  AppComponent,
   AccountsComponent,
+  AlphabeticalPipe,
+  AppComponent,
   CheckboxFieldComponent,
   CredentialsComponent,
   CreateUserFormComponent,

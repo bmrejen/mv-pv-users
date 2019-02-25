@@ -5,7 +5,9 @@ import { ParserService } from "../../services/parser.service";
 import { SugarService } from "../../services/sugar.service";
 import { SwitchVoxService } from "../../services/switchvox.service";
 
+import { Destination } from "../../models/destination";
 import { Fields } from "../../models/fields";
+import { Team } from "../../models/team";
 import { User } from "../../models/user";
 
 @Component({
@@ -20,6 +22,8 @@ export class CreateUserFormComponent implements OnInit {
   public usersFromSugar: User[] = [];
   public usernameTaken;
   public currentUser: User;
+  public teams: Team[] = [];
+  public destinations: Destination[] = [];
 
   constructor(
               private fieldsService: FieldsService,
@@ -37,9 +41,13 @@ export class CreateUserFormComponent implements OnInit {
 
     this.route.data
     .subscribe((data) => {
-      const [ usr, users ] = [ data.userData[0], data.userData[1] ];
+
+      const myArr = data.userData;
+      const [ usr, users, teams, destinations ] = [ ...myArr ];
       this.currentUser = new User(usr);
       users.forEach((user) => this.usersFromSugar.push(new User(user)));
+      teams.forEach((team) => this.teams.push(new Team(team)));
+      destinations.forEach((dest) => this.destinations.push(new Destination(dest)));
     });
   }
 

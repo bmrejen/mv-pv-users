@@ -16,14 +16,12 @@ export class FieldsService {
     const fields = [
     "accounts",
     "civilites",
-    "destinations",
     "functions",
     "managers",
     "offices",
     "orgas",
     "others",
     "services",
-    "teams",
     "userFields",
     "userTemplates",
     ];
