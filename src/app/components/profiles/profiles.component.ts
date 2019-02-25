@@ -5,6 +5,7 @@ import { FieldsService } from "../../services/fields.service";
 import { SugarService } from "../../services/sugar.service";
 
 import { Fields } from "../../models/fields";
+import { Role } from "../../models/role";
 import { User } from "../../models/user";
 
 @Component({
@@ -19,7 +20,6 @@ import { User } from "../../models/user";
 })
 
 export class ProfilesComponent implements OnInit {
-  @Input() public roles;
   @Input() public services;
   @Input() public userTemplates;
   @Input() public userValue;
@@ -49,6 +49,7 @@ export class ProfilesComponent implements OnInit {
   public displayVentesLeads = false;
   public allUsersFromSugar: User[] = [];
   public activeUsersFromSugar: User[];
+  public roles: Role[] = [];
 
   constructor(private fieldsService: FieldsService,
               private sugarService: SugarService) {
@@ -59,6 +60,17 @@ export class ProfilesComponent implements OnInit {
     this.fieldsService.getData()
     .then((res) => this.fields = new Fields(res[0]));
 
+    this.populateUserInheritance();
+    this.populateRoles();
+
+  }
+
+  public populateRoles() {
+    this.sugarService.getRoles()
+    .then((roles) => roles.forEach((role) => this.roles.push(new Role(role))));
+  }
+
+  public populateUserInheritance() {
     this.sugarService.getUsers()
 
     // populate usersFromSugar array
@@ -87,7 +99,6 @@ export class ProfilesComponent implements OnInit {
   }
 
   public handleClick(e, type) {
-    const roles = this.roles;
     const services = this.services;
     const others = this.others;
     const orgas = this.orgas;
@@ -97,7 +108,7 @@ export class ProfilesComponent implements OnInit {
       case "conseiller":
       {
         this.userValue = "user_default";
-        this.checkStuff(roles, ["Sales"]);
+        this.checkRoles(["Sales"]);
         this.checkStuff(services, ["Ventes"]);
         this.checkStuff(others, ["Global", "Ventes", "Devis Cotation", "ROLE - Reservation"]);
         break;
@@ -108,7 +119,7 @@ export class ProfilesComponent implements OnInit {
         this.userValue = "user_default_jm";
         this.selectedFunction = "jm";
 
-        this.checkStuff(roles, ["Sales"]);
+        this.checkRoles(["Sales"]);
         this.checkStuff(services, ["Ventes"]);
         this.checkStuff(others,
                         [
@@ -127,7 +138,7 @@ export class ProfilesComponent implements OnInit {
       {
         this.selectedFunction = "mgr";
 
-        this.checkStuff(roles, ["Team Manager"]);
+        this.checkRoles(["Team Manager"]);
         this.checkStuff(services, ["Ventes"]);
         this.checkStuff(others, [
                         "Global",
@@ -141,7 +152,7 @@ export class ProfilesComponent implements OnInit {
       case "assistant":
       {
         this.selectedFunction = "av";
-        this.checkStuff(roles, ["Reservation"]);
+        this.checkRoles(["Reservation"]);
         this.checkStuff(services, ["Ventes"]);
         this.checkStuff(others, [
                         "Devis V3",
@@ -158,7 +169,7 @@ export class ProfilesComponent implements OnInit {
         this.selectedOffice = "Bureau - Billetterie & Qualité";
         this.selectedManager = "Manager du service qualité (Aminata)";
 
-        this.checkStuff(roles, ["Quality Control"]);
+        this.checkRoles(["Quality Control"]);
         this.checkStuff(services, ["Service Qualité"]);
         this.checkStuff(others, ["BackOffice", "Global", "SAV"]);
         this.checkStuff(orgas, ["BackOffice"]);
@@ -168,7 +179,7 @@ export class ProfilesComponent implements OnInit {
       {
         this.selectedOffice = "1377";
 
-        this.checkStuff(roles, ["Accountant"]);
+        this.checkRoles(["Accountant"]);
         this.checkStuff(services, ["Comptabilité"]);
         this.checkStuff(others, ["Global", "ROLE - Affaire Validation", "ROLE - Create Provider"]);
         this.checkStuff(orgas, ["Compta"]);
@@ -176,7 +187,7 @@ export class ProfilesComponent implements OnInit {
       }
       case "inactif":
       {
-        this.checkStuff(roles, ["Read-only"]);
+        this.checkRoles(["ReadOnly"]);
         this.inactiveStatus = true;
         this.inactiveEmployee = true;
         break;
@@ -213,9 +224,6 @@ export class ProfilesComponent implements OnInit {
   public checkStuff(where, arr) {
     let prefix;
     switch (where) {
-      case this.roles:
-      prefix = "roles";
-      break;
       case this.orgas:
       prefix = "orgas";
       break;
@@ -283,6 +291,12 @@ export class ProfilesComponent implements OnInit {
                        this.destinations,
                        this.orgas,
                        ]);
+  }
+
+  private checkRoles(rolesToCheck) {
+    rolesToCheck.forEach((roleToCheck) => {
+      this.roles.find((role) => role.name === roleToCheck).checked = true;
+    });
   }
 
 }

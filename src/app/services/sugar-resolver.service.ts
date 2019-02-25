@@ -22,14 +22,17 @@ export class SugarResolverService implements Resolve<Promise<User[]>> {
     const id = route.params.id;
 
     const userPromise: Promise<User> = this.sugar.getUserById(id);
-    const usersPromise: Promise<User[]> = this.sugar.getUsers();
-    const teamsPromise: Promise<Team[]> = this.sugar.getTeams();
-    const destinationsPromise: Promise<Destination[]> = this.sugar.getDestinations();
+    // const usersPromise: Promise<User[]> = this.sugar.getUsers();
+    // const teamsPromise: Promise<Team[]> = this.sugar.getTeams();
+    // const destinationsPromise: Promise<Destination[]> = this.sugar.getDestinations();
 
-    const promises: [Promise<User>,
-    Promise<User[]>,
-    Promise<Team[]>,
-    Promise<Destination[]> ] = [ userPromise, usersPromise, teamsPromise, destinationsPromise ];
+    const promises: [Promise<User>
+    // Promise<User[]>,
+    // Promise<Team[]>,
+    // Promise<Destination[]>
+    ] = [ userPromise,
+    // usersPromise, teamsPromise, destinationsPromise
+     ];
 
     return new Promise((resolve, reject) => {
       Promise.all(promises)

@@ -19,9 +19,10 @@
     </div>
 
     <div class="checkbox-list subtitle" id="sugar_role" ngModelGroup="roles">ROLE:
-     <span *ngFor="let role of roles ; trackBy: trackByFn">
-      <label><input type="checkbox" [(ngModel)]="role.checked" [name]="role.id">{{ role.label }}
-      </label></span>
+      <span *ngFor="let role of roles; trackBy: trackByFn">
+        <label><input type="checkbox" [(ngModel)]="role.checked" [name]="role.name">{{ role.name }}
+        </label>
+      </span>
     </div>
 
     <div class="checkbox-list subtitle" id="sugar_departement" ngModelGroup="services">SERVICE:
