@@ -12,7 +12,7 @@ export class FieldsService {
     //
   }
 
-  public getData() {
+  public getData(): Promise<any> {
     const fields = [
     "accounts",
     "civilites",
@@ -29,7 +29,7 @@ export class FieldsService {
     const promises = fields.map((field) => this.getSingleField(field));
 
     return Promise.all(promises)
-    .then((result) => new Promise((resolve, reject) => resolve(result)));
+    .then((result) => new Promise((resolve, reject) => resolve(result[0])));
   }
 
   public getSingleField(field: string) {
