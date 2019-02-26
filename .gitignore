@@ -4,9 +4,7 @@ src/aot/*
 build/**
 gulp-tsc-tmp-*/
 tmp/*
-dist/*
-/dist/*
-/dist
+/dist/
 
 #coverage
 coverage

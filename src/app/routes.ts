@@ -26,18 +26,37 @@ import {
   UsersComponent,
 } from "./components/users/users.component";
 
-import { SugarResolverService } from "./services/sugar-resolver.service";
+import { DestinationsResolverService } from "./resolvers/destinations-resolver.service";
+import { FieldsResolverService } from "./resolvers/fields-resolver.service";
+import { ManagersResolverService } from "./resolvers/managers-resolver.service";
+import { TeamsResolverService } from "./resolvers/teams-resolver.service";
+import { UserResolverService } from "./resolvers/user-resolver.service";
+import { UsersResolverService } from "./resolvers/users-resolver.service";
 
 /* tslint:disable object-literal-sort-keys */
 export const AppRoutes: Routes = [
 {
   path: "users/:id",
   component: CreateUserFormComponent,
-  resolve: { userData: SugarResolverService },
+  resolve: {
+    destinations: DestinationsResolverService,
+    fields: FieldsResolverService,
+    managers: ManagersResolverService,
+    user: UserResolverService,
+    users: UsersResolverService,
+    teams: TeamsResolverService,
+  },
 },
 {
   path: "create",
   component: CreateUserFormComponent,
+  resolve: {
+    destinations: DestinationsResolverService,
+    fields: FieldsResolverService,
+    managers: ManagersResolverService,
+    users: UsersResolverService,
+    teams: TeamsResolverService,
+  },
 },
 {
   path: "users",

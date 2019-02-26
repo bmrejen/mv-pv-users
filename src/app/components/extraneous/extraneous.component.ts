@@ -28,9 +28,11 @@ export class ExtraneousComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.codeTourplan = this.currentUser.tourplanID;
-    this.inactiveEmployee = this.currentUser.employeeStatus !== "Active";
-    this.inactiveStatus = this.currentUser.status !== "Active";
+    if (this.currentUser != null) {
+      this.codeTourplan = this.currentUser.tourplanID;
+      this.inactiveEmployee = this.currentUser.employeeStatus !== "Active";
+      this.inactiveStatus = this.currentUser.status !== "Active";
+    }
   }
 
   public trackByFn(index, item) {

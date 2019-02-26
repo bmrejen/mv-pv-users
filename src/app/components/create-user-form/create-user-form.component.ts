@@ -2,7 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, ActivatedRouteSnapshot } from "@angular/router";
 import { FieldsService } from "../../services/fields.service";
 import { ParserService } from "../../services/parser.service";
-import { SugarService } from "../../services/sugar.service";
 import { SwitchVoxService } from "../../services/switchvox.service";
 
 import { Destination } from "../../models/destination";
@@ -24,11 +23,11 @@ export class CreateUserFormComponent implements OnInit {
   public currentUser: User;
   public teams: Team[] = [];
   public destinations: Destination[] = [];
+  public managers: User[] = [];
 
   constructor(
               private fieldsService: FieldsService,
               private switchvoxService: SwitchVoxService,
-              private sugarService: SugarService,
               private parserService: ParserService,
               private route: ActivatedRoute,
               ) {
@@ -36,18 +35,15 @@ export class CreateUserFormComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.fieldsService.getData()
-    .then((res) => this.fields = new Fields(res[0]));
-
     this.route.data
     .subscribe((data) => {
+      this.currentUser = data.user != null ? new User(data.user) : new User({firstName: ""});
 
-      const myArr = data.userData;
-      const [ usr, users, teams, destinations ] = [ ...myArr ];
-      this.currentUser = new User(usr);
-      users.forEach((user) => this.usersFromSugar.push(new User(user)));
-      teams.forEach((team) => this.teams.push(new Team(team)));
-      destinations.forEach((dest) => this.destinations.push(new Destination(dest)));
+      this.managers = data.managers;
+      data.users.forEach((user) => this.usersFromSugar.push(new User(user)));
+      data.teams.forEach((team) => this.teams.push(new Team(team)));
+      data.destinations.forEach((dest) => this.destinations.push(new Destination(dest)));
+      this.fields = new Fields(data.fields);
     });
   }
 
