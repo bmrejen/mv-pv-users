@@ -97,18 +97,3 @@ function getCheckedItems(object) {
 
   return checkedDepts;
 }
-
-function getCheckedTeams(object) {
-  const checkedDepts = [];
-
-  for (const key of Object.keys(object)) {
-
-    // if the value of that key is true (===checked)
-    if (object[key]) {
-      checkedDepts.push(object.id);
-    }
-  }
-
-  return checkedDepts;
-}
-
