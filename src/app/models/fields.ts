@@ -5,6 +5,7 @@ export class Fields extends Model {
   // Json-related properties must have same name as their json file
   public accounts: any[];
   public civilites: any[];
+  public departments: any[];
   public destinations: any[];
   public functions: any[];
   public managers: any[];
@@ -12,7 +13,6 @@ export class Fields extends Model {
   public orgas: any[];
   public others: any[];
   public roles: any[];
-  public services: any[];
   public teams: any[];
   public userFields: any[];
   public userTemplates: any[];

@@ -1,6 +1,6 @@
 <h2> Create User Form </h2>
 
-<form #createForm="ngForm" (ngSubmit)="onSubmit(createForm.value)">
+<form #createForm="ngForm" (ngSubmit)="onSubmit(createForm)">
 
   <ng-container *ngIf="fields != null">
     <mv-accounts [accounts]="fields.accounts"></mv-accounts>
@@ -34,7 +34,7 @@
     [orgas]="fields.orgas"
     [userValue]="fields.userValue"
     [userTemplates]="fields.userTemplates"
-    [services]="fields.services"
+    [departments]="fields.departments"
 
     ></mv-profiles>
 
@@ -42,7 +42,7 @@
     <mv-function [functions]="fields.functions" [selectedFunction]="fields.selectedFunction"></mv-function>
     <mv-manager [managers]="managers" [selectedManager]="fields.selectedManager"></mv-manager>
 
-    <mv-destinations [destinations]="fields.destinations" [dests]="destinations"></mv-destinations>
+    <mv-destinations [destinations]="destinations"></mv-destinations>
     <mv-teams [teams]="teams"></mv-teams>
     <mv-others [others]="fields.others"></mv-others>
     <mv-extraneous
@@ -71,6 +71,9 @@
     <button [disabled]="!createForm.form.valid" type="submit">Créer l'utilisateur</button>
   </ng-container>
 </form>
+USER OBJECT
+<pre> {{ userObject }} </pre>
+
 FORM VALUE
 <pre> {{ createForm.value | json }} </pre>
 

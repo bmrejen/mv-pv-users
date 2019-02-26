@@ -25,6 +25,7 @@ export class CreateUserFormComponent implements OnInit {
   public teams: Team[] = [];
   public destinations: Destination[] = [];
   public managers: User[] = [];
+  public userObject;
 
   constructor(
               private fieldsService: FieldsService,
@@ -39,12 +40,22 @@ export class CreateUserFormComponent implements OnInit {
   public ngOnInit(): void {
     this.route.data
     .subscribe((data) => {
-      this.currentUser = data.user != null ? new User(data.user) : new User({firstName: ""});
+      // set current user if any
+      this.currentUser = data.user != null ? new User(data.user) : new User();
 
+      // get manager list
       this.managers = data.managers;
+
+      // get user list
       data.users.forEach((user) => this.usersFromSugar.push(new User(user)));
+
+      // get team list
       data.teams.forEach((team) => this.teams.push(new Team(team)));
+
+      // get destinations list
       data.destinations.forEach((dest) => this.destinations.push(new Destination(dest)));
+
+      // get fields list
       this.fields = new Fields(data.fields);
     });
   }
@@ -55,7 +66,7 @@ export class CreateUserFormComponent implements OnInit {
   }
 
   public onSubmit(form) {
-    this.mapper.parseFormForSugar(form);
+    this.userObject = this.mapper.createUserForSugar(form);
     // this.sugarService.postDataToSugar(form)
     // .subscribe(
     //            (data) => console.log("DATA- ", data),
@@ -103,7 +114,7 @@ export class CreateUserFormComponent implements OnInit {
                      ]);
     this.unCheckArrays([
                        this.fields.roles,
-                       this.fields.services,
+                       this.fields.departments,
                        this.fields.others,
                        this.fields.teams,
                        this.fields.destinations,

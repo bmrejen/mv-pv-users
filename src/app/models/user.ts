@@ -30,9 +30,8 @@ export class User extends Model {
   public swTelephony: boolean = false;
   public inheritsPreferencesFrom: string = "";
   public roleId: string = "";
-  public serviceId: string = "";
   public functionId: string = "";
-  public destinations: string = "";
+  public destinations: string[] = [""];
   public ggOrganisationId: string = "";
   public ggGroups: string = "";
   public isAdmin: number = 0;
