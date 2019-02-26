@@ -73,7 +73,7 @@ export class SugarService {
     return _throw(error);
   }
 
-  public getTeams(): Promise<User[]> {
+  public getTeams(): Promise<Team[]> {
     return this.getData("teams")
     .then((items) => items.filter((item) => isTeamMember(item)));
   }

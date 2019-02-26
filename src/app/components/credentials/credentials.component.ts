@@ -34,7 +34,9 @@ export class CredentialsComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.prefillForm();
+    if (this.currentUser != null) {
+      this.prefillForm();
+    }
   }
 
   public prefillForm(): any {
