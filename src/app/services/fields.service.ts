@@ -17,7 +17,6 @@ export class FieldsService {
     "accounts",
     "civilites",
     "functions",
-    "managers",
     "offices",
     "orgas",
     "others",

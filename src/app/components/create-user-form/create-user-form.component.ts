@@ -2,7 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, ActivatedRouteSnapshot } from "@angular/router";
 import { FieldsService } from "../../services/fields.service";
 import { ParserService } from "../../services/parser.service";
-import { SugarService } from "../../services/sugar.service";
 import { SwitchVoxService } from "../../services/switchvox.service";
 
 import { Destination } from "../../models/destination";
@@ -24,11 +23,11 @@ export class CreateUserFormComponent implements OnInit {
   public currentUser: User;
   public teams: Team[] = [];
   public destinations: Destination[] = [];
+  public managers: User[] = [];
 
   constructor(
               private fieldsService: FieldsService,
               private switchvoxService: SwitchVoxService,
-              private sugarService: SugarService,
               private parserService: ParserService,
               private route: ActivatedRoute,
               ) {
@@ -41,6 +40,7 @@ export class CreateUserFormComponent implements OnInit {
 
     this.route.data
     .subscribe((data) => {
+      this.managers = data.managers;
 
       const myArr = data.userData;
       const [ usr, users, teams, destinations ] = [ ...myArr ];
