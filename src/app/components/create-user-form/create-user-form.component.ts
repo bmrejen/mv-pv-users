@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, ActivatedRouteSnapshot } from "@angular/router";
 import { FieldsService } from "../../services/fields.service";
+import { FormValueMapperService } from "../../services/form-value-mapper.service";
 import { ParserService } from "../../services/parser.service";
 import { SwitchVoxService } from "../../services/switchvox.service";
 
@@ -30,6 +31,7 @@ export class CreateUserFormComponent implements OnInit {
               private switchvoxService: SwitchVoxService,
               private parserService: ParserService,
               private route: ActivatedRoute,
+              private mapper: FormValueMapperService,
               ) {
     //
   }
@@ -53,6 +55,7 @@ export class CreateUserFormComponent implements OnInit {
   }
 
   public onSubmit(form) {
+    this.mapper.parseFormForSugar(form);
     // this.sugarService.postDataToSugar(form)
     // .subscribe(
     //            (data) => console.log("DATA- ", data),

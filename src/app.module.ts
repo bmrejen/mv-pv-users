@@ -50,6 +50,7 @@ import { UserResolverService } from "./app/resolvers/user-resolver.service";
 import { UsersResolverService } from "./app/resolvers/users-resolver.service";
 
 import { FieldsService } from "./app/services/fields.service";
+import { FormValueMapperService } from "./app/services/form-value-mapper.service";
 import { ParserService } from "./app/services/parser.service";
 import { SugarService } from "./app/services/sugar.service";
 import { SwitchVoxService } from "./app/services/switchvox.service";
@@ -96,6 +97,7 @@ import "./app/rxjs-extensions";
   DestinationsResolverService,
   FieldsService,
   FieldsResolverService,
+  FormValueMapperService,
   ManagersResolverService,
   ParserService,
   SugarService,
