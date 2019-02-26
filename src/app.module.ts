@@ -35,6 +35,7 @@ import { ImportComponent } from "./app/components/import/import.component";
 import { ManagerComponent } from "./app/components/manager/manager.component";
 import { OfficeComponent } from "./app/components/office/office.component";
 import { OthersComponent } from "./app/components/others/others.component";
+import { PhonesComponent } from "./app/components/phones/phones.component";
 import { ProfilesComponent } from "./app/components/profiles/profiles.component";
 import { RolesComponent } from "./app/components/roles/roles.component";
 import { SwitchvoxComponent } from "./app/components/switchvox/switchvox.component";
@@ -78,6 +79,7 @@ import "./app/rxjs-extensions";
   ManagerComponent,
   OfficeComponent,
   OthersComponent,
+  PhonesComponent,
   ProfilesComponent,
   RolesComponent,
   SwitchvoxComponent,
