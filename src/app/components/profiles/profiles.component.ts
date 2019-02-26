@@ -61,7 +61,6 @@ export class ProfilesComponent implements OnInit {
 
     this.populateUserInheritance();
     this.populateRoles();
-
   }
 
   public populateRoles() {

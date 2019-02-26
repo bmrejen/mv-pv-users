@@ -28,12 +28,11 @@ export class FormValueMapperService {
 
     const codeSonGalileo = form.codeSON;
 
-    const departments = getCheckedDepartments(form.departments);
+    const departments = getCheckedItems(form.departments);
+    const roles = getCheckedItems(form.roles);
+    const destinations = getCheckedItems(form.destinations);
+    const teams = getCheckedItems(form.teams);
 
-    // const department = form.services.find((dep) => dep.checked === true);
-    // const destinations = form.destinations
-    // .filter((des) => des.checked === true)
-    // .map((des) => des.id);
     const employeeStatus = !form.inactiveEmployee;
     const functionId = form.fonction;
     const id = form.id;
@@ -47,17 +46,15 @@ export class FormValueMapperService {
     const phoneFax = "phoneFax";
     const phoneMobile = "phoneMobile";
     const phoneWork = "phoneWork";
-    // const roleId = form.roles.filter((r) => r.checked === true);
     const salutation = form.userInfo.gender;
     const status = !form.inactiveStatus;
-    // const teamId = form.teams.filter((t) => t.checked === true);
     const title = form.title;
     const tourplanID = form.sugar_tourplan;
 
     this.user = {
       codeSonGalileo,
-      // department,
-      // destinations,
+      departments,
+      destinations,
       email,
       employeeStatus,
       firstName,
@@ -74,31 +71,44 @@ export class FormValueMapperService {
       phoneFax,
       phoneMobile,
       phoneWork,
-      // roleId,
+      roles,
       salutation,
       status,
-      // teamId,
+      teams,
       title,
       tourplanID,
       userName,
     };
-    console.log(Array.isArray(form.destinations));
 
     return JSON.stringify({users: [this.user]});
   }
 }
 
-function getCheckedDepartments(depts) {
-  console.log("depts", depts);
+function getCheckedItems(object) {
   const checkedDepts = [];
 
-  for (const dept of Object.keys(depts)) {
-    if (depts["dept"] === true) {
-      console.log(dept);
-      checkedDepts.push(dept);
+  for (const key of Object.keys(object)) {
+
+    // if the value of that key is true (===checked)
+    if (object[key]) {
+      checkedDepts.push(key);
     }
   }
-  console.log(checkedDepts);
 
   return checkedDepts;
 }
+
+function getCheckedTeams(object) {
+  const checkedDepts = [];
+
+  for (const key of Object.keys(object)) {
+
+    // if the value of that key is true (===checked)
+    if (object[key]) {
+      checkedDepts.push(object.id);
+    }
+  }
+
+  return checkedDepts;
+}
+

@@ -25,7 +25,7 @@ export class DestinationsComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    console.log("child array", Array.isArray(this.destinations));
+    //
   }
 
   public trackByFn(index, item) {
