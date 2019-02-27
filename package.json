@@ -20,6 +20,8 @@
     "@angular/platform-server": "^4.3.3",
     "@angular/router": "^4.3.3",
     "@angular/upgrade": "^4.3.3",
+    "@commitlint/cli": "^7.5.2",
+    "@commitlint/config-angular": "^7.5.0",
     "@types/core-js": "^0.9.35",
     "@types/jest": "^23.3.1",
     "@types/node": "^8.0.20",
@@ -34,6 +36,7 @@
     "browserify": "^14.4.0",
     "child_process": "^1.0.2",
     "codelyzer": "^4.1.0",
+    "commitlint": "^7.5.2",
     "conventional-changelog": "^1.1.3",
     "conventional-changelog-cli": "^1.3.2",
     "core-js": "^2.5.0",
@@ -76,11 +79,13 @@
     "gulp-watch": "^4.3.11",
     "gutil": "^1.6.4",
     "htmlhint": "^0.10.1",
+    "husky": "^1.3.1",
     "jest": "^23.4.2",
     "jest-each": "^23.5.0",
     "jest-jenkins-reporter": "^1.0.2",
     "jest-preset-angular": "^6.0.0",
     "jshint": "^2.9.5",
+    "lint-staged": "^8.1.4",
     "lite-server": "^2.3.0",
     "merge-stream": "^1.0.0",
     "node-sass": "^4.5.3",
@@ -119,9 +124,7 @@
     "build:aot": "rm -rf ./src/aot/ && ./node_modules/.bin/ngc -p tsconfig-aot.json && ./node_modules/.bin/rollup -c rollup-config.js",
     "dev": "yarn run hook:install && chmod +x ./bin/*.sh && ./node_modules/.bin/gulp dev",
     "prod": "./node_modules/.bin/gulp dist",
-    "hook:install": "yarn run hook:post-checkout && yarn run hook:pre-commit",
-    "hook:post-checkout": "cp post-checkout.dist .git/hooks/post-checkout && chmod +x .git/hooks/post-checkout",
-    "hook:pre-commit": "cp pre-commit.dist .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit",
+    "hook:install": "rm -rf .git/hooks/* && node ./node_modules/husky/lib/installer/bin.js install",
     "htmllint": "./node_modules/.bin/htmlhint src/**/*.html",
     "tslint": "./node_modules/.bin/tslint -p . -c tslint.json -t stylish",
     "sasslint": "./node_modules/.bin/sass-lint src/scss/**/*.scss -f checkstyle -v -q &> build/sasslint.xml",
@@ -133,6 +136,7 @@
     "publish:patch": "./node_modules/.bin/gulp publish:patch",
     "publish:minor": "./node_modules/.bin/gulp publish:minor",
     "publish:major": "./node_modules/.bin/gulp publish:major",
+    "test": "yarn run test:unit",
     "test:unit": "./node_modules/.bin/jest",
     "test:unit:ci": "yarn run test:unit:coverage --testResultsProcessor='./node_modules/jest-jenkins-reporter'",
     "test:unit:coverage": "./node_modules/.bin/jest --runInBand --coverage --collectCoverageFrom=src/**/*.ts --collectCoverageFrom=!src/main.ts --collectCoverageFrom=!src/app/rxjs-extensions.ts --collectCoverageFrom=!src/app/routes.ts --collectCoverageFrom=!**/index.ts --collectCoverageFrom=!src/aot/**/*.ts",
@@ -140,6 +144,22 @@
   },
   "engines": {
     "yarn": ">= 1.9.0"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn run test",
+      "post-checkout": "yarn"
+    }
+  },
+  "lint-staged": {
+    "*.ts": [
+      "yarn run tslint"
+    ],
+    "*.scss": [
+      "./node_modules/.bin/sass-lint -f stylish -v -q"
+    ]
   },
   "jest": {
     "preset": "jest-preset-angular",

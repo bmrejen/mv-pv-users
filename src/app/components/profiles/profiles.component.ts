@@ -45,7 +45,7 @@ export class ProfilesComponent implements OnInit {
   @Input() public title;
 
   public fields: Fields;
-  public displayVentesLeads = false;
+  public hideLeads = true;
   public allUsersFromSugar: User[] = [];
   public activeUsersFromSugar: User[];
   public roles: Role[] = [];
@@ -100,8 +100,8 @@ export class ProfilesComponent implements OnInit {
     const departments = this.departments;
     const others = this.others;
     const orgas = this.orgas;
-
     this.resetSugar();
+
     switch (type) {
       case "conseiller":
       {
@@ -197,18 +197,9 @@ export class ProfilesComponent implements OnInit {
     }
   }
 
-  public setVentesLeads() {
-    this.currentUser.leadsMin = 15;
-    this.currentUser.leadsMax = 45;
-  }
-
   public onDepartmentChecked(department, e) {
     if (department.id === "departments-Ventes") {
-      if (!department.checked) {
-        this.displayVentesLeads = e;
-      } else {
-        this.setVentesLeads();
-      }
+      this.hideLeads = !e;
     }
   }
 
@@ -256,8 +247,8 @@ export class ProfilesComponent implements OnInit {
   private resetSugar() {
     this.inactiveStatus = false,
     this.inactiveEmployee = false,
-    this.currentUser.leadsMin = null;
-    this.currentUser.leadsMax = null;
+    this.currentUser.leadsMin = 15;
+    this.currentUser.leadsMax = 45;
     this.userValue = "user_default_xx";
     this.selectedManager = null,
     this.eraseFields([
