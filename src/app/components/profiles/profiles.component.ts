@@ -30,8 +30,7 @@ export class ProfilesComponent implements OnInit {
   @Input() public others;
   @Input() public inactiveEmployee;
   @Input() public inactiveStatus;
-  @Input() public leadsMin;
-  @Input() public leadsMax;
+  @Input() public currentUser;
   @Input() public destinations;
   @Input() public teams;
   @Input() public codeSON;
@@ -46,7 +45,7 @@ export class ProfilesComponent implements OnInit {
   @Input() public title;
 
   public fields: Fields;
-  public displayVentesLeads = false;
+  public hideLeads = true;
   public allUsersFromSugar: User[] = [];
   public activeUsersFromSugar: User[];
   public roles: Role[] = [];
@@ -102,8 +101,8 @@ export class ProfilesComponent implements OnInit {
     const services = this.services;
     const others = this.others;
     const orgas = this.orgas;
-
     this.resetSugar();
+
     switch (type) {
       case "conseiller":
       {
@@ -199,25 +198,14 @@ export class ProfilesComponent implements OnInit {
     }
   }
 
-  public setVentesLeads() {
-    this.leadsMin = 15;
-    this.leadsMax = 45;
-  }
-
-  public eraseVentesLeads() {
-    this.leadsMin = null;
-    this.leadsMax = null;
-  }
-
   public onServiceChecked(service, e) {
+    console.log("ON SERVICE CHECKED");
+    console.log("service", service);
+    console.log("this.services", this.services);
+    console.log("e", e);
     if (service.id === "services-Ventes") {
-      if (!service.checked) {
-        this.eraseVentesLeads();
-        this.displayVentesLeads = e;
-      } else {
-        this.setVentesLeads();
-        // this.displayVentesLeads = false;
-      }
+      this.hideLeads = !service.checked;
+      console.log("this.hideLeads", this.hideLeads);
     }
   }
 
@@ -265,8 +253,8 @@ export class ProfilesComponent implements OnInit {
   private resetSugar() {
     this.inactiveStatus = false,
     this.inactiveEmployee = false,
-    this.leadsMin = null;
-    this.leadsMax = null;
+    this.currentUser.leadsMin = 15;
+    this.currentUser.leadsMax = 45;
     this.userValue = "user_default_xx";
     this.selectedManager = null,
     this.eraseFields([

@@ -37,9 +37,7 @@ export class CreateUserFormComponent implements OnInit {
   public ngOnInit(): void {
     this.route.data
     .subscribe((data) => {
-      if (data.user != null) {
-        this.currentUser = new User(data.user);
-      }
+      this.currentUser = data.user != null ? new User(data.user) : new User({firstName: ""});
 
       this.managers = data.managers;
       data.users.forEach((user) => this.usersFromSugar.push(new User(user)));

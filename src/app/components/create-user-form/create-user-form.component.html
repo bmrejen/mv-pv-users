@@ -28,10 +28,9 @@
     [codevad]="fields.codevad"
     [codeTourplan]="fields.codeTourplan"
     [codeSON]="fields.codeSON"
-    [destinations]="fields.destinations"
-    [teams]="fields.teams"
-    [leadsMax]="fields.leadsMax"
-    [leadsMin]="fields.leadsMin"
+    [destinations]="destinations"
+    [teams]="teams"
+    [currentUser]="currentUser"
     [inactiveStatus]="fields.inactiveStatus"
     [inactiveEmployee]="fields.inactiveEmployee"
     [selectedManager]="fields.selectedManager"
@@ -47,7 +46,7 @@
     <mv-function [functions]="fields.functions" [selectedFunction]="fields.selectedFunction"></mv-function>
     <mv-manager [managers]="managers" [selectedManager]="fields.selectedManager"></mv-manager>
 
-    <mv-destinations [destinations]="fields.destinations" [dests]="destinations"></mv-destinations>
+    <mv-destinations [destinations]="destinations"></mv-destinations>
     <mv-teams [teams]="teams"></mv-teams>
     <mv-others [others]="fields.others"></mv-others>
     <mv-extraneous

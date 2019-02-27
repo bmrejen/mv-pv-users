@@ -40,8 +40,8 @@ export class User extends Model {
   public assignationNotification: string = "0";
   public userGroup: number;
   public defaultTeams: number;
-  public leadsMin: number;
-  public leadsMax: number;
+  public leadsMin: number = 15;
+  public leadsMax: number = 45;
 
   public constructor(data?: any) {
     super(data);
