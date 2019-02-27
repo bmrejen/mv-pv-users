@@ -18,7 +18,6 @@ import { Fields } from "../../models/fields";
 
 export class DestinationsComponent implements OnInit {
   @Input() public destinations;
-  @Input() public dests;
 
   constructor(private fieldsService: FieldsService) {
     //

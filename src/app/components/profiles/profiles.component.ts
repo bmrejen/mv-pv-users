@@ -45,7 +45,7 @@ export class ProfilesComponent implements OnInit {
   @Input() public title;
 
   public fields: Fields;
-  public displayVentesLeads = false;
+  public hideLeads = true;
   public allUsersFromSugar: User[] = [];
   public activeUsersFromSugar: User[];
   public roles: Role[] = [];
@@ -101,8 +101,8 @@ export class ProfilesComponent implements OnInit {
     const services = this.services;
     const others = this.others;
     const orgas = this.orgas;
-
     this.resetSugar();
+
     switch (type) {
       case "conseiller":
       {
@@ -198,18 +198,14 @@ export class ProfilesComponent implements OnInit {
     }
   }
 
-  public setVentesLeads() {
-    this.currentUser.leadsMin = 15;
-    this.currentUser.leadsMax = 45;
-  }
-
   public onServiceChecked(service, e) {
+    console.log("ON SERVICE CHECKED");
+    console.log("service", service);
+    console.log("this.services", this.services);
+    console.log("e", e);
     if (service.id === "services-Ventes") {
-      if (!service.checked) {
-        this.displayVentesLeads = e;
-      } else {
-        this.setVentesLeads();
-      }
+      this.hideLeads = !service.checked;
+      console.log("this.hideLeads", this.hideLeads);
     }
   }
 
@@ -257,8 +253,8 @@ export class ProfilesComponent implements OnInit {
   private resetSugar() {
     this.inactiveStatus = false,
     this.inactiveEmployee = false,
-    this.currentUser.leadsMin = null;
-    this.currentUser.leadsMax = null;
+    this.currentUser.leadsMin = 15;
+    this.currentUser.leadsMax = 45;
     this.userValue = "user_default_xx";
     this.selectedManager = null,
     this.eraseFields([

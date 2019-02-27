@@ -28,20 +28,32 @@
     <div class="checkbox-list subtitle" id="sugar_departement" ngModelGroup="services">SERVICE:
       <span *ngFor="let service of services ; trackBy: trackByFn">
         <label>
-          <input [id]="service.id" type="checkbox" [name]="service.id" [ngModel]="service.checked" (ngModelChange)="onServiceChecked(service, $event)">{{ service.name }}
+          <input
+          [id]="service.id"
+          type="checkbox"
+          [name]="service.id"
+          [(ngModel)]="service.checked"
+          (ngModelChange)="onServiceChecked(service, $event)"
+          >{{ service.name }}
         </label>
       </span>
     </div>
 
-    <div [hidden]="!displayVentesLeads">
+    <div [hidden]="hideLeads">
       <label>Leads min
-        <input type="number" name="leadsMin" [(ngModel)]="currentUser.leadsMin">
+        <input
+        type="number"
+        name="leadsMin"
+        [(ngModel)]="currentUser.leadsMin">
       </label>
     </div>
 
-    <div [hidden]="!displayVentesLeads">
+    <div [hidden]="hideLeads">
       <label>Leads max
-        <input type="number" name="leadsMax" [(ngModel)]="currentUser.leadsMax">
+        <input
+        type="number"
+        name="leadsMax"
+        [(ngModel)]="currentUser.leadsMax">
       </label>
     </div>
   </fieldset>
