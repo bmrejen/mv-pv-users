@@ -1,4 +1,7 @@
+import { Destination } from "./destination";
 import { Model } from "./model";
+import { Role } from "./role";
+import { Team } from "./team";
 
 export class User extends Model {
 
@@ -19,7 +22,7 @@ export class User extends Model {
   public managerId: string = "";
   public department: string = "";
   public officeId: string = "";
-  public teamId: string = "";
+  public teams: Team[] = [];
   public tourplanID: string = "";
   public swClickToCall: boolean = false;
   public swCallNotification: boolean = false;
@@ -29,15 +32,15 @@ export class User extends Model {
   public swExtension: string = "";
   public swTelephony: boolean = false;
   public inheritsPreferencesFrom: string = "";
-  public roleId: string = "";
+  public roles: Role[] = [];
   public functionId: string = "";
-  public destinations: string[] = [""];
+  public destinations: Destination[] = [];
   public ggOrganisationId: string = "";
   public ggGroups: string = "";
-  public isAdmin: number = 0;
-  public apiPortalUser: number = 0;
-  public assignationNotification: number = 0;
-  public userGroup: number = 0;
+  public isAdmin: boolean = false;
+  public apiPortalUser: boolean = false;
+  public assignationNotification: boolean = false;
+  public userGroup: boolean = false;
   public defaultTeams: number = 1;
   public leadsMin: number = 15;
   public leadsMax: number = 45;
