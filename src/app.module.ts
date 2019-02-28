@@ -23,6 +23,7 @@ import {
 import { RouterModule } from "@angular/router";
 
 import { AccountsComponent } from "./app/components/accounts/accounts.component";
+import { ApiQuickStartComponent } from "./app/components/api-quickstart/api-quickstart.component";
 import { CheckboxFieldComponent } from "./app/components/checkbox-field/checkbox-field.component";
 import { CreateUserFormComponent } from "./app/components/create-user-form/create-user-form.component";
 import { CredentialsComponent } from "./app/components/credentials/credentials.component";
@@ -66,6 +67,7 @@ import "./app/rxjs-extensions";
   declarations: [
   AccountsComponent,
   AlphabeticalPipe,
+  ApiQuickStartComponent,
   AppComponent,
   CheckboxFieldComponent,
   CredentialsComponent,
