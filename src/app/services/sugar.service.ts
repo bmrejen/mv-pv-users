@@ -20,6 +20,7 @@ export class SugarService {
   public userList: User[] = [];
   public itemList = [];
   private endPoint: string = "http://sh.pvcrm.com/sugarcrm/sugarcrm/api/";
+  private postEndPoint: string = "http://sh.pvcrm.com/sugarcrm/sugarcrm/api/users";
 
   constructor(private http: HttpClient) {
     //
@@ -65,7 +66,7 @@ export class SugarService {
   }
 
   public postDataToSugar(body) {
-    return this.http.post<any>(this.endPoint, body)
+    return this.http.post<any>(this.postEndPoint, body)
     .pipe(catchError(this.errorHandler));
   }
 

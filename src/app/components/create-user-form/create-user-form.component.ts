@@ -3,6 +3,7 @@ import { ActivatedRoute, ActivatedRouteSnapshot } from "@angular/router";
 import { FieldsService } from "../../services/fields.service";
 import { FormValueMapperService } from "../../services/form-value-mapper.service";
 import { ParserService } from "../../services/parser.service";
+import { SugarService } from "../../services/sugar.service";
 import { SwitchVoxService } from "../../services/switchvox.service";
 
 import { Destination } from "../../models/destination";
@@ -26,6 +27,9 @@ export class CreateUserFormComponent implements OnInit {
   public teams: Team[] = [];
   public destinations: Destination[] = [];
   public managers: User[] = [];
+  // tslint:disable-next-line:max-line-length
+  public body = `{"data":[{"codeSonGalileo":"","departments":["departments-Backoffice","departments-Backoffice Billet"],"destinations":["4e12eefb-5dbb-f913-d80b-4c2ab8202809","6f9aedb6-6d68-b4f3-0270-4cc10e363077"],"email":"mfeuillet@marcovasco.fr","employeeStatus":true,"firstName":"Mathilde","functionId":"","inheritsPreferencesFrom":"user_default","isAdmin":false,"lastName":"Feuillet","leadsMax":45,"leadsMin":15,"managerId":"","officeId":"","phoneAsterisk":"phoneAsterisk","phoneFax":"phoneFax","phoneMobile":"phoneMobile","phoneWork":"phoneWork","roles":["128e2eae-322a-8a0d-e9f0-4cf35b5bfe5b","25218251-3011-b347-5d4f-4bfced4de2cc"],"salutation":"Mrs.","status":true,"teams":["0ec63f44-aa38-11e7-924f-005056911f09","1046f88d-3d37-10d5-7760-506023561b57"],"title":"","tourplanID":"MFEUIL","userName":"mfeuillet"}]}`;
+
   public userObject;
 
   constructor(
@@ -33,6 +37,7 @@ export class CreateUserFormComponent implements OnInit {
               private switchvoxService: SwitchVoxService,
               private parserService: ParserService,
               private route: ActivatedRoute,
+              private sugar: SugarService,
               private mapper: FormValueMapperService,
               ) {
     //
@@ -59,6 +64,7 @@ export class CreateUserFormComponent implements OnInit {
       // get fields list
       this.fields = new Fields(data.fields);
     });
+
   }
 
   public onParentChange({e, id}) {
@@ -67,6 +73,14 @@ export class CreateUserFormComponent implements OnInit {
   }
 
   public onSubmit(form) {
+    // form doesn't get updated after updating currentUser :'(
+    this.sugar.postDataToSugar(this.body)
+    .subscribe(
+               (res) => {
+                 this.currentUser = new User(res.data[0]);
+               },
+               (error) => this.errorMsg = error.statusText,
+               );
     this.userObject = this.mapper.createUserForSugar(form);
     // this.sugarService.postDataToSugar(form)
     // .subscribe(
