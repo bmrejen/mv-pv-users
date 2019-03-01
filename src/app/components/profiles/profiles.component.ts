@@ -20,7 +20,7 @@ import { User } from "../../models/user";
 })
 
 export class ProfilesComponent implements OnInit {
-  @Input() public services;
+  @Input() public departments;
   @Input() public userTemplates;
   @Input() public userValue;
   @Input() public selectedFunction;
@@ -30,8 +30,7 @@ export class ProfilesComponent implements OnInit {
   @Input() public others;
   @Input() public inactiveEmployee;
   @Input() public inactiveStatus;
-  @Input() public leadsMin;
-  @Input() public leadsMax;
+  @Input() public currentUser;
   @Input() public destinations;
   @Input() public teams;
   @Input() public codeSON;
@@ -46,7 +45,7 @@ export class ProfilesComponent implements OnInit {
   @Input() public title;
 
   public fields: Fields;
-  public displayVentesLeads = false;
+  public hideLeads = true;
   public allUsersFromSugar: User[] = [];
   public activeUsersFromSugar: User[];
   public roles: Role[] = [];
@@ -62,7 +61,6 @@ export class ProfilesComponent implements OnInit {
 
     this.populateUserInheritance();
     this.populateRoles();
-
   }
 
   public populateRoles() {
@@ -99,17 +97,17 @@ export class ProfilesComponent implements OnInit {
   }
 
   public handleClick(e, type) {
-    const services = this.services;
+    const departments = this.departments;
     const others = this.others;
     const orgas = this.orgas;
-
     this.resetSugar();
+
     switch (type) {
       case "conseiller":
       {
         this.userValue = "user_default";
         this.checkRoles(["Sales"]);
-        this.checkStuff(services, ["Ventes"]);
+        this.checkStuff(departments, ["Ventes"]);
         this.checkStuff(others, ["Global", "Ventes", "Devis Cotation", "ROLE - Reservation"]);
         break;
       }
@@ -120,7 +118,7 @@ export class ProfilesComponent implements OnInit {
         this.selectedFunction = "jm";
 
         this.checkRoles(["Sales"]);
-        this.checkStuff(services, ["Ventes"]);
+        this.checkStuff(departments, ["Ventes"]);
         this.checkStuff(others,
                         [
                         "Global",
@@ -139,7 +137,7 @@ export class ProfilesComponent implements OnInit {
         this.selectedFunction = "mgr";
 
         this.checkRoles(["Team Manager"]);
-        this.checkStuff(services, ["Ventes"]);
+        this.checkStuff(departments, ["Ventes"]);
         this.checkStuff(others, [
                         "Global",
                         "Devis Cotation",                        "Devis V3",
@@ -153,7 +151,7 @@ export class ProfilesComponent implements OnInit {
       {
         this.selectedFunction = "av";
         this.checkRoles(["Reservation"]);
-        this.checkStuff(services, ["Ventes"]);
+        this.checkStuff(departments, ["Ventes"]);
         this.checkStuff(others, [
                         "Devis V3",
                         "Devis Cotation",
@@ -170,7 +168,7 @@ export class ProfilesComponent implements OnInit {
         this.selectedManager = "Manager du service qualité (Aminata)";
 
         this.checkRoles(["Quality Control"]);
-        this.checkStuff(services, ["Service Qualité"]);
+        this.checkStuff(departments, ["Service Qualité"]);
         this.checkStuff(others, ["BackOffice", "Global", "SAV"]);
         this.checkStuff(orgas, ["BackOffice"]);
         break;
@@ -180,7 +178,7 @@ export class ProfilesComponent implements OnInit {
         this.selectedOffice = "1377";
 
         this.checkRoles(["Accountant"]);
-        this.checkStuff(services, ["Comptabilité"]);
+        this.checkStuff(departments, ["Comptabilité"]);
         this.checkStuff(others, ["Global", "ROLE - Affaire Validation", "ROLE - Create Provider"]);
         this.checkStuff(orgas, ["Compta"]);
         break;
@@ -199,25 +197,9 @@ export class ProfilesComponent implements OnInit {
     }
   }
 
-  public setVentesLeads() {
-    this.leadsMin = 15;
-    this.leadsMax = 45;
-  }
-
-  public eraseVentesLeads() {
-    this.leadsMin = null;
-    this.leadsMax = null;
-  }
-
-  public onServiceChecked(service, e) {
-    if (service.id === "services-Ventes") {
-      if (!service.checked) {
-        this.eraseVentesLeads();
-        this.displayVentesLeads = e;
-      } else {
-        this.setVentesLeads();
-        // this.displayVentesLeads = false;
-      }
+  public onDepartmentChecked(department, e) {
+    if (department.id === "departments-Ventes") {
+      this.hideLeads = !e;
     }
   }
 
@@ -227,8 +209,8 @@ export class ProfilesComponent implements OnInit {
       case this.orgas:
       prefix = "orgas";
       break;
-      case this.services:
-      prefix = "services";
+      case this.departments:
+      prefix = "departments";
       break;
       case this.others:
       prefix = "others";
@@ -265,8 +247,8 @@ export class ProfilesComponent implements OnInit {
   private resetSugar() {
     this.inactiveStatus = false,
     this.inactiveEmployee = false,
-    this.leadsMin = null;
-    this.leadsMax = null;
+    this.currentUser.leadsMin = 15;
+    this.currentUser.leadsMax = 45;
     this.userValue = "user_default_xx";
     this.selectedManager = null,
     this.eraseFields([
@@ -285,7 +267,7 @@ export class ProfilesComponent implements OnInit {
                      ]);
     this.unCheckArrays([
                        this.roles,
-                       this.services,
+                       this.departments,
                        this.others,
                        this.teams,
                        this.destinations,

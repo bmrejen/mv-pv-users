@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from "@angular/core";
 import { ControlContainer, NgForm } from "@angular/forms";
 import { FieldsService } from "../../services/fields.service";
 
+import { Destination } from "../../models/destination";
 import { Fields } from "../../models/fields";
 
 @Component({
@@ -17,8 +18,7 @@ import { Fields } from "../../models/fields";
 })
 
 export class DestinationsComponent implements OnInit {
-  @Input() public destinations;
-  @Input() public dests;
+  @Input() public destinations: Destination[];
 
   constructor(private fieldsService: FieldsService) {
     //

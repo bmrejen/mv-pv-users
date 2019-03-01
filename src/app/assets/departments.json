@@ -3,47 +3,47 @@
   [
     {
       "checked": false,
-      "id": "services-Backoffice",
+      "id": "departments-Backoffice",
       "name": "Backoffice"
     },
     {
       "checked": false,
-      "id": "services-Backoffice Billet",
+      "id": "departments-Backoffice Billet",
       "name": "Backoffice Billet"
     },
     {
       "checked": false,
-      "id": "services-Backoffice Carnet",
+      "id": "departments-Backoffice Carnet",
       "name": "Backoffice Carnet"
     },
     {
       "checked": false,
-      "id": "services-Backoffice Resa",
+      "id": "departments-Backoffice Resa",
       "name": "Backoffice Resa"
     },
     {
       "checked": false,
-      "id": "services-Comptabilité",
+      "id": "departments-Comptabilité",
       "name": "Comptabilité"
     },
     {
       "checked": false,
-      "id": "services-Production",
+      "id": "departments-Production",
       "name": "Production"
     },
     {
       "checked": false,
-      "id": "services-SAV",
+      "id": "departments-SAV",
       "name": "SAV"
     },
     {
       "checked": false,
-      "id": "services-Service Qualité",
+      "id": "departments-Service Qualité",
       "name": "Service Qualité"
     },
     {
       "checked": false,
-      "id": "services-Ventes",
+      "id": "departments-Ventes",
       "name": "Ventes"
     }
   ]

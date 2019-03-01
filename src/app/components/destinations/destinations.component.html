@@ -1,12 +1,12 @@
-<fieldset class="blue" *ngIf = "dests != null">
+ <fieldset class="blue" *ngIf = "destinations != null">
   <legend>Destinations</legend>
   <div ngModelGroup="destinations" class="destinations">
-    <div *ngFor="let dest of dests | alphabetical ; trackBy: trackByFn">
+    <div *ngFor="let dest of destinations | alphabetical ; trackBy: trackByFn">
       <label>
         <input
         type="checkbox"
         [(ngModel)]="dest.checked"
-        [name]="dest.name"
+        [name]="dest.id"
         >{{ dest.name | slice:7 }}
       </label>
     </div>
