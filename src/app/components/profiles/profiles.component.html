@@ -1,4 +1,4 @@
-<div *ngIf="userTemplates != null && roles != null && services != null">
+<div *ngIf="userTemplates != null && roles != null && departments != null">
   <fieldset class="blue">
     <legend>Profiles SugarCRM</legend>
     <button (click)="handleClick($event, 'conseiller')">Ventes - Conseiller</button>
@@ -20,21 +20,15 @@
 
     <div class="checkbox-list subtitle" id="sugar_role" ngModelGroup="roles">ROLE:
       <span *ngFor="let role of roles; trackBy: trackByFn">
-        <label><input type="checkbox" [(ngModel)]="role.checked" [name]="role.name">{{ role.name }}
+        <label><input type="checkbox" [(ngModel)]="role.checked" [name]="role.id">{{ role.name }}
         </label>
       </span>
     </div>
 
-    <div class="checkbox-list subtitle" id="sugar_departement" ngModelGroup="services">SERVICE:
-      <span *ngFor="let service of services ; trackBy: trackByFn">
+    <div class="checkbox-list subtitle" id="sugar_departement" ngModelGroup="departments">DEPARTMENT:
+      <span *ngFor="let department of departments ; trackBy: trackByFn">
         <label>
-          <input
-          [id]="service.id"
-          type="checkbox"
-          [name]="service.id"
-          [(ngModel)]="service.checked"
-          (ngModelChange)="onServiceChecked(service, $event)"
-          >{{ service.name }}
+          <input [id]="department.id" type="checkbox" [name]="department.id" [ngModel]="department.checked" (ngModelChange)="onDepartmentChecked(department, $event)">{{ department.name }}
         </label>
       </span>
     </div>

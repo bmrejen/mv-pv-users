@@ -158,7 +158,7 @@
       "yarn run tslint"
     ],
     "*.scss": [
-      "./node_modules/.bin/sass-lint -f stylish -v -q"
+      "./node_modules/.bin/sass-lint -v -q"
     ]
   },
   "jest": {
