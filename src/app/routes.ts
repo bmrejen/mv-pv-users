@@ -1,5 +1,6 @@
 import { Routes } from "@angular/router";
 
+import { ApiQuickStartComponent } from "./components/api-quickstart/api-quickstart.component";
 import {
   CreateUserFormComponent,
 } from "./components/create-user-form/create-user-form.component";
@@ -65,6 +66,10 @@ export const AppRoutes: Routes = [
 {
   path: "user",
   component: UserComponent,
+},
+{
+  path: "api",
+  component: ApiQuickStartComponent,
 },
 {
   path: "disable/:id",
