@@ -13,7 +13,7 @@
     <div class="select subtitle">Hérite les préférence de l'utilisateur
       <select name="userToCopyHPfrom" [(ngModel)]="userValue">
         <option *ngFor="let user of userTemplates ; trackBy: trackByFn" [value]="user.value">
-          {{ userTemplates.indexOf(user)+1 }}. {{ user.label | uppercase }}
+          {{ user.label | uppercase }}
         </option>
       </select>
     </div>
