@@ -2,6 +2,7 @@ version: "3"
 services:
   webserver:
     build:
+    # where to find a Dockerfile to build from
       context: webserver/.
     volumes:
       - ../.:/usr/local/apache2/htdocs/.
@@ -12,6 +13,10 @@ services:
       - ~/.docker/.env
     environment:
       - VIRTUAL_HOST=users.local
+      # The following 3 lines were added to use HTTPS - but seems it doesn't work
+      - VIRTUAL_PROTO=https
+      - VIRTUAL_PORT=443
+      - CERT_NAME=YOUR_CERT_NAME ## Add this
     ports:
       # Use for debugging, access to vnc to show running test
        - "9099:80"

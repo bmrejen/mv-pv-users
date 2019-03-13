@@ -13,12 +13,13 @@ gulp.task('concat:css', ['sass'], function() {
 
 gulp.task('concat:js', function() {
   return gulp.src([
-                  'src/app/assets/js/google-api.js',
-                  'node_modules/core-js/client/shim.js',
-                  'node_modules/zone.js/dist/zone.js',
-                  'node_modules/reflect-metadata/Reflect.js',
-                  'node_modules/systemjs/dist/system.src.js'
-                  ])
+    'src/app/assets/js/google-api.js',
+    'src/app/assets/js/gapi-methods.js',
+    'node_modules/core-js/client/shim.js',
+    'node_modules/zone.js/dist/zone.js',
+    'node_modules/reflect-metadata/Reflect.js',
+    'node_modules/systemjs/dist/system.src.js'
+  ])
   .pipe(concat('vendor.js'))
   .pipe(gulp.dest('./dist/js'));
 });
