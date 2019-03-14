@@ -9,8 +9,8 @@ var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/admin/direct
 // included, separated by spaces.
 var SCOPES = 'https://www.googleapis.com/auth/admin.directory.user.readonly';
 
-var authorizeButton = document.getElementById('authorize_button');
-var signoutButton = document.getElementById('signout_button');
+var authorizeButton = null;
+var signoutButton = null;
 
 /**
 * On load, called to load the auth2 library and API client library.
@@ -47,6 +47,9 @@ function initClient() {
 *  appropriately. After a sign-in, the API is called.
 */
 function updateSigninStatus(isSignedIn) {
+  authorizeButton = document.getElementById('authorize_button');
+  signoutButton = document.getElementById('signout_button');
+
   if (isSignedIn) {
     authorizeButton.style.display = 'none';
     signoutButton.style.display = 'block';
