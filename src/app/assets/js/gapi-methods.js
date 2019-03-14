@@ -1,6 +1,6 @@
 // Client ID and API key from the Developer Console
 var CLIENT_ID = '370957812504-q434e61j772ehv68fl4722fraomiduc4.apps.googleusercontent.com';
-var API_KEY = 'AIzaSyBfeKvEwqrrFTpWA79_cLEGgJZYnRF1Dug';
+var API_KEY = 'AIzaSyBeysOdY1ZjiSNpj-PA5Qr2Z-EaJGQNOTQ';
 
 // Array of API discovery doc URLs for APIs used by the quickstart
 var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/admin/directory_v1/rest"];
@@ -11,13 +11,6 @@ var SCOPES = 'https://www.googleapis.com/auth/admin.directory.user.readonly';
 
 var authorizeButton = null;
 var signoutButton = null;
-
-/**
-* On load, called to load the auth2 library and API client library.
-*/
-function handleClientLoad() {
-  gapi.load('client:auth2', initClient);
-}
 
 /**
 *  Initializes the API client library and sets up sign-in state

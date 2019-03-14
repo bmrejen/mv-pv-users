@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from "@angular/core";
+import { AfterViewInit, Component } from "@angular/core";
 import { ControlContainer, NgForm } from "@angular/forms";
 
 declare var gapi: any  ;
@@ -10,17 +10,12 @@ declare var initClient: any;
   viewProviders: [{ provide: ControlContainer, useExisting: NgForm }],
 })
 
-export class ApiQuickStartComponent implements AfterViewInit, OnInit {
+export class ApiQuickStartComponent implements AfterViewInit {
   constructor() {
     //
   }
 
-  public ngOnInit() {
-    // gapi.load("client:auth2", initClient);
-  }
-
   public ngAfterViewInit() {
-    console.log("init gapi");
     gapi.load("client:auth2", initClient);
   }
 }
