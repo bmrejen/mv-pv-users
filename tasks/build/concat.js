@@ -4,7 +4,6 @@ var concat = require('gulp-concat');
 gulp.task('concat:css', ['sass'], function () {
   return gulp.src([
     'node_modules/primeicons/primeicons.css',
-    'node_modules/primeicons/primeicons.css',
     'node_modules/primeng/resources/primeng.css',
   ])
     .pipe(concat('vendor.css'))
