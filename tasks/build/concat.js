@@ -1,21 +1,17 @@
-var gulp        = require('gulp');
-var concat      = require('gulp-concat');
+var gulp = require('gulp');
+var concat = require('gulp-concat');
 
-gulp.task('concat:css', ['sass'], function() {
+gulp.task('concat:css', ['sass'], function () {
   return gulp.src([
-                  'node_modules/primeicons/primeicons.css',
-    return gulp.src([
-        ..
-        'node_modules/primeicons/primeicons.css',
-        ..
-    ]);
-                  'node_modules/primeng/resources/primeng.css',
-                  ])
-  .pipe(concat('vendor.css'))
-  .pipe(gulp.dest('./dist/css'));
+    'node_modules/primeicons/primeicons.css',
+    'node_modules/primeicons/primeicons.css',
+    'node_modules/primeng/resources/primeng.css',
+  ])
+    .pipe(concat('vendor.css'))
+    .pipe(gulp.dest('./dist/css'));
 });
 
-gulp.task('concat:js', function() {
+gulp.task('concat:js', function () {
   return gulp.src([
     'src/app/assets/js/google-api.js',
     'src/app/assets/js/gapi-methods.js',
@@ -24,6 +20,6 @@ gulp.task('concat:js', function() {
     'node_modules/reflect-metadata/Reflect.js',
     'node_modules/systemjs/dist/system.src.js'
   ])
-  .pipe(concat('vendor.js'))
-  .pipe(gulp.dest('./dist/js'));
+    .pipe(concat('vendor.js'))
+    .pipe(gulp.dest('./dist/js'));
 });

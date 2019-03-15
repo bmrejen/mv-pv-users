@@ -4,7 +4,6 @@ import { AppRoutes } from "./app/routes";
 
 import {
   BrowserModule,
-  Title,
 } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
@@ -23,7 +22,6 @@ import {
 import { RouterModule } from "@angular/router";
 
 import { AccountsComponent } from "./app/components/accounts/accounts.component";
-import { ApiQuickStartComponent } from "./app/components/api-quickstart/api-quickstart.component";
 import { CheckboxFieldComponent } from "./app/components/checkbox-field/checkbox-field.component";
 import { CreateUserFormComponent } from "./app/components/create-user-form/create-user-form.component";
 import { CredentialsComponent } from "./app/components/credentials/credentials.component";
@@ -31,6 +29,7 @@ import { DestinationsComponent } from "./app/components/destinations/destination
 import { DisableUserFormComponent } from "./app/components/disable-user-form/disable-user-form.component";
 import { ExtraneousComponent } from "./app/components/extraneous/extraneous.component";
 import { FunctionComponent } from "./app/components/function/function.component";
+import { GapiUsersComponent } from "./app/components/gapi-users/gapi-users.component";
 import { GappsComponent } from "./app/components/gapps/gapps.component";
 import { ImportComponent } from "./app/components/import/import.component";
 import { ManagerComponent } from "./app/components/manager/manager.component";
@@ -63,55 +62,55 @@ import "./app/rxjs-extensions";
 
 @NgModule({
   bootstrap: [
-  AppComponent,
+    AppComponent,
   ],
   declarations: [
-  AccountsComponent,
-  AlphabeticalPipe,
-  ApiQuickStartComponent,
-  AppComponent,
-  CheckboxFieldComponent,
-  CredentialsComponent,
-  CreateUserFormComponent,
-  DestinationsComponent,
-  DisableUserFormComponent,
-  ExtraneousComponent,
-  FunctionComponent,
-  GappsComponent,
-  ImportComponent,
-  ManagerComponent,
-  OfficeComponent,
-  OthersComponent,
-  PhonesComponent,
-  ProfilesComponent,
-  RolesComponent,
-  SwitchvoxComponent,
-  TeamsComponent,
-  UserComponent,
-  UsersComponent,
+    AccountsComponent,
+    AlphabeticalPipe,
+    AppComponent,
+    CheckboxFieldComponent,
+    CredentialsComponent,
+    CreateUserFormComponent,
+    DestinationsComponent,
+    DisableUserFormComponent,
+    ExtraneousComponent,
+    FunctionComponent,
+    GapiUsersComponent,
+    GappsComponent,
+    ImportComponent,
+    ManagerComponent,
+    OfficeComponent,
+    OthersComponent,
+    PhonesComponent,
+    ProfilesComponent,
+    RolesComponent,
+    SwitchvoxComponent,
+    TeamsComponent,
+    UserComponent,
+    UsersComponent,
   ],
   imports: [
-  BrowserModule,
-  BrowserAnimationsModule,
-  FormsModule,
-  HttpClientModule,
-  RouterModule.forRoot(AppRoutes),
+    BrowserModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    HttpClientModule,
+    RouterModule.forRoot(AppRoutes),
   ],
   providers: [
-  DestinationsResolverService,
-  FieldsService,
-  FieldsResolverService,
-  FormValueMapperService,
-  ManagersResolverService,
-  ParserService,
-  SugarService,
-  SwitchVoxService,
-  TeamsResolverService,
-  UserResolverService,
-  UsersResolverService,
-  HttpClient,
-  { provide: APP_BASE_HREF, useValue: "/" },
-  { provide: LOCALE_ID, useValue: "fr-FR" },
+    DestinationsResolverService,
+    FieldsService,
+    FieldsResolverService,
+    FormValueMapperService,
+    ManagersResolverService,
+    ParserService,
+    SugarService,
+    SwitchVoxService,
+    TeamsResolverService,
+    UserResolverService,
+    UsersResolverService,
+    HttpClient,
+    { provide: APP_BASE_HREF, useValue: "/" },
+    { provide: LOCALE_ID, useValue: "fr-FR" },
   ],
 })
 
