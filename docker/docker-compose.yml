@@ -2,6 +2,7 @@ version: "3"
 services:
   webserver:
     build:
+    # where to find a Dockerfile to build from
       context: webserver/.
     volumes:
       - ../.:/usr/local/apache2/htdocs/.
