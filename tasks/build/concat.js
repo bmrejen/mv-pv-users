@@ -5,6 +5,7 @@ gulp.task('concat:css', ['sass'], function () {
   return gulp.src([
     'node_modules/primeicons/primeicons.css',
     'node_modules/primeng/resources/primeng.css',
+    'node_modules/primeng/resources/themes/nova-colored/theme.css',
   ])
     .pipe(concat('vendor.css'))
     .pipe(gulp.dest('./dist/css'));
