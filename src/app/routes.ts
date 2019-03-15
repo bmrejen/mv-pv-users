@@ -62,7 +62,7 @@ export const AppRoutes: Routes = [
     component: UserComponent,
   },
   {
-    path: "api",
+    path: "gapi",
     component: GapiUsersComponent,
   },
   {
