@@ -1,8 +1,9 @@
+// tslint:disable-next-line
+/// <reference path="../../../node_modules/@types/gapi/index.d.ts" />
+
 import { Injectable, NgZone } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { User } from "../models/user";
-
-import "../../../node_modules/@types/gapi/index.d.ts";
 
 declare const gapi: any;
 
