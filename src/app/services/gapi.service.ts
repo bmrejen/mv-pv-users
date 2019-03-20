@@ -1,6 +1,8 @@
-import { Injectable, NgZone, Output } from "@angular/core";
+import { Injectable, NgZone } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { User } from "../models/user";
+
+import "../../../node_modules/@types/gapi/index.d.ts";
 
 declare const gapi: any;
 
@@ -30,19 +32,17 @@ export class GapiAuthenticatorService {
 
     public signIn(): void {
         this.auth2.signIn()
-            .then((user) => {
-                // console.log("id token from service", user.getAuthResponse().id_token);
-                // this.validateToken(user.getAuthResponse().id_token).subscribe(user => {
-                this.zone.run(() => {
-                    this.user$.next(user);
-                    this.isLoggedIn$.next(true);
-                    console.log("this.auth2", this.auth2);
-                });
-                // },
-                //     (err) => {
-                //         console.error("uh-oh", err);
-                //     });
-            });
+            .then(
+                (user) => {
+                    console.log("id token from service", user.getAuthResponse().id_token);
+                    // this.validateToken(user.getAuthResponse().id_token).subscribe(user => {
+                    this.zone.run(() => {
+                        this.user$.next(user);
+                        this.isLoggedIn$.next(true);
+                        console.log("this.auth2", this.auth2);
+                    });
+                },
+                (err) => console.error("uh-oh", err));
     }
 
     public signOut(): void {
@@ -60,6 +60,7 @@ export class GapiAuthenticatorService {
 
     public loadAuth2(): void {
         gapi.load("client:auth2", () => {
+            console.log("client auth2 loaded");
             gapi.client.init({
                 apiKey: this.API_KEY,
                 client_id: this.CLIENT_ID,
@@ -67,15 +68,22 @@ export class GapiAuthenticatorService {
                 discoveryDocs: this.DISCOVERY_DOCS,
                 scope: this.SCOPES,
             })
-                .then((auth) => {
-                    console.log("loadAuth2 in service\n", auth);
-                    console.log("gapi from loadAuth2\n", gapi);
+                .then(
+                    (auth) => {
+                        const isSignedIn = gapi.auth2.getAuthInstance()
+                            .isSignedIn
+                            .get();
+                        console.log("isSignedIn\n", isSignedIn);
 
-                    this.zone.run(() => {
-                        this.auth2 = auth;
-                        this.isLoaded$.next(true);
-                    });
-                },
+                        console.log("loadAuth2 in service\n", auth);
+                        console.log("gapi from loadAuth2\n", gapi);
+
+                        this.zone.run(() => {
+                            console.log("auth", auth);
+                            this.auth2 = auth;
+                            this.isLoaded$.next(true);
+                        });
+                    },
                 );
         });
     }
@@ -106,4 +114,32 @@ export class GapiAuthenticatorService {
                 });
     }
 
+    public loadClient(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.zone.run(() => {
+                console.log("inside loadClient");
+                gapi.load("client:auth2", {
+                    callback: resolve,
+                    onerror: reject,
+                    ontimeout: reject,
+                    timeout: 1000, // 5 seconds.
+                });
+            });
+        });
+    }
+    /* tslint:disable:object-literal-key-quotes */
+    public initClient(): Promise<any> {
+        const initObj = {
+            "apiKey": this.API_KEY,
+            "discoveryDocs": this.DISCOVERY_DOCS,
+        };
+        /* tslint:enable:object-literal-key-quotes */
+
+        return new Promise((resolve, reject) => {
+            this.zone.run(() => {
+                gapi.client.init(initObj)
+                    .then(resolve, reject);
+            });
+        });
+    }
 }
