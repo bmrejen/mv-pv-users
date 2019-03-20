@@ -1,11 +1,11 @@
 <h1>API Quickstart</h1>
 
-<!--Add buttons to initiate auth sequence and sign out-->
-<!--Buttons not found by js code-->
-
-<button id="authorize_button" style="display: none;">Authorize</button>
+<!-- <button id="authorize_button" style="display: none;">Authorize</button>
 <button id="signout_button" style="display: none;">Sign Out</button>
 
-<pre id="content" style="white-space: pre-wrap;"></pre>
-
-<!-- <script src="https://apis.google.com/js/api.js"></script> -->
+<pre id="content" style="white-space: pre-wrap;"></pre> -->
+<ng-container *ngIf="authIsLoaded">
+    <button *ngIf="!isLoggedIn" (click)="signIn()">Sign In With Google</button>
+    <button *ngIf="isLoggedIn" (click)="signOut()">Sign Out</button>
+</ng-container>
+<h2 *ngIf="authIsLoaded && isLoggedIn"> Signed in as {{ user.name }} </h2>

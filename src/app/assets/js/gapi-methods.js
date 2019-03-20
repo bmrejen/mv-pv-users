@@ -17,6 +17,7 @@ var signoutButton = null;
 *  listeners.
 */
 function initClient() {
+  console.log("init client from gapi-methods");
   gapi.client.init({
     apiKey: API_KEY,
     clientId: CLIENT_ID,
@@ -30,7 +31,7 @@ function initClient() {
     updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
     authorizeButton.onclick = handleAuthClick;
     signoutButton.onclick = handleSignoutClick;
-  }, function(error) {
+  }, function (error) {
     appendPre(JSON.stringify(error, null, 2));
   });
 }
@@ -87,7 +88,7 @@ function listUsers() {
     'customer': 'my_customer',
     'maxResults': 500,
     'orderBy': 'email'
-  }).then(function(response) {
+  }).then(function (response) {
     var users = response.result.users;
     appendPre('Users:');
 

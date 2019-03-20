@@ -19,6 +19,10 @@
             "dom",
             "es2015"
         ],
+        "types": [
+            "gapi",
+            "gapi.auth2"
+        ],
         "typeRoots": [
             "./node_modules/@types"
         ]
