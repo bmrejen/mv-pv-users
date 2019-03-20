@@ -1,7 +1,5 @@
-import { HttpClient } from "@angular/common/http";
 import { Injectable, NgZone, Output } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
-import { Observable } from "rxjs/Observable";
 import { User } from "../models/user";
 
 declare const gapi: any;
@@ -38,6 +36,7 @@ export class GapiAuthenticatorService {
                 this.zone.run(() => {
                     this.user$.next(user);
                     this.isLoggedIn$.next(true);
+                    console.log("this.auth2", this.auth2);
                 });
                 // },
                 //     (err) => {
@@ -60,10 +59,13 @@ export class GapiAuthenticatorService {
     }
 
     public loadAuth2(): void {
-        gapi.load("auth2", () => {
-            gapi.auth2.init({
+        gapi.load("client:auth2", () => {
+            gapi.client.init({
+                apiKey: this.API_KEY,
                 client_id: this.CLIENT_ID,
-                fetch_basic_profile: true,
+                // fetch_basic_profile: true,
+                discoveryDocs: this.DISCOVERY_DOCS,
+                scope: this.SCOPES,
             })
                 .then((auth) => {
                     console.log("loadAuth2 in service\n", auth);
