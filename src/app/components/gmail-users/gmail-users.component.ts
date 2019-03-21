@@ -5,7 +5,7 @@ declare const initClient;
 
 @Component({
     selector: "mv-gmail-users",
-    templateUrl: "./gmail-users.component",
+    templateUrl: "./gmail-users.component.html",
 })
 
 export class GmailUsersComponent implements AfterViewInit {
