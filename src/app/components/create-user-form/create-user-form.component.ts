@@ -8,6 +8,7 @@ import { SwitchVoxService } from "../../services/switchvox.service";
 
 import { Destination } from "../../models/destination";
 import { Fields } from "../../models/fields";
+import { Role } from "../../models/role";
 import { Team } from "../../models/team";
 import { User } from "../../models/user";
 
@@ -25,6 +26,7 @@ export class CreateUserFormComponent implements OnInit {
   public usernameTaken;
   public currentUser: User;
   public teams: Team[] = [];
+  public roles: Role[] = [];
   public destinations: Destination[] = [];
   public managers: User[] = [];
   // tslint:disable-next-line:max-line-length
@@ -33,41 +35,44 @@ export class CreateUserFormComponent implements OnInit {
   public userObject;
 
   constructor(
-              private fieldsService: FieldsService,
-              private switchvoxService: SwitchVoxService,
-              private parserService: ParserService,
-              private route: ActivatedRoute,
-              private sugar: SugarService,
-              private mapper: FormValueMapperService,
-              ) {
+    private fieldsService: FieldsService,
+    private switchvoxService: SwitchVoxService,
+    private parserService: ParserService,
+    private route: ActivatedRoute,
+    private sugar: SugarService,
+    private mapper: FormValueMapperService,
+  ) {
     //
   }
 
   public ngOnInit(): void {
     this.route.data
-    .subscribe((data) => {
-      // set current user if any
-      this.currentUser = data.user != null ? new User(data.user) : new User();
+      .subscribe((data) => {
+        // set current user if any
+        this.currentUser = data.user != null ? new User(data.user) : new User();
 
-      // get manager list
-      this.managers = data.managers;
+        // get manager list
+        this.managers = data.managers;
 
-      // get user list
-      data.users.forEach((user) => this.usersFromSugar.push(new User(user)));
+        // get user list
+        data.users.forEach((user) => this.usersFromSugar.push(new User(user)));
 
-      // get team list
-      data.teams.forEach((team) => this.teams.push(new Team(team)));
+        // get team list
+        data.teams.forEach((team) => this.teams.push(new Team(team)));
 
-      // get destinations list
-      data.destinations.forEach((dest) => this.destinations.push(new Destination(dest)));
+        // get role list
+        data.roles.forEach((role) => this.roles.push(new Role(role)));
 
-      // get fields list
-      this.fields = new Fields(data.fields);
-    });
+        // get destinations list
+        data.destinations.forEach((dest) => this.destinations.push(new Destination(dest)));
+
+        // get fields list
+        this.fields = new Fields(data.fields);
+      });
 
   }
 
-  public onParentChange({e, id}) {
+  public onParentChange({ e, id }) {
     // const myField = this.fields.others.find((field) => field.id === id);
     // myField.checked = e;
   }
@@ -75,12 +80,12 @@ export class CreateUserFormComponent implements OnInit {
   public onSubmit(form) {
     // form doesn't get updated after updating currentUser :'(
     this.sugar.postDataToSugar(this.body)
-    .subscribe(
-               (res) => {
-                 this.currentUser = new User(res.data[0]);
-               },
-               (error) => this.errorMsg = error.statusText,
-               );
+      .subscribe(
+        (res) => {
+          this.currentUser = new User(res.data[0]);
+        },
+        (error) => this.errorMsg = error.statusText,
+      );
     this.userObject = this.mapper.createUserForSugar(form);
     // this.sugarService.postDataToSugar(form)
     // .subscribe(
@@ -108,33 +113,33 @@ export class CreateUserFormComponent implements OnInit {
 
   private resetSugar() {
     this.fields.inactiveStatus = false,
-    this.fields.inactiveEmployee = false,
-    this.fields.leadsMin = 15;
+      this.fields.inactiveEmployee = false,
+      this.fields.leadsMin = 15;
     this.fields.leadsMax = 45;
     this.fields.userValue = "user_default_xx";
     this.fields.selectedManager = null,
-    this.eraseFields([
-                     this.fields.codeSON,
-                     this.fields.codeTourplan,
-                     this.fields.codevad,
-                     this.fields.groupes,
-                     this.fields.inbound,
-                     this.fields.outbound,
-                     this.fields.phoneExtension,
-                     this.fields.phoneNumber,
-                     this.fields.selectedFunction,
-                     this.fields.selectedOffice,
-                     this.fields.selectedOrganisation,
-                     this.fields.title,
-                     ]);
+      this.eraseFields([
+        this.fields.codeSON,
+        this.fields.codeTourplan,
+        this.fields.codevad,
+        this.fields.groupes,
+        this.fields.inbound,
+        this.fields.outbound,
+        this.fields.phoneExtension,
+        this.fields.phoneNumber,
+        this.fields.selectedFunction,
+        this.fields.selectedOffice,
+        this.fields.selectedOrganisation,
+        this.fields.title,
+      ]);
     this.unCheckArrays([
-                       this.fields.roles,
-                       this.fields.departments,
-                       this.fields.others,
-                       this.fields.teams,
-                       this.fields.destinations,
-                       this.fields.orgas,
-                       ]);
+      this.fields.roles,
+      this.fields.departments,
+      this.fields.others,
+      this.fields.teams,
+      this.fields.destinations,
+      this.fields.orgas,
+    ]);
   }
 
 }
