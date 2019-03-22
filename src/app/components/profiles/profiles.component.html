@@ -11,24 +11,51 @@
 
 
     <div class="select subtitle">Hérite les préférence de l'utilisateur
-      <select name="userToCopyHPfrom" [(ngModel)]="userValue">
-        <option *ngFor="let user of userTemplates ; trackBy: trackByFn" [value]="user.value">
+      <select
+        name="userToCopyHPfrom"
+        [(ngModel)]="userValue"
+      >
+        <option
+          *ngFor="let user of userTemplates ; trackBy: trackByFn"
+          [value]="user.value"
+        >
           {{ user.label | uppercase }}
         </option>
       </select>
     </div>
 
-    <div class="checkbox-list subtitle" id="sugar_role" ngModelGroup="roles">ROLE:
+    <div
+      class="checkbox-list subtitle"
+      id="sugar_role"
+      ngModelGroup="roles"
+    >ROLE:
       <span *ngFor="let role of roles; trackBy: trackByFn">
-        <label><input type="checkbox" [(ngModel)]="role.checked" [name]="role.id">{{ role.name }}
+        <label>
+          <input
+            type="radio"
+            [value]="role.id"
+            [(ngModel)]="role.checked"
+            name="role"
+          >
+          {{ role.name }}
         </label>
       </span>
     </div>
 
-    <div class="checkbox-list subtitle" id="sugar_departement" ngModelGroup="departments">DEPARTMENT:
+    <div
+      class="checkbox-list subtitle"
+      id="sugar_departement"
+      ngModelGroup="departments"
+    >DEPARTMENT:
       <span *ngFor="let department of departments ; trackBy: trackByFn">
         <label>
-          <input [id]="department.id" type="checkbox" [name]="department.id" [ngModel]="department.checked" (ngModelChange)="onDepartmentChecked(department, $event)">{{ department.name }}
+          <input
+            [id]="department.id"
+            type="checkbox"
+            [name]="department.id"
+            [ngModel]="department.checked"
+            (ngModelChange)="onDepartmentChecked(department, $event)"
+          >{{ department.name }}
         </label>
       </span>
     </div>
@@ -36,18 +63,20 @@
     <div [hidden]="hideLeads">
       <label>Leads min
         <input
-        type="number"
-        name="leadsMin"
-        [(ngModel)]="currentUser.leadsMin">
+          type="number"
+          name="leadsMin"
+          [(ngModel)]="currentUser.leadsMin"
+        >
       </label>
     </div>
 
     <div [hidden]="hideLeads">
       <label>Leads max
         <input
-        type="number"
-        name="leadsMax"
-        [(ngModel)]="currentUser.leadsMax">
+          type="number"
+          name="leadsMax"
+          [(ngModel)]="currentUser.leadsMax"
+        >
       </label>
     </div>
   </fieldset>
