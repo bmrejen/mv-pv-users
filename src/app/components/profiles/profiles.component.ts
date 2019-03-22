@@ -45,21 +45,15 @@ export class ProfilesComponent implements OnInit {
   @Input() public selectedOrganisation;
   @Input() public title;
 
-  public fields: Fields;
   public hideLeads = true;
   public allUsersFromSugar: User[] = [];
   public activeUsersFromSugar: User[];
 
-  constructor(
-    private fieldsService: FieldsService,
-    private sugarService: SugarService) {
+  constructor(private sugarService: SugarService) {
     //
   }
 
   public ngOnInit(): void {
-    this.fieldsService.getData()
-      .then((res) => this.fields = new Fields(res[0]));
-
     this.populateUserInheritance();
   }
 
