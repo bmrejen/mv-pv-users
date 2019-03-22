@@ -31,7 +31,6 @@ import { ExtraneousComponent } from "./app/components/extraneous/extraneous.comp
 import { FunctionComponent } from "./app/components/function/function.component";
 import { GapiUsersComponent } from "./app/components/gapi-users/gapi-users.component";
 import { GappsComponent } from "./app/components/gapps/gapps.component";
-import { GmailUsersComponent } from "./app/components/gmail-users/gmail-users.component";
 import { ImportComponent } from "./app/components/import/import.component";
 import { ManagerComponent } from "./app/components/manager/manager.component";
 import { OfficeComponent } from "./app/components/office/office.component";
@@ -78,7 +77,6 @@ import "./app/rxjs-extensions";
     FunctionComponent,
     GapiUsersComponent,
     GappsComponent,
-    GmailUsersComponent,
     ImportComponent,
     ManagerComponent,
     OfficeComponent,
