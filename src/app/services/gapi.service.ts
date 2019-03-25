@@ -121,7 +121,7 @@ export class GapiAuthenticatorService {
         return new Promise((resolve, reject) => {
             this.zone.run(() => {
                 console.log("inside loadClient");
-                gapi.load("client:auth2", { // 'client' in tutorial
+                gapi.load("client", { // 'client' in tutorial
                     callback: resolve,
                     onerror: reject,
                     ontimeout: reject,
