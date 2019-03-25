@@ -2,8 +2,8 @@ import { AfterViewInit, Component, OnInit } from "@angular/core";
 import { User } from "../../models/user";
 import { GapiAuthenticatorService } from "../../services/gapi.service";
 
-declare const gapi: any;
-declare const initClient: any;
+// declare const gapi: any;
+// declare const initClient: any;
 
 @Component({
   selector: "mv-gapi-users",
@@ -26,18 +26,29 @@ export class GapiUsersComponent implements AfterViewInit, OnInit {
   public ngOnInit(): void {
     this.gapiService.loadClient()
       .then(
-        (data) => {
+        (result) => {
           this.apiLoaded = true;
-          console.log("data from loadClient", data);
+
+          return this.gapiService.initClient();
         },
-        (err) => console.error(err),
+        (err) => {
+          this.apiFailed = true;
+        },
       )
-      .then((result) => {
+      .then((res) => {
         this.apiReady = true;
-        this.gapiService.initClient()
-          .then((res) => {
-            console.log("initClient", res);
-          });
+        this.gapiService.initAuthClient()
+          .then(
+            (result: any) => {
+              if (result.currentUser.get()
+                .isSignedIn() === true) {
+                //
+              }
+            },
+            (err) => {
+              console.log("init auth client error", err);
+            },
+          );
       }, (err) => {
         this.apiFailed = true;
       });
@@ -46,26 +57,26 @@ export class GapiUsersComponent implements AfterViewInit, OnInit {
   public ngAfterViewInit(): void {
     // gapi.load("client:auth2", initClient);
 
-    this.gapiService.isLoaded$.subscribe((value) => {
-      this.authIsLoaded = value;
-    });
+    // this.gapiService.isLoaded$.subscribe((value) => {
+    //   this.authIsLoaded = value;
+    // });
 
-    this.gapiService.isLoggedIn$.subscribe((value) => {
-      this.isLoggedIn = value;
-    });
+    // this.gapiService.isLoggedIn$.subscribe((value) => {
+    //   this.isLoggedIn = value;
+    // });
 
-    this.gapiService.user$.subscribe((value) => {
-      this.user = value;
-    });
+    // this.gapiService.user$.subscribe((value) => {
+    //   this.user = value;
+    // });
 
-    this.gapiService.loadAuth2();
+    // this.gapiService.loadAuth2();
   }
 
   public signIn(): void {
-    this.gapiService.signIn();
+    // this.gapiService.signIn();
   }
 
   public signOut(): void {
-    this.gapiService.signOut();
+    // this.gapiService.signOut();
   }
 }

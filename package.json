@@ -117,6 +117,7 @@
   },
   "dependencies": {
     "@types/gapi": "0.0.36",
+    "@types/gapi.auth2": "^0.0.50",
     "primeicons": "^1.0.0",
     "primeng": "4.3.0"
   },

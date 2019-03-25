@@ -1,5 +1,7 @@
-// tslint:disable-next-line
+// tslint:disable:no-reference
 /// <reference path="../../../node_modules/@types/gapi/index.d.ts" />
+/// <reference path="../../../node_modules/@types/gapi.auth2/index.d.ts" />
+// tslint:enable:no-reference
 
 import { Injectable, NgZone } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
@@ -119,7 +121,7 @@ export class GapiAuthenticatorService {
         return new Promise((resolve, reject) => {
             this.zone.run(() => {
                 console.log("inside loadClient");
-                gapi.load("client:auth2", {
+                gapi.load("client:auth2", { // 'client' in tutorial
                     callback: resolve,
                     onerror: reject,
                     ontimeout: reject,
@@ -143,4 +145,24 @@ export class GapiAuthenticatorService {
             });
         });
     }
+
+    public initAuthClient() {
+        const CLIENT_ID = "370957812504-q434e61j772ehv68fl4722fraomiduc4.apps.googleusercontent.com";
+        const SCOPES = "https://www.googleapis.com/auth/admin.directory.user.readonly";
+
+        // Authorization scopes required by the API; multiple scopes can be
+        // included, separated by spaces.
+        const initObj = {
+            client_id: CLIENT_ID,
+            scope: SCOPES,
+        };
+
+        return new Promise((resolve, reject) => {
+            this.zone.run(() => {
+                gapi.auth2.init(initObj)
+                    .then(resolve, reject);
+            });
+        });
+    }
+
 }

@@ -1,11 +1,21 @@
 <h1>API Quickstart</h1>
 
-<!-- <button id="authorize_button" style="display: none;">Authorize</button>
-<button id="signout_button" style="display: none;">Sign Out</button>
+<div>
+    <button
+        id="authorize_button"
+        (click)="signIn()"
+    >Sign In With Google</button>
 
-<pre id="content" style="white-space: pre-wrap;"></pre> -->
-<ng-container *ngIf="authIsLoaded">
-    <button *ngIf="!isLoggedIn" (click)="signIn()">Sign In With Google</button>
-    <button *ngIf="isLoggedIn" (click)="signOut()">Sign Out</button>
-</ng-container>
-<h2 *ngIf="authIsLoaded && isLoggedIn"> Signed in as {{ user.name }} </h2>
+    <button
+        id="signout_button"
+        (click)="signOut()"
+    >Sign Out</button>
+
+</div>
+
+<div id="content">
+
+
+    <div>API is loaded : {{ apiLoaded }}</div>
+    <div>API is failed : {{ apiFailed }}</div>
+    <div>API is ready : {{ apiReady }}</div>
