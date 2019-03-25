@@ -1,8 +1,3 @@
-// tslint:disable:no-reference
-/// <reference path="../../../node_modules/@types/gapi/index.d.ts" />
-/// <reference path="../../../node_modules/@types/gapi.auth2/index.d.ts" />
-// tslint:enable:no-reference
-
 import { Injectable, NgZone } from "@angular/core";
 
 declare const gapi: any;
@@ -19,6 +14,10 @@ export class GapiAuthenticatorService {
 
     constructor(private zone: NgZone) {
         //
+    }
+
+    public getGapi() {
+        return gapi;
     }
 
     public listUsers(): Promise<any> {
