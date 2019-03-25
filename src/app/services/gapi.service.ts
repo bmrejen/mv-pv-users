@@ -4,8 +4,6 @@
 // tslint:enable:no-reference
 
 import { Injectable, NgZone } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
-import { User } from "../models/user";
 
 declare const gapi: any;
 
@@ -19,24 +17,16 @@ export class GapiAuthenticatorService {
     // included, separated by spaces.
     public SCOPES: string = "https://www.googleapis.com/auth/admin.directory.user.readonly";
 
-    public auth2: any;
-    public user$: BehaviorSubject<User> = new BehaviorSubject<User>(null);
-    public isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-    public isLoaded$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    constructor(private zone: NgZone) {
+        //
+    }
 
-    constructor(
-        private zone: NgZone,
-        // private http: HttpClient
-    ) { }
-
-    /* tslint:disable:object-literal-key-quotes */
     public listUsers(): Promise<any> {
         return gapi.client.directory.users.list({
             customer: "my_customer",
             maxResults: 500,
             orderBy: "email",
         });
-        /* tslint:enable:object-literal-key-quotes */
     }
 
     public loadClient(): Promise<any> {
@@ -66,8 +56,6 @@ export class GapiAuthenticatorService {
     }
 
     public initAuthClient() {
-        // Authorization scopes required by the API; multiple scopes can be
-        // included, separated by spaces.
         const initObj = {
             client_id: this.CLIENT_ID,
             scope: this.SCOPES,
@@ -80,5 +68,4 @@ export class GapiAuthenticatorService {
             });
         });
     }
-
 }

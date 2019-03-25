@@ -1,9 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { User } from "../../models/user";
 import { GapiAuthenticatorService } from "../../services/gapi.service";
-
-// declare const gapi: any;
-// declare const initClient: any;
 
 @Component({
   selector: "mv-gapi-users",
