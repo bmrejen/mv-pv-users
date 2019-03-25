@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { User } from "../../models/user";
 import { GapiAuthenticatorService } from "../../services/gapi.service";
 
@@ -7,17 +7,16 @@ import { GapiAuthenticatorService } from "../../services/gapi.service";
 
 @Component({
   selector: "mv-gapi-users",
+  styleUrls: ["./gapi-users.component.css"],
   templateUrl: "./gapi-users.component.html",
 })
 
-export class GapiUsersComponent implements AfterViewInit, OnInit {
-  public authIsLoaded: boolean = false;
-  public isLoggedIn: boolean = false;
-  public user: User;
-
+export class GapiUsersComponent implements OnInit {
   public apiLoaded: boolean = false;
   public apiReady: boolean = false;
   public apiFailed: boolean = false;
+  public userLoggedIn: string;
+  public users;
 
   constructor(private gapiService: GapiAuthenticatorService) {
     //
@@ -42,7 +41,7 @@ export class GapiUsersComponent implements AfterViewInit, OnInit {
             (result: any) => {
               if (result.currentUser.get()
                 .isSignedIn() === true) {
-                //
+                this.userLoggedIn = result.currentUser.get().w3.ig;
               }
             },
             (err) => {
@@ -54,29 +53,17 @@ export class GapiUsersComponent implements AfterViewInit, OnInit {
       });
   }
 
-  public ngAfterViewInit(): void {
-    // gapi.load("client:auth2", initClient);
-
-    // this.gapiService.isLoaded$.subscribe((value) => {
-    //   this.authIsLoaded = value;
-    // });
-
-    // this.gapiService.isLoggedIn$.subscribe((value) => {
-    //   this.isLoggedIn = value;
-    // });
-
-    // this.gapiService.user$.subscribe((value) => {
-    //   this.user = value;
-    // });
-
-    // this.gapiService.loadAuth2();
+  public listUsers(): void {
+    this.gapiService.listUsers()
+      .then((res) => {
+        this.users = res.result.users;
+        console.log(this.users);
+      });
   }
 
-  public signIn(): void {
-    // this.gapiService.signIn();
-  }
+  public trackByFn(index, item) {
+    const self = this;
 
-  public signOut(): void {
-    // this.gapiService.signOut();
+    return index; // or item.id
   }
 }

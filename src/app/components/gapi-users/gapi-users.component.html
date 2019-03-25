@@ -1,15 +1,7 @@
 <h1>API Quickstart</h1>
 
 <div>
-    <button
-        id="authorize_button"
-        (click)="signIn()"
-    >Sign In With Google</button>
-
-    <button
-        id="signout_button"
-        (click)="signOut()"
-    >Sign Out</button>
+    <button (click)="listUsers()">List Users</button>
 
 </div>
 
@@ -19,3 +11,35 @@
     <div>API is loaded : {{ apiLoaded }}</div>
     <div>API is failed : {{ apiFailed }}</div>
     <div>API is ready : {{ apiReady }}</div>
+    <div>User logged in : {{ userLoggedIn }}</div>
+
+    <table *ngIf="users && users != undefined">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Is Admin</th>
+                <th>Team</th>
+                <th>Primary Email</th>
+                <th>Emails</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users; trackBy: trackByFn">
+                <td>{{ user.id }}</td>
+                <td>{{ user.name.givenName }}</td>
+                <td>{{ user.name.familyName }}</td>
+                <td>{{ user.isAdmin }}</td>
+                <td>{{ user.orgUnitPath }}</td>
+                <td>{{ user.primaryEmail }}</td>
+                <td>
+                    <ul *ngIf="user.emails && user.emails != undefined">
+                        <li *ngFor="let email of user.emails; trackBy: trackByFn">
+                            {{ email.address }}
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
