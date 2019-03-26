@@ -24,6 +24,7 @@ import {
 import { DestinationsResolverService } from "./resolvers/destinations-resolver.service";
 import { FieldsResolverService } from "./resolvers/fields-resolver.service";
 import { ManagersResolverService } from "./resolvers/managers-resolver.service";
+import { RolesResolverService } from "./resolvers/roles-resolver.service";
 import { TeamsResolverService } from "./resolvers/teams-resolver.service";
 import { UserResolverService } from "./resolvers/user-resolver.service";
 import { UsersResolverService } from "./resolvers/users-resolver.service";
@@ -37,6 +38,7 @@ export const AppRoutes: Routes = [
       destinations: DestinationsResolverService,
       fields: FieldsResolverService,
       managers: ManagersResolverService,
+      roles: RolesResolverService,
       user: UserResolverService,
       users: UsersResolverService,
       teams: TeamsResolverService,
