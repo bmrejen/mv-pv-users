@@ -67,4 +67,14 @@ export class GapiAuthenticatorService {
             });
         });
     }
+
+    public signIn() {
+        gapi.auth2.getAuthInstance()
+            .signIn();
+    }
+
+    public signOut() {
+        gapi.auth2.getAuthInstance()
+            .signOut();
+    }
 }
