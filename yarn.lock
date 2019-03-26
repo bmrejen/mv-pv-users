@@ -5576,6 +5576,30 @@ gulp-uglifyes@^0.1.1:
     through2 "^2.0.3"
     uglify-es "^3.3.7"
 
+gulp-util@3.0.7:
+  version "3.0.7"
+  resolved "https://registry.yarnpkg.com/gulp-util/-/gulp-util-3.0.7.tgz#78925c4b8f8b49005ac01a011c557e6218941cbb"
+  integrity sha1-eJJcS4+LSQBawBoBHFV+YhiUHLs=
+  dependencies:
+    array-differ "^1.0.0"
+    array-uniq "^1.0.2"
+    beeper "^1.0.0"
+    chalk "^1.0.0"
+    dateformat "^1.0.11"
+    fancy-log "^1.1.0"
+    gulplog "^1.0.0"
+    has-gulplog "^0.1.0"
+    lodash._reescape "^3.0.0"
+    lodash._reevaluate "^3.0.0"
+    lodash._reinterpolate "^3.0.0"
+    lodash.template "^3.0.0"
+    minimist "^1.1.0"
+    multipipe "^0.1.2"
+    object-assign "^3.0.0"
+    replace-ext "0.0.1"
+    through2 "^2.0.0"
+    vinyl "^0.5.0"
+
 gulp-util@^3.0, gulp-util@^3.0.0, gulp-util@^3.0.1, gulp-util@^3.0.5, gulp-util@^3.0.6, gulp-util@^3.0.7, gulp-util@^3.0.8:
   version "3.0.8"
   resolved "https://registry.yarnpkg.com/gulp-util/-/gulp-util-3.0.8.tgz#0054e1e744502e27c04c187c3ecc505dd54bbb4f"
@@ -10515,15 +10539,15 @@ regjsparser@^0.1.4:
   dependencies:
     jsesc "~0.5.0"
 
-remap-istanbul@^0.9f.5:
-  version "0.12.0"
-  resolved "https://registry.yarnpkg.com/remap-istanbul/-/remap-istanbul-0.12.0.tgz#7215642017d01a8c4a51bdb41be35297ec71fc4e"
-  integrity sha512-lpA+zkWfT7v81k76asd+w82+dnbBTmBEsyuBVQ28armnOqsZZO23uI4ZCBGd8TtIb9Tq4CauswB+A44cbkuiMA==
+remap-istanbul@^0.9.5:
+  version "0.9.6"
+  resolved "https://registry.yarnpkg.com/remap-istanbul/-/remap-istanbul-0.9.6.tgz#bbd5a688fe265192f067a0ca5b2b0d7f746c5f4b"
+  integrity sha512-l0WDBsVjaTzP8m3glERJO6bjlAFUahcgfcgvcX+owZw7dKeDLT3CVRpS7UO4L9LfGcMiNsqk223HopwVxlh8Hg==
   dependencies:
     amdefine "^1.0.0"
+    gulp-util "3.0.7"
     istanbul "0.4.5"
     minimatch "^3.0.3"
-    plugin-error "^0.1.2"
     source-map "^0.6.1"
     through2 "2.0.1"
 
