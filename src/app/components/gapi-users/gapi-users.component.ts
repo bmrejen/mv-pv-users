@@ -11,7 +11,7 @@ export class GapiUsersComponent implements OnInit {
     public apiLoaded: boolean = false;
     public apiReady: boolean = false;
     public apiFailed: boolean = false;
-    public userLoggedIn: string;
+    public userLoggedIn: string = "Logged out";
     public users;
 
     constructor(private gapiService: GapiAuthenticatorService) {
@@ -20,12 +20,11 @@ export class GapiUsersComponent implements OnInit {
 
     public ngOnInit(): void {
         this.gapiService.loadClient()
-            .then(
-                (result) => {
-                    this.apiLoaded = true;
+            .then((result) => {
+                this.apiLoaded = true;
 
-                    return this.gapiService.initClient();
-                },
+                return this.gapiService.initClient();
+            },
                 (err) => {
                     this.apiFailed = true;
                 },
@@ -33,18 +32,14 @@ export class GapiUsersComponent implements OnInit {
             .then((res) => {
                 this.apiReady = true;
                 this.gapiService.initAuthClient()
-                    .then((result: any) => {
-                        if (result.currentUser.get()
-                            .isSignedIn() === true) {
-                            this.userLoggedIn = result.currentUser.get().w3.ig;
-                        }
-                    },
-                        (err) => {
-                            console.log("init auth client error", err);
+                    .then(
+                        (result: any) => {
+                            if (this.isSignedIn()) {
+                                this.userLoggedIn = result.currentUser.get().w3.ig;
+                            }
                         },
+                        (err) => console.log("init auth client error", err),
                     );
-            }, (err) => {
-                this.apiFailed = true;
             });
     }
 
@@ -54,11 +49,30 @@ export class GapiUsersComponent implements OnInit {
     }
 
     public signIn() {
-        this.gapiService.signIn();
+        this.gapiService.signIn()
+            .then(() => this.gapiService.initAuthClient()
+                .then(
+                    (result: any) => this.userLoggedIn = result.currentUser.get().w3.ig,
+                    (err) => console.log("init auth client error", err),
+                ));
     }
 
     public signOut() {
-        this.gapiService.signOut();
+        this.gapiService.signOut()
+            .then(() => this.gapiService.initAuthClient()
+                .then(
+                    (result: any) => {
+                        if (!this.isSignedIn()) {
+                            this.userLoggedIn = "Logged out";
+                        }
+                    },
+                    (err) => console.log("init auth client error", err),
+                ));
+    }
+
+    public isSignedIn() {
+        return gapi.auth2.getAuthInstance().isSignedIn
+            .get();
     }
 
     public trackByFn(index, item) {

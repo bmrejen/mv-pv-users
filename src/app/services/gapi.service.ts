@@ -54,7 +54,7 @@ export class GapiAuthenticatorService {
         });
     }
 
-    public initAuthClient() {
+    public initAuthClient(): Promise<any> {
         const initObj = {
             client_id: this.CLIENT_ID,
             scope: this.SCOPES,
@@ -68,13 +68,19 @@ export class GapiAuthenticatorService {
         });
     }
 
-    public signIn() {
-        gapi.auth2.getAuthInstance()
-            .signIn();
+    public signIn(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            gapi.auth2.getAuthInstance()
+                .signIn()
+                .then(resolve, reject);
+        });
     }
 
-    public signOut() {
-        gapi.auth2.getAuthInstance()
-            .signOut();
+    public signOut(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            gapi.auth2.getAuthInstance()
+                .signOut()
+                .then(resolve, reject);
+        });
     }
 }

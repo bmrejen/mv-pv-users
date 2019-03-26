@@ -1,9 +1,25 @@
 <h1>API Quickstart</h1>
 
 <div>
-    <button (click)="signIn()">Sign In</button>
-    <button (click)="signOut()">Sign Out</button>
-    <button (click)="listUsers()">List Users</button>
+    <button
+        *ngIf="userLoggedIn==='Logged out'"
+        (click)="signIn()"
+    >Sign In</button>
+
+    <button
+        *ngIf="userLoggedIn!=='Logged out'"
+        (click)="signIn()"
+    >Change Users</button>
+
+    <button
+        *ngIf="userLoggedIn!=='Logged out'"
+        (click)="signOut()"
+    >Sign Out</button>
+
+    <button
+        *ngIf="userLoggedIn!=='Logged out'"
+        (click)="listUsers()"
+    >List Users</button>
 
 </div>
 
