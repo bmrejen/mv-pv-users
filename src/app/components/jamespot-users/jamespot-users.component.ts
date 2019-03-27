@@ -6,12 +6,42 @@ import { JamespotService } from "../../services/jamespot.service";
 })
 
 export class JamespotUsersComponent implements OnInit {
+    public first;
+    public last;
+    public id;
+    public fields = {
+        active: "1",
+        country: "fr",
+        firstname: "Mister",
+        image: null,
+        language: "fr",
+        lastname: "Pouet",
+        mail: "pouet6@pouet.com",
+        password: "mypass",
+        pseudo: "misterpouet7",
+        role: "User",
+    };
+
     constructor(private james: JamespotService) {
         //
     }
 
     public ngOnInit() {
-        this.james.getUsers()
-            .subscribe((data) => console.log(data));
+        // this.james.getUsers()
+        //     .subscribe((data) => console.log(data));
+    }
+
+    public onFileSelected(event) {
+        this.fields.image = event.target.files[0] as File;
+    }
+
+    public onPost() {
+        this.james.postUsers(this.fields)
+            .subscribe((res) => {
+                console.log(res);
+                this.first = res.VAL.Firstname;
+                this.last = res.VAL.Lastname;
+                this.id = res.VAL.idUser;
+            });
     }
 }

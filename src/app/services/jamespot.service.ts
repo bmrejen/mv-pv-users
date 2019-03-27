@@ -19,8 +19,19 @@ export class JamespotService {
         return this.http.get(`${this.endPoint}user/list`, { headers: this.headers });
     }
 
-    public postUsers(): Observable<any> {
-        return this.http.post(`${this.endPoint}user/list`, { headers: this.headers });
+    public postUsers(form): Observable<any> {
+        const fd = new FormData();
+        fd.append("image", form.image);
+        fd.append("Mail", form.mail);
+        fd.append("Role", form.role);
+        fd.append("Country", form.country);
+        fd.append("Language", form.language);
+        fd.append("active", form.active);
+        fd.append("Pseudo", form.pseudo);
+        fd.append("Password", form.password);
+        fd.append("Firstname", form.firstname);
+        fd.append("Lastname", form.lastname.toUpperCase());
 
+        return this.http.post(`${this.endPoint}user/create`, fd, { headers: this.headers });
     }
 }
