@@ -59,18 +59,20 @@ export class JamespotUsersComponent implements OnInit {
     }
 
     public onDelete(id) {
-        this.errorMessage = null;
-        this.james.deleteUser(id)
-            .subscribe((res) => {
-                console.log(res);
-                if (res.RC.CODE === 0) {
-                    this.isDeleted = true;
-                    this.deletedId = id;
-                } else {
-                    this.isDeleted = false;
-                    this.errorMessage = res.RC.MSG;
-                }
-            });
+        if (confirm(`Etes-vous sur de supprimer l'utilisateur ${id} en production?`)) {
+            this.errorMessage = null;
+            this.james.deleteUser(id)
+                .subscribe((res) => {
+                    console.log(res);
+                    if (res.RC.CODE === 0) {
+                        this.isDeleted = true;
+                        this.deletedId = id;
+                    } else {
+                        this.isDeleted = false;
+                        this.errorMessage = res.RC.MSG;
+                    }
+                });
+        }
     }
 
     private mapResponseToFields(res) {
