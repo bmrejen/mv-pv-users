@@ -6,6 +6,7 @@ import { JamespotService } from "../../services/jamespot.service";
 })
 
 export class JamespotUsersComponent implements OnInit {
+    public currentId;
     public first;
     public last;
     public id;
@@ -43,5 +44,30 @@ export class JamespotUsersComponent implements OnInit {
                 this.last = res.VAL.Lastname;
                 this.id = res.VAL.idUser;
             });
+    }
+
+    public getUser(id: string) {
+        this.james.getUser(id)
+            .subscribe((res) => {
+                this.currentId = res.VAL.idUser;
+                this.mapResponseToFields(res);
+            });
+    }
+
+    private mapResponseToFields(res) {
+        const val = res.VAL;
+        // je dois reassigner l'objet entier? ca m'a l'air un peu dangereux
+        this.fields = {
+            active: val.properties.active,
+            country: val.Country,
+            firstname: val.Firstname,
+            image: null,
+            language: val.Language,
+            lastname: val.Lastname,
+            mail: val.Mail,
+            password: null,
+            pseudo: val.Pseudo,
+            role: val.Role,
+        };
     }
 }

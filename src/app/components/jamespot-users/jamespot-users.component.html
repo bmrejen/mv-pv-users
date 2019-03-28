@@ -1,6 +1,14 @@
 <h1>Jamespot users</h1>
+<h2>Get User</h2>
+Get user id: <input
+    type="text"
+    [(ngModel)]="currentId"
+    name="currentId"
+>
+<button (click)="getUser(currentId)">Get</button>
 
-<h2>Create User</h2>
+<h2 *ngIf="currentId == null">Create User</h2>
+<h2 *ngIf="currentId != null">Edit User {{ currentId }}</h2>
 <form #jamesForm="ngForm">
     <input
         type="text"
@@ -63,7 +71,7 @@
     <button
         type=button
         (click)="onPost()"
-    >Upload</button>
+    >Create</button>
 </form>
 <div *ngIf="first != null && last != null">
     User {{ first }} {{ last }} created ! Id: {{ id }}
