@@ -68,3 +68,14 @@
 <div *ngIf="first != null && last != null">
     User {{ first }} {{ last }} created ! Id: {{ id }}
 </div>
+
+<h2>Delete User</h2>
+id to delete:
+<input
+    type="text"
+    name="userToDelete"
+    [(ngModel)]=userToDelete
+>
+<button (click)="onDelete(userToDelete)">Delete</button>
+<p *ngIf="isDeleted">User {{ deletedId }} deleted !</p>
+<p *ngIf="errorMessage">ERROR: {{ errorMessage }}</p>

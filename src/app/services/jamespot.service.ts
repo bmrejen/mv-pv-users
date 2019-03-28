@@ -1,5 +1,6 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { RequestOptions } from "@angular/http";
 import { Observable } from "rxjs/Observable";
 
 @Injectable()
@@ -33,5 +34,12 @@ export class JamespotService {
         fd.append("Lastname", form.lastname.toUpperCase());
 
         return this.http.post(`${this.endPoint}user/create`, fd, { headers: this.headers });
+    }
+
+    public deleteUser(id: string): Observable<any> {
+        const params = new HttpParams()
+            .set("idUser", id);
+
+        return this.http.delete(`${this.endPoint}user/delete`, { headers: this.headers, params });
     }
 }
