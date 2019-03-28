@@ -5576,6 +5576,30 @@ gulp-uglifyes@^0.1.1:
     through2 "^2.0.3"
     uglify-es "^3.3.7"
 
+gulp-util@3.0.7:
+  version "3.0.7"
+  resolved "https://registry.yarnpkg.com/gulp-util/-/gulp-util-3.0.7.tgz#78925c4b8f8b49005ac01a011c557e6218941cbb"
+  integrity sha1-eJJcS4+LSQBawBoBHFV+YhiUHLs=
+  dependencies:
+    array-differ "^1.0.0"
+    array-uniq "^1.0.2"
+    beeper "^1.0.0"
+    chalk "^1.0.0"
+    dateformat "^1.0.11"
+    fancy-log "^1.1.0"
+    gulplog "^1.0.0"
+    has-gulplog "^0.1.0"
+    lodash._reescape "^3.0.0"
+    lodash._reevaluate "^3.0.0"
+    lodash._reinterpolate "^3.0.0"
+    lodash.template "^3.0.0"
+    minimist "^1.1.0"
+    multipipe "^0.1.2"
+    object-assign "^3.0.0"
+    replace-ext "0.0.1"
+    through2 "^2.0.0"
+    vinyl "^0.5.0"
+
 gulp-util@^3.0, gulp-util@^3.0.0, gulp-util@^3.0.1, gulp-util@^3.0.5, gulp-util@^3.0.6, gulp-util@^3.0.7, gulp-util@^3.0.8:
   version "3.0.8"
   resolved "https://registry.yarnpkg.com/gulp-util/-/gulp-util-3.0.8.tgz#0054e1e744502e27c04c187c3ecc505dd54bbb4f"
@@ -6839,7 +6863,7 @@ jest-cli@^22.4.4:
     which "^1.2.12"
     yargs "^10.0.3"
 
-jest-cli@^23.6.0:
+jest-cli@^23.4.2:
   version "23.6.0"
   resolved "https://registry.yarnpkg.com/jest-cli/-/jest-cli-23.6.0.tgz#61ab917744338f443ef2baa282ddffdd658a5da4"
   integrity sha512-hgeD1zRUp1E1zsiyOXjEn4LzRLWdJBV//ukAHGlx6s5mfCNJTbhbHjgxnDUXA8fsKWN/HqFFF6X5XcCwC/IvYQ==
@@ -7387,6 +7411,14 @@ jest-zone-patch@^0.0.8:
   resolved "https://registry.yarnpkg.com/jest-zone-patch/-/jest-zone-patch-0.0.8.tgz#90fa3b5b60e95ad3e624dd2c3eb59bb1dcabd371"
   integrity sha1-kPo7W2DpWtPmJN0sPrWbsdyr03E=
 
+jest@23.4.2:
+  version "23.4.2"
+  resolved "https://registry.yarnpkg.com/jest/-/jest-23.4.2.tgz#1fae3ed832192143070ae85156b25cea891a1260"
+  integrity sha512-w10HGpVFWT1oN8B2coxeiMEsZoggkDaw3i26xHGLU+rsR+LYkBk8qpZCgi+1cD1S6ttPjZDL8E8M99lmNhgTeA==
+  dependencies:
+    import-local "^1.0.0"
+    jest-cli "^23.4.2"
+
 jest@^22.4.3:
   version "22.4.4"
   resolved "https://registry.yarnpkg.com/jest/-/jest-22.4.4.tgz#ffb36c9654b339a13e10b3d4b338eb3e9d49f6eb"
@@ -7394,14 +7426,6 @@ jest@^22.4.3:
   dependencies:
     import-local "^1.0.0"
     jest-cli "^22.4.4"
-
-jest@^23.4.2:
-  version "23.6.0"
-  resolved "https://registry.yarnpkg.com/jest/-/jest-23.6.0.tgz#ad5835e923ebf6e19e7a1d7529a432edfee7813d"
-  integrity sha512-lWzcd+HSiqeuxyhG+EnZds6iO3Y3ZEnMrfZq/OTGvF/C+Z4fPMCdhWTGSAiO2Oym9rbEXfwddHhh6jqrTF3+Lw==
-  dependencies:
-    import-local "^1.0.0"
-    jest-cli "^23.6.0"
 
 jison-lex@0.2.x:
   version "0.2.1"
@@ -10515,15 +10539,15 @@ regjsparser@^0.1.4:
   dependencies:
     jsesc "~0.5.0"
 
-remap-istanbul@^0.9f.5:
-  version "0.12.0"
-  resolved "https://registry.yarnpkg.com/remap-istanbul/-/remap-istanbul-0.12.0.tgz#7215642017d01a8c4a51bdb41be35297ec71fc4e"
-  integrity sha512-lpA+zkWfT7v81k76asd+w82+dnbBTmBEsyuBVQ28armnOqsZZO23uI4ZCBGd8TtIb9Tq4CauswB+A44cbkuiMA==
+remap-istanbul@^0.9.5:
+  version "0.9.6"
+  resolved "https://registry.yarnpkg.com/remap-istanbul/-/remap-istanbul-0.9.6.tgz#bbd5a688fe265192f067a0ca5b2b0d7f746c5f4b"
+  integrity sha512-l0WDBsVjaTzP8m3glERJO6bjlAFUahcgfcgvcX+owZw7dKeDLT3CVRpS7UO4L9LfGcMiNsqk223HopwVxlh8Hg==
   dependencies:
     amdefine "^1.0.0"
+    gulp-util "3.0.7"
     istanbul "0.4.5"
     minimatch "^3.0.3"
-    plugin-error "^0.1.2"
     source-map "^0.6.1"
     through2 "2.0.1"
 
