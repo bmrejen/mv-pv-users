@@ -7,24 +7,23 @@ import { JamespotService } from "../../services/jamespot.service";
 
 export class JamespotUsersComponent implements OnInit {
     public currentId;
-    public userToDelete = null;
     public first;
     public last;
-    public id;
+    public idToGet;
     public isDeleted: boolean = false;
     public deletedId;
     public errorMessage;
     public fields = {
-        active: "1",
-        country: "fr",
-        firstname: "Mister",
+        active: null,
+        country: null,
+        firstname: null,
         image: null,
-        language: "fr",
-        lastname: "Pouet",
-        mail: "pouet6@pouet.com",
-        password: "mypass",
-        pseudo: "misterpouet7",
-        role: "User",
+        language: null,
+        lastname: null,
+        mail: null,
+        password: null,
+        pseudo: null,
+        role: null,
     };
 
     constructor(private james: JamespotService) {
@@ -46,47 +45,85 @@ export class JamespotUsersComponent implements OnInit {
                 console.log(res);
                 this.first = res.VAL.Firstname;
                 this.last = res.VAL.Lastname;
-                this.id = res.VAL.idUser;
+                this.currentId = res.VAL.idUser;
             });
     }
 
     public getUser(id: string) {
+        this.resetFields();
         this.james.getUser(id)
             .subscribe((res) => {
-                this.currentId = res.VAL.idUser;
-                this.mapResponseToFields(res);
+                if (res.RC.CODE === 0) {
+                    this.currentId = res.VAL.idUser;
+                    this.mapResponseToFields(res);
+                } else {
+                    this.errorMessage = `User ${id} doesn't exist`;
+                }
+
             });
     }
 
     public onDelete(id) {
+        if (confirm(`Etes-vous sur de supprimer l'utilisateur ${id} en production?`)) {
+            this.errorMessage = null;
+            this.james.deleteUser(id)
+                .subscribe((res) => {
+                    console.log(res);
+                    if (res.RC.CODE === 0) {
+                        this.isDeleted = true;
+                        this.deletedId = id;
+                        this.resetFields();
+                    } else {
+                        this.isDeleted = false;
+                        this.errorMessage = res.RC.MSG;
+                    }
+                });
+        }
+    }
+
+    private resetFields() {
+        this.fields = {
+            active: null,
+            country: null,
+            firstname: null,
+            image: null,
+            language: null,
+            lastname: null,
+            mail: null,
+            password: null,
+            pseudo: null,
+            role: null,
+        };
         this.errorMessage = null;
-        this.james.deleteUser(id)
-            .subscribe((res) => {
-                console.log(res);
-                if (res.RC.CODE === 0) {
-                    this.isDeleted = true;
-                    this.deletedId = id;
-                } else {
-                    this.isDeleted = false;
-                    this.errorMessage = res.RC.MSG;
-                }
-            });
+        this.currentId = null;
+        this.idToGet = null;
     }
 
     private mapResponseToFields(res) {
         const val = res.VAL;
         // je dois reassigner l'objet entier? ca m'a l'air un peu dangereux
-        this.fields = {
-            active: val.properties.active,
-            country: val.Country,
-            firstname: val.Firstname,
-            image: null,
-            language: val.Language,
-            lastname: val.Lastname,
-            mail: val.Mail,
-            password: null,
-            pseudo: val.Pseudo,
-            role: val.Role,
-        };
+        [
+            this.fields.active,
+            this.fields.country,
+            this.fields.firstname,
+            this.fields.image,
+            this.fields.language,
+            this.fields.lastname,
+            this.fields.mail,
+            this.fields.password,
+            this.fields.pseudo,
+            this.fields.role,
+        ] = [
+                val.properties.active,
+                val.Country,
+                val.Firstname,
+                null,
+                val.Language,
+                val.Lastname,
+                val.Mail,
+                null,
+                val.Pseudo,
+                val.Role,
+            ];
     }
 }
