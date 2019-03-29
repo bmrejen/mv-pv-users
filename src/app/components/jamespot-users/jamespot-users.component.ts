@@ -6,6 +6,7 @@ import { JamespotService } from "../../services/jamespot.service";
 })
 
 export class JamespotUsersComponent implements OnInit {
+    public userToDelete;
     public currentId;
     public first;
     public last;
