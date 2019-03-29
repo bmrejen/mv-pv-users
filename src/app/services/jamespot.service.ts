@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { RequestOptions } from "@angular/http";
 import { Observable } from "rxjs/Observable";
 
 @Injectable()
@@ -18,6 +17,13 @@ export class JamespotService {
 
     public getUsers(): Observable<any> {
         return this.http.get(`${this.endPoint}user/list`, { headers: this.headers });
+    }
+
+    public getUser(id: string): Observable<any> {
+        const params = new HttpParams()
+            .set("idUser", id);
+
+        return this.http.get(`${this.endPoint}user/get`, { headers: this.headers, params });
     }
 
     public postUsers(form): Observable<any> {

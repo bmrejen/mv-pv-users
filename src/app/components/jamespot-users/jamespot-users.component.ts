@@ -6,7 +6,8 @@ import { JamespotService } from "../../services/jamespot.service";
 })
 
 export class JamespotUsersComponent implements OnInit {
-    public userToDelete = null;
+    public userToDelete;
+    public currentId;
     public first;
     public last;
     public id;
@@ -49,6 +50,14 @@ export class JamespotUsersComponent implements OnInit {
             });
     }
 
+    public getUser(id: string): void {
+        this.james.getUser(id)
+            .subscribe((res) => {
+                this.currentId = res.VAL.idUser;
+                this.mapResponseToFields(res);
+            });
+    }
+
     public onDelete(id) {
         this.errorMessage = null;
         this.james.deleteUser(id)
@@ -62,5 +71,22 @@ export class JamespotUsersComponent implements OnInit {
                     this.errorMessage = res.RC.MSG;
                 }
             });
+    }
+
+    private mapResponseToFields(res) {
+        const val = res.VAL;
+        // je dois reassigner l'objet entier? ca m'a l'air un peu dangereux
+        this.fields = {
+            active: val.properties.active,
+            country: val.Country,
+            firstname: val.Firstname,
+            image: null,
+            language: val.Language,
+            lastname: val.Lastname,
+            mail: val.Mail,
+            password: null,
+            pseudo: val.Pseudo,
+            role: val.Role,
+        };
     }
 }
