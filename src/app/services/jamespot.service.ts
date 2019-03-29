@@ -20,7 +20,7 @@ export class JamespotService {
         return this.http.get(`${this.endPoint}user/list`, { headers: this.headers });
     }
 
-    public getUser(id): Observable<any> {
+    public getUser(id: string): Observable<any> {
         const params = new HttpParams()
             .set("idUser", id);
 

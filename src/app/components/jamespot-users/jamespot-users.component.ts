@@ -6,12 +6,7 @@ import { JamespotService } from "../../services/jamespot.service";
 })
 
 export class JamespotUsersComponent implements OnInit {
-<<<<<<< HEAD
     public currentId;
-||||||| merged common ancestors
-=======
-    public userToDelete = null;
->>>>>>> dev
     public first;
     public last;
     public id;
@@ -53,13 +48,27 @@ export class JamespotUsersComponent implements OnInit {
                 this.id = res.VAL.idUser;
             });
     }
-<<<<<<< HEAD
 
-    public getUser(id: string) {
+    public getUser(id: string): void {
         this.james.getUser(id)
             .subscribe((res) => {
                 this.currentId = res.VAL.idUser;
                 this.mapResponseToFields(res);
+            });
+    }
+
+    public onDelete(id) {
+        this.errorMessage = null;
+        this.james.deleteUser(id)
+            .subscribe((res) => {
+                console.log(res);
+                if (res.RC.CODE === 0) {
+                    this.isDeleted = true;
+                    this.deletedId = id;
+                } else {
+                    this.isDeleted = false;
+                    this.errorMessage = res.RC.MSG;
+                }
             });
     }
 
@@ -79,22 +88,4 @@ export class JamespotUsersComponent implements OnInit {
             role: val.Role,
         };
     }
-||||||| merged common ancestors
-=======
-
-    public onDelete(id) {
-        this.errorMessage = null;
-        this.james.deleteUser(id)
-            .subscribe((res) => {
-                console.log(res);
-                if (res.RC.CODE === 0) {
-                    this.isDeleted = true;
-                    this.deletedId = id;
-                } else {
-                    this.isDeleted = false;
-                    this.errorMessage = res.RC.MSG;
-                }
-            });
-    }
->>>>>>> dev
 }
