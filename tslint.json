@@ -50,14 +50,6 @@
             "allow-single-concat"
         ],
         "radix": false,
-        "trailing-comma": [
-            true,
-            {
-                "multiline": "always",
-                "singleline": "never",
-                "esSpecCompliant": true
-            }
-        ],
         "use-host-property-decorator": true,
         "use-input-property-decorator": true,
         "use-life-cycle-interface": true,
