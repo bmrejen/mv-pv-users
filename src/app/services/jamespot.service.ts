@@ -26,13 +26,7 @@ export class JamespotService {
             `${this.endPoint}user/list`, { headers: this.headers });
     }
 
-<<<<<<< HEAD
-    public getUser(id: string): Observable<any> {
-||||||| merged common ancestors
-    public getUser(id): Observable<any> {
-=======
     public getUser(id: string): Observable<IJamespotApiResponse<IJamespotUser>> {
->>>>>>> feat/#17715_jamespot_update
         const params = new HttpParams()
             .set("idUser", id);
 

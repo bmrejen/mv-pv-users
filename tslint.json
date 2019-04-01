@@ -9,15 +9,28 @@
     "rules": {
         "binary-expression-operand-order": false,
         "component-class-suffix": true,
-        "component-selector": [true, "element", "mv", "kebab-case"],
+        "component-selector": [
+            true,
+            "element",
+            "mv",
+            "kebab-case"
+        ],
         "directive-class-suffix": true,
-        "directive-selector": [false, "attribute"],
-        "i18n": [false],
+        "directive-selector": [
+            false,
+            "attribute"
+        ],
+        "i18n": [
+            false
+        ],
         "no-attribute-parameter-decorator": true,
         "no-console": false,
         "no-dynamic-delete": false,
         "no-forward-ref": false,
-        "no-implicit-dependencies": [true, "dev"],
+        "no-implicit-dependencies": [
+            true,
+            "dev"
+        ],
         "no-inferrable-types": false,
         "no-input-rename": false,
         "no-null-keyword": false,
@@ -26,11 +39,25 @@
         "no-string-literal": false,
         "no-template-call-expression": false,
         "no-var-requires": false,
-        "object-literal-key-quotes": [true, "as-needed"],
+        "object-literal-key-quotes": [
+            true,
+            "as-needed"
+        ],
         "only-arrow-functions": false,
         "pipe-impure": false,
-        "prefer-template": [true, "allow-single-concat"],
+        "prefer-template": [
+            true,
+            "allow-single-concat"
+        ],
         "radix": false,
+        "trailing-comma": [
+            true,
+            {
+                "multiline": "always",
+                "singleline": "never",
+                "esSpecCompliant": true
+            }
+        ],
         "use-host-property-decorator": true,
         "use-input-property-decorator": true,
         "use-life-cycle-interface": true,

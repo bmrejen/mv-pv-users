@@ -167,29 +167,16 @@ export class JamespotUsersComponent implements OnInit {
 
     private mapResponseToFields(res) {
         const val = res.VAL;
-        // je dois reassigner l'objet entier? ca m'a l'air un peu dangereux
-        [
-            this.fields.active,
-            this.fields.country,
-            this.fields.firstname,
-            this.fields.image,
-            this.fields.language,
-            this.fields.lastname,
-            this.fields.mail,
-            this.fields.password,
-            this.fields.pseudo,
-            this.fields.role,
-        ] = [
-                val.properties.active,
-                val.Country,
-                val.Firstname,
-                null,
-                val.Language,
-                val.Lastname,
-                val.Mail,
-                null,
-                val.Pseudo,
-                val.Role,
-            ];
+        // reassigner l'objet entier?
+        this.fields.active = val.properties.active;
+        this.fields.country = val.Country;
+        this.fields.firstname = val.Firstname;
+        this.fields.image = null;
+        this.fields.language = val.Language;
+        this.fields.lastname = val.Lastname;
+        this.fields.mail = val.Mail;
+        this.fields.password = null;
+        this.fields.pseudo = val.Pseudo;
+        this.fields.role = val.Role;
     }
 }
