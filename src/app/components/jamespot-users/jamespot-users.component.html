@@ -2,13 +2,13 @@
 <h2>Get User</h2>
 Get user id: <input
     type="text"
-    [(ngModel)]="currentId"
-    name="currentId"
+    [(ngModel)]="idToGet"
+    name="idToGet"
 >
-<button (click)="getUser(currentId)">Get</button>
+<button (click)="getUser(idToGet)">Get</button>
 
 <h2 *ngIf="currentId == null">Create User</h2>
-<h2 *ngIf="currentId != null">Edit User {{ currentId }}</h2>
+<h2 *ngIf="currentId != null">User {{ currentId }}</h2>
 <form #jamesForm="ngForm">
     <input
         type="text"
@@ -64,26 +64,33 @@ Get user id: <input
         name="lastname"
     >Lastname
     <br>
+
+    <!-- IMAGE UPDATE -->
     <input
         type="file"
         (change)="onFileSelected($event)"
     >
+    <br>
+    <!-- BUTTONS -->
     <button
+        type=button
+        (click)="onPrefill()"
+    >Prefill form with random data</button>
+    <button
+        *ngIf="currentId == null"
         type=button
         (click)="onPost()"
     >Create</button>
+    <button
+        *ngIf="currentId != null"
+        type=button
+        (click)="onUpdate(jamesForm.value)"
+    >Update</button>
+    <button (click)="onDelete(currentId)">Delete</button>
 </form>
-<div *ngIf="first != null && last != null">
-    User {{ first }} {{ last }} created ! Id: {{ id }}
-</div>
+<h2 *ngIf="first != null && last != null">
+    User {{ currentUser.Firstname }} {{ currentUser.Lastname }} created ! Id: {{ currentUser.idUser }}
+</h2>
 
-<h2>Delete User</h2>
-id to delete:
-<input
-    type="text"
-    name="userToDelete"
-    [(ngModel)]=userToDelete
->
-<button (click)="onDelete(userToDelete)">Delete</button>
-<p *ngIf="isDeleted">User {{ deletedId }} deleted !</p>
-<p *ngIf="errorMessage">ERROR: {{ errorMessage }}</p>
+<h2 *ngIf="isDeleted">User {{ deletedId }} deleted !</h2>
+<h2 *ngIf="errorMessage">ERROR: {{ errorMessage }}</h2>
