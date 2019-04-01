@@ -1,3 +1,9 @@
+import {
+    IJamespotApiResponse,
+    IJamespotUser,
+    IJamespotUserList,
+} from "./../interfaces/jamespot-api-response";
+
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
@@ -15,18 +21,20 @@ export class JamespotService {
         //
     }
 
-    public getUsers(): Observable<any> {
-        return this.http.get(`${this.endPoint}user/list`, { headers: this.headers });
+    public getUsers(): Observable<IJamespotApiResponse<IJamespotUserList[]>> {
+        return this.http.get<IJamespotApiResponse<IJamespotUserList[]>>(
+            `${this.endPoint}user/list`, { headers: this.headers });
     }
 
-    public getUser(id): Observable<any> {
+    public getUser(id: string): Observable<IJamespotApiResponse<IJamespotUser>> {
         const params = new HttpParams()
             .set("idUser", id);
 
-        return this.http.get(`${this.endPoint}user/get`, { headers: this.headers, params });
+        return this.http.get<IJamespotApiResponse<IJamespotUser>>(
+            `${this.endPoint}user/get`, { headers: this.headers, params });
     }
 
-    public postUsers(form): Observable<any> {
+    public postUsers(form): Observable<IJamespotApiResponse<IJamespotUser>> {
         const fd = new FormData();
         fd.append("image", form.image);
         fd.append("Mail", form.mail);
@@ -39,7 +47,8 @@ export class JamespotService {
         fd.append("Firstname", form.firstname);
         fd.append("Lastname", form.lastname.toUpperCase());
 
-        return this.http.post(`${this.endPoint}user/create`, fd, { headers: this.headers });
+        return this.http.post<IJamespotApiResponse<IJamespotUser>>(
+            `${this.endPoint}user/create`, fd, { headers: this.headers });
     }
 
     public deleteUser(id: string): Observable<any> {
@@ -47,5 +56,21 @@ export class JamespotService {
             .set("idUser", id);
 
         return this.http.delete(`${this.endPoint}user/delete`, { headers: this.headers, params });
+    }
+
+    public updateUser(form) {
+        const fd = new FormData();
+        fd.append("image", form.image);
+        fd.append("Mail", form.mail);
+        fd.append("Role", form.role);
+        fd.append("Country", form.country);
+        fd.append("Language", form.language);
+        fd.append("active", form.active);
+        fd.append("Pseudo", form.pseudo);
+        fd.append("Password", form.password);
+        fd.append("Firstname", form.firstname);
+        fd.append("Lastname", form.lastname.toUpperCase());
+
+        return this.http.put(`${this.endPoint}user/update`, fd, { headers: this.headers });
     }
 }

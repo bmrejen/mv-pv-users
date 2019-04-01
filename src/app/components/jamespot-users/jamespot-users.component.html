@@ -64,10 +64,18 @@ Get user id: <input
         name="lastname"
     >Lastname
     <br>
+
+    <!-- IMAGE UPDATE -->
     <input
         type="file"
         (change)="onFileSelected($event)"
     >
+    <br>
+    <!-- BUTTONS -->
+    <button
+        type=button
+        (click)="onPrefill()"
+    >Prefill form with random data</button>
     <button
         *ngIf="currentId == null"
         type=button
@@ -76,13 +84,13 @@ Get user id: <input
     <button
         *ngIf="currentId != null"
         type=button
-        (click)="onPost()"
+        (click)="onUpdate(jamesForm.value)"
     >Update</button>
     <button (click)="onDelete(currentId)">Delete</button>
 </form>
-<div *ngIf="first != null && last != null">
-    User {{ first }} {{ last }} created ! Id: {{ id }}
-</div>
+<h2 *ngIf="first != null && last != null">
+    User {{ currentUser.Firstname }} {{ currentUser.Lastname }} created ! Id: {{ currentUser.idUser }}
+</h2>
 
-<p *ngIf="isDeleted">User {{ deletedId }} deleted !</p>
+<h2 *ngIf="isDeleted">User {{ deletedId }} deleted !</h2>
 <h2 *ngIf="errorMessage">ERROR: {{ errorMessage }}</h2>
