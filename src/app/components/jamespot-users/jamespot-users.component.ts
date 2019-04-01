@@ -8,7 +8,9 @@ import { JamespotUser } from "./../../models/jamespot-user";
 })
 
 export class JamespotUsersComponent implements OnInit {
+    public updateSuccessful: boolean = false;
     public currentUser: JamespotUser;
+    public updatedUser: JamespotUser;
     public currentId;
     public first;
     public last;
@@ -47,23 +49,53 @@ export class JamespotUsersComponent implements OnInit {
             .subscribe((res) => {
                 console.log(res);
                 this.resetFields();
-
-                this.first = res.VAL.Firstname;
-                this.last = res.VAL.Lastname;
                 this.currentId = res.VAL.idUser;
 
-                const [
-                    Country,
-                    Firstname,
-                    Language,
-                    Lastname,
-                    Mail,
-                    Pseudo,
-                    Role,
-                    idUser,
-                    img,
-                    active,
-                ] = [
+                this.currentUser = new JamespotUser(
+                    res.VAL.Country,
+                    res.VAL.Firstname,
+                    res.VAL.Language,
+                    res.VAL.Lastname,
+                    res.VAL.Mail,
+                    res.VAL.Pseudo,
+                    res.VAL.Role,
+                    res.VAL.properties.active,
+                    res.VAL.idUser,
+                    res.VAL.img,
+                );
+                console.log("this.currentUser", this.currentUser);
+            });
+    }
+    public onUpdate(form) {
+        this.updatedUser = new JamespotUser(
+            this.fields.country,
+            this.fields.firstname,
+            this.fields.language,
+            this.fields.lastname,
+            this.fields.mail,
+            this.fields.pseudo,
+            this.fields.role,
+            this.fields.active,
+            this.currentId,
+            this.fields.image,
+            this.fields.password,
+        );
+        console.log("this.updatedUser", this.updatedUser);
+        this.james.updateUser(this.updatedUser, this.currentUser)
+            .subscribe((res) => {
+                if (res["RC"].CODE === 0) {
+                    this.resetFields();
+                    this.updateSuccessful = true;
+                }
+            },
+                (err) => console.error(err));
+    }
+
+    public getUser(id: string): void {
+        this.james.getUser(id)
+            .subscribe((res: IJamespotApiResponse<IJamespotUser>) => {
+                if (res.RC.CODE === 0) {
+                    this.currentUser = new JamespotUser(
                         res.VAL.Country,
                         res.VAL.Firstname,
                         res.VAL.Language,
@@ -71,39 +103,13 @@ export class JamespotUsersComponent implements OnInit {
                         res.VAL.Mail,
                         res.VAL.Pseudo,
                         res.VAL.Role,
+                        res.VAL.properties.active,
                         res.VAL.idUser,
                         res.VAL.img,
-                        res.VAL.properties.active,
-                    ];
-                this.currentUser = new JamespotUser(
-                    Country,
-                    Firstname,
-                    Language,
-                    Lastname,
-                    Mail,
-                    Pseudo,
-                    Role,
-                    active,
-                    idUser,
-                    img,
-                );
-                console.log(this.currentUser);
-            });
-    }
-    public onUpdate(form) {
-        console.log(form);
-        console.log(this.fields);
-        this.james.updateUser(this.fields)
-            .subscribe((res) => console.log(res));
-    }
-
-    public getUser(id: string): void {
-        this.james.getUser(id)
-            .subscribe((res: IJamespotApiResponse<IJamespotUser>) => {
-                console.log(res);
-                if (res.RC.CODE === 0) {
-                    this.currentId = res.VAL.idUser;
+                    );
+                    this.currentId = this.currentUser.idUser;
                     this.mapResponseToFields(res);
+                    console.log("this.currentUser", this.currentUser);
                 } else {
                     this.errorMessage = `User ${id} doesn't exist`;
                 }
@@ -163,11 +169,12 @@ export class JamespotUsersComponent implements OnInit {
         this.isDeleted = false;
         this.first = null;
         this.last = null;
+        this.updateSuccessful = false;
     }
 
     private mapResponseToFields(res) {
         const val = res.VAL;
-        // reassigner l'objet entier?
+
         this.fields.active = val.properties.active;
         this.fields.country = val.Country;
         this.fields.firstname = val.Firstname;

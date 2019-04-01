@@ -88,9 +88,10 @@ Get user id: <input
     >Update</button>
     <button (click)="onDelete(currentId)">Delete</button>
 </form>
-<h2 *ngIf="first != null && last != null">
-    User {{ currentUser.Firstname }} {{ currentUser.Lastname }} created ! Id: {{ currentUser.idUser }}
+<h2 *ngIf="currentUser && currentUser.Firstname != null && currentUser.Lastname != null">
+    Current User: {{ currentUser.Firstname }} {{ currentUser.Lastname }} - Id: {{ currentUser.idUser }}
 </h2>
+<h3 *ngIf="updateSuccessful">Data Updated ! </h3>
 
 <h2 *ngIf="isDeleted">User {{ deletedId }} deleted !</h2>
 <h2 *ngIf="errorMessage">ERROR: {{ errorMessage }}</h2>
