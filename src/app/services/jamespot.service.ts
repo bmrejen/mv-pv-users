@@ -34,9 +34,9 @@ export class JamespotService {
             `${this.endPoint}user/get`, { headers: this.headers, params });
     }
 
-    public postUsers(form): Observable<IJamespotApiResponse<IJamespotUser>> {
+    public postUsers(form, image): Observable<IJamespotApiResponse<IJamespotUser>> {
+        console.log("form", form);
         const fd = new FormData();
-        fd.append("image", form.image);
         fd.append("Mail", form.mail);
         fd.append("Role", form.role);
         fd.append("Country", form.country);
@@ -46,6 +46,10 @@ export class JamespotService {
         fd.append("Password", form.password);
         fd.append("Firstname", form.firstname);
         fd.append("Lastname", form.lastname.toUpperCase());
+        fd.append("Company", form.company);
+        fd.append("Field1", form.phoneExtension);
+        fd.append("timeZone", form.timeZone);
+        fd.append("image", image);
 
         return this.http.post<IJamespotApiResponse<IJamespotUser>>(
             `${this.endPoint}user/create`, fd, { headers: this.headers });

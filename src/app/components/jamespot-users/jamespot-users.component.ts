@@ -10,78 +10,57 @@ import { JamespotUser } from "./../../models/jamespot-user";
 export class JamespotUsersComponent implements OnInit {
     public updateSuccessful: boolean = false;
     public currentUser: JamespotUser;
-    public updatedUser: JamespotUser;
-    public currentId;
-    public first;
-    public last;
+    public oldUser: JamespotUser;
     public idToGet;
     public isDeleted: boolean = false;
     public deletedId;
     public errorMessage;
-    public fields = {
-        active: null,
-        country: null,
-        firstname: null,
-        image: null,
-        language: null,
-        lastname: null,
-        mail: null,
-        password: null,
-        pseudo: null,
-        role: null,
-    };
+    public image;
 
     constructor(private james: JamespotService) {
         //
     }
 
     public ngOnInit(): void {
+        this.resetFields();
+        console.log("this.currentUser", this.currentUser);
         this.james.getUsers()
             .subscribe((data) => console.log(data.VAL.forEach((user) => user.idUser)));
     }
 
     public onFileSelected(event) {
-        this.fields.image = event.target.files[0] as File;
+        this.image = event.target.files[0] as File;
     }
 
-    public onPost() {
-        this.james.postUsers(this.fields)
+    public onPost(form) {
+        this.james.postUsers(form, this.image)
             .subscribe((res) => {
-                console.log(res);
+                console.log("res", res);
                 this.resetFields();
-                this.currentId = res.VAL.idUser;
+                if (res["RC"].CODE === 0) {
 
-                this.currentUser = new JamespotUser(
-                    res.VAL.Country,
-                    res.VAL.Firstname,
-                    res.VAL.Language,
-                    res.VAL.Lastname,
-                    res.VAL.Mail,
-                    res.VAL.Pseudo,
-                    res.VAL.Role,
-                    res.VAL.properties.active,
-                    res.VAL.idUser,
-                    res.VAL.img,
-                );
-                console.log("this.currentUser", this.currentUser);
+                    this.currentUser = new JamespotUser(
+                        res.VAL.Country,
+                        res.VAL.Firstname,
+                        res.VAL.Language,
+                        res.VAL.Lastname,
+                        res.VAL.Mail,
+                        res.VAL.Pseudo,
+                        res.VAL.Role,
+                        res.VAL.properties.active,
+                        res.VAL.properties.timeZone,
+                        res.VAL.field1, // phoneExtension
+                        res.VAL.idUser,
+                        res.VAL.img,
+                        null, // password
+                        res.VAL.properties.company,
+                    );
+                    console.log("this.currentUser", this.currentUser);
+                }
             });
     }
     public onUpdate(form) {
-        this.updatedUser = new JamespotUser(
-            this.fields.country,
-            this.fields.firstname,
-            this.fields.language,
-            this.fields.lastname,
-            this.fields.mail,
-            this.fields.pseudo,
-            this.fields.role,
-            this.fields.active,
-            this.currentId,
-            this.fields.image,
-            this.fields.password,
-        );
-        console.log("this.updatedUser", this.updatedUser);
-        this.james.updateUser(this.updatedUser, this.currentUser)
+        this.james.updateUser(this.currentUser, this.oldUser)
             .subscribe((res) => {
                 if (res["RC"].CODE === 0) {
                     this.resetFields();
@@ -112,13 +91,13 @@ export class JamespotUsersComponent implements OnInit {
                         null, // password
                         res.VAL.properties.company,
                     );
-                    this.currentId = this.currentUser.idUser;
-                    this.mapResponseToFields(res);
+                    this.oldUser = { ...this.currentUser };
                     console.log("this.currentUser", this.currentUser);
                 } else {
+                    this.resetFields();
                     this.errorMessage = `User ${id} doesn't exist`;
-                }
 
+                }
             });
     }
 
@@ -141,54 +120,44 @@ export class JamespotUsersComponent implements OnInit {
     }
 
     public onPrefill() {
-        this.fields = {
-            active: "1",
-            country: "fr",
-            firstname: "Benoit",
-            image: null,
-            language: "fr",
-            lastname: "Mrejen",
-            mail: "benoit.mrejen@planetveo.com",
-            password: "mypassword",
-            pseudo: "benoitmrejen",
-            role: "User",
-        };
+        this.currentUser = new JamespotUser(
+            "fr",           // country
+            "Benoit",             // firstName
+            "fr",           // language
+            "Mrejen",             // lastName
+            "benoitmrejen@planetveo.com",             // mail
+            "benoit.mrejen",             // pseudo
+            "User",         // role
+            "1",            // active
+            "Europe/Paris", // timeZone
+            "1234",           // phoneExtension
+            null,           // idUser
+            null,           // image
+            "mypassword",           // password
+            "MARCO VASCO",  // company
+        );
     }
 
     private resetFields() {
-        this.fields = {
-            active: null,
-            country: null,
-            firstname: null,
-            image: null,
-            language: null,
-            lastname: null,
-            mail: null,
-            password: null,
-            pseudo: null,
-            role: null,
-        };
+        this.currentUser = new JamespotUser(
+            "fr",           // country
+            "",             // firstName
+            "fr",           // language
+            "",             // lastName
+            "",             // mail
+            "",             // pseudo
+            "User",         // role
+            "1",            // active
+            "Europe/Paris", // timeZone
+            null,           // phoneExtension
+            null,           // idUser
+            null,           // image
+            null,           // password
+            "MARCO VASCO",  // company
+        );
         this.errorMessage = null;
-        this.currentId = null;
         this.idToGet = null;
         this.isDeleted = false;
-        this.first = null;
-        this.last = null;
         this.updateSuccessful = false;
-    }
-
-    private mapResponseToFields(res) {
-        const val = res.VAL;
-
-        this.fields.active = val.properties.active;
-        this.fields.country = val.Country;
-        this.fields.firstname = val.Firstname;
-        this.fields.image = null;
-        this.fields.language = val.Language;
-        this.fields.lastname = val.Lastname;
-        this.fields.mail = val.Mail;
-        this.fields.password = null;
-        this.fields.pseudo = val.Pseudo;
-        this.fields.role = val.Role;
     }
 }
