@@ -85,5 +85,11 @@ id to delete:
     [(ngModel)]=userToDelete
 >
 <button (click)="onDelete(userToDelete)">Delete</button>
+
+<button
+    *ngIf="currentId != null"
+    type=button
+    (click)="onDisable(currentId)"
+>Disable</button>
 <p *ngIf="isDeleted">User {{ deletedId }} deleted !</p>
 <p *ngIf="errorMessage">ERROR: {{ errorMessage }}</p>

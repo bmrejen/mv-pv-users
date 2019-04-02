@@ -48,4 +48,12 @@ export class JamespotService {
 
         return this.http.delete(`${this.endPoint}user/delete`, { headers: this.headers, params });
     }
+
+    public disableUser(id: string): Observable<any> {
+        const params = new HttpParams()
+            .set("idUser", id)
+            .append("active", "0");
+
+        return this.http.put(`${this.endPoint}user/update`, null, { headers: this.headers, params });
+    }
 }

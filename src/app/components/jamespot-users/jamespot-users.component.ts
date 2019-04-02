@@ -73,6 +73,11 @@ export class JamespotUsersComponent implements OnInit {
             });
     }
 
+    public onDisable(id: string) {
+        this.james.disableUser(id)
+            .subscribe((res) => console.log(res));
+    }
+
     private mapResponseToFields(res) {
         const val = res.VAL;
         // je dois reassigner l'objet entier? ca m'a l'air un peu dangereux
