@@ -23,7 +23,6 @@ export class JamespotUsersComponent implements OnInit {
 
     public ngOnInit(): void {
         this.resetFields();
-        console.log("this.currentUser", this.currentUser);
         this.james.getUsers()
             .subscribe((data) => console.log(data.VAL.forEach((user) => user.idUser)));
     }
@@ -35,7 +34,6 @@ export class JamespotUsersComponent implements OnInit {
     public onPost(form) {
         this.james.postUsers(form, this.image)
             .subscribe((res) => {
-                console.log("res", res);
                 this.resetFields();
                 if (res["RC"].CODE === 0) {
 
@@ -73,7 +71,7 @@ export class JamespotUsersComponent implements OnInit {
     public getUser(id: string): void {
         this.james.getUser(id)
             .subscribe((res: IJamespotApiResponse<IJamespotUser>) => {
-                console.log(res);
+                this.resetFields();
                 if (res.RC.CODE === 0) {
                     this.currentUser = new JamespotUser(
                         res.VAL.Country,
@@ -92,9 +90,7 @@ export class JamespotUsersComponent implements OnInit {
                         res.VAL.properties.company,
                     );
                     this.oldUser = { ...this.currentUser };
-                    console.log("this.currentUser", this.currentUser);
                 } else {
-                    this.resetFields();
                     this.errorMessage = `User ${id} doesn't exist`;
 
                 }

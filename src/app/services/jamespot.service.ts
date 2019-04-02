@@ -35,7 +35,6 @@ export class JamespotService {
     }
 
     public postUsers(form, image): Observable<IJamespotApiResponse<IJamespotUser>> {
-        console.log("form", form);
         const fd = new FormData();
         fd.append("Mail", form.mail);
         fd.append("Role", form.role);
@@ -61,9 +60,11 @@ export class JamespotService {
 
         for (const key in user) {
             if (key === "img" && user[key] === null) {
-                // do not update image in params
+                // do not update image in params - it will be updated in Form Data
             } else if (key === "password" && user[key] === null) {
-                // do not update password
+                // do not update password unless it's been changed
+            } else if (key === "idUser") {
+                // do not update id
             } else if (key === "phoneExtension" && user[key] !== oldUser[key]) {
                 params = params.append("field1", user[key]);
             } else {
