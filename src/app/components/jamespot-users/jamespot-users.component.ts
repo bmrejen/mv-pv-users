@@ -94,6 +94,7 @@ export class JamespotUsersComponent implements OnInit {
     public getUser(id: string): void {
         this.james.getUser(id)
             .subscribe((res: IJamespotApiResponse<IJamespotUser>) => {
+                console.log(res);
                 if (res.RC.CODE === 0) {
                     this.currentUser = new JamespotUser(
                         res.VAL.Country,
@@ -104,8 +105,12 @@ export class JamespotUsersComponent implements OnInit {
                         res.VAL.Pseudo,
                         res.VAL.Role,
                         res.VAL.properties.active,
+                        res.VAL.properties.timeZone || null,
+                        res.VAL.field1 || null, // phoneExtension
                         res.VAL.idUser,
                         res.VAL.img,
+                        null, // password
+                        res.VAL.properties.company,
                     );
                     this.currentId = this.currentUser.idUser;
                     this.mapResponseToFields(res);

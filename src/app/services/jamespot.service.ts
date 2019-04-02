@@ -60,6 +60,8 @@ export class JamespotService {
                 // do not update image in params
             } else if (key === "password" && user[key] === null) {
                 // do not update password
+            } else if (key === "phoneExtension" && user[key] !== oldUser[key]) {
+                params = params.append("field1", user[key]);
             } else {
                 if (user[key] !== oldUser[key]) {
                     params = params.append(key, user[key]);
