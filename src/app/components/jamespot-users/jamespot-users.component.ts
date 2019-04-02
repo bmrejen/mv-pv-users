@@ -105,8 +105,8 @@ export class JamespotUsersComponent implements OnInit {
                         res.VAL.Pseudo,
                         res.VAL.Role,
                         res.VAL.properties.active,
-                        res.VAL.properties.timeZone || null,
-                        res.VAL.field1 || null, // phoneExtension
+                        res.VAL.properties.timeZone,
+                        res.VAL.field1, // phoneExtension
                         res.VAL.idUser,
                         res.VAL.img,
                         null, // password
