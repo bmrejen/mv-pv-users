@@ -1,0 +1,97 @@
+<h1>Jamespot users</h1>
+<h2>Get User</h2>
+Get user id: <input
+    type="text"
+    [(ngModel)]="idToGet"
+    name="idToGet"
+>
+<button (click)="getUser(idToGet)">Get</button>
+
+<h2 *ngIf="currentId == null">Create User</h2>
+<h2 *ngIf="currentId != null">User {{ currentId }}</h2>
+<form #jamesForm="ngForm">
+    <input
+        type="text"
+        [(ngModel)]="fields.mail"
+        name="mail"
+    >Email
+    <br>
+    <input
+        type="text"
+        [(ngModel)]="fields.role"
+        name="role"
+    >Role
+    <br>
+    <input
+        type="text"
+        [(ngModel)]="fields.country"
+        name="country"
+    >Country
+    <br>
+    <input
+        type="text"
+        [(ngModel)]="fields.language"
+        name="language"
+    >Language
+    <br>
+    <input
+        type="text"
+        [(ngModel)]="fields.active"
+        name="active"
+    >active
+    <br>
+    <input
+        type="text"
+        [(ngModel)]="fields.pseudo"
+        name="pseudo"
+    >Pseudo
+    <br>
+    <input
+        type="text"
+        [(ngModel)]="fields.password"
+        name="password"
+    >Password
+    <br>
+    <input
+        type="text"
+        [(ngModel)]="fields.firstname"
+        name="firstname"
+    >Firstname
+    <br>
+    <input
+        type="text"
+        [(ngModel)]="fields.lastname"
+        name="lastname"
+    >Lastname
+    <br>
+
+    <!-- IMAGE UPDATE -->
+    <input
+        type="file"
+        (change)="onFileSelected($event)"
+    >
+    <br>
+    <!-- BUTTONS -->
+    <button
+        type=button
+        (click)="onPrefill()"
+    >Prefill form with random data</button>
+    <button
+        *ngIf="currentId == null"
+        type=button
+        (click)="onPost()"
+    >Create</button>
+    <button
+        *ngIf="currentId != null"
+        type=button
+        (click)="onUpdate(jamesForm.value)"
+    >Update</button>
+    <button (click)="onDelete(currentId)">Delete</button>
+</form>
+<h2 *ngIf="currentUser && currentUser.Firstname != null && currentUser.Lastname != null">
+    Current User: {{ currentUser.Firstname }} {{ currentUser.Lastname }} - Id: {{ currentUser.idUser }}
+</h2>
+<h3 *ngIf="updateSuccessful">Data Updated ! </h3>
+
+<h2 *ngIf="isDeleted">User {{ deletedId }} deleted !</h2>
+<h2 *ngIf="errorMessage">ERROR: {{ errorMessage }}</h2>
