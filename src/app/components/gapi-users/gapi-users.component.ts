@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 import { GapiAuthenticatorService } from "../../services/gapi.service";
 
 @Component({
@@ -13,20 +14,31 @@ export class GapiUsersComponent implements OnInit {
     public apiFailed: boolean = false;
     public userLoggedIn: string = "Logged out";
     public users;
+    public orgas;
+    public currentUser;
+    public errorMessage: string;
+    public selectedMail = "planetveo.com";
 
     // CREATE
     public newUser = {
         firstName: null,
         lastName: null,
+        orgas: null,
         password: null,
         primaryEmail: null,
     };
 
-    constructor(private gapiService: GapiAuthenticatorService) {
+    constructor(
+        private gapiService: GapiAuthenticatorService,
+        private route: ActivatedRoute,
+    ) {
         //
     }
 
     public ngOnInit(): void {
+        this.route.data
+            .subscribe((data) => this.orgas = data.fields.orgas);
+
         this.gapiService.loadClient()
             .then((result) => {
                 this.apiLoaded = true;
@@ -83,13 +95,39 @@ export class GapiUsersComponent implements OnInit {
     }
 
     public postUser(user) {
+        this.currentUser = null;
+        this.errorMessage = null;
         this.gapiService.postUser(user)
-            .then((res) => console.log(res));
+            .then((res) => this.setUser(res),
+                (err) => this.errorMessage = err["result"].error.message,
+            );
     }
 
     public trackByFn(index, item) {
         const self = this;
 
         return index; // or item.id
+    }
+
+    private setUser(res) {
+        this.resetForm();
+        this.currentUser = {
+            firstName: res["result"].name.givenName,
+            id: res["result"].id,
+            lastName: res["result"].name.familyName,
+            orgas: res["result"].orgUnitPath,
+            password: null,
+            primaryEmail: res["result"].primaryEmail,
+        };
+    }
+
+    private resetForm() {
+        this.newUser = {
+            firstName: null,
+            lastName: null,
+            orgas: null,
+            password: null,
+            primaryEmail: null,
+        };
     }
 }

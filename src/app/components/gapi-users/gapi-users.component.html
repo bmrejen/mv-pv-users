@@ -61,7 +61,32 @@
         <option value="marcovasco.com">marcovasco.com</option>
         <option value="prestige-voyages.com">prestige-voyages.com</option>
     </select>
+    <br>
+    Orgas
+    <select
+        name="orgas"
+        [(ngModel)]=newUser.orgas
+    >
+        <option
+            *ngFor="let orga of orgas"
+            [value]="orga.value"
+        >{{ orga.value }}
+        </option>
+    </select>
+    <br>
     <button (click)="postUser(newUser)">Create</button>
+
+
+    <div *ngIf="currentUser != undefined">
+        <h2>Current User</h2>
+        <h3>{{ currentUser.firstName }} {{ currentUser.lastName }}</h3>
+        <h4>ID: {{ currentUser.id }}</h4>
+        <h4>Primary Mail: {{ currentUser.primaryEmail }}</h4>
+        <h4>Orgas: {{ currentUser.orgas }}</h4>
+    </div>
+    <h3 *ngIf="errorMessage != null">
+        {{ errorMessage }}
+    </h3>
 
     <table *ngIf="users && users != undefined">
         <thead>

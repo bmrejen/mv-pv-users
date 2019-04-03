@@ -84,6 +84,7 @@ export class GapiAuthenticatorService {
                             familyName: user.lastName,
                             givenName: user.firstName,
                         },
+                        orgUnitPath: user.orgas,
                         password: user.password,
                         primaryEmail: email,
                     },
