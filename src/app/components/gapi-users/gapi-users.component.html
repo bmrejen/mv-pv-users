@@ -31,6 +31,38 @@
     <div>API is ready : {{ apiReady }}</div>
     <div>User logged in : {{ userLoggedIn }}</div>
 
+    <h2>CREATE USER</h2>
+    <input
+        type="text"
+        name="firstName"
+        [(ngModel)]="newUser.firstName"
+    >First name
+    <br>
+    <input
+        type="text"
+        name="lastName"
+        [(ngModel)]="newUser.lastName"
+    >Last name
+    <br>
+    <input
+        type="text"
+        name="password"
+        [(ngModel)]="newUser.password"
+    >Password
+    <br>
+    Primary mail
+    <select
+        name="primaryEmail"
+        [(ngModel)]="newUser.primaryEmail"
+    >Primary Email
+        <option value="planetveo.com">planetveo.com</option>
+        <option value="marcovasco.fr">marcovasco.fr</option>
+        <option value="chinaveo.com">chinaveo.com</option>
+        <option value="marcovasco.com">marcovasco.com</option>
+        <option value="prestige-voyages.com">prestige-voyages.com</option>
+    </select>
+    <button (click)="postUser(newUser)">Create</button>
+
     <table *ngIf="users && users != undefined">
         <thead>
             <tr>

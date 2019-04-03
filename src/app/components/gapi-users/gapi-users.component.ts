@@ -14,6 +14,14 @@ export class GapiUsersComponent implements OnInit {
     public userLoggedIn: string = "Logged out";
     public users;
 
+    // CREATE
+    public newUser = {
+        firstName: null,
+        lastName: null,
+        password: null,
+        primaryEmail: null,
+    };
+
     constructor(private gapiService: GapiAuthenticatorService) {
         //
     }
@@ -71,8 +79,12 @@ export class GapiUsersComponent implements OnInit {
     }
 
     public isSignedIn() {
-        return gapi.auth2.getAuthInstance().isSignedIn
-            .get();
+        return this.gapiService.isSignedIn();
+    }
+
+    public postUser(user) {
+        this.gapiService.postUser(user)
+            .then((res) => console.log(res));
     }
 
     public trackByFn(index, item) {
