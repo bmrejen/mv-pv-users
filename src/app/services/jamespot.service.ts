@@ -89,4 +89,13 @@ export class JamespotService {
 
         return this.http.delete(`${this.endPoint}user/delete`, { headers: this.headers, params });
     }
+
+    public getByField(field: string, value: string): Observable<IJamespotApiResponse<IJamespotUser>> {
+        const params = new HttpParams()
+            .set("name", field)
+            .append("value", value);
+
+        return this.http.get<IJamespotApiResponse<IJamespotUser>>(
+            `${this.endPoint}user/getByField`, { headers: this.headers, params });
+    }
 }

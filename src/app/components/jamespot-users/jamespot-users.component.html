@@ -47,6 +47,7 @@ Get user id: <input
         type="text"
         [(ngModel)]="currentUser.Pseudo"
         name="pseudo"
+        (blur)="getByField()"
     >Pseudo
     <br>
     <input

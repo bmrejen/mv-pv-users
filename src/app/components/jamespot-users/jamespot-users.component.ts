@@ -134,6 +134,14 @@ export class JamespotUsersComponent implements OnInit {
         );
     }
 
+    public getByField() {
+        this.james.getUser("81")
+            .subscribe((res) => console.log("user 81", res));
+
+        this.james.getByField("Pseudo", "benoitmrejen")
+            .subscribe((res) => console.log(res));
+    }
+
     private resetFields() {
         this.currentUser = new JamespotUser(
             "fr",           // country
