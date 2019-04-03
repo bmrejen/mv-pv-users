@@ -18,6 +18,7 @@ export class JamespotUsersComponent implements OnInit {
     public isDeleted: boolean = false;
     public deletedId;
     public errorMessage;
+    public userToDelete;
     public fields = {
         active: null,
         country: null,
@@ -150,6 +151,11 @@ export class JamespotUsersComponent implements OnInit {
         };
     }
 
+    public onDisable(id: string) {
+        this.james.disableUser(id)
+            .subscribe((res) => console.log(res));
+    }
+
     private resetFields() {
         this.fields = {
             active: null,
@@ -174,7 +180,6 @@ export class JamespotUsersComponent implements OnInit {
 
     private mapResponseToFields(res) {
         const val = res.VAL;
-
         this.fields.active = val.properties.active;
         this.fields.country = val.Country;
         this.fields.firstname = val.Firstname;
