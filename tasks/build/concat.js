@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 var concat = require('gulp-concat');
 
-gulp.task('concat:css', ['sass'], function () {
+gulp.task('concat:css', ['sass'], function() {
   return gulp.src([
     'node_modules/primeicons/primeicons.css',
     'node_modules/primeng/resources/primeng.css',
@@ -11,10 +11,8 @@ gulp.task('concat:css', ['sass'], function () {
     .pipe(gulp.dest('./dist/css'));
 });
 
-gulp.task('concat:js', function () {
+gulp.task('concat:js', function() {
   return gulp.src([
-    'src/app/assets/js/google-api.js',
-    'src/app/assets/js/gapi-methods.js',
     'node_modules/core-js/client/shim.js',
     'node_modules/zone.js/dist/zone.js',
     'node_modules/reflect-metadata/Reflect.js',

@@ -1,11 +1,63 @@
 <h1>API Quickstart</h1>
 
-<!--Add buttons to initiate auth sequence and sign out-->
-<!--Buttons not found by js code-->
+<div>
+    <button
+        *ngIf="userLoggedIn==='Logged out'"
+        (click)="signIn()"
+    >Sign In</button>
 
-<button id="authorize_button" style="display: none;">Authorize</button>
-<button id="signout_button" style="display: none;">Sign Out</button>
+    <button
+        *ngIf="userLoggedIn!=='Logged out'"
+        (click)="signIn()"
+    >Change Users</button>
 
-<pre id="content" style="white-space: pre-wrap;"></pre>
+    <button
+        *ngIf="userLoggedIn!=='Logged out'"
+        (click)="signOut()"
+    >Sign Out</button>
 
-<!-- <script src="https://apis.google.com/js/api.js"></script> -->
+    <button
+        *ngIf="userLoggedIn!=='Logged out'"
+        (click)="listUsers()"
+    >List Users</button>
+
+</div>
+
+<div id="content">
+
+
+    <div>API is loaded : {{ apiLoaded }}</div>
+    <div>API is failed : {{ apiFailed }}</div>
+    <div>API is ready : {{ apiReady }}</div>
+    <div>User logged in : {{ userLoggedIn }}</div>
+
+    <table *ngIf="users && users != undefined">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Is Admin</th>
+                <th>Team</th>
+                <th>Primary Email</th>
+                <th>Emails</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users; trackBy: trackByFn">
+                <td>{{ user.id }}</td>
+                <td>{{ user.name.givenName }}</td>
+                <td>{{ user.name.familyName }}</td>
+                <td>{{ user.isAdmin }}</td>
+                <td>{{ user.orgUnitPath }}</td>
+                <td>{{ user.primaryEmail }}</td>
+                <td>
+                    <ul *ngIf="user.emails && user.emails != undefined">
+                        <li *ngFor="let email of user.emails; trackBy: trackByFn">
+                            {{ email.address }}
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
