@@ -13,6 +13,14 @@ export class GapiUsersComponent implements OnInit {
     public apiFailed: boolean = false;
     public userLoggedIn: string = "Logged out";
     public users;
+    public userToGet: string;
+    public currentUser = {
+        emails: null,
+        fullName: null,
+        id: null,
+        team: null,
+    };
+    public errorMessage: string = null;
 
     constructor(private gapiService: GapiAuthenticatorService) {
         //
@@ -71,8 +79,29 @@ export class GapiUsersComponent implements OnInit {
     }
 
     public isSignedIn() {
-        return gapi.auth2.getAuthInstance().isSignedIn
-            .get();
+        return this.gapiService.isSignedIn();
+    }
+
+    public getUser(email) {
+        this.currentUser = {
+            emails: null,
+            fullName: null,
+            id: null,
+            team: null,
+        };
+        this.errorMessage = null;
+        this.gapiService.getUser(email)
+            .then((res) => {
+                this.currentUser.fullName = res["result"].name.fullName;
+                this.currentUser.emails = res["result"].emails;
+                this.currentUser.team = res["result"].orgUnitPath;
+                this.currentUser.id = res["result"].customerId;
+            },
+                (err) => {
+                    console.error(err);
+                    this.errorMessage = err["result"].error.message;
+                },
+            );
     }
 
     public trackByFn(index, item) {
