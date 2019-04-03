@@ -151,6 +151,11 @@ export class JamespotUsersComponent implements OnInit {
         };
     }
 
+    public onDisable(id: string) {
+        this.james.disableUser(id)
+            .subscribe((res) => console.log(res));
+    }
+
     private resetFields() {
         this.fields = {
             active: null,

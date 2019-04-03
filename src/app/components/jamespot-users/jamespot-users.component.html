@@ -93,7 +93,6 @@ Get user id: <input
 </h2>
 <h3 *ngIf="updateSuccessful">Data Updated ! </h3>
 
-<<<<<<< HEAD
 <h2>Delete User</h2>
 id to delete:
 <input
@@ -110,18 +109,3 @@ id to delete:
 >Disable</button>
 <p *ngIf="isDeleted">User {{ deletedId }} deleted !</p>
 <p *ngIf="errorMessage">ERROR: {{ errorMessage }}</p>
-||||||| merged common ancestors
-<h2>Delete User</h2>
-id to delete:
-<input
-    type="text"
-    name="userToDelete"
-    [(ngModel)]=userToDelete
->
-<button (click)="onDelete(userToDelete)">Delete</button>
-<p *ngIf="isDeleted">User {{ deletedId }} deleted !</p>
-<p *ngIf="errorMessage">ERROR: {{ errorMessage }}</p>
-=======
-<h2 *ngIf="isDeleted">User {{ deletedId }} deleted !</h2>
-<h2 *ngIf="errorMessage">ERROR: {{ errorMessage }}</h2>
->>>>>>> dev
