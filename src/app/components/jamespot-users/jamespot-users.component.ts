@@ -16,6 +16,19 @@ export class JamespotUsersComponent implements OnInit {
     public deletedId;
     public errorMessage;
     public image;
+    public userToDelete;
+    public fields = {
+        active: null,
+        country: null,
+        firstname: null,
+        image: null,
+        language: null,
+        lastname: null,
+        mail: null,
+        password: null,
+        pseudo: null,
+        role: null,
+    };
 
     constructor(private james: JamespotService) {
         //
@@ -134,6 +147,11 @@ export class JamespotUsersComponent implements OnInit {
         );
     }
 
+    public onDisable(id: string) {
+        this.james.disableUser(id)
+            .subscribe((res) => console.log(res));
+    }
+
     private resetFields() {
         this.currentUser = new JamespotUser(
             "fr",           // country
@@ -155,5 +173,19 @@ export class JamespotUsersComponent implements OnInit {
         this.idToGet = null;
         this.isDeleted = false;
         this.updateSuccessful = false;
+    }
+
+    private mapResponseToFields(res) {
+        const val = res.VAL;
+        this.fields.active = val.properties.active;
+        this.fields.country = val.Country;
+        this.fields.firstname = val.Firstname;
+        this.fields.image = null;
+        this.fields.language = val.Language;
+        this.fields.lastname = val.Lastname;
+        this.fields.mail = val.Mail;
+        this.fields.password = null;
+        this.fields.pseudo = val.Pseudo;
+        this.fields.role = val.Role;
     }
 }

@@ -54,6 +54,7 @@ import { UsersResolverService } from "./app/resolvers/users-resolver.service";
 
 import { FieldsService } from "./app/services/fields.service";
 import { FormValueMapperService } from "./app/services/form-value-mapper.service";
+import { GapiAuthenticatorService } from "./app/services/gapi.service";
 import { JamespotService } from "./app/services/jamespot.service";
 import { ParserService } from "./app/services/parser.service";
 import { SugarService } from "./app/services/sugar.service";
@@ -105,6 +106,7 @@ import "./app/rxjs-extensions";
         FieldsService,
         FieldsResolverService,
         FormValueMapperService,
+        GapiAuthenticatorService,
         JamespotService,
         ManagersResolverService,
         ParserService,
