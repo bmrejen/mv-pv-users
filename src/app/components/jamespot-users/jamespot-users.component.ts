@@ -18,6 +18,7 @@ export class JamespotUsersComponent implements OnInit {
     public isDeleted: boolean = false;
     public deletedId;
     public errorMessage;
+    public userToDelete;
     public fields = {
         active: null,
         country: null,
