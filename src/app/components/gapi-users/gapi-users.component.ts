@@ -18,7 +18,7 @@ export class GapiUsersComponent implements OnInit {
         emails: null,
         fullName: null,
         id: null,
-        team: null,
+        orgas: null,
     };
     public errorMessage: string = null;
 
@@ -87,15 +87,16 @@ export class GapiUsersComponent implements OnInit {
             emails: null,
             fullName: null,
             id: null,
-            team: null,
+            orgas: null,
         };
         this.errorMessage = null;
         this.gapiService.getUser(email)
             .then((res) => {
+                console.log(res);
                 this.currentUser.fullName = res["result"].name.fullName;
                 this.currentUser.emails = res["result"].emails;
-                this.currentUser.team = res["result"].orgUnitPath;
                 this.currentUser.id = res["result"].customerId;
+                this.currentUser.orgas = res["result"].orgUnitPath;
             },
                 (err) => {
                     console.error(err);
