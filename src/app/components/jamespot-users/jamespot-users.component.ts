@@ -8,6 +8,7 @@ import { JamespotUser } from "./../../models/jamespot-user";
 })
 
 export class JamespotUsersComponent implements OnInit {
+    public currentId;
     public updateSuccessful: boolean = false;
     public currentUser: JamespotUser;
     public oldUser: JamespotUser;

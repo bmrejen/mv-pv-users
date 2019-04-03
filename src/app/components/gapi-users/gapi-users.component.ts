@@ -70,9 +70,8 @@ export class GapiUsersComponent implements OnInit {
                 ));
     }
 
-    public isSignedIn() {
-        return gapi.auth2.getAuthInstance().isSignedIn
-            .get();
+    public isSignedIn(): boolean {
+        return this.gapiService.isSignedIn();
     }
 
     public trackByFn(index, item) {

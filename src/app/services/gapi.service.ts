@@ -83,4 +83,9 @@ export class GapiAuthenticatorService {
                 .then(resolve, reject);
         });
     }
+
+    public isSignedIn(): boolean {
+        return gapi.auth2.getAuthInstance().isSignedIn
+            .get();
+    }
 }
