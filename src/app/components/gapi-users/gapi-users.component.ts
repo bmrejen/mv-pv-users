@@ -22,20 +22,13 @@ export class GapiUsersComponent implements OnInit {
         givenName: null,
         id: null,
         orgas: null,
+        password: null,
         primaryEmail: null,
+        primaryEmailSuffix: "planetveo.com",
     };
     public errorMessage: string = null;
     public orgas;
-    public selectedMail = "planetveo.com";
-
-    // CREATE
-    public newUser = {
-        firstName: null,
-        lastName: null,
-        orgas: null,
-        password: null,
-        primaryEmail: null,
-    };
+    public successMessage = null;
 
     constructor(
         private gapiService: GapiAuthenticatorService,
@@ -105,6 +98,8 @@ export class GapiUsersComponent implements OnInit {
     }
 
     public getUser(email) {
+        this.successMessage = null;
+        this.userToGet = null;
         this.currentUser = {
             emails: null,
             familyName: null,
@@ -112,7 +107,9 @@ export class GapiUsersComponent implements OnInit {
             givenName: null,
             id: null,
             orgas: null,
+            password: null,
             primaryEmail: null,
+            primaryEmailSuffix: "planetveo.com",
         };
         this.errorMessage = null;
         this.gapiService.getUser(email)
@@ -124,6 +121,8 @@ export class GapiUsersComponent implements OnInit {
                 this.currentUser.givenName = res["result"].name.givenName;
                 this.currentUser.id = res["result"].customerId;
                 this.currentUser.orgas = res["result"].orgUnitPath;
+                this.currentUser.primaryEmail = res["result"].primaryEmail;
+                console.log(this.currentUser.emails);
             },
                 (err) => {
                     console.error(err);
@@ -133,10 +132,14 @@ export class GapiUsersComponent implements OnInit {
     }
 
     public postUser(user) {
-        this.currentUser = null;
         this.errorMessage = null;
         this.gapiService.postUser(user)
-            .then((res) => this.setUser(res),
+            .then((res) => {
+                this.currentUser = null;
+                this.getUser(res["result"].id);
+                this.successMessage = "User created !";
+                console.log("res ", res);
+            },
                 (err) => this.errorMessage = err["result"].error.message,
             );
     }
@@ -147,26 +150,24 @@ export class GapiUsersComponent implements OnInit {
         return index; // or item.id
     }
 
-    private setUser(res) {
-        this.resetForm();
-        this.currentUser = {
-            emails: null,
-            familyName: res["result"].name.familyName,
-            fullName: res["result"].name.fullName,
-            givenName: res["result"].name.givenName,
-            id: res["result"].id,
-            orgas: res["result"].orgUnitPath,
-            primaryEmail: res["result"].primaryEmail,
-        };
+    public refreshEmail() {
+        const email = this.currentUser.primaryEmail;
+        const emailPrefix = email.lastIndexOf("@") === -1 ? email : email.substring(0, email.lastIndexOf("@"));
+
+        this.currentUser.primaryEmail = `${emailPrefix}@${this.currentUser.primaryEmailSuffix}`;
     }
 
-    private resetForm() {
-        this.newUser = {
-            firstName: null,
-            lastName: null,
-            orgas: null,
-            password: null,
-            primaryEmail: null,
-        };
-    }
+    // private setUser(res) {
+    //     this.currentUser = {
+    //         emails: res["result"].,
+    //         familyName: res["result"].name.familyName,
+    //         fullName: res["result"].name.fullName,
+    //         givenName: res["result"].name.givenName,
+    //         id: res["result"].id,
+    //         orgas: res["result"].orgUnitPath,
+    //         password: null,
+    //         primaryEmail: res["result"].primaryEmail,
+    //         primaryEmailSuffix: res["result"].replace(/.*@/, ""),
+    //     };
+    // }
 }

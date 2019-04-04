@@ -74,19 +74,17 @@ export class GapiAuthenticatorService {
     }
 
     public postUser(user) {
-        const email = `${user.firstName[0]}${user.lastName}@${user.primaryEmail}`;
-
         return new Promise((resolve, reject) => {
             this.zone.run(() => {
                 gapi.client.directory.users.insert({
                     resource: {
                         name: {
-                            familyName: user.lastName,
-                            givenName: user.firstName,
+                            familyName: user.familyName,
+                            givenName: user.givenName,
                         },
                         orgUnitPath: user.orgas,
                         password: user.password,
-                        primaryEmail: email,
+                        primaryEmail: user.primaryEmail,
                     },
                 })
                     .then(resolve, reject);
