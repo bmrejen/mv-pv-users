@@ -1,5 +1,4 @@
 import { Injectable, NgZone } from "@angular/core";
-import { userInfo } from "os";
 
 declare const gapi: any;
 
