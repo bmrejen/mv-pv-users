@@ -101,7 +101,7 @@ export class GapiUsersComponent implements OnInit {
 
     public isSignedIn(): boolean {
         return this.gapiService.isSignedIn()
-            .get();
+            .get;
     }
 
     public getUser(email) {
@@ -112,6 +112,7 @@ export class GapiUsersComponent implements OnInit {
             givenName: null,
             id: null,
             orgas: null,
+            primaryEmail: null,
         };
         this.errorMessage = null;
         this.gapiService.getUser(email)
