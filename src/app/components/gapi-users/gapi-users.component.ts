@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 import { GapiAuthenticatorService } from "../../services/gapi.service";
 
 @Component({
@@ -21,12 +22,29 @@ export class GapiUsersComponent implements OnInit {
         orgas: null,
     };
     public errorMessage: string = null;
+    public orgas;
+    public selectedMail = "planetveo.com";
 
-    constructor(private gapiService: GapiAuthenticatorService) {
+    // CREATE
+    public newUser = {
+        firstName: null,
+        lastName: null,
+        orgas: null,
+        password: null,
+        primaryEmail: null,
+    };
+
+    constructor(
+        private gapiService: GapiAuthenticatorService,
+        private route: ActivatedRoute,
+    ) {
         //
     }
 
     public ngOnInit(): void {
+        this.route.data
+            .subscribe((data) => this.orgas = data.fields.orgas);
+
         this.gapiService.loadClient()
             .then((result) => {
                 this.apiLoaded = true;
@@ -78,6 +96,7 @@ export class GapiUsersComponent implements OnInit {
                 ));
     }
 
+<<<<<<< HEAD
     public isSignedIn(): boolean {
         return this.gapiService.isSignedIn();
     }
@@ -103,11 +122,50 @@ export class GapiUsersComponent implements OnInit {
                     this.errorMessage = err["result"].error.message;
                 },
             );
+||||||| merged common ancestors
+    public isSignedIn() {
+        return gapi.auth2.getAuthInstance().isSignedIn
+            .get();
+=======
+    public isSignedIn() {
+        return this.gapiService.isSignedIn();
+    }
+
+    public postUser(user) {
+        this.currentUser = null;
+        this.errorMessage = null;
+        this.gapiService.postUser(user)
+            .then((res) => this.setUser(res),
+                (err) => this.errorMessage = err["result"].error.message,
+            );
+>>>>>>> feat/#17810_gsuite_post
     }
 
     public trackByFn(index, item) {
         const self = this;
 
         return index; // or item.id
+    }
+
+    private setUser(res) {
+        this.resetForm();
+        this.currentUser = {
+            firstName: res["result"].name.givenName,
+            id: res["result"].id,
+            lastName: res["result"].name.familyName,
+            orgas: res["result"].orgUnitPath,
+            password: null,
+            primaryEmail: res["result"].primaryEmail,
+        };
+    }
+
+    private resetForm() {
+        this.newUser = {
+            firstName: null,
+            lastName: null,
+            orgas: null,
+            password: null,
+            primaryEmail: null,
+        };
     }
 }
