@@ -17,9 +17,12 @@ export class GapiUsersComponent implements OnInit {
     public userToGet: string;
     public currentUser = {
         emails: null,
+        familyName: null,
         fullName: null,
+        givenName: null,
         id: null,
         orgas: null,
+        primaryEmail: null,
     };
     public errorMessage: string = null;
     public orgas;
@@ -96,15 +99,17 @@ export class GapiUsersComponent implements OnInit {
                 ));
     }
 
-<<<<<<< HEAD
     public isSignedIn(): boolean {
-        return this.gapiService.isSignedIn();
+        return this.gapiService.isSignedIn()
+            .get();
     }
 
     public getUser(email) {
         this.currentUser = {
             emails: null,
+            familyName: null,
             fullName: null,
+            givenName: null,
             id: null,
             orgas: null,
         };
@@ -112,8 +117,10 @@ export class GapiUsersComponent implements OnInit {
         this.gapiService.getUser(email)
             .then((res) => {
                 console.log(res);
-                this.currentUser.fullName = res["result"].name.fullName;
                 this.currentUser.emails = res["result"].emails;
+                this.currentUser.familyName = res["result"].name.familyName;
+                this.currentUser.fullName = res["result"].name.fullName;
+                this.currentUser.givenName = res["result"].name.givenName;
                 this.currentUser.id = res["result"].customerId;
                 this.currentUser.orgas = res["result"].orgUnitPath;
             },
@@ -122,13 +129,6 @@ export class GapiUsersComponent implements OnInit {
                     this.errorMessage = err["result"].error.message;
                 },
             );
-||||||| merged common ancestors
-    public isSignedIn() {
-        return gapi.auth2.getAuthInstance().isSignedIn
-            .get();
-=======
-    public isSignedIn() {
-        return this.gapiService.isSignedIn();
     }
 
     public postUser(user) {
@@ -138,7 +138,6 @@ export class GapiUsersComponent implements OnInit {
             .then((res) => this.setUser(res),
                 (err) => this.errorMessage = err["result"].error.message,
             );
->>>>>>> feat/#17810_gsuite_post
     }
 
     public trackByFn(index, item) {
@@ -150,11 +149,12 @@ export class GapiUsersComponent implements OnInit {
     private setUser(res) {
         this.resetForm();
         this.currentUser = {
-            firstName: res["result"].name.givenName,
+            emails: null,
+            familyName: res["result"].name.familyName,
+            fullName: res["result"].name.fullName,
+            givenName: res["result"].name.givenName,
             id: res["result"].id,
-            lastName: res["result"].name.familyName,
             orgas: res["result"].orgUnitPath,
-            password: null,
             primaryEmail: res["result"].primaryEmail,
         };
     }
