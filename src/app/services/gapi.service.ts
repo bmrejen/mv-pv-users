@@ -1,4 +1,5 @@
 import { Injectable, NgZone } from "@angular/core";
+import { userInfo } from "os";
 
 declare const gapi: any;
 
@@ -86,6 +87,17 @@ export class GapiAuthenticatorService {
             gapi.auth2.getAuthInstance()
                 .signOut()
                 .then(resolve, reject);
+        });
+    }
+
+    public getUser(user) {
+        return new Promise((resolve, reject) => {
+            this.zone.run(() => {
+                gapi.client.directory.users.get({
+                    userKey: user,
+                })
+                    .then(resolve, reject);
+            });
         });
     }
 }
