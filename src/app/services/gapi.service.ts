@@ -68,6 +68,11 @@ export class GapiAuthenticatorService {
         });
     }
 
+    public isSignedIn(): boolean {
+        return gapi.auth2.getAuthInstance().isSignedIn
+            .get();
+    }
+
     public signIn(): Promise<any> {
         return new Promise((resolve, reject) => {
             gapi.auth2.getAuthInstance()
