@@ -78,11 +78,11 @@ export class GapiUsersComponent implements OnInit {
                 ));
     }
 
-    public isSignedIn() {
+    public isSignedIn(): boolean {
         return this.gapiService.isSignedIn();
     }
 
-    public getUser(email) {
+    public getUser(): void {
         this.currentUser = {
             emails: null,
             fullName: null,
@@ -90,19 +90,22 @@ export class GapiUsersComponent implements OnInit {
             orgas: null,
         };
         this.errorMessage = null;
-        this.gapiService.getUser(email)
+        this.gapiService.getUser(this.userToGet)
             .then((res) => {
                 console.log(res);
-                this.currentUser.fullName = res["result"].name.fullName;
-                this.currentUser.emails = res["result"].emails;
-                this.currentUser.id = res["result"].customerId;
-                this.currentUser.orgas = res["result"].orgUnitPath;
-            },
-                (err) => {
-                    console.error(err);
+                if (res["result"] != null && res["result"].name != null) {
+                    this.currentUser.fullName = res["result"].name.fullName;
+                    this.currentUser.emails = res["result"].emails;
+                    this.currentUser.id = res["result"].customerId;
+                    this.currentUser.orgas = res["result"].orgUnitPath;
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+                if (err["result"] != null && err["result"].error != null) {
                     this.errorMessage = err["result"].error.message;
-                },
-            );
+                }
+            });
     }
 
     public trackByFn(index, item) {

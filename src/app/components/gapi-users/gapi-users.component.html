@@ -39,7 +39,7 @@
 
     <button
         *ngIf="userLoggedIn!=='Logged out'"
-        (click)="getUser(userToGet)"
+        (click)="getUser()"
     >Get</button>
 
     <div *ngIf="currentUser && currentUser.id != null">

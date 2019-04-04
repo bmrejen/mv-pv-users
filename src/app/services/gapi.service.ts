@@ -90,12 +90,10 @@ export class GapiAuthenticatorService {
         });
     }
 
-    public getUser(user) {
+    public getUser(user): Promise<any> {
         return new Promise((resolve, reject) => {
             this.zone.run(() => {
-                gapi.client.directory.users.get({
-                    userKey: user,
-                })
+                gapi.client.directory.users.get({ userKey: user })
                     .then(resolve, reject);
             });
         });
