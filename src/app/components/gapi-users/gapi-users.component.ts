@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { IGapiUser } from "../../interfaces/gapi-user";
 import { GapiAuthenticatorService } from "../../services/gapi.service";
 
 @Component({
@@ -15,20 +16,10 @@ export class GapiUsersComponent implements OnInit {
     public userLoggedIn: string = "Logged out";
     public users;
     public userToGet: string;
-    public currentUser = {
-        emails: null,
-        familyName: null,
-        fullName: null,
-        givenName: null,
-        id: null,
-        orgas: null,
-        password: null,
-        primaryEmail: null,
-        primaryEmailSuffix: "planetveo.com",
-    };
-    public errorMessage: string = null;
+    public currentUser: IGapiUser;
+    public oldUser: IGapiUser;
     public orgas;
-    public successMessage = null;
+    public message = null;
 
     constructor(
         private gapiService: GapiAuthenticatorService,
@@ -38,6 +29,7 @@ export class GapiUsersComponent implements OnInit {
     }
 
     public ngOnInit(): void {
+        this.resetForm();
         this.route.data
             .subscribe((data) => this.orgas = data.fields.orgas);
 
@@ -97,57 +89,63 @@ export class GapiUsersComponent implements OnInit {
     }
 
     public getUser(): void {
-        this.currentUser = {
-            emails: null,
-            familyName: null,
-            fullName: null,
-            givenName: null,
-            id: null,
-            orgas: null,
-            password: null,
-            primaryEmail: null,
-            primaryEmailSuffix: "planetveo.com",
-        };
-        this.errorMessage = null;
+        this.resetForm();
         this.gapiService.getUser(this.userToGet)
             .then((res) => {
                 console.log(res);
                 if (res["result"] != null && res["result"].name != null) {
+                    const email = res["result"].primaryEmail;
+
                     this.currentUser.givenName = res["result"].name.givenName;
                     this.currentUser.familyName = res["result"].name.familyName;
                     this.currentUser.emails = res["result"].emails;
                     this.currentUser.id = res["result"].customerId;
                     this.currentUser.orgas = res["result"].orgUnitPath;
-                    this.currentUser.primaryEmail = res["result"].primaryEmail;
+                    this.currentUser.primaryEmail = email;
+                    this.currentUser.primaryEmailSuffix = email.substring(email.lastIndexOf("@") + 1);
+                    this.oldUser = { ...this.currentUser };
+                    console.log(this.currentUser);
                 }
             })
             .catch((err) => {
                 console.error(err);
                 if (err["result"] != null && err["result"].error != null) {
-                    this.errorMessage = err["result"].error.message;
+                    this.message = err["result"].error.message;
                 }
             });
     }
 
     public postUser(user) {
-        this.errorMessage = null;
+        this.message = null;
         this.gapiService.postUser(user)
             .then((res) => {
                 if (res["result"] != null) {
                     this.currentUser = null;
                     this.userToGet = res["result"].id;
                     this.getUser();
-                    this.successMessage = "User created !";
+                    this.message = "User created !";
                     console.log("res ", res);
                 }
             })
-            .catch((err) => this.errorMessage = err["result"].error.message);
+            .catch((err) => this.message = err["result"].error.message);
     }
 
-    public trackByFn(index, item) {
-        const self = this;
+    public updateUser() {
+        this.message = null;
+        this.gapiService.updateUser(this.currentUser, this.oldUser)
+            .then((res) => {
+                this.currentUser = null;
+                this.userToGet = res["result"].id;
+                this.getUser();
+                this.message = "User updated!";
+                console.log(this.message);
+            })
+            .catch((err) => console.error(err));
+    }
 
-        return index; // or item.id
+    public trackByFn(index) {
+
+        return index;
     }
 
     public refreshEmail() {
@@ -157,17 +155,18 @@ export class GapiUsersComponent implements OnInit {
         this.currentUser.primaryEmail = `${emailPrefix}@${this.currentUser.primaryEmailSuffix}`;
     }
 
-    // private setUser(res) {
-    //     this.currentUser = {
-    //         emails: res["result"].,
-    //         familyName: res["result"].name.familyName,
-    //         fullName: res["result"].name.fullName,
-    //         givenName: res["result"].name.givenName,
-    //         id: res["result"].id,
-    //         orgas: res["result"].orgUnitPath,
-    //         password: null,
-    //         primaryEmail: res["result"].primaryEmail,
-    //         primaryEmailSuffix: res["result"].replace(/.*@/, ""),
-    //     };
-    // }
+    public resetForm() {
+        this.currentUser = {
+            emails: null,
+            familyName: null,
+            fullName: null,
+            givenName: null,
+            id: null,
+            orgas: null,
+            password: null,
+            primaryEmail: "",
+            primaryEmailSuffix: "planetveo.com",
+        };
+        this.message = null;
+    }
 }

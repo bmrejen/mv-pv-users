@@ -15,6 +15,10 @@
         <button (click)="signIn()">Change Users</button>
         <button (click)="signOut()">Sign Out</button>
         <button (click)="listUsers()">List Users</button>
+        <button
+            *ngIf="currentUser.id != null"
+            (click)="resetForm()"
+        >New User</button>
 
         <div id="content">
 
@@ -57,20 +61,23 @@
                 name="primaryEmail"
                 [(ngModel)]="currentUser.primaryEmail"
                 (ngModelChange)="refreshEmail()"
+                [disabled]="currentUser.id != null"
             >Primary Mail
             <br>
-            Primary mail suffix
-            <select
-                name="primaryEmailSuffix"
-                [(ngModel)]="currentUser.primaryEmailSuffix"
-                (ngModelChange)="refreshEmail()"
-            >Primary Email
-                <option value="planetveo.com">planetveo.com</option>
-                <option value="marcovasco.fr">marcovasco.fr</option>
-                <option value="chinaveo.com">chinaveo.com</option>
-                <option value="marcovasco.com">marcovasco.com</option>
-                <option value="prestige-voyages.com">prestige-voyages.com</option>
-            </select>
+            <div *ngIf="currentUser.id === null">
+                Primary mail suffix
+                <select
+                    name="primaryEmailSuffix"
+                    [(ngModel)]="currentUser.primaryEmailSuffix"
+                    (ngModelChange)="refreshEmail()"
+                >Primary Email
+                    <option value="planetveo.com">planetveo.com</option>
+                    <option value="marcovasco.fr">marcovasco.fr</option>
+                    <option value="chinaveo.com">chinaveo.com</option>
+                    <option value="marcovasco.com">marcovasco.com</option>
+                    <option value="prestige-voyages.com">prestige-voyages.com</option>
+                </select>
+            </div>
             <br>
             Orgas
             <select
@@ -84,8 +91,8 @@
                 </option>
             </select>
             <br>
-            Other Emails
             <div *ngIf="currentUser.id != null">
+                Other Emails
                 <div *ngFor="let email of currentUser.emails">
                     <input
                         type="text"
@@ -95,9 +102,15 @@
                 </div>
             </div>
 
-            <button (click)="postUser(currentUser)">Create</button>
-            <h2 *ngIf="errorMessage != null">{{ errorMessage }}</h2>
-            <h2 *ngIf="successMessage != null">{{ successMessage }}</h2>
+            <button
+                *ngIf="currentUser.id === null"
+                (click)="postUser(currentUser)"
+            >Create</button>
+            <button
+                *ngIf="currentUser.id != null"
+                (click)="updateUser()"
+            >Update</button>
+            <h2 *ngIf="message != null">{{ message }}</h2>
 
             <table *ngIf="users && users != undefined">
                 <thead>

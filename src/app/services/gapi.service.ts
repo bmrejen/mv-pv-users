@@ -1,4 +1,6 @@
+import { HttpClient } from "@angular/common/http";
 import { Injectable, NgZone } from "@angular/core";
+import { IGapiUser } from "../interfaces/gapi-user";
 
 declare const gapi: any;
 
@@ -12,7 +14,10 @@ export class GapiAuthenticatorService {
     // included, separated by spaces.
     public SCOPES: string = "https://www.googleapis.com/auth/admin.directory.user";
 
-    constructor(private zone: NgZone) {
+    constructor(
+        private zone: NgZone,
+        private http: HttpClient,
+    ) {
         //
     }
 
@@ -87,6 +92,37 @@ export class GapiAuthenticatorService {
                         primaryEmail: user.primaryEmail,
                     },
                 })
+                    .then(resolve, reject);
+            });
+        });
+    }
+
+    public updateUser(user: IGapiUser, oldUser: IGapiUser): Promise<any> {
+        const myObj = {
+            resource: {},
+            userKey: oldUser.primaryEmail,
+        };
+
+        for (const key in user) {
+            if (key === "id") {
+                // do not update id
+            } else if (key === "password" && user[key] === null) {
+                // do not update password if empty
+            } else if (key === "primaryEmailSuffix") {
+                // do not update primaryEmailSuffix
+            } else if (key === "orgas" && user[key] !== oldUser[key]) {
+                myObj["orgUnitPath"] = user[key];
+            } else {
+                if (user[key] !== oldUser[key]) {
+                    myObj[key] = user[key];
+                }
+            }
+        }
+        myObj.resource["userKey"] = user.id;
+
+        return new Promise((resolve, reject) => {
+            this.zone.run(() => {
+                gapi.client.directory.users.update(myObj)
                     .then(resolve, reject);
             });
         });
