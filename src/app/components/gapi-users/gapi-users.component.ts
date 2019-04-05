@@ -93,13 +93,10 @@ export class GapiUsersComponent implements OnInit {
     }
 
     public isSignedIn(): boolean {
-        return this.gapiService.isSignedIn()
-            .get;
+        return this.gapiService.isSignedIn();
     }
 
-    public getUser(email) {
-        this.successMessage = null;
-        this.userToGet = null;
+    public getUser(): void {
         this.currentUser = {
             emails: null,
             familyName: null,
@@ -112,36 +109,37 @@ export class GapiUsersComponent implements OnInit {
             primaryEmailSuffix: "planetveo.com",
         };
         this.errorMessage = null;
-        this.gapiService.getUser(email)
+        this.gapiService.getUser(this.userToGet)
             .then((res) => {
                 console.log(res);
-                this.currentUser.emails = res["result"].emails;
-                this.currentUser.familyName = res["result"].name.familyName;
-                this.currentUser.fullName = res["result"].name.fullName;
-                this.currentUser.givenName = res["result"].name.givenName;
-                this.currentUser.id = res["result"].customerId;
-                this.currentUser.orgas = res["result"].orgUnitPath;
-                this.currentUser.primaryEmail = res["result"].primaryEmail;
-                console.log(this.currentUser.emails);
-            },
-                (err) => {
-                    console.error(err);
+                if (res["result"] != null && res["result"].name != null) {
+                    this.currentUser.fullName = res["result"].name.fullName;
+                    this.currentUser.emails = res["result"].emails;
+                    this.currentUser.id = res["result"].customerId;
+                    this.currentUser.orgas = res["result"].orgUnitPath;
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+                if (err["result"] != null && err["result"].error != null) {
                     this.errorMessage = err["result"].error.message;
-                },
-            );
+                }
+            });
     }
 
     public postUser(user) {
         this.errorMessage = null;
         this.gapiService.postUser(user)
             .then((res) => {
-                this.currentUser = null;
-                this.getUser(res["result"].id);
-                this.successMessage = "User created !";
-                console.log("res ", res);
-            },
-                (err) => this.errorMessage = err["result"].error.message,
-            );
+                if (res["result"] != null) {
+                    this.currentUser = null;
+                    this.userToGet = res["result"].id;
+                    this.getUser();
+                    this.successMessage = "User created !";
+                    console.log("res ", res);
+                }
+            })
+            .catch((err) => this.errorMessage = err["result"].error.message);
     }
 
     public trackByFn(index, item) {
