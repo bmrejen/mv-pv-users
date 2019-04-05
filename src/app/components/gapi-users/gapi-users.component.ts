@@ -113,10 +113,12 @@ export class GapiUsersComponent implements OnInit {
             .then((res) => {
                 console.log(res);
                 if (res["result"] != null && res["result"].name != null) {
-                    this.currentUser.fullName = res["result"].name.fullName;
+                    this.currentUser.givenName = res["result"].name.givenName;
+                    this.currentUser.familyName = res["result"].name.familyName;
                     this.currentUser.emails = res["result"].emails;
                     this.currentUser.id = res["result"].customerId;
                     this.currentUser.orgas = res["result"].orgUnitPath;
+                    this.currentUser.primaryEmail = res["result"].primaryEmail;
                 }
             })
             .catch((err) => {
