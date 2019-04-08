@@ -1,93 +1,73 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { ControlContainer, NgForm } from "@angular/forms";
-import { FieldsService } from "../../services/fields.service";
 
-import { ActivatedRoute } from "@angular/router";
-
-import { Fields } from "../../models/fields";
 import { User } from "../../models/user";
 
 @Component({
-  selector: "mv-credentials",
-  styleUrls: ["./credentials.component.css"],
-  templateUrl: "./credentials.component.html",
-  viewProviders: [
-  {
-    provide: ControlContainer,
-    useExisting: NgForm,
-  },
-  ],
+    selector: "mv-credentials",
+    styleUrls: ["./credentials.component.css"],
+    templateUrl: "./credentials.component.html",
+    viewProviders: [
+        {
+            provide: ControlContainer,
+            useExisting: NgForm,
+        },
+    ],
 })
 
-export class CredentialsComponent implements OnInit {
-  @Input() public civilites;
-  @Input() public userFields;
-  @Input() public currentUser: User;
-  @Input() public usersFromSugar: User[];
+export class CredentialsComponent {
+    @Input() public civilites;
+    @Input() public userFields;
+    @Input() public currentUser: User;
+    @Input() public usersFromSugar: User[];
 
-  public passwordExists = false;
-  public usernameTaken;
-  public usernameStatus;
+    public usernameStatus: string;
+    public emailStatus: string;
 
-  constructor(private fieldsService: FieldsService) {
-    //
-  }
-
-  public ngOnInit(): void {
-    if (this.currentUser != null) {
-      this.prefillForm();
+    public credentialClick() {
+        if (this.currentUser.firstName !== ""
+            && this.currentUser.lastName !== ""
+            && this.currentUser.userName === "") {
+            this.currentUser.userName = this.setUsername();
+            this.checkUsernameAvailability();
+            this.currentUser.email = this.setEmail();
+            this.checkEmailAvailability();
+            this.currentUser.password = this.currentUser.id === "" ? this.setPassword() : "";
+        }
+        console.log(this.currentUser);
     }
-  }
 
-  public prefillForm(): any {
-    this.userFields[0].value = this.currentUser.firstName;
-    this.userFields[1].value = this.currentUser.lastName;
-    this.userFields[2].value = this.currentUser.userName;
-    this.userFields[3].value = this.currentUser.email;
-  }
-
-  public credentialClick(e) {
-    const [ first, last, username ] = [ this.userFields[0], this.userFields[1], this.userFields[2] ];
-
-    this.usernameTaken = this.isUsernameTaken(username);
-    this.usernameStatus = this.usernameTaken ? "Username already taken. Choose another one" : "Username available :)";
-
-    if (!!first.value && !!last.value && !username.value) {
-      this.setUsername(first, last, username);
-      this.setPassword(first, last);
-      this.setEmail(username);
+    public setEmail() {
+        return `${this.currentUser.userName}@marcovasco.fr`;
     }
-  }
 
-  public setEmail(username) {
-    const email = this.userFields[3];
-    email.value = `${username.value}@marcovasco.fr`;
-  }
+    public setUsername() {
+        return `${this.currentUser.firstName[0].toLowerCase()}${this.currentUser.lastName.toLowerCase()}`;
+    }
 
-  public setUsername(first, last, username) {
-    username.value = `${first.value[0].toLowerCase()}${last.value.toLowerCase()}`;
-  }
+    public checkUsernameAvailability(e?) {
+        this.usernameStatus = (this.usersFromSugar
+            .find((user) => user.userName === this.currentUser.userName) !== undefined) ?
+            "USERNAME ALREADY TAKEN" : "Username available :)";
+    }
 
-  public isUsernameTaken(username) {
+    public checkEmailAvailability(e?) {
+        this.emailStatus = (this.usersFromSugar
+            .find((user) => user.email === this.currentUser.email) !== undefined) ?
+            "EMAIL ALREADY TAKEN" : "Email available :)";
+    }
 
-    return (this.usersFromSugar
-            .find((user) => user.userName === username.value) !== undefined);
-  }
+    public setPassword() {
+        if (this.currentUser.id !== "") { return null; }
+        const rndStrg = Math.random()
+            .toString()
+            .substring(2, 7);
 
-  public setPassword(first, last) {
-    if (this.passwordExists) { return ; }
-    const pwd = this.userFields.find((field) => field.name === "password");
-    const rndStrg = Math.random()
-    .toString()
-    .substring(2, 7);
-    pwd.value = `${first.value[0].toLowerCase()}${last.value[0].toLowerCase()}${rndStrg}!`;
-    this.passwordExists = true;
-  }
+        return `${this.currentUser.firstName[0].toLowerCase()}${this.currentUser.lastName[0].toLowerCase()}${rndStrg}!`;
+    }
 
-  public trackByFn(index, item) {
-    const self = this;
-
-    return item.id; // or index
-  }
+    public trackByFn(item) {
+        return item.id;
+    }
 
 }
