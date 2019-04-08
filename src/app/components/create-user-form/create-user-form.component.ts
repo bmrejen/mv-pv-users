@@ -62,6 +62,8 @@ export class CreateUserFormComponent implements OnInit {
 
                 // get fields list
                 this.fields = new Fields(data.fields);
+
+                console.log(this.fields);
             });
 
     }
@@ -72,15 +74,15 @@ export class CreateUserFormComponent implements OnInit {
     }
 
     public onSubmit(form) {
-        // form doesn't get updated after updating currentUser :'(
-        this.sugar.postDataToSugar(this.body)
-            .subscribe(
-                (res) => {
-                    this.currentUser = new User(res.data[0]);
-                },
-                (error) => this.errorMsg = error.statusText,
-            );
-        this.userObject = this.mapper.createUserForSugar(form);
+        console.log("submitted", form);
+        // this.sugar.postDataToSugar(this.body)
+        //     .subscribe(
+        //         (res) => {
+        //             this.currentUser = new User(res.data[0]);
+        //         },
+        //         (error) => this.errorMsg = error.statusText,
+        //     );
+        // this.userObject = this.mapper.createUserForSugar(form);
         // this.sugarService.postDataToSugar(form)
         // .subscribe(
         //            (data) => console.log("DATA- ", data),
@@ -92,48 +94,4 @@ export class CreateUserFormComponent implements OnInit {
 
         return item.id; // or index
     }
-
-    public eraseFields(fields) {
-        fields.forEach((field) => field = "");
-    }
-
-    public unCheck(array) {
-        array.forEach((x) => x.checked = false);
-    }
-
-    private unCheckArrays(arrays) {
-        arrays.forEach((array) => this.unCheck(array));
-    }
-
-    private resetSugar() {
-        this.fields.inactiveStatus = false,
-            this.fields.inactiveEmployee = false,
-            this.fields.leadsMin = 15;
-        this.fields.leadsMax = 45;
-        this.fields.userValue = "user_default_xx";
-        this.fields.selectedManager = null,
-            this.eraseFields([
-                this.fields.codeSON,
-                this.fields.codeTourplan,
-                this.fields.codevad,
-                this.fields.groupes,
-                this.fields.inbound,
-                this.fields.outbound,
-                this.fields.phoneExtension,
-                this.fields.phoneNumber,
-                this.fields.selectedFunction,
-                this.fields.selectedOffice,
-                this.fields.selectedOrganisation,
-                this.fields.title,
-            ]);
-        this.unCheckArrays([
-            this.fields.roles,
-            this.fields.departments,
-            this.fields.others,
-            this.fields.teams,
-            this.fields.destinations,
-            this.fields.orgas,
-        ]);
-    }
-
 }

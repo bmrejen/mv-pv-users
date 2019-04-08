@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { ActivatedRoute, ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/router";
+import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/router";
 import { SugarService } from "../services/sugar.service";
 
 import { Role } from "../models/role";
@@ -12,17 +12,14 @@ export class RolesResolverService implements Resolve<Promise<Role[]>> {
         //
     }
 
-    public resolve(
-        route: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot): Promise<Role[]> {
+    public resolve(): Promise<Role[]> {
 
         const Roles: Promise<Role[]> = this.sugar.getRoles();
 
         return new Promise((resolve, reject) => {
             Roles
-                .then(
-                    (res) => resolve(res),
-                    (error) => reject("Probleme"));
+                .then((res) => resolve(res))
+                .catch((error) => reject("Probleme"));
         });
     }
 }

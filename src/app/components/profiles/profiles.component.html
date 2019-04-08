@@ -1,39 +1,65 @@
 <div *ngIf="userTemplates != null && roles != null && departments != null">
     <fieldset class="blue">
         <legend>Profiles SugarCRM</legend>
-        <button (click)="handleClick($event, 'conseiller')">Ventes - Conseiller</button>
-        <button (click)="handleClick($event, 'jm')">Ventes – Junior Manager</button>
-        <button (click)="handleClick($event, 'manager')">Ventes - Manager</button>
-        <button (click)="handleClick($event, 'assistant')">Ventes – Assistant de ventes</button>
-        <button (click)="handleClick($event, 'qualite')">Agent Qualité</button>
-        <button (click)="handleClick($event, 'compta')">Compta</button>
-        <button (click)="handleClick($event, 'inactif')">Inactif</button>
+        <button
+            type="button"
+            (click)="handleClick('conseiller')"
+        >Ventes - Conseiller
+        </button>
+        <button
+            type="button"
+            (click)="handleClick('jm')"
+        >Ventes – Junior Manager
+        </button>
+        <button
+            type="button"
+            (click)="handleClick('manager')"
+        >Ventes - Manager
+        </button>
+        <button
+            type="button"
+            (click)="handleClick('assistant')"
+        >Ventes – Assistant de ventes
+        </button>
+        <button
+            type="button"
+            (click)="handleClick('qualite')"
+        >Agent Qualité
+        </button>
+        <button
+            type="button"
+            (click)="handleClick('compta')"
+        >Compta
+        </button>
+        <button
+            type="button"
+            (click)="handleClick('inactif')"
+        >Inactif
+        </button>
 
 
         <div class="select subtitle">Hérite les préférence de l'utilisateur
             <select
                 name="userToCopyHPfrom"
-                [(ngModel)]="userValue"
+                [(ngModel)]="currentUser.userToCopyHPfrom"
             >
                 <option
                     *ngFor="let user of userTemplates ; trackBy: trackByFn"
                     [value]="user.value"
                 >
-                    {{ user.label | uppercase }}
+                    {{ user.value | uppercase }}
                 </option>
             </select>
         </div>
 
-        <div
-            class="checkbox-list subtitle"
-            id="sugar_role"
-        >ROLE:
+        <div class="checkbox-list subtitle">ROLE:
             <span *ngFor="let role of roles; trackBy: trackByFn">
                 <label>
+                    <!-- ngModel can be binded to role ID if needed -->
                     <input
                         type="radio"
-                        [value]="role.id"
-                        [(ngModel)]="role.checked"
+                        [value]="role.name"
+                        [(ngModel)]="currentUser.role"
                         name="role"
                     >
                     {{ role.name }}
@@ -43,23 +69,21 @@
 
         <div
             class="checkbox-list subtitle"
-            id="sugar_departement"
             ngModelGroup="departments"
         >DEPARTMENT:
             <span *ngFor="let department of departments ; trackBy: trackByFn">
                 <label>
                     <input
-                        [id]="department.id"
-                        type="checkbox"
-                        [name]="department.id"
-                        [ngModel]="department.checked"
-                        (ngModelChange)="onDepartmentChecked(department, $event)"
+                        type="radio"
+                        name="department"
+                        [(ngModel)]="currentUser.department"
+                        [value]="department.name"
                     >{{ department.name }}
                 </label>
             </span>
         </div>
 
-        <div [hidden]="hideLeads">
+        <div *ngIf="currentUser.department === 'Ventes'">
             <label>Leads min
                 <input
                     type="number"
@@ -67,9 +91,7 @@
                     [(ngModel)]="currentUser.leadsMin"
                 >
             </label>
-        </div>
-
-        <div [hidden]="hideLeads">
+            <br>
             <label>Leads max
                 <input
                     type="number"
@@ -80,3 +102,4 @@
         </div>
     </fieldset>
 </div>
+<pre>{{ currentUser | json }}</pre>
