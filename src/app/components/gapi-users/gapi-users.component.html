@@ -20,7 +20,6 @@
         *ngIf="userLoggedIn!=='Logged out'"
         (click)="listUsers()"
     >List Users</button>
-
 </div>
 
 <div id="content">
@@ -30,6 +29,27 @@
     <div>API is failed : {{ apiFailed }}</div>
     <div>API is ready : {{ apiReady }}</div>
     <div>User logged in : {{ userLoggedIn }}</div>
+    <br>
+    <h2>GET USER</h2>
+    <input
+        type="text"
+        name="userToGet"
+        [(ngModel)]="userToGet"
+    > Email or alias of user to get (ex. bmrejen@marcovasco.fr)
+
+    <button
+        *ngIf="userLoggedIn!=='Logged out'"
+        (click)="getUser()"
+    >Get</button>
+
+    <div *ngIf="currentUser && currentUser.id != null">
+        <h2>{{ currentUser.fullName }}</h2>
+        <h3>ID: {{ currentUser.id }}</h3>
+        <h3>Orga : {{ currentUser.orgas }}</h3>
+        <h3>Emails</h3>
+        <p *ngFor="let email of currentUser.emails">{{ email.address }}</p>
+    </div>
+    <h2 *ngIf="errorMessage != null">{{ errorMessage }}</h2>
 
     <h2>CREATE USER</h2>
     <input
@@ -68,7 +88,7 @@
         [(ngModel)]=newUser.orgas
     >
         <option
-            *ngFor="let orga of orgas"
+            *ngFor="let orga of currentUser.orgas"
             [value]="orga.value"
         >{{ orga.value }}
         </option>
