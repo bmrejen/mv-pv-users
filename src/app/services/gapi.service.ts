@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, NgZone } from "@angular/core";
-import { IGapiUser } from "../interfaces/gapi-user";
+import { IGapiRequest, IGapiUser } from "../interfaces/gapi-user";
 
 declare const gapi: any;
 
@@ -98,27 +98,59 @@ export class GapiAuthenticatorService {
     }
 
     public updateUser(user: IGapiUser, oldUser: IGapiUser): Promise<any> {
-        const myObj = {
+        console.log("old user", oldUser);
+        const myObj: IGapiRequest = {
             resource: {},
-            userKey: oldUser.primaryEmail,
+            userKey: oldUser.id,
         };
 
         for (const key in user) {
-            if (key === "id") {
-                // do not update id
-            } else if (key === "password" && user[key] === null) {
-                // do not update password if empty
-            } else if (key === "primaryEmailSuffix") {
-                // do not update primaryEmailSuffix
-            } else if (key === "orgas" && user[key] !== oldUser[key]) {
-                myObj["orgUnitPath"] = user[key];
-            } else {
-                if (user[key] !== oldUser[key]) {
-                    myObj[key] = user[key];
+            if (user[key] !== null) {
+
+                switch (key) {
+                    case "id":
+                        // do not update id
+                        break;
+                    case "primaryEmailSuffix":
+                        // do not update primaryEmailSuffix
+                        delete myObj[key];
+                        break;
+                    case "familyName":
+                        if (user[key] !== oldUser[key]) {
+                            if (myObj.resource.name != null) {
+                                myObj.resource.name.familyName = user[key];
+                            } else {
+                                myObj.resource["name"] = {
+                                    familyName: user[key],
+                                };
+                            }
+                        }
+                        break;
+                    case "givenName":
+                        if (user[key] !== oldUser[key]) {
+                            if (myObj.resource.name != null) {
+                                myObj.resource.name.givenName = user[key];
+                            } else {
+                                myObj.resource["name"] = {
+                                    givenName: user[key],
+                                };
+                            }
+                        }
+                        break;
+                    case "orgas":
+                        if (user[key] !== oldUser[key]) {
+                            myObj.resource["orgUnitPath"] = user[key];
+                            delete myObj[key];
+                        }
+                    default:
+                        if (user[key] !== oldUser[key]) {
+                            myObj.resource[key] = user[key];
+                        }
+                        break;
                 }
             }
         }
-        myObj.resource["userKey"] = user.id;
+        console.log("objet a poster:", myObj);
 
         return new Promise((resolve, reject) => {
             this.zone.run(() => {

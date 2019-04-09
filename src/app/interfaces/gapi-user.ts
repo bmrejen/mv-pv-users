@@ -13,3 +13,17 @@ export interface IGapiUser {
 export interface IGapiEmails {
     address: string;
 }
+
+export interface IGapiRequest {
+    userKey: string;
+    resource: {
+        name?: {
+            familyName?: string,
+            fullName?: string,
+            givenName?: string,
+        },
+        orgUnitPath?: string,
+        password?: string,
+        primaryEmail?: string,
+    };
+}

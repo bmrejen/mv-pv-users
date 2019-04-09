@@ -99,12 +99,11 @@ export class GapiUsersComponent implements OnInit {
                     this.currentUser.givenName = res["result"].name.givenName;
                     this.currentUser.familyName = res["result"].name.familyName;
                     this.currentUser.emails = res["result"].emails;
-                    this.currentUser.id = res["result"].customerId;
+                    this.currentUser.id = res["result"].id;
                     this.currentUser.orgas = res["result"].orgUnitPath;
                     this.currentUser.primaryEmail = email;
                     this.currentUser.primaryEmailSuffix = email.substring(email.lastIndexOf("@") + 1);
                     this.oldUser = { ...this.currentUser };
-                    console.log(this.currentUser);
                 }
             })
             .catch((err) => {
