@@ -51,7 +51,64 @@
     </div>
     <h2 *ngIf="errorMessage != null">{{ errorMessage }}</h2>
 
-    <table *ngIf="users && users != undefined">
+    <h2>CREATE USER</h2>
+    <div *ngIf="newUser != null">
+        <input
+            type="text"
+            name="firstName"
+            [(ngModel)]="newUser.firstName"
+        >First name
+        <br>
+        <input
+            type="text"
+            name="lastName"
+            [(ngModel)]="newUser.lastName"
+        >Last name
+        <br>
+        <input
+            type="text"
+            name="password"
+            [(ngModel)]="newUser.password"
+        >Password
+        <br>
+        Primary mail
+        <select
+            name="primaryEmail"
+            [(ngModel)]="newUser.primaryEmail"
+        >Primary Email
+            <option
+                *ngFor="let dom of domains"
+                [value]="dom"
+            >{{ dom }}</option>
+        </select>
+        <br>
+        Orgas
+        <select
+            name="orgas"
+            [(ngModel)]="newUser.orgas"
+        >
+            <option
+                *ngFor="let orga of orgas"
+                [value]="orga.value"
+            >{{ orga.value }}
+            </option>
+        </select>
+        <br>
+        <button (click)="postUser(newUser)">Create</button>
+    </div>
+
+    <div *ngIf="currentUser != null">
+        <h2>Current User</h2>
+        <h3>{{ currentUser.firstName }} {{ currentUser.lastName }}</h3>
+        <h4>ID: {{ currentUser.id }}</h4>
+        <h4>Primary Mail: {{ currentUser.primaryEmail }}</h4>
+        <h4>Orgas: {{ currentUser.orgas }}</h4>
+    </div>
+    <h3 *ngIf="errorMessage != null">
+        {{ errorMessage }}
+    </h3>
+
+    <table *ngIf="users != null && users.length > 0">
         <thead>
             <tr>
                 <th>ID</th>
@@ -72,7 +129,7 @@
                 <td>{{ user.orgUnitPath }}</td>
                 <td>{{ user.primaryEmail }}</td>
                 <td>
-                    <ul *ngIf="user.emails && user.emails != undefined">
+                    <ul *ngIf="user.emails && user.emails != null">
                         <li *ngFor="let email of user.emails; trackBy: trackByFn">
                             {{ email.address }}
                         </li>
