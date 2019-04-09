@@ -68,30 +68,32 @@ export class GapiAuthenticatorService {
         });
     }
 
-    public isSignedIn() {
+    public isSignedIn(): boolean {
         return gapi.auth2.getAuthInstance().isSignedIn
             .get();
     }
 
-    public postUser(user) {
-        const email = `${user.firstName[0]}${user.lastName}@${user.primaryEmail}`;
+    public postUser(user): Promise<any> {
+        if (user != null && user.firstName != null) {
+            const email = `${user.firstName[0]}${user.lastName}@${user.primaryEmail}`;
 
-        return new Promise((resolve, reject) => {
-            this.zone.run(() => {
-                gapi.client.directory.users.insert({
-                    resource: {
-                        name: {
-                            familyName: user.lastName,
-                            givenName: user.firstName,
+            return new Promise((resolve, reject) => {
+                this.zone.run(() => {
+                    gapi.client.directory.users.insert({
+                        resource: {
+                            name: {
+                                familyName: user.lastName,
+                                givenName: user.firstName,
+                            },
+                            orgUnitPath: user.orgas,
+                            password: user.password,
+                            primaryEmail: email,
                         },
-                        orgUnitPath: user.orgas,
-                        password: user.password,
-                        primaryEmail: email,
-                    },
-                })
-                    .then(resolve, reject);
+                    })
+                        .then(resolve, reject);
+                });
             });
-        });
+        }
     }
 
     public signIn(): Promise<any> {
