@@ -23,17 +23,9 @@ export class GapiUsersComponent implements OnInit {
     public userLoggedIn: string = "Logged out";
     public users;
     public userToGet: string;
-    public currentUser = {
-        emails: null,
-        firstName: null,
-        fullName: null,
-        id: null,
-        lastName: null,
-        orgas: null,
-        password: null,
-        primaryEmail: null,
-    };
     public errorMessage: string = null;
+    public currentUser;
+    public orgas;
 
     // CREATE
     public newUser = {
@@ -54,10 +46,12 @@ export class GapiUsersComponent implements OnInit {
     }
 
     public ngOnInit(): void {
+        this.resetCurrentUser();
         this.route.data
             .subscribe((data) => {
                 if (data.fields != null) {
-                    this.currentUser.orgas = data.fields.orgas;
+                    this.orgas = data.fields.orgas;
+                    console.log(this.currentUser);
                 }
             });
 
@@ -116,7 +110,8 @@ export class GapiUsersComponent implements OnInit {
     }
 
     public postUser(user) {
-        this.currentUser = null;
+        console.log("user in component", user);
+        this.resetCurrentUser();
         this.errorMessage = null;
         this.gapiService.postUser(user)
             .then((res) => this.setUser(res))
@@ -160,6 +155,7 @@ export class GapiUsersComponent implements OnInit {
     }
 
     private setUser(res): void {
+        console.log(res);
         this.resetForm();
         if (res["result"] != null && res["result"].name != null) {
             this.currentUser.firstName = res["result"].name.givenName;
@@ -174,6 +170,19 @@ export class GapiUsersComponent implements OnInit {
     private resetForm(): void {
         this.newUser = {
             firstName: null,
+            lastName: null,
+            orgas: null,
+            password: null,
+            primaryEmail: null,
+        };
+    }
+
+    private resetCurrentUser(): void {
+        this.currentUser = {
+            emails: null,
+            firstName: null,
+            fullName: null,
+            id: null,
             lastName: null,
             orgas: null,
             password: null,

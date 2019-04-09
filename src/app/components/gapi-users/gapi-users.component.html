@@ -88,7 +88,7 @@
             [(ngModel)]="newUser.orgas"
         >
             <option
-                *ngFor="let orga of currentUser.orgas"
+                *ngFor="let orga of orgas"
                 [value]="orga.value"
             >{{ orga.value }}
             </option>

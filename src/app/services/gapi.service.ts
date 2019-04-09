@@ -74,6 +74,8 @@ export class GapiAuthenticatorService {
     }
 
     public postUser(user): Promise<any> {
+        console.log("user in service", user);
+
         if (user != null && user.firstName != null) {
             const email = `${user.firstName[0]}${user.lastName}@${user.primaryEmail}`;
 
