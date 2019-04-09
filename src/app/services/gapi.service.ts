@@ -10,7 +10,7 @@ export class GapiAuthenticatorService {
 
     // Authorization scopes required by the API; multiple scopes can be
     // included, separated by spaces.
-    public SCOPES: string = "https://www.googleapis.com/auth/admin.directory.user.readonly";
+    public SCOPES: string = "https://www.googleapis.com/auth/admin.directory.user";
 
     constructor(private zone: NgZone) {
         //
@@ -71,6 +71,31 @@ export class GapiAuthenticatorService {
     public isSignedIn(): boolean {
         return gapi.auth2.getAuthInstance().isSignedIn
             .get();
+    }
+
+    public postUser(user): Promise<any> {
+        console.log("user in service", user);
+
+        if (user != null && user.firstName != null) {
+            const email = `${user.firstName[0]}${user.lastName}@${user.primaryEmail}`;
+
+            return new Promise((resolve, reject) => {
+                this.zone.run(() => {
+                    gapi.client.directory.users.insert({
+                        resource: {
+                            name: {
+                                familyName: user.lastName,
+                                givenName: user.firstName,
+                            },
+                            orgUnitPath: user.orgas,
+                            password: user.password,
+                            primaryEmail: email,
+                        },
+                    })
+                        .then(resolve, reject);
+                });
+            });
+        }
     }
 
     public signIn(): Promise<any> {

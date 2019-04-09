@@ -72,6 +72,9 @@ export const AppRoutes: Routes = [
     {
         path: "gapi",
         component: GapiUsersComponent,
+        resolve: {
+            fields: FieldsResolverService,
+        },
     },
     {
         path: "disable/:id",
