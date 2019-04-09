@@ -1,18 +1,18 @@
 export class JamespotUser {
-    public Country = "fr";
-    public Firstname;
-    public Language = "fr";
-    public Lastname;
-    public Mail;
-    public Pseudo;
-    public Role = "User";
-    public idUser;
-    public img;
-    public active = "1";
-    public password;
-    public phoneExtension;
-    public timeZone = "Europe/Paris";
-    public company = "MARCO VASCO";
+    public Country: string = "fr";
+    public Firstname: string;
+    public Language: string = "fr";
+    public Lastname: string;
+    public Mail: string;
+    public Pseudo: string;
+    public Role: string = "User";
+    public idUser: string;
+    public img: string | File;
+    public active: string = "1";
+    public password: string;
+    public phoneExtension: string;
+    public timeZone: string = "Europe/Paris";
+    public company: string = "MARCO VASCO";
 
     constructor(
         Country,

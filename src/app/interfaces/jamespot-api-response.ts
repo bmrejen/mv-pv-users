@@ -7,7 +7,7 @@ export interface IJamespotUser {
     Country: string;
     Firstname: string;
     idUser: string;
-    img: string;
+    img: string | File;
     Language: string;
     Lastname: string;
     Mail: string;
