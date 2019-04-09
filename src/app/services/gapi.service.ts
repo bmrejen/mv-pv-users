@@ -73,28 +73,34 @@ export class GapiAuthenticatorService {
         });
     }
 
-    public isSignedIn() {
+    public isSignedIn(): boolean {
         return gapi.auth2.getAuthInstance().isSignedIn
             .get();
     }
 
-    public postUser(user) {
-        return new Promise((resolve, reject) => {
-            this.zone.run(() => {
-                gapi.client.directory.users.insert({
-                    resource: {
-                        name: {
-                            familyName: user.familyName,
-                            givenName: user.givenName,
+    public postUser(user): Promise<any> {
+        console.log("user in service", user);
+
+        if (user != null && user.givenName != null) {
+            const email = `${user.givenName[0]}${user.familyName}@${user.primaryEmail}`;
+
+            return new Promise((resolve, reject) => {
+                this.zone.run(() => {
+                    gapi.client.directory.users.insert({
+                        resource: {
+                            name: {
+                                familyName: user.familyName,
+                                givenName: user.givenName,
+                            },
+                            orgUnitPath: user.orgas,
+                            password: user.password,
+                            primaryEmail: email,
                         },
-                        orgUnitPath: user.orgas,
-                        password: user.password,
-                        primaryEmail: user.primaryEmail,
-                    },
-                })
-                    .then(resolve, reject);
+                    })
+                        .then(resolve, reject);
+                });
             });
-        });
+        }
     }
 
     public updateUser(user: IGapiUser, oldUser: IGapiUser): Promise<any> {

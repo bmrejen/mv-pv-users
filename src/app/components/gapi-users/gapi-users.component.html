@@ -15,22 +15,67 @@
         <button (click)="signIn()">Change Users</button>
         <button (click)="signOut()">Sign Out</button>
         <button (click)="listUsers()">List Users</button>
-        <button
-            *ngIf="currentUser.id != null"
-            (click)="resetForm()"
-        >New User</button>
+        <button (click)="resetForm()">New User</button>
+        <br>
+        Email or alias of user to get (ex. bmrejen@marcovasco.fr)
+        <br>
+        <input
+            type="text"
+            name="userToGet"
+            [(ngModel)]="userToGet"
+        >
+        <button (click)="getUser(userToGet)">Get</button>
+        <hr>
 
-        <div id="content">
 
-            Email or alias of user to get (ex. bmrejen@marcovasco.fr)
+
+        <div *ngIf="currentUser.id == null">
+            <h2>USER FORM</h2>
+            <input
+                type="text"
+                name="firstName"
+                [(ngModel)]="newUser.givenName"
+            >First name
             <br>
             <input
                 type="text"
-                name="userToGet"
-                [(ngModel)]="userToGet"
+                name="lastName"
+                [(ngModel)]="newUser.familyName"
+            >Last name
+            <br>
+            <input
+                type="text"
+                name="password"
+                [(ngModel)]="newUser.password"
+            >Password
+            <br>
+            Primary mail
+            <select
+                name="primaryEmail"
+                [(ngModel)]="newUser.primaryEmail"
+            >Primary Email
+                <option
+                    *ngFor="let dom of domains"
+                    [value]="dom"
+                >{{ dom }}</option>
+            </select>
+            <br>
+            Orgas
+            <select
+                name="orgas"
+                [(ngModel)]="newUser.orgas"
             >
-            <button (click)="getUser(userToGet)">Get</button>
-            <hr>
+                <option
+                    *ngFor="let orga of orgas"
+                    [value]="orga.value"
+                >{{ orga.value }}
+                </option>
+            </select>
+            <br>
+            <button (click)="postUser()">Create</button>
+        </div>
+
+        <div *ngIf="currentUser.id != null">
             <input
                 type="text"
                 name="id"
@@ -71,11 +116,10 @@
                     [(ngModel)]="currentUser.primaryEmailSuffix"
                     (ngModelChange)="refreshEmail()"
                 >Primary Email
-                    <option value="planetveo.com">planetveo.com</option>
-                    <option value="marcovasco.fr">marcovasco.fr</option>
-                    <option value="chinaveo.com">chinaveo.com</option>
-                    <option value="marcovasco.com">marcovasco.com</option>
-                    <option value="prestige-voyages.com">prestige-voyages.com</option>
+                    <option
+                        *ngFor="let dom of domains"
+                        [value]="dom"
+                    >{{ dom }}</option>
                 </select>
             </div>
             <br>
@@ -101,47 +145,38 @@
                     >
                 </div>
             </div>
-
-            <button
-                *ngIf="currentUser.id === null"
-                (click)="postUser(currentUser)"
-            >Create</button>
-            <button
-                *ngIf="currentUser.id != null"
-                (click)="updateUser()"
-            >Update</button>
-            <h2 *ngIf="message != null">{{ message }}</h2>
-
-            <table *ngIf="users && users != undefined">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>First name</th>
-                        <th>Last name</th>
-                        <th>Is Admin</th>
-                        <th>Team</th>
-                        <th>Primary Email</th>
-                        <th>Emails</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let user of users; trackBy: trackByFn">
-                        <td>{{ user.id }}</td>
-                        <td>{{ user.name.givenName }}</td>
-                        <td>{{ user.name.familyName }}</td>
-                        <td>{{ user.isAdmin }}</td>
-                        <td>{{ user.orgUnitPath }}</td>
-                        <td>{{ user.primaryEmail }}</td>
-                        <td>
-                            <ul *ngIf="user.emails && user.emails != undefined">
-                                <li *ngFor="let email of user.emails; trackBy: trackByFn">
-                                    {{ email.address }}
-                                </li>
-                            </ul>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <button (click)="updateUser()">Update</button>
         </div>
-    </div>
-</div>
+
+        <h2 *ngIf="message != null">{{ message }}</h2>
+
+        <table *ngIf="users != null && users.length > 0">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Is Admin</th>
+                    <th>Team</th>
+                    <th>Primary Email</th>
+                    <th>Emails</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users; trackBy: trackByFn">
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.name.givenName }}</td>
+                    <td>{{ user.name.familyName }}</td>
+                    <td>{{ user.isAdmin }}</td>
+                    <td>{{ user.orgUnitPath }}</td>
+                    <td>{{ user.primaryEmail }}</td>
+                    <td>
+                        <ul *ngIf="user.emails && user.emails != null">
+                            <li *ngFor="let email of user.emails; trackBy: trackByFn">
+                                {{ email.address }}
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>

@@ -52,8 +52,9 @@ export const AppRoutes: Routes = [
             destinations: DestinationsResolverService,
             fields: FieldsResolverService,
             managers: ManagersResolverService,
-            users: UsersResolverService,
+            roles: RolesResolverService,
             teams: TeamsResolverService,
+            users: UsersResolverService,
         },
     },
     {

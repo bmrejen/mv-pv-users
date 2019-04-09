@@ -1,7 +1,14 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { IGapiUser } from "../../interfaces/gapi-user";
 import { GapiAuthenticatorService } from "../../services/gapi.service";
+
+enum Domains {
+    PL = "planetveo.com",
+    MA = "marcovasco.fr",
+    CH = "chinaveo.com",
+    MR = "marcovasco.com",
+    PR = "prestige-voyages.com",
+}
 
 @Component({
     selector: "mv-gapi-users",
@@ -16,10 +23,22 @@ export class GapiUsersComponent implements OnInit {
     public userLoggedIn: string = "Logged out";
     public users;
     public userToGet: string;
-    public currentUser: IGapiUser;
-    public oldUser: IGapiUser;
+    public currentUser;
+    public oldUser;
     public orgas;
     public message = null;
+
+    // CREATE
+    public newUser = {
+        familyName: null,
+        givenName: null,
+        orgas: null,
+        password: null,
+        primaryEmail: null,
+    };
+
+    public domains = Object.keys(Domains)
+        .map((dom) => Domains[dom]);
 
     constructor(
         private gapiService: GapiAuthenticatorService,
@@ -31,7 +50,12 @@ export class GapiUsersComponent implements OnInit {
     public ngOnInit(): void {
         this.resetForm();
         this.route.data
-            .subscribe((data) => this.orgas = data.fields.orgas);
+            .subscribe((data) => {
+                if (data.fields != null) {
+                    this.orgas = data.fields.orgas;
+                    console.log(this.currentUser);
+                }
+            });
 
         this.gapiService.loadClient()
             .then((result) => {
@@ -46,20 +70,19 @@ export class GapiUsersComponent implements OnInit {
             .then((res) => {
                 this.apiReady = true;
                 this.gapiService.initAuthClient()
-                    .then(
-                        (result: any) => {
-                            if (this.isSignedIn()) {
-                                this.userLoggedIn = result.currentUser.get().w3.ig;
-                            }
-                        },
-                        (err) => console.log("init auth client error", err),
-                    );
+                    .then((result: any) => {
+                        if (this.isSignedIn()) {
+                            this.userLoggedIn = result.currentUser.get().w3.ig;
+                        }
+                    })
+                    .catch((err) => console.log("init auth client error", err));
             });
     }
 
     public listUsers(): void {
         this.gapiService.listUsers()
-            .then((res) => this.users = res.result.users);
+            .then((res) => this.users = res.result.users)
+            .catch((err) => console.log("error", err));
     }
 
     public signIn() {
@@ -114,14 +137,15 @@ export class GapiUsersComponent implements OnInit {
             });
     }
 
-    public postUser(user) {
+    public postUser() {
         this.message = null;
-        this.gapiService.postUser(user)
+        this.gapiService.postUser(this.newUser)
             .then((res) => {
                 if (res["result"] != null) {
-                    this.currentUser = null;
+                    this.resetForm();
                     this.userToGet = res["result"].id;
                     this.getUser();
+                    this.setUser(res);
                     this.message = "User created !";
                     console.log("res ", res);
                 }
@@ -133,17 +157,13 @@ export class GapiUsersComponent implements OnInit {
         this.message = null;
         this.gapiService.updateUser(this.currentUser, this.oldUser)
             .then((res) => {
-                this.currentUser = null;
                 this.userToGet = res["result"].id;
                 this.getUser();
-                this.message = "User updated!";
-                console.log(this.message);
             })
             .catch((err) => console.error(err));
     }
 
     public trackByFn(index) {
-
         return index;
     }
 
@@ -154,11 +174,11 @@ export class GapiUsersComponent implements OnInit {
         this.currentUser.primaryEmail = `${emailPrefix}@${this.currentUser.primaryEmailSuffix}`;
     }
 
-    public resetForm() {
+    public resetForm(): void {
+        this.message = null;
         this.currentUser = {
             emails: null,
             familyName: null,
-            fullName: null,
             givenName: null,
             id: null,
             orgas: null,
@@ -166,6 +186,27 @@ export class GapiUsersComponent implements OnInit {
             primaryEmail: "",
             primaryEmailSuffix: "planetveo.com",
         };
-        this.message = null;
+
+        this.newUser = {
+            familyName: null,
+            givenName: null,
+            orgas: null,
+            password: null,
+            primaryEmail: null,
+        };
+
+    }
+
+    private setUser(res): void {
+        console.log(res);
+        this.resetForm();
+        if (res["result"] != null && res["result"].name != null) {
+            this.currentUser.givenName = res["result"].name.givenName;
+            this.currentUser.id = res["result"].id;
+            this.currentUser.familyName = res["result"].name.familyName;
+            this.currentUser.orgas = res["result"].orgUnitPath;
+            this.currentUser.password = null;
+            this.currentUser.primaryEmail = res["result"].primaryEmail;
+        }
     }
 }
