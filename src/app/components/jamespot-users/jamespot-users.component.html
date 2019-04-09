@@ -93,5 +93,19 @@ Get user id: <input
 </h2>
 <h3 *ngIf="updateSuccessful">Data Updated ! </h3>
 
-<h2 *ngIf="isDeleted">User {{ deletedId }} deleted !</h2>
-<h2 *ngIf="errorMessage">ERROR: {{ errorMessage }}</h2>
+<h2>Delete User</h2>
+id to delete:
+<input
+    type="text"
+    name="userToDelete"
+    [(ngModel)]=userToDelete
+>
+<button (click)="onDelete(userToDelete)">Delete</button>
+
+<button
+    *ngIf="currentId != null"
+    type=button
+    (click)="onDisable(currentId)"
+>Disable</button>
+<p *ngIf="isDeleted">User {{ deletedId }} deleted !</p>
+<p *ngIf="errorMessage">ERROR: {{ errorMessage }}</p>

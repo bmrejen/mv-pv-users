@@ -1,11 +1,140 @@
 <h1>API Quickstart</h1>
 
-<!--Add buttons to initiate auth sequence and sign out-->
-<!--Buttons not found by js code-->
+<div>
+    <button
+        *ngIf="userLoggedIn==='Logged out'"
+        (click)="signIn()"
+    >Sign In</button>
 
-<button id="authorize_button" style="display: none;">Authorize</button>
-<button id="signout_button" style="display: none;">Sign Out</button>
+    <button
+        *ngIf="userLoggedIn!=='Logged out'"
+        (click)="signIn()"
+    >Change Users</button>
 
-<pre id="content" style="white-space: pre-wrap;"></pre>
+    <button
+        *ngIf="userLoggedIn!=='Logged out'"
+        (click)="signOut()"
+    >Sign Out</button>
 
-<!-- <script src="https://apis.google.com/js/api.js"></script> -->
+    <button
+        *ngIf="userLoggedIn!=='Logged out'"
+        (click)="listUsers()"
+    >List Users</button>
+</div>
+
+<div id="content">
+
+
+    <div>API is loaded : {{ apiLoaded }}</div>
+    <div>API is failed : {{ apiFailed }}</div>
+    <div>API is ready : {{ apiReady }}</div>
+    <div>User logged in : {{ userLoggedIn }}</div>
+    <br>
+    <h2>GET USER</h2>
+    <input
+        type="text"
+        name="userToGet"
+        [(ngModel)]="userToGet"
+    > Email or alias of user to get (ex. bmrejen@marcovasco.fr)
+
+    <button
+        *ngIf="userLoggedIn!=='Logged out'"
+        (click)="getUser()"
+    >Get</button>
+
+    <div *ngIf="currentUser && currentUser.id != null">
+        <h2>{{ currentUser.fullName }}</h2>
+        <h3>ID: {{ currentUser.id }}</h3>
+        <h3>Orga : {{ currentUser.orgas }}</h3>
+        <h3>Emails</h3>
+        <p *ngFor="let email of currentUser.emails">{{ email.address }}</p>
+    </div>
+    <h2 *ngIf="errorMessage != null">{{ errorMessage }}</h2>
+
+    <h2>CREATE USER</h2>
+    <div *ngIf="newUser != null">
+        <input
+            type="text"
+            name="firstName"
+            [(ngModel)]="newUser.firstName"
+        >First name
+        <br>
+        <input
+            type="text"
+            name="lastName"
+            [(ngModel)]="newUser.lastName"
+        >Last name
+        <br>
+        <input
+            type="text"
+            name="password"
+            [(ngModel)]="newUser.password"
+        >Password
+        <br>
+        Primary mail
+        <select
+            name="primaryEmail"
+            [(ngModel)]="newUser.primaryEmail"
+        >Primary Email
+            <option
+                *ngFor="let dom of domains"
+                [value]="dom"
+            >{{ dom }}</option>
+        </select>
+        <br>
+        Orgas
+        <select
+            name="orgas"
+            [(ngModel)]="newUser.orgas"
+        >
+            <option
+                *ngFor="let orga of orgas"
+                [value]="orga.value"
+            >{{ orga.value }}
+            </option>
+        </select>
+        <br>
+        <button (click)="postUser(newUser)">Create</button>
+    </div>
+
+    <div *ngIf="currentUser != null">
+        <h2>Current User</h2>
+        <h3>{{ currentUser.firstName }} {{ currentUser.lastName }}</h3>
+        <h4>ID: {{ currentUser.id }}</h4>
+        <h4>Primary Mail: {{ currentUser.primaryEmail }}</h4>
+        <h4>Orgas: {{ currentUser.orgas }}</h4>
+    </div>
+    <h3 *ngIf="errorMessage != null">
+        {{ errorMessage }}
+    </h3>
+
+    <table *ngIf="users != null && users.length > 0">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Is Admin</th>
+                <th>Team</th>
+                <th>Primary Email</th>
+                <th>Emails</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users; trackBy: trackByFn">
+                <td>{{ user.id }}</td>
+                <td>{{ user.name.givenName }}</td>
+                <td>{{ user.name.familyName }}</td>
+                <td>{{ user.isAdmin }}</td>
+                <td>{{ user.orgUnitPath }}</td>
+                <td>{{ user.primaryEmail }}</td>
+                <td>
+                    <ul *ngIf="user.emails && user.emails != null">
+                        <li *ngFor="let email of user.emails; trackBy: trackByFn">
+                            {{ email.address }}
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>

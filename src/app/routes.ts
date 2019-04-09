@@ -52,8 +52,9 @@ export const AppRoutes: Routes = [
             destinations: DestinationsResolverService,
             fields: FieldsResolverService,
             managers: ManagersResolverService,
-            users: UsersResolverService,
+            roles: RolesResolverService,
             teams: TeamsResolverService,
+            users: UsersResolverService,
         },
     },
     {
@@ -71,6 +72,9 @@ export const AppRoutes: Routes = [
     {
         path: "gapi",
         component: GapiUsersComponent,
+        resolve: {
+            fields: FieldsResolverService,
+        },
     },
     {
         path: "disable/:id",
