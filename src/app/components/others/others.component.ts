@@ -1,36 +1,33 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { ControlContainer, NgForm } from "@angular/forms";
-import { FieldsService } from "../../services/fields.service";
-
-import { Fields } from "../../models/fields";
 
 @Component({
-  selector: "mv-others",
-  styleUrls: ["./others.component.css"],
-  templateUrl: "./others.component.html",
-  viewProviders: [
-  {
-    provide: ControlContainer,
-    useExisting: NgForm,
-  },
-  ],
+    selector: "mv-others",
+    styleUrls: ["./others.component.css"],
+    templateUrl: "./others.component.html",
+    viewProviders: [
+        {
+            provide: ControlContainer,
+            useExisting: NgForm,
+        },
+    ],
 })
 
-export class OthersComponent implements OnInit {
-  @Input() public others;
+export class OthersComponent {
+    @Input() public others;
+    @Input() public currentUser;
 
-  constructor(private fieldsService: FieldsService) {
-    //
-  }
+    public handleClick(other): void {
+        if (!this.currentUser.others.includes(other.id)) {
+            this.currentUser.others.push(other.id);
+        } else {
+            const index = this.currentUser.others.indexOf(other.id);
+            this.currentUser.others.splice(index, 1);
+        }
+    }
 
-  public ngOnInit(): void {
-    //
-  }
-
-  public trackByFn(index, item) {
-    const self = this;
-
-    return item.id; // or index
-  }
+    public trackByFn(item) {
+        return item.id;
+    }
 
 }

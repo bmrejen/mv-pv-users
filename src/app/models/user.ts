@@ -34,6 +34,7 @@ export class User extends Model {
     public role: Role = null;
     public functionId: string = "";
     public destinations: Destination[] = [];
+    public others = [];
 
     // SWITCHVOX
     public swPhoneNumber: string = "";

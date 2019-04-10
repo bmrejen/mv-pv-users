@@ -44,10 +44,14 @@
             [destinations]="destinations"
             [currentUser]="currentUser"
         ></mv-destinations>
-        <mv-teams [teams]="
-            teams">
-        </mv-teams>
-        <mv-others [others]="fields.others"></mv-others>
+        <mv-teams
+            [currentUser]="currentUser"
+            [teams]="teams"
+        ></mv-teams>
+        <mv-others
+            [others]="fields.others"
+            [currentUser]="currentUser"
+        ></mv-others>
         <mv-extraneous
             [codeTourplan]="fields.codeTourplan"
             [codeSON]="fields.codeSON"

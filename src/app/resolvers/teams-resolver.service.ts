@@ -19,7 +19,7 @@ export class TeamsResolverService implements Resolve<Promise<Team[]>> {
         return new Promise((resolve, reject) => {
             teams
                 .then((res) => resolve(res))
-                .catch((error) => reject("Probleme"));
+                .catch((error) => reject(error));
         });
     }
 }

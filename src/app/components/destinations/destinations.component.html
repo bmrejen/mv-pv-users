@@ -11,11 +11,9 @@
             <label>
                 <input
                     type="checkbox"
-                    [name]="dest.id"
                     (click)="handleClick(dest)"
                 >{{ dest.name | slice:7 }}
             </label>
         </div>
     </div>
 </fieldset>
-<pre>{{ currentUser | json }}</pre>
