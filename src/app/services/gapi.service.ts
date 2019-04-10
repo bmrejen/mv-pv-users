@@ -1,4 +1,6 @@
+import { HttpClient } from "@angular/common/http";
 import { Injectable, NgZone } from "@angular/core";
+import { IGapiRequest, IGapiUser } from "../interfaces/gapi-user";
 
 declare const gapi: any;
 
@@ -12,7 +14,10 @@ export class GapiAuthenticatorService {
     // included, separated by spaces.
     public SCOPES: string = "https://www.googleapis.com/auth/admin.directory.user";
 
-    constructor(private zone: NgZone) {
+    constructor(
+        private zone: NgZone,
+        private http: HttpClient,
+    ) {
         //
     }
 
@@ -76,16 +81,16 @@ export class GapiAuthenticatorService {
     public postUser(user): Promise<any> {
         console.log("user in service", user);
 
-        if (user != null && user.firstName != null) {
-            const email = `${user.firstName[0]}${user.lastName}@${user.primaryEmail}`;
+        if (user != null && user.givenName != null) {
+            const email = `${user.givenName[0]}${user.familyName}@${user.primaryEmail}`;
 
             return new Promise((resolve, reject) => {
                 this.zone.run(() => {
                     gapi.client.directory.users.insert({
                         resource: {
                             name: {
-                                familyName: user.lastName,
-                                givenName: user.firstName,
+                                familyName: user.familyName,
+                                givenName: user.givenName,
                             },
                             orgUnitPath: user.orgas,
                             password: user.password,
@@ -96,6 +101,69 @@ export class GapiAuthenticatorService {
                 });
             });
         }
+    }
+
+    public updateUser(user: IGapiUser, oldUser: IGapiUser): Promise<any> {
+        console.log("old user", oldUser);
+        const myObj: IGapiRequest = {
+            resource: {},
+            userKey: oldUser.id,
+        };
+
+        for (const key in user) {
+            if (user[key] !== null) {
+
+                switch (key) {
+                    case "id":
+                        // do not update id
+                        break;
+                    case "primaryEmailSuffix":
+                        // do not update primaryEmailSuffix
+                        delete myObj[key];
+                        break;
+                    case "familyName":
+                        if (user[key] !== oldUser[key]) {
+                            if (myObj.resource.name != null) {
+                                myObj.resource.name.familyName = user[key];
+                            } else {
+                                myObj.resource["name"] = {
+                                    familyName: user[key],
+                                };
+                            }
+                        }
+                        break;
+                    case "givenName":
+                        if (user[key] !== oldUser[key]) {
+                            if (myObj.resource.name != null) {
+                                myObj.resource.name.givenName = user[key];
+                            } else {
+                                myObj.resource["name"] = {
+                                    givenName: user[key],
+                                };
+                            }
+                        }
+                        break;
+                    case "orgas":
+                        if (user[key] !== oldUser[key]) {
+                            myObj.resource["orgUnitPath"] = user[key];
+                            delete myObj[key];
+                        }
+                    default:
+                        if (user[key] !== oldUser[key]) {
+                            myObj.resource[key] = user[key];
+                        }
+                        break;
+                }
+            }
+        }
+        console.log("objet a poster:", myObj);
+
+        return new Promise((resolve, reject) => {
+            this.zone.run(() => {
+                gapi.client.directory.users.update(myObj)
+                    .then(resolve, reject);
+            });
+        });
     }
 
     public signIn(): Promise<any> {

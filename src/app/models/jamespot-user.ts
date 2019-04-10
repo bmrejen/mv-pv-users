@@ -1,15 +1,18 @@
 export class JamespotUser {
-    public Country;
-    public Firstname;
-    public Language;
-    public Lastname;
-    public Mail;
-    public Pseudo;
-    public Role;
-    public idUser;
-    public img;
-    public active;
-    public password;
+    public Country: string = "fr";
+    public Firstname: string;
+    public Language: string = "fr";
+    public Lastname: string;
+    public Mail: string;
+    public Pseudo: string;
+    public Role: string = "User";
+    public idUser: string;
+    public img: string | File;
+    public active: string = "1";
+    public password: string;
+    public phoneExtension: string;
+    public timeZone: string = "Europe/Paris";
+    public company: string = "MARCO VASCO";
 
     constructor(
         Country,
@@ -20,9 +23,12 @@ export class JamespotUser {
         Pseudo,
         Role,
         active,
+        timeZone?,
+        phoneExtension?,
         idUser?,
         img?,
-        password?) {
+        password?,
+        company?) {
         this.Country = Country;
         this.Firstname = Firstname;
         this.Language = Language;
@@ -34,5 +40,8 @@ export class JamespotUser {
         this.img = img;
         this.active = active;
         this.password = password;
+        this.phoneExtension = phoneExtension;
+        this.timeZone = timeZone;
+        this.company = company;
     }
 }

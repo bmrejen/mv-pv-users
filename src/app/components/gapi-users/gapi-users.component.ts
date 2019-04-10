@@ -23,18 +23,20 @@ export class GapiUsersComponent implements OnInit {
     public userLoggedIn: string = "Logged out";
     public users;
     public userToGet: string;
-    public errorMessage: string = null;
     public currentUser;
+    public oldUser;
     public orgas;
+    public message = null;
 
     // CREATE
     public newUser = {
-        firstName: null,
-        lastName: null,
+        familyName: null,
+        givenName: null,
         orgas: null,
         password: null,
         primaryEmail: null,
     };
+
     public domains = Object.keys(Domains)
         .map((dom) => Domains[dom]);
 
@@ -46,7 +48,7 @@ export class GapiUsersComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-        this.resetCurrentUser();
+        this.resetForm();
         this.route.data
             .subscribe((data) => {
                 if (data.fields != null) {
@@ -109,84 +111,102 @@ export class GapiUsersComponent implements OnInit {
         return this.gapiService.isSignedIn();
     }
 
-    public postUser(user) {
-        console.log("user in component", user);
-        this.resetCurrentUser();
-        this.errorMessage = null;
-        this.gapiService.postUser(user)
-            .then((res) => this.setUser(res))
-            .catch((err) => this.errorMessage = err["result"].error.message);
-    }
-
     public getUser(): void {
-        this.currentUser = {
-            emails: null,
-            firstName: null,
-            fullName: null,
-            id: null,
-            lastName: null,
-            orgas: null,
-            password: null,
-            primaryEmail: null,
-        };
-        this.errorMessage = null;
+        this.resetForm();
         this.gapiService.getUser(this.userToGet)
             .then((res) => {
                 console.log(res);
                 if (res["result"] != null && res["result"].name != null) {
-                    this.currentUser.fullName = res["result"].name.fullName;
+                    const email = res["result"].primaryEmail;
+
+                    this.currentUser.givenName = res["result"].name.givenName;
+                    this.currentUser.familyName = res["result"].name.familyName;
                     this.currentUser.emails = res["result"].emails;
-                    this.currentUser.id = res["result"].customerId;
+                    this.currentUser.id = res["result"].id;
                     this.currentUser.orgas = res["result"].orgUnitPath;
+                    this.currentUser.primaryEmail = email;
+                    this.currentUser.primaryEmailSuffix = email.substring(email.lastIndexOf("@") + 1);
+                    this.oldUser = { ...this.currentUser };
                 }
             })
             .catch((err) => {
                 console.error(err);
                 if (err["result"] != null && err["result"].error != null) {
-                    this.errorMessage = err["result"].error.message;
+                    this.message = err["result"].error.message;
                 }
             });
     }
 
-    public trackByFn(index, item) {
-        const self = this;
+    public postUser() {
+        this.message = null;
+        this.gapiService.postUser(this.newUser)
+            .then((res) => {
+                if (res["result"] != null) {
+                    this.resetForm();
+                    this.userToGet = res["result"].id;
+                    this.getUser();
+                    this.setUser(res);
+                    this.message = "User created !";
+                    console.log("res ", res);
+                }
+            })
+            .catch((err) => this.message = err["result"].error.message);
+    }
 
-        return index; // or item.id
+    public updateUser() {
+        this.message = null;
+        this.gapiService.updateUser(this.currentUser, this.oldUser)
+            .then((res) => {
+                this.userToGet = res["result"].id;
+                this.getUser();
+            })
+            .catch((err) => console.error(err));
+    }
+
+    public trackByFn(index) {
+        return index;
+    }
+
+    public refreshEmail() {
+        const email = this.currentUser.primaryEmail;
+        const emailPrefix = email.lastIndexOf("@") === -1 ? email : email.substring(0, email.lastIndexOf("@"));
+
+        this.currentUser.primaryEmail = `${emailPrefix}@${this.currentUser.primaryEmailSuffix}`;
+    }
+
+    public resetForm(): void {
+        this.message = null;
+        this.currentUser = {
+            emails: null,
+            familyName: null,
+            givenName: null,
+            id: null,
+            orgas: null,
+            password: null,
+            primaryEmail: "",
+            primaryEmailSuffix: "planetveo.com",
+        };
+
+        this.newUser = {
+            familyName: null,
+            givenName: null,
+            orgas: null,
+            password: null,
+            primaryEmail: null,
+        };
+
     }
 
     private setUser(res): void {
         console.log(res);
         this.resetForm();
         if (res["result"] != null && res["result"].name != null) {
-            this.currentUser.firstName = res["result"].name.givenName;
+            this.currentUser.givenName = res["result"].name.givenName;
             this.currentUser.id = res["result"].id;
-            this.currentUser.lastName = res["result"].name.familyName;
+            this.currentUser.familyName = res["result"].name.familyName;
             this.currentUser.orgas = res["result"].orgUnitPath;
             this.currentUser.password = null;
             this.currentUser.primaryEmail = res["result"].primaryEmail;
         }
-    }
-
-    private resetForm(): void {
-        this.newUser = {
-            firstName: null,
-            lastName: null,
-            orgas: null,
-            password: null,
-            primaryEmail: null,
-        };
-    }
-
-    private resetCurrentUser(): void {
-        this.currentUser = {
-            emails: null,
-            firstName: null,
-            fullName: null,
-            id: null,
-            lastName: null,
-            orgas: null,
-            password: null,
-            primaryEmail: null,
-        };
     }
 }
