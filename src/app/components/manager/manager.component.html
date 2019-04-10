@@ -1,6 +1,12 @@
 <div *ngIf="managers != null">Manager
-  <select name="manager" [(ngModel)]="selectedManager">
-    <option *ngFor="let manager of managers; trackBy: trackByFn" [value]="manager.id">{{ managers.indexOf(manager)+1 }}. {{ manager.firstName }} {{ manager.lastName | uppercase }}
-    </option>
-  </select>
+    <select
+        name="manager"
+        [(ngModel)]="currentUser.managerId"
+    >
+        <option
+            *ngFor="let manager of managers; trackBy: trackByFn"
+            [value]="manager.id"
+        >{{ managers.indexOf(manager)+1 }}. {{ manager.firstName }} {{ manager.lastName | uppercase }}
+        </option>
+    </select>
 </div>

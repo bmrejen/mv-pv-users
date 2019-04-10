@@ -28,9 +28,6 @@ export class Fields extends Model {
     public outbound: boolean = false;
     public phoneExtension: string = "";
     public phoneNumber: string = "";
-    public selectedFunction: string = "";
-    public selectedManager: string = "";
-    public selectedOffice: string = "";
     public selectedOrganisation: string = "";
     public title: string = "";
     public userValue: string = "user_default";

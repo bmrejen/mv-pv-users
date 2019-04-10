@@ -1,7 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { FormValueMapperService } from "../../services/form-value-mapper.service";
-import { SugarService } from "../../services/sugar.service";
 
 import { Destination } from "../../models/destination";
 import { Fields } from "../../models/fields";
@@ -31,11 +29,7 @@ export class CreateUserFormComponent implements OnInit {
 
     public userObject;
 
-    constructor(
-        private route: ActivatedRoute,
-        private sugar: SugarService,
-        private mapper: FormValueMapperService,
-    ) {
+    constructor(private route: ActivatedRoute) {
         //
     }
 
@@ -64,6 +58,7 @@ export class CreateUserFormComponent implements OnInit {
                 this.fields = new Fields(data.fields);
 
                 console.log(this.fields);
+                console.log(this.currentUser);
             });
 
     }

@@ -1,6 +1,13 @@
-<div *ngIf = "functions != null">Function
-  <select name="fonction" [(ngModel)]="selectedFunction"><option [ngValue]="null"></option>
-    <option *ngFor="let func of functions ; trackBy: trackByFn" [value]="func.value">{{ func.label }}
-    </option>
-  </select>
+<div *ngIf="functions != null">Function
+    <select
+        name="fonction"
+        [(ngModel)]="currentUser.functionId"
+    >
+        <option [ngValue]="null"></option>
+        <option
+            *ngFor="let func of functions ; trackBy: trackByFn"
+            [value]="func.value"
+        >{{ func.label }}
+        </option>
+    </select>
 </div>

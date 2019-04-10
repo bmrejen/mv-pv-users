@@ -22,15 +22,14 @@ export class User extends Model {
     public employeeStatus: string = "Active";
     public title: string = "";
     public managerId: string = "";
+    public officeId: string = "";
     public department: string = "";
-    public office: string = "";
     public teams: Team[] = [];
     public tourplanID: string = "";
     public swClickToCall: boolean = false;
     public swCallNotification: boolean = false;
     public codeSonGalileo: string = "";
     public userToCopyHPfrom: string = "";
-    public selectedManager: string = "";
 
     // SWITCHVOX
     public swPhoneNumber: string = "";

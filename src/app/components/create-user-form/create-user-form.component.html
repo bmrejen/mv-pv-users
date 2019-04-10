@@ -29,15 +29,15 @@
 
         <mv-office
             [offices]="fields.offices"
-            [selectedOffice]="fields.selectedOffice"
+            [currentUser]="currentUser"
         ></mv-office>
         <mv-function
             [functions]="fields.functions"
-            [selectedFunction]="fields.selectedFunction"
+            [currentUser]="currentUser"
         ></mv-function>
         <mv-manager
             [managers]="managers"
-            [selectedManager]="fields.selectedManager"
+            [currentUser]="currentUser"
         ></mv-manager>
 
         <mv-destinations [destinations]="destinations"></mv-destinations>
