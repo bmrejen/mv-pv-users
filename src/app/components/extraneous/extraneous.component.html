@@ -1,29 +1,58 @@
 <fieldset class="blue">
-  <legend>Extraneous</legend>
-  <div>
-    <label>Code User Tourplan
-      <input name="sugar_tourplan" type="text" [(ngModel)]="codeTourplan">
-    </label>
-  </div>
+    <legend>Extraneous</legend>
+    <div>
+        <label>Code User Tourplan
+            <input
+                name="sugar_tourplan"
+                type="text"
+                [(ngModel)]="currentUser.tourplanID"
+            >
+        </label>
+    </div>
 
-  <div>
-    <label>Code SON Galileo
-      <input name="codeSON" type="text" [(ngModel)]="codeSON">
-    </label>
-  </div>
+    <div>
+        <label>Code SON Galileo
+            <input
+                name="codeSON"
+                type="text"
+                [(ngModel)]="currentUser.codeSonGalileo"
+            >
+        </label>
+    </div>
 
-  <div>
-    <label>Title
-      <input name="title" type="text" [(ngModel)]="title">
-    </label>
-  </div>
+    <div>
+        <label>Title
+            <input
+                name="title"
+                type="text"
+                [(ngModel)]="currentUser.title"
+            >
+        </label>
+    </div>
 
-  <div>
-    <label>
-      <input type="checkbox" [(ngModel)]="inactiveStatus" name="inactiveStatus">Statut inactif
-    </label>
-    <label>
-      <input type="checkbox" [(ngModel)]="inactiveEmployee" name="inactiveEmployee">Statut Employe inactif
-    </label>
-  </div>
+    <div>
+        Status
+        <select
+            name="status"
+            [(ngModel)]="currentUser.status"
+        >
+            <option
+                *ngFor="let status of statuses; trackBy: trackByFn"
+                [value]="status"
+            >{{ status }}</option>
+        </select>
+    </div>
+
+    <div>
+        Employee Status
+        <select
+            name="employeeStatus"
+            [(ngModel)]="currentUser.employeeStatus"
+        >
+            <option
+                *ngFor="let status of employeeStatuses; trackBy: trackByFn"
+                [value]="status"
+            >{{ status }}</option>
+        </select>
+    </div>
 </fieldset>

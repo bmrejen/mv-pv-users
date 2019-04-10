@@ -1,44 +1,40 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { ControlContainer, NgForm } from "@angular/forms";
-import { FieldsService } from "../../services/fields.service";
 
-import { Fields } from "../../models/fields";
+enum Statuses {
+    AC = "Active",
+    IN = "Inactive",
+}
+
+enum EmployeeStatuses {
+    AC = "Active",
+    IN = "Inactive",
+    LA = "Leave of Absence",
+    TR = "Terminated",
+}
 
 @Component({
-  selector: "mv-extraneous",
-  templateUrl: "./extraneous.component.html",
-  viewProviders: [
-  {
-    provide: ControlContainer,
-    useExisting: NgForm,
-  },
-  ],
+    selector: "mv-extraneous",
+    templateUrl: "./extraneous.component.html",
+    viewProviders: [
+        {
+            provide: ControlContainer,
+            useExisting: NgForm,
+        },
+    ],
 })
 
-export class ExtraneousComponent implements OnInit {
-  @Input() public codeTourplan;
-  @Input() public codeSON;
-  @Input() public title;
-  @Input() public inactiveStatus;
-  @Input() public inactiveEmployee;
-  @Input() public currentUser;
+export class ExtraneousComponent {
+    @Input() public currentUser;
 
-  constructor(private fieldsService: FieldsService) {
-    //
-  }
+    public statuses = Object.keys(Statuses)
+        .map((status) => Statuses[status]);
 
-  public ngOnInit(): void {
-    if (this.currentUser != null) {
-      this.codeTourplan = this.currentUser.tourplanID;
-      this.inactiveEmployee = this.currentUser.employeeStatus !== "Active";
-      this.inactiveStatus = this.currentUser.status !== "Active";
+    public employeeStatuses = Object.keys(EmployeeStatuses)
+        .map((status) => EmployeeStatuses[status]);
+
+    public trackByFn(item) {
+        return item.id;
     }
-  }
-
-  public trackByFn(index, item) {
-    const self = this;
-
-    return item.id; // or index
-  }
 
 }

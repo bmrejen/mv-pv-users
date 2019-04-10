@@ -37,8 +37,6 @@ export class User extends Model {
     public others = [];
 
     // SWITCHVOX
-    public swPhoneNumber: string = "";
-    public swExtension: string = "";
     public swTelephony: boolean = false;
 
     // OTHERS

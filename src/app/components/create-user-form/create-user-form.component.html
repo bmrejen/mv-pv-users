@@ -52,21 +52,8 @@
             [others]="fields.others"
             [currentUser]="currentUser"
         ></mv-others>
-        <mv-extraneous
-            [codeTourplan]="fields.codeTourplan"
-            [codeSON]="fields.codeSON"
-            [title]="fields.title"
-            [inactiveEmployee]="fields.inactiveEmployee"
-            [inactiveStatus]="fields.inactiveStatus"
-            [currentUser]="currentUser"
-        ></mv-extraneous>
-        <mv-switchvox
-            [phoneNumber]="fields.phoneNumber"
-            [phoneExtension]="fields.phoneExtension"
-            [codevad]="fields.codevad"
-            [outbound]="fields.outbound"
-            [inbound]="fields.inbound"
-        ></mv-switchvox>
+        <mv-extraneous [currentUser]="currentUser"></mv-extraneous>
+        <mv-switchvox [currentUser]="currentUser"></mv-switchvox>
         <mv-gapps
             [orgas]="fields.orgas"
             [selectedOrganisation]="fields.selectedOrganisation"
