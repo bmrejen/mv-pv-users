@@ -17,21 +17,6 @@ export class Fields extends Model {
     public userFields: any[];
     public userTemplates: any[];
 
-    // Non-json properties are not added to class if not initialized
-    public codeSON: string = "";
-    public codeTourplan: string = "";
-    public codevad: boolean = false;
-    public groupes: string = "";
-    public inbound: boolean = false;
-    public leadsMax: number = 45;
-    public leadsMin: number = 15;
-    public outbound: boolean = false;
-    public phoneExtension: string = "";
-    public phoneNumber: string = "";
-    public selectedOrganisation: string = "";
-    public title: string = "";
-    public userValue: string = "user_default";
-
     constructor(data?: any) {
         super(data);
     }

@@ -55,9 +55,8 @@
         <mv-extraneous [currentUser]="currentUser"></mv-extraneous>
         <mv-switchvox [currentUser]="currentUser"></mv-switchvox>
         <mv-gapps
+            [currentUser]="currentUser"
             [orgas]="fields.orgas"
-            [selectedOrganisation]="fields.selectedOrganisation"
-            [groupes]="fields.groupes"
         ></mv-gapps>
 
         <div *ngIf="errorMsg">ERROR: {{ errorMsg }}</div>
