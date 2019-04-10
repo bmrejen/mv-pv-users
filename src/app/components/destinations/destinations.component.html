@@ -1,14 +1,21 @@
- <fieldset class="blue" *ngIf = "destinations != null">
-  <legend>Destinations</legend>
-  <div ngModelGroup="destinations" class="destinations">
-    <div *ngFor="let dest of destinations | alphabetical ; trackBy: trackByFn">
-      <label>
-        <input
-        type="checkbox"
-        [(ngModel)]="dest.checked"
-        [name]="dest.id"
-        >{{ dest.name | slice:7 }}
-      </label>
+<fieldset
+    class="blue"
+    *ngIf="destinations != null"
+>
+    <legend>Destinations</legend>
+    <div
+        ngModelGroup="destinations"
+        class="destinations"
+    >
+        <div *ngFor="let dest of destinations | alphabetical ; trackBy: trackByFn">
+            <label>
+                <input
+                    type="checkbox"
+                    [name]="dest.id"
+                    (click)="handleClick(dest)"
+                >{{ dest.name | slice:7 }}
+            </label>
+        </div>
     </div>
-  </div>
 </fieldset>
+<pre>{{ currentUser | json }}</pre>

@@ -30,6 +30,10 @@ export class User extends Model {
     public swCallNotification: boolean = false;
     public codeSonGalileo: string = "";
     public userToCopyHPfrom: string = "";
+    public inheritsPreferencesFrom: string = "";
+    public role: Role = null;
+    public functionId: string = "";
+    public destinations: Destination[] = [];
 
     // SWITCHVOX
     public swPhoneNumber: string = "";
@@ -37,10 +41,6 @@ export class User extends Model {
     public swTelephony: boolean = false;
 
     // OTHERS
-    public inheritsPreferencesFrom: string = "";
-    public role: Role = null;
-    public functionId: string = "";
-    public destinations: Destination[] = [];
     public password: string = "";
 
     // GOOGLE

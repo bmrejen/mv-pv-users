@@ -40,8 +40,13 @@
             [currentUser]="currentUser"
         ></mv-manager>
 
-        <mv-destinations [destinations]="destinations"></mv-destinations>
-        <mv-teams [teams]="teams"></mv-teams>
+        <mv-destinations
+            [destinations]="destinations"
+            [currentUser]="currentUser"
+        ></mv-destinations>
+        <mv-teams [teams]="
+            teams">
+        </mv-teams>
         <mv-others [others]="fields.others"></mv-others>
         <mv-extraneous
             [codeTourplan]="fields.codeTourplan"
