@@ -9,10 +9,7 @@ Get user id: <input
 
 <h2 *ngIf="currentUser.idUser == null">Create User</h2>
 <h2 *ngIf="currentUser.idUser != null">User {{ currentUser.idUser }}</h2>
-<form
-    *ngIf="currentUser != null"
-    #jamesForm="ngForm"
->
+<form *ngIf="currentUser != null">
     <input
         type="text"
         [(ngModel)]="currentUser.Mail"
@@ -47,7 +44,7 @@ Get user id: <input
         type="text"
         [(ngModel)]="currentUser.Pseudo"
         name="pseudo"
-        (blur)="getByField()"
+        (blur)="checkUsernameAvailability()"
     >Pseudo
     <br>
     <input
@@ -102,12 +99,12 @@ Get user id: <input
     <button
         *ngIf="currentUser.idUser == null"
         type=button
-        (click)="onPost(jamesForm.value)"
+        (click)="onPost()"
     >Create</button>
     <button
         *ngIf="currentUser.idUser != null"
         type=button
-        (click)="onUpdate(jamesForm.value)"
+        (click)="onUpdate()"
     >Update</button>
     <button (click)="onDelete(currentUser.idUser)">Delete</button>
 </form>

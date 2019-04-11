@@ -16,6 +16,7 @@ export class JamespotUsersComponent implements OnInit {
     public deletedId;
     public errorMessage;
     public image;
+    public isUsernameTaken: boolean = false;
 
     constructor(private james: JamespotService) {
         //
@@ -24,17 +25,18 @@ export class JamespotUsersComponent implements OnInit {
     public ngOnInit(): void {
         this.resetFields();
         this.james.getUsers()
-            .subscribe((data) => console.log(data.VAL.forEach((user) => user.idUser)));
+            .subscribe((data) => console.log(data));
     }
 
     public onFileSelected(event) {
         this.image = event.target.files[0] as File;
     }
 
-    public onPost(form) {
-        this.james.postUsers(form, this.image)
+    public onPost() {
+        this.james.postUsers(this.currentUser, this.image)
             .subscribe((res) => {
                 this.resetFields();
+                console.log(res);
                 if (res["RC"].CODE === 0) {
 
                     this.currentUser = new JamespotUser(
@@ -57,7 +59,7 @@ export class JamespotUsersComponent implements OnInit {
                 }
             });
     }
-    public onUpdate(form) {
+    public onUpdate() {
         this.james.updateUser(this.currentUser, this.oldUser)
             .subscribe((res) => {
                 if (res["RC"].CODE === 0) {
@@ -135,11 +137,15 @@ export class JamespotUsersComponent implements OnInit {
     }
 
     public getByField() {
-        this.james.getUser("81")
-            .subscribe((res) => console.log("user 81", res));
-
-        this.james.getByField("Pseudo", "benoitmrejen")
-            .subscribe((res) => console.log(res));
+        this.james.getByField("pseudo", this.currentUser.Pseudo)
+            .subscribe((res) => {
+                this.isUsernameTaken = true;
+                this.errorMessage = null;
+                if (res != null && res.VAL.idUser !== "" && this.currentUser.idUser === null) {
+                    this.isUsernameTaken = true;
+                    this.errorMessage = `Username taken by user #${res.VAL.idUser}`;
+                }
+            });
     }
 
     private resetFields() {

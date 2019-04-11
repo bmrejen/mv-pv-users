@@ -34,20 +34,20 @@ export class JamespotService {
             `${this.endPoint}user/get`, { headers: this.headers, params });
     }
 
-    public postUsers(form, image): Observable<IJamespotApiResponse<IJamespotUser>> {
+    public postUsers(user, image): Observable<IJamespotApiResponse<IJamespotUser>> {
         const fd = new FormData();
-        fd.append("Mail", form.mail);
-        fd.append("Role", form.role);
-        fd.append("Country", form.country);
-        fd.append("Language", form.language);
-        fd.append("active", form.active);
-        fd.append("Pseudo", form.pseudo);
-        fd.append("Password", form.password);
-        fd.append("Firstname", form.firstname);
-        fd.append("Lastname", form.lastname.toUpperCase());
-        fd.append("Company", form.company);
-        fd.append("Field1", form.phoneExtension);
-        fd.append("timeZone", form.timeZone);
+        fd.append("Mail", user.Mail);
+        fd.append("Role", user.Role);
+        fd.append("Country", user.Country);
+        fd.append("Language", user.Language);
+        fd.append("active", user.active);
+        fd.append("Pseudo", user.Pseudo);
+        fd.append("Password", user.Password);
+        fd.append("Firstname", user.Firstname);
+        fd.append("Lastname", user.Lastname.toUpperCase());
+        fd.append("Company", user.company);
+        fd.append("Field1", user.phoneExtension);
+        fd.append("timeZone", user.timeZone);
         fd.append("image", image);
 
         return this.http.post<IJamespotApiResponse<IJamespotUser>>(
