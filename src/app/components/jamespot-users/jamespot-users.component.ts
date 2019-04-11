@@ -65,6 +65,7 @@ export class JamespotUsersComponent implements OnInit {
                 if (res["RC"].CODE === 0) {
                     this.resetFields();
                     this.updateSuccessful = true;
+                    this.getUser(res["VAL"].idUser);
                 }
             },
                 (err) => console.error(err));
@@ -99,7 +100,8 @@ export class JamespotUsersComponent implements OnInit {
             });
     }
 
-    public onDelete(id) {
+    public onDelete() {
+        const id = this.currentUser.idUser;
         if (confirm(`Etes-vous sur de supprimer l'utilisateur ${id} en production?`)) {
             this.errorMessage = null;
             this.james.deleteUser(id)
@@ -136,7 +138,7 @@ export class JamespotUsersComponent implements OnInit {
         );
     }
 
-    public getByField() {
+    public checkUsernameAvailability() {
         this.james.getByField("pseudo", this.currentUser.Pseudo)
             .subscribe((res) => {
                 this.isUsernameTaken = true;
@@ -144,6 +146,16 @@ export class JamespotUsersComponent implements OnInit {
                 if (res != null && res.VAL.idUser !== "" && this.currentUser.idUser === null) {
                     this.isUsernameTaken = true;
                     this.errorMessage = `Username taken by user #${res.VAL.idUser}`;
+                }
+            });
+    }
+
+    public onDisable() {
+        this.james.disableUser(this.currentUser.idUser)
+            .subscribe((res) => {
+                if (res != null && res.VAL.idUser !== "") {
+                    this.resetFields();
+                    this.getUser(res.VAL.idUser);
                 }
             });
     }

@@ -23,6 +23,8 @@
         "@commitlint/cli": "^7.5.2",
         "@commitlint/config-angular": "^7.5.0",
         "@types/core-js": "^0.9.35",
+        "@types/gapi": "^0.0.36",
+        "@types/gapi.auth2": "^0.0.50",
         "@types/jest": "^23.3.1",
         "@types/node": "^8.0.20",
         "angular-tslint-rules": "^1.3.0",

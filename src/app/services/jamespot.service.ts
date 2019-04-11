@@ -59,17 +59,32 @@ export class JamespotService {
             .set("idUser", user.idUser);
 
         for (const key in user) {
-            if (key === "img" && user[key] === null) {
-                // do not update image in params - it will be updated in Form Data
-            } else if (key === "password" && user[key] === null) {
-                // do not update password unless it's been changed
-            } else if (key === "idUser") {
-                // do not update id
-            } else if (key === "phoneExtension" && user[key] !== oldUser[key]) {
-                params = params.append("field1", user[key]);
-            } else {
-                if (user[key] !== oldUser[key]) {
-                    params = params.append(key, user[key]);
+            if (user[key] !== null) {
+
+                switch (key) {
+                    case "img":
+                        if (user[key] === null) {
+                            // do not update image in params - it will be updated in Form Data
+                        }
+                        break;
+                    case "password":
+                        if (user[key] === null) {
+                            // do not update password unless it's been changed
+                        }
+                        break;
+                    case "idUser":
+                        // do not update id
+                        break;
+                    case "phoneExtension":
+                        if (user[key] !== oldUser[key]) {
+                            params = params.append("field1", user[key]);
+                        }
+                        break;
+                    default:
+                        if (user[key] !== oldUser[key]) {
+                            params = params.append(key, user[key]);
+                        }
+                        break;
                 }
             }
         }
@@ -97,5 +112,13 @@ export class JamespotService {
 
         return this.http.get<IJamespotApiResponse<IJamespotUser>>(
             `${this.endPoint}user/getByField`, { headers: this.headers, params });
+    }
+
+    public disableUser(id: string): Observable<any> {
+        const params = new HttpParams()
+            .set("idUser", id)
+            .append("active", "0");
+
+        return this.http.put(`${this.endPoint}user/update`, null, { headers: this.headers, params });
     }
 }

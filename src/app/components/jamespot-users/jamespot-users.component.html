@@ -8,8 +8,14 @@ Get user id: <input
 <button (click)="getUser(idToGet)">Get</button>
 
 <h2 *ngIf="currentUser.idUser == null">Create User</h2>
-<h2 *ngIf="currentUser.idUser != null">User {{ currentUser.idUser }}</h2>
-<form *ngIf="currentUser != null">
+
+<h2 *ngIf="currentUser.idUser != null">
+    {{ currentUser.Firstname }} {{ currentUser.Lastname }} - Id: {{ currentUser.idUser }}
+</h2>
+
+<form *ngIf="
+    currentUser
+    !=null">
     <input
         type="text"
         [(ngModel)]="currentUser.Mail"
@@ -92,6 +98,23 @@ Get user id: <input
     >
     <br>
     <!-- BUTTONS -->
+    <div *ngIf="currentUser.idUser != null">
+        <button
+            type="button"
+            (click)="onUpdate()"
+        >Update</button>
+
+        <button
+            type="button"
+            (click)="onDisable()"
+        >Disable</button>
+
+        <button
+            type="button"
+            (click)="onDelete()"
+        >Delete</button>
+    </div>
+
     <button
         type=button
         (click)="onPrefill()"
@@ -101,16 +124,8 @@ Get user id: <input
         type=button
         (click)="onPost()"
     >Create</button>
-    <button
-        *ngIf="currentUser.idUser != null"
-        type=button
-        (click)="onUpdate()"
-    >Update</button>
-    <button (click)="onDelete(currentUser.idUser)">Delete</button>
 </form>
-<h2 *ngIf="currentUser != null && currentUser.Firstname != null && currentUser.Lastname != null">
-    Current User: {{ currentUser.Firstname }} {{ currentUser.Lastname }} - Id: {{ currentUser.idUser }}
-</h2>
+
 <h3 *ngIf="updateSuccessful">Data Updated ! </h3>
 
 <h2 *ngIf="isDeleted">User {{ deletedId }} deleted !</h2>
