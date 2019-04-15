@@ -8,32 +8,33 @@ Get user id: <input
 <button (click)="getUser(idToGet)">Get</button>
 
 <h2 *ngIf="currentUser.idUser == null">Create User</h2>
-<h2 *ngIf="currentUser.idUser != null">User {{ currentUser.idUser }}</h2>
-<form
-    *ngIf="currentUser != null"
-    #jamesForm="ngForm"
->
+
+<h2 *ngIf="currentUser.idUser != null">
+    {{ currentUser.firstname }} {{ currentUser.lastname }} - Id: {{ currentUser.idUser }}
+</h2>
+
+<form *ngIf="currentUser!=null">
     <input
         type="text"
-        [(ngModel)]="currentUser.Mail"
+        [(ngModel)]="currentUser.mail"
         name="mail"
     >Email
     <br>
     <input
         type="text"
-        [(ngModel)]="currentUser.Role"
+        [(ngModel)]="currentUser.role"
         name="role"
     >Role
     <br>
     <input
         type="text"
-        [(ngModel)]="currentUser.Country"
+        [(ngModel)]="currentUser.country"
         name="country"
     >Country
     <br>
     <input
         type="text"
-        [(ngModel)]="currentUser.Language"
+        [(ngModel)]="currentUser.language"
         name="language"
     >Language
     <br>
@@ -45,8 +46,9 @@ Get user id: <input
     <br>
     <input
         type="text"
-        [(ngModel)]="currentUser.Pseudo"
+        [(ngModel)]="currentUser.username"
         name="pseudo"
+        (blur)="checkUsernameAvailability()"
     >Pseudo
     <br>
     <input
@@ -57,13 +59,13 @@ Get user id: <input
     <br>
     <input
         type="text"
-        [(ngModel)]="currentUser.Firstname"
+        [(ngModel)]="currentUser.firstname"
         name="firstname"
     >Firstname
     <br>
     <input
         type="text"
-        [(ngModel)]="currentUser.Lastname"
+        [(ngModel)]="currentUser.lastname"
         name="lastname"
     >Lastname
     <br>
@@ -94,6 +96,23 @@ Get user id: <input
     >
     <br>
     <!-- BUTTONS -->
+    <div *ngIf="currentUser.idUser != null">
+        <button
+            type="button"
+            (click)="onUpdate()"
+        >Update</button>
+
+        <button
+            type="button"
+            (click)="onDisable()"
+        >Disable</button>
+
+        <button
+            type="button"
+            (click)="onDelete()"
+        >Delete</button>
+    </div>
+
     <button
         type=button
         (click)="onPrefill()"
@@ -101,33 +120,16 @@ Get user id: <input
     <button
         *ngIf="currentUser.idUser == null"
         type=button
-        (click)="onPost(jamesForm.value)"
+        (click)="onPost()"
     >Create</button>
-    <button
-        *ngIf="currentUser.idUser != null"
-        type=button
-        (click)="onUpdate(jamesForm.value)"
-    >Update</button>
-    <button (click)="onDelete(currentUser.idUser)">Delete</button>
 </form>
-<h2 *ngIf="currentUser != null && currentUser.Firstname != null && currentUser.Lastname != null">
-    Current User: {{ currentUser.Firstname }} {{ currentUser.Lastname }} - Id: {{ currentUser.idUser }}
-</h2>
+
 <h3 *ngIf="updateSuccessful">Data Updated ! </h3>
 
-<h2>Delete User</h2>
-id to delete:
-<input
-    type="text"
-    name="userToDelete"
-    [(ngModel)]=userToDelete
->
-<button (click)="onDelete(userToDelete)">Delete</button>
+<h2 *ngIf="isDeleted">User {{ deletedId }} deleted !</h2>
+<h2 *ngIf="errorMessage">ERROR: {{ errorMessage }}</h2>
+Current User
+<pre> {{ currentUser | json }}</pre>
 
-<button
-    *ngIf="currentId != null"
-    type=button
-    (click)="onDisable(currentId)"
->Disable</button>
-<p *ngIf="isDeleted">User {{ deletedId }} deleted !</p>
-<p *ngIf="errorMessage">ERROR: {{ errorMessage }}</p>
+Old User
+<pre> {{ oldUser | json }}</pre>

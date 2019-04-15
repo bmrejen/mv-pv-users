@@ -1,6 +1,7 @@
 import {
     IJamespotApiResponse,
-    IJamespotUser,
+    IJamespotUserConfig,
+    IJamespotUserFromApi,
     IJamespotUserList,
 } from "./../interfaces/jamespot-api-response";
 
@@ -26,35 +27,69 @@ export class JamespotService {
             `${this.endPoint}user/list`, { headers: this.headers });
     }
 
-    public getUser(id: string): Observable<IJamespotApiResponse<IJamespotUser>> {
+    public getUser(id: string): Promise<any> {
         const params = new HttpParams()
             .set("idUser", id);
 
-        return this.http.get<IJamespotApiResponse<IJamespotUser>>(
-            `${this.endPoint}user/get`, { headers: this.headers, params });
+        return this.http.get<IJamespotApiResponse<IJamespotUserFromApi>>(
+            `${this.endPoint}user/get`, { headers: this.headers, params })
+            .toPromise<IJamespotApiResponse<IJamespotUserFromApi>>()
+            .then((res: IJamespotApiResponse<IJamespotUserFromApi>) => {
+                return new Promise((resolve, reject) => {
+                    res.RC.CODE === 0 ? resolve(this.mapFromApi(res)) : reject(`User ${id} doesn't exist`);
+                });
+            });
     }
 
-    public postUsers(form, image): Observable<IJamespotApiResponse<IJamespotUser>> {
+    public postUsers(user, image): Promise<IJamespotUserConfig> {
         const fd = new FormData();
-        fd.append("Mail", form.mail);
-        fd.append("Role", form.role);
-        fd.append("Country", form.country);
-        fd.append("Language", form.language);
-        fd.append("active", form.active);
-        fd.append("Pseudo", form.pseudo);
-        fd.append("Password", form.password);
-        fd.append("Firstname", form.firstname);
-        fd.append("Lastname", form.lastname.toUpperCase());
-        fd.append("Company", form.company);
-        fd.append("Field1", form.phoneExtension);
-        fd.append("timeZone", form.timeZone);
+        fd.append("Mail", user.mail);
+        fd.append("Role", user.role);
+        fd.append("Country", user.country);
+        fd.append("Language", user.language);
+        fd.append("active", user.active);
+        fd.append("Pseudo", user.username);
+        fd.append("Password", user.password);
+        fd.append("Firstname", user.firstname);
+        fd.append("Lastname", user.lastname.toUpperCase());
+        fd.append("Company", user.company);
+        fd.append("Field1", user.phoneExtension);
+        fd.append("timeZone", user.timeZone);
         fd.append("image", image);
 
-        return this.http.post<IJamespotApiResponse<IJamespotUser>>(
-            `${this.endPoint}user/create`, fd, { headers: this.headers });
+        return this.http
+            .post<IJamespotApiResponse<IJamespotUserFromApi>>(
+                `${this.endPoint}user/create`, fd, { headers: this.headers })
+            .toPromise<IJamespotApiResponse<IJamespotUserFromApi>>()
+            .then((res: IJamespotApiResponse<IJamespotUserFromApi>) => {
+                return new Promise<IJamespotUserConfig>((resolve, reject) => {
+                    const err = res.RC.MSG;
+                    res.RC.CODE === 0 ? resolve(this.mapFromApi(res)) : reject(err);
+                });
+            });
     }
 
-    public updateUser(user, oldUser) {
+    public mapFromApi(res: IJamespotApiResponse<IJamespotUserFromApi>): IJamespotUserConfig {
+        return {
+            active: res.VAL.properties.active,
+            company: res.VAL.properties.company,
+            country: res.VAL.Country,
+            firstname: res.VAL.Firstname,
+            idUser: res.VAL.idUser,
+            img: res.VAL.img,
+            language: res.VAL.Language,
+            lastname: res.VAL.Lastname,
+            mail: res.VAL.Mail,
+            password: null, // password
+            phoneExtension: res.VAL.field1, // phoneExtension
+            role: res.VAL.Role,
+            timeZone: res.VAL.properties.timeZone,
+            username: res.VAL.Pseudo,
+        };
+    }
+
+    public updateUser(user, oldUser): Promise<IJamespotUserConfig> {
+        console.log(user === oldUser);
         let params = new HttpParams()
             .set("idUser", user.idUser);
 
@@ -95,21 +130,61 @@ export class JamespotService {
             fd.append("image", user.image);
         }
 
-        return this.http.put(`${this.endPoint}user/update`, fd, { headers: this.headers, params });
+        return this.http.put<IJamespotApiResponse<IJamespotUserFromApi>>
+            (`${this.endPoint}user/update`, fd, { headers: this.headers, params })
+            .toPromise<IJamespotApiResponse<IJamespotUserFromApi>>()
+            .then((res: IJamespotApiResponse<IJamespotUserFromApi>) => {
+                return new Promise<IJamespotUserConfig>((resolve, reject) => {
+                    const err = res.RC.MSG;
+                    res.RC.CODE === 0 ? resolve(this.mapFromApi(res)) : reject(err);
+                });
+            });
     }
 
-    public deleteUser(id: string): Observable<any> {
+    public deleteUser(id: string): Promise<IJamespotApiResponse<any>> {
         const params = new HttpParams()
             .set("idUser", id);
 
-        return this.http.delete(`${this.endPoint}user/delete`, { headers: this.headers, params });
+        return this.http
+            .delete<IJamespotApiResponse<any>>(`${this.endPoint}user/delete`, { headers: this.headers, params })
+            .toPromise<IJamespotApiResponse<any>>()
+            .then((res) => {
+
+                return new Promise<IJamespotApiResponse<any>>((resolve, reject) => {
+                    res["RC"].CODE === 0 ? resolve(res) : reject(res);
+                });
+            });
     }
 
-    public disableUser(id: string): Observable<any> {
+    public getByField(field: string, value: string): Promise<IJamespotUserConfig> {
+        const params = new HttpParams()
+            .set("name", field)
+            .append("value", value);
+
+        return this.http.get<IJamespotApiResponse<IJamespotUserFromApi>>(
+            `${this.endPoint}user/getByField`, { headers: this.headers, params })
+            .toPromise<IJamespotApiResponse<IJamespotUserFromApi>>()
+            .then((res: IJamespotApiResponse<IJamespotUserFromApi>) => {
+                return new Promise<IJamespotUserConfig>((resolve, reject) => {
+                    const err = res.RC.MSG;
+                    res.RC.CODE === 0 ? resolve(this.mapFromApi(res)) : reject(err);
+                });
+            });
+    }
+
+    public disableUser(id: string): Promise<IJamespotUserConfig> {
         const params = new HttpParams()
             .set("idUser", id)
             .append("active", "0");
 
-        return this.http.put(`${this.endPoint}user/update`, null, { headers: this.headers, params });
+        return this.http.put<IJamespotApiResponse<IJamespotUserFromApi>>
+            (`${this.endPoint}user/update`, null, { headers: this.headers, params })
+            .toPromise<IJamespotApiResponse<IJamespotUserFromApi>>()
+            .then((res: IJamespotApiResponse<IJamespotUserFromApi>) => {
+                return new Promise<IJamespotUserConfig>((resolve, reject) => {
+                    const err = res.RC.MSG;
+                    res.RC.CODE === 0 ? resolve(this.mapFromApi(res)) : reject(err);
+                });
+            });
     }
 }

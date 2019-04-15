@@ -37,7 +37,7 @@ export class CreateUserFormComponent implements OnInit {
         this.route.data
             .subscribe((data) => {
                 // set current user if any
-                this.currentUser = data.user != null ? new User(data.user) : new User();
+                this.currentUser = data.user != null ? new User(data.user) : new User(null);
 
                 // get manager list
                 this.managers = data.managers;

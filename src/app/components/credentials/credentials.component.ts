@@ -32,7 +32,7 @@ export class CredentialsComponent {
             this.checkUsernameAvailability();
             this.currentUser.email = this.setEmail();
             this.checkEmailAvailability();
-            this.currentUser.password = this.currentUser.id === "" ? this.setPassword() : "";
+            this.currentUser["password"] = this.currentUser.id === "" ? this.setPassword() : "";
         }
         console.log(this.currentUser);
     }
