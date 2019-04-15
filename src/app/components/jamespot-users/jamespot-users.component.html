@@ -10,31 +10,31 @@ Get user id: <input
 <h2 *ngIf="currentUser.idUser == null">Create User</h2>
 
 <h2 *ngIf="currentUser.idUser != null">
-    {{ currentUser.Firstname }} {{ currentUser.Lastname }} - Id: {{ currentUser.idUser }}
+    {{ currentUser.firstname }} {{ currentUser.lastname }} - Id: {{ currentUser.idUser }}
 </h2>
 
 <form *ngIf="currentUser!=null">
     <input
         type="text"
-        [(ngModel)]="currentUser.Mail"
+        [(ngModel)]="currentUser.mail"
         name="mail"
     >Email
     <br>
     <input
         type="text"
-        [(ngModel)]="currentUser.Role"
+        [(ngModel)]="currentUser.role"
         name="role"
     >Role
     <br>
     <input
         type="text"
-        [(ngModel)]="currentUser.Country"
+        [(ngModel)]="currentUser.country"
         name="country"
     >Country
     <br>
     <input
         type="text"
-        [(ngModel)]="currentUser.Language"
+        [(ngModel)]="currentUser.language"
         name="language"
     >Language
     <br>
@@ -46,7 +46,7 @@ Get user id: <input
     <br>
     <input
         type="text"
-        [(ngModel)]="currentUser.Pseudo"
+        [(ngModel)]="currentUser.username"
         name="pseudo"
         (blur)="checkUsernameAvailability()"
     >Pseudo
@@ -59,13 +59,13 @@ Get user id: <input
     <br>
     <input
         type="text"
-        [(ngModel)]="currentUser.Firstname"
+        [(ngModel)]="currentUser.firstname"
         name="firstname"
     >Firstname
     <br>
     <input
         type="text"
-        [(ngModel)]="currentUser.Lastname"
+        [(ngModel)]="currentUser.lastname"
         name="lastname"
     >Lastname
     <br>
@@ -128,3 +128,8 @@ Get user id: <input
 
 <h2 *ngIf="isDeleted">User {{ deletedId }} deleted !</h2>
 <h2 *ngIf="errorMessage">ERROR: {{ errorMessage }}</h2>
+Current User
+<pre> {{ currentUser | json }}</pre>
+
+Old User
+<pre> {{ oldUser | json }}</pre>

@@ -1,4 +1,4 @@
-export interface IJamespotUser {
+export interface IJamespotUserFromApi {
     properties: {
         active: string,
         company?: string,
@@ -30,4 +30,21 @@ export interface IJamespotApiResponse<T> {
         MSG: string,
     };
     VAL: T;
+}
+
+export interface IJamespotUserConfig {
+    country: string;
+    firstname: string;
+    language: string;
+    lastname: string;
+    mail: string;
+    username: string;
+    role: string;
+    active: string;
+    timeZone?: string;
+    phoneExtension?: string;
+    idUser?: string;
+    img?: string | File;
+    password?: string;
+    company?: string;
 }

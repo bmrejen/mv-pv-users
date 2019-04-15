@@ -1,11 +1,13 @@
-export class JamespotUser {
-    public Country: string = "fr";
-    public Firstname: string;
-    public Language: string = "fr";
-    public Lastname: string;
-    public Mail: string;
-    public Pseudo: string;
-    public Role: string = "User";
+import { IJamespotUserConfig } from "../interfaces/jamespot-api-response";
+
+export class JamespotUser implements IJamespotUserConfig {
+    public country: string = "fr";
+    public firstname: string;
+    public language: string = "fr";
+    public lastname: string;
+    public mail: string;
+    public username: string;
+    public role: string = "User";
     public idUser: string;
     public img: string | File;
     public active: string = "1";
@@ -14,34 +16,20 @@ export class JamespotUser {
     public timeZone: string = "Europe/Paris";
     public company: string = "MARCO VASCO";
 
-    constructor(
-        Country,
-        Firstname,
-        Language,
-        Lastname,
-        Mail,
-        Pseudo,
-        Role,
-        active,
-        timeZone?,
-        phoneExtension?,
-        idUser?,
-        img?,
-        password?,
-        company?) {
-        this.Country = Country;
-        this.Firstname = Firstname;
-        this.Language = Language;
-        this.Lastname = Lastname;
-        this.Mail = Mail;
-        this.Pseudo = Pseudo;
-        this.Role = Role;
-        this.idUser = idUser;
-        this.img = img;
-        this.active = active;
-        this.password = password;
-        this.phoneExtension = phoneExtension;
-        this.timeZone = timeZone;
-        this.company = company;
+    constructor(user: IJamespotUserConfig) {
+        this.country = user.country || this.country;
+        this.firstname = user.firstname || this.firstname;
+        this.language = user.language || this.language;
+        this.lastname = user.lastname || this.lastname;
+        this.mail = user.mail || this.mail;
+        this.username = user.username || this.username;
+        this.role = user.role || this.role;
+        this.idUser = user.idUser || this.idUser;
+        this.img = user.img || this.img;
+        this.active = user.active || this.active;
+        this.password = user.password || this.password;
+        this.phoneExtension = user.phoneExtension || this.phoneExtension;
+        this.timeZone = user.timeZone || this.timeZone;
+        this.company = user.company || this.company;
     }
 }

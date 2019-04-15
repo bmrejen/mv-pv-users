@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { IJamespotApiResponse, IJamespotUser } from "../../interfaces/jamespot-api-response";
+import { IJamespotUserConfig } from "../../interfaces/jamespot-api-response";
+
 import { JamespotService } from "../../services/jamespot.service";
 import { JamespotUser } from "./../../models/jamespot-user";
 
@@ -32,154 +33,118 @@ export class JamespotUsersComponent implements OnInit {
         this.image = event.target.files[0] as File;
     }
 
-    public onPost() {
+    public onPost(): void {
         this.james.postUsers(this.currentUser, this.image)
-            .subscribe((res) => {
+            .then((res: IJamespotUserConfig) => {
                 this.resetFields();
-                console.log(res);
-                if (res["RC"].CODE === 0) {
-
-                    this.currentUser = new JamespotUser(
-                        res.VAL.Country,
-                        res.VAL.Firstname,
-                        res.VAL.Language,
-                        res.VAL.Lastname,
-                        res.VAL.Mail,
-                        res.VAL.Pseudo,
-                        res.VAL.Role,
-                        res.VAL.properties.active,
-                        res.VAL.properties.timeZone,
-                        res.VAL.field1, // phoneExtension
-                        res.VAL.idUser,
-                        res.VAL.img,
-                        null, // password
-                        res.VAL.properties.company,
-                    );
-                    console.log("this.currentUser", this.currentUser);
-                }
+                this.getUser(res.idUser);
+            })
+            .catch((err: string) => {
+                console.error(err);
+                this.errorMessage = err.substr(31, err.length - 34);
             });
     }
-    public onUpdate() {
+
+    public onUpdate(): void {
         this.james.updateUser(this.currentUser, this.oldUser)
-            .subscribe((res) => {
-                if (res["RC"].CODE === 0) {
-                    this.resetFields();
-                    this.updateSuccessful = true;
-                    this.getUser(res["VAL"].idUser);
-                }
-            },
-                (err) => console.error(err));
+            .then((res: IJamespotUserConfig) => {
+                this.resetFields();
+                this.updateSuccessful = true;
+                this.getUser(res.idUser);
+            })
+            .catch((err: string) => {
+                console.error(err);
+                this.errorMessage = err.substr(31, err.length - 34);
+            });
     }
 
     public getUser(id: string): void {
         this.james.getUser(id)
-            .subscribe((res: IJamespotApiResponse<IJamespotUser>) => {
+            .then((res: IJamespotUserConfig) => {
                 this.resetFields();
-                if (res.RC.CODE === 0) {
-                    this.currentUser = new JamespotUser(
-                        res.VAL.Country,
-                        res.VAL.Firstname,
-                        res.VAL.Language,
-                        res.VAL.Lastname,
-                        res.VAL.Mail,
-                        res.VAL.Pseudo,
-                        res.VAL.Role,
-                        res.VAL.properties.active,
-                        res.VAL.properties.timeZone,
-                        res.VAL.field1, // phoneExtension
-                        res.VAL.idUser,
-                        res.VAL.img,
-                        null, // password
-                        res.VAL.properties.company,
-                    );
-                    this.oldUser = { ...this.currentUser };
-                } else {
-                    this.errorMessage = `User ${id} doesn't exist`;
-
-                }
+                this.currentUser = new JamespotUser(res);
+                this.oldUser = { ...this.currentUser };
+            })
+            .catch((err) => {
+                console.error(err);
+                this.errorMessage = `User ${id} doesn't exist`;
             });
     }
 
-    public onDelete() {
+    public onDelete(): void {
         const id = this.currentUser.idUser;
         if (confirm(`Etes-vous sur de supprimer l'utilisateur ${id} en production?`)) {
             this.errorMessage = null;
             this.james.deleteUser(id)
-                .subscribe((res) => {
-                    console.log(res);
-                    if (res.RC.CODE === 0) {
-                        this.resetFields();
-                        this.isDeleted = true;
-                        this.deletedId = id;
-                    } else {
-                        this.isDeleted = false;
-                        this.errorMessage = res.RC.MSG;
-                    }
+                .then((res) => {
+                    this.resetFields();
+                    this.isDeleted = true;
+                    this.deletedId = id;
+                })
+                .catch((err) => {
+                    console.error(err);
+                    this.isDeleted = false;
+                    this.errorMessage = err.RC.MSG;
                 });
         }
     }
 
-    public onPrefill() {
+    public onPrefill(): void {
         this.currentUser = new JamespotUser(
-            "fr",           // country
-            "Benoit",             // firstName
-            "fr",           // language
-            "Mrejen",             // lastName
-            "benoitmrejen@planetveo.com",             // mail
-            "benoit.mrejen",             // pseudo
-            "User",         // role
-            "1",            // active
-            "Europe/Paris", // timeZone
-            "1234",           // phoneExtension
-            null,           // idUser
-            null,           // image
-            "mypassword",           // password
-            "MARCO VASCO",  // company
-        );
+            {
+                active: "1",
+                company: "MARCO VASCO",
+                country: "fr",
+                firstname: "Benoit",
+                idUser: null,
+                img: null,
+                language: "fr",
+                lastname: "Mrejen",
+                mail: "benoitmrejen@planetveo.com",
+                password: "mypassword",
+                phoneExtension: "1234",
+                role: "User",
+                timeZone: "Europe/Paris",
+                username: "benoit.mrejen",
+            });
     }
 
-    public checkUsernameAvailability() {
-        this.james.getByField("pseudo", this.currentUser.Pseudo)
-            .subscribe((res) => {
+    public checkUsernameAvailability(): void {
+        this.james.getByField("pseudo", this.currentUser.username)
+            .then((res: IJamespotUserConfig) => {
                 this.isUsernameTaken = true;
                 this.errorMessage = null;
-                if (res != null && res.VAL.idUser !== "" && this.currentUser.idUser === null) {
+                if (res.idUser !== "" && this.currentUser.idUser === null) {
                     this.isUsernameTaken = true;
-                    this.errorMessage = `Username taken by user #${res.VAL.idUser}`;
+                    this.errorMessage = `Username taken by user #${res.idUser}`;
                 }
+            })
+            .catch((err) => {
+                console.error(err);
+                this.errorMessage = err;
             });
     }
 
-    public onDisable() {
+    public onDisable(): void {
         this.james.disableUser(this.currentUser.idUser)
-            .subscribe((res) => {
-                if (res != null && res.VAL.idUser !== "") {
+            .then((res: IJamespotUserConfig) => {
+                if (res.idUser !== "") {
                     this.resetFields();
-                    this.getUser(res.VAL.idUser);
+                    this.getUser(res.idUser);
                 }
+            })
+            .catch((err) => {
+                console.error(err);
+                this.errorMessage = err;
             });
     }
 
-    private resetFields() {
-        this.currentUser = new JamespotUser(
-            "fr",           // country
-            "",             // firstName
-            "fr",           // language
-            "",             // lastName
-            "",             // mail
-            "",             // pseudo
-            "User",         // role
-            "1",            // active
-            "Europe/Paris", // timeZone
-            null,           // phoneExtension
-            null,           // idUser
-            null,           // image
-            null,           // password
-            "MARCO VASCO",  // company
-        );
+    private resetFields(): void {
+        this.onPrefill();
         this.errorMessage = null;
         this.idToGet = null;
         this.isDeleted = false;
         this.updateSuccessful = false;
+        this.oldUser = null;
     }
 }
