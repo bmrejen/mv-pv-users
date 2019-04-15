@@ -82,35 +82,6 @@ export class JamespotUsersComponent implements OnInit {
                 (err) => console.error(err));
     }
 
-    public getUser(id: string): void {
-        this.james.getUser(id)
-            .subscribe((res: IJamespotApiResponse<IJamespotUser>) => {
-                this.resetFields();
-                if (res.RC.CODE === 0) {
-                    this.currentUser = new JamespotUser(
-                        res.VAL.Country,
-                        res.VAL.Firstname,
-                        res.VAL.Language,
-                        res.VAL.Lastname,
-                        res.VAL.Mail,
-                        res.VAL.Pseudo,
-                        res.VAL.Role,
-                        res.VAL.properties.active,
-                        res.VAL.properties.timeZone,
-                        res.VAL.field1, // phoneExtension
-                        res.VAL.idUser,
-                        res.VAL.img,
-                        null, // password
-                        res.VAL.properties.company,
-                    );
-                    this.oldUser = { ...this.currentUser };
-                } else {
-                    this.errorMessage = `User ${id} doesn't exist`;
-
-                }
-            });
-    }
-
     public onDelete(id) {
         if (confirm(`Etes-vous sur de supprimer l'utilisateur ${id} en production?`)) {
             this.errorMessage = null;
@@ -118,7 +89,6 @@ export class JamespotUsersComponent implements OnInit {
                 .subscribe((res) => {
                     console.log(res);
                     if (res.RC.CODE === 0) {
-                        this.resetFields();
                         this.isDeleted = true;
                         this.deletedId = id;
                     } else {
