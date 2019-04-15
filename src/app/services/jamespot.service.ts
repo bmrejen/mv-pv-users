@@ -1,6 +1,11 @@
+import {
+    IJamespotApiResponse,
+    IJamespotUser,
+    IJamespotUserList,
+} from "./../interfaces/jamespot-api-response";
+
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { RequestOptions } from "@angular/http";
 import { Observable } from "rxjs/Observable";
 
 @Injectable()
@@ -16,20 +21,21 @@ export class JamespotService {
         //
     }
 
-    public getUsers(): Observable<any> {
-        return this.http.get(`${this.endPoint}user/list`, { headers: this.headers });
+    public getUsers(): Observable<IJamespotApiResponse<IJamespotUserList[]>> {
+        return this.http.get<IJamespotApiResponse<IJamespotUserList[]>>(
+            `${this.endPoint}user/list`, { headers: this.headers });
     }
 
-    public getUser(id): Observable<any> {
+    public getUser(id: string): Observable<IJamespotApiResponse<IJamespotUser>> {
         const params = new HttpParams()
             .set("idUser", id);
 
-        return this.http.get(`${this.endPoint}user/get`, { headers: this.headers, params });
+        return this.http.get<IJamespotApiResponse<IJamespotUser>>(
+            `${this.endPoint}user/get`, { headers: this.headers, params });
     }
 
-    public postUsers(form): Observable<any> {
+    public postUsers(form, image): Observable<IJamespotApiResponse<IJamespotUser>> {
         const fd = new FormData();
-        fd.append("image", form.image);
         fd.append("Mail", form.mail);
         fd.append("Role", form.role);
         fd.append("Country", form.country);
@@ -39,8 +45,57 @@ export class JamespotService {
         fd.append("Password", form.password);
         fd.append("Firstname", form.firstname);
         fd.append("Lastname", form.lastname.toUpperCase());
+        fd.append("Company", form.company);
+        fd.append("Field1", form.phoneExtension);
+        fd.append("timeZone", form.timeZone);
+        fd.append("image", image);
 
-        return this.http.post(`${this.endPoint}user/create`, fd, { headers: this.headers });
+        return this.http.post<IJamespotApiResponse<IJamespotUser>>(
+            `${this.endPoint}user/create`, fd, { headers: this.headers });
+    }
+
+    public updateUser(user, oldUser) {
+        let params = new HttpParams()
+            .set("idUser", user.idUser);
+
+        for (const key in user) {
+            if (user[key] !== null) {
+
+                switch (key) {
+                    case "img":
+                        if (user[key] === null) {
+                            // do not update image in params - it will be updated in Form Data
+                        }
+                        break;
+                    case "password":
+                        if (user[key] === null) {
+                            // do not update password unless it's been changed
+                        }
+                        break;
+                    case "idUser":
+                        // do not update id
+                        break;
+                    case "phoneExtension":
+                        if (user[key] !== oldUser[key]) {
+                            params = params.append("field1", user[key]);
+                        }
+                        break;
+                    default:
+                        if (user[key] !== oldUser[key]) {
+                            params = params.append(key, user[key]);
+                        }
+                        break;
+                }
+            }
+        }
+
+        const fd = new FormData();
+        // update the image in the form data
+        if (user.image && user.image !== undefined) {
+            fd.append("image", user.image);
+        }
+
+        return this.http.put(`${this.endPoint}user/update`, fd, { headers: this.headers, params });
     }
 
     public deleteUser(id: string): Observable<any> {
@@ -48,5 +103,13 @@ export class JamespotService {
             .set("idUser", id);
 
         return this.http.delete(`${this.endPoint}user/delete`, { headers: this.headers, params });
+    }
+
+    public disableUser(id: string): Observable<any> {
+        const params = new HttpParams()
+            .set("idUser", id)
+            .append("active", "0");
+
+        return this.http.put(`${this.endPoint}user/update`, null, { headers: this.headers, params });
     }
 }

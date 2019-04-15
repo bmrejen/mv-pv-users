@@ -2,80 +2,118 @@
 <h2>Get User</h2>
 Get user id: <input
     type="text"
-    [(ngModel)]="currentId"
-    name="currentId"
+    [(ngModel)]="idToGet"
+    name="idToGet"
 >
-<button (click)="getUser(currentId)">Get</button>
+<button (click)="getUser(idToGet)">Get</button>
 
-<h2 *ngIf="currentId == null">Create User</h2>
-<h2 *ngIf="currentId != null">Edit User {{ currentId }}</h2>
-<form #jamesForm="ngForm">
+<h2 *ngIf="currentUser.idUser == null">Create User</h2>
+<h2 *ngIf="currentUser.idUser != null">User {{ currentUser.idUser }}</h2>
+<form
+    *ngIf="currentUser != null"
+    #jamesForm="ngForm"
+>
     <input
         type="text"
-        [(ngModel)]="fields.mail"
+        [(ngModel)]="currentUser.Mail"
         name="mail"
     >Email
     <br>
     <input
         type="text"
-        [(ngModel)]="fields.role"
+        [(ngModel)]="currentUser.Role"
         name="role"
     >Role
     <br>
     <input
         type="text"
-        [(ngModel)]="fields.country"
+        [(ngModel)]="currentUser.Country"
         name="country"
     >Country
     <br>
     <input
         type="text"
-        [(ngModel)]="fields.language"
+        [(ngModel)]="currentUser.Language"
         name="language"
     >Language
     <br>
     <input
         type="text"
-        [(ngModel)]="fields.active"
+        [(ngModel)]="currentUser.active"
         name="active"
     >active
     <br>
     <input
         type="text"
-        [(ngModel)]="fields.pseudo"
+        [(ngModel)]="currentUser.Pseudo"
         name="pseudo"
     >Pseudo
     <br>
     <input
         type="text"
-        [(ngModel)]="fields.password"
+        [(ngModel)]="currentUser.password"
         name="password"
     >Password
     <br>
     <input
         type="text"
-        [(ngModel)]="fields.firstname"
+        [(ngModel)]="currentUser.Firstname"
         name="firstname"
     >Firstname
     <br>
     <input
         type="text"
-        [(ngModel)]="fields.lastname"
+        [(ngModel)]="currentUser.Lastname"
         name="lastname"
     >Lastname
     <br>
     <input
+        type="text"
+        [(ngModel)]="currentUser.company"
+        name="company"
+    >Company
+    <br>
+    <input
+        type="text"
+        [(ngModel)]="currentUser.phoneExtension"
+        name="phoneExtension"
+    >Phone Extension
+    <br>
+    <input
+        type="text"
+        [(ngModel)]="currentUser.timeZone"
+        name="timeZone"
+    >Time Zone
+    <br>
+
+
+    <!-- IMAGE UPDATE -->
+    <input
         type="file"
         (change)="onFileSelected($event)"
     >
+    <br>
+    <!-- BUTTONS -->
     <button
         type=button
-        (click)="onPost()"
+        (click)="onPrefill()"
+    >Prefill form with random data</button>
+    <button
+        *ngIf="currentUser.idUser == null"
+        type=button
+        (click)="onPost(jamesForm.value)"
     >Create</button>
+    <button
+        *ngIf="currentUser.idUser != null"
+        type=button
+        (click)="onUpdate(jamesForm.value)"
+    >Update</button>
+    <button (click)="onDelete(currentUser.idUser)">Delete</button>
 </form>
-<div *ngIf="first != null && last != null">
-    User {{ first }} {{ last }} created ! Id: {{ id }}
-</div>
+<h2 *ngIf="currentUser != null && currentUser.Firstname != null && currentUser.Lastname != null">
+    Current User: {{ currentUser.Firstname }} {{ currentUser.Lastname }} - Id: {{ currentUser.idUser }}
+</h2>
+<h3 *ngIf="updateSuccessful">Data Updated ! </h3>
 
 <h2>Delete User</h2>
 id to delete:
@@ -85,5 +123,11 @@ id to delete:
     [(ngModel)]=userToDelete
 >
 <button (click)="onDelete(userToDelete)">Delete</button>
+
+<button
+    *ngIf="currentId != null"
+    type=button
+    (click)="onDisable(currentId)"
+>Disable</button>
 <p *ngIf="isDeleted">User {{ deletedId }} deleted !</p>
 <p *ngIf="errorMessage">ERROR: {{ errorMessage }}</p>
