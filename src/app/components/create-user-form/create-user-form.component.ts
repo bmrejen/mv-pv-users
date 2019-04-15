@@ -1,10 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, ActivatedRouteSnapshot } from "@angular/router";
-import { FieldsService } from "../../services/fields.service";
+import { ActivatedRoute } from "@angular/router";
 import { FormValueMapperService } from "../../services/form-value-mapper.service";
-import { ParserService } from "../../services/parser.service";
 import { SugarService } from "../../services/sugar.service";
-import { SwitchVoxService } from "../../services/switchvox.service";
 
 import { Destination } from "../../models/destination";
 import { Fields } from "../../models/fields";
@@ -35,9 +32,6 @@ export class CreateUserFormComponent implements OnInit {
     public userObject;
 
     constructor(
-        private fieldsService: FieldsService,
-        private switchvoxService: SwitchVoxService,
-        private parserService: ParserService,
         private route: ActivatedRoute,
         private sugar: SugarService,
         private mapper: FormValueMapperService,
