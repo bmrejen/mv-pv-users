@@ -54,7 +54,6 @@ export class User {
     public leadsMax: number = 45;
 
     public constructor(data: any) {
-        this.type = data.type || this.type;
         this.id = data.id || this.id;
         this.userName = data.userName || this.userName;
         this.salutation = data.salutation || this.salutation;

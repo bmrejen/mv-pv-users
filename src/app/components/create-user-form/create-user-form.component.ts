@@ -4,6 +4,7 @@ import { ActivatedRoute } from "@angular/router";
 import { Destination } from "../../models/destination";
 import { Fields } from "../../models/fields";
 import { Role } from "../../models/role";
+import { SugarUser } from "../../models/sugar-user";
 import { Team } from "../../models/team";
 import { User } from "../../models/user";
 
@@ -24,6 +25,8 @@ export class CreateUserFormComponent implements OnInit {
     public roles: Role[] = [];
     public destinations: Destination[] = [];
     public managers: User[] = [];
+    public currentSugarUser: SugarUser;
+
     // tslint:disable-next-line:max-line-length
     public body = `{"data":[{"codeSonGalileo":"","departments":["departments-Backoffice","departments-Backoffice Billet"],"destinations":["4e12eefb-5dbb-f913-d80b-4c2ab8202809","6f9aedb6-6d68-b4f3-0270-4cc10e363077"],"email":"mfeuillet@marcovasco.fr","employeeStatus":true,"firstName":"Mathilde","functionId":"","inheritsPreferencesFrom":"user_default","isAdmin":false,"lastName":"Feuillet","leadsMax":45,"leadsMin":15,"managerId":"","officeId":"","phoneAsterisk":"phoneAsterisk","phoneFax":"phoneFax","phoneMobile":"phoneMobile","phoneWork":"phoneWork","roles":["128e2eae-322a-8a0d-e9f0-4cf35b5bfe5b","25218251-3011-b347-5d4f-4bfced4de2cc"],"salutation":"Mrs.","status":true,"teams":["0ec63f44-aa38-11e7-924f-005056911f09","1046f88d-3d37-10d5-7760-506023561b57"],"title":"","tourplanID":"MFEUIL","userName":"mfeuillet"}]}`;
 
@@ -37,7 +40,11 @@ export class CreateUserFormComponent implements OnInit {
         this.route.data
             .subscribe((data) => {
                 // set current user if any
-                this.currentUser = data.user != null ? new User(data.user) : new User(null);
+                this.currentSugarUser = new SugarUser(data.sugarUser);
+                this.currentUser = new User({});
+
+                Object.keys(this.currentSugarUser)
+                    .forEach((key) => this.currentUser[key] = this.currentSugarUser[key]);
 
                 // get manager list
                 this.managers = data.managers;
@@ -56,9 +63,6 @@ export class CreateUserFormComponent implements OnInit {
 
                 // get fields list
                 this.fields = new Fields(data.fields);
-
-                console.log(this.fields);
-                console.log(this.currentUser);
             });
 
     }
