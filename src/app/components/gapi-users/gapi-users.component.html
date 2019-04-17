@@ -29,6 +29,7 @@
 
 
 
+
         <div *ngIf="currentUser.id == null">
             <h2>USER FORM</h2>
             <input
@@ -146,6 +147,8 @@
                 </div>
             </div>
             <button (click)="updateUser()">Update</button>
+            <button (click)="activateImap()">Activate IMAP</button>
+            <button (click)="deactivateImap()">Deactivate IMAP</button>
         </div>
 
         <h2 *ngIf="message != null">{{ message }}</h2>

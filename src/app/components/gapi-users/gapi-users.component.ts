@@ -62,11 +62,8 @@ export class GapiUsersComponent implements OnInit {
                 this.apiLoaded = true;
 
                 return this.gapiService.initClient();
-            },
-                (err) => {
-                    this.apiFailed = true;
-                },
-            )
+            })
+            .catch((err) => this.apiFailed = true)
             .then((res) => {
                 this.apiReady = true;
                 this.gapiService.initAuthClient()
@@ -88,23 +85,20 @@ export class GapiUsersComponent implements OnInit {
     public signIn() {
         this.gapiService.signIn()
             .then(() => this.gapiService.initAuthClient()
-                .then(
-                    (result: any) => this.userLoggedIn = result.currentUser.get().w3.ig,
-                    (err) => console.log("init auth client error", err),
-                ));
+                .then((result: any) => this.userLoggedIn = result.currentUser.get().w3.ig)
+                .catch((err) => console.log("init auth client error", err)),
+            );
     }
 
     public signOut() {
         this.gapiService.signOut()
             .then(() => this.gapiService.initAuthClient()
-                .then(
-                    (result: any) => {
-                        if (!this.isSignedIn()) {
-                            this.userLoggedIn = "Logged out";
-                        }
-                    },
-                    (err) => console.log("init auth client error", err),
-                ));
+                .then((result: any) => {
+                    if (!this.isSignedIn()) {
+                        this.userLoggedIn = "Logged out";
+                    }
+                })
+                .catch((err) => console.log("init auth client error", err)));
     }
 
     public isSignedIn(): boolean {
@@ -135,6 +129,7 @@ export class GapiUsersComponent implements OnInit {
                     this.message = err["result"].error.message;
                 }
             });
+        this.getImap(this.userToGet);
     }
 
     public postUser() {
@@ -194,7 +189,24 @@ export class GapiUsersComponent implements OnInit {
             password: null,
             primaryEmail: null,
         };
+    }
 
+    public activateImap(id: string) {
+        return this.gapiService.activateImap(id)
+            .then((res) => console.log("IMAP Activated", res))
+            .catch((err) => console.error("IMAP Activation error", err));
+    }
+
+    public getImap(id: string) {
+        return this.gapiService.getImap(id)
+            .then((res) => console.log("IMAP settings", res))
+            .catch((err) => console.error("Error when getting IMAP", err));
+    }
+
+    public deactivateImap(id: string) {
+        return this.gapiService.deactivateImap(id)
+            .then((res) => console.log("IMAP settings", res))
+            .catch((err) => console.error("Error when getting IMAP", err));
     }
 
     private setUser(res): void {
