@@ -53,6 +53,22 @@ export class User {
     public leadsMin: number = 15;
     public leadsMax: number = 45;
 
+    // JAMESPOT
+    public jamesCountry: string = "fr";
+    public jamesFirstname: string;
+    public jamesLanguage: string = "fr";
+    public jamesLastname: string;
+    public jamesMail: string;
+    public jamesUsername: string;
+    public jamesRole: string = "User";
+    public jamesIdUser: string;
+    public jamesImg: string | File;
+    public jamesActive: string = "1";
+    public jamesPassword: string;
+    public jamesPhoneExtension: string;
+    public jamesTimeZone: string = "Europe/Paris";
+    public jamesCompany: string = "MARCO VASCO";
+
     public constructor(data: any) {
         this.id = data.id || this.id;
         this.userName = data.userName || this.userName;
@@ -92,5 +108,21 @@ export class User {
         this.defaultTeams = data.defaultTeams || this.defaultTeams;
         this.leadsMin = data.leadsMin || this.leadsMin;
         this.leadsMax = data.leadsMax || this.leadsMax;
+
+        // JAMESPOT
+        this.jamesCountry = data.jamesCountry || this.jamesCountry;
+        this.jamesFirstname = data.jamesFirstname || this.jamesFirstname;
+        this.jamesLanguage = data.jamesLanguage || this.jamesLanguage;
+        this.jamesLastname = data.jamesLastname || this.jamesLastname;
+        this.jamesMail = data.jamesMail || this.jamesMail;
+        this.jamesUsername = data.jamesUsername || this.jamesUsername;
+        this.jamesRole = data.jamesRole || this.jamesRole;
+        this.jamesIdUser = data.jamesIdUser || this.jamesIdUser;
+        this.jamesImg = data.jamesImg || this.jamesImg;
+        this.jamesActive = data.jamesActive || this.jamesActive;
+        this.jamesPassword = data.jamesPassword || this.jamesPassword;
+        this.jamesPhoneExtension = data.jamesPhoneExtension || this.jamesPhoneExtension;
+        this.jamesTimeZone = data.jamesTimeZone || this.jamesTimeZone;
+        this.jamesCompany = data.jamesCompany || this.jamesCompany;
     }
 }

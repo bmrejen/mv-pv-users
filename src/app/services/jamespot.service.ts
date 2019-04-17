@@ -43,18 +43,18 @@ export class JamespotService {
 
     public postUsers(user, image): Promise<IJamespotUserConfig> {
         const fd = new FormData();
-        fd.append("Mail", user.mail);
-        fd.append("Role", user.role);
-        fd.append("Country", user.country);
-        fd.append("Language", user.language);
-        fd.append("active", user.active);
-        fd.append("Pseudo", user.username);
-        fd.append("Password", user.password);
-        fd.append("Firstname", user.firstname);
-        fd.append("Lastname", user.lastname.toUpperCase());
-        fd.append("Company", user.company);
-        fd.append("Field1", user.phoneExtension);
-        fd.append("timeZone", user.timeZone);
+        fd.append("Mail", user.jamesMail);
+        fd.append("Role", user.jamesRole);
+        fd.append("Country", user.jamesCountry);
+        fd.append("Language", user.jamesLanguage);
+        fd.append("active", user.jamesActive);
+        fd.append("Pseudo", user.jamesUsername);
+        fd.append("Password", user.jamesPassword);
+        fd.append("Firstname", user.jamesFirstname);
+        fd.append("Lastname", user.jamesLastname.toUpperCase());
+        fd.append("Company", user.jamesCompany);
+        fd.append("Field1", user.jamesPhoneExtension);
+        fd.append("timeZone", user.jamesTimeZone);
         fd.append("image", image);
 
         return this.http
@@ -85,6 +85,25 @@ export class JamespotService {
             role: res.VAL.Role,
             timeZone: res.VAL.properties.timeZone,
             username: res.VAL.Pseudo,
+        };
+    }
+
+    public mapJamespotUserToUserConfig(res: IJamespotUserConfig) {
+        return {
+            jamesActive: res.active,
+            jamesCompany: res.company,
+            jamesCountry: res.country,
+            jamesFirstname: res.firstname,
+            jamesIdUser: res.idUser,
+            jamesImg: res.img,
+            jamesLanguage: res.language,
+            jamesLastname: res.lastname,
+            jamesMail: res.mail,
+            jamesPassword: res.password,
+            jamesPhoneExtension: res.phoneExtension,
+            jamesRole: res.role,
+            jamesTimeZone: res.timeZone,
+            jamesUsername: res.username,
         };
     }
 

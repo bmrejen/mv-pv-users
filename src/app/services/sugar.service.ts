@@ -52,8 +52,10 @@ export class SugarService implements ISugarService {
     }
 
     public getUserByUsername(username): Promise<User> {
+        console.log("username we are looking for: ", username);
+
         return this.getData("users")
-            .then((users) => users.filter((user) => user.attributes["userName"] === username))
+            .then((users) => users.filter((user) => user.attributes["userName"] === username.toLowerCase()))
             .then((user) => user[0]);
     }
 

@@ -1,135 +1,136 @@
-<h1>Jamespot users</h1>
-<h2>Get User</h2>
-Get user id: <input
-    type="text"
-    [(ngModel)]="idToGet"
-    name="idToGet"
->
-<button (click)="getUser(idToGet)">Get</button>
-
-<h2 *ngIf="currentUser.idUser == null">Create User</h2>
-
-<h2 *ngIf="currentUser.idUser != null">
-    {{ currentUser.firstname }} {{ currentUser.lastname }} - Id: {{ currentUser.idUser }}
-</h2>
-
-<form *ngIf="currentUser!=null">
-    <input
+<fieldset class="blue">
+    <legend>Jamespot</legend>
+    Get user id: <input
         type="text"
-        [(ngModel)]="currentUser.mail"
-        name="mail"
-    >Email
-    <br>
-    <input
-        type="text"
-        [(ngModel)]="currentUser.role"
-        name="role"
-    >Role
-    <br>
-    <input
-        type="text"
-        [(ngModel)]="currentUser.country"
-        name="country"
-    >Country
-    <br>
-    <input
-        type="text"
-        [(ngModel)]="currentUser.language"
-        name="language"
-    >Language
-    <br>
-    <input
-        type="text"
-        [(ngModel)]="currentUser.active"
-        name="active"
-    >active
-    <br>
-    <input
-        type="text"
-        [(ngModel)]="currentUser.username"
-        name="pseudo"
-        (blur)="checkUsernameAvailability()"
-    >Pseudo
-    <br>
-    <input
-        type="text"
-        [(ngModel)]="currentUser.password"
-        name="password"
-    >Password
-    <br>
-    <input
-        type="text"
-        [(ngModel)]="currentUser.firstname"
-        name="firstname"
-    >Firstname
-    <br>
-    <input
-        type="text"
-        [(ngModel)]="currentUser.lastname"
-        name="lastname"
-    >Lastname
-    <br>
-    <input
-        type="text"
-        [(ngModel)]="currentUser.company"
-        name="company"
-    >Company
-    <br>
-    <input
-        type="text"
-        [(ngModel)]="currentUser.phoneExtension"
-        name="phoneExtension"
-    >Phone Extension
-    <br>
-    <input
-        type="text"
-        [(ngModel)]="currentUser.timeZone"
-        name="timeZone"
-    >Time Zone
-    <br>
-
-
-    <!-- IMAGE UPDATE -->
-    <input
-        type="file"
-        (change)="onFileSelected($event)"
+        [(ngModel)]="idToGet"
+        name="idToGet"
     >
-    <br>
-    <!-- BUTTONS -->
-    <div *ngIf="currentUser.idUser != null">
-        <button
-            type="button"
-            (click)="onUpdate()"
-        >Update</button>
+    <button (click)="getUser(idToGet)">Get</button>
+
+    <h2 *ngIf="currentUser.jamesIdUser == null">Create User</h2>
+
+    <h2 *ngIf="currentUser.jamesIdUser != null">
+        {{ currentUser.jamesFirstname }} {{ currentUser.jamesLastname }} - Id: {{ currentUser.jamesIdUser }}
+    </h2>
+
+    <form *ngIf="currentUser!=null">
+        <input
+            type="text"
+            [(ngModel)]="currentUser.jamesMail"
+            name="mail"
+        >Email
+        <br>
+        <input
+            type="text"
+            [(ngModel)]="currentUser.jamesRole"
+            name="role"
+        >Role
+        <br>
+        <input
+            type="text"
+            [(ngModel)]="currentUser.jamesCountry"
+            name="country"
+        >Country
+        <br>
+        <input
+            type="text"
+            [(ngModel)]="currentUser.jamesLanguage"
+            name="language"
+        >Language
+        <br>
+        <input
+            type="text"
+            [(ngModel)]="currentUser.jamesActive"
+            name="active"
+        >active
+        <br>
+        <input
+            type="text"
+            [(ngModel)]="currentUser.jamesUsername"
+            name="pseudo"
+            (blur)="checkUsernameAvailability()"
+        >Pseudo
+        <br>
+        <input
+            type="text"
+            [(ngModel)]="currentUser.jamesPassword"
+            name="password"
+        >Password
+        <br>
+        <input
+            type="text"
+            [(ngModel)]="currentUser.jamesFirstname"
+            name="firstname"
+        >Firstname
+        <br>
+        <input
+            type="text"
+            [(ngModel)]="currentUser.jamesLastname"
+            name="lastname"
+        >Lastname
+        <br>
+        <input
+            type="text"
+            [(ngModel)]="currentUser.jamesCompany"
+            name="company"
+        >Company
+        <br>
+        <input
+            type="text"
+            [(ngModel)]="currentUser.jamesPhoneExtension"
+            name="phoneExtension"
+        >Phone Extension
+        <br>
+        <input
+            type="text"
+            [(ngModel)]="currentUser.jamesTimeZone"
+            name="timeZone"
+        >Time Zone
+        <br>
+
+
+        <!-- IMAGE UPDATE -->
+        <input
+            type="file"
+            (change)="onFileSelected($event)"
+        >
+        <br>
+        <!-- BUTTONS -->
+        <div *ngIf="currentUser.jamesIdUser != null">
+            <button
+                type="button"
+                (click)="onUpdate()"
+            >Update</button>
+
+            <button
+                type="button"
+                (click)="onDisable()"
+            >Disable</button>
+
+            <button
+                type="button"
+                (click)="onDelete()"
+            >Delete</button>
+        </div>
 
         <button
-            type="button"
-            (click)="onDisable()"
-        >Disable</button>
-
+            type=button
+            (click)="onPrefill()"
+        >Prefill form with random data</button>
         <button
-            type="button"
-            (click)="onDelete()"
-        >Delete</button>
-    </div>
+            *ngIf="currentUser.jamesIdUser == null"
+            type=button
+            (click)="onPost()"
+        >Create</button>
+    </form>
 
-    <button
-        type=button
-        (click)="onPrefill()"
-    >Prefill form with random data</button>
-    <button
-        *ngIf="currentUser.idUser == null"
-        type=button
-        (click)="onPost()"
-    >Create</button>
-</form>
+    <h3 *ngIf="updateSuccessful">Data Updated ! </h3>
 
-<h3 *ngIf="updateSuccessful">Data Updated ! </h3>
+    <h2 *ngIf="isDeleted">User {{ deletedId }} deleted !</h2>
+    <h2 *ngIf="errorMessage">ERROR: {{ errorMessage }}</h2>
+    <!-- Current User
+    <pre> {{ currentUser | json }}</pre>
 
-<h2 *ngIf="isDeleted">User {{ deletedId }} deleted !</h2>
-<h2 *ngIf="errorMessage">ERROR: {{ errorMessage }}</h2>
-Current User
-<pre> {{ currentUser | json }}</pre>
-
-Old User
-<pre> {{ oldUser | json }}</pre>
+    Old User
+    <pre> {{ oldUser | json }}</pre> -->
+</fieldset>

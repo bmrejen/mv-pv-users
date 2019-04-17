@@ -7,15 +7,25 @@
 
     <ng-container *ngIf="fields != null">
         <mv-accounts [accounts]="fields.accounts"></mv-accounts>
-        <mv-credentials
-            [currentUser]="currentUser"
-            [civilites]="fields.civilites"
-            [userFields]="fields.userFields"
-            [usersFromSugar]="usersFromSugar"
-        ></mv-credentials>
 
-        <mv-phones [currentUser]="currentUser"></mv-phones>
+        <div class="grid-container">
+            <mv-credentials
+                [currentUser]="currentUser"
+                [civilites]="fields.civilites"
+                [userFields]="fields.userFields"
+                [usersFromSugar]="usersFromSugar"
+                class="credentials"
+            ></mv-credentials>
 
+            <mv-phones
+                [currentUser]="currentUser"
+                class="phones"
+            ></mv-phones>
+            <mv-jamespot
+                class="jamespot"
+                [currentUser]="currentUser"
+            ></mv-jamespot>
+        </div>
         <mv-profiles
             [currentUser]="currentUser"
             [selectedFunction]="fields.selectedFunction"
