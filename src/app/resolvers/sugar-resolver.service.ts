@@ -18,7 +18,7 @@ export class SugarResolverService implements Resolve<Promise<SugarUser>> {
 
         return new Promise((resolve, reject) => {
             userPromise
-                .then((res) => resolve(res))
+                .then((res) => resolve(this.sugar.mapUserFromApi(res)))
                 .catch((error) => reject(error));
         });
     }
