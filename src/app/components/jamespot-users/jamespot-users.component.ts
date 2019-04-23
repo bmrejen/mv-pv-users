@@ -30,10 +30,6 @@ export class JamespotUsersComponent implements OnInit {
 
     public ngOnInit(): void {
         this.resetFields();
-        this.james.getUsers()
-            .subscribe((data) => console.log(data));
-        this.james.getByField("pseudo", "Xavier Morel")
-            .then((res) => console.log(res));
     }
 
     public onFileSelected(event) {
@@ -48,7 +44,7 @@ export class JamespotUsersComponent implements OnInit {
                 this.getUser(res.idUser);
             })
             .catch((err: string) => {
-                console.error(err);
+                console.error("Jamespot Problem :", err);
                 this.errorMessage = err.substr(31, err.length - 34);
             });
     }
@@ -81,8 +77,8 @@ export class JamespotUsersComponent implements OnInit {
                 this.getUser(res.idUser);
             })
             .catch((err: string) => {
-                console.error(err);
-                this.errorMessage = err.substr(31, err.length - 34);
+                console.error("Jamespot update error: ", err);
+                this.errorMessage = err;
             });
     }
 
@@ -90,12 +86,10 @@ export class JamespotUsersComponent implements OnInit {
         this.james.getUser(id)
             .then((res: IJamespotUserConfig) => {
                 this.resetFields();
-                this.currentJamespotUser = new JamespotUser(res);
-                this.oldJamespotUser = { ...this.currentJamespotUser };
+                this.currentJamespotUser = this.oldJamespotUser = new JamespotUser(res);
 
-                const jamespotData = this.james.mapJamespotUserToUserConfig(res);
-                Object.keys(jamespotData)
-                    .forEach((key) => this.currentUser[key] = jamespotData[key]);
+                Object.keys(this.currentJamespotUser)
+                    .forEach((key) => this.currentUser[key] = this.currentJamespotUser[key]);
 
                 this.sugar.getUserByUsername
                     (`${this.currentUser.jamesFirstname[0]}${this.currentUser.jamesLastname}`)

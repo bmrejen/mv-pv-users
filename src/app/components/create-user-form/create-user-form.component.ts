@@ -41,7 +41,6 @@ export class CreateUserFormComponent implements OnInit {
             .subscribe((data) => {
                 // set current user if any
                 this.currentSugarUser = new SugarUser(data.sugarUser || {});
-                console.log(this.currentSugarUser);
                 this.currentUser = new User({});
 
                 Object.keys(this.currentSugarUser)

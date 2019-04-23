@@ -127,10 +127,5 @@
     <h3 *ngIf="updateSuccessful">Data Updated ! </h3>
 
     <h2 *ngIf="isDeleted">User {{ deletedId }} deleted !</h2>
-    <h2 *ngIf="errorMessage">ERROR: {{ errorMessage }}</h2>
-    <!-- Current User
-    <pre> {{ currentUser | json }}</pre>
-
-    Old User
-    <pre> {{ oldUser | json }}</pre> -->
+    <h2 *ngIf="errorMessage != null">ERROR: {{ errorMessage }}</h2>
 </fieldset>

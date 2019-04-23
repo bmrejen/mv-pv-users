@@ -108,40 +108,7 @@ export class JamespotService {
     }
 
     public updateUser(user, oldUser): Promise<IJamespotUserConfig> {
-        console.log(user === oldUser);
-        let params = new HttpParams()
-            .set("idUser", user.idUser);
-
-        for (const key in user) {
-            if (user[key] !== null) {
-
-                switch (key) {
-                    case "img":
-                        if (user[key] === null) {
-                            // do not update image in params - it will be updated in Form Data
-                        }
-                        break;
-                    case "password":
-                        if (user[key] === null) {
-                            // do not update password unless it's been changed
-                        }
-                        break;
-                    case "idUser":
-                        // do not update id
-                        break;
-                    case "phoneExtension":
-                        if (user[key] !== oldUser[key]) {
-                            params = params.append("field1", user[key]);
-                        }
-                        break;
-                    default:
-                        if (user[key] !== oldUser[key]) {
-                            params = params.append(key, user[key]);
-                        }
-                        break;
-                }
-            }
-        }
+        const params = this.createParamsToUpdate(user, oldUser);
 
         const fd = new FormData();
         // update the image in the form data
@@ -153,11 +120,112 @@ export class JamespotService {
             (`${this.endPoint}user/update`, fd, { headers: this.headers, params })
             .toPromise<IJamespotApiResponse<IJamespotUserFromApi>>()
             .then((res: IJamespotApiResponse<IJamespotUserFromApi>) => {
+                console.log(res);
+
                 return new Promise<IJamespotUserConfig>((resolve, reject) => {
                     const err = res.RC.MSG;
                     res.RC.CODE === 0 ? resolve(this.mapFromApi(res)) : reject(err);
                 });
             });
+    }
+
+    public createParamsToUpdate(user, oldUser): HttpParams {
+        let params = new HttpParams()
+            .set("idUser", user.jamesIdUser);
+
+        for (const key in user) {
+            if (user[key] !== null) {
+                switch (key) {
+                    // id will not be updated
+                    case "jamesIdUser":
+                        break;
+
+                    // image is not updated in params - it will be updated in Form Data
+                    case "jamesImg":
+                        break;
+
+                    // password updated if it's been inputted
+                    case "jamesPassword":
+                        if (user[key] != null) {
+                            params = params.append("Password", user[key]);
+                        }
+                        break;
+
+                    // other properties are added to params if they have been edited
+                    case "jamesPhoneExtension":
+                        if (user[key] !== oldUser[key]) {
+                            params = params.append("field1", user[key]);
+                        }
+                        break;
+
+                    case "jamesActive":
+                        if (user[key] !== oldUser[key]) {
+                            params = params.append("active", user[key]);
+                        }
+                        break;
+
+                    case "jamesCompany":
+                        if (user[key] !== oldUser[key]) {
+                            params = params.append("company", user[key]);
+                        }
+                        break;
+
+                    case "jamesCountry":
+                        if (user[key] !== oldUser[key]) {
+                            params = params.append("Country", user[key]);
+                        }
+                        break;
+
+                    case "jamesFirstname":
+                        if (user[key] !== oldUser[key]) {
+                            params = params.append("Firstname", user[key]);
+                        }
+                        break;
+
+                    case "jamesLastname":
+                        if (user[key] !== oldUser[key]) {
+                            params = params.append("Lastname", user[key]);
+                        }
+                        break;
+
+                    case "jamesLanguage":
+                        if (user[key] !== oldUser[key]) {
+                            params = params.append("Language", user[key]);
+                        }
+                        break;
+
+                    case "jamesMail":
+                        if (user[key] !== oldUser[key]) {
+                            params = params.append("Mail", user[key]);
+                        }
+                        break;
+
+                    case "jamesRole":
+                        if (user[key] !== oldUser[key]) {
+                            params = params.append("Role", user[key]);
+                        }
+                        break;
+
+                    case "jamesTimeZone":
+                        if (user[key] !== oldUser[key]) {
+                            params = params.append("timeZone", user[key]);
+                        }
+                        break;
+
+                    case "jamesUsername":
+                        if (user[key] !== oldUser[key]) {
+                            params = params.append("Pseudo", user[key]);
+                        }
+                        break;
+
+                    default:
+                        alert("Problem creating the params in the JamespotUpdate service");
+                        break;
+                }
+            }
+        }
+
+        return params;
     }
 
     public deleteUser(id: string): Promise<IJamespotApiResponse<any>> {
