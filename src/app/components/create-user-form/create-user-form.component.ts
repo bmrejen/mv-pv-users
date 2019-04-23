@@ -24,7 +24,7 @@ export class CreateUserFormComponent implements OnInit {
     public teams: Team[] = [];
     public roles: Role[] = [];
     public destinations: Destination[] = [];
-    public managers: User[] = [];
+    public managers: SugarUser[] = [];
     public currentSugarUser: SugarUser;
 
     // tslint:disable-next-line:max-line-length
