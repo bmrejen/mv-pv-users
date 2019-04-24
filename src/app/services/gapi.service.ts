@@ -12,7 +12,7 @@ export class GapiAuthenticatorService {
 
     // Authorization scopes required by the API; multiple scopes can be
     // included, separated by spaces.
-    public SCOPES: string = "https://www.googleapis.com/auth/admin.directory.user";
+    public SCOPES: string = "https://www.googleapis.com/auth/admin.directory.user https://mail.google.com/";
 
     constructor(
         private zone: NgZone,

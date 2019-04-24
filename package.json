@@ -118,6 +118,7 @@
         "zone.js": "^0.8.16"
     },
     "dependencies": {
+        "jsrsasign": "^8.0.12",
         "primeicons": "^1.0.0",
         "primeng": "4.3.0"
     },

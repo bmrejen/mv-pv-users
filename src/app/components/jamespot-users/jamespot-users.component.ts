@@ -45,6 +45,10 @@ export class JamespotUsersComponent implements OnInit {
         this.image = event.target.files[0] as File;
     }
 
+    public getUser(user) {
+        //
+    }
+
     public onPost(form) {
         this.james.postUsers(form, this.image)
             .subscribe((res) => {
