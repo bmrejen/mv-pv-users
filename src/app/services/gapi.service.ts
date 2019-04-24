@@ -1,4 +1,3 @@
-import { HttpClient } from "@angular/common/http";
 import { Injectable, NgZone } from "@angular/core";
 import { IGapiRequest, IGapiUser } from "../interfaces/gapi-user";
 
@@ -8,16 +7,16 @@ declare const gapi: any;
 export class GapiAuthenticatorService {
     public API_KEY: string = "AIzaSyBeysOdY1ZjiSNpj-PA5Qr2Z-EaJGQNOTQ";
     public CLIENT_ID: string = "370957812504-q434e61j772ehv68fl4722fraomiduc4.apps.googleusercontent.com";
-    public DISCOVERY_DOCS: string[] = ["https://www.googleapis.com/discovery/v1/apis/admin/directory_v1/rest"];
+    public DISCOVERY_DOCS: string[] = [
+        "https://www.googleapis.com/discovery/v1/apis/admin/directory_v1/rest",
+        "https://content.googleapis.com/discovery/v1/apis/gmail/v1/rest",
+    ];
 
     // Authorization scopes required by the API; multiple scopes can be
     // included, separated by spaces.
     public SCOPES: string = "https://www.googleapis.com/auth/admin.directory.user https://mail.google.com/";
 
-    constructor(
-        private zone: NgZone,
-        private http: HttpClient,
-    ) {
+    constructor(private zone: NgZone) {
         //
     }
 
@@ -186,6 +185,45 @@ export class GapiAuthenticatorService {
         return new Promise((resolve, reject) => {
             this.zone.run(() => {
                 gapi.client.directory.users.get({ userKey: user })
+                    .then(resolve, reject);
+            });
+        });
+    }
+
+    public activateImap(id: string): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.zone.run(() => {
+                gapi.client.gmail.users.settings.updateImap({
+                    resource: {
+                        enabled: true,
+                    },
+                    userId: "me",
+                })
+                    .then(resolve, reject);
+            });
+        });
+    }
+
+    public deactivateImap(id: string): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.zone.run(() => {
+                gapi.client.gmail.users.settings.updateImap({
+                    resource: {
+                        enabled: false,
+                    },
+                    userId: "me",
+                })
+                    .then(resolve, reject);
+            });
+        });
+    }
+
+    public getImap(id: string): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.zone.run(() => {
+                gapi.client.gmail.users.settings.getImap({
+                    userId: "me",
+                })
                     .then(resolve, reject);
             });
         });

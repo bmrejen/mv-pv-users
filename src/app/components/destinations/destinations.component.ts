@@ -1,37 +1,35 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { ControlContainer, NgForm } from "@angular/forms";
-import { FieldsService } from "../../services/fields.service";
 
 import { Destination } from "../../models/destination";
-import { Fields } from "../../models/fields";
 
 @Component({
-  selector: "mv-destinations",
-  styleUrls: ["./destinations.component.css"],
-  templateUrl: "./destinations.component.html",
-  viewProviders: [
-  {
-    provide: ControlContainer,
-    useExisting: NgForm,
-  },
-  ],
+    selector: "mv-destinations",
+    styleUrls: ["./destinations.component.css"],
+    templateUrl: "./destinations.component.html",
+    viewProviders: [
+        {
+            provide: ControlContainer,
+            useExisting: NgForm,
+        },
+    ],
 })
 
-export class DestinationsComponent implements OnInit {
-  @Input() public destinations: Destination[];
+export class DestinationsComponent {
+    @Input() public destinations: Destination[];
+    @Input() public currentUser;
 
-  constructor(private fieldsService: FieldsService) {
-    //
-  }
+    public handleClick(dest: Destination): void {
+        if (!this.currentUser.destinations.includes(dest.id)) {
+            this.currentUser.destinations.push(dest.id);
+        } else {
+            const index = this.currentUser.destinations.indexOf(dest.id);
+            this.currentUser.destinations.splice(index, 1);
+        }
+    }
 
-  public ngOnInit(): void {
-    //
-  }
-
-  public trackByFn(index, item) {
-    const self = this;
-
-    return item.id; // or index
-  }
+    public trackByFn(item) {
+        return item.id;
+    }
 
 }

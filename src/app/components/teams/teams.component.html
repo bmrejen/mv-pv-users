@@ -1,14 +1,19 @@
-<fieldset class="blue" *ngIf = "teams != null">
-  <legend>Teams</legend>
-  <div ngModelGroup="teams" class="teams">
-    <div *ngFor="let team of teams ; trackBy: trackByFn">
-      <label>
-        <input
-        type="checkbox"
-        [(ngModel)]="team.checked"
-        [name]="team.id"
-        >{{ team.name }}
-      </label>
+<fieldset
+    class="blue"
+    *ngIf="teams != null"
+>
+    <legend>Teams</legend>
+    <div
+        ngModelGroup="teams"
+        class="teams"
+    >
+        <div *ngFor="let team of teams ; trackBy: trackByFn">
+            <label>
+                <input
+                    type="checkbox"
+                    (click)="handleClick(team)"
+                >{{ team.name }}
+            </label>
+        </div>
     </div>
-  </div>
 </fieldset>

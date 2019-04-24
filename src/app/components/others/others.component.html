@@ -1,14 +1,19 @@
-<fieldset class="blue" *ngIf = "others != null">
-  <legend>Others</legend>
-  <div ngModelGroup="others" class="others">
-    <div *ngFor="let other of others ; trackBy: trackByFn">
-      <label>
-        <input
-        type="checkbox"
-        [(ngModel)]="other.checked"
-        [name]="other.id"
-        >{{ other.label }}
-      </label>
+<fieldset
+    class="blue"
+    *ngIf="others != null"
+>
+    <legend>Others</legend>
+    <div
+        ngModelGroup="others"
+        class="others"
+    >
+        <div *ngFor="let other of others ; trackBy: trackByFn">
+            <label>
+                <input
+                    type="checkbox"
+                    (click)="handleClick(other)"
+                >{{ other.label }}
+            </label>
+        </div>
     </div>
-  </div>
 </fieldset>

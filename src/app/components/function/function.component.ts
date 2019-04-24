@@ -1,36 +1,23 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { ControlContainer, NgForm } from "@angular/forms";
-import { FieldsService } from "../../services/fields.service";
-
-import { Fields } from "../../models/fields";
 
 @Component({
-  selector: "mv-function",
-  templateUrl: "./function.component.html",
-  viewProviders: [
-  {
-    provide: ControlContainer,
-    useExisting: NgForm,
-  },
-  ],
+    selector: "mv-function",
+    templateUrl: "./function.component.html",
+    viewProviders: [
+        {
+            provide: ControlContainer,
+            useExisting: NgForm,
+        },
+    ],
 })
 
-export class FunctionComponent implements OnInit {
-  @Input() public functions;
-  @Input() public selectedFunction;
+export class FunctionComponent {
+    @Input() public functions;
+    @Input() public currentUser;
 
-  constructor(private fieldsService: FieldsService) {
-    //
-  }
-
-  public ngOnInit(): void {
-    //
-  }
-
-  public trackByFn(index, item) {
-    const self = this;
-
-    return item.id; // or index
-  }
+    public trackByFn(item) {
+        return item.id;
+    }
 
 }

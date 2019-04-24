@@ -1,7 +1,13 @@
-<div *ngIf = "offices != null">Office
-  <select [(ngModel)]="selectedOffice" name="office">
-    <option *ngFor="let office of offices ; trackBy: trackByFn" [value]="office.value">
-      {{ office.label }}
-    </option>
-  </select>
+<div *ngIf="offices != null">Office
+    <select
+        [(ngModel)]="currentUser.officeId"
+        name="office"
+    >
+        <option
+            *ngFor="let office of offices ; trackBy: trackByFn"
+            [value]="office.value"
+        >
+            {{ office.label }}
+        </option>
+    </select>
 </div>

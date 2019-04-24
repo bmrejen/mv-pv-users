@@ -1,33 +1,58 @@
-<fieldset class="blue" *ngIf = "1 != null">
-  <legend>Switchvox</legend>
+<fieldset
+    class="blue"
+    *ngIf="1 != null"
+>
+    <legend>Switchvox</legend>
 
-  <div>
-    <label>Phone Number
-      <input name="phone_number" type="tel" [(ngModel)]="phoneNumber">
-    </label>
-  </div>
+    <div>
+        <label>Phone Number (phoneWork)
+            <input
+                name="phoneWork"
+                type="tel"
+                [(ngModel)]="currentUser.phoneWork"
+            >
+        </label>
+    </div>
 
-  <div>
-    <label>Extension
-      <input name="extension" type="tel" [(ngModel)]="phoneExtension">
-    </label>
-  </div>
+    <div>
+        <label>Extension (phoneAsterisk)
+            <input
+                name="phoneAsterisk"
+                type="tel"
+                [(ngModel)]="currentUser.phoneAsterisk"
+            >
+        </label>
+    </div>
 
-  <div>
-    <label>
-      <input type="checkbox" [(ngModel)]="codevad" name="codevad">Téléphonie a distance
-    </label>
-  </div>
+    <div>
+        Téléphonie a distance
+        <select
+            name="swTelephony"
+            [(ngModel)]="currentUser.swTelephony"
+        >
+            <option value="false">Non</option>
+            <option value="true">Oui</option>
+        </select>
+    </div>
 
-  <div>
-    <label>
-      <input type="checkbox" [(ngModel)]="outbound" name="outbound">Click to call
-    </label>
-  </div>
-
-  <div>
-    <label>
-      <input type="checkbox" [(ngModel)]="inbound" name="inbound">Notifications appels entrants
-    </label>
-  </div>
+    <div>
+        Click to call
+        <select
+            name="swClickToCall"
+            [(ngModel)]="currentUser.swClickToCall"
+        >
+            <option value="0">Non</option>
+            <option value="1">Oui</option>
+        </select>
+    </div>
+    <div>
+        Notifications appels entrants
+        <select
+            name="swCallNotification"
+            [(ngModel)]="currentUser.swCallNotification"
+        >
+            <option value="0">Non</option>
+            <option value="1">Oui</option>
+        </select>
+    </div>
 </fieldset>

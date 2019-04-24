@@ -1,430 +1,204 @@
 {
-  "data" :
-  [
-    {
-      "checked": false,
-      "id": "others-Admin Devis Cotation",
-      "label": "Admin Devis Cotation"
-    },
-    {
-      "checked": false,
-      "id": "others-Afrique",
-      "label": "Afrique"
-    },
-    {
-      "checked": false,
-      "id": "others-AfriqueDuSud",
-      "label": "AfriqueDuSud"
-    },
-    {
-      "checked": false,
-      "id": "others-Argentine",
-      "label": "Argentine"
-    },
-    {
-      "checked": false,
-      "id": "others-Australie",
-      "label": "Australie"
-    },
-    {
-      "checked": false,
-      "id": "others-Aventure",
-      "label": "Aventure"
-    },
-    {
-      "checked": false,
-      "id": "others-BackOffice",
-      "label": "BackOffice"
-    },
-    {
-      "checked": false,
-      "id": "others-Backoffice Manager",
-      "label": "Backoffice Manager"
-    },
-    {
-      "checked": false,
-      "id": "others-Bahamas",
-      "label": "Bahamas"
-    },
-    {
-      "checked": false,
-      "id": "others-Bali",
-      "label": "Bali"
-    },
-    {
-      "checked": false,
-      "id": "others-Birmanie",
-      "label": "Birmanie"
-    },
-    {
-      "checked": false,
-      "id": "others-Bresil",
-      "label": "Bresil"
-    },
-    {
-      "checked": false,
-      "id": "others-Canada",
-      "label": "Canada"
-    },
-    {
-      "checked": false,
-      "id": "others-Chili",
-      "label": "Chili"
-    },
-    {
-      "checked": false,
-      "id": "others-Chine",
-      "label": "Chine"
-    },
-    {
-      "checked": false,
-      "id": "others-Coree",
-      "label": "Coree"
-    },
-    {
-      "checked": false,
-      "id": "others-CostaRica",
-      "label": "CostaRica"
-    },
-    {
-      "checked": false,
-      "id": "others-Cuba",
-      "label": "Cuba"
-    },
-    {
-      "checked": false,
-      "id": "others-Devis Cotation",
-      "label": "Devis Cotation"
-    },
-    {
-      "checked": false,
-      "id": "others-Devis Simplifié",
-      "label": "Devis Simplifié"
-    },
-    {
-      "checked": false,
-      "id": "others-Devis V2",
-      "label": "Devis V2"
-    },
-    {
-      "checked": false,
-      "id": "others-Devis V3",
-      "label": "Devis V3"
-    },
-    {
-      "checked": false,
-      "id": "others-France",
-      "label": "France"
-    },
-    {
-      "checked": false,
-      "id": "others-Global",
-      "label": "Global"
-    },
-    {
-      "checked": false,
-      "id": "others-Inde",
-      "label": "Inde"
-    },
-    {
-      "checked": false,
-      "id": "others-Indonesie",
-      "label": "Indonesie"
-    },
-    {
-      "checked": false,
-      "id": "others-Iran",
-      "label": "Iran"
-    },
-    {
-      "checked": false,
-      "id": "others-Islande",
-      "label": "Islande"
-    },
-    {
-      "checked": false,
-      "id": "others-Japan",
-      "label": "Japan"
-    },
-    {
-      "checked": false,
-      "id": "others-Japon",
-      "label": "Japon"
-    },
-    {
-      "checked": false,
-      "id": "others-Kenya",
-      "label": "Kenya"
-    },
-    {
-      "checked": false,
-      "id": "others-Madagascar",
-      "label": "Madagascar"
-    },
-    {
-      "checked": false,
-      "id": "others-Malaisie",
-      "label": "Malaisie"
-    },
-    {
-      "checked": false,
-      "id": "others-Malaysia",
-      "label": "Malaysia"
-    },
-    {
-      "checked": false,
-      "id": "others-Maldives",
-      "label": "Maldives"
-    },
-    {
-      "checked": false,
-      "id": "others-Manager",
-      "label": "Manager"
-    },
-    {
-      "checked": false,
-      "id": "others-MarcoVasco",
-      "label": "MarcoVasco"
-    },
-    {
-      "checked": false,
-      "id": "others-Maurice",
-      "label": "Maurice"
-    },
-    {
-      "checked": false,
-      "id": "others-Mexique",
-      "label": "Mexique"
-    },
-    {
-      "checked": false,
-      "id": "others-Mongolie",
-      "label": "Mongolie"
-    },
-    {
-      "checked": false,
-      "id": "others-MoyenOrient",
-      "label": "MoyenOrient"
-    },
-    {
-      "checked": false,
-      "id": "others-Namibie",
-      "label": "Namibie"
-    },
-    {
-      "checked": false,
-      "id": "others-Noces",
-      "label": "Noces"
-    },
-    {
-      "checked": false,
-      "id": "others-NouvelleZelande",
-      "label": "NouvelleZelande"
-    },
-    {
-      "checked": false,
-      "id": "others-Ouzbekistan",
-      "label": "Ouzbekistan"
-    },
-    {
-      "checked": false,
-      "id": "others-Perou",
-      "label": "Perou"
-    },
-    {
-      "checked": false,
-      "id": "others-Philippines",
-      "label": "Philippines"
-    },
-    {
-      "checked": false,
-      "id": "others-Polynesie",
-      "label": "Polynesie"
-    },
-    {
-      "checked": false,
-      "id": "others-Questionnaire V3",
-      "label": "Questionnaire V3"
-    },
-    {
-      "checked": false,
-      "id": "others-RD",
-      "label": "RD"
-    },
-    {
-      "checked": false,
-      "id": "others-Reservation",
-      "label": "Reservation"
-    },
-    {
-      "checked": false,
-      "id": "others-ROLE - Affaire Validation",
-      "label": "ROLE - Affaire Validation"
-    },
-    {
-      "checked": false,
-      "id": "others-ROLE - BI Validation",
-      "label": "ROLE - BI Validation"
-    },
-    {
-      "checked": false,
-      "id": "others-ROLE - Conciergerie",
-      "label": "ROLE - Conciergerie"
-    },
-    {
-      "checked": false,
-      "id": "others-ROLE - Create Provider",
-      "label": "ROLE - Create Provider"
-    },
-    {
-      "checked": false,
-      "id": "others-ROLE - Dashlet assurances",
-      "label": "ROLE - Dashlet assurances"
-    },
-    {
-      "checked": false,
-      "id": "others-ROLE - Exclude review from NPS",
-      "label": "ROLE - Exclude review from NPS"
-    },
-    {
-      "checked": false,
-      "id": "others-ROLE - Fid",
-      "label": "ROLE - Fid"
-    },
-    {
-      "checked": false,
-      "id": "others-ROLE - Formation",
-      "label": "ROLE - Formation"
-    },
-    {
-      "checked": false,
-      "id": "others-ROLE - Import OBJ",
-      "label": "ROLE - Import OBJ"
-    },
-    {
-      "checked": false,
-      "id": "others-ROLE - Paiement Manuel",
-      "label": "ROLE - Paiement Manuel"
-    },
-    {
-      "checked": false,
-      "id": "others-ROLE - Production",
-      "label": "ROLE - Production"
-    },
-    {
-      "checked": false,
-      "id": "others-ROLE - Reservation",
-      "label": "ROLE - Reservation"
-    },
-    {
-      "checked": false,
-      "id": "others-ROLE - Update Deposite Rate",
-      "label": "ROLE - Update Deposite Rate"
-    },
-    {
-      "checked": false,
-      "id": "others-ROLE - ViewGDPR",
-      "label": "ROLE - ViewGDPR"
-    },
-    {
-      "checked": false,
-      "id": "others-ROLE - View Incentive Tracker",
-      "label": "ROLE - View Incentive Tracker"
-    },
-    {
-      "checked": false,
-      "id": "others-ROLE - View Leads M",
-      "label": "ROLE - View Leads M"
-    },
-    {
-      "checked": false,
-      "id": "others-ROLE - View OBJ",
-      "label": "ROLE - View OBJ"
-    },
-    {
-      "checked": false,
-      "id": "others-ROLE - View PPV",
-      "label": "ROLE - View PPV"
-    },
-    {
-      "checked": false,
-      "id": "others-ROLE - View Product Feeds",
-      "label": "ROLE - View Product Feeds"
-    },
-    {
-      "checked": false,
-      "id": "others-ROLE - ViewRCM",
-      "label": "ROLE - ViewRCM"
-    },
-    {
-      "checked": false,
-      "id": "others-ROLE - View RCQ",
-      "label": "ROLE - View RCQ"
-    },
-    {
-      "checked": false,
-      "id": "others-ROLE - View RM",
-      "label": "ROLE - View RM"
-    },
-    {
-      "checked": false,
-      "id": "others-ROLE - ViewSEO",
-      "label": "ROLE - ViewSEO"
-    },
-    {
-      "checked": false,
-      "id": "others-ROLE - View SQ",
-      "label": "ROLE - View SQ"
-    },
-    {
-      "checked": false,
-      "id": "others-ROLE - View SQ Sales",
-      "label": "ROLE - View SQ Sales"
-    },
-    {
-      "checked": false,
-      "id": "others-SAV",
-      "label": "SAV"
-    },
-    {
-      "checked": false,
-      "id": "others-Seychelles",
-      "label": "Seychelles"
-    },
-    {
-      "checked": false,
-      "id": "others-Tanzanie",
-      "label": "Tanzanie"
-    },
-    {
-      "checked": false,
-      "id": "others-Team Manager",
-      "label": "Team Manager"
-    },
-    {
-      "checked": false,
-      "id": "others-Thailande",
-      "label": "Thailande"
-    },
-    {
-      "checked": false,
-      "id": "others-Usa",
-      "label": "Usa"
-    },
-    {
-      "checked": false,
-      "id": "others-Ventes",
-      "label": "Ventes"
-    },
-    {
-      "checked": false,
-      "id": "others-Vietnam",
-      "label": "Vietnam"
-    },
-    {
-      "checked": false,
-      "id": "others-XTest",
-      "label": "XTest"
-    }
-  ]
+    "data": [
+        {
+            "checked": false,
+            "id": "others-Admin Devis Cotation",
+            "label": "Admin Devis Cotation"
+        },
+        {
+            "checked": false,
+            "id": "others-BackOffice",
+            "label": "BackOffice"
+        },
+        {
+            "checked": false,
+            "id": "others-Backoffice Manager",
+            "label": "Backoffice Manager"
+        },
+        {
+            "checked": false,
+            "id": "others-Devis Cotation",
+            "label": "Devis Cotation"
+        },
+        {
+            "checked": false,
+            "id": "others-Devis Simplifié",
+            "label": "Devis Simplifié"
+        },
+        {
+            "checked": false,
+            "id": "others-Devis V2",
+            "label": "Devis V2"
+        },
+        {
+            "checked": false,
+            "id": "others-Devis V3",
+            "label": "Devis V3"
+        },
+        {
+            "checked": false,
+            "id": "others-Global",
+            "label": "Global"
+        },
+        {
+            "checked": false,
+            "id": "others-Manager",
+            "label": "Manager"
+        },
+        {
+            "checked": false,
+            "id": "others-Questionnaire V3",
+            "label": "Questionnaire V3"
+        },
+        {
+            "checked": false,
+            "id": "others-RD",
+            "label": "RD"
+        },
+        {
+            "checked": false,
+            "id": "others-Reservation",
+            "label": "Reservation"
+        },
+        {
+            "checked": false,
+            "id": "others-ROLE - Affaire Validation",
+            "label": "ROLE - Affaire Validation"
+        },
+        {
+            "checked": false,
+            "id": "others-ROLE - BI Validation",
+            "label": "ROLE - BI Validation"
+        },
+        {
+            "checked": false,
+            "id": "others-ROLE - Conciergerie",
+            "label": "ROLE - Conciergerie"
+        },
+        {
+            "checked": false,
+            "id": "others-ROLE - Create Provider",
+            "label": "ROLE - Create Provider"
+        },
+        {
+            "checked": false,
+            "id": "others-ROLE - Dashlet assurances",
+            "label": "ROLE - Dashlet assurances"
+        },
+        {
+            "checked": false,
+            "id": "others-ROLE - Exclude review from NPS",
+            "label": "ROLE - Exclude review from NPS"
+        },
+        {
+            "checked": false,
+            "id": "others-ROLE - Fid",
+            "label": "ROLE - Fid"
+        },
+        {
+            "checked": false,
+            "id": "others-ROLE - Formation",
+            "label": "ROLE - Formation"
+        },
+        {
+            "checked": false,
+            "id": "others-ROLE - Import OBJ",
+            "label": "ROLE - Import OBJ"
+        },
+        {
+            "checked": false,
+            "id": "others-ROLE - Paiement Manuel",
+            "label": "ROLE - Paiement Manuel"
+        },
+        {
+            "checked": false,
+            "id": "others-ROLE - Production",
+            "label": "ROLE - Production"
+        },
+        {
+            "checked": false,
+            "id": "others-ROLE - Reservation",
+            "label": "ROLE - Reservation"
+        },
+        {
+            "checked": false,
+            "id": "others-ROLE - Update Deposite Rate",
+            "label": "ROLE - Update Deposite Rate"
+        },
+        {
+            "checked": false,
+            "id": "others-ROLE - ViewGDPR",
+            "label": "ROLE - ViewGDPR"
+        },
+        {
+            "checked": false,
+            "id": "others-ROLE - View Incentive Tracker",
+            "label": "ROLE - View Incentive Tracker"
+        },
+        {
+            "checked": false,
+            "id": "others-ROLE - View Leads M",
+            "label": "ROLE - View Leads M"
+        },
+        {
+            "checked": false,
+            "id": "others-ROLE - View OBJ",
+            "label": "ROLE - View OBJ"
+        },
+        {
+            "checked": false,
+            "id": "others-ROLE - View PPV",
+            "label": "ROLE - View PPV"
+        },
+        {
+            "checked": false,
+            "id": "others-ROLE - View Product Feeds",
+            "label": "ROLE - View Product Feeds"
+        },
+        {
+            "checked": false,
+            "id": "others-ROLE - ViewRCM",
+            "label": "ROLE - ViewRCM"
+        },
+        {
+            "checked": false,
+            "id": "others-ROLE - View RCQ",
+            "label": "ROLE - View RCQ"
+        },
+        {
+            "checked": false,
+            "id": "others-ROLE - View RM",
+            "label": "ROLE - View RM"
+        },
+        {
+            "checked": false,
+            "id": "others-ROLE - ViewSEO",
+            "label": "ROLE - ViewSEO"
+        },
+        {
+            "checked": false,
+            "id": "others-ROLE - View SQ",
+            "label": "ROLE - View SQ"
+        },
+        {
+            "checked": false,
+            "id": "others-ROLE - View SQ Sales",
+            "label": "ROLE - View SQ Sales"
+        },
+        {
+            "checked": false,
+            "id": "others-SAV",
+            "label": "SAV"
+        },
+        {
+            "checked": false,
+            "id": "others-Team Manager",
+            "label": "Team Manager"
+        },
+        {
+            "checked": false,
+            "id": "others-Ventes",
+            "label": "Ventes"
+        }
+    ]
 }

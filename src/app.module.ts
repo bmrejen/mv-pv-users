@@ -48,8 +48,8 @@ import { DestinationsResolverService } from "./app/resolvers/destinations-resolv
 import { FieldsResolverService } from "./app/resolvers/fields-resolver.service";
 import { ManagersResolverService } from "./app/resolvers/managers-resolver.service";
 import { RolesResolverService } from "./app/resolvers/roles-resolver.service";
+import { SugarResolverService } from "./app/resolvers/sugar-resolver.service";
 import { TeamsResolverService } from "./app/resolvers/teams-resolver.service";
-import { UserResolverService } from "./app/resolvers/user-resolver.service";
 import { UsersResolverService } from "./app/resolvers/users-resolver.service";
 
 import { FieldsService } from "./app/services/fields.service";
@@ -111,10 +111,10 @@ import "./app/rxjs-extensions";
         ManagersResolverService,
         ParserService,
         RolesResolverService,
+        SugarResolverService,
         SugarService,
         SwitchVoxService,
         TeamsResolverService,
-        UserResolverService,
         UsersResolverService,
         HttpClient,
         { provide: APP_BASE_HREF, useValue: "/" },

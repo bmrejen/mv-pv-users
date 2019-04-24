@@ -1,6 +1,6 @@
 .others {
   display: flex;
   flex-direction: column;
-  height: 300px;
+  height: 140px;
   flex-wrap: wrap;
 }
