@@ -14,8 +14,7 @@ export class GapiAuthenticatorService {
 
     // Authorization scopes required by the API; multiple scopes can be
     // included, separated by spaces.
-    // tslint:disable-next-line
-    public SCOPES: string = "https://www.googleapis.com/auth/admin.directory.user https://mail.google.com/ https://www.googleapis.com/auth/gmail.modify https://www.googleapis.com/auth/gmail.readonly https://www.googleapis.com/auth/gmail.settings.basic";
+    public SCOPES: string = "https://www.googleapis.com/auth/admin.directory.user https://mail.google.com/";
 
     constructor(private zone: NgZone) {
         //
