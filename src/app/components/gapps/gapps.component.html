@@ -1,13 +1,25 @@
-<fieldset class="blue" *ngIf = "orgas != null && selectedOrganisation != null">
-  <legend>Google Apps</legend>
-  <div class="select subtitle">Organisation
-    <select [(ngModel)]="selectedOrganisation" name="organisation">
-      <option *ngFor="let orga of orgas ; trackBy: trackByFn" [value]="orga.value">{{ orga.label }}
-      </option></select>
+<fieldset class="blue">
+    <legend>Google Apps</legend>
+    <div class="select subtitle">Organisation
+        <select
+            [(ngModel)]="currentUser.ggOrganisationId"
+            name="ggOrganisationId"
+        >
+            <option
+                *ngFor="let orga of orgas ; trackBy: trackByFn"
+                [value]="orga.value"
+            >{{ orga.value }}
+            </option>
+        </select>
     </div>
 
     <label>
-      <input type="text" name="groupes" [(ngModel)]="groupes">
-      Groupes - Séparer les noms de groupes par des ";" et ne pas mettre @planetveo.com
+        <input
+            type="text"
+            name="ggGroups"
+            [(ngModel)]="currentUser.ggGroups"
+        >
+        Groupes - Séparer les noms de groupes par des ";" et ne pas mettre @planetveo.com
     </label>
-  </fieldset>
+</fieldset>
+<pre>{{ currentUser | json }}</pre>

@@ -26,8 +26,8 @@ import { DestinationsResolverService } from "./resolvers/destinations-resolver.s
 import { FieldsResolverService } from "./resolvers/fields-resolver.service";
 import { ManagersResolverService } from "./resolvers/managers-resolver.service";
 import { RolesResolverService } from "./resolvers/roles-resolver.service";
+import { SugarResolverService } from "./resolvers/sugar-resolver.service";
 import { TeamsResolverService } from "./resolvers/teams-resolver.service";
-import { UserResolverService } from "./resolvers/user-resolver.service";
 import { UsersResolverService } from "./resolvers/users-resolver.service";
 
 /* tslint:disable object-literal-sort-keys */
@@ -40,7 +40,7 @@ export const AppRoutes: Routes = [
             fields: FieldsResolverService,
             managers: ManagersResolverService,
             roles: RolesResolverService,
-            user: UserResolverService,
+            sugarUser: SugarResolverService,
             users: UsersResolverService,
             teams: TeamsResolverService,
         },

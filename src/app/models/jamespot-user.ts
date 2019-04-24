@@ -1,47 +1,35 @@
-export class JamespotUser {
-    public Country: string = "fr";
-    public Firstname: string;
-    public Language: string = "fr";
-    public Lastname: string;
-    public Mail: string;
-    public Pseudo: string;
-    public Role: string = "User";
-    public idUser: string;
-    public img: string | File;
-    public active: string = "1";
-    public password: string;
-    public phoneExtension: string;
-    public timeZone: string = "Europe/Paris";
-    public company: string = "MARCO VASCO";
+import { IJamespotUser, IJamespotUserConfig } from "../interfaces/jamespot-api-response";
 
-    constructor(
-        Country,
-        Firstname,
-        Language,
-        Lastname,
-        Mail,
-        Pseudo,
-        Role,
-        active,
-        timeZone?,
-        phoneExtension?,
-        idUser?,
-        img?,
-        password?,
-        company?) {
-        this.Country = Country;
-        this.Firstname = Firstname;
-        this.Language = Language;
-        this.Lastname = Lastname;
-        this.Mail = Mail;
-        this.Pseudo = Pseudo;
-        this.Role = Role;
-        this.idUser = idUser;
-        this.img = img;
-        this.active = active;
-        this.password = password;
-        this.phoneExtension = phoneExtension;
-        this.timeZone = timeZone;
-        this.company = company;
+export class JamespotUser implements IJamespotUser {
+    public jamesCountry: string = "fr";
+    public jamesFirstname: string;
+    public jamesLanguage: string = "fr";
+    public jamesLastname: string;
+    public jamesMail: string;
+    public jamesUsername: string;
+    public jamesRole: string = "User";
+    public jamesIdUser: string;
+    public jamesImg: string | File;
+    public jamesActive: string = "1";
+    public jamesPassword: string;
+    public jamesPhoneExtension: string;
+    public jamesTimeZone: string = "Europe/Paris";
+    public jamesCompany: string = "MARCO VASCO";
+
+    constructor(user: IJamespotUserConfig) {
+        this.jamesCountry = user.country || this.jamesCountry;
+        this.jamesFirstname = user.firstname || this.jamesFirstname;
+        this.jamesLanguage = user.language || this.jamesLanguage;
+        this.jamesLastname = user.lastname || this.jamesLastname;
+        this.jamesMail = user.mail || this.jamesMail;
+        this.jamesUsername = user.username || this.jamesUsername;
+        this.jamesRole = user.role || this.jamesRole;
+        this.jamesIdUser = user.idUser || this.jamesIdUser;
+        this.jamesImg = user.img || this.jamesImg;
+        this.jamesActive = user.active || this.jamesActive;
+        this.jamesPassword = user.password || this.jamesPassword;
+        this.jamesPhoneExtension = user.phoneExtension || this.jamesPhoneExtension;
+        this.jamesTimeZone = user.timeZone || this.jamesTimeZone;
+        this.jamesCompany = user.company || this.jamesCompany;
     }
 }

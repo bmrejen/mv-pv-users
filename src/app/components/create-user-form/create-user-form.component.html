@@ -7,77 +7,66 @@
 
     <ng-container *ngIf="fields != null">
         <mv-accounts [accounts]="fields.accounts"></mv-accounts>
-        <mv-credentials
-            [currentUser]="currentUser"
-            [civilites]="fields.civilites"
-            [userFields]="fields.userFields"
-            [usersFromSugar]="usersFromSugar"
-        ></mv-credentials>
 
-        <mv-phones [currentUser]="currentUser"></mv-phones>
+        <div class="grid-container">
+            <mv-credentials
+                [currentUser]="currentUser"
+                [civilites]="fields.civilites"
+                [userFields]="fields.userFields"
+                [usersFromSugar]="usersFromSugar"
+                class="credentials"
+            ></mv-credentials>
 
+            <mv-phones
+                [currentUser]="currentUser"
+                class="phones"
+            ></mv-phones>
+            <mv-jamespot
+                class="jamespot"
+                [currentUser]="currentUser"
+            ></mv-jamespot>
+        </div>
         <mv-profiles
-            [title]="fields.title"
-            [selectedOrganisation]="fields.selectedOrganisation"
+            [currentUser]="currentUser"
             [selectedFunction]="fields.selectedFunction"
             [selectedOffice]="fields.selectedOffice"
-            [phoneNumber]="fields.phoneNumber"
-            [phoneExtension]="fields.phoneExtension"
-            [outbound]="fields.outbound"
-            [inbound]="fields.inbound"
-            [groupes]="fields.groupes"
-            [codevad]="fields.codevad"
-            [codeTourplan]="fields.codeTourplan"
-            [codeSON]="fields.codeSON"
-            [destinations]="destinations"
-            [teams]="teams"
             [roles]="roles"
-            [currentUser]="currentUser"
-            [inactiveStatus]="fields.inactiveStatus"
-            [inactiveEmployee]="fields.inactiveEmployee"
-            [selectedManager]="fields.selectedManager"
-            [others]="fields.others"
-            [orgas]="fields.orgas"
-            [userValue]="fields.userValue"
             [userTemplates]="fields.userTemplates"
             [departments]="fields.departments"
+            [orgas]="fields.orgas"
+            [others]="fields.others"
         ></mv-profiles>
 
         <mv-office
             [offices]="fields.offices"
-            [selectedOffice]="fields.selectedOffice"
+            [currentUser]="currentUser"
         ></mv-office>
         <mv-function
             [functions]="fields.functions"
-            [selectedFunction]="fields.selectedFunction"
+            [currentUser]="currentUser"
         ></mv-function>
         <mv-manager
             [managers]="managers"
-            [selectedManager]="fields.selectedManager"
+            [currentUser]="currentUser"
         ></mv-manager>
 
-        <mv-destinations [destinations]="destinations"></mv-destinations>
-        <mv-teams [teams]="teams"></mv-teams>
-        <mv-others [others]="fields.others"></mv-others>
-        <mv-extraneous
-            [codeTourplan]="fields.codeTourplan"
-            [codeSON]="fields.codeSON"
-            [title]="fields.title"
-            [inactiveEmployee]="fields.inactiveEmployee"
-            [inactiveStatus]="fields.inactiveStatus"
+        <mv-destinations
+            [destinations]="destinations"
             [currentUser]="currentUser"
-        ></mv-extraneous>
-        <mv-switchvox
-            [phoneNumber]="fields.phoneNumber"
-            [phoneExtension]="fields.phoneExtension"
-            [codevad]="fields.codevad"
-            [outbound]="fields.outbound"
-            [inbound]="fields.inbound"
-        ></mv-switchvox>
+        ></mv-destinations>
+        <mv-teams
+            [currentUser]="currentUser"
+            [teams]="teams"
+        ></mv-teams>
+        <mv-others
+            [others]="fields.others"
+            [currentUser]="currentUser"
+        ></mv-others>
+        <mv-extraneous [currentUser]="currentUser"></mv-extraneous>
+        <mv-switchvox [currentUser]="currentUser"></mv-switchvox>
         <mv-gapps
+            [currentUser]="currentUser"
             [orgas]="fields.orgas"
-            [selectedOrganisation]="fields.selectedOrganisation"
-            [groupes]="fields.groupes"
         ></mv-gapps>
 
         <div *ngIf="errorMsg">ERROR: {{ errorMsg }}</div>

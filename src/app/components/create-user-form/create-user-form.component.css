@@ -1,3 +1,11 @@
-/* pre {
-  white-space: pre-wrap;
-} */
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+
+.credentials { grid-area: 1 / 1 / 2 / 2; }
+
+.phones { grid-area: 2 / 1 / 3 / 2; }
+
+.jamespot { grid-area: 1 / 2 / 3 / 3; }
