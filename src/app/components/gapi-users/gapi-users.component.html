@@ -25,6 +25,8 @@
             [(ngModel)]="userToGet"
         >
         <button (click)="getUser(userToGet)">Get</button>
+        <span *ngIf="isAlias">THIS EMAIL IS AN ALIAS OF {{ currentUser.primaryEmail | uppercase }}</span>
+        <span *ngIf="isAlias === false">Email belongs to real account</span>
         <hr>
 
 
