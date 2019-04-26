@@ -83,10 +83,8 @@ export class GapiAuthenticatorService {
     }
 
     public postUser(user): Promise<any> {
-        console.log("user in service", user);
-
-        if (user != null && user.givenName != null) {
-            const email = `${user.givenName[0]}${user.familyName}@${user.primaryEmail}`;
+        if (user.familyName != null && user.givenName != null) {
+            const email = `${user.givenName[0]}${user.familyName}@planetveo.com`;
 
             return new Promise((resolve, reject) => {
                 this.zone.run(() => {
@@ -108,7 +106,6 @@ export class GapiAuthenticatorService {
     }
 
     public updateUser(user: IGapiUser, oldUser: IGapiUser): Promise<any> {
-        console.log("old user", oldUser);
         const myObj: IGapiRequest = {
             resource: {},
             userKey: oldUser.id,
@@ -119,11 +116,9 @@ export class GapiAuthenticatorService {
 
                 switch (key) {
                     case "id":
-                        // do not update id
-                        break;
-                    case "primaryEmailSuffix":
-                        // do not update primaryEmailSuffix
-                        delete myObj[key];
+                    case "sendAs":
+                    case "signature":
+                        // do not update id. sendAs or signature will be updated in Gmail service
                         break;
                     case "familyName":
                         if (user[key] !== oldUser[key]) {
@@ -152,6 +147,7 @@ export class GapiAuthenticatorService {
                             myObj.resource["orgUnitPath"] = user[key];
                             delete myObj[key];
                         }
+                        break;
                     default:
                         if (user[key] !== oldUser[key]) {
                             myObj.resource[key] = user[key];
@@ -160,7 +156,6 @@ export class GapiAuthenticatorService {
                 }
             }
         }
-        console.log("objet a poster:", myObj);
 
         return new Promise((resolve, reject) => {
             this.zone.run(() => {
@@ -168,6 +163,60 @@ export class GapiAuthenticatorService {
                     .then(resolve, reject);
             });
         });
+    }
+
+    public updateGmailSendAs(user: IGapiUser, oldUser: IGapiUser): Promise<any> {
+        const body = {};
+
+        //  If signature has been modified
+        if (user.signature !== oldUser.signature) {
+            body["signature"] = user.signature;
+        }
+
+        // If alias has been modified
+        if (user.sendAs !== oldUser.sendAs) {
+
+            const newSendAsEmail = `${user.primaryEmail.split("@")[0]}@${user.sendAs}`;
+            body["displayName"] = `${user.givenName} ${user.familyName}`;
+            body["isDefault"] = true;
+            body["sendAsEmail"] = newSendAsEmail;
+            body["treatAsAlias"] = true;
+
+            // Check if user already has this alias available
+            if (user.aliases.find((alias) => alias.sendAsEmail === newSendAsEmail) === undefined) {
+                // Create the alias if needed
+                return this.createNewAlias(newSendAsEmail, body);
+            } else {
+                return this.updateAlias(newSendAsEmail, body);
+            }
+        }
+
+        if (user.signature === oldUser.signature && user.sendAs === oldUser.sendAs) {
+            return new Promise((resolve, reject) => reject("Alias and signature unchanged"));
+        }
+    }
+
+    public updateAlias(email, body) {
+        return this.createToken(email)
+            .then(() => {
+                const url = `https://www.googleapis.com/gmail/v1/users/me/settings/sendAs/${email}`;
+                const headers = new HttpHeaders({ Authorization: `Bearer ${this.accessToken}` });
+
+                return this.http.put(url, body, { headers })
+                    .toPromise();
+            });
+    }
+
+    public createNewAlias(email, body) {
+
+        return this.createToken(email)
+            .then(() => {
+                const url = `https://www.googleapis.com/gmail/v1/users/me/settings/sendAs`;
+                const headers = new HttpHeaders({ Authorization: `Bearer ${this.accessToken}` });
+
+                return this.http.post(url, body, { headers })
+                    .toPromise();
+            });
     }
 
     public signIn(): Promise<any> {
@@ -243,11 +292,12 @@ export class GapiAuthenticatorService {
             exp: jwt.KJUR.jws.IntDate.get("now + 1hour"),
             iat: jwt.KJUR.jws.IntDate.get("now"),
             iss: "370957812504-m0eophjpraff16mbnloc330bq7jkm6up@developer.gserviceaccount.com",
-            scope: "https://mail.google.com/ https://www.googleapis.com/auth/admin.directory.user",
+            // tslint:disable-next-line
+            scope: "https://mail.google.com/ https://www.googleapis.com/auth/admin.directory.user https://www.googleapis.com/auth/gmail.settings.sharing https://www.googleapis.com/auth/gmail.settings.basic",
             sub: email,
         };
 
-        // Sign JWT, password=616161
+        // Sign JWT
         const sHeader = JSON.stringify(oHeader);
         const sPayload = JSON.stringify(oPayload);
 
@@ -264,7 +314,22 @@ export class GapiAuthenticatorService {
             .toPromise()
             .then((res) => {
                 this.accessToken = res["access_token"];
-                console.log("Email :\n", email, "\nAccess token :\n", this.accessToken);
+            });
+    }
+
+    public getUserAliases(email) {
+        return this.createToken(email)
+            .then((rep) => {
+                const url = `https://www.googleapis.com/gmail/v1/users/me/settings/sendAs`;
+                const headers = new HttpHeaders({ Authorization: `Bearer ${this.accessToken}` });
+
+                return this.http.get(url, { headers })
+                    .toPromise()
+                    .then((res) => {
+                        const aliases = res["sendAs"];
+
+                        return aliases;
+                    });
             });
     }
 
