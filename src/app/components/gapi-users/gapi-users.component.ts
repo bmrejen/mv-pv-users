@@ -26,6 +26,7 @@ export class GapiUsersComponent implements OnInit {
     public orgas;
     public message = null;
     public isAlias: boolean = null;
+    public googleGroups;
 
     public domains = Object.keys(Domains)
         .map((dom) => Domains[dom]);
@@ -120,6 +121,9 @@ export class GapiUsersComponent implements OnInit {
 
                             this.oldUser = { ...this.currentUser };
                         });
+                    this.gapiService.getGroups(email)
+                        .then((response) => this.googleGroups = response)
+                        .catch((err) => console.error(err));
                 }
             })
             .catch((err) => {
