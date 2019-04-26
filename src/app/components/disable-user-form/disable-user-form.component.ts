@@ -4,50 +4,52 @@ import { FieldsService } from "../../services/fields.service";
 import { SugarService } from "../../services/sugar.service";
 
 import { Fields } from "../../models/fields";
-import { User } from "../../models/user";
+import { SugarUser } from "../../models/sugar-user";
 
 @Component({
-  selector: "mv-app-disable-user-form",
-  styleUrls: ["./disable-user-form.css"],
-  templateUrl: "./disable-user-form.component.html",
+    selector: "mv-app-disable-user-form",
+    styleUrls: ["./disable-user-form.css"],
+    templateUrl: "./disable-user-form.component.html",
 })
 
 export class DisableUserFormComponent implements OnInit {
 
-  public fields: Fields;
-  public users: User[] = [];
-  public enableAdd: boolean = true;
-  public password: string;
-  public disableGoogle: boolean = false;
-  public changePassword: boolean = false;
-  public disableSugarAccount: boolean = false;
+    public fields: Fields;
+    public users: SugarUser[] = [];
+    public enableAdd: boolean = true;
+    public password: string;
+    public disableGoogle: boolean = false;
+    public changePassword: boolean = false;
+    public disableSugarAccount: boolean = false;
 
-  constructor(
-              private fieldsService: FieldsService,
-              private route: ActivatedRoute,
-              private sugar: SugarService) {
-    //
-  }
+    constructor(
+        private fieldsService: FieldsService,
+        private route: ActivatedRoute,
+        private sugar: SugarService) {
+        //
+    }
 
-  public ngOnInit(): void {
-    this.fieldsService.getData()
-    .then((res) => this.fields = new Fields(res[0]))
-    .then((res) => console.log(this.fields));
+    public ngOnInit(): void {
+        this.fieldsService.getData()
+            .then((res) => this.fields = new Fields(res))
+            .then((res) => console.log(this.fields))
+            .catch((err) => console.error(err));
 
-    this.sugar.getUsers()
-    .then((users) => users.forEach((user) => {
-      user["checked"] = false;
-      this.users.push(new User(user));
-    }))
+        this.sugar.getUsers()
+            .then((users) => users.forEach((user) => {
+                const userConfig = this.sugar.mapUserFromApi(user);
+                user["checked"] = false;
+                this.users.push(new SugarUser(userConfig));
+            }))
 
-    .then((res) => console.log("this.users", this.users));
+            .then((res) => console.log("this.users", this.users));
 
-    this.route.paramMap.subscribe((params) => (params));
+        this.route.paramMap.subscribe((params) => console.log(params));
 
-  }
+    }
 
-  public trackByFn(index, item) {
-    return item.id;
-  }
+    public trackByFn(index) {
+        return index;
+    }
 
 }
