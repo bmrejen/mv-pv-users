@@ -1,4 +1,4 @@
-<h1>Google / GMail</h1>
+<h1>Google</h1>
 
 <div>
     <div>API is loaded : {{ apiLoaded }}</div>
@@ -47,17 +47,6 @@
             [(ngModel)]="currentUser.password"
         >Password
         <br>
-
-        <select
-            name="sendAs"
-            [(ngModel)]="currentUser.sendAs"
-        >
-            <option
-                *ngFor="let dom of domains"
-                [value]="dom"
-            >{{ dom }}</option>
-        </select>Default Send-as email
-        <br>
         <select
             name="orgas"
             [(ngModel)]="currentUser.orgas"
@@ -68,13 +57,38 @@
             >{{ orga.value }}
             </option>
         </select>Orgas
-        <br>
-        <textarea
-            name="signature"
-            [(ngModel)]="currentUser.signature"
-            cols="30"
-            rows="10"
-        ></textarea>Signature
+        <div *ngIf="googleGroups != null">Google Groups
+            <div *ngFor="let group of googleGroups; trackBy: trackByFn">
+                <label>
+                    <input
+                        type="checkbox"
+                        (change)="pushGroupToUser(group)"
+                        [checked]="currentUser.googleGroups.includes(group)"
+                    >{{ group.name }}
+                </label>
+            </div>
+        </div>
+        <fieldset>
+            <legend>GMail</legend>
+            <select
+                name="sendAs"
+                [(ngModel)]="currentUser.sendAs"
+            >
+                <option
+                    *ngFor="let dom of domains"
+                    [value]="dom"
+                >{{ dom }}</option>
+            </select>Default Send-as email
+            <br>
+            Signature <br>
+            <textarea
+                name="signature"
+                [(ngModel)]="currentUser.signature"
+                cols="30"
+                rows="10"
+            ></textarea>
+        </fieldset>
+
         <hr>
 
         <div *ngIf="currentUser.id != null">

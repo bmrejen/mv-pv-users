@@ -42,7 +42,9 @@ export class GapiUsersComponent implements OnInit {
         this.resetForm();
         this.route.data
             .subscribe((data) => {
-                if (data.fields != null) { this.orgas = data.fields.orgas; }
+                if (data.fields != null) {
+                    this.orgas = data.fields.orgas;
+                }
             });
 
         this.gapiService.loadClient()
@@ -58,10 +60,29 @@ export class GapiUsersComponent implements OnInit {
                     .then((result: any) => {
                         if (this.isSignedIn()) {
                             this.userLoggedIn = result.currentUser.get().w3.ig;
+                            this.gapiService.getGroups()
+                                .then((response) => { this.googleGroups = response; console.log(response); });
                         }
                     })
                     .catch((err) => console.error("init auth client error", err));
             });
+
+    }
+
+    public pushGroupToUser(group) {
+        console.log(this.currentUser.googleGroups);
+        console.log(group);
+        console.log(this.currentUser.googleGroups.includes(group));
+
+        if (this.currentUser.googleGroups.includes(group)) {
+            const index = this.currentUser.googleGroups.indexOf(group);
+            this.currentUser.googleGroups.splice(index, 1);
+            console.log("group deleted", this.currentUser.googleGroups);
+
+        } else {
+            this.currentUser.googleGroups.push(group);
+            console.log("group added", this.currentUser.googleGroups);
+        }
     }
 
     public listUsers(): void {
@@ -99,6 +120,7 @@ export class GapiUsersComponent implements OnInit {
         this.gapiService.getUser(this.userToGet)
             .then((res) => {
                 if (res["result"] != null && res["result"].name != null) {
+                    console.log(res);
                     const email = res["result"].primaryEmail;
 
                     this.currentUser.givenName = res["result"].name.givenName;
@@ -108,8 +130,13 @@ export class GapiUsersComponent implements OnInit {
                     this.currentUser.orgas = res["result"].orgUnitPath;
                     this.currentUser.primaryEmail = email;
 
-                    this.getImap(this.userToGet);
                     this.isAlias = this.gapiService.isAlias(email, this.userToGet, res);
+                    this.gapiService.getGroups(email)
+                        .then((response) => {
+                            response.forEach((group) => {
+                                this.pushGroupToUser(group);
+                            });
+                        });
 
                     this.gapiService.getUserAliases(email)
                         .then((response) => {
@@ -121,9 +148,6 @@ export class GapiUsersComponent implements OnInit {
 
                             this.oldUser = { ...this.currentUser };
                         });
-                    this.gapiService.getGroups(email)
-                        .then((response) => this.googleGroups = response)
-                        .catch((err) => console.error(err));
                 }
             })
             .catch((err) => {
@@ -176,6 +200,7 @@ export class GapiUsersComponent implements OnInit {
             emails: null,
             familyName: null,
             givenName: null,
+            googleGroups: [],
             id: null,
             orgas: null,
             password: null,
@@ -184,23 +209,4 @@ export class GapiUsersComponent implements OnInit {
             signature: null,
         };
     }
-
-    public activateImap(id: string) {
-        // return this.gapiService.activateImap(id)
-        //     .then((res) => console.log("IMAP Activated", res))
-        //     .catch((err) => console.error("IMAP Activation error", err));
-    }
-
-    public getImap(id: string) {
-        // return this.gapiService.getImap(id)
-        //     .then((res) => console.log("IMAP settings", res))
-        //     .catch((err) => console.error("Error when getting IMAP", err));
-    }
-
-    public deactivateImap(id: string) {
-        // return this.gapiService.deactivateImap(id)
-        //     .then((res) => console.log("IMAP settings", res))
-        //     .catch((err) => console.error("Error when getting IMAP", err));
-    }
-
 }

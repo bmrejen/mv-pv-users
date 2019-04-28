@@ -220,7 +220,7 @@ export class GapiAuthenticatorService {
             });
     }
 
-    public getGroups(email) {
+    public getGroups(mail?): Promise<any[]> {
         // 2 requests are run in a row because Google only allows 200 results
 
         const body = {
@@ -228,22 +228,32 @@ export class GapiAuthenticatorService {
             maxResults: 200,
             orderBy: "email",
         };
+
+        if (mail != null) {
+            body["userKey"] = mail;
+            delete body.customer;
+        }
+
         const results = [];
         // tslint:disable-next-line
         const pageToken = "CkeMnpaMlpq_j5OekZqLiZqQ0ZyQkv8A_piYmKDPz8_Pz8-bycaZm5zLms_O_wD-__7_mJiYoM_Pz8_Pz5vJxpmbnMuaz87__hDKASE0KsyTpKSjjVACWgsJ3PYWI7ot48AQA2Dz2sJU";
 
-        return gapi.client.directory.groups.list(body)
-            .then((res) => results.push(...res["result"].groups))
-            .then((_) => {
-                body["pageToken"] = pageToken;
+        return new Promise((resolve, reject) => {
 
-                return gapi.client.directory.groups.list(body)
-                    .then((res) => {
-                        results.push(...res["result"].groups);
+            gapi.client.directory.groups.list(body)
+                .then((res) => results.push(...res["result"].groups))
+                .then((_) => {
+                    body["pageToken"] = pageToken;
 
-                        return results;
-                    });
-            });
+                    return gapi.client.directory.groups.list(body)
+                        .then((res) => {
+                            results.push(...res["result"].groups);
+
+                            resolve(results);
+                        })
+                        .catch((err) => reject(err));
+                });
+        });
     }
 
     public signIn(): Promise<any> {
