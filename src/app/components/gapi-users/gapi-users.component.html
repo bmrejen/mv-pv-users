@@ -57,14 +57,17 @@
             >{{ orga.value }}
             </option>
         </select>Orgas
-        <div *ngIf="googleGroups != null">Google Groups
+        <div
+            *ngIf="googleGroups != null"
+            class="googleGroups"
+        >Google Groups
             <div *ngFor="let group of googleGroups; trackBy: trackByFn">
                 <label>
                     <input
                         type="checkbox"
                         (change)="pushGroupToUser(group)"
                         [checked]="currentUser.googleGroups.includes(group)"
-                    >{{ group.name }}
+                    >{{ group.name }} ({{ group.directMembersCount }})
                 </label>
             </div>
         </div>
@@ -84,7 +87,7 @@
             <textarea
                 name="signature"
                 [(ngModel)]="currentUser.signature"
-                cols="30"
+                cols="150"
                 rows="10"
             ></textarea>
         </fieldset>
