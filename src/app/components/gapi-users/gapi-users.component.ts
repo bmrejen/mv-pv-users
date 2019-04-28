@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, NgZone, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { GapiAuthenticatorService } from "../../services/gapi.service";
 
@@ -34,6 +34,7 @@ export class GapiUsersComponent implements OnInit {
     constructor(
         private gapiService: GapiAuthenticatorService,
         private route: ActivatedRoute,
+        private zone: NgZone,
     ) {
         //
     }
@@ -61,7 +62,9 @@ export class GapiUsersComponent implements OnInit {
                         if (this.isSignedIn()) {
                             this.userLoggedIn = result.currentUser.get().w3.ig;
                             this.gapiService.getGroups()
-                                .then((response) => { this.googleGroups = response; console.log(response); });
+                                .then((response) => {
+                                    this.googleGroups = response;
+                                });
                         }
                     })
                     .catch((err) => console.error("init auth client error", err));
@@ -69,20 +72,67 @@ export class GapiUsersComponent implements OnInit {
 
     }
 
+    public getUser(): void {
+        this.isAlias = null;
+        this.resetForm();
+        this.gapiService.getUser(this.userToGet)
+            .then((res) => {
+                if (res["result"] != null && res["result"].name != null) {
+                    console.log(res);
+                    const email = res["result"].primaryEmail;
+
+                    this.currentUser.givenName = res["result"].name.givenName;
+                    this.currentUser.familyName = res["result"].name.familyName;
+                    this.currentUser.emails = res["result"].emails;
+                    this.currentUser.id = res["result"].id;
+                    this.currentUser.orgas = res["result"].orgUnitPath;
+                    this.currentUser.primaryEmail = email;
+
+                    this.isAlias = this.gapiService.isAlias(email, this.userToGet, res);
+
+                    this.gapiService.getGroups(email)
+                        .then((response) => {
+                            this.googleGroups.forEach((gp) => gp["isEnabled"] = false);
+                            response.forEach((group) => {
+                                const myGroup = this.googleGroups.find((grp) => grp.id === group.id);
+                                myGroup["isEnabled"] = true;
+                                this.pushGroupToUser(myGroup);
+                            });
+                        });
+
+                    this.gapiService.getUserAliases(email)
+                        .then((response) => {
+                            this.currentUser.aliases = response;
+
+                            const defaultAlias = response.find((alias) => alias.isDefault === true);
+                            this.currentUser.signature = defaultAlias.signature;
+                            this.currentUser.sendAs = defaultAlias.sendAsEmail.split("@")[1];
+
+                            this.oldUser = { ...this.currentUser };
+                        });
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+                if (err["result"] != null && err["result"].error != null) {
+                    this.message = err["result"].error.message;
+                }
+            });
+    }
+
     public pushGroupToUser(group) {
-        console.log(this.currentUser.googleGroups);
-        console.log(group);
-        console.log(this.currentUser.googleGroups.includes(group));
 
         if (this.currentUser.googleGroups.includes(group)) {
             const index = this.currentUser.googleGroups.indexOf(group);
             this.currentUser.googleGroups.splice(index, 1);
-            console.log("group deleted", this.currentUser.googleGroups);
 
         } else {
             this.currentUser.googleGroups.push(group);
-            console.log("group added", this.currentUser.googleGroups);
         }
+    }
+
+    public isChecked(group): boolean {
+        return this.currentUser.googleGroups.includes(group);
     }
 
     public listUsers(): void {
@@ -112,50 +162,6 @@ export class GapiUsersComponent implements OnInit {
 
     public isSignedIn(): boolean {
         return this.gapiService.isSignedIn();
-    }
-
-    public getUser(): void {
-        this.isAlias = null;
-        this.resetForm();
-        this.gapiService.getUser(this.userToGet)
-            .then((res) => {
-                if (res["result"] != null && res["result"].name != null) {
-                    console.log(res);
-                    const email = res["result"].primaryEmail;
-
-                    this.currentUser.givenName = res["result"].name.givenName;
-                    this.currentUser.familyName = res["result"].name.familyName;
-                    this.currentUser.emails = res["result"].emails;
-                    this.currentUser.id = res["result"].id;
-                    this.currentUser.orgas = res["result"].orgUnitPath;
-                    this.currentUser.primaryEmail = email;
-
-                    this.isAlias = this.gapiService.isAlias(email, this.userToGet, res);
-                    this.gapiService.getGroups(email)
-                        .then((response) => {
-                            response.forEach((group) => {
-                                this.pushGroupToUser(group);
-                            });
-                        });
-
-                    this.gapiService.getUserAliases(email)
-                        .then((response) => {
-                            this.currentUser.aliases = response;
-
-                            const defaultAlias = response.find((alias) => alias.isDefault === true);
-                            this.currentUser.signature = defaultAlias.signature;
-                            this.currentUser.sendAs = defaultAlias.sendAsEmail.split("@")[1];
-
-                            this.oldUser = { ...this.currentUser };
-                        });
-                }
-            })
-            .catch((err) => {
-                console.error(err);
-                if (err["result"] != null && err["result"].error != null) {
-                    this.message = err["result"].error.message;
-                }
-            });
     }
 
     public postUser() {

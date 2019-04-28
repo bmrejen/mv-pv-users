@@ -65,8 +65,8 @@
                 <label>
                     <input
                         type="checkbox"
+                        [checked]="group.isEnabled"
                         (change)="pushGroupToUser(group)"
-                        [checked]="currentUser.googleGroups.includes(group)"
                     >{{ group.name }} ({{ group.directMembersCount }})
                 </label>
             </div>

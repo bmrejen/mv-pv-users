@@ -221,7 +221,7 @@ export class GapiAuthenticatorService {
     }
 
     public getGroups(mail?): Promise<any[]> {
-        // 2 requests are run in a row because Google only allows 200 results
+        // 2 requests are run in a row because Google only sends 200 results per response
 
         const body = {
             customer: "my_customer",
