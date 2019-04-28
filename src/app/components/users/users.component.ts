@@ -31,14 +31,14 @@ export class UsersComponent implements OnInit {
 
             case "inactive":
                 this.filter = "Inactive";
-                // tslint:disable-next-line:max-line-length
-                this.filteredUsers = this.usersFromSugar.filter((user) => user.status !== "Active" || user.employeeStatus !== "Active");
+                this.filteredUsers = this.usersFromSugar
+                    .filter((user) => user.status !== "Active" || user.employeeStatus !== "Active");
                 break;
 
             case "active":
                 this.filter = "Active";
-                // tslint:disable-next-line:max-line-length
-                this.filteredUsers = this.usersFromSugar.filter((user) => user.status === "Active" && user.employeeStatus === "Active");
+                this.filteredUsers = this.usersFromSugar
+                    .filter((user) => user.status === "Active" && user.employeeStatus === "Active");
                 break;
 
             case "all":
@@ -52,9 +52,7 @@ export class UsersComponent implements OnInit {
         }
     }
 
-    public trackByFn(index, item) {
-        const self = this;
-
-        return index; // or item.id
+    public trackByFn(index) {
+        return index;
     }
 }
