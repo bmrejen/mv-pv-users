@@ -41,7 +41,9 @@ export class GapiUsersComponent implements OnInit {
         this.resetForm();
         this.route.data
             .subscribe((data) => {
-                if (data.fields != null) { this.orgas = data.fields.orgas; }
+                if (data.fields != null) {
+                    this.orgas = data.fields.orgas;
+                }
             });
 
         this.gapiService.loadClient()

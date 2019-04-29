@@ -167,8 +167,13 @@ export class GapiAuthenticatorService {
 
     public updateGmailSendAs(user: IGapiUser, oldUser: IGapiUser): Promise<any> {
         const body = {};
+        const newSendAsEmail = `${user.primaryEmail.split("@")[0]}@${user.sendAs}`;
 
-        //  If signature has been modified
+        if (user.sendAs === oldUser.sendAs && user.signature === oldUser.signature) {
+            return new Promise((resolve, reject) => reject("Alias and signature unchanged"));
+        }
+
+        // If alias has been modified
         if (user.signature !== oldUser.signature) {
             body["signature"] = user.signature;
         }
@@ -176,23 +181,17 @@ export class GapiAuthenticatorService {
         // If alias has been modified
         if (user.sendAs !== oldUser.sendAs) {
 
-            const newSendAsEmail = `${user.primaryEmail.split("@")[0]}@${user.sendAs}`;
             body["displayName"] = `${user.givenName} ${user.familyName}`;
             body["isDefault"] = true;
             body["sendAsEmail"] = newSendAsEmail;
             body["treatAsAlias"] = true;
-
-            // Check if user already has this alias available
-            if (user.aliases.find((alias) => alias.sendAsEmail === newSendAsEmail) === undefined) {
-                // Create the alias if needed
-                return this.createNewAlias(newSendAsEmail, body);
-            } else {
-                return this.updateAlias(newSendAsEmail, body);
-            }
         }
 
-        if (user.signature === oldUser.signature && user.sendAs === oldUser.sendAs) {
-            return new Promise((resolve, reject) => reject("Alias and signature unchanged"));
+        // Create the alias if it doesn't exist
+        if (user.aliases.some((alias) => alias.sendAsEmail === newSendAsEmail)) {
+            return this.updateAlias(newSendAsEmail, body);
+        } else {
+            return this.createNewAlias(newSendAsEmail, body);
         }
     }
 
@@ -202,7 +201,7 @@ export class GapiAuthenticatorService {
                 const url = `https://www.googleapis.com/gmail/v1/users/me/settings/sendAs/${email}`;
                 const headers = new HttpHeaders({ Authorization: `Bearer ${this.accessToken}` });
 
-                return this.http.put(url, body, { headers })
+                return this.http.patch(url, body, { headers })
                     .toPromise();
             });
     }
