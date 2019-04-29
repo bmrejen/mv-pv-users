@@ -49,13 +49,7 @@ RUN set -x \
 		' /usr/local/apache2/conf/httpd.conf \
 	&& apt-get purge -y --auto-remove ca-certificates curl bzip2 gcc libapr1-dev libaprutil1-dev libc6-dev libpcre++-dev libssl-dev make
 
-RUN apt-get update && \
-    apt-get -y install software-properties-common python-software-properties && \
-    add-apt-repository ppa:webupd8team/java && \
-    apt-get update && \
-    apt-get -y install dialog apt-utils && \
-    echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections && \
-    apt-get -y install oracle-java8-installer
+RUN apt-get update && apt-get -y install software-properties-common python-software-properties dialog apt-utils openjdk-8-jdk
 
 RUN  sh -c 'echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list' && \
      apt-get -y install wget apt-transport-https && \
