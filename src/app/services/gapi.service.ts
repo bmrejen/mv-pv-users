@@ -20,7 +20,8 @@ export class GapiAuthenticatorService {
 
     // Authorization scopes required by the API; multiple scopes can be
     // included, separated by spaces.
-    public SCOPES: string = "https://www.googleapis.com/auth/admin.directory.user https://mail.google.com/";
+    // tslint:disable-next-line
+    public SCOPES: string = "https://www.googleapis.com/auth/admin.directory.user https://www.googleapis.com/auth/admin.directory.group https://mail.google.com/";
 
     constructor(private zone: NgZone, private http: HttpClient) {
         //
@@ -236,6 +237,42 @@ export class GapiAuthenticatorService {
                 return this.http.post(url, body, { headers })
                     .toPromise();
             });
+    }
+
+    public getGroups(mail?): Promise<any[]> {
+        // 2 requests are run in a row because Google only sends 200 results per response
+
+        const body = {
+            customer: "my_customer",
+            maxResults: 200,
+            orderBy: "email",
+        };
+
+        if (mail != null) {
+            body["userKey"] = mail;
+            delete body.customer;
+        }
+
+        const results = [];
+        // tslint:disable-next-line
+        const pageToken = "CkeMnpaMlpq_j5OekZqLiZqQ0ZyQkv8A_piYmKDPz8_Pz8-bycaZm5zLms_O_wD-__7_mJiYoM_Pz8_Pz5vJxpmbnMuaz87__hDKASE0KsyTpKSjjVACWgsJ3PYWI7ot48AQA2Dz2sJU";
+
+        return new Promise((resolve, reject) => {
+
+            gapi.client.directory.groups.list(body)
+                .then((res) => results.push(...res["result"].groups))
+                .then((_) => {
+                    body["pageToken"] = pageToken;
+
+                    return gapi.client.directory.groups.list(body)
+                        .then((res) => {
+                            results.push(...res["result"].groups);
+
+                            resolve(results);
+                        })
+                        .catch((err) => reject(err));
+                });
+        });
     }
 
     public signIn(): Promise<any> {

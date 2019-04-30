@@ -7,6 +7,7 @@ export class GoogleUser implements IGapiUser {
     public id;
     public sendAs;
     public signature;
+    public googleGroups = [];
 
     // not needed in constructor
     public primaryEmailSuffix;

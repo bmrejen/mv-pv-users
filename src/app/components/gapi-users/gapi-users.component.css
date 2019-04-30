@@ -2,15 +2,21 @@ table {
     border-collapse: collapse;
     width: 100%;
   }
-  
+
   thead > td, th {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
     background-color: #dddddd;
   }
-  
+
   tbody > tr:nth-child(even) {
     background-color: #dddddd;
   }
-  
+
+  /* .googleGroups {
+    display: flex;
+    flex-direction: column;
+    height: 1000px;
+    flex-wrap: wrap;
+  } */

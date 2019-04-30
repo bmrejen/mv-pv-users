@@ -27,6 +27,7 @@ export class GapiUsersComponent implements OnInit {
     public orgas;
     public message = null;
     public isAlias: boolean = null;
+    public googleGroups;
     @Input() public currentUser: User;
 
     public domains = Object.keys(Domains)
@@ -63,6 +64,10 @@ export class GapiUsersComponent implements OnInit {
                     .then((result: any) => {
                         if (this.isSignedIn()) {
                             this.userLoggedIn = result.currentUser.get().w3.ig;
+                            this.gapiService.getGroups()
+                                .then((response) => {
+                                    this.googleGroups = response;
+                                });
                         }
                     })
                     .catch((err) => console.error("init auth client error", err));
@@ -104,6 +109,7 @@ export class GapiUsersComponent implements OnInit {
         this.gapiService.getUser(this.userToGet)
             .then((res) => {
                 if (res["result"] != null && res["result"].name != null) {
+                    console.log(res);
                     const email = res["result"].primaryEmail;
 
                     this.currentUser.firstName = res["result"].name.givenName;
@@ -114,8 +120,18 @@ export class GapiUsersComponent implements OnInit {
                     this.currentUser.ggCurrentUser.primaryEmail = email;
                     this.currentUser.ggCurrentUser.primaryEmailSuffix = email.substring(email.lastIndexOf("@") + 1);
 
-                    this.getImap(this.userToGet);
                     this.isAlias = this.gapiService.isAlias(email, this.userToGet, res);
+
+                    this.gapiService.getGroups(email)
+                        .then((response) => {
+                            console.log(response);
+                            this.googleGroups.forEach((gp) => gp["isEnabled"] = false);
+                            response.forEach((group) => {
+                                const myGroup = this.googleGroups.find((grp) => grp.id === group.id);
+                                myGroup["isEnabled"] = true;
+                                this.pushGroupToUser(myGroup);
+                            });
+                        });
 
                     this.gapiService.getUserAliases(email)
                         .then((response) => {
@@ -137,6 +153,17 @@ export class GapiUsersComponent implements OnInit {
                     this.message = err["result"].error.message;
                 }
             });
+    }
+
+    public pushGroupToUser(group) {
+
+        if (this.currentUser.ggCurrentUser.googleGroups.includes(group)) {
+            const index = this.currentUser.ggCurrentUser.googleGroups.indexOf(group);
+            this.currentUser.ggCurrentUser.googleGroups.splice(index, 1);
+
+        } else {
+            this.currentUser.ggCurrentUser.googleGroups.push(group);
+        }
     }
 
     public postUser() {
