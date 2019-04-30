@@ -69,6 +69,9 @@ export class User {
     public jamesTimeZone: string = "Europe/Paris";
     public jamesCompany: string = "MARCO VASCO";
 
+    // GOOGLE
+    public ggCurrentUser;
+
     public constructor(data: any) {
         this.id = data.id || this.id;
         this.userName = data.userName || this.userName;

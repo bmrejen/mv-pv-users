@@ -3,6 +3,7 @@ import { Injectable, NgZone } from "@angular/core";
 import { IGapiRequest, IGapiUser } from "../interfaces/gapi-user";
 
 import * as jwt from "jsrsasign";
+import { User } from "../models/user";
 
 declare const gapi: any;
 
@@ -83,18 +84,21 @@ export class GapiAuthenticatorService {
     }
 
     public postUser(user): Promise<any> {
-        if (user.familyName != null && user.givenName != null) {
-            const email = `${user.givenName[0]}${user.familyName}@planetveo.com`;
+        const lastName = user.lastName;
+        const firstName = user.firstName;
+
+        if (lastName != null && firstName != null) {
+            const email = `${firstName[0]}${lastName}@planetveo.com`;
 
             return new Promise((resolve, reject) => {
                 this.zone.run(() => {
                     gapi.client.directory.users.insert({
                         resource: {
                             name: {
-                                familyName: user.familyName,
-                                givenName: user.givenName,
+                                familyName: lastName,
+                                givenName: firstName,
                             },
-                            orgUnitPath: user.orgas,
+                            orgUnitPath: user.ggCurrentUser.orgas,
                             password: user.password,
                             primaryEmail: email,
                         },
@@ -105,11 +109,45 @@ export class GapiAuthenticatorService {
         }
     }
 
-    public updateUser(user: IGapiUser, oldUser: IGapiUser): Promise<any> {
+    public updateUser(usr: User, oldUsr: User): Promise<any> {
+        const user = usr.ggCurrentUser;
+        const oldUser = oldUsr.ggCurrentUser;
+
         const myObj: IGapiRequest = {
             resource: {},
             userKey: oldUser.id,
         };
+
+        for (const key in usr) {
+            if (usr[key] !== null) {
+                switch (key) {
+                    case "lastName":
+                        if (usr[key] !== oldUsr[key]) {
+                            if (myObj.resource.name != null) {
+                                myObj.resource.name.familyName = usr[key];
+                            } else {
+                                myObj.resource["name"] = {
+                                    familyName: usr[key],
+                                };
+                            }
+                        }
+                        break;
+                    case "firstName":
+                        if (usr[key] !== oldUsr[key]) {
+                            if (myObj.resource.name != null) {
+                                myObj.resource.name.givenName = usr[key];
+                            } else {
+                                myObj.resource["name"] = {
+                                    givenName: usr[key],
+                                };
+                            }
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
 
         for (const key in user) {
             if (user[key] !== null) {
@@ -120,28 +158,7 @@ export class GapiAuthenticatorService {
                     case "signature":
                         // do not update id. sendAs or signature will be updated in Gmail service
                         break;
-                    case "familyName":
-                        if (user[key] !== oldUser[key]) {
-                            if (myObj.resource.name != null) {
-                                myObj.resource.name.familyName = user[key];
-                            } else {
-                                myObj.resource["name"] = {
-                                    familyName: user[key],
-                                };
-                            }
-                        }
-                        break;
-                    case "givenName":
-                        if (user[key] !== oldUser[key]) {
-                            if (myObj.resource.name != null) {
-                                myObj.resource.name.givenName = user[key];
-                            } else {
-                                myObj.resource["name"] = {
-                                    givenName: user[key],
-                                };
-                            }
-                        }
-                        break;
+
                     case "orgas":
                         if (user[key] !== oldUser[key]) {
                             myObj.resource["orgUnitPath"] = user[key];
@@ -165,7 +182,10 @@ export class GapiAuthenticatorService {
         });
     }
 
-    public updateGmailSendAs(user: IGapiUser, oldUser: IGapiUser): Promise<any> {
+    public updateGmailSendAs(usr: User, oldUsr: User): Promise<any> {
+        const user = usr.ggCurrentUser;
+        const oldUser = oldUsr.ggCurrentUser;
+
         const body = {};
         const newSendAsEmail = `${user.primaryEmail.split("@")[0]}@${user.sendAs}`;
 
@@ -181,7 +201,7 @@ export class GapiAuthenticatorService {
         // If alias has been modified
         if (user.sendAs !== oldUser.sendAs) {
 
-            body["displayName"] = `${user.givenName} ${user.familyName}`;
+            body["displayName"] = `${usr.firstName} ${usr.lastName}`;
             body["isDefault"] = true;
             body["sendAsEmail"] = newSendAsEmail;
             body["treatAsAlias"] = true;
