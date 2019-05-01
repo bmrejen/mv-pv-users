@@ -1,6 +1,8 @@
 import { Component, Input } from "@angular/core";
 import { ControlContainer, NgForm } from "@angular/forms";
+import { SugarService } from "./../../services/sugar.service";
 
+import { SugarUser } from "../../models/sugar-user";
 import { User } from "../../models/user";
 
 @Component({
@@ -23,6 +25,10 @@ export class CredentialsComponent {
 
     public usernameStatus: string;
     public emailStatus: string;
+
+    constructor(private sugar: SugarService) {
+        //
+    }
 
     public credentialClick() {
         if (this.currentUser.firstName !== ""
@@ -64,6 +70,14 @@ export class CredentialsComponent {
             .substring(2, 7);
 
         return `${this.currentUser.firstName[0].toLowerCase()}${this.currentUser.lastName[0].toLowerCase()}${rndStrg}!`;
+    }
+
+    public getSugarUser() {
+        this.sugar.getUserById(this.currentUser.id)
+            .then((res) => {
+                console.log(new SugarUser(res));
+                // this.currentUser = this.sugar.mapUserFromApi
+            });
     }
 
     public trackByFn(item) {
