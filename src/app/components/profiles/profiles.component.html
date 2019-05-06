@@ -41,7 +41,7 @@
         <div class="select subtitle">Hérite les préférence de l'utilisateur
             <select
                 name="userToCopyHPfrom"
-                [(ngModel)]="currentUser.userToCopyHPfrom"
+                [(ngModel)]="currentUser.sugarCurrentUser.userToCopyHPfrom"
             >
                 <option
                     *ngFor="let user of userTemplates ; trackBy: trackByFn"
@@ -59,7 +59,7 @@
                     <input
                         type="radio"
                         [value]="role.name"
-                        [(ngModel)]="currentUser.role"
+                        [(ngModel)]="currentUser.sugarCurrentUser.role"
                         name="role"
                     >
                     {{ role.name }}
@@ -76,7 +76,7 @@
                     <input
                         type="radio"
                         name="department"
-                        [(ngModel)]="currentUser.department"
+                        [(ngModel)]="currentUser.sugarCurrentUser.department"
                         [value]="department.name"
                     >{{ department.name }}
                 </label>
@@ -88,7 +88,7 @@
                 <input
                     type="number"
                     name="leadsMin"
-                    [(ngModel)]="currentUser.leadsMin"
+                    [(ngModel)]="currentUser.sugarCurrentUser.leadsMin"
                 >
             </label>
             <br>
@@ -96,7 +96,7 @@
                 <input
                     type="number"
                     name="leadsMax"
-                    [(ngModel)]="currentUser.leadsMax"
+                    [(ngModel)]="currentUser.sugarCurrentUser.leadsMax"
                 >
             </label>
         </div>

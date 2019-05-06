@@ -1,35 +1,36 @@
 import { IJamespotUser, IJamespotUserConfig } from "../interfaces/jamespot-api-response";
 
 export class JamespotUser implements IJamespotUser {
-    public jamesCountry: string = "fr";
-    public jamesFirstname: string;
-    public jamesLanguage: string = "fr";
-    public jamesLastname: string;
-    public jamesMail: string;
-    public jamesUsername: string;
-    public jamesRole: string = "User";
-    public jamesIdUser: string;
-    public jamesImg: string | File;
-    public jamesActive: string = "1";
-    public jamesPassword: string;
-    public jamesPhoneExtension: string;
-    public jamesTimeZone: string = "Europe/Paris";
-    public jamesCompany: string = "MARCO VASCO";
+    public country: string = "fr";
+    public firstname: string;
+    public language: string = "fr";
+    public lastname: string;
+    public mail: string;
+    public username: string;
+    public role: string = "User";
+    public idUser: string;
+    public img: string | File;
+    public active: string = "1";
+    public password: string;
+    public phoneExtension: string;
+    public timeZone: string = "Europe/Paris";
+    public company: string = "MARCO VASCO";
 
-    constructor(user: IJamespotUserConfig) {
-        this.jamesCountry = user.country || this.jamesCountry;
-        this.jamesFirstname = user.firstname || this.jamesFirstname;
-        this.jamesLanguage = user.language || this.jamesLanguage;
-        this.jamesLastname = user.lastname || this.jamesLastname;
-        this.jamesMail = user.mail || this.jamesMail;
-        this.jamesUsername = user.username || this.jamesUsername;
-        this.jamesRole = user.role || this.jamesRole;
-        this.jamesIdUser = user.idUser || this.jamesIdUser;
-        this.jamesImg = user.img || this.jamesImg;
-        this.jamesActive = user.active || this.jamesActive;
-        this.jamesPassword = user.password || this.jamesPassword;
-        this.jamesPhoneExtension = user.phoneExtension || this.jamesPhoneExtension;
-        this.jamesTimeZone = user.timeZone || this.jamesTimeZone;
-        this.jamesCompany = user.company || this.jamesCompany;
+    constructor(data: any) {
+        this.firstname = data.firstname || this.firstname;
+        this.language = data.language || this.language;
+        this.lastname = data.lastname || this.lastname;
+        this.mail = data.mail || this.mail;
+        this.username = data.username || this.username;
+        this.role = data.role || this.role;
+        this.idUser = data.idUser || this.idUser;
+        this.img = data.img || this.img;
+        this.active = data.active || this.active;
+        this.password = data.password || this.password;
+        this.phoneExtension = data.phoneExtension || this.phoneExtension;
+        this.timeZone = data.timeZone || this.timeZone;
+        this.company = data.company || this.company;
+        this.country = data.country || this.country;
+
     }
 }

@@ -46,15 +46,15 @@ export class ProfilesComponent implements OnInit {
 
             // filter active users
             .then((users) => this.activeUsersFromSugar = this.allUsersFromSugar
-                .filter((user) => user.status === "Active"))
+                .filter((user) => user.sugarCurrentUser.status === "Active"))
 
             // create userTemplates from userlist
             .then((data) => {
                 return this.activeUsersFromSugar.map((user) => {
                     return {
-                        label: user.userName,
+                        label: user.sugarCurrentUser.userName,
                         selected: false,
-                        value: user.userName,
+                        value: user.sugarCurrentUser.userName,
                     };
                 });
             })

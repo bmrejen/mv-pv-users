@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { GapiAuthenticatorService } from "../../services/gapi.service";
 import { GoogleUser } from "./../../models/google-user";
@@ -29,6 +29,7 @@ export class GapiUsersComponent implements OnInit {
     public isAlias: boolean = null;
     public googleGroups;
     @Input() public currentUser: User;
+    @Output() public readonly notifyParent: EventEmitter<any> = new EventEmitter();
 
     public domains = Object.keys(Domains)
         .map((dom) => Domains[dom]);
@@ -103,13 +104,20 @@ export class GapiUsersComponent implements OnInit {
         return this.gapiService.isSignedIn();
     }
 
-    public getUser(): void {
+    public getUser(user?): void {
+        if (user.constructor.name === "JamespotUser") {
+            this.userToGet = user.jamesMail;
+        }
+        if (user.constructor.name === "CredentialsComponent") {
+            this.userToGet =
+                `${user.firstName[0]}${user.lastName}@planetveo.com`;
+        }
         this.isAlias = null;
         this.resetForm();
+
         this.gapiService.getUser(this.userToGet)
             .then((res) => {
                 if (res["result"] != null && res["result"].name != null) {
-                    console.log(res);
                     const email = res["result"].primaryEmail;
 
                     this.currentUser.firstName = res["result"].name.givenName;
@@ -120,11 +128,12 @@ export class GapiUsersComponent implements OnInit {
                     this.currentUser.ggCurrentUser.primaryEmail = email;
                     this.currentUser.ggCurrentUser.primaryEmailSuffix = email.substring(email.lastIndexOf("@") + 1);
 
+                    this.notifyParent.emit(this.currentUser.ggCurrentUser);
+
                     this.isAlias = this.gapiService.isAlias(email, this.userToGet, res);
 
                     this.gapiService.getGroups(email)
                         .then((response) => {
-                            console.log(response);
                             this.googleGroups.forEach((gp) => gp["isEnabled"] = false);
                             response.forEach((group) => {
                                 const myGroup = this.googleGroups.find((grp) => grp.id === group.id);

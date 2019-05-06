@@ -51,12 +51,12 @@ export class SugarService implements ISugarService {
             .then((users) => users.filter((user) => user.attributes["title"] === "Manager"));
     }
 
-    public getUserByUsername(username): Promise<User> {
+    public getUserByUsername(username): Promise<ISugarUserConfig> {
         console.log("username we are looking for: ", username);
 
         return this.getData("users")
             .then((users) => users.filter((user) => user.attributes["userName"] === username.toLowerCase()))
-            .then((user) => user[0]);
+            .then((user) => this.mapUserFromApi(user[0]));
     }
 
     public getUserByEmail(email): Promise<User> {
@@ -94,9 +94,7 @@ export class SugarService implements ISugarService {
             department: data.attributes.department || "",
             email: data.attributes.email || "",
             employeeStatus: data.attributes.employeeStatus || "",
-            firstName: data.attributes.firstName || "",
             id: data.attributes.id || "",
-            lastName: data.attributes.lastName || "",
             managerId: data.attributes.managerId || "",
             officeId: data.attributes.officeId || "",
             phoneAsterisk: data.attributes.phoneAsterisk || "",
@@ -113,6 +111,7 @@ export class SugarService implements ISugarService {
             teamId: data.attributes.teamId || "",
             title: data.attributes.title || "",
             tourplanID: data.attributes.tourplanID || "",
+            type: data.attributes.type || "",
             userName: data.attributes.userName || "",
         };
     }

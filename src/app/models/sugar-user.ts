@@ -1,13 +1,14 @@
 import { ISugarUserConfig } from "../interfaces/sugar-user";
+import { Destination } from "./destination";
+import { Other } from "./other";
+import { Role } from "./role";
 
 export class SugarUser implements ISugarUserConfig {
     public codeSonGalileo: string = "";
     public department: string = "";
     public email: string = "";
     public employeeStatus: string = "";
-    public firstName: string = "";
     public id: string = "";
-    public lastName: string = "";
     public managerId: string = "";
     public officeId: string = "";
     public phoneAsterisk: string = "";
@@ -25,15 +26,30 @@ export class SugarUser implements ISugarUserConfig {
     public title: string = "";
     public tourplanID: string = "";
     public userName: string = "";
+    public type: string = "users";
+    public userToCopyHPfrom: string = "";
+    public inheritsPreferencesFrom: string = "";
+    public role: Role = null;
+    public functionId: string = "";
+    public destinations: Destination[] = [];
+    public others: Other[] = [];
+    public roles: Role[] = [];
+    public ggOrganisationId: string = "";
+    public ggGroups: string = "";
+    public isAdmin: boolean = false;
+    public apiPortalUser: boolean = false;
+    public assignationNotification: boolean = false;
+    public userGroup: boolean = false;
+    public defaultTeams: number = 1;
+    public leadsMin: number = 15;
+    public leadsMax: number = 45;
 
     constructor(data: any) {
         this.codeSonGalileo = data.codeSonGalileo || this.codeSonGalileo;
         this.department = data.department || this.department;
         this.email = data.email || this.email;
         this.employeeStatus = data.employeeStatus || this.employeeStatus;
-        this.firstName = data.firstName || this.firstName;
         this.id = data.id || this.id;
-        this.lastName = data.lastName || this.lastName;
         this.managerId = data.managerId || this.managerId;
         this.officeId = data.officeId || this.officeId;
         this.phoneAsterisk = data.phoneAsterisk || this.phoneAsterisk;
@@ -44,12 +60,33 @@ export class SugarUser implements ISugarUserConfig {
         this.phoneWork = data.phoneWork || this.phoneWork;
         this.salutation = data.salutation || this.salutation;
         this.status = data.status || this.status;
-        this.swAllowRemoteCalls = data.swAllowRemoteCalls || this.swAllowRemoteCalls;
-        this.swCallNotification = data.swCallNotification || this.swCallNotification;
-        this.swClickToCall = data.swClickToCall || this.swClickToCall;
         this.teamId = data.teamId || this.teamId;
         this.title = data.title || this.title;
         this.tourplanID = data.tourplanID || this.tourplanID;
         this.userName = data.userName || this.userName;
+        this.type = data.type || this.type;
+        this.swAllowRemoteCalls = data.swAllowRemoteCalls || this.swAllowRemoteCalls;
+        this.swCallNotification = data.swCallNotification || this.swCallNotification;
+        this.swClickToCall = data.swClickToCall || this.swClickToCall;
+
+        // Following properties are not returned by the API
+
+        // this.userToCopyHPfrom = data.userToCopyHPfrom || this.userToCopyHPfrom;
+        // this.inheritsPreferencesFrom = data.inheritsPreferencesFrom || this.inheritsPreferencesFrom;
+        // this.role = data.role || this.role;
+        // this.functionId = data.functionId || this.functionId;
+        // this.destinations = data.destinations || this.destinations;
+        // this.others = data.others || this.others;
+        // this.roles = data.roles || this.roles;
+        // this.ggOrganisationId = data.ggOrganisationId || this.ggOrganisationId;
+        // this.ggGroups = data.ggGroups || this.ggGroups;
+        // this.isAdmin = data.isAdmin || this.isAdmin;
+        // this.apiPortalUser = data.apiPortalUser || this.apiPortalUser;
+        // this.assignationNotification = data.assignationNotification || this.assignationNotification;
+        // this.userGroup = data.userGroup || this.userGroup;
+        // this.defaultTeams = data.defaultTeams || this.defaultTeams;
+        // this.leadsMin = data.leadsMin || this.leadsMin;
+        // this.leadsMax = data.leadsMax || this.leadsMax;
+
     }
 }

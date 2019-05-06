@@ -1,3 +1,8 @@
+import { Role } from "../models/role";
+
+import { Destination } from "../models/destination";
+import { Other } from "../models/other";
+
 export interface ISugarUserFromApi {
     attributes: {
         codeSonGalileo: string;
@@ -30,28 +35,51 @@ export interface ISugarUserFromApi {
 }
 
 export interface ISugarUserConfig {
-    codeSonGalileo: string;
-    department: string;
-    email: string;
-    employeeStatus: string;
-    firstName: string;
     id: string;
-    lastName: string;
-    managerId: string;
-    officeId: string;
-    phoneAsterisk: string;
-    phoneFax: string;
+    userName: string;
+    salutation: string;
     phoneHome: string;
     phoneMobile: string;
-    phoneOther: string;
     phoneWork: string;
-    salutation: string;
+    phoneOther: string;
+    phoneFax: string;
+    phoneAsterisk: string;
+    email: string;
     status: string;
-    swAllowRemoteCalls: string;
-    swCallNotification: string;
-    swClickToCall: string;
-    teamId: string;
+    employeeStatus: string;
     title: string;
+    managerId: string;
+    department: string;
+    officeId: string;
+    teamId: string;
     tourplanID: string;
-    userName: string;
+    swClickToCall: string;
+    swCallNotification: string;
+    swAllowRemoteCalls: string;
+    codeSonGalileo: string;
+    type: string;
+
+    // Following properties belong in the CommonProperties of the User model
+
+    // lastName: string;
+    // firstName: string;
+
+    // Following properties are not returned by the API
+
+    // userToCopyHPfrom: string;
+    // inheritsPreferencesFrom: string;
+    // role: Role;
+    // functionId: string;
+    // destinations: Destination[];
+    // others: Other[];
+    // roles: Role[];
+    // ggOrganisationId: string;
+    // ggGroups: string;
+    // isAdmin: boolean;
+    // apiPortalUser: boolean;
+    // assignationNotification: boolean;
+    // userGroup: boolean;
+    // defaultTeams: number;
+    // leadsMin: number;
+    // leadsMax: number;
 }

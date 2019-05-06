@@ -50,18 +50,18 @@ export interface IJamespotUserConfig {
 }
 
 export interface IJamespotUser {
-    jamesCountry: string;
-    jamesFirstname: string;
-    jamesLanguage: string;
-    jamesLastname: string;
-    jamesMail: string;
-    jamesUsername: string;
-    jamesRole: string;
-    jamesActive: string;
-    jamesTimeZone?: string;
-    jamesPhoneExtension?: string;
-    jamesIdUser?: string;
-    jamesImg?: string | File;
-    jamesPassword?: string;
-    jamesCompany?: string;
+    country: string;
+    firstname: string;
+    language: string;
+    lastname: string;
+    mail: string;
+    username: string;
+    role: string;
+    active: string;
+    timeZone?: string;
+    phoneExtension?: string;
+    idUser?: string;
+    img?: string | File;
+    password?: string;
+    company?: string;
 }

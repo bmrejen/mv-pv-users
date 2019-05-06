@@ -18,11 +18,11 @@ export class OthersComponent {
     @Input() public currentUser;
 
     public handleClick(other): void {
-        if (!this.currentUser.others.includes(other.id)) {
-            this.currentUser.others.push(other.id);
+        if (!this.currentUser.sugarCurrentUser.others.includes(other.id)) {
+            this.currentUser.sugarCurrentUser.others.push(other.id);
         } else {
-            const index = this.currentUser.others.indexOf(other.id);
-            this.currentUser.others.splice(index, 1);
+            const index = this.currentUser.sugarCurrentUser.others.indexOf(other.id);
+            this.currentUser.sugarCurrentUser.others.splice(index, 1);
         }
     }
 

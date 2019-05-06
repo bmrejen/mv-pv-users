@@ -10,7 +10,9 @@
         <mv-accounts [accounts]="fields.accounts"></mv-accounts>
 
         <div class="grid-container">
+            <!-- (notifyParent)="onNotify($event, gapi, james)" -->
             <mv-credentials
+                #credentials
                 [currentUser]="currentUser"
                 [civilites]="fields.civilites"
                 [userFields]="fields.userFields"
@@ -22,11 +24,17 @@
                 [currentUser]="currentUser"
                 class="phones"
             ></mv-phones>
+            <!-- (notifyParent)="onNotify($event, credentials, gapi)" -->
             <mv-jamespot
+                #james
                 class="jamespot"
-                [currentUser]="currentUser"
-            ></mv-jamespot>
+                [currentJamespotUser]="currentUser.jamesCurrentUser"
+                (getJamespotUser)="getJamespotUser($event)"
+            >
+            </mv-jamespot>
+            <!-- (notifyParent)="onNotify($event, credentials, james)" -->
             <mv-gapi-users
+                #gapi
                 [currentUser]="currentUser"
                 class="google"
             ></mv-gapi-users>

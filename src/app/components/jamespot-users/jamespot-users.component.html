@@ -7,83 +7,84 @@
     >
     <button (click)="getUser(idToGet)">Get</button>
 
-    <h2 *ngIf="currentUser.jamesIdUser == null">Create User</h2>
+    <h2 *ngIf="currentJamespotUser.idUser == null">Create User</h2>
 
-    <h2 *ngIf="currentUser.jamesIdUser != null">
-        {{ currentUser.jamesFirstname }} {{ currentUser.jamesLastname }} - Id: {{ currentUser.jamesIdUser }}
+    <h2 *ngIf="currentJamespotUser.idUser != null">
+        {{ currentJamespotUser.firstname }} {{ currentJamespotUser.lastname }} - Id:
+        {{ currentJamespotUser.idUser }}
     </h2>
 
-    <form *ngIf="currentUser!=null">
+    <form *ngIf="currentJamespotUser!=null">
         <input
             type="text"
-            [(ngModel)]="currentUser.jamesMail"
+            [(ngModel)]="currentJamespotUser.mail"
             name="mail"
         >Email
         <br>
         <input
             type="text"
-            [(ngModel)]="currentUser.jamesRole"
+            [(ngModel)]="currentJamespotUser.role"
             name="role"
         >Role
         <br>
         <input
             type="text"
-            [(ngModel)]="currentUser.jamesCountry"
+            [(ngModel)]="currentJamespotUser.country"
             name="country"
         >Country
         <br>
         <input
             type="text"
-            [(ngModel)]="currentUser.jamesLanguage"
+            [(ngModel)]="currentJamespotUser.language"
             name="language"
         >Language
         <br>
         <input
             type="text"
-            [(ngModel)]="currentUser.jamesActive"
+            [(ngModel)]="currentJamespotUser.active"
             name="active"
         >active
         <br>
         <input
             type="text"
-            [(ngModel)]="currentUser.jamesUsername"
+            [(ngModel)]="currentJamespotUser.username"
             name="pseudo"
             (blur)="checkUsernameAvailability()"
         >Pseudo
         <br>
         <input
             type="text"
-            [(ngModel)]="currentUser.jamesPassword"
+            [(ngModel)]="currentJamespotUser.password"
             name="password"
         >Password
         <br>
         <input
             type="text"
-            [(ngModel)]="currentUser.jamesFirstname"
+            [(ngModel)]="currentJamespotUser.firstname"
             name="firstname"
         >Firstname
         <br>
         <input
             type="text"
-            [(ngModel)]="currentUser.jamesLastname"
+            [(ngModel)]="currentJamespotUser.lastname"
             name="lastname"
         >Lastname
         <br>
         <input
             type="text"
-            [(ngModel)]="currentUser.jamesCompany"
+            [(ngModel)]="currentJamespotUser.company"
             name="company"
         >Company
         <br>
         <input
             type="text"
-            [(ngModel)]="currentUser.jamesPhoneExtension"
+            [(ngModel)]="currentJamespotUser.phoneExtension"
             name="phoneExtension"
         >Phone Extension
         <br>
         <input
             type="text"
-            [(ngModel)]="currentUser.jamesTimeZone"
+            [(ngModel)]="currentJamespotUser.timeZone"
             name="timeZone"
         >Time Zone
         <br>
@@ -96,7 +97,7 @@
         >
         <br>
         <!-- BUTTONS -->
-        <div *ngIf="currentUser.jamesIdUser != null">
+        <div *ngIf="currentJamespotUser.idUser != null">
             <button
                 type="button"
                 (click)="onUpdate()"
@@ -118,7 +119,7 @@
             (click)="onPrefill()"
         >Prefill form with random data</button>
         <button
-            *ngIf="currentUser.jamesIdUser == null"
+            *ngIf="currentJamespotUser.idUser == null"
             type=button
             (click)="onPost()"
         >Create</button>
