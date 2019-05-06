@@ -26,6 +26,10 @@
                 class="jamespot"
                 [currentUser]="currentUser"
             ></mv-jamespot>
+            <mv-gapi-users
+                [currentUser]="currentUser"
+                class="google"
+            ></mv-gapi-users>
         </div>
         <mv-profiles
             [currentUser]="currentUser"
@@ -77,3 +81,4 @@
         >Créer l'utilisateur</button>
     </ng-container>
 </form>
+<pre>{{ currentUser | json }}</pre>

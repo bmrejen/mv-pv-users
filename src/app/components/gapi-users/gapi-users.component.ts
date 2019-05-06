@@ -1,6 +1,8 @@
-import { Component, NgZone, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { GapiAuthenticatorService } from "../../services/gapi.service";
+import { GoogleUser } from "./../../models/google-user";
+import { User } from "./../../models/user";
 
 enum Domains {
     PL = "planetveo.com",
@@ -21,12 +23,12 @@ export class GapiUsersComponent implements OnInit {
     public userLoggedIn: string = "Logged out";
     public users;
     public userToGet: string;
-    public currentUser;
-    public oldUser;
+    public ggOldUser: User;
     public orgas;
     public message = null;
     public isAlias: boolean = null;
     public googleGroups;
+    @Input() public currentUser: User;
 
     public domains = Object.keys(Domains)
         .map((dom) => Domains[dom]);
@@ -34,12 +36,13 @@ export class GapiUsersComponent implements OnInit {
     constructor(
         private gapiService: GapiAuthenticatorService,
         private route: ActivatedRoute,
-        private zone: NgZone,
     ) {
         //
     }
 
     public ngOnInit(): void {
+        this.currentUser["ggCurrentUser"] = new GoogleUser(null, null, null, null, null);
+
         this.resetForm();
         this.route.data
             .subscribe((data) => {
@@ -69,70 +72,6 @@ export class GapiUsersComponent implements OnInit {
                     })
                     .catch((err) => console.error("init auth client error", err));
             });
-
-    }
-
-    public getUser(): void {
-        this.isAlias = null;
-        this.resetForm();
-        this.gapiService.getUser(this.userToGet)
-            .then((res) => {
-                if (res["result"] != null && res["result"].name != null) {
-                    console.log(res);
-                    const email = res["result"].primaryEmail;
-
-                    this.currentUser.givenName = res["result"].name.givenName;
-                    this.currentUser.familyName = res["result"].name.familyName;
-                    this.currentUser.emails = res["result"].emails;
-                    this.currentUser.id = res["result"].id;
-                    this.currentUser.orgas = res["result"].orgUnitPath;
-                    this.currentUser.primaryEmail = email;
-
-                    this.isAlias = this.gapiService.isAlias(email, this.userToGet, res);
-
-                    this.gapiService.getGroups(email)
-                        .then((response) => {
-                            this.googleGroups.forEach((gp) => gp["isEnabled"] = false);
-                            response.forEach((group) => {
-                                const myGroup = this.googleGroups.find((grp) => grp.id === group.id);
-                                myGroup["isEnabled"] = true;
-                                this.pushGroupToUser(myGroup);
-                            });
-                        });
-
-                    this.gapiService.getUserAliases(email)
-                        .then((response) => {
-                            this.currentUser.aliases = response;
-
-                            const defaultAlias = response.find((alias) => alias.isDefault === true);
-                            this.currentUser.signature = defaultAlias.signature;
-                            this.currentUser.sendAs = defaultAlias.sendAsEmail.split("@")[1];
-
-                            this.oldUser = { ...this.currentUser };
-                        });
-                }
-            })
-            .catch((err) => {
-                console.error(err);
-                if (err["result"] != null && err["result"].error != null) {
-                    this.message = err["result"].error.message;
-                }
-            });
-    }
-
-    public pushGroupToUser(group) {
-
-        if (this.currentUser.googleGroups.includes(group)) {
-            const index = this.currentUser.googleGroups.indexOf(group);
-            this.currentUser.googleGroups.splice(index, 1);
-
-        } else {
-            this.currentUser.googleGroups.push(group);
-        }
-    }
-
-    public isChecked(group): boolean {
-        return this.currentUser.googleGroups.includes(group);
     }
 
     public listUsers(): void {
@@ -145,7 +84,7 @@ export class GapiUsersComponent implements OnInit {
         this.gapiService.signIn()
             .then(() => this.gapiService.initAuthClient()
                 .then((result: any) => this.userLoggedIn = result.currentUser.get().w3.ig)
-                .catch((err) => console.error("init auth client error", err)),
+                .catch((err) => console.log("init auth client error", err)),
             );
     }
 
@@ -164,6 +103,69 @@ export class GapiUsersComponent implements OnInit {
         return this.gapiService.isSignedIn();
     }
 
+    public getUser(): void {
+        this.isAlias = null;
+        this.resetForm();
+        this.gapiService.getUser(this.userToGet)
+            .then((res) => {
+                if (res["result"] != null && res["result"].name != null) {
+                    console.log(res);
+                    const email = res["result"].primaryEmail;
+
+                    this.currentUser.firstName = res["result"].name.givenName;
+                    this.currentUser.lastName = res["result"].name.familyName;
+                    this.currentUser.ggCurrentUser.emails = res["result"].emails;
+                    this.currentUser.ggCurrentUser.id = res["result"].id;
+                    this.currentUser.ggCurrentUser.orgas = res["result"].orgUnitPath;
+                    this.currentUser.ggCurrentUser.primaryEmail = email;
+                    this.currentUser.ggCurrentUser.primaryEmailSuffix = email.substring(email.lastIndexOf("@") + 1);
+
+                    this.isAlias = this.gapiService.isAlias(email, this.userToGet, res);
+
+                    this.gapiService.getGroups(email)
+                        .then((response) => {
+                            console.log(response);
+                            this.googleGroups.forEach((gp) => gp["isEnabled"] = false);
+                            response.forEach((group) => {
+                                const myGroup = this.googleGroups.find((grp) => grp.id === group.id);
+                                myGroup["isEnabled"] = true;
+                                this.pushGroupToUser(myGroup);
+                            });
+                        });
+
+                    this.gapiService.getUserAliases(email)
+                        .then((response) => {
+                            this.currentUser.ggCurrentUser.aliases = response;
+
+                            const defaultAlias = response.find((alias) => alias.isDefault === true);
+                            this.currentUser.ggCurrentUser.signature = defaultAlias.signature;
+                            this.currentUser.ggCurrentUser.sendAs = defaultAlias.sendAsEmail.split("@")[1];
+
+                            this.ggOldUser = { ...this.currentUser };
+                        });
+                    this.isAlias =
+                        this.gapiService.isAlias(this.currentUser.ggCurrentUser.primaryEmail, this.userToGet, res);
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+                if (err["result"] != null && err["result"].error != null) {
+                    this.message = err["result"].error.message;
+                }
+            });
+    }
+
+    public pushGroupToUser(group) {
+
+        if (this.currentUser.ggCurrentUser.googleGroups.includes(group)) {
+            const index = this.currentUser.ggCurrentUser.googleGroups.indexOf(group);
+            this.currentUser.ggCurrentUser.googleGroups.splice(index, 1);
+
+        } else {
+            this.currentUser.ggCurrentUser.googleGroups.push(group);
+        }
+    }
+
     public postUser() {
         this.message = null;
         this.gapiService.postUser(this.currentUser)
@@ -180,9 +182,7 @@ export class GapiUsersComponent implements OnInit {
 
     public updateUser() {
         this.message = null;
-
-        // Update Admin Directory
-        this.gapiService.updateUser(this.currentUser, this.oldUser)
+        this.gapiService.updateUser(this.currentUser, this.ggOldUser)
             .then((res) => {
                 this.userToGet = res["result"].id;
                 this.getUser();
@@ -190,7 +190,7 @@ export class GapiUsersComponent implements OnInit {
             .catch((err) => console.error(err));
 
         // Update Gmail settings (sendAs and signature)
-        this.gapiService.updateGmailSendAs(this.currentUser, this.oldUser)
+        this.gapiService.updateGmailSendAs(this.currentUser, this.ggOldUser)
             .then((res) => console.log("Alias updated !", res))
             .catch((err) => console.error(err));
     }
@@ -199,20 +199,56 @@ export class GapiUsersComponent implements OnInit {
         return index;
     }
 
+    public refreshEmail() {
+        const email = this.currentUser.ggCurrentUser.primaryEmail;
+        const emailPrefix = email.lastIndexOf("@") === -1 ? email : email.substring(0, email.lastIndexOf("@"));
+
+        this.currentUser.ggCurrentUser.primaryEmail =
+            `${emailPrefix}@${this.currentUser.ggCurrentUser.primaryEmailSuffix}`;
+    }
+
     public resetForm(): void {
         this.message = null;
-        this.currentUser = {
-            aliases: null,
-            emails: null,
-            familyName: null,
-            givenName: null,
-            googleGroups: [],
-            id: null,
-            orgas: null,
-            password: null,
-            primaryEmail: null,
-            sendAs: null,
-            signature: null,
-        };
+
+        this.currentUser["ggCurrentUser"]["emails"] = null;
+        this.currentUser["ggCurrentUser"]["familyName"] = null;
+        this.currentUser["ggCurrentUser"]["givenName"] = null;
+        this.currentUser["ggCurrentUser"]["id"] = null;
+        this.currentUser["ggCurrentUser"]["orgas"] = null;
+        this.currentUser["ggCurrentUser"]["password"] = null;
+        this.currentUser["ggCurrentUser"]["primaryEmail"] = null;
+        this.currentUser["ggCurrentUser"]["sendAs"] = null;
+        this.currentUser["ggCurrentUser"]["signature"] = null;
+    }
+
+    public activateImap(id: string) {
+        // return this.gapiService.activateImap(id)
+        //     .then((res) => console.log("IMAP Activated", res))
+        //     .catch((err) => console.error("IMAP Activation error", err));
+    }
+
+    public getImap(id: string) {
+        // return this.gapiService.getImap(id)
+        //     .then((res) => console.log("IMAP settings", res))
+        //     .catch((err) => console.error("Error when getting IMAP", err));
+    }
+
+    public deactivateImap(id: string) {
+        // return this.gapiService.deactivateImap(id)
+        //     .then((res) => console.log("IMAP settings", res))
+        //     .catch((err) => console.error("Error when getting IMAP", err));
+    }
+
+    private setUser(res): void {
+        console.log(res);
+        this.resetForm();
+        if (res["result"] != null && res["result"].name != null) {
+            this.currentUser.ggCurrentUser.givenName = res["result"].name.givenName;
+            this.currentUser.ggCurrentUser.id = res["result"].id;
+            this.currentUser.ggCurrentUser.familyName = res["result"].name.familyName;
+            this.currentUser.ggCurrentUser.orgas = res["result"].orgUnitPath;
+            this.currentUser.ggCurrentUser.password = null;
+            this.currentUser.ggCurrentUser.primaryEmail = res["result"].primaryEmail;
+        }
     }
 }

@@ -1,11 +1,8 @@
 export interface IGapiUser {
     aliases: IGapiAlias[];
     emails: IGapiEmails[];
-    familyName: string;
-    givenName: string;
     id: string;
     orgas: string;
-    password: string;
     primaryEmail: string;
     sendAs: string;
     signature: string;
