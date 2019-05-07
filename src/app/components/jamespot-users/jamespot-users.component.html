@@ -1,14 +1,5 @@
 <fieldset class="blue">
     <legend>Jamespot</legend>
-    Get user id: <input
-        type="text"
-        [(ngModel)]="idToGet"
-        name="idToGet"
-    >
-    <button (click)="getUser(idToGet)">Get</button>
-
-    <h2 *ngIf="currentJamespotUser.idUser == null">Create User</h2>
-
     <h2 *ngIf="currentJamespotUser.idUser != null">
         {{ currentJamespotUser.firstname }} {{ currentJamespotUser.lastname }} - Id:
         {{ currentJamespotUser.idUser }}

@@ -1,11 +1,13 @@
 export interface IGapiUser {
-    aliases: IGapiAlias[];
+    // aliases: IGapiAlias[];
     emails: IGapiEmails[];
     id: string;
+    nonEditableAliases: IGapiAlias[];
     orgas: string;
+    // password: string;
     primaryEmail: string;
-    sendAs: string;
-    signature: string;
+    // sendAs: string;
+    // signature: string;
 }
 
 export interface IGapiEmails {

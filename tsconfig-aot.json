@@ -17,7 +17,8 @@
         "allowSyntheticDefaultImports": true,
         "lib": [
             "dom",
-            "es2015"
+            "es2015",
+            "es2016.array.include",
         ],
         "typeRoots": [
             "./node_modules/@types"

@@ -8,11 +8,25 @@
 
     <ng-container *ngIf="fields != null">
         <mv-accounts [accounts]="fields.accounts"></mv-accounts>
+        <input
+            type="text"
+            [(ngModel)]="mailToGet"
+            name="mailToGet"
+        >
+        <button
+            type="button"
+            (click)=getUser()
+        >Get User</button>
+
+        <div *ngIf="isAlias">{{ mailToGet }} IS AN ALIAS OF
+            {{ currentUser.ggCurrentUser.primaryEmail | uppercase }}</div>
+        <div *ngIf="isAlias === false">{{ mailToGet }} belongs to real account</div>
+        <hr>
+
 
         <div class="grid-container">
-            <!-- (notifyParent)="onNotify($event, gapi, james)" -->
             <mv-credentials
-                #credentials
+                [currentSugarUser]="currentUser.sugarCurrentUser"
                 [currentUser]="currentUser"
                 [civilites]="fields.civilites"
                 [userFields]="fields.userFields"
@@ -24,18 +38,14 @@
                 [currentUser]="currentUser"
                 class="phones"
             ></mv-phones>
-            <!-- (notifyParent)="onNotify($event, credentials, gapi)" -->
             <mv-jamespot
-                #james
                 class="jamespot"
                 [currentJamespotUser]="currentUser.jamesCurrentUser"
-                (getJamespotUser)="getJamespotUser($event)"
             >
             </mv-jamespot>
-            <!-- (notifyParent)="onNotify($event, credentials, james)" -->
             <mv-gapi-users
-                #gapi
                 [currentUser]="currentUser"
+                [ggCurrentUser]="currentUser.ggCurrentUser"
                 class="google"
             ></mv-gapi-users>
         </div>

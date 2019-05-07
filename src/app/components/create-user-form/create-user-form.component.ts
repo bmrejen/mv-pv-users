@@ -9,9 +9,11 @@ import { Team } from "../../models/team";
 import { User } from "../../models/user";
 
 import { IJamespotUserConfig } from "../../interfaces/jamespot-api-response";
+import { GoogleUser } from "../../models/google-user";
 import { JamespotUser } from "../../models/jamespot-user";
 import { GapiAuthenticatorService } from "../../services/gapi.service";
-import { JamespotService } from "./../../services/jamespot.service";
+import { JamespotService } from "../../services/jamespot.service";
+import { SugarService } from "../../services/sugar.service";
 
 @Component({
     selector: "mv-app-create-user-form",
@@ -30,7 +32,9 @@ export class CreateUserFormComponent implements OnInit {
     public roles: Role[] = [];
     public destinations: Destination[] = [];
     public managers: SugarUser[] = [];
-    public currentSugarUser: SugarUser;
+    public mailToGet: string;
+    public googleGroups = [];
+    public isAlias: boolean = null;
 
     public oldJamespotUser: JamespotUser;
 
@@ -42,6 +46,7 @@ export class CreateUserFormComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private james: JamespotService,
+        private sugar: SugarService,
         private gapi: GapiAuthenticatorService) {
         //
     }
@@ -77,62 +82,84 @@ export class CreateUserFormComponent implements OnInit {
         // console.log("submitted", form);
     }
 
-    // public onNotify(user, ...components) {
-    //     components.forEach((component) => {
-    //         switch (component.constructor.name) {
-    //             case "GapiUsersComponent":
-    //                 component.getUser(user);
-    //                 break;
-    //             case "JamespotUsersComponent":
-    //                 component.getUser(user);
-    //                 break;
-    //             case "CredentialsComponent":
-    //                 component.getSugarUserByUsername(user);
-    //                 break;
-    //             default:
-    //                 alert("problem");
-    //                 break;
-    //         }
-    //     });
-    // }
+    public getUser() {
+        this.resetForm();
+        if (!this.mailToGet.includes("@")) {
+            this.mailToGet = `${this.mailToGet}@planetveo.com`;
+        }
+        const username = this.mailToGet.substring(0, this.mailToGet.lastIndexOf("@"));
 
-    public getJamespotUser(id) {
-        console.log("create user form is looking for jamespot user", id);
-        this.james.getUser(id)
+        this.getJamespotUser(`${username}@planetveo.com`);
+        this.getGapiUser(this.mailToGet);
+        this.getSugarUser(username);
+    }
+
+    public resetForm() {
+        this.isAlias = null;
+        this.currentUser = new User({});
+    }
+
+    public getJamespotUser(mail) {
+        this.james.getByField("mail", mail)
             .then((res: IJamespotUserConfig) => {
-                console.log("response from service", res);
                 this.currentUser.jamesCurrentUser = this.oldJamespotUser = new JamespotUser(res);
-
-                Object.keys(this.currentUser.jamesCurrentUser)
-                    .forEach((key) => this.currentUser[key] = this.currentUser.jamesCurrentUser[key]);
-                console.log(this.currentUser);
             })
             .catch((err) => {
                 console.error(err);
-                alert(`User ${id} doesn't exist`);
+                alert(`Jamespot User ${mail} doesn't exist`);
             });
     }
 
-    public mapUserToJamespot() {
-        this.currentUser.jamesCurrentUser = new JamespotUser({
-            active: this.currentUser.jamesCurrentUser.active,
-            company: this.currentUser.jamesCurrentUser.company,
-            country: this.currentUser.jamesCurrentUser.country,
-            firstname: this.currentUser.jamesCurrentUser.firstname,
-            idUser: this.currentUser.jamesCurrentUser.idUser,
-            img: this.currentUser.jamesCurrentUser.img,
-            language: this.currentUser.jamesCurrentUser.language,
-            lastname: this.currentUser.jamesCurrentUser.lastname,
-            mail: this.currentUser.jamesCurrentUser.mail,
-            password: this.currentUser.jamesCurrentUser.password,
-            phoneExtension: this.currentUser.jamesCurrentUser.phoneExtension,
-            role: this.currentUser.jamesCurrentUser.role,
-            timeZone: this.currentUser.jamesCurrentUser.timeZone,
-            username: this.currentUser.jamesCurrentUser.username,
-        });
+    public getSugarUser(username) {
+        this.sugar.getUserByUsername(username)
+            .then((res) => this.currentUser.sugarCurrentUser = new SugarUser(res))
+            .catch((err) => console.error(err));
+    }
+
+    public getGapiUser(mail) {
+        this.gapi.getUser(mail)
+            .then((res) => this.currentUser.ggCurrentUser = new GoogleUser(res))
+            .then((resp) => {
+                const primaryEmail = this.currentUser.ggCurrentUser.primaryEmail;
+                this.getGoogleGroupsOfUser(primaryEmail);
+                this.getUserAliases(primaryEmail);
+                this.isAlias = this.gapi.isAlias(primaryEmail, mail, this.currentUser.ggCurrentUser);
+            })
+            .catch((err) => console.error(err));
     }
 
     public trackByFn(item) {
         return item.id;
+    }
+
+    private getGoogleGroupsOfUser(primaryMail) {
+        this.gapi.getGroups(primaryMail)
+            .then((response) => {
+                this.googleGroups = response;
+                this.googleGroups.forEach((gp) => gp["isEnabled"] = false);
+                response.forEach((group) => {
+                    const myGroup = this.googleGroups.find((grp) => grp.id === group.id);
+                    myGroup["isEnabled"] = true;
+                    this.currentUser.ggCurrentUser.googleGroups.push(group);
+                });
+            })
+            .catch((err) => {
+                console.error(err);
+                if (err["result"] != null && err["result"].error != null) {
+                    alert(err["result"].error.message);
+                }
+            });
+    }
+
+    private getUserAliases(primaryEmail) {
+        this.gapi.getUserAliases(primaryEmail)
+            .then((response) => {
+                this.currentUser.ggCurrentUser.aliases = response;
+
+                const defaultAlias = response.find((alias) => alias.isDefault === true);
+                this.currentUser.ggCurrentUser.signature = defaultAlias.signature;
+                this.currentUser.ggCurrentUser.sendAs = defaultAlias.sendAsEmail.split("@")[1];
+            })
+            .catch((err) => console.error(err));
     }
 }

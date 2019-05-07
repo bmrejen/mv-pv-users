@@ -1,3 +1,4 @@
+import { GoogleUser } from "./google-user";
 import { JamespotUser } from "./jamespot-user";
 import { SugarUser } from "./sugar-user";
 
@@ -16,7 +17,7 @@ export class User {
     public jamesCurrentUser: JamespotUser = new JamespotUser({});
 
     // GOOGLE
-    public ggCurrentUser;
+    public ggCurrentUser: GoogleUser = new GoogleUser({});
 
     public constructor(data: any) {
         //
