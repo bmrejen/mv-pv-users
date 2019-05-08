@@ -143,7 +143,8 @@
         "test:unit": "./node_modules/.bin/jest",
         "test:unit:ci": "yarn run test:unit:coverage --testResultsProcessor='./node_modules/jest-jenkins-reporter'",
         "test:unit:coverage": "./node_modules/.bin/jest --runInBand --coverage --collectCoverageFrom=src/**/*.ts --collectCoverageFrom=!src/main.ts --collectCoverageFrom=!src/app/rxjs-extensions.ts --collectCoverageFrom=!src/app/routes.ts --collectCoverageFrom=!**/index.ts --collectCoverageFrom=!src/aot/**/*.ts",
-        "version": "./bin/version.sh $npm_package_version"
+        "version": "./bin/version.sh $npm_package_version",
+        "mux": "mux local"
     },
     "engines": {
         "yarn": ">= 1.9.0"
