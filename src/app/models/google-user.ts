@@ -1,7 +1,7 @@
 import { IGapiUser } from "../interfaces/gapi-user";
 
 export class GoogleUser implements IGapiUser {
-    public primaryEmail = null;
+    public primaryEmail: string = "";
     public orgas = null;
     public emails = null;
     public id = null;
@@ -12,7 +12,7 @@ export class GoogleUser implements IGapiUser {
     public password = null;
 
     // not needed in constructor
-    public primaryEmailSuffix;
+    public primaryEmailSuffix = null;
     public aliases;
 
     constructor(data?: any) {
@@ -23,5 +23,7 @@ export class GoogleUser implements IGapiUser {
         this.sendAs = data.sendAs || this.sendAs;
         this.signature = data.signature || this.signature;
         this.nonEditableAliases = data.nonEditableAliases || this.nonEditableAliases;
+        this.primaryEmailSuffix = this.primaryEmail.includes("@") ?
+            this.primaryEmail.split("@")[1] : this.primaryEmailSuffix;
     }
 }

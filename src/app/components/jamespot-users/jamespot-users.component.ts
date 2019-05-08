@@ -11,11 +11,12 @@ import { JamespotUser } from "./../../models/jamespot-user";
 
 export class JamespotUsersComponent {
     @Input() public currentJamespotUser: JamespotUser;
+    @Input() public jamesMessage: string;
+
     public updateSuccessful: boolean = false;
     public oldJamespotUser: JamespotUser;
     public isDeleted: boolean = false;
     public deletedId;
-    public errorMessage;
     public image;
     public isUsernameTaken: boolean = false;
 
@@ -36,7 +37,7 @@ export class JamespotUsersComponent {
             })
             .catch((err: string) => {
                 console.error("Jamespot Problem :", err);
-                this.errorMessage = err.substr(31, err.length - 34);
+                this.jamesMessage = err.substr(31, err.length - 34);
             });
     }
 
@@ -50,14 +51,14 @@ export class JamespotUsersComponent {
             })
             .catch((err: string) => {
                 console.error("Jamespot update error: ", err);
-                this.errorMessage = err;
+                this.jamesMessage = err;
             });
     }
 
     public onDelete(): void {
         const id = this.currentJamespotUser.idUser;
         if (confirm(`Etes-vous sur de supprimer l'utilisateur ${id} en production?`)) {
-            this.errorMessage = null;
+            this.jamesMessage = null;
             this.james.deleteUser(id)
                 .then((res) => {
                     this.resetFields();
@@ -67,7 +68,7 @@ export class JamespotUsersComponent {
                 .catch((err) => {
                     console.error(err);
                     this.isDeleted = false;
-                    this.errorMessage = err.RC.MSG;
+                    this.jamesMessage = err.RC.MSG;
                 });
         }
     }
@@ -93,15 +94,15 @@ export class JamespotUsersComponent {
         this.james.getByField("pseudo", this.currentJamespotUser.username)
             .then((res: IJamespotUserConfig) => {
                 this.isUsernameTaken = true;
-                this.errorMessage = null;
+                this.jamesMessage = null;
                 if (res.idUser !== "" && this.currentJamespotUser.idUser === null) {
                     this.isUsernameTaken = true;
-                    this.errorMessage = `Username taken by user #${res.idUser}`;
+                    this.jamesMessage = `Username taken by user #${res.idUser}`;
                 }
             })
             .catch((err) => {
                 console.error(err);
-                this.errorMessage = err;
+                this.jamesMessage = err;
             });
     }
 
@@ -115,7 +116,7 @@ export class JamespotUsersComponent {
             })
             .catch((err) => {
                 console.error(err);
-                this.errorMessage = err;
+                this.jamesMessage = err;
             });
     }
 
@@ -135,7 +136,7 @@ export class JamespotUsersComponent {
         this.currentJamespotUser.timeZone = "Europe/Paris";
         this.currentJamespotUser.username = null;
 
-        this.errorMessage = null;
+        this.jamesMessage = null;
         this.isDeleted = false;
         this.updateSuccessful = false;
         this.oldJamespotUser = null;

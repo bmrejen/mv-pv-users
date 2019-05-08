@@ -22,7 +22,6 @@ export class GapiUsersComponent implements OnInit {
     public userToGet: string;
     public ggOldUser: User;
     public orgas;
-    public message = null;
     public gapiStatus = {
         apiFailed: false,
         apiLoaded: false,
@@ -35,6 +34,7 @@ export class GapiUsersComponent implements OnInit {
 
     @Input() public currentUser: User;
     @Input() public ggCurrentUser: GoogleUser;
+    @Input() public gapiMessage: string;
 
     constructor(
         private gapiService: GapiAuthenticatorService,
@@ -97,17 +97,6 @@ export class GapiUsersComponent implements OnInit {
                 .catch((err) => console.error("init auth client error", err)));
     }
 
-    public getUser(mail): Promise<GoogleUser> {
-        this.resetForm();
-
-        return this.gapiService.getUser(mail)
-            .then((res: IGapiUser) => {
-                this.ggCurrentUser = new GoogleUser(res);
-
-                return this.ggCurrentUser;
-            });
-    }
-
     public pushGroupToUser(group) {
         if (this.ggCurrentUser.googleGroups.includes(group)) {
             const index = this.ggCurrentUser.googleGroups.indexOf(group);
@@ -119,21 +108,21 @@ export class GapiUsersComponent implements OnInit {
     }
 
     public postUser() {
-        this.message = null;
+        this.gapiMessage = null;
         this.gapiService.postUser(this.currentUser)
             .then((res) => {
                 if (res["result"] != null) {
                     this.resetForm();
                     this.userToGet = res["result"].id;
                     // this.getUser();
-                    this.message = "User created !";
+                    this.gapiMessage = "User created !";
                 }
             })
-            .catch((err) => this.message = err["result"].error.message);
+            .catch((err) => this.gapiMessage = err["result"].error.gapiMessage);
     }
 
     public updateUser() {
-        this.message = null;
+        this.gapiMessage = null;
         this.gapiService.updateUser(this.currentUser, this.ggOldUser)
             .then((res) => {
                 this.userToGet = res["result"].id;
@@ -160,7 +149,7 @@ export class GapiUsersComponent implements OnInit {
     }
 
     public resetForm(): void {
-        this.message = null;
+        this.gapiMessage = null;
         this.ggCurrentUser.emails = null;
         this.ggCurrentUser.id = null;
         this.ggCurrentUser.orgas = null;

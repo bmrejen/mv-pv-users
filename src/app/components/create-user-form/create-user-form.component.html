@@ -31,21 +31,24 @@
                 [civilites]="fields.civilites"
                 [userFields]="fields.userFields"
                 [usersFromSugar]="usersFromSugar"
+                [sugarMessage]="sugarMessage"
                 class="credentials"
             ></mv-credentials>
 
             <mv-phones
-                [currentUser]="currentUser"
+                [currentSugarUser]="currentUser.sugarCurrentUser"
                 class="phones"
             ></mv-phones>
             <mv-jamespot
                 class="jamespot"
                 [currentJamespotUser]="currentUser.jamesCurrentUser"
+                [jamesMessage]="jamesMessage"
             >
             </mv-jamespot>
             <mv-gapi-users
                 [currentUser]="currentUser"
                 [ggCurrentUser]="currentUser.ggCurrentUser"
+                [gapiMessage]="gapiMessage"
                 class="google"
             ></mv-gapi-users>
         </div>

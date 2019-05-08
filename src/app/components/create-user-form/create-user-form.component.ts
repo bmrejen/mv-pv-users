@@ -35,6 +35,9 @@ export class CreateUserFormComponent implements OnInit {
     public mailToGet: string;
     public googleGroups = [];
     public isAlias: boolean = null;
+    public gapiMessage: string = null;
+    public jamesMessage: string = null;
+    public sugarMessage: string = null;
 
     public oldJamespotUser: JamespotUser;
 
@@ -96,6 +99,9 @@ export class CreateUserFormComponent implements OnInit {
 
     public resetForm() {
         this.isAlias = null;
+        this.gapiMessage = null;
+        this.jamesMessage = null;
+        this.sugarMessage = null;
         this.currentUser = new User({});
     }
 
@@ -104,16 +110,13 @@ export class CreateUserFormComponent implements OnInit {
             .then((res: IJamespotUserConfig) => {
                 this.currentUser.jamesCurrentUser = this.oldJamespotUser = new JamespotUser(res);
             })
-            .catch((err) => {
-                console.error(err);
-                alert(`Jamespot User ${mail} doesn't exist`);
-            });
+            .catch((err) => this.jamesMessage = err);
     }
 
     public getSugarUser(username) {
         this.sugar.getUserByUsername(username)
             .then((res) => this.currentUser.sugarCurrentUser = new SugarUser(res))
-            .catch((err) => console.error(err));
+            .catch((err) => this.sugarMessage = "User not found");
     }
 
     public getGapiUser(mail) {
@@ -125,7 +128,7 @@ export class CreateUserFormComponent implements OnInit {
                 this.getUserAliases(primaryEmail);
                 this.isAlias = this.gapi.isAlias(primaryEmail, mail, this.currentUser.ggCurrentUser);
             })
-            .catch((err) => console.error(err));
+            .catch((err) => this.gapiMessage = err.result.error.message);
     }
 
     public trackByFn(item) {
@@ -143,12 +146,7 @@ export class CreateUserFormComponent implements OnInit {
                     this.currentUser.ggCurrentUser.googleGroups.push(group);
                 });
             })
-            .catch((err) => {
-                console.error(err);
-                if (err["result"] != null && err["result"].error != null) {
-                    alert(err["result"].error.message);
-                }
-            });
+            .catch((err) => alert(err.result.error.message));
     }
 
     private getUserAliases(primaryEmail) {

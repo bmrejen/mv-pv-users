@@ -23,6 +23,7 @@ export class CredentialsComponent {
     @Input() public currentSugarUser: SugarUser;
     @Input() public currentUser: User;
     @Input() public usersFromSugar: User[];
+    @Input() public sugarMessage;
 
     public usernameStatus: string;
     public emailStatus: string;

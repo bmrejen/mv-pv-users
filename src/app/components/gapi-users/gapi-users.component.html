@@ -17,34 +17,39 @@
             <button (click)="signOut()">Sign Out</button>
             <button (click)="listUsers()">List Users</button>
             <button (click)="resetForm()">New User</button>
+            <br>
+            Orgas
+            <select
+                name="orgas"
+                [(ngModel)]="ggCurrentUser.orgas"
+            >
+                <option
+                    *ngFor="let orga of orgas"
+                    [value]="orga.value"
+                >{{ orga.value }}
+                </option>
+            </select>
 
+            <!-- IF ID IS NULL THEN ADMIN CAN CHOOSE A DOMAIN -->
             <div *ngIf="ggCurrentUser.id == null">
                 Primary mail
                 <select
-                    name="primaryEmail"
-                    [(ngModel)]="ggCurrentUser.primaryEmail"
-                >Primary Email
+                    name="primaryEmailSuffix"
+                    [(ngModel)]="ggCurrentUser.primaryEmailSuffix"
+                    (ngModelChange)="refreshEmail()"
+                >
                     <option
                         *ngFor="let dom of domains"
                         [value]="dom"
                     >{{ dom }}</option>
                 </select>
-                <br>
-                Orgas
-                <select
-                    name="orgas"
-                    [(ngModel)]="ggCurrentUser.orgas"
-                >
-                    <option
-                        *ngFor="let orga of orgas"
-                        [value]="orga.value"
-                    >{{ orga.value }}
-                    </option>
-                </select>
+
                 <br>
                 <button (click)="postUser()">Create</button>
             </div>
+            <br>
 
+            <!-- IF ID IS NOT NULL THEN THE DOMAIN IS READONLY -->
             <div *ngIf="ggCurrentUser.id != null">
                 <input
                     type="text"
@@ -79,80 +84,73 @@
                     [disabled]="ggCurrentUser.id != null"
                 >Primary Mail
                 <br>
-                <div *ngIf="ggCurrentUser.id === null">
-                    Primary mail suffix
-                    <select
-                        name="primaryEmailSuffix"
-                        [(ngModel)]="ggCurrentUser.primaryEmailSuffix"
-                        (ngModelChange)="refreshEmail()"
-                    >Primary Email
-                        <option
-                            *ngFor="let dom of domains"
-                            [value]="dom"
-                        >{{ dom }}</option>
-                    </select>
+
+                Other Emails
+                <div *ngFor="let email of ggCurrentUser.emails">
+                    <input
+                        type="text"
+                        [value]="email.address"
+                        [attr.disabled]="true"
+                    >
                 </div>
                 <br>
-                Orgas
+                Default alias
+
                 <select
-                    name="orgas"
-                    [(ngModel)]=ggCurrentUser.orgas
+                    name="defaultAlias"
+                    [(ngModel)]="ggCurrentUser.sendAs"
                 >
                     <option
-                        *ngFor="let orga of orgas"
-                        [value]="orga.value"
-                    >{{ orga.value }}
-                    </option>
+                        *ngFor="let dom of domains"
+                        [value]="dom"
+                    >{{ dom }}</option>
                 </select>
                 <br>
-                <div *ngIf="ggCurrentUser.id != null">
-                    Other Emails
-                    <div *ngFor="let email of ggCurrentUser.emails">
-                        <input
-                            type="text"
-                            [value]="email.address"
-                            [attr.disabled]="true"
-                        >
-                    </div>
-                </div>
-                <button (click)="updateUser()">Update</button>
-                <button (click)="activateImap()">Activate IMAP</button>
-                <button (click)="deactivateImap()">Deactivate IMAP</button>
+                Signature
+                <br>
+                <textarea
+                    rows="5"
+                    cols="70"
+                    name="signature"
+                    [(ngModel)]="ggCurrentUser.signature"
+                >
+                </textarea>
             </div>
-
+            <button (click)="updateUser()">Update</button>
+            <button (click)="activateImap()">Activate IMAP</button>
+            <button (click)="deactivateImap()">Deactivate IMAP</button>
         </div>
-
-        <h2 *ngIf="message != null">{{ message }}</h2>
-        <table *ngIf="users != null && users.length > 0">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>First name</th>
-                    <th>Last name</th>
-                    <th>Is Admin</th>
-                    <th>Team</th>
-                    <th>Primary Email</th>
-                    <th>Emails</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let user of users; trackBy: trackByFn">
-                    <td>{{ user.id }}</td>
-                    <td>{{ user.name.givenName }}</td>
-                    <td>{{ user.name.familyName }}</td>
-                    <td>{{ user.isAdmin }}</td>
-                    <td>{{ user.orgUnitPath }}</td>
-                    <td>{{ user.primaryEmail }}</td>
-                    <td>
-                        <ul *ngIf="user.emails && user.emails != null">
-                            <li *ngFor="let email of user.emails; trackBy: trackByFn">
-                                {{ email.address }}
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
     </div>
 
+    <h2 *ngIf="gapiMessage != null">{{ gapiMessage }}</h2>
+    <table *ngIf="users != null && users.length > 0">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Is Admin</th>
+                <th>Team</th>
+                <th>Primary Email</th>
+                <th>Emails</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users; trackBy: trackByFn">
+                <td>{{ user.id }}</td>
+                <td>{{ user.name.givenName }}</td>
+                <td>{{ user.name.familyName }}</td>
+                <td>{{ user.isAdmin }}</td>
+                <td>{{ user.orgUnitPath }}</td>
+                <td>{{ user.primaryEmail }}</td>
+                <td>
+                    <ul *ngIf="user.emails && user.emails != null">
+                        <li *ngFor="let email of user.emails; trackBy: trackByFn">
+                            {{ email.address }}
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </fieldset>
