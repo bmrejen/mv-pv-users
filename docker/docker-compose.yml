@@ -13,6 +13,7 @@ services:
       - ~/.docker/.env
     environment:
       - VIRTUAL_HOST=users.local
+    working_dir: "/usr/local/apache2/htdocs"
     ports:
       # Use for debugging, access to vnc to show running test
        - "9099:80"
