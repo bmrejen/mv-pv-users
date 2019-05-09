@@ -8,9 +8,8 @@
             <label>
                 <input
                     type="radio"
-                    name="teamId"
-                    [(ngModel)]="sugarCurrentUser.team"
-                    (click)="handleClick(team)"
+                    name="team"
+                    [(ngModel)]="sugarCurrentUser.teamId"
                     [value]="team.name"
                 >{{ team.name }}
             </label>
