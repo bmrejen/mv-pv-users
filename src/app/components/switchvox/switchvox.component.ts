@@ -13,7 +13,7 @@ import { ControlContainer, NgForm } from "@angular/forms";
 })
 
 export class SwitchvoxComponent {
-    @Input() public currentUser;
+    @Input() public sugarCurrentUser;
     public isChecked: boolean;
 
     public trackByFn(item) {

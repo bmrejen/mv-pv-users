@@ -244,7 +244,6 @@ export class JamespotService {
     }
 
     public getByField(field: string, value: string): Promise<IJamespotUserConfig> {
-        console.log(`on cherche le user avec le ${field} de valeur ${value}`);
         const params = new HttpParams()
             .set("name", field)
             .append("value", value);

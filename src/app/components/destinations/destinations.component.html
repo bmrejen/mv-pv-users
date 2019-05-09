@@ -3,10 +3,7 @@
     *ngIf="destinations != null"
 >
     <legend>Destinations</legend>
-    <div
-        ngModelGroup="destinations"
-        class="destinations"
-    >
+    <div class="destinations">
         <div *ngFor="let dest of destinations | alphabetical ; trackBy: trackByFn">
             <label>
                 <input

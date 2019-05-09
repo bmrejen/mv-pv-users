@@ -26,7 +26,7 @@
 
         <div class="grid-container">
             <mv-credentials
-                [currentSugarUser]="currentUser.sugarCurrentUser"
+                [sugarCurrentUser]="currentUser.sugarCurrentUser"
                 [currentUser]="currentUser"
                 [civilites]="fields.civilites"
                 [userFields]="fields.userFields"
@@ -36,12 +36,12 @@
             ></mv-credentials>
 
             <mv-phones
-                [currentSugarUser]="currentUser.sugarCurrentUser"
+                [sugarCurrentUser]="currentUser.sugarCurrentUser"
                 class="phones"
             ></mv-phones>
             <mv-jamespot
                 class="jamespot"
-                [currentJamespotUser]="currentUser.jamesCurrentUser"
+                [jamesCurrentUser]="currentUser.jamesCurrentUser"
                 [jamesMessage]="jamesMessage"
             >
             </mv-jamespot>
@@ -53,9 +53,7 @@
             ></mv-gapi-users>
         </div>
         <mv-profiles
-            [currentUser]="currentUser"
-            [selectedFunction]="fields.selectedFunction"
-            [selectedOffice]="fields.selectedOffice"
+            [sugarCurrentUser]="currentUser.sugarCurrentUser"
             [roles]="roles"
             [userTemplates]="fields.userTemplates"
             [departments]="fields.departments"
@@ -65,35 +63,32 @@
 
         <mv-office
             [offices]="fields.offices"
-            [currentUser]="currentUser"
+            [sugarCurrentUser]="currentUser.sugarCurrentUser"
         ></mv-office>
         <mv-function
             [functions]="fields.functions"
-            [currentUser]="currentUser"
+            [sugarCurrentUser]="currentUser.sugarCurrentUser"
         ></mv-function>
         <mv-manager
             [managers]="managers"
-            [currentUser]="currentUser"
+            [sugarCurrentUser]="currentUser.sugarCurrentUser"
         ></mv-manager>
 
         <mv-destinations
             [destinations]="destinations"
-            [currentUser]="currentUser"
+            [sugarCurrentUser]="currentUser.sugarCurrentUser"
         ></mv-destinations>
         <mv-teams
-            [currentUser]="currentUser"
+            [sugarCurrentUser]="currentUser.sugarCurrentUser"
             [teams]="teams"
         ></mv-teams>
         <mv-others
             [others]="fields.others"
-            [currentUser]="currentUser"
+            [sugarCurrentUser]="currentUser.sugarCurrentUser"
         ></mv-others>
-        <mv-extraneous [currentUser]="currentUser"></mv-extraneous>
-        <mv-switchvox [currentUser]="currentUser"></mv-switchvox>
-        <mv-gapps
-            [currentUser]="currentUser"
-            [orgas]="fields.orgas"
-        ></mv-gapps>
+        <mv-extraneous [sugarCurrentUser]="currentUser.sugarCurrentUser"></mv-extraneous>
+        <mv-switchvox [sugarCurrentUser]="currentUser.sugarCurrentUser"></mv-switchvox>
+        <mv-gapps [sugarCurrentUser]="currentUser.sugarCurrentUser"></mv-gapps>
 
         <div *ngIf="errorMsg">ERROR: {{ errorMsg }}</div>
         <button

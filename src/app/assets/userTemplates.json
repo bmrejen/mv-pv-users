@@ -1,15 +1,15 @@
 {
     "data": [
         {
-            "selected": false,
+            "checked": false,
             "value": "user_default"
         },
         {
-            "selected": false,
+            "checked": false,
             "value": "user_default_xx"
         },
         {
-            "selected": false,
+            "checked": false,
             "value": "user_default_jm"
         }
     ]

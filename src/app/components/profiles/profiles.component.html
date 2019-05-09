@@ -41,7 +41,7 @@
         <div class="select subtitle">Hérite les préférence de l'utilisateur
             <select
                 name="userToCopyHPfrom"
-                [(ngModel)]="currentUser.sugarCurrentUser.userToCopyHPfrom"
+                [(ngModel)]="sugarCurrentUser.userToCopyHPfrom"
             >
                 <option
                     *ngFor="let user of userTemplates ; trackBy: trackByFn"
@@ -59,7 +59,7 @@
                     <input
                         type="radio"
                         [value]="role.name"
-                        [(ngModel)]="currentUser.sugarCurrentUser.role"
+                        [(ngModel)]="sugarCurrentUser.role"
                         name="role"
                     >
                     {{ role.name }}
@@ -67,28 +67,25 @@
             </span>
         </div>
 
-        <div
-            class="checkbox-list subtitle"
-            ngModelGroup="departments"
-        >DEPARTMENT:
+        <div class="checkbox-list subtitle">DEPARTMENT:
             <span *ngFor="let department of departments ; trackBy: trackByFn">
                 <label>
                     <input
                         type="radio"
                         name="department"
-                        [(ngModel)]="currentUser.sugarCurrentUser.department"
+                        [(ngModel)]="sugarCurrentUser.department"
                         [value]="department.name"
                     >{{ department.name }}
                 </label>
             </span>
         </div>
 
-        <div *ngIf="currentUser.department === 'Ventes'">
+        <div *ngIf="sugarCurrentUser.department === 'Ventes'">
             <label>Leads min
                 <input
                     type="number"
                     name="leadsMin"
-                    [(ngModel)]="currentUser.sugarCurrentUser.leadsMin"
+                    [(ngModel)]="sugarCurrentUser.leadsMin"
                 >
             </label>
             <br>
@@ -96,7 +93,7 @@
                 <input
                     type="number"
                     name="leadsMax"
-                    [(ngModel)]="currentUser.sugarCurrentUser.leadsMax"
+                    [(ngModel)]="sugarCurrentUser.leadsMax"
                 >
             </label>
         </div>

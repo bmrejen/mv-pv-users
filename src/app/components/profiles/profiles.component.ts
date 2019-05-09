@@ -3,6 +3,7 @@ import { ControlContainer, NgForm } from "@angular/forms";
 
 import { SugarService } from "../../services/sugar.service";
 
+import { SugarUser } from "../../models/sugar-user";
 import { User } from "../../models/user";
 
 @Component({
@@ -17,9 +18,7 @@ import { User } from "../../models/user";
 })
 
 export class ProfilesComponent implements OnInit {
-    @Input() public currentUser;
-    @Input() public selectedFunction;
-    @Input() public selectedOffice;
+    @Input() public sugarCurrentUser;
     @Input() public roles;
     @Input() public userTemplates;
     @Input() public departments;
@@ -36,13 +35,23 @@ export class ProfilesComponent implements OnInit {
 
     public ngOnInit(): void {
         this.populateUserInheritance();
+        console.log(this.sugarCurrentUser);
     }
 
     public populateUserInheritance() {
         this.sugarService.getUsers()
 
             // populate usersFromSugar array
-            .then((users) => users.forEach((user) => this.allUsersFromSugar.push(new User(user))))
+            .then((users) => users.forEach((user) => {
+                const userInfo = this.sugarService.mapUserFromApi(user);
+
+                const myUser = new User({});
+                myUser.firstName = userInfo.common.firstName;
+                myUser.lastName = userInfo.common.lastName;
+                myUser.sugarCurrentUser = new SugarUser(userInfo.sugar);
+
+                this.allUsersFromSugar.push(myUser);
+            }))
 
             // filter active users
             .then((users) => this.activeUsersFromSugar = this.allUsersFromSugar
@@ -52,7 +61,6 @@ export class ProfilesComponent implements OnInit {
             .then((data) => {
                 return this.activeUsersFromSugar.map((user) => {
                     return {
-                        label: user.sugarCurrentUser.userName,
                         selected: false,
                         value: user.sugarCurrentUser.userName,
                     };
@@ -65,7 +73,7 @@ export class ProfilesComponent implements OnInit {
                     this.userTemplates.push(...templates);
                 }
             })
-            .catch((err) => console.log(err));
+            .catch((err) => console.error(err));
     }
 
     public handleClick(type) {
@@ -75,20 +83,19 @@ export class ProfilesComponent implements OnInit {
         switch (type) {
             case "conseiller":
                 {
-                    this.currentUser.userToCopyHPfrom = "user_default";
-                    this.currentUser.role = "Sales";
-                    this.currentUser.department = "Ventes";
+                    this.sugarCurrentUser.userToCopyHPfrom = "user_default";
+                    this.sugarCurrentUser.role = "Sales";
+                    this.sugarCurrentUser.department = "Ventes";
                     this.checkStuff(others, ["Global", "Ventes", "Devis Cotation", "ROLE - Reservation"]);
                     break;
                 }
 
             case "jm":
                 {
-                    this.currentUser.userToCopyHPfrom = "user_default_jm";
-                    this.selectedFunction = "jm";
+                    this.sugarCurrentUser.userToCopyHPfrom = "user_default_jm";
 
-                    this.currentUser.role = "Sales";
-                    this.currentUser.department = "Ventes";
+                    this.sugarCurrentUser.role = "Sales";
+                    this.sugarCurrentUser.department = "Ventes";
                     this.checkStuff(others,
                         [
                             "Global",
@@ -104,10 +111,9 @@ export class ProfilesComponent implements OnInit {
                 }
             case "manager":
                 {
-                    this.selectedFunction = "mgr";
 
-                    this.currentUser.role = "Team Manager";
-                    this.currentUser.department = "Ventes";
+                    this.sugarCurrentUser.role = "Team Manager";
+                    this.sugarCurrentUser.department = "Ventes";
                     this.checkStuff(others, [
                         "Global",
                         "Devis Cotation", "Devis V3",
@@ -119,9 +125,8 @@ export class ProfilesComponent implements OnInit {
                 }
             case "assistant":
                 {
-                    this.selectedFunction = "av";
-                    this.currentUser.role = "Reservation";
-                    this.currentUser.department = "Ventes";
+                    this.sugarCurrentUser.role = "Reservation";
+                    this.sugarCurrentUser.department = "Ventes";
                     this.checkStuff(others, [
                         "Devis V3",
                         "Devis Cotation",
@@ -133,31 +138,30 @@ export class ProfilesComponent implements OnInit {
                 }
             case "qualite":
                 {
-                    this.selectedFunction = "aq";
-                    this.currentUser.office = "Bureau - Billetterie & Qualité";
-                    this.currentUser.selectedManager = "Manager du service qualité (Aminata)";
+                    this.sugarCurrentUser.office = "Bureau - Billetterie & Qualité";
+                    // this.sugarCurrentUser.selectedManager = "Manager du service qualité (Aminata)";
 
-                    this.currentUser.role = "Quality Control";
-                    this.currentUser.department = "Service Qualité";
+                    this.sugarCurrentUser.role = "Quality Control";
+                    this.sugarCurrentUser.department = "Service Qualité";
                     this.checkStuff(others, ["BackOffice", "Global", "SAV"]);
                     this.checkStuff(orgas, ["BackOffice"]);
                     break;
                 }
             case "compta":
                 {
-                    this.currentUser.office = "1377";
+                    this.sugarCurrentUser.office = "1377";
 
-                    this.currentUser.role = "Accountant";
-                    this.currentUser.department = "Comptabilité";
+                    this.sugarCurrentUser.role = "Accountant";
+                    this.sugarCurrentUser.department = "Comptabilité";
                     this.checkStuff(others, ["Global", "ROLE - Affaire Validation", "ROLE - Create Provider"]);
                     this.checkStuff(orgas, ["Compta"]);
                     break;
                 }
             case "inactif":
                 {
-                    this.currentUser.role = "ReadOnly";
-                    this.currentUser.status = "Inactive";
-                    this.currentUser.employeeStatus = "Inactive";
+                    this.sugarCurrentUser.role = "ReadOnly";
+                    this.sugarCurrentUser.status = "Inactive";
+                    this.sugarCurrentUser.employeeStatus = "Inactive";
                     break;
                 }
 

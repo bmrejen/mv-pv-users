@@ -13,7 +13,7 @@ import { ControlContainer, NgForm } from "@angular/forms";
 })
 
 export class PhonesComponent implements OnInit {
-    @Input() public currentSugarUser;
+    @Input() public sugarCurrentUser;
 
     constructor() {
         //

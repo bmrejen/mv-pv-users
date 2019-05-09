@@ -115,7 +115,11 @@ export class CreateUserFormComponent implements OnInit {
 
     public getSugarUser(username) {
         this.sugar.getUserByUsername(username)
-            .then((res) => this.currentUser.sugarCurrentUser = new SugarUser(res))
+            .then((res) => {
+                this.currentUser.firstName = res.common.firstName;
+                this.currentUser.lastName = res.common.lastName;
+                this.currentUser.sugarCurrentUser = new SugarUser(res.sugar);
+            })
             .catch((err) => this.sugarMessage = "User not found");
     }
 

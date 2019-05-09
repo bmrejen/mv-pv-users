@@ -294,9 +294,8 @@ export class GapiAuthenticatorService {
         return new Promise((resolve, reject) => {
             this.zone.run(() => {
                 gapi.client.directory.users.get({ userKey: user })
-                    .then(
-                        (res) => resolve(this.mapFromApi(res["result"])),
-                        (err) => reject(err));
+                    .then((res) => resolve(this.mapFromApi(res["result"])))
+                    .catch((err) => reject(err));
             });
         });
     }

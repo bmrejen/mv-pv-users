@@ -1,8 +1,3 @@
-import { Role } from "../models/role";
-
-import { Destination } from "../models/destination";
-import { Other } from "../models/other";
-
 export interface ISugarUserFromApi {
     attributes: {
         codeSonGalileo: string;
@@ -59,11 +54,6 @@ export interface ISugarUserConfig {
     codeSonGalileo: string;
     type: string;
 
-    // Following properties belong in the CommonProperties of the User model
-
-    // lastName: string;
-    // firstName: string;
-
     // Following properties are not returned by the API
 
     // userToCopyHPfrom: string;
@@ -82,4 +72,15 @@ export interface ISugarUserConfig {
     // defaultTeams: number;
     // leadsMin: number;
     // leadsMax: number;
+}
+
+interface ICommonProperties {
+    firstName: string;
+    lastName: string;
+}
+
+// Firstname and lastname will come from Sugar
+export interface ISugarConfigAndName {
+    common: ICommonProperties;
+    sugar: ISugarUserConfig;
 }

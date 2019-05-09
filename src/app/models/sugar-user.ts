@@ -34,7 +34,6 @@ export class SugarUser implements ISugarUserConfig {
     public destinations: Destination[] = [];
     public others: Other[] = [];
     public roles: Role[] = [];
-    public ggOrganisationId: string = "";
     public ggGroups: string = "";
     public isAdmin: boolean = false;
     public apiPortalUser: boolean = false;
@@ -43,6 +42,7 @@ export class SugarUser implements ISugarUserConfig {
     public defaultTeams: number = 1;
     public leadsMin: number = 15;
     public leadsMax: number = 45;
+    public password: string = null;
 
     constructor(data: any) {
         this.codeSonGalileo = data.codeSonGalileo || this.codeSonGalileo;
@@ -78,7 +78,6 @@ export class SugarUser implements ISugarUserConfig {
         // this.destinations = data.destinations || this.destinations;
         // this.others = data.others || this.others;
         // this.roles = data.roles || this.roles;
-        // this.ggOrganisationId = data.ggOrganisationId || this.ggOrganisationId;
         // this.ggGroups = data.ggGroups || this.ggGroups;
         // this.isAdmin = data.isAdmin || this.isAdmin;
         // this.apiPortalUser = data.apiPortalUser || this.apiPortalUser;
@@ -87,6 +86,7 @@ export class SugarUser implements ISugarUserConfig {
         // this.defaultTeams = data.defaultTeams || this.defaultTeams;
         // this.leadsMin = data.leadsMin || this.leadsMin;
         // this.leadsMax = data.leadsMax || this.leadsMax;
+        // this.leadsMax = data.password || this.password;
 
     }
 }

@@ -3,15 +3,15 @@
     *ngIf="teams != null"
 >
     <legend>Teams</legend>
-    <div
-        ngModelGroup="teams"
-        class="teams"
-    >
+    <div class="teams checkbox-list subtitle">
         <div *ngFor="let team of teams ; trackBy: trackByFn">
             <label>
                 <input
-                    type="checkbox"
+                    type="radio"
+                    name="teamId"
+                    [(ngModel)]="sugarCurrentUser.team"
                     (click)="handleClick(team)"
+                    [value]="team.name"
                 >{{ team.name }}
             </label>
         </div>

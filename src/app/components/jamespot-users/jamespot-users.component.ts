@@ -10,7 +10,7 @@ import { JamespotUser } from "./../../models/jamespot-user";
 })
 
 export class JamespotUsersComponent {
-    @Input() public currentJamespotUser: JamespotUser;
+    @Input() public jamesCurrentUser: JamespotUser;
     @Input() public jamesMessage: string;
 
     public updateSuccessful: boolean = false;
@@ -30,7 +30,7 @@ export class JamespotUsersComponent {
 
     public onPost(): void {
         // this.mapUserToJamespot();
-        this.james.postUsers(this.currentJamespotUser, this.image)
+        this.james.postUsers(this.jamesCurrentUser, this.image)
             .then((res: IJamespotUserConfig) => {
                 this.resetFields();
                 // this.getUser(res.idUser);
@@ -43,7 +43,7 @@ export class JamespotUsersComponent {
 
     public onUpdate(): void {
         // this.mapUserToJamespot();
-        this.james.updateUser(this.currentJamespotUser, this.oldJamespotUser)
+        this.james.updateUser(this.jamesCurrentUser, this.oldJamespotUser)
             .then((res: IJamespotUserConfig) => {
                 this.resetFields();
                 this.updateSuccessful = true;
@@ -56,7 +56,7 @@ export class JamespotUsersComponent {
     }
 
     public onDelete(): void {
-        const id = this.currentJamespotUser.idUser;
+        const id = this.jamesCurrentUser.idUser;
         if (confirm(`Etes-vous sur de supprimer l'utilisateur ${id} en production?`)) {
             this.jamesMessage = null;
             this.james.deleteUser(id)
@@ -74,28 +74,28 @@ export class JamespotUsersComponent {
     }
 
     public onPrefill(): void {
-        this.currentJamespotUser.active = "1";
-        this.currentJamespotUser.company = "MARCO VASCO";
-        this.currentJamespotUser.country = "fr";
-        this.currentJamespotUser.firstname = "Benoit";
-        this.currentJamespotUser.idUser = null;
-        this.currentJamespotUser.img = null;
-        this.currentJamespotUser.language = "fr";
-        this.currentJamespotUser.lastname = "Mrejen";
-        this.currentJamespotUser.mail = "benoitmrejen@planetveo.com";
-        this.currentJamespotUser.password = "mypassword";
-        this.currentJamespotUser.phoneExtension = "1234";
-        this.currentJamespotUser.role = "User";
-        this.currentJamespotUser.timeZone = "Europe/Paris";
-        this.currentJamespotUser.username = "benoit.mrejen";
+        this.jamesCurrentUser.active = "1";
+        this.jamesCurrentUser.company = "MARCO VASCO";
+        this.jamesCurrentUser.country = "fr";
+        this.jamesCurrentUser.firstname = "Benoit";
+        this.jamesCurrentUser.idUser = null;
+        this.jamesCurrentUser.img = null;
+        this.jamesCurrentUser.language = "fr";
+        this.jamesCurrentUser.lastname = "Mrejen";
+        this.jamesCurrentUser.mail = "benoitmrejen@planetveo.com";
+        this.jamesCurrentUser.password = "mypassword";
+        this.jamesCurrentUser.phoneExtension = "1234";
+        this.jamesCurrentUser.role = "User";
+        this.jamesCurrentUser.timeZone = "Europe/Paris";
+        this.jamesCurrentUser.username = "benoit.mrejen";
     }
 
     public checkUsernameAvailability(): void {
-        this.james.getByField("pseudo", this.currentJamespotUser.username)
+        this.james.getByField("pseudo", this.jamesCurrentUser.username)
             .then((res: IJamespotUserConfig) => {
                 this.isUsernameTaken = true;
                 this.jamesMessage = null;
-                if (res.idUser !== "" && this.currentJamespotUser.idUser === null) {
+                if (res.idUser !== "" && this.jamesCurrentUser.idUser === null) {
                     this.isUsernameTaken = true;
                     this.jamesMessage = `Username taken by user #${res.idUser}`;
                 }
@@ -107,7 +107,7 @@ export class JamespotUsersComponent {
     }
 
     public onDisable(): void {
-        this.james.disableUser(this.currentJamespotUser.idUser)
+        this.james.disableUser(this.jamesCurrentUser.idUser)
             .then((res: IJamespotUserConfig) => {
                 if (res.idUser !== "") {
                     this.resetFields();
@@ -121,20 +121,20 @@ export class JamespotUsersComponent {
     }
 
     private resetFields(): void {
-        this.currentJamespotUser.active = "1";
-        this.currentJamespotUser.company = "MARCO VASCO";
-        this.currentJamespotUser.country = "fr";
-        this.currentJamespotUser.firstname = null;
-        this.currentJamespotUser.idUser = null;
-        this.currentJamespotUser.img = null;
-        this.currentJamespotUser.language = "fr";
-        this.currentJamespotUser.lastname = null;
-        this.currentJamespotUser.mail = null;
-        this.currentJamespotUser.password = null;
-        this.currentJamespotUser.phoneExtension = null;
-        this.currentJamespotUser.role = "User";
-        this.currentJamespotUser.timeZone = "Europe/Paris";
-        this.currentJamespotUser.username = null;
+        this.jamesCurrentUser.active = "1";
+        this.jamesCurrentUser.company = "MARCO VASCO";
+        this.jamesCurrentUser.country = "fr";
+        this.jamesCurrentUser.firstname = null;
+        this.jamesCurrentUser.idUser = null;
+        this.jamesCurrentUser.img = null;
+        this.jamesCurrentUser.language = "fr";
+        this.jamesCurrentUser.lastname = null;
+        this.jamesCurrentUser.mail = null;
+        this.jamesCurrentUser.password = null;
+        this.jamesCurrentUser.phoneExtension = null;
+        this.jamesCurrentUser.role = "User";
+        this.jamesCurrentUser.timeZone = "Europe/Paris";
+        this.jamesCurrentUser.username = null;
 
         this.jamesMessage = null;
         this.isDeleted = false;

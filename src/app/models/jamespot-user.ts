@@ -31,6 +31,5 @@ export class JamespotUser implements IJamespotUser {
         this.timeZone = data.timeZone || this.timeZone;
         this.company = data.company || this.company;
         this.country = data.country || this.country;
-
     }
 }

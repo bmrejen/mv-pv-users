@@ -1,81 +1,69 @@
 <fieldset class="blue">
     <legend>Jamespot</legend>
-    <h2 *ngIf="currentJamespotUser.idUser != null">
-        {{ currentJamespotUser.firstname }} {{ currentJamespotUser.lastname }} - Id:
-        {{ currentJamespotUser.idUser }}
+    <h2 *ngIf="jamesCurrentUser.idUser != null">
+        {{ jamesCurrentUser.firstname }} {{ jamesCurrentUser.lastname }} - Id:
+        {{ jamesCurrentUser.idUser }}
     </h2>
 
-    <form *ngIf="currentJamespotUser!=null">
+    <form *ngIf="jamesCurrentUser!=null">
         <input
             type="text"
-            [(ngModel)]="currentJamespotUser.mail"
+            [(ngModel)]="jamesCurrentUser.mail"
             name="mail"
         >Email
         <br>
         <input
             type="text"
-            [(ngModel)]="currentJamespotUser.role"
+            [(ngModel)]="jamesCurrentUser.role"
             name="role"
         >Role
         <br>
         <input
             type="text"
-            [(ngModel)]="currentJamespotUser.country"
+            [(ngModel)]="jamesCurrentUser.country"
             name="country"
         >Country
         <br>
         <input
             type="text"
-            [(ngModel)]="currentJamespotUser.language"
+            [(ngModel)]="jamesCurrentUser.language"
             name="language"
         >Language
         <br>
         <input
             type="text"
-            [(ngModel)]="currentJamespotUser.active"
+            [(ngModel)]="jamesCurrentUser.active"
             name="active"
         >active
         <br>
         <input
             type="text"
-            [(ngModel)]="currentJamespotUser.username"
+            [(ngModel)]="jamesCurrentUser.username"
             name="pseudo"
             (blur)="checkUsernameAvailability()"
         >Pseudo
         <br>
         <input
             type="text"
-            [(ngModel)]="currentJamespotUser.password"
+            [(ngModel)]="jamesCurrentUser.password"
             name="password"
         >Password
         <br>
         <input
             type="text"
-            [(ngModel)]="currentJamespotUser.firstname"
-            name="firstname"
-        >Firstname
-        <br>
-        <input
-            type="text"
-            [(ngModel)]="currentJamespotUser.lastname"
-            name="lastname"
-        >Lastname
-        <br>
-        <input
-            type="text"
-            [(ngModel)]="currentJamespotUser.company"
+            [(ngModel)]="jamesCurrentUser.company"
             name="company"
         >Company
         <br>
         <input
             type="text"
-            [(ngModel)]="currentJamespotUser.phoneExtension"
+            [(ngModel)]="jamesCurrentUser.phoneExtension"
             name="phoneExtension"
         >Phone Extension
         <br>
         <input
             type="text"
-            [(ngModel)]="currentJamespotUser.timeZone"
+            [(ngModel)]="jamesCurrentUser.timeZone"
             name="timeZone"
         >Time Zone
         <br>
@@ -88,7 +76,7 @@
         >
         <br>
         <!-- BUTTONS -->
-        <div *ngIf="currentJamespotUser.idUser != null">
+        <div *ngIf="jamesCurrentUser.idUser != null">
             <button
                 type="button"
                 (click)="onUpdate()"
@@ -110,7 +98,7 @@
             (click)="onPrefill()"
         >Prefill form with random data</button>
         <button
-            *ngIf="currentJamespotUser.idUser == null"
+            *ngIf="jamesCurrentUser.idUser == null"
             type=button
             (click)="onPost()"
         >Create</button>

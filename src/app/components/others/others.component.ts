@@ -15,14 +15,14 @@ import { ControlContainer, NgForm } from "@angular/forms";
 
 export class OthersComponent {
     @Input() public others;
-    @Input() public currentUser;
+    @Input() public sugarCurrentUser;
 
     public handleClick(other): void {
-        if (!this.currentUser.sugarCurrentUser.others.includes(other.id)) {
-            this.currentUser.sugarCurrentUser.others.push(other.id);
+        if (!this.sugarCurrentUser.others.includes(other.id)) {
+            this.sugarCurrentUser.others.push(other.id);
         } else {
-            const index = this.currentUser.sugarCurrentUser.others.indexOf(other.id);
-            this.currentUser.sugarCurrentUser.others.splice(index, 1);
+            const index = this.sugarCurrentUser.others.indexOf(other.id);
+            this.sugarCurrentUser.others.splice(index, 1);
         }
     }
 

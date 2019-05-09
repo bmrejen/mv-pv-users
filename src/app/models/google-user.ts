@@ -25,5 +25,6 @@ export class GoogleUser implements IGapiUser {
         this.nonEditableAliases = data.nonEditableAliases || this.nonEditableAliases;
         this.primaryEmailSuffix = this.primaryEmail.includes("@") ?
             this.primaryEmail.split("@")[1] : this.primaryEmailSuffix;
+        this.password = data.password || this.password;
     }
 }

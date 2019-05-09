@@ -13,8 +13,7 @@ import { ControlContainer, NgForm } from "@angular/forms";
 })
 
 export class GappsComponent {
-    @Input() public orgas;
-    @Input() public currentUser;
+    @Input() public sugarCurrentUser;
 
     public trackByFn(item) {
         return item.id;

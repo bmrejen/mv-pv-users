@@ -5,7 +5,7 @@
             <input
                 name="sugar_tourplan"
                 type="text"
-                [(ngModel)]="currentUser.sugarCurrentUser.tourplanID"
+                [(ngModel)]="sugarCurrentUser.tourplanID"
             >
         </label>
     </div>
@@ -15,7 +15,7 @@
             <input
                 name="codeSON"
                 type="text"
-                [(ngModel)]="currentUser.sugarCurrentUser.codeSonGalileo"
+                [(ngModel)]="sugarCurrentUser.codeSonGalileo"
             >
         </label>
     </div>
@@ -25,7 +25,7 @@
             <input
                 name="title"
                 type="text"
-                [(ngModel)]="currentUser.sugarCurrentUser.title"
+                [(ngModel)]="sugarCurrentUser.title"
             >
         </label>
     </div>
@@ -34,7 +34,7 @@
         Status
         <select
             name="status"
-            [(ngModel)]="currentUser.sugarCurrentUser.status"
+            [(ngModel)]="sugarCurrentUser.status"
         >
             <option
                 *ngFor="let status of statuses; trackBy: trackByFn"
@@ -47,7 +47,7 @@
         Employee Status
         <select
             name="employeeStatus"
-            [(ngModel)]="currentUser.sugarCurrentUser.employeeStatus"
+            [(ngModel)]="sugarCurrentUser.employeeStatus"
         >
             <option
                 *ngFor="let status of employeeStatuses; trackBy: trackByFn"

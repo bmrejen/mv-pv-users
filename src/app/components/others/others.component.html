@@ -3,10 +3,7 @@
     *ngIf="others != null"
 >
     <legend>Others</legend>
-    <div
-        ngModelGroup="others"
-        class="others"
-    >
+    <div class="others">
         <div *ngFor="let other of others ; trackBy: trackByFn">
             <label>
                 <input

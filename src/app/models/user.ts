@@ -4,14 +4,12 @@ import { SugarUser } from "./sugar-user";
 
 export class User {
 
+    // COMMON PROPERTIES
     public firstName: string = "";
     public lastName: string = "";
 
     // SUGAR
     public sugarCurrentUser: SugarUser = new SugarUser({});
-
-    // OTHERS
-    public password: string = "";
 
     // JAMESPOT
     public jamesCurrentUser: JamespotUser = new JamespotUser({});
@@ -19,7 +17,8 @@ export class User {
     // GOOGLE
     public ggCurrentUser: GoogleUser = new GoogleUser({});
 
-    public constructor(data: any) {
-        //
+    constructor(data: any) {
+        this.firstName = data.firstName || this.firstName;
+        this.lastName = data.lastName || this.lastName;
     }
 }
