@@ -35,7 +35,6 @@ export class ProfilesComponent implements OnInit {
 
     public ngOnInit(): void {
         this.populateUserInheritance();
-        console.log(this.sugarCurrentUser);
     }
 
     public populateUserInheritance() {
