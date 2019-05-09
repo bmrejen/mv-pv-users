@@ -48,9 +48,9 @@ export interface ISugarUserConfig {
     officeId: string;
     teamId: string;
     tourplanID: string;
-    swClickToCall: string;
-    swCallNotification: string;
-    swAllowRemoteCalls: string;
+    swClickToCall: boolean;
+    swCallNotification: boolean;
+    swAllowRemoteCalls: boolean;
     codeSonGalileo: string;
     type: string;
 

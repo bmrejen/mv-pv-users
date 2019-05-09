@@ -1,0 +1,14 @@
+.radio-container {
+    position: relative;
+}
+
+.radio {
+    position: absolute;
+    left: 230px;
+}
+
+.radio label {
+    position: relative;
+    top: -18px;
+}
+
