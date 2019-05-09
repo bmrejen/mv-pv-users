@@ -49,6 +49,7 @@
                 [currentUser]="currentUser"
                 [ggCurrentUser]="currentUser.ggCurrentUser"
                 [gapiMessage]="gapiMessage"
+                [gapiStatus]="gapiStatus"
                 class="google"
             ></mv-gapi-users>
         </div>
@@ -88,7 +89,10 @@
         ></mv-others>
         <mv-extraneous [sugarCurrentUser]="currentUser.sugarCurrentUser"></mv-extraneous>
         <mv-switchvox [sugarCurrentUser]="currentUser.sugarCurrentUser"></mv-switchvox>
-        <mv-gapps [sugarCurrentUser]="currentUser.sugarCurrentUser"></mv-gapps>
+        <mv-gapps
+            [ggCurrentUser]="currentUser.ggCurrentUser"
+            [googleGroups]="googleGroups"
+        ></mv-gapps>
 
         <div *ngIf="errorMsg">ERROR: {{ errorMsg }}</div>
         <button

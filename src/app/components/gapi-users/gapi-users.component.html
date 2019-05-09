@@ -30,6 +30,14 @@
                 </option>
             </select>
 
+            <div>Groups
+                <div *ngFor="let group of googleGroups; trackBy: trackByFn">
+                    <label>
+                        <input type="checkbox">{{ group.name }}
+                    </label>
+                </div>
+            </div>
+
             <!-- IF ID IS NULL THEN ADMIN CAN CHOOSE A DOMAIN -->
             <div *ngIf="ggCurrentUser.id == null">
                 Primary mail
