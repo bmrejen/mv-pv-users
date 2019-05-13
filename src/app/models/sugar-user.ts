@@ -80,7 +80,6 @@ export class SugarUser implements ISugarUserConfig {
         // this.destinations = data.destinations || this.destinations;
         // this.others = data.others || this.others;
         // this.roles = data.roles || this.roles;
-        // this.ggGroups = data.ggGroups || this.ggGroups;
         // this.isAdmin = data.isAdmin || this.isAdmin;
         // this.apiPortalUser = data.apiPortalUser || this.apiPortalUser;
         // this.assignationNotification = data.assignationNotification || this.assignationNotification;
@@ -88,7 +87,6 @@ export class SugarUser implements ISugarUserConfig {
         // this.defaultTeams = data.defaultTeams || this.defaultTeams;
         // this.leadsMin = data.leadsMin || this.leadsMin;
         // this.leadsMax = data.leadsMax || this.leadsMax;
-        // this.leadsMax = data.password || this.password;
 
     }
 }

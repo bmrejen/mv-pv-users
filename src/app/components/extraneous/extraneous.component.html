@@ -30,29 +30,30 @@
         </label>
     </div>
 
-    <div>
-        Status
-        <select
-            name="status"
-            [(ngModel)]="sugarCurrentUser.status"
-        >
-            <option
-                *ngFor="let status of statuses; trackBy: trackByFn"
-                [value]="status"
-            >{{ status }}</option>
-        </select>
+    <div>Status
+        <div class="radio">
+            <label *ngFor="let status of statuses; trackBy: trackByFn">
+                <input
+                    type="radio"
+                    name="status"
+                    [(ngModel)]="sugarCurrentUser.status"
+                    [value]="status"
+                >{{ status }}
+            </label>
+        </div>
     </div>
 
-    <div>
-        Employee Status
-        <select
-            name="employeeStatus"
-            [(ngModel)]="sugarCurrentUser.employeeStatus"
-        >
-            <option
-                *ngFor="let status of employeeStatuses; trackBy: trackByFn"
-                [value]="status"
-            >{{ status }}</option>
-        </select>
+    <div>Employee Status
+        <div class="radio">
+            <label *ngFor="let status of employeeStatuses; trackBy: trackByFn">
+                <input
+                    type="radio"
+                    name="employeeStatus"
+                    [(ngModel)]="sugarCurrentUser.employeeStatus"
+                    [value]="status"
+                >{{ status }}
+            </label>
+        </div>
     </div>
+
 </fieldset>
