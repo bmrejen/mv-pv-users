@@ -39,7 +39,6 @@ import { OthersComponent } from "./app/components/others/others.component";
 import { PhonesComponent } from "./app/components/phones/phones.component";
 import { ProfilesComponent } from "./app/components/profiles/profiles.component";
 import { RolesComponent } from "./app/components/roles/roles.component";
-import { SwitchvoxComponent } from "./app/components/switchvox/switchvox.component";
 import { TeamsComponent } from "./app/components/teams/teams.component";
 import { UserComponent } from "./app/components/user/user.component";
 import { UsersComponent } from "./app/components/users/users.component";
@@ -89,7 +88,6 @@ import "./app/rxjs-extensions";
         PhonesComponent,
         ProfilesComponent,
         RolesComponent,
-        SwitchvoxComponent,
         TeamsComponent,
         UserComponent,
         UsersComponent,

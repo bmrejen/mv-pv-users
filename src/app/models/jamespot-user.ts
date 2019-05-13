@@ -11,7 +11,6 @@ export class JamespotUser implements IJamespotUser {
     public idUser: string;
     public img: string | File;
     public active: string = "1";
-    public password: string;
     public phoneExtension: string;
     public timeZone: string = "Europe/Paris";
     public company: string = "MARCO VASCO";
@@ -26,7 +25,6 @@ export class JamespotUser implements IJamespotUser {
         this.idUser = data.idUser || this.idUser;
         this.img = data.img || this.img;
         this.active = data.active || this.active;
-        this.password = data.password || this.password;
         this.phoneExtension = data.phoneExtension || this.phoneExtension;
         this.timeZone = data.timeZone || this.timeZone;
         this.company = data.company || this.company;

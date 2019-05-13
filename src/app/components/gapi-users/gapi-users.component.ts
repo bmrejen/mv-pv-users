@@ -132,7 +132,6 @@ export class GapiUsersComponent implements OnInit {
         this.ggCurrentUser.emails = null;
         this.ggCurrentUser.id = null;
         this.ggCurrentUser.orgas = null;
-        this.ggCurrentUser.password = null;
         this.ggCurrentUser.primaryEmail = null;
         this.ggCurrentUser.sendAs = null;
         this.ggCurrentUser.signature = null;

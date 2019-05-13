@@ -42,7 +42,6 @@ export class SugarUser implements ISugarUserConfig {
     public defaultTeams: number = 1;
     public leadsMin: number = 15;
     public leadsMax: number = 45;
-    public password: string = null;
 
     constructor(data: any) {
         this.codeSonGalileo = data.codeSonGalileo || this.codeSonGalileo;

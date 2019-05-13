@@ -83,7 +83,6 @@ export class JamespotUsersComponent {
         this.jamesCurrentUser.language = "fr";
         this.jamesCurrentUser.lastname = "Mrejen";
         this.jamesCurrentUser.mail = "benoitmrejen@planetveo.com";
-        this.jamesCurrentUser.password = "mypassword";
         this.jamesCurrentUser.phoneExtension = "1234";
         this.jamesCurrentUser.role = "User";
         this.jamesCurrentUser.timeZone = "Europe/Paris";
@@ -130,7 +129,6 @@ export class JamespotUsersComponent {
         this.jamesCurrentUser.language = "fr";
         this.jamesCurrentUser.lastname = null;
         this.jamesCurrentUser.mail = null;
-        this.jamesCurrentUser.password = null;
         this.jamesCurrentUser.phoneExtension = null;
         this.jamesCurrentUser.role = "User";
         this.jamesCurrentUser.timeZone = "Europe/Paris";

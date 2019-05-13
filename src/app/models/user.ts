@@ -7,6 +7,7 @@ export class User {
     // COMMON PROPERTIES
     public firstName: string = "";
     public lastName: string = "";
+    public password: string = "";
 
     // SUGAR
     public sugarCurrentUser: SugarUser = new SugarUser({});
