@@ -6,7 +6,8 @@
         <option
             *ngFor="let manager of managers; trackBy: trackByFn"
             [value]="manager.sugarCurrentUser.id"
-        >{{ manager.firstName }} {{ manager.lastName | uppercase }} - {{ manager.sugarCurrentUser.teamId }}
+        >{{ manager.firstName }} {{ manager.lastName | uppercase }} - {{ manager.sugarCurrentUser.teamId }} -
+            {{ manager.sugarCurrentUser.status }}
         </option>
     </select>
 </div>
