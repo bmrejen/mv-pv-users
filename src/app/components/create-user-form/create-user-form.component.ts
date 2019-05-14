@@ -38,6 +38,12 @@ export class CreateUserFormComponent implements OnInit {
     public gapiMessage: string = null;
     public jamesMessage: string = null;
     public sugarMessage: string = null;
+    public gapiStatus = {
+        apiFailed: false,
+        apiLoaded: false,
+        apiReady: false,
+        userLoggedIn: null,
+    };
 
     public oldJamespotUser: JamespotUser;
 
@@ -79,6 +85,31 @@ export class CreateUserFormComponent implements OnInit {
                 // get fields list
                 this.fields = new Fields(data.fields);
             });
+        this.initGapiServices();
+    }
+
+    public initGapiServices() {
+        this.gapi.loadClient()
+            .then((result) => {
+                this.gapiStatus.apiLoaded = true;
+
+                return this.gapi.initClient();
+            })
+            .catch((err) => this.gapiStatus.apiFailed = true)
+            .then((res) => {
+                this.gapiStatus.apiReady = true;
+                this.gapi.initAuthClient()
+                    .then((result) => {
+                        if (result.currentUser.get()
+                            .isSignedIn() === true) {
+                            this.gapiStatus.userLoggedIn = result.currentUser.get().w3.ig;
+                        }
+                    })
+                    .then(() => this.gapi.getGroups()
+                        .then((groups) => this.googleGroups = groups))
+                    .catch((err) => console.error("initAuthClient error", err));
+            })
+            .catch((err) => this.gapiStatus.apiFailed = true);
     }
 
     public onSubmit(form) {
@@ -142,12 +173,11 @@ export class CreateUserFormComponent implements OnInit {
     private getGoogleGroupsOfUser(primaryMail) {
         this.gapi.getGroups(primaryMail)
             .then((response) => {
-                this.googleGroups = response;
                 this.googleGroups.forEach((gp) => gp["isEnabled"] = false);
                 response.forEach((group) => {
                     const myGroup = this.googleGroups.find((grp) => grp.id === group.id);
                     myGroup["isEnabled"] = true;
-                    this.currentUser.ggCurrentUser.googleGroups.push(group);
+                    this.currentUser.ggCurrentUser.googleGroups.push(myGroup);
                 });
             })
             .catch((err) => alert(err.result.error.message));

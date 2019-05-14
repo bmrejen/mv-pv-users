@@ -19,12 +19,12 @@ export class SugarUser implements ISugarUserConfig {
     public phoneWork: string = "";
     public salutation: string = "";
     public status: string = "";
-    public swAllowRemoteCalls: string = "";
-    public swCallNotification: string = "";
-    public swClickToCall: string = "";
+    public swAllowRemoteCalls: boolean = true;
+    public swCallNotification: boolean = true;
+    public swClickToCall: boolean = true;
     public teamId: string = "";
     public title: string = "";
-    public tourplanID: string = "";
+    public tourplanID: string;
     public userName: string = "";
     public type: string = "users";
     public userToCopyHPfrom: string = "";
@@ -62,12 +62,14 @@ export class SugarUser implements ISugarUserConfig {
         this.status = data.status || this.status;
         this.teamId = data.teamId || this.teamId;
         this.title = data.title || this.title;
-        this.tourplanID = data.tourplanID || this.tourplanID;
         this.userName = data.userName || this.userName;
         this.type = data.type || this.type;
-        this.swAllowRemoteCalls = data.swAllowRemoteCalls || this.swAllowRemoteCalls;
-        this.swCallNotification = data.swCallNotification || this.swCallNotification;
-        this.swClickToCall = data.swClickToCall || this.swClickToCall;
+
+        this.swAllowRemoteCalls = data.swAllowRemoteCalls === "0" ? false : this.swAllowRemoteCalls;
+        this.swCallNotification = data.swCallNotification === "0" ? false : this.swCallNotification;
+        this.swClickToCall = data.swClickToCall === "0" ? false : this.swClickToCall;
+        this.tourplanID = data.tourplanID || this.userName.substr(0, 6)
+            .toUpperCase();
 
         // Following properties are not returned by the API
 
@@ -78,7 +80,6 @@ export class SugarUser implements ISugarUserConfig {
         // this.destinations = data.destinations || this.destinations;
         // this.others = data.others || this.others;
         // this.roles = data.roles || this.roles;
-        // this.ggGroups = data.ggGroups || this.ggGroups;
         // this.isAdmin = data.isAdmin || this.isAdmin;
         // this.apiPortalUser = data.apiPortalUser || this.apiPortalUser;
         // this.assignationNotification = data.assignationNotification || this.assignationNotification;
@@ -86,7 +87,6 @@ export class SugarUser implements ISugarUserConfig {
         // this.defaultTeams = data.defaultTeams || this.defaultTeams;
         // this.leadsMin = data.leadsMin || this.leadsMin;
         // this.leadsMax = data.leadsMax || this.leadsMax;
-        // this.leadsMax = data.password || this.password;
 
     }
 }

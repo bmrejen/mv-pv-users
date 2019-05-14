@@ -193,4 +193,5 @@ export class ProfilesComponent implements OnInit {
     public trackByFn(item) {
         return item.id;
     }
+
 }

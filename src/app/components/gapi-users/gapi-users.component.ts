@@ -22,12 +22,9 @@ export class GapiUsersComponent implements OnInit {
     public userToGet: string;
     public ggOldUser: User;
     public orgas;
-    public gapiStatus = {
-        apiFailed: false,
-        apiLoaded: false,
-        apiReady: false,
-        userLoggedIn: "Logged out",
-    };
+    public userLoggedIn: "Logged out";
+
+    public googleGroups;
 
     public domains = Object.keys(Domains)
         .map((dom) => Domains[dom]);
@@ -35,6 +32,7 @@ export class GapiUsersComponent implements OnInit {
     @Input() public currentUser: User;
     @Input() public ggCurrentUser: GoogleUser;
     @Input() public gapiMessage: string;
+    @Input() public gapiStatus;
 
     constructor(
         private gapiService: GapiAuthenticatorService,
@@ -51,25 +49,6 @@ export class GapiUsersComponent implements OnInit {
                     this.orgas = data.fields.orgas;
                 }
             });
-        this.gapiService.loadClient()
-            .then((result) => {
-                this.gapiStatus.apiLoaded = true;
-
-                return this.gapiService.initClient();
-            })
-            .catch((err) => this.gapiStatus.apiFailed = true)
-            .then((res) => {
-                this.gapiStatus.apiReady = true;
-                this.gapiService.initAuthClient()
-                    .then((result) => {
-                        if (result.currentUser.get()
-                            .isSignedIn() === true) {
-                            this.gapiStatus.userLoggedIn = result.currentUser.get().w3.ig;
-                        }
-                    })
-                    .catch((err) => console.error("initAuthClient error", err));
-            })
-            .catch((err) => this.gapiStatus.apiFailed = true);
     }
 
     public listUsers(): void {
@@ -81,7 +60,7 @@ export class GapiUsersComponent implements OnInit {
     public signIn() {
         this.gapiService.signIn()
             .then(() => this.gapiService.initAuthClient()
-                .then((result: any) => this.gapiStatus.userLoggedIn = result.currentUser.get().w3.ig)
+                .then((result: any) => this.userLoggedIn = result.currentUser.get().w3.ig)
                 .catch((err) => console.log("init auth client error", err)),
             );
     }
@@ -91,7 +70,7 @@ export class GapiUsersComponent implements OnInit {
             .then(() => this.gapiService.initAuthClient()
                 .then((result: any) => {
                     if (!this.gapiService.isSignedIn()) {
-                        this.gapiStatus.userLoggedIn = "Logged out";
+                        this.userLoggedIn = "Logged out";
                     }
                 })
                 .catch((err) => console.error("init auth client error", err)));

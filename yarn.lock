@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@angular/animations@^4.4.7":
+"@angular/animations@^4.3.3":
   version "4.4.7"
   resolved "https://registry.yarnpkg.com/@angular/animations/-/animations-4.4.7.tgz#4d108e89cafe8d0d193385e7aa1b3b00e8199ade"
   integrity sha512-clP1xZw3KCfdj5rGDies5L5iwLgXzVFQ/B66Yj9oc24mJyK9oZARmuXdHfu+y8YtlW2b3wNSK2JH3qygaxbNLA==

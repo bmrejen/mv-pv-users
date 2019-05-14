@@ -3,6 +3,7 @@ import { ControlContainer, NgForm } from "@angular/forms";
 
 @Component({
     selector: "mv-switchvox",
+    styleUrls: ["./switchvox.component.css"],
     templateUrl: "./switchvox.component.html",
     viewProviders: [
         {
