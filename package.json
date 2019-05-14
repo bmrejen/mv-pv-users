@@ -8,6 +8,7 @@
     "license": "UNLICENSED",
     "private": true,
     "devDependencies": {
+        "@angular/animations": "^4.3.3",
         "@angular/common": "^4.3.3",
         "@angular/compiler": "^4.3.3",
         "@angular/compiler-cli": "^4.3.3",
@@ -117,7 +118,6 @@
         "zone.js": "^0.8.16"
     },
     "dependencies": {
-        "@angular/animations": "^4.4.7",
         "jsrsasign": "^8.0.12"
     },
     "scripts": {
