@@ -12,15 +12,11 @@ import "rxjs/add/operator/map";
 import "rxjs/add/operator/mergeMap";
 import "rxjs/add/operator/toPromise";
 
-import { ISugarUserConfig } from "./../interfaces/sugar-user";
-
-// Using an interface to work around tslint-prefer-function-over-method rule
-interface ISugarService {
-    mapUserFromApi(data: any): ISugarUserConfig;
-}
+import { SugarUser } from "../models/sugar-user";
+import { ISugarConfigAndName } from "./../interfaces/sugar-user";
 
 @Injectable()
-export class SugarService implements ISugarService {
+export class SugarService {
     public roleList: Role[] = [];
     public teamList: Team[] = [];
     public userList: User[] = [];
@@ -32,12 +28,12 @@ export class SugarService implements ISugarService {
         //
     }
 
-    public getUserById(id): Promise<ISugarUserConfig> {
+    public getUserById(id): Promise<ISugarConfigAndName> {
         return this.getData(`users/${id}`)
             .then((user) => this.mapUserFromApi(user));
     }
 
-    public getUsers(): Promise<User[]> {
+    public getUsers(): Promise<any> {
         return this.getData("users");
     }
 
@@ -47,25 +43,38 @@ export class SugarService implements ISugarService {
     }
 
     public getManagers(): Promise<User[]> {
-        return this.getData("users")
-            .then((users) => users.filter((user) => user.attributes["title"] === "Manager"));
+        return this.getUsers()
+            .then((users) => users.filter((user) => user.attributes.title === "Manager"))
+            .then((users) => this.createUsersArray(users));
     }
 
-    public getUserByUsername(username): Promise<User> {
-        console.log("username we are looking for: ", username);
+    public createUsersArray(users): User[] {
+        const usersArray = [];
+        users.forEach((user) => {
+            const userInfo = this.mapUserFromApi(user);
+            const myUser = new User({});
+            myUser.firstName = userInfo.common.firstName;
+            myUser.lastName = userInfo.common.lastName;
+            myUser.sugarCurrentUser = new SugarUser(userInfo.sugar);
 
-        return this.getData("users")
-            .then((users) => users.filter((user) => user.attributes["userName"] === username.toLowerCase()))
-            .then((user) => user[0]);
+            usersArray.push(myUser);
+        });
+
+        return usersArray;
     }
 
-    public getUserByEmail(email): Promise<User> {
+    public getUserByUsername(username): Promise<any> {
+        return this.getData(`users?username=${username}`)
+            .then((users) => this.mapUserFromApi(users[0]));
+    }
+
+    public getUserByEmail(email): Promise<SugarUser> {
         return this.getData("users")
             .then((users) => users.filter((user) => user.attributes["email"] === email))
             .then((user) => user[0]);
     }
 
-    public getUsersByTeam(team): Promise<User[]> {
+    public getUsersByTeam(team): Promise<SugarUser[]> {
         return this.getData("users")
             .then((users) => users.filter((user) => user.attributes["teamId"] === team));
     }
@@ -88,32 +97,37 @@ export class SugarService implements ISugarService {
             .then((items) => items.filter((item) => isTeamMember(item)));
     }
 
-    public mapUserFromApi(data): ISugarUserConfig {
+    public mapUserFromApi(data): ISugarConfigAndName {
         return {
-            codeSonGalileo: data.attributes.codeSonGalileo,
-            department: data.attributes.department,
-            email: data.attributes.email,
-            employeeStatus: data.attributes.employeeStatus,
-            firstName: data.attributes.firstName,
-            id: data.attributes.id,
-            lastName: data.attributes.lastName,
-            managerId: data.attributes.managerId,
-            officeId: data.attributes.officeId,
-            phoneAsterisk: data.attributes.phoneAsterisk,
-            phoneFax: data.attributes.phoneFax,
-            phoneHome: data.attributes.phoneHome,
-            phoneMobile: data.attributes.phoneMobile,
-            phoneOther: data.attributes.phoneOther,
-            phoneWork: data.attributes.phoneWork,
-            salutation: data.attributes.salutation,
-            status: data.attributes.status,
-            swAllowRemoteCalls: data.attributes.swAllowRemoteCalls,
-            swCallNotification: data.attributes.swCallNotification,
-            swClickToCall: data.attributes.swClickToCall,
-            teamId: data.attributes.teamId,
-            title: data.attributes.title,
-            tourplanID: data.attributes.tourplanID,
-            userName: data.attributes.userName,
+            common: {
+                firstName: data.attributes.firstName,
+                lastName: data.attributes.lastName,
+            },
+            sugar: {
+                codeSonGalileo: data.attributes.codeSonGalileo || "",
+                department: data.attributes.department || "",
+                email: data.attributes.email || "",
+                employeeStatus: data.attributes.employeeStatus || "",
+                id: data.attributes.id || "",
+                managerId: data.attributes.managerId || "",
+                officeId: data.attributes.officeId || "",
+                phoneAsterisk: data.attributes.phoneAsterisk || "",
+                phoneFax: data.attributes.phoneFax || "",
+                phoneHome: data.attributes.phoneHome || "",
+                phoneMobile: data.attributes.phoneMobile || "",
+                phoneOther: data.attributes.phoneOther || "",
+                phoneWork: data.attributes.phoneWork || "",
+                salutation: data.attributes.salutation || "",
+                status: data.attributes.status || "",
+                swAllowRemoteCalls: data.attributes.swAllowRemoteCalls || "",
+                swCallNotification: data.attributes.swCallNotification || "",
+                swClickToCall: data.attributes.swClickToCall || "",
+                teamId: data.attributes.teamId || "",
+                title: data.attributes.title || "",
+                tourplanID: data.attributes.tourplanID || "",
+                type: data.attributes.type || "",
+                userName: data.attributes.userName || "",
+            },
         };
     }
 

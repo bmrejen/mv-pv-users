@@ -1,27 +1,22 @@
 import { Injectable } from "@angular/core";
-import { ActivatedRoute, ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/router";
+import { Resolve } from "@angular/router";
+import { ISugarConfigAndName } from "../interfaces/sugar-user";
 import { SugarService } from "../services/sugar.service";
-
-import { User } from "../models/user";
 
 @Injectable()
 
-export class UsersResolverService implements Resolve<Promise<User[]>> {
+export class UsersResolverService implements Resolve<Promise<ISugarConfigAndName[]>> {
 
-  constructor(private sugar: SugarService) {
-    //
-  }
+    constructor(private sugar: SugarService) {
+        //
+    }
 
-  public resolve(route: ActivatedRouteSnapshot,
-                 state: RouterStateSnapshot): Promise<User[]> {
+    public resolve(): Promise<ISugarConfigAndName[]> {
 
-    const users: Promise<User[]> = this.sugar.getUsers();
-
-    return new Promise((resolve, reject) => {
-      users
-      .then(
-            (res) => resolve(res),
-            (error) => reject("Probleme"));
-    });
-  }
+        return new Promise((resolve, reject) => {
+            this.sugar.getUsers()
+                .then((res) => resolve(res))
+                .catch((error) => reject(`Probleme Sugar Users: ${error}`));
+        });
+    }
 }

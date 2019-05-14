@@ -14,7 +14,7 @@ import { ControlContainer, NgForm } from "@angular/forms";
 
 export class OfficeComponent {
     @Input() public offices;
-    @Input() public currentUser;
+    @Input() public sugarCurrentUser;
 
     constructor() {
         //

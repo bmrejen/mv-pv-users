@@ -8,33 +8,52 @@
 
     <ng-container *ngIf="fields != null">
         <mv-accounts [accounts]="fields.accounts"></mv-accounts>
+        <input
+            type="text"
+            [(ngModel)]="mailToGet"
+            name="mailToGet"
+        >
+        <button
+            type="button"
+            (click)=getUser()
+        >Get User</button>
+
+        <div *ngIf="isAlias">{{ mailToGet }} IS AN ALIAS OF
+            {{ currentUser.ggCurrentUser.primaryEmail | uppercase }}</div>
+        <div *ngIf="isAlias === false">{{ mailToGet }} belongs to real account</div>
+        <hr>
+
 
         <div class="grid-container">
             <mv-credentials
+                [sugarCurrentUser]="currentUser.sugarCurrentUser"
                 [currentUser]="currentUser"
                 [civilites]="fields.civilites"
                 [userFields]="fields.userFields"
                 [usersFromSugar]="usersFromSugar"
+                [sugarMessage]="sugarMessage"
                 class="credentials"
             ></mv-credentials>
 
             <mv-phones
-                [currentUser]="currentUser"
+                [sugarCurrentUser]="currentUser.sugarCurrentUser"
                 class="phones"
             ></mv-phones>
             <mv-jamespot
                 class="jamespot"
-                [currentUser]="currentUser"
-            ></mv-jamespot>
+                [jamesCurrentUser]="currentUser.jamesCurrentUser"
+                [jamesMessage]="jamesMessage"
+            >
+            </mv-jamespot>
             <mv-gapi-users
                 [currentUser]="currentUser"
+                [ggCurrentUser]="currentUser.ggCurrentUser"
+                [gapiMessage]="gapiMessage"
                 class="google"
             ></mv-gapi-users>
         </div>
         <mv-profiles
-            [currentUser]="currentUser"
-            [selectedFunction]="fields.selectedFunction"
-            [selectedOffice]="fields.selectedOffice"
+            [sugarCurrentUser]="currentUser.sugarCurrentUser"
             [roles]="roles"
             [userTemplates]="fields.userTemplates"
             [departments]="fields.departments"
@@ -44,35 +63,32 @@
 
         <mv-office
             [offices]="fields.offices"
-            [currentUser]="currentUser"
+            [sugarCurrentUser]="currentUser.sugarCurrentUser"
         ></mv-office>
         <mv-function
             [functions]="fields.functions"
-            [currentUser]="currentUser"
+            [sugarCurrentUser]="currentUser.sugarCurrentUser"
         ></mv-function>
         <mv-manager
             [managers]="managers"
-            [currentUser]="currentUser"
+            [sugarCurrentUser]="currentUser.sugarCurrentUser"
         ></mv-manager>
 
         <mv-destinations
             [destinations]="destinations"
-            [currentUser]="currentUser"
+            [sugarCurrentUser]="currentUser.sugarCurrentUser"
         ></mv-destinations>
         <mv-teams
-            [currentUser]="currentUser"
+            [sugarCurrentUser]="currentUser.sugarCurrentUser"
             [teams]="teams"
         ></mv-teams>
         <mv-others
             [others]="fields.others"
-            [currentUser]="currentUser"
+            [sugarCurrentUser]="currentUser.sugarCurrentUser"
         ></mv-others>
-        <mv-extraneous [currentUser]="currentUser"></mv-extraneous>
-        <mv-switchvox [currentUser]="currentUser"></mv-switchvox>
-        <mv-gapps
-            [currentUser]="currentUser"
-            [orgas]="fields.orgas"
-        ></mv-gapps>
+        <mv-extraneous [sugarCurrentUser]="currentUser.sugarCurrentUser"></mv-extraneous>
+        <mv-switchvox [sugarCurrentUser]="currentUser.sugarCurrentUser"></mv-switchvox>
+        <mv-gapps [sugarCurrentUser]="currentUser.sugarCurrentUser"></mv-gapps>
 
         <div *ngIf="errorMsg">ERROR: {{ errorMsg }}</div>
         <button

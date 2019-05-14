@@ -1,6 +1,8 @@
-import { Component, Input } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { ControlContainer, NgForm } from "@angular/forms";
+import { SugarService } from "./../../services/sugar.service";
 
+import { SugarUser } from "../../models/sugar-user";
 import { User } from "../../models/user";
 
 @Component({
@@ -18,27 +20,32 @@ import { User } from "../../models/user";
 export class CredentialsComponent {
     @Input() public civilites;
     @Input() public userFields;
+    @Input() public sugarCurrentUser: SugarUser;
     @Input() public currentUser: User;
     @Input() public usersFromSugar: User[];
+    @Input() public sugarMessage;
 
     public usernameStatus: string;
     public emailStatus: string;
 
+    constructor(private sugar: SugarService) {
+        //
+    }
+
     public credentialClick() {
         if (this.currentUser.firstName !== ""
             && this.currentUser.lastName !== ""
-            && this.currentUser.userName === "") {
-            this.currentUser.userName = this.setUsername();
+            && this.sugarCurrentUser.userName === "") {
+            this.sugarCurrentUser.userName = this.setUsername();
             this.checkUsernameAvailability();
-            this.currentUser.email = this.setEmail();
+            this.sugarCurrentUser.email = this.setEmail();
             this.checkEmailAvailability();
-            this.currentUser["password"] = this.currentUser.id === "" ? this.setPassword() : "";
+            this.currentUser["password"] = this.sugarCurrentUser.id === "" ? this.setPassword() : "";
         }
-        console.log(this.currentUser);
     }
 
     public setEmail() {
-        return `${this.currentUser.userName}@marcovasco.fr`;
+        return `${this.sugarCurrentUser.userName}@marcovasco.fr`;
     }
 
     public setUsername() {
@@ -47,18 +54,19 @@ export class CredentialsComponent {
 
     public checkUsernameAvailability(e?) {
         this.usernameStatus = (this.usersFromSugar
-            .find((user) => user.userName === this.currentUser.userName) !== undefined) ?
+            .find((user) =>
+                user.sugarCurrentUser.userName === this.sugarCurrentUser.userName) !== undefined) ?
             "USERNAME ALREADY TAKEN" : "Username available :)";
     }
 
     public checkEmailAvailability(e?) {
         this.emailStatus = (this.usersFromSugar
-            .find((user) => user.email === this.currentUser.email) !== undefined) ?
+            .find((user) => user.sugarCurrentUser.email === this.sugarCurrentUser.email) !== undefined) ?
             "EMAIL ALREADY TAKEN" : "Email available :)";
     }
 
     public setPassword() {
-        if (this.currentUser.id !== "") { return null; }
+        if (this.sugarCurrentUser.id !== "") { return null; }
         const rndStrg = Math.random()
             .toString()
             .substring(2, 7);

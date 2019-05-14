@@ -12,13 +12,10 @@ export class FieldsResolverService implements Resolve<Promise<Fields>> {
     }
 
     public resolve(): Promise<Fields> {
-
-        const fields: Promise<Fields> = this.fields.getData();
-
         return new Promise((resolve, reject) => {
-            fields
+            this.fields.getData()
                 .then((res) => resolve(res))
-                .catch((error) => reject("Probleme"));
+                .catch((error) => reject(`Problem getting fields: ${error}`));
         });
     }
 }

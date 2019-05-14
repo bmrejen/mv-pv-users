@@ -17,14 +17,14 @@ import { Destination } from "../../models/destination";
 
 export class DestinationsComponent {
     @Input() public destinations: Destination[];
-    @Input() public currentUser;
+    @Input() public sugarCurrentUser;
 
     public handleClick(dest: Destination): void {
-        if (!this.currentUser.destinations.includes(dest.id)) {
-            this.currentUser.destinations.push(dest.id);
+        if (!this.sugarCurrentUser.destinations.includes(dest.id)) {
+            this.sugarCurrentUser.destinations.push(dest.id);
         } else {
-            const index = this.currentUser.destinations.indexOf(dest.id);
-            this.currentUser.destinations.splice(index, 1);
+            const index = this.sugarCurrentUser.destinations.indexOf(dest.id);
+            this.sugarCurrentUser.destinations.splice(index, 1);
         }
     }
 

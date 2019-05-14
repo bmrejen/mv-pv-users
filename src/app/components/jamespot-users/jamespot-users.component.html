@@ -1,89 +1,69 @@
 <fieldset class="blue">
     <legend>Jamespot</legend>
-    Get user id: <input
-        type="text"
-        [(ngModel)]="idToGet"
-        name="idToGet"
-    >
-    <button (click)="getUser(idToGet)">Get</button>
-
-    <h2 *ngIf="currentUser.jamesIdUser == null">Create User</h2>
-
-    <h2 *ngIf="currentUser.jamesIdUser != null">
-        {{ currentUser.jamesFirstname }} {{ currentUser.jamesLastname }} - Id: {{ currentUser.jamesIdUser }}
+    <h2 *ngIf="jamesCurrentUser.idUser != null">
+        {{ jamesCurrentUser.firstname }} {{ jamesCurrentUser.lastname }} - Id:
+        {{ jamesCurrentUser.idUser }}
     </h2>
 
-    <form *ngIf="currentUser!=null">
+    <form *ngIf="jamesCurrentUser!=null">
         <input
             type="text"
-            [(ngModel)]="currentUser.jamesMail"
+            [(ngModel)]="jamesCurrentUser.mail"
             name="mail"
         >Email
         <br>
         <input
             type="text"
-            [(ngModel)]="currentUser.jamesRole"
+            [(ngModel)]="jamesCurrentUser.role"
             name="role"
         >Role
         <br>
         <input
             type="text"
-            [(ngModel)]="currentUser.jamesCountry"
+            [(ngModel)]="jamesCurrentUser.country"
             name="country"
         >Country
         <br>
         <input
             type="text"
-            [(ngModel)]="currentUser.jamesLanguage"
+            [(ngModel)]="jamesCurrentUser.language"
             name="language"
         >Language
         <br>
         <input
             type="text"
-            [(ngModel)]="currentUser.jamesActive"
+            [(ngModel)]="jamesCurrentUser.active"
             name="active"
         >active
         <br>
         <input
             type="text"
-            [(ngModel)]="currentUser.jamesUsername"
+            [(ngModel)]="jamesCurrentUser.username"
             name="pseudo"
             (blur)="checkUsernameAvailability()"
         >Pseudo
         <br>
         <input
             type="text"
-            [(ngModel)]="currentUser.jamesPassword"
+            [(ngModel)]="jamesCurrentUser.password"
             name="password"
         >Password
         <br>
         <input
             type="text"
-            [(ngModel)]="currentUser.jamesFirstname"
-            name="firstname"
-        >Firstname
-        <br>
-        <input
-            type="text"
-            [(ngModel)]="currentUser.jamesLastname"
-            name="lastname"
-        >Lastname
-        <br>
-        <input
-            type="text"
-            [(ngModel)]="currentUser.jamesCompany"
+            [(ngModel)]="jamesCurrentUser.company"
             name="company"
         >Company
         <br>
         <input
             type="text"
-            [(ngModel)]="currentUser.jamesPhoneExtension"
+            [(ngModel)]="jamesCurrentUser.phoneExtension"
             name="phoneExtension"
         >Phone Extension
         <br>
         <input
             type="text"
-            [(ngModel)]="currentUser.jamesTimeZone"
+            [(ngModel)]="jamesCurrentUser.timeZone"
             name="timeZone"
         >Time Zone
         <br>
@@ -96,7 +76,7 @@
         >
         <br>
         <!-- BUTTONS -->
-        <div *ngIf="currentUser.jamesIdUser != null">
+        <div *ngIf="jamesCurrentUser.idUser != null">
             <button
                 type="button"
                 (click)="onUpdate()"
@@ -118,7 +98,7 @@
             (click)="onPrefill()"
         >Prefill form with random data</button>
         <button
-            *ngIf="currentUser.jamesIdUser == null"
+            *ngIf="jamesCurrentUser.idUser == null"
             type=button
             (click)="onPost()"
         >Create</button>
@@ -127,5 +107,5 @@
     <h3 *ngIf="updateSuccessful">Data Updated ! </h3>
 
     <h2 *ngIf="isDeleted">User {{ deletedId }} deleted !</h2>
-    <h2 *ngIf="errorMessage != null">ERROR: {{ errorMessage }}</h2>
+    <h2 *ngIf="jamesMessage != null">ERROR: {{ jamesMessage }}</h2>
 </fieldset>

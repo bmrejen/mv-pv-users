@@ -25,7 +25,7 @@ enum EmployeeStatuses {
 })
 
 export class ExtraneousComponent {
-    @Input() public currentUser;
+    @Input() public sugarCurrentUser;
 
     public statuses = Object.keys(Statuses)
         .map((status) => Statuses[status]);

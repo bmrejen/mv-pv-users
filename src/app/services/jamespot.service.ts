@@ -252,6 +252,7 @@ export class JamespotService {
             `${this.endPoint}user/getByField`, { headers: this.headers, params })
             .toPromise<IJamespotApiResponse<IJamespotUserFromApi>>()
             .then((res: IJamespotApiResponse<IJamespotUserFromApi>) => {
+
                 return new Promise<IJamespotUserConfig>((resolve, reject) => {
                     const err = res.RC.MSG;
                     res.RC.CODE === 0 ? resolve(this.mapFromApi(res)) : reject(err);

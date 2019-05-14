@@ -14,7 +14,7 @@ import { ControlContainer, NgForm } from "@angular/forms";
 
 export class ManagerComponent {
     @Input() public managers;
-    @Input() public currentUser;
+    @Input() public sugarCurrentUser;
 
     public trackByFn(item) {
         return item.id;

@@ -16,7 +16,6 @@ export class GapiAuthenticatorService {
         "https://content.googleapis.com/discovery/v1/apis/gmail/v1/rest",
     ];
     public accessToken: string;
-    public isCurrentUserAnAlias: boolean = null;
 
     // Authorization scopes required by the API; multiple scopes can be
     // included, separated by spaces.
@@ -295,9 +294,20 @@ export class GapiAuthenticatorService {
         return new Promise((resolve, reject) => {
             this.zone.run(() => {
                 gapi.client.directory.users.get({ userKey: user })
-                    .then(resolve, reject);
+                    .then((res) => resolve(this.mapFromApi(res["result"])))
+                    .catch((err) => reject(err));
             });
         });
+    }
+
+    public mapFromApi(res): IGapiUser {
+        return {
+            emails: res.emails,
+            id: res.id,
+            nonEditableAliases: res.nonEditableAliases,
+            orgas: res.orgUnitPath,
+            primaryEmail: res.primaryEmail,
+        };
     }
 
     public activateImap(id: string): Promise<any> {
@@ -389,28 +399,28 @@ export class GapiAuthenticatorService {
             });
     }
 
-    public isAlias(primaryEmail, email, res) {
-        this.isCurrentUserAnAlias = null;
+    public isAlias(primaryEmail, email, user) {
+        let isCurrentUserAnAlias = null;
 
         const username = email.split("@")[0];
         const primaryUsername = primaryEmail.split("@")[0];
 
-        const planetVeoAliases = res["result"].aliases;
-        const otherAliases = res["result"].nonEditableAliases;
+        const planetVeoAliases = user.aliases;
+        const otherAliases = user.nonEditableAliases;
 
         if (planetVeoAliases === undefined
             || email === primaryEmail
             || (otherAliases.includes(email) && username === primaryUsername)) {
-            this.isCurrentUserAnAlias = false;
+            isCurrentUserAnAlias = false;
 
         } else if (planetVeoAliases.includes(email)
             || (otherAliases.includes(email) && username !== primaryUsername)) {
-            this.isCurrentUserAnAlias = true;
+            isCurrentUserAnAlias = true;
 
         } else {
             alert("problem checking alias");
         }
 
-        return this.isCurrentUserAnAlias;
+        return isCurrentUserAnAlias;
     }
 }

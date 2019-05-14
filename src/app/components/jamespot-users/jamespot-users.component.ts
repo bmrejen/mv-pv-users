@@ -1,35 +1,27 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { IJamespotUserConfig } from "../../interfaces/jamespot-api-response";
-import { SugarService } from "./../../services/sugar.service";
 
 import { JamespotService } from "../../services/jamespot.service";
 import { JamespotUser } from "./../../models/jamespot-user";
-
-import { User } from "./../../models/user";
 
 @Component({
     selector: "mv-jamespot",
     templateUrl: "./jamespot-users.component.html",
 })
 
-export class JamespotUsersComponent implements OnInit {
-    @Input() public currentUser: User;
+export class JamespotUsersComponent {
+    @Input() public jamesCurrentUser: JamespotUser;
+    @Input() public jamesMessage: string;
+
     public updateSuccessful: boolean = false;
-    public currentJamespotUser: JamespotUser;
     public oldJamespotUser: JamespotUser;
-    public idToGet;
     public isDeleted: boolean = false;
     public deletedId;
-    public errorMessage;
     public image;
     public isUsernameTaken: boolean = false;
 
-    constructor(private james: JamespotService, private sugar: SugarService) {
+    constructor(private james: JamespotService) {
         //
-    }
-
-    public ngOnInit(): void {
-        this.resetFields();
     }
 
     public onFileSelected(event) {
@@ -37,78 +29,36 @@ export class JamespotUsersComponent implements OnInit {
     }
 
     public onPost(): void {
-        this.mapUserToJamespot();
-        this.james.postUsers(this.currentJamespotUser, this.image)
+        // this.mapUserToJamespot();
+        this.james.postUsers(this.jamesCurrentUser, this.image)
             .then((res: IJamespotUserConfig) => {
                 this.resetFields();
-                this.getUser(res.idUser);
+                // this.getUser(res.idUser);
             })
             .catch((err: string) => {
                 console.error("Jamespot Problem :", err);
-                this.errorMessage = err.substr(31, err.length - 34);
+                this.jamesMessage = err.substr(31, err.length - 34);
             });
-    }
-
-    public mapUserToJamespot() {
-        this.currentJamespotUser = new JamespotUser({
-            active: this.currentUser.jamesActive,
-            company: this.currentUser.jamesCompany,
-            country: this.currentUser.jamesCountry,
-            firstname: this.currentUser.jamesFirstname,
-            idUser: this.currentUser.jamesIdUser,
-            img: this.currentUser.jamesImg,
-            language: this.currentUser.jamesLanguage,
-            lastname: this.currentUser.jamesLastname,
-            mail: this.currentUser.jamesMail,
-            password: this.currentUser.jamesPassword,
-            phoneExtension: this.currentUser.jamesPhoneExtension,
-            role: this.currentUser.jamesRole,
-            timeZone: this.currentUser.jamesTimeZone,
-            username: this.currentUser.jamesUsername,
-        });
     }
 
     public onUpdate(): void {
-        this.mapUserToJamespot();
-        this.james.updateUser(this.currentJamespotUser, this.oldJamespotUser)
+        // this.mapUserToJamespot();
+        this.james.updateUser(this.jamesCurrentUser, this.oldJamespotUser)
             .then((res: IJamespotUserConfig) => {
                 this.resetFields();
                 this.updateSuccessful = true;
-                this.getUser(res.idUser);
+                // this.getUser(res.idUser);
             })
             .catch((err: string) => {
                 console.error("Jamespot update error: ", err);
-                this.errorMessage = err;
-            });
-    }
-
-    public getUser(id: string): void {
-        this.james.getUser(id)
-            .then((res: IJamespotUserConfig) => {
-                this.resetFields();
-                this.currentJamespotUser = this.oldJamespotUser = new JamespotUser(res);
-
-                Object.keys(this.currentJamespotUser)
-                    .forEach((key) => this.currentUser[key] = this.currentJamespotUser[key]);
-
-                this.sugar.getUserByUsername
-                    (`${this.currentUser.jamesFirstname[0]}${this.currentUser.jamesLastname}`)
-                    .then((response) => {
-                        const sugarUserConfig = this.sugar.mapUserFromApi(response);
-                        Object.keys(sugarUserConfig)
-                            .forEach((key) => this.currentUser[key] = sugarUserConfig[key]);
-                    });
-            })
-            .catch((err) => {
-                console.error(err);
-                this.errorMessage = `User ${id} doesn't exist`;
+                this.jamesMessage = err;
             });
     }
 
     public onDelete(): void {
-        const id = this.currentUser.jamesIdUser;
+        const id = this.jamesCurrentUser.idUser;
         if (confirm(`Etes-vous sur de supprimer l'utilisateur ${id} en production?`)) {
-            this.errorMessage = null;
+            this.jamesMessage = null;
             this.james.deleteUser(id)
                 .then((res) => {
                     this.resetFields();
@@ -118,76 +68,75 @@ export class JamespotUsersComponent implements OnInit {
                 .catch((err) => {
                     console.error(err);
                     this.isDeleted = false;
-                    this.errorMessage = err.RC.MSG;
+                    this.jamesMessage = err.RC.MSG;
                 });
         }
     }
 
     public onPrefill(): void {
-        this.currentUser.jamesActive = "1";
-        this.currentUser.jamesCompany = "MARCO VASCO";
-        this.currentUser.jamesCountry = "fr";
-        this.currentUser.jamesFirstname = "Benoit";
-        this.currentUser.jamesIdUser = null;
-        this.currentUser.jamesImg = null;
-        this.currentUser.jamesLanguage = "fr";
-        this.currentUser.jamesLastname = "Mrejen";
-        this.currentUser.jamesMail = "benoitmrejen@planetveo.com";
-        this.currentUser.jamesPassword = "mypassword";
-        this.currentUser.jamesPhoneExtension = "1234";
-        this.currentUser.jamesRole = "User";
-        this.currentUser.jamesTimeZone = "Europe/Paris";
-        this.currentUser.jamesUsername = "benoit.mrejen";
+        this.jamesCurrentUser.active = "1";
+        this.jamesCurrentUser.company = "MARCO VASCO";
+        this.jamesCurrentUser.country = "fr";
+        this.jamesCurrentUser.firstname = "Benoit";
+        this.jamesCurrentUser.idUser = null;
+        this.jamesCurrentUser.img = null;
+        this.jamesCurrentUser.language = "fr";
+        this.jamesCurrentUser.lastname = "Mrejen";
+        this.jamesCurrentUser.mail = "benoitmrejen@planetveo.com";
+        this.jamesCurrentUser.password = "mypassword";
+        this.jamesCurrentUser.phoneExtension = "1234";
+        this.jamesCurrentUser.role = "User";
+        this.jamesCurrentUser.timeZone = "Europe/Paris";
+        this.jamesCurrentUser.username = "benoit.mrejen";
     }
 
     public checkUsernameAvailability(): void {
-        this.james.getByField("pseudo", this.currentUser.jamesUsername)
+        this.james.getByField("pseudo", this.jamesCurrentUser.username)
             .then((res: IJamespotUserConfig) => {
                 this.isUsernameTaken = true;
-                this.errorMessage = null;
-                if (res.idUser !== "" && this.currentUser.jamesIdUser === null) {
+                this.jamesMessage = null;
+                if (res.idUser !== "" && this.jamesCurrentUser.idUser === null) {
                     this.isUsernameTaken = true;
-                    this.errorMessage = `Username taken by user #${res.idUser}`;
+                    this.jamesMessage = `Username taken by user #${res.idUser}`;
                 }
             })
             .catch((err) => {
                 console.error(err);
-                this.errorMessage = err;
+                this.jamesMessage = err;
             });
     }
 
     public onDisable(): void {
-        this.james.disableUser(this.currentUser.jamesIdUser)
+        this.james.disableUser(this.jamesCurrentUser.idUser)
             .then((res: IJamespotUserConfig) => {
                 if (res.idUser !== "") {
                     this.resetFields();
-                    this.getUser(res.idUser);
+                    // this.getUser(res.idUser);
                 }
             })
             .catch((err) => {
                 console.error(err);
-                this.errorMessage = err;
+                this.jamesMessage = err;
             });
     }
 
     private resetFields(): void {
-        this.currentUser.jamesActive = "1";
-        this.currentUser.jamesCompany = "MARCO VASCO";
-        this.currentUser.jamesCountry = "fr";
-        this.currentUser.jamesFirstname = null;
-        this.currentUser.jamesIdUser = null;
-        this.currentUser.jamesImg = null;
-        this.currentUser.jamesLanguage = "fr";
-        this.currentUser.jamesLastname = null;
-        this.currentUser.jamesMail = null;
-        this.currentUser.jamesPassword = null;
-        this.currentUser.jamesPhoneExtension = null;
-        this.currentUser.jamesRole = "User";
-        this.currentUser.jamesTimeZone = "Europe/Paris";
-        this.currentUser.jamesUsername = null;
+        this.jamesCurrentUser.active = "1";
+        this.jamesCurrentUser.company = "MARCO VASCO";
+        this.jamesCurrentUser.country = "fr";
+        this.jamesCurrentUser.firstname = null;
+        this.jamesCurrentUser.idUser = null;
+        this.jamesCurrentUser.img = null;
+        this.jamesCurrentUser.language = "fr";
+        this.jamesCurrentUser.lastname = null;
+        this.jamesCurrentUser.mail = null;
+        this.jamesCurrentUser.password = null;
+        this.jamesCurrentUser.phoneExtension = null;
+        this.jamesCurrentUser.role = "User";
+        this.jamesCurrentUser.timeZone = "Europe/Paris";
+        this.jamesCurrentUser.username = null;
 
-        this.errorMessage = null;
-        this.idToGet = null;
+        this.jamesMessage = null;
         this.isDeleted = false;
         this.updateSuccessful = false;
         this.oldJamespotUser = null;
