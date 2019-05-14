@@ -49,7 +49,15 @@ export class CredentialsComponent {
     }
 
     public setUsername() {
-        return `${this.currentUser.firstName[0].toLowerCase()}${this.currentUser.lastName.toLowerCase()}`;
+        const initials = this.currentUser.firstName.split(" ")
+            .map((part) => part[0])
+            .join()
+            .replace(/,/g, "")
+            .toLowerCase();
+        const lastName = this.currentUser.lastName.replace(/ /g, "")
+            .toLowerCase();
+
+        return `${initials}${lastName}`;
     }
 
     public checkUsernameAvailability(e?) {
