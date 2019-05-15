@@ -28,6 +28,7 @@ export class CreateUserFormComponent implements OnInit {
     public usersFromSugar: User[] = [];
     public usernameTaken;
     public currentUser: User;
+    public oldUser: User;
     public teams: Team[] = [];
     public roles: Role[] = [];
     public destinations: Destination[] = [];
@@ -112,10 +113,6 @@ export class CreateUserFormComponent implements OnInit {
             .catch((err) => this.gapiStatus.apiFailed = true);
     }
 
-    public onSubmit(form) {
-        // console.log("submitted", form);
-    }
-
     public getUser() {
         this.resetForm();
         if (!this.mailToGet.includes("@")) {
@@ -137,7 +134,7 @@ export class CreateUserFormComponent implements OnInit {
     }
 
     public getJamespotUser(mail) {
-        this.james.getByField("mail", mail)
+        return this.james.getByField("mail", mail)
             .then((res: IJamespotUserConfig) => {
                 this.currentUser.jamesCurrentUser = this.oldJamespotUser = new JamespotUser(res);
             })
@@ -145,7 +142,7 @@ export class CreateUserFormComponent implements OnInit {
     }
 
     public getSugarUser(username) {
-        this.sugar.getUserByUsername(username)
+        return this.sugar.getUserByUsername(username)
             .then((res) => {
                 this.currentUser.firstName = res.common.firstName;
                 this.currentUser.lastName = res.common.lastName;
@@ -155,8 +152,9 @@ export class CreateUserFormComponent implements OnInit {
     }
 
     public getGapiUser(mail) {
-        this.gapi.getUser(mail)
-            .then((res) => this.currentUser.ggCurrentUser = new GoogleUser(res))
+        return this.gapi.getUser(mail)
+            .then((res) =>
+                this.currentUser.ggCurrentUser = this.oldUser.ggCurrentUser = new GoogleUser(res))
             .then((resp) => {
                 const primaryEmail = this.currentUser.ggCurrentUser.primaryEmail;
                 this.getGoogleGroupsOfUser(primaryEmail);
@@ -169,7 +167,42 @@ export class CreateUserFormComponent implements OnInit {
     public trackByFn(item) {
         return item.id;
     }
+    // POST USER
+    public onSubmit() {
+        // this.postJamespotUser();
+        this.postGapiUser();
+        // this.postSugarUser();
+        // this.resetForm();
+    }
 
+    public postJamespotUser() {
+        this.james.postUsers(this.currentUser)
+            .then((res: IJamespotUserConfig) => console.log(res))
+            .catch((err: string) => {
+                console.error("Jamespot Problem :", err);
+                this.jamesMessage = err.substr(31, err.length - 34);
+            });
+    }
+
+    public postGapiUser() {
+        this.gapiMessage = null;
+        this.gapi.postUser(this.currentUser)
+            .then((res) => {
+                console.log(res);
+                this.getGapiUser(res.result.primaryEmail)
+                    .then((reponse) => {
+                        console.log(reponse);
+                        this.gapi.updateGmailSendAs(this.currentUser, new User({}))
+                            .then((response) => console.log("response from updateGmailSendAs", response))
+                            .catch((err) => console.error("ERROR in UpdateGMailAlias", err));
+                        this.gapiMessage = "User created !";
+                    });
+            })
+            .catch((err) => console.error("ERROR POSTING USER", err));
+        // .catch((err) => this.gapiMessage = err["result"].error);
+    }
+
+    // ------- PRIVATE METHODS --------
     private getGoogleGroupsOfUser(primaryMail) {
         this.gapi.getGroups(primaryMail)
             .then((response) => {
@@ -194,4 +227,5 @@ export class CreateUserFormComponent implements OnInit {
             })
             .catch((err) => console.error(err));
     }
+
 }

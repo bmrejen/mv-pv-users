@@ -3,7 +3,7 @@
 
 <form
     #createForm="ngForm"
-    (ngSubmit)="onSubmit(createForm)"
+    (ngSubmit)="onSubmit()"
 >
 
     <ng-container *ngIf="fields != null">
@@ -43,6 +43,7 @@
                 class="jamespot"
                 [jamesCurrentUser]="currentUser.jamesCurrentUser"
                 [jamesMessage]="jamesMessage"
+                [currentUser]="currentUser"
             >
             </mv-jamespot>
             <mv-gapi-users
@@ -96,7 +97,8 @@
         <div *ngIf="errorMsg">ERROR: {{ errorMsg }}</div>
         <button
             [disabled]="!createForm.form.valid"
-            type="submit"
+            type="button"
+            (click)="onSubmit()"
         >Créer l'utilisateur</button>
     </ng-container>
 </form>

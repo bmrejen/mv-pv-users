@@ -83,20 +83,20 @@ export class GapiAuthenticatorService {
             .get();
     }
 
-    public postUser(user): Promise<any> {
-        const lastName = user.lastName;
-        const firstName = user.firstName;
+    public postUser(user: User): Promise<any> {
+        console.log("post gapi user service", user);
 
-        if (lastName != null && firstName != null) {
-            const email = `${firstName[0]}${lastName}@planetveo.com`;
+        if (user.lastName != null && user.firstName != null) {
+            const email = `${user.firstName[0]}${user.lastName}@planetveo.com`;
+            console.log(email);
 
             return new Promise((resolve, reject) => {
                 this.zone.run(() => {
                     gapi.client.directory.users.insert({
                         resource: {
                             name: {
-                                familyName: lastName,
-                                givenName: firstName,
+                                familyName: user.lastName,
+                                givenName: user.firstName,
                             },
                             orgUnitPath: user.ggCurrentUser.orgas,
                             password: user.password,
@@ -193,7 +193,7 @@ export class GapiAuthenticatorService {
             return new Promise((resolve, reject) => reject("Alias and signature unchanged"));
         }
 
-        // If alias has been modified
+        // If signature has been modified
         if (user.signature !== oldUser.signature) {
             body["signature"] = user.signature;
         }
@@ -227,7 +227,6 @@ export class GapiAuthenticatorService {
     }
 
     public createNewAlias(email, body) {
-
         return this.createToken(email)
             .then(() => {
                 const url = `https://www.googleapis.com/gmail/v1/users/me/settings/sendAs`;

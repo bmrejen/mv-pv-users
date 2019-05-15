@@ -30,34 +30,29 @@
                 </option>
             </select>
 
-            <div>Groups
-                <div *ngFor="let group of googleGroups; trackBy: trackByFn">
-                    <label>
-                        <input type="checkbox">{{ group.name }}
-                    </label>
-                </div>
-            </div>
-
-            <!-- IF ID IS NULL THEN ADMIN CAN CHOOSE A DOMAIN -->
-            <div *ngIf="ggCurrentUser.id == null">
-                Primary mail
-                <select
-                    name="primaryEmailSuffix"
-                    [(ngModel)]="ggCurrentUser.primaryEmailSuffix"
-                    (ngModelChange)="refreshEmail()"
-                >
-                    <option
-                        *ngFor="let dom of domains"
-                        [value]="dom"
-                    >{{ dom }}</option>
-                </select>
-
-                <br>
-                <button (click)="postUser()">Create</button>
-            </div>
             <br>
+            Default alias
+            <select
+                name="defaultAlias"
+                [(ngModel)]="ggCurrentUser.sendAs"
+            >
+                <option
+                    *ngFor="let dom of domains"
+                    [value]="dom"
+                >{{ dom }}</option>
+            </select>
+            <br>
+            Signature
+            <br>
+            <textarea
+                rows="5"
+                cols="70"
+                name="signature"
+                [(ngModel)]="ggCurrentUser.signature"
+            >
+            </textarea>
 
-            <!-- IF ID IS NOT NULL THEN THE DOMAIN IS READONLY -->
+            <!-- IF ID IS NOT NULL THEN ID, PRIMARY and OTHER EMAILS ARE DISPLAYED -->
             <div *ngIf="ggCurrentUser.id != null">
                 <input
                     type="text"
@@ -68,15 +63,8 @@
                 <br>
                 <input
                     type="text"
-                    name="password"
-                    [(ngModel)]="ggCurrentUser.password"
-                >Password
-                <br>
-                <input
-                    type="text"
                     name="primaryEmail"
                     [(ngModel)]="ggCurrentUser.primaryEmail"
-                    (ngModelChange)="refreshEmail()"
                     [disabled]="ggCurrentUser.id != null"
                 >Primary Mail
                 <br>
@@ -89,28 +77,6 @@
                         [attr.disabled]="true"
                     >
                 </div>
-                <br>
-                Default alias
-
-                <select
-                    name="defaultAlias"
-                    [(ngModel)]="ggCurrentUser.sendAs"
-                >
-                    <option
-                        *ngFor="let dom of domains"
-                        [value]="dom"
-                    >{{ dom }}</option>
-                </select>
-                <br>
-                Signature
-                <br>
-                <textarea
-                    rows="5"
-                    cols="70"
-                    name="signature"
-                    [(ngModel)]="ggCurrentUser.signature"
-                >
-                </textarea>
             </div>
             <button (click)="updateUser()">Update</button>
             <button (click)="activateImap()">Activate IMAP</button>

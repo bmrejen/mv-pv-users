@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { IJamespotUserConfig } from "../../interfaces/jamespot-api-response";
 
+import { User } from "../../models/user";
 import { JamespotService } from "../../services/jamespot.service";
 import { JamespotUser } from "./../../models/jamespot-user";
 
@@ -12,12 +13,12 @@ import { JamespotUser } from "./../../models/jamespot-user";
 export class JamespotUsersComponent {
     @Input() public jamesCurrentUser: JamespotUser;
     @Input() public jamesMessage: string;
+    @Input() public currentUser: User;
 
     public updateSuccessful: boolean = false;
     public oldJamespotUser: JamespotUser;
     public isDeleted: boolean = false;
     public deletedId;
-    public image;
     public isUsernameTaken: boolean = false;
 
     constructor(private james: JamespotService) {
@@ -25,20 +26,11 @@ export class JamespotUsersComponent {
     }
 
     public onFileSelected(event) {
-        this.image = event.target.files[0] as File;
+        this.jamesCurrentUser.image = event.target.files[0] as File;
     }
 
     public onPost(): void {
-        // this.mapUserToJamespot();
-        this.james.postUsers(this.jamesCurrentUser, this.image)
-            .then((res: IJamespotUserConfig) => {
-                this.resetFields();
-                // this.getUser(res.idUser);
-            })
-            .catch((err: string) => {
-                console.error("Jamespot Problem :", err);
-                this.jamesMessage = err.substr(31, err.length - 34);
-            });
+        //
     }
 
     public onUpdate(): void {
@@ -77,11 +69,9 @@ export class JamespotUsersComponent {
         this.jamesCurrentUser.active = "1";
         this.jamesCurrentUser.company = "MARCO VASCO";
         this.jamesCurrentUser.country = "fr";
-        this.jamesCurrentUser.firstname = "Benoit";
         this.jamesCurrentUser.idUser = null;
-        this.jamesCurrentUser.img = null;
+        this.jamesCurrentUser.image = null;
         this.jamesCurrentUser.language = "fr";
-        this.jamesCurrentUser.lastname = "Mrejen";
         this.jamesCurrentUser.mail = "benoitmrejen@planetveo.com";
         this.jamesCurrentUser.phoneExtension = "1234";
         this.jamesCurrentUser.role = "User";
@@ -123,11 +113,9 @@ export class JamespotUsersComponent {
         this.jamesCurrentUser.active = "1";
         this.jamesCurrentUser.company = "MARCO VASCO";
         this.jamesCurrentUser.country = "fr";
-        this.jamesCurrentUser.firstname = null;
         this.jamesCurrentUser.idUser = null;
-        this.jamesCurrentUser.img = null;
+        this.jamesCurrentUser.image = null;
         this.jamesCurrentUser.language = "fr";
-        this.jamesCurrentUser.lastname = null;
         this.jamesCurrentUser.mail = null;
         this.jamesCurrentUser.phoneExtension = null;
         this.jamesCurrentUser.role = "User";

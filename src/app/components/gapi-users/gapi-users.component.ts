@@ -42,7 +42,6 @@ export class GapiUsersComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-        this.resetForm();
         this.route.data
             .subscribe((data) => {
                 if (data.fields != null) {
@@ -86,20 +85,6 @@ export class GapiUsersComponent implements OnInit {
         }
     }
 
-    public postUser() {
-        this.gapiMessage = null;
-        this.gapiService.postUser(this.currentUser)
-            .then((res) => {
-                if (res["result"] != null) {
-                    this.resetForm();
-                    this.userToGet = res["result"].id;
-                    // this.getUser();
-                    this.gapiMessage = "User created !";
-                }
-            })
-            .catch((err) => this.gapiMessage = err["result"].error.gapiMessage);
-    }
-
     public updateUser() {
         this.gapiMessage = null;
         this.gapiService.updateUser(this.currentUser, this.ggOldUser)
@@ -119,23 +104,15 @@ export class GapiUsersComponent implements OnInit {
         return index;
     }
 
+    // Can be deleted
     public refreshEmail() {
-        const email = this.ggCurrentUser.primaryEmail;
-        const emailPrefix = email.lastIndexOf("@") === -1 ? email : email.substring(0, email.lastIndexOf("@"));
+        // const email = this.ggCurrentUser.primaryEmail;
+        // const emailPrefix = email.lastIndexOf("@") === -1 ? email : email.substring(0, email.lastIndexOf("@"));
 
-        this.ggCurrentUser.primaryEmail =
-            `${emailPrefix}@${this.ggCurrentUser.primaryEmailSuffix}`;
-    }
-
-    public resetForm(): void {
-        this.gapiMessage = null;
-        this.ggCurrentUser.emails = null;
-        this.ggCurrentUser.id = null;
-        this.ggCurrentUser.orgas = null;
-        this.ggCurrentUser.primaryEmail = null;
-        this.ggCurrentUser.sendAs = null;
-        this.ggCurrentUser.signature = null;
-
+        // this.ggCurrentUser.sendAs =
+        //     `${emailPrefix}@${this.ggCurrentUser.primaryEmailSuffix}`;
+        // this.currentUser.sugarCurrentUser.email =
+        //     `${this.currentUser.sugarCurrentUser.userName}@${this.ggCurrentUser.sendAs}`;
     }
 
     public activateImap(id: string) {

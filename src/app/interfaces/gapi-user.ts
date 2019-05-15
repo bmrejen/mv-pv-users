@@ -6,7 +6,7 @@ export interface IGapiUser {
     orgas: string;
     // password: string;
     primaryEmail: string;
-    // sendAs: string;
+    sendAs?: string;
     // signature: string;
 }
 

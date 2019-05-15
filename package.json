@@ -118,7 +118,8 @@
     },
     "dependencies": {
         "@angular/animations": "^4.4.7",
-        "jsrsasign": "^8.0.12"
+        "jsrsasign": "^8.0.12",
+        "ui-kit": "git+ssh://git@git.passveo.com:24458/common/ui-kit.git#2.0.13"
     },
     "scripts": {
         "build": "./node_modules/.bin/gulp build",

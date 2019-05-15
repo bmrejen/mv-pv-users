@@ -11,7 +11,7 @@ export class GoogleUser implements IGapiUser {
     public googleGroups = [];
 
     // not needed in constructor
-    public primaryEmailSuffix = null;
+    // public primaryEmailSuffix = null;
     public aliases;
 
     constructor(data?: any) {
@@ -22,7 +22,7 @@ export class GoogleUser implements IGapiUser {
         this.sendAs = data.sendAs || this.sendAs;
         this.signature = data.signature || this.signature;
         this.nonEditableAliases = data.nonEditableAliases || this.nonEditableAliases;
-        this.primaryEmailSuffix = this.primaryEmail.includes("@") ?
-            this.primaryEmail.split("@")[1] : this.primaryEmailSuffix;
+        // this.primaryEmailSuffix = this.primaryEmail.includes("@") ?
+        // this.primaryEmail.split("@")[1] : this.primaryEmailSuffix;
     }
 }
