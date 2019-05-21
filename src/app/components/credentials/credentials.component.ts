@@ -41,15 +41,18 @@ export class CredentialsComponent {
             this.sugarCurrentUser.email = this.setEmail();
             this.checkEmailAvailability();
             this.currentUser["password"] = this.sugarCurrentUser.id === "" ? this.setPassword() : "";
+            if (this.currentUser.ggCurrentUser.primaryEmail === "") {
+                this.currentUser.ggCurrentUser.primaryEmail = `${this.sugarCurrentUser.userName}@planetveo.com`;
+            }
         }
-    }
-
-    public setEmail() {
-        return `${this.sugarCurrentUser.userName}@marcovasco.fr`;
     }
 
     public setUsername() {
         return `${this.currentUser.firstName[0].toLowerCase()}${this.currentUser.lastName.toLowerCase()}`;
+    }
+
+    public setEmail() {
+        return `${this.sugarCurrentUser.userName}@marcovasco.fr`;
     }
 
     public checkUsernameAvailability(e?) {

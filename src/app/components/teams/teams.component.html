@@ -7,10 +7,8 @@
         <div *ngFor="let team of teams ; trackBy: trackByFn">
             <label>
                 <input
-                    type="radio"
-                    name="team"
-                    [(ngModel)]="sugarCurrentUser.teamId"
-                    [value]="team.name"
+                    type="checkbox"
+                    (click)="handleClick(team)"
                 >{{ team.name }}
             </label>
         </div>

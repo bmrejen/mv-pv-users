@@ -31,6 +31,8 @@ export class GapiAuthenticatorService {
     }
 
     public listUsers(): Promise<any> {
+        console.log("listUsers");
+
         return gapi.client.directory.users.list({
             customer: "my_customer",
             maxResults: 500,
@@ -39,6 +41,8 @@ export class GapiAuthenticatorService {
     }
 
     public loadClient(): Promise<any> {
+        console.log("loadClient");
+
         return new Promise((resolve, reject) => {
             this.zone.run(() => {
                 gapi.load("client:auth2", {
@@ -51,6 +55,8 @@ export class GapiAuthenticatorService {
         });
     }
     public initClient(): Promise<any> {
+        console.log("initClient");
+
         const initObj = {
             apiKey: this.API_KEY,
             discoveryDocs: this.DISCOVERY_DOCS,
@@ -65,6 +71,8 @@ export class GapiAuthenticatorService {
     }
 
     public initAuthClient(): Promise<any> {
+        console.log("initAuthClient ");
+
         const initObj = {
             client_id: this.CLIENT_ID,
             scope: this.SCOPES,
@@ -84,11 +92,11 @@ export class GapiAuthenticatorService {
     }
 
     public postUser(user: User): Promise<any> {
-        console.log("post gapi user service", user);
 
-        if (user.lastName != null && user.firstName != null) {
-            const email = `${user.firstName[0]}${user.lastName}@planetveo.com`;
-            console.log(email);
+        if (user.lastName != null
+            && user.firstName != null
+            && user.ggCurrentUser.primaryEmail != null
+        ) {
 
             return new Promise((resolve, reject) => {
                 this.zone.run(() => {
@@ -100,7 +108,7 @@ export class GapiAuthenticatorService {
                             },
                             orgUnitPath: user.ggCurrentUser.orgas,
                             password: user.password,
-                            primaryEmail: email,
+                            primaryEmail: user.ggCurrentUser.primaryEmail,
                         },
                     })
                         .then(resolve, reject);
@@ -183,11 +191,14 @@ export class GapiAuthenticatorService {
     }
 
     public updateGmailSendAs(usr: User, oldUsr: User): Promise<any> {
+        console.log("updateGmailSendAs ", usr, oldUsr);
         const user = usr.ggCurrentUser;
         const oldUser = oldUsr.ggCurrentUser;
 
         const body = {};
+        // CHECK WHY USER.SENDAS IS SOMETIMES NULL
         const newSendAsEmail = `${user.primaryEmail.split("@")[0]}@${user.sendAs}`;
+        console.log("new alias:", newSendAsEmail);
 
         if (user.sendAs === oldUser.sendAs && user.signature === oldUser.signature) {
             return new Promise((resolve, reject) => reject("Alias and signature unchanged"));
@@ -196,27 +207,37 @@ export class GapiAuthenticatorService {
         // If signature has been modified
         if (user.signature !== oldUser.signature) {
             body["signature"] = user.signature;
+            console.log("signature has been modified");
         }
 
         // If alias has been modified
         if (user.sendAs !== oldUser.sendAs) {
+            console.log("alias has been modified");
 
             body["displayName"] = `${usr.firstName} ${usr.lastName}`;
             body["isDefault"] = true;
             body["sendAsEmail"] = newSendAsEmail;
             body["treatAsAlias"] = true;
+            body["sub"] = `${usr.ggCurrentUser.primaryEmail}`;
         }
 
         // Create the alias if it doesn't exist
         if (user.aliases.some((alias) => alias.sendAsEmail === newSendAsEmail)) {
-            return this.updateAlias(newSendAsEmail, body);
+            console.log("alias already exists");
+
+            return this.updateAlias(body);
         } else {
-            return this.createNewAlias(newSendAsEmail, body);
+            console.log("creating an alias ");
+
+            return this.createNewAlias(body);
         }
     }
 
-    public updateAlias(email, body) {
-        return this.createToken(email)
+    public updateAlias(body) {
+        const email = body.sendAsEmail;
+        const primaryEmail = body.sub;
+
+        return this.createToken(primaryEmail)
             .then(() => {
                 const url = `https://www.googleapis.com/gmail/v1/users/me/settings/sendAs/${email}`;
                 const headers = new HttpHeaders({ Authorization: `Bearer ${this.accessToken}` });
@@ -226,9 +247,13 @@ export class GapiAuthenticatorService {
             });
     }
 
-    public createNewAlias(email, body) {
-        return this.createToken(email)
+    public createNewAlias(body) {
+        const primaryEmail = body.sub;
+        console.log("body", body);
+
+        return this.createToken(primaryEmail)
             .then(() => {
+                console.log("token has been created:", this.accessToken);
                 const url = `https://www.googleapis.com/gmail/v1/users/me/settings/sendAs`;
                 const headers = new HttpHeaders({ Authorization: `Bearer ${this.accessToken}` });
 
@@ -239,7 +264,6 @@ export class GapiAuthenticatorService {
 
     public getGroups(mail?): Promise<any[]> {
         // 2 requests are run in a row because Google only sends 200 results per response
-
         const body = {
             customer: "my_customer",
             maxResults: 200,
@@ -258,7 +282,10 @@ export class GapiAuthenticatorService {
         return new Promise((resolve, reject) => {
 
             gapi.client.directory.groups.list(body)
-                .then((res) => results.push(...res["result"].groups))
+                .then((res) => {
+                    console.log("getGroups response", res);
+                    results.push(...res["result"].groups);
+                })
                 .then((_) => {
                     body["pageToken"] = pageToken;
 
@@ -290,6 +317,8 @@ export class GapiAuthenticatorService {
     }
 
     public getUser(user): Promise<any> {
+        console.log("getUser service", user);
+
         return new Promise((resolve, reject) => {
             this.zone.run(() => {
                 gapi.client.directory.users.get({ userKey: user })
@@ -349,40 +378,52 @@ export class GapiAuthenticatorService {
     }
 
     public createToken(email) {
-        // Header
-        const oHeader = { alg: "RS256", typ: "JWT" };
-        // Payload
-        const oPayload = {
-            aud: "https://www.googleapis.com/oauth2/v4/token/",
-            exp: jwt.KJUR.jws.IntDate.get("now + 1hour"),
-            iat: jwt.KJUR.jws.IntDate.get("now"),
-            iss: "370957812504-m0eophjpraff16mbnloc330bq7jkm6up@developer.gserviceaccount.com",
-            // tslint:disable-next-line
-            scope: "https://mail.google.com/ https://www.googleapis.com/auth/admin.directory.user https://www.googleapis.com/auth/gmail.settings.sharing https://www.googleapis.com/auth/gmail.settings.basic",
-            sub: email,
-        };
+        return new Promise((resolve) => setTimeout(resolve, 10000))
+            .then(() => {
 
-        // Sign JWT
-        const sHeader = JSON.stringify(oHeader);
-        const sPayload = JSON.stringify(oPayload);
+                console.log("creating a token for the primaryEmail: ", email);
+                // Header
+                const oHeader = { alg: "RS256", typ: "JWT" };
+                // Payload
+                const oPayload = {
+                    aud: "https://www.googleapis.com/oauth2/v4/token/",
+                    exp: jwt.KJUR.jws.IntDate.get("now + 1hour"),
+                    iat: jwt.KJUR.jws.IntDate.get("now"),
+                    iss: "370957812504-m0eophjpraff16mbnloc330bq7jkm6up@developer.gserviceaccount.com",
+                    // tslint:disable-next-line
+                    scope: "https://mail.google.com/ https://www.googleapis.com/auth/admin.directory.user https://www.googleapis.com/auth/gmail.settings.sharing https://www.googleapis.com/auth/gmail.settings.basic https://www.googleapis.com/auth/gmail.modify",
+                    sub: email,
+                };
 
-        // tslint:disable-next-line
-        const privateKey = "-----BEGIN PRIVATE KEY-----\nMIIEuwIBADANBgkqhkiG9w0BAQEFAASCBKUwggShAgEAAoIBAQCktko8W7B/J6+l\nDQooHSH+IIq6tAIWPKSYjhON4NYD7XTHhSDgcW1qGvaMorPhS2k/UbeR0J3hBzJr\nSuBNLMa9XiHLZ+n8Z3f0j2UBO3QQwSOejSvf38LnloWtV20LY2njAW/9pNys6f9w\njMQSVIBwBOgnBC6UebzNVMsVAq5zm0zBGDIlInUPYP7NQkt5TI+eYsmuveULmm6Q\ntehf6M7krGu958nK207Y3dpvgiZR59mBpwlni9EwOq+zbjL3XC8bUA0ODUcorrxx\nQ8WJ+Mx9aE8nBXdjDz8EfFcD+6ccotwbbsiTFmUv56cLaa1kfj4cmA+me0wC8vBg\nnaHIR/aJAgMBAAECgf9HMb74a5WtOSGVGGZpBAdBFc/NbXdSEZWJvbgsLuU/CG5A\nbPIhmzRXUAF8tK+VlJakgvK4McypqMtTgU7BSAWy+/M9FfJSbBgBHYPjq9jrjGin\nxw6cIjl1Vsu/3Dtjf4snsW2FjcbogIsGX/lMaSZWCfBOnjs1QPNQ4RDmvxC8XQpy\nXuHU+sD8vBiZpclgaF2R1mf8nNfZbPCHiZws8B7Y1PhWLvutGlVdEAjMbJuMVkXP\nbmnuWh9MdL7FGZdWEola27mPkDpZSYy/Dr0ghOV9puKbZNP3wgDkWsHkw848ndFk\nfYV31g4eT7ByXbLKLuyjEnqaRDsa26D0s2epfukCgYEA4e8EAL4grLhmG+xRveci\ng5HoXVFZRVgInplsONpu1M2mXIBtWWDfVycblVkM5d1Ohd/n1Pw3fEdfK/hg2ymg\nofGVRVpYQP73NJMw1rTa5kcWRsG+YDAi4ostExlXI2rnlbnUoIuEerEzHtj4Wh9A\nPWAzBrRi8f87YTp2TDrqikUCgYEAuqGcX+p8YO5dMi/s5lGPGprptMHmCmOqU2gr\nYEectOoytOPJEiaxd7pGSa4W4ao0euNMnKsMT6q+wtRqBvpg/t8jrsvdu4hbq2Hf\nzZI6lgRKOOoawAzRjiKGcbOwgsz2UjHoIB4OWO/ujFDsrIO2yhJypdxZg/SQC3E0\nHRligXUCgYEAnnJqQz8TWS4E5iZIeT7ElLLZ27/2NEx11wxPultuCK2ksxCaH2lx\nmARkMsv94KLgs8CALH0pSG4hT4vkGS9LaOcswTOH2yU0JtnnEVxKe950v/CV241G\nmcvzM4a89qi9euKVPHY71XO6HzMYkNOD0MdLYbNWBNLzSM+gMPvMimUCgYAfcRSo\nMBfuOJoo11wg3UKvp8ORuUzpGStby+Pq34WuEPqj8PAyB6TEV/R5e0PNluAqh9qj\nVknHritfJWwLaukmZy9axmu/qVRQRjfvKSCHn4dlmUMScdZoDLb7ttsY3jDtXg0O\nRCIEp79XkladJb+IwZzhBoNqMKyH0PWHpXwr9QKBgB7YGcXYy8XFW0kwpcu7lSVz\np6dROafSMk4QMljHo8yila1I0Z/TOmHalFhn9Wsafdg4JoYy12Z7OPkngCurhWv9\nCGPf4Q2/Cex5bUsjI67oUTeEkP4+a1BDDqEiUyvmQVWiE5rJZR3WsWK6jpDdHin9\nsyFa9YbHVlwpSCna8LSn\n-----END PRIVATE KEY-----\n";
+                // Sign JWT
+                const sHeader = JSON.stringify(oHeader);
+                const sPayload = JSON.stringify(oPayload);
 
-        const sJWT = jwt.KJUR.jws.JWS.sign("RS256", sHeader, sPayload, privateKey);
+                // tslint:disable-next-line
+                const privateKey = "-----BEGIN PRIVATE KEY-----\nMIIEuwIBADANBgkqhkiG9w0BAQEFAASCBKUwggShAgEAAoIBAQCktko8W7B/J6+l\nDQooHSH+IIq6tAIWPKSYjhON4NYD7XTHhSDgcW1qGvaMorPhS2k/UbeR0J3hBzJr\nSuBNLMa9XiHLZ+n8Z3f0j2UBO3QQwSOejSvf38LnloWtV20LY2njAW/9pNys6f9w\njMQSVIBwBOgnBC6UebzNVMsVAq5zm0zBGDIlInUPYP7NQkt5TI+eYsmuveULmm6Q\ntehf6M7krGu958nK207Y3dpvgiZR59mBpwlni9EwOq+zbjL3XC8bUA0ODUcorrxx\nQ8WJ+Mx9aE8nBXdjDz8EfFcD+6ccotwbbsiTFmUv56cLaa1kfj4cmA+me0wC8vBg\nnaHIR/aJAgMBAAECgf9HMb74a5WtOSGVGGZpBAdBFc/NbXdSEZWJvbgsLuU/CG5A\nbPIhmzRXUAF8tK+VlJakgvK4McypqMtTgU7BSAWy+/M9FfJSbBgBHYPjq9jrjGin\nxw6cIjl1Vsu/3Dtjf4snsW2FjcbogIsGX/lMaSZWCfBOnjs1QPNQ4RDmvxC8XQpy\nXuHU+sD8vBiZpclgaF2R1mf8nNfZbPCHiZws8B7Y1PhWLvutGlVdEAjMbJuMVkXP\nbmnuWh9MdL7FGZdWEola27mPkDpZSYy/Dr0ghOV9puKbZNP3wgDkWsHkw848ndFk\nfYV31g4eT7ByXbLKLuyjEnqaRDsa26D0s2epfukCgYEA4e8EAL4grLhmG+xRveci\ng5HoXVFZRVgInplsONpu1M2mXIBtWWDfVycblVkM5d1Ohd/n1Pw3fEdfK/hg2ymg\nofGVRVpYQP73NJMw1rTa5kcWRsG+YDAi4ostExlXI2rnlbnUoIuEerEzHtj4Wh9A\nPWAzBrRi8f87YTp2TDrqikUCgYEAuqGcX+p8YO5dMi/s5lGPGprptMHmCmOqU2gr\nYEectOoytOPJEiaxd7pGSa4W4ao0euNMnKsMT6q+wtRqBvpg/t8jrsvdu4hbq2Hf\nzZI6lgRKOOoawAzRjiKGcbOwgsz2UjHoIB4OWO/ujFDsrIO2yhJypdxZg/SQC3E0\nHRligXUCgYEAnnJqQz8TWS4E5iZIeT7ElLLZ27/2NEx11wxPultuCK2ksxCaH2lx\nmARkMsv94KLgs8CALH0pSG4hT4vkGS9LaOcswTOH2yU0JtnnEVxKe950v/CV241G\nmcvzM4a89qi9euKVPHY71XO6HzMYkNOD0MdLYbNWBNLzSM+gMPvMimUCgYAfcRSo\nMBfuOJoo11wg3UKvp8ORuUzpGStby+Pq34WuEPqj8PAyB6TEV/R5e0PNluAqh9qj\nVknHritfJWwLaukmZy9axmu/qVRQRjfvKSCHn4dlmUMScdZoDLb7ttsY3jDtXg0O\nRCIEp79XkladJb+IwZzhBoNqMKyH0PWHpXwr9QKBgB7YGcXYy8XFW0kwpcu7lSVz\np6dROafSMk4QMljHo8yila1I0Z/TOmHalFhn9Wsafdg4JoYy12Z7OPkngCurhWv9\nCGPf4Q2/Cex5bUsjI67oUTeEkP4+a1BDDqEiUyvmQVWiE5rJZR3WsWK6jpDdHin9\nsyFa9YbHVlwpSCna8LSn\n-----END PRIVATE KEY-----\n";
 
-        const url = "https://www.googleapis.com/oauth2/v4/token/";
-        const headers = new HttpHeaders({ "Content-Type": "application/x-www-form-urlencoded" });
-        const body = `grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Ajwt-bearer&assertion=${sJWT}`;
+                const sJWT = jwt.KJUR.jws.JWS.sign("RS256", sHeader, sPayload, privateKey);
 
-        return this.http.post(url, body, { headers })
-            .toPromise()
-            .then((res) => {
-                this.accessToken = res["access_token"];
+                const url = "https://www.googleapis.com/oauth2/v4/token/";
+                const headers = new HttpHeaders({ "Content-Type": "application/x-www-form-urlencoded" });
+                const body = `grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Ajwt-bearer&assertion=${sJWT}`;
+
+                return this.http.post(url, body, { headers })
+                    .toPromise()
+                    .then((res) => {
+                        console.log("Token created", res);
+                        this.accessToken = res["access_token"];
+
+                        return this.accessToken;
+                    })
+                    .catch((err) => console.error("ERROR CREATING TOKEN", err));
             });
+
     }
 
     public getUserAliases(email) {
+        console.log("getUserAliases for ", email);
+
         return this.createToken(email)
             .then((rep) => {
                 const url = `https://www.googleapis.com/gmail/v1/users/me/settings/sendAs`;

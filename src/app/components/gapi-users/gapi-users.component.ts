@@ -87,12 +87,11 @@ export class GapiUsersComponent implements OnInit {
 
     public updateUser() {
         this.gapiMessage = null;
-        this.gapiService.updateUser(this.currentUser, this.ggOldUser)
-            .then((res) => {
-                this.userToGet = res["result"].id;
-                // this.getUser();
-            })
-            .catch((err) => console.error(err));
+        // this.gapiService.updateUser(this.currentUser, this.ggOldUser)
+        //     .then((res) => {
+        //         this.userToGet = res["result"].id;
+        //     })
+        //     .catch((err) => console.error(err));
 
         // Update Gmail settings (sendAs and signature)
         this.gapiService.updateGmailSendAs(this.currentUser, this.ggOldUser)

@@ -11,7 +11,7 @@ export class Fields extends Model {
     public managers: any[];
     public offices: any[];
     public orgas: any[];
-    public others: any[];
+    public others: any[] = [];
     public roles: any[];
     public teams: any[];
     public userFields: any[];

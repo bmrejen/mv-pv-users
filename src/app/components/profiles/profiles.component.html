@@ -58,8 +58,8 @@
                     <!-- ngModel can be binded to role ID if needed -->
                     <input
                         type="radio"
-                        [value]="role.name"
-                        [(ngModel)]="sugarCurrentUser.role"
+                        [value]="role.id"
+                        [(ngModel)]="sugarCurrentUser.roleId"
                         name="role"
                     >
                     {{ role.name }}

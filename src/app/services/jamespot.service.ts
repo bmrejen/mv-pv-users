@@ -42,7 +42,6 @@ export class JamespotService {
     }
 
     public postUsers(user): Promise<IJamespotUserConfig> {
-        console.log("user in post user service", user);
         const fd = new FormData();
         fd.append("Firstname", user.firstName);
         fd.append("Lastname", user.lastName.toUpperCase());

@@ -65,20 +65,6 @@ export class JamespotUsersComponent {
         }
     }
 
-    public onPrefill(): void {
-        this.jamesCurrentUser.active = "1";
-        this.jamesCurrentUser.company = "MARCO VASCO";
-        this.jamesCurrentUser.country = "fr";
-        this.jamesCurrentUser.idUser = null;
-        this.jamesCurrentUser.image = null;
-        this.jamesCurrentUser.language = "fr";
-        this.jamesCurrentUser.mail = "benoitmrejen@planetveo.com";
-        this.jamesCurrentUser.phoneExtension = "1234";
-        this.jamesCurrentUser.role = "User";
-        this.jamesCurrentUser.timeZone = "Europe/Paris";
-        this.jamesCurrentUser.username = "benoit.mrejen";
-    }
-
     public checkUsernameAvailability(): void {
         this.james.getByField("pseudo", this.jamesCurrentUser.username)
             .then((res: IJamespotUserConfig) => {

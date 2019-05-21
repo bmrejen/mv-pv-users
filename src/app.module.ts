@@ -46,6 +46,7 @@ import { UsersComponent } from "./app/components/users/users.component";
 import { DestinationsResolverService } from "./app/resolvers/destinations-resolver.service";
 import { FieldsResolverService } from "./app/resolvers/fields-resolver.service";
 import { ManagersResolverService } from "./app/resolvers/managers-resolver.service";
+import { OthersResolverService } from "./app/resolvers/others-resolver.service";
 import { RolesResolverService } from "./app/resolvers/roles-resolver.service";
 import { SugarResolverService } from "./app/resolvers/sugar-resolver.service";
 import { TeamsResolverService } from "./app/resolvers/teams-resolver.service";
@@ -107,6 +108,7 @@ import "./app/rxjs-extensions";
         GapiAuthenticatorService,
         JamespotService,
         ManagersResolverService,
+        OthersResolverService,
         ParserService,
         RolesResolverService,
         SugarResolverService,

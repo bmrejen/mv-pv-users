@@ -12,7 +12,7 @@ export class GoogleUser implements IGapiUser {
 
     // not needed in constructor
     // public primaryEmailSuffix = null;
-    public aliases;
+    public aliases = [];
 
     constructor(data?: any) {
         this.primaryEmail = data.primaryEmail || this.primaryEmail;

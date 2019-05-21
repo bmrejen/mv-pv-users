@@ -13,7 +13,7 @@ import "rxjs/add/operator/mergeMap";
 import "rxjs/add/operator/toPromise";
 
 import { SugarUser } from "../models/sugar-user";
-import { ISugarConfigAndName } from "./../interfaces/sugar-user";
+import { ISugarConfigAndName, ISugarUserFromApi, ISugarUserToApi } from "./../interfaces/sugar-user";
 
 @Injectable()
 export class SugarService {
@@ -83,18 +83,19 @@ export class SugarService {
         return this.getData("roles");
     }
 
-    public postDataToSugar(body) {
-        return this.http.post<any>(this.postEndPoint, body)
-            .pipe(catchError(this.errorHandler));
-    }
-
-    public errorHandler(error: HttpErrorResponse) {
-        return _throw(error);
+    public postDataToSugar(user: User) {
+        return this.http.post<any>(this.postEndPoint, this.mapCurrentUserToApi(user))
+            .toPromise();
     }
 
     public getTeams(): Promise<Team[]> {
         return this.getData("teams")
             .then((items) => items.filter((item) => isTeamMember(item)));
+    }
+
+    public getOthers(): Promise<Team[]> {
+        return this.getData("teams")
+            .then((items) => items.filter((item) => !isDestOrTeam(item)));
     }
 
     public mapUserFromApi(data): ISugarConfigAndName {
@@ -122,11 +123,48 @@ export class SugarService {
                 swAllowRemoteCalls: data.attributes.swAllowRemoteCalls || "",
                 swCallNotification: data.attributes.swCallNotification || "",
                 swClickToCall: data.attributes.swClickToCall || "",
-                teamId: data.attributes.teamId || "",
+                teams: [data.attributes.teamId] || [],
                 title: data.attributes.title || "",
                 tourplanID: data.attributes.tourplanID || "",
                 type: data.attributes.type || "",
                 userName: data.attributes.userName || "",
+            },
+        };
+    }
+
+    private mapCurrentUserToApi(user: User): ISugarUserToApi {
+        console.log(this);
+
+        return {
+            data: {
+                attributes: {
+                    codeSonGalileo: user.sugarCurrentUser.codeSonGalileo,
+                    department: user.sugarCurrentUser.department,
+                    email: user.sugarCurrentUser.email,
+                    employeeStatus: user.sugarCurrentUser.employeeStatus,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    managerId: user.sugarCurrentUser.managerId,
+                    officeId: user.sugarCurrentUser.officeId,
+                    phoneAsterisk: user.sugarCurrentUser.phoneAsterisk,
+                    phoneFax: user.sugarCurrentUser.phoneFax,
+                    phoneHome: user.sugarCurrentUser.phoneHome,
+                    phoneMobile: user.sugarCurrentUser.phoneMobile,
+                    phoneOther: user.sugarCurrentUser.phoneOther,
+                    phoneWork: user.sugarCurrentUser.phoneWork,
+                    salutation: user.sugarCurrentUser.salutation,
+                    status: user.sugarCurrentUser.status,
+                    swAllowRemoteCalls: user.sugarCurrentUser.swAllowRemoteCalls ? "1" : "0",
+                    swCallNotification: user.sugarCurrentUser.swCallNotification ? "1" : "0",
+                    swClickToCall: user.sugarCurrentUser.swClickToCall ? "1" : "0",
+                    title: user.sugarCurrentUser.title,
+                    tourplanID: user.sugarCurrentUser.tourplanID,
+                    userName: user.sugarCurrentUser.userName,
+                },
+                destinations: user.sugarCurrentUser.destinations,
+                roles: [user.sugarCurrentUser.roleId],
+                teams: [...user.sugarCurrentUser.teams, ...user.sugarCurrentUser.others],
+                type: "users",
             },
         };
     }
@@ -142,4 +180,11 @@ function isTeamMember(item): boolean {
     const prefixTeam = "EQ ";
 
     return item.attributes["name"].startsWith(prefixTeam);
+}
+
+function isDestOrTeam(item): boolean {
+    const prefixDest = "DESTI ";
+    const prefixTeam = "EQ ";
+
+    return (item.attributes["name"].startsWith(prefixDest) || item.attributes["name"].startsWith(prefixTeam));
 }

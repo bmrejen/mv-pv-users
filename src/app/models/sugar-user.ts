@@ -1,7 +1,4 @@
 import { ISugarUserConfig } from "../interfaces/sugar-user";
-import { Destination } from "./destination";
-import { Other } from "./other";
-import { Role } from "./role";
 
 export class SugarUser implements ISugarUserConfig {
     public codeSonGalileo: string = "";
@@ -22,19 +19,16 @@ export class SugarUser implements ISugarUserConfig {
     public swAllowRemoteCalls: boolean = true;
     public swCallNotification: boolean = true;
     public swClickToCall: boolean = true;
-    public teamId: string = "";
     public title: string = "";
     public tourplanID: string;
     public userName: string = "";
     public type: string = "users";
     public userToCopyHPfrom: string = "";
     public inheritsPreferencesFrom: string = "";
-    public role: Role = null;
+    public roleId: string = "";
     public functionId: string = "";
-    public destinations: Destination[] = [];
-    public others: Other[] = [];
-    public roles: Role[] = [];
-    public ggGroups: string = "";
+    public destinations: string[] = [];
+    public others: string[] = [];
     public isAdmin: boolean = false;
     public apiPortalUser: boolean = false;
     public assignationNotification: boolean = false;
@@ -42,6 +36,7 @@ export class SugarUser implements ISugarUserConfig {
     public defaultTeams: number = 1;
     public leadsMin: number = 15;
     public leadsMax: number = 45;
+    public teams: string[] = [];
 
     constructor(data: any) {
         this.codeSonGalileo = data.codeSonGalileo || this.codeSonGalileo;
@@ -59,7 +54,6 @@ export class SugarUser implements ISugarUserConfig {
         this.phoneWork = data.phoneWork || this.phoneWork;
         this.salutation = data.salutation || this.salutation;
         this.status = data.status || this.status;
-        this.teamId = data.teamId || this.teamId;
         this.title = data.title || this.title;
         this.userName = data.userName || this.userName;
         this.type = data.type || this.type;
@@ -74,10 +68,11 @@ export class SugarUser implements ISugarUserConfig {
 
         // this.userToCopyHPfrom = data.userToCopyHPfrom || this.userToCopyHPfrom;
         // this.inheritsPreferencesFrom = data.inheritsPreferencesFrom || this.inheritsPreferencesFrom;
-        // this.role = data.role || this.role;
+        this.roleId = data.roleId || this.roleId;
         // this.functionId = data.functionId || this.functionId;
-        // this.destinations = data.destinations || this.destinations;
-        // this.others = data.others || this.others;
+        this.destinations = data.destinations || this.destinations;
+        this.teams = data.teams || this.teams;
+        this.others = data.others || this.others;
         // this.roles = data.roles || this.roles;
         // this.isAdmin = data.isAdmin || this.isAdmin;
         // this.apiPortalUser = data.apiPortalUser || this.apiPortalUser;

@@ -17,6 +17,10 @@
             type="button"
             (click)=getUser()
         >Get User</button>
+        <button
+            type="button"
+            (click)=prefillForm()
+        >Prefill</button>
 
         <div *ngIf="isAlias">{{ mailToGet }} IS AN ALIAS OF
             {{ currentUser.ggCurrentUser.primaryEmail | uppercase }}</div>

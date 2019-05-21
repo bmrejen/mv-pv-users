@@ -21,5 +21,6 @@ export class User {
     constructor(data: any) {
         this.firstName = data.firstName || this.firstName;
         this.lastName = data.lastName || this.lastName;
+        this.password = data.password || this.password;
     }
 }

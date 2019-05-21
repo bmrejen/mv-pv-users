@@ -88,10 +88,6 @@
         </div>
 
         <button
-            type=button
-            (click)="onPrefill()"
-        >Prefill form with random data</button>
-        <button
             *ngIf="jamesCurrentUser.idUser == null"
             type=button
             (click)="onPost()"

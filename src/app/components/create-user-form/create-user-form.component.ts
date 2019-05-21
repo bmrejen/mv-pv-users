@@ -28,7 +28,7 @@ export class CreateUserFormComponent implements OnInit {
     public usersFromSugar: User[] = [];
     public usernameTaken;
     public currentUser: User;
-    public oldUser: User;
+    public oldUser: User = new User({});
     public teams: Team[] = [];
     public roles: Role[] = [];
     public destinations: Destination[] = [];
@@ -44,6 +44,10 @@ export class CreateUserFormComponent implements OnInit {
         apiLoaded: false,
         apiReady: false,
         userLoggedIn: null,
+    };
+    public temporaryData = {
+        sendAs: null,
+        signature: null,
     };
 
     public oldJamespotUser: JamespotUser;
@@ -85,8 +89,17 @@ export class CreateUserFormComponent implements OnInit {
 
                 // get fields list
                 this.fields = new Fields(data.fields);
+
+                // remove following lines after testing
+                this.fields.accounts[1]["checked"] = false;
+                this.fields.accounts[2]["checked"] = false;
+                this.fields.accounts[3]["checked"] = false;
+
+                // get others
+                data.others.forEach((other) => this.fields.others.push(new Team(other)));
             });
         this.initGapiServices();
+        this.oldUser = new User({});
     }
 
     public initGapiServices() {
@@ -104,6 +117,8 @@ export class CreateUserFormComponent implements OnInit {
                         if (result.currentUser.get()
                             .isSignedIn() === true) {
                             this.gapiStatus.userLoggedIn = result.currentUser.get().w3.ig;
+                        } else {
+                            this.gapi.signIn();
                         }
                     })
                     .then(() => this.gapi.getGroups()
@@ -114,15 +129,27 @@ export class CreateUserFormComponent implements OnInit {
     }
 
     public getUser() {
+        if (this.mailToGet === "" || this.mailToGet == null) {
+            alert("Please specify user to get");
+        }
         this.resetForm();
         if (!this.mailToGet.includes("@")) {
             this.mailToGet = `${this.mailToGet}@planetveo.com`;
         }
         const username = this.mailToGet.substring(0, this.mailToGet.lastIndexOf("@"));
 
-        this.getJamespotUser(`${username}@planetveo.com`);
-        this.getGapiUser(this.mailToGet);
-        this.getSugarUser(username);
+        const promises = [
+            this.getJamespotUser(`${username}@planetveo.com`),
+            this.getGapiUser(this.mailToGet),
+            this.getSugarUser(username),
+        ];
+        Promise.all(promises)
+            .then((res) => {
+                console.log(res);
+                // this.currentUser = new User({});
+
+            })
+            .catch((err) => console.error(err));
     }
 
     public resetForm() {
@@ -133,73 +160,214 @@ export class CreateUserFormComponent implements OnInit {
         this.currentUser = new User({});
     }
 
-    public getJamespotUser(mail) {
+    // -------- GET USER METHODS -------------
+    public getJamespotUser(mail): Promise<any> {
         return this.james.getByField("mail", mail)
             .then((res: IJamespotUserConfig) => {
                 this.currentUser.jamesCurrentUser = this.oldJamespotUser = new JamespotUser(res);
+
+                return res;
             })
             .catch((err) => this.jamesMessage = err);
     }
 
-    public getSugarUser(username) {
+    public getSugarUser(username): Promise<any> {
         return this.sugar.getUserByUsername(username)
             .then((res) => {
                 this.currentUser.firstName = res.common.firstName;
                 this.currentUser.lastName = res.common.lastName;
                 this.currentUser.sugarCurrentUser = new SugarUser(res.sugar);
+
+                return res;
             })
             .catch((err) => this.sugarMessage = "User not found");
     }
 
-    public getGapiUser(mail) {
+    public getGapiUser(mail): Promise<any> {
         return this.gapi.getUser(mail)
-            .then((res) =>
-                this.currentUser.ggCurrentUser = this.oldUser.ggCurrentUser = new GoogleUser(res))
-            .then((resp) => {
-                const primaryEmail = this.currentUser.ggCurrentUser.primaryEmail;
+            .then((res) => {
+                this.currentUser.ggCurrentUser = new GoogleUser(res);
+                const primaryEmail = res.primaryEmail;
+
+                // Google API
                 this.getGoogleGroupsOfUser(primaryEmail);
+
+                // GMail API
                 this.getUserAliases(primaryEmail);
+
+                // Local boolean
                 this.isAlias = this.gapi.isAlias(primaryEmail, mail, this.currentUser.ggCurrentUser);
+
+                return res;
             })
-            .catch((err) => this.gapiMessage = err.result.error.message);
+            .catch((err) => {
+                console.error("Error getting Gapi User", err);
+                this.gapiMessage = err.result["error"].message;
+            });
     }
 
-    public trackByFn(item) {
-        return item.id;
+    public lowerCasify() {
+        this.currentUser.sugarCurrentUser.email = this.currentUser.sugarCurrentUser.email.toLowerCase();
+        this.currentUser.sugarCurrentUser.userName = this.currentUser.sugarCurrentUser.userName.toLowerCase();
+        this.currentUser.jamesCurrentUser.mail = this.currentUser.jamesCurrentUser.mail.toLowerCase();
+        this.currentUser.jamesCurrentUser.username = this.currentUser.jamesCurrentUser.username.toLowerCase();
+        this.currentUser.jamesCurrentUser.mail = this.currentUser.jamesCurrentUser.mail.toLowerCase();
+        this.currentUser.ggCurrentUser.primaryEmail = this.currentUser.ggCurrentUser.primaryEmail.toLowerCase();
     }
-    // POST USER
+
+    // --------- POST USER -------------
     public onSubmit() {
-        // this.postJamespotUser();
-        this.postGapiUser();
-        // this.postSugarUser();
-        // this.resetForm();
+        this.lowerCasify();
+
+        this.mailToGet = this.currentUser.ggCurrentUser.primaryEmail;
+
+        const promises: Array<Promise<any>> = [];
+
+        this.fields.accounts.forEach((account) => {
+            if (account.checked) {
+                switch (account.id) {
+                    case "gapps":
+                        promises.push(this.postGapiUser());
+                        break;
+                    case "sugar":
+                        promises.push(this.postSugarUser());
+                        break;
+                    case "jamespot":
+                        promises.push(this.postJamespotUser());
+                        break;
+                    case "switchvox":
+                        break;
+
+                    default:
+                        alert("This promise is not defined");
+                        break;
+                }
+            }
+        });
+
+        Promise.all(promises)
+            .then((res) => {
+                console.log(res);
+
+                return res;
+            })
+            .catch((err) => console.error(err));
     }
 
-    public postJamespotUser() {
-        this.james.postUsers(this.currentUser)
-            .then((res: IJamespotUserConfig) => console.log(res))
+    public postJamespotUser(): Promise<any> {
+        return this.james.postUsers(this.currentUser)
+            .then((res: IJamespotUserConfig) => res)
             .catch((err: string) => {
                 console.error("Jamespot Problem :", err);
                 this.jamesMessage = err.substr(31, err.length - 34);
             });
     }
 
-    public postGapiUser() {
+    public postGapiUser(): Promise<any> {
         this.gapiMessage = null;
-        this.gapi.postUser(this.currentUser)
+        this.temporaryData.sendAs = this.currentUser.ggCurrentUser.sendAs;
+        this.temporaryData.signature = this.currentUser.ggCurrentUser.signature;
+
+        return this.gapi.postUser(this.currentUser)
             .then((res) => {
-                console.log(res);
-                this.getGapiUser(res.result.primaryEmail)
-                    .then((reponse) => {
-                        console.log(reponse);
-                        this.gapi.updateGmailSendAs(this.currentUser, new User({}))
-                            .then((response) => console.log("response from updateGmailSendAs", response))
-                            .catch((err) => console.error("ERROR in UpdateGMailAlias", err));
-                        this.gapiMessage = "User created !";
+
+                console.log("POST GAPI response", res);
+
+                return new Promise((resolve) => setTimeout(resolve, 10000))
+                    .then(() => {
+
+                        this.getGapiUser(res["result"].primaryEmail)
+                            .then((response) => {
+
+                                return new Promise((resolve, reject) => {
+                                    setTimeout(() => {
+
+                                        this.currentUser.ggCurrentUser.sendAs = this.temporaryData.sendAs;
+                                        this.currentUser.ggCurrentUser.signature = this.temporaryData.signature;
+
+                                        this.gapiMessage = "User created !";
+
+                                        return this.gapi.updateGmailSendAs(this.currentUser, this.oldUser)
+                                            .then((rep) => console.log("response from updateGmailSendAs", rep))
+                                            .catch((err) => console.error("ERROR in UpdateGMailAlias", err));
+                                    }, 3000);
+
+                                });
+
+                            });
                     });
+
             })
-            .catch((err) => console.error("ERROR POSTING USER", err));
+
+            .catch((err) => console.error(err));
         // .catch((err) => this.gapiMessage = err["result"].error);
+    }
+
+    public postSugarUser(): Promise<any> {
+        return this.sugar.postDataToSugar(this.currentUser)
+            .then((res) => res)
+            .catch((err) => err);
+    }
+
+    public prefillForm() {
+        this.currentUser = new User({
+            firstName: "Foxtrotfoxtrot",
+        });
+        this.currentUser.lastName = this.currentUser.firstName;
+        this.currentUser.password = Math.random()
+            .toString(36)
+            .substring(2);
+        this.currentUser.ggCurrentUser = new GoogleUser({
+            orgas: "/IT",
+            primaryEmail: `${this.currentUser.firstName[0]}${this.currentUser.lastName}@planetveo.com`,
+            sendAs: "marcovasco.fr",
+            signature: "Pouet pouet",
+        });
+        this.currentUser.sugarCurrentUser = new SugarUser({
+            codeSonGalileo: "123456",
+            department: "Backoffice Carnet",
+            destinations: ["4e12eefb-5dbb-f913-d80b-4c2ab8202809",
+                "6f9aedb6-6d68-b4f3-0270-4cc10e363077"],
+            email: `${this.currentUser.firstName[0]}${this.currentUser.lastName}@marcovasco.fr`,
+            employeeStatus: "Active",
+            managerId: "4a15f7bb-09ec-32f7-4da8-5a560982cd06",
+            officeId: "1006",
+            others: ["013335f9-80ad-11e7-9c8e-64006a75b5cd",
+                "0d5a7e81-d409-11e7-875a-64006a75b5cd"],
+            phoneAsterisk: "1211",
+            phoneFax: "01 76 64 72 00",
+            phoneHome: "01 76 64 72 01",
+            phoneMobile: "01 76 64 72 02",
+            phoneOther: "01 76 64 72 03",
+            phoneWork: "01 76 64 72 04",
+            roleId: "25218251-3011-b347-5d4f-4bfced4de2cc",
+            salutation: "Mr.",
+            status: "Active",
+            swAllowRemoteCalls: "0",
+            swCallNotification: "1",
+            swClickToCall: "1",
+            teams: ["0ec63f44-aa38-11e7-924f-005056911f09",
+                "1046f88d-3d37-10d5-7760-506023561b57"],
+            title: "Assistant Ventes",
+            tourplanID: this.currentUser.firstName.slice(0, 6)
+                .toUpperCase(),
+            userName: `${this.currentUser.firstName[0]}${this.currentUser.lastName}`,
+        });
+        this.currentUser.jamesCurrentUser = new JamespotUser({
+            active: "1",
+            company: "MARCO VASCO",
+            country: "fr",
+            language: "fr",
+            mail: this.currentUser.ggCurrentUser.primaryEmail,
+            phoneExtension: "",
+            role: "User",
+            timeZone: "Europe/Paris",
+            username: `${this.currentUser.firstName[0]}${this.currentUser.lastName}`,
+        });
+    }
+
+    public trackByFn(item) {
+        return item.id;
     }
 
     // ------- PRIVATE METHODS --------
@@ -217,8 +385,11 @@ export class CreateUserFormComponent implements OnInit {
     }
 
     private getUserAliases(primaryEmail) {
+        console.log("getting the GMAIL aliases of", primaryEmail);
+
         this.gapi.getUserAliases(primaryEmail)
             .then((response) => {
+                console.log("aliases for ", primaryEmail, response);
                 this.currentUser.ggCurrentUser.aliases = response;
 
                 const defaultAlias = response.find((alias) => alias.isDefault === true);
