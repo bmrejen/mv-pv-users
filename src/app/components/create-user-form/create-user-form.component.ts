@@ -192,13 +192,12 @@ export class CreateUserFormComponent implements OnInit {
                 // Google API
                 this.getGoogleGroupsOfUser(primaryEmail);
 
-                // GMail API
-                this.getUserAliases(primaryEmail);
-
                 // Local boolean
                 this.isAlias = this.gapi.isAlias(primaryEmail, mail, this.currentUser.ggCurrentUser);
 
-                return res;
+                // GMail API
+                return this.getUserAliases(primaryEmail);
+
             })
             .catch((err) => {
                 console.error("Error getting Gapi User", err);
@@ -311,7 +310,7 @@ export class CreateUserFormComponent implements OnInit {
 
     public prefillForm() {
         this.currentUser = new User({
-            firstName: "Foxtrotfoxtrot",
+            firstName: "Xrayxray",
         });
         this.currentUser.lastName = this.currentUser.firstName;
         this.currentUser.password = Math.random()
@@ -384,10 +383,10 @@ export class CreateUserFormComponent implements OnInit {
             .catch((err) => alert(err.result.error.message));
     }
 
-    private getUserAliases(primaryEmail) {
+    private getUserAliases(primaryEmail): Promise<any> {
         console.log("getting the GMAIL aliases of", primaryEmail);
 
-        this.gapi.getUserAliases(primaryEmail)
+        return this.gapi.getUserAliases(primaryEmail)
             .then((response) => {
                 console.log("aliases for ", primaryEmail, response);
                 this.currentUser.ggCurrentUser.aliases = response;
@@ -395,6 +394,8 @@ export class CreateUserFormComponent implements OnInit {
                 const defaultAlias = response.find((alias) => alias.isDefault === true);
                 this.currentUser.ggCurrentUser.signature = defaultAlias.signature;
                 this.currentUser.ggCurrentUser.sendAs = defaultAlias.sendAsEmail.split("@")[1];
+
+                return response;
             })
             .catch((err) => console.error(err));
     }

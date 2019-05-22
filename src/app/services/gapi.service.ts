@@ -214,8 +214,9 @@ export class GapiAuthenticatorService {
         if (user.sendAs !== oldUser.sendAs) {
             console.log("alias has been modified");
 
-            body["displayName"] = `${usr.firstName} ${usr.lastName}`;
+            body["displayName"] = "";
             body["isDefault"] = true;
+            body["replyToAddress"] = "";
             body["sendAsEmail"] = newSendAsEmail;
             body["treatAsAlias"] = true;
             body["sub"] = `${usr.ggCurrentUser.primaryEmail}`;
@@ -254,6 +255,7 @@ export class GapiAuthenticatorService {
         return this.createToken(primaryEmail)
             .then(() => {
                 console.log("token has been created:", this.accessToken);
+                delete body["sub"];
                 const url = `https://www.googleapis.com/gmail/v1/users/me/settings/sendAs`;
                 const headers = new HttpHeaders({ Authorization: `Bearer ${this.accessToken}` });
 
