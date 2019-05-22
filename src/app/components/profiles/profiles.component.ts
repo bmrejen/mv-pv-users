@@ -3,6 +3,7 @@ import { ControlContainer, NgForm } from "@angular/forms";
 
 import { SugarService } from "../../services/sugar.service";
 
+import { GoogleUser } from "../../models/google-user";
 import { SugarUser } from "../../models/sugar-user";
 import { User } from "../../models/user";
 
@@ -18,12 +19,13 @@ import { User } from "../../models/user";
 })
 
 export class ProfilesComponent implements OnInit {
-    @Input() public sugarCurrentUser;
+    @Input() public sugarCurrentUser: SugarUser;
     @Input() public roles;
     @Input() public userTemplates;
     @Input() public departments;
     @Input() public orgas;
     @Input() public others;
+    @Input() public ggCurrentUser: GoogleUser;
 
     public hideLeads = true;
     public allUsersFromSugar: User[] = [];
@@ -75,17 +77,28 @@ export class ProfilesComponent implements OnInit {
             .catch((err) => console.error(err));
     }
 
+    public pushOthersToUser(others: string[]) {
+        others.forEach((other) => {
+            const myOther = this.others.find((oth) => oth.name === other);
+            this.sugarCurrentUser.others.push(myOther.id);
+        });
+    }
+
+    public pushRoleToUser(roleName: string) {
+        const myRole = this.roles.find((role) => role.name === roleName);
+        this.sugarCurrentUser.roleId = myRole.id;
+    }
+
     public handleClick(type) {
-        const others = this.others;
-        const orgas = this.orgas;
+        this.resetProfiles();
 
         switch (type) {
             case "conseiller":
                 {
                     this.sugarCurrentUser.userToCopyHPfrom = "user_default";
-                    this.sugarCurrentUser.role = "Sales";
+                    this.pushRoleToUser("Sales");
                     this.sugarCurrentUser.department = "Ventes";
-                    this.checkStuff(others, ["Global", "Ventes", "Devis Cotation", "ROLE - Reservation"]);
+                    this.pushOthersToUser(["Global", "Ventes", "Devis Cotation", "ROLE - Reservation"]);
                     break;
                 }
 
@@ -93,72 +106,73 @@ export class ProfilesComponent implements OnInit {
                 {
                     this.sugarCurrentUser.userToCopyHPfrom = "user_default_jm";
 
-                    this.sugarCurrentUser.role = "Sales";
+                    this.pushRoleToUser("Sales");
                     this.sugarCurrentUser.department = "Ventes";
-                    this.checkStuff(others,
-                        [
-                            "Global",
-                            "Ventes",
-                            "Devis Cotation",
-                            "ROLE - BI Validation",
-                            "ROLE - ViewRCM",
-                            "ROLE - View RM",
-                            "Ventes",
-                        ],
-                    );
+                    this.pushOthersToUser([
+                        "Global",
+                        "Ventes",
+                        "Devis Cotation",
+                        "ROLE - BI Validation",
+                        "ROLE - View RCM",
+                        "ROLE - View RM",
+                        "Ventes",
+                    ]);
+                    this.sugarCurrentUser.functionId = "jm";
                     break;
                 }
             case "manager":
                 {
-
-                    this.sugarCurrentUser.role = "Team Manager";
+                    this.pushRoleToUser("Team Manager");
                     this.sugarCurrentUser.department = "Ventes";
-                    this.checkStuff(others, [
+                    this.pushOthersToUser([
                         "Global",
                         "Devis Cotation", "Devis V3",
                         "ROLE - BI Validation",
                         "Ventes",
-                    ],
-                    );
+                    ]);
+                    this.sugarCurrentUser.functionId = "mgr";
                     break;
                 }
             case "assistant":
                 {
-                    this.sugarCurrentUser.role = "Reservation";
+                    this.pushRoleToUser("Reservation");
                     this.sugarCurrentUser.department = "Ventes";
-                    this.checkStuff(others, [
+                    this.pushOthersToUser([
                         "Devis V3",
                         "Devis Cotation",
                         "Global",
                         "Reservation",
                         "ROLE - Reservation",
                     ]);
+                    this.sugarCurrentUser.functionId = "av";
                     break;
                 }
             case "qualite":
                 {
-                    this.sugarCurrentUser.office = "Bureau - Billetterie & Qualité";
-                    // this.sugarCurrentUser.selectedManager = "Manager du service qualité (Aminata)";
-
-                    this.sugarCurrentUser.role = "Quality Control";
+                    this.sugarCurrentUser.officeId = "1006";
+                    this.sugarCurrentUser.managerId = "c2a40794-67cc-c26a-1626-5abcfc134aa5";
+                    this.pushRoleToUser("Quality Control");
                     this.sugarCurrentUser.department = "Service Qualité";
-                    this.checkStuff(others, ["BackOffice", "Global", "SAV"]);
-                    this.checkStuff(orgas, ["BackOffice"]);
+                    this.pushOthersToUser(
+                        ["Backoffice", "Global", "SAV"]);
+                    this.ggCurrentUser.orgas = "/BackOffice";
+                    this.sugarCurrentUser.functionId = "aq";
+
                     break;
                 }
             case "compta":
                 {
-                    this.sugarCurrentUser.office = "1377";
-
-                    this.sugarCurrentUser.role = "Accountant";
+                    this.sugarCurrentUser.officeId = "1377";
+                    this.pushRoleToUser("Accountant");
                     this.sugarCurrentUser.department = "Comptabilité";
-                    this.checkStuff(others, ["Global", "ROLE - Affaire Validation", "ROLE - Create Provider"]);
-                    this.checkStuff(orgas, ["Compta"]);
+                    this.pushOthersToUser(
+                        ["Global", "ROLE - Affaire Validation", "ROLE - Create Provider"]);
+                    this.ggCurrentUser.orgas = "/Compta";
                     break;
                 }
             case "inactif":
                 {
-                    this.sugarCurrentUser.role = "ReadOnly";
+                    this.pushRoleToUser("ReadOnly");
                     this.sugarCurrentUser.status = "Inactive";
                     this.sugarCurrentUser.employeeStatus = "Inactive";
                     break;
@@ -170,24 +184,16 @@ export class ProfilesComponent implements OnInit {
         }
     }
 
-    public checkStuff(where, arr) {
-        let prefix;
-        switch (where) {
-            case this.orgas:
-                prefix = "orgas";
-                break;
-            case this.others:
-                prefix = "others";
-                break;
-
-            default:
-                console.error("Wrong input");
-                break;
-        }
-        arr.forEach((element) => {
-            const myOther = where.find((other) => other.id === `${prefix}-${element}`);
-            if (!!myOther) { myOther.checked = true; }
-        });
+    public resetProfiles() {
+        this.sugarCurrentUser.userToCopyHPfrom = "";
+        this.sugarCurrentUser.roleId = "";
+        this.sugarCurrentUser.department = "";
+        this.sugarCurrentUser.functionId = null;
+        this.sugarCurrentUser.officeId = "";
+        this.sugarCurrentUser.others = [];
+        this.ggCurrentUser.orgas = null;
+        this.sugarCurrentUser.status = "Active";
+        this.sugarCurrentUser.employeeStatus = "Active";
     }
 
     public trackByFn(item) {

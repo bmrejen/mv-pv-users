@@ -100,6 +100,7 @@ export class CreateUserFormComponent implements OnInit {
             });
         this.initGapiServices();
         this.oldUser = new User({});
+        console.log(this.fields);
     }
 
     public initGapiServices() {
