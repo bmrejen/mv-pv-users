@@ -1,9 +1,9 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { _throw } from "rxjs/observable/throw";
-import { catchError } from "rxjs/operators";
 
 import { Destination } from "../models/destination";
+import { Other } from "../models/other";
 import { Role } from "../models/role";
 import { Team } from "../models/team";
 import { User } from "../models/user";
@@ -13,7 +13,7 @@ import "rxjs/add/operator/mergeMap";
 import "rxjs/add/operator/toPromise";
 
 import { SugarUser } from "../models/sugar-user";
-import { ISugarConfigAndName, ISugarUserFromApi, ISugarUserToApi } from "./../interfaces/sugar-user";
+import { ISugarConfigAndName, ISugarUserToApi } from "./../interfaces/sugar-user";
 
 @Injectable()
 export class SugarService {
@@ -93,9 +93,10 @@ export class SugarService {
             .then((items) => items.filter((item) => isTeamMember(item)));
     }
 
-    public getOthers(): Promise<Team[]> {
+    public getOthers(): Promise<Other[]> {
         return this.getData("teams")
-            .then((items) => items.filter((item) => !isDestOrTeam(item)));
+            .then((items) => items.filter((item) => !isDestOrTeam(item)))
+            .then((others) => others.map((other) => other.attributes));
     }
 
     public mapUserFromApi(data): ISugarConfigAndName {

@@ -4,6 +4,7 @@ import { ControlContainer, NgForm } from "@angular/forms";
 import { SugarService } from "../../services/sugar.service";
 
 import { GoogleUser } from "../../models/google-user";
+import { Other } from "../../models/other";
 import { SugarUser } from "../../models/sugar-user";
 import { User } from "../../models/user";
 
@@ -24,14 +25,15 @@ export class ProfilesComponent implements OnInit {
     @Input() public userTemplates;
     @Input() public departments;
     @Input() public orgas;
-    @Input() public others;
+    @Input() public others: Other[];
     @Input() public ggCurrentUser: GoogleUser;
 
     public hideLeads = true;
     public allUsersFromSugar: User[] = [];
     public activeUsersFromSugar: User[];
 
-    constructor(private sugarService: SugarService) {
+    constructor(
+        private sugarService: SugarService) {
         //
     }
 
@@ -78,8 +80,9 @@ export class ProfilesComponent implements OnInit {
     }
 
     public pushOthersToUser(others: string[]) {
-        others.forEach((other) => {
-            const myOther = this.others.find((oth) => oth.name === other);
+        others.forEach((other: string) => {
+            const myOther = this.others.find((oth: Other) => oth.name === other);
+            myOther.checked = true;
             this.sugarCurrentUser.others.push(myOther.id);
         });
     }
@@ -194,6 +197,7 @@ export class ProfilesComponent implements OnInit {
         this.ggCurrentUser.orgas = null;
         this.sugarCurrentUser.status = "Active";
         this.sugarCurrentUser.employeeStatus = "Active";
+        this.others.forEach((other) => other.checked = false);
     }
 
     public trackByFn(item) {

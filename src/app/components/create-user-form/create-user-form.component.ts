@@ -3,6 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 
 import { Destination } from "../../models/destination";
 import { Fields } from "../../models/fields";
+import { Other } from "../../models/other";
 import { Role } from "../../models/role";
 import { SugarUser } from "../../models/sugar-user";
 import { Team } from "../../models/team";
@@ -90,13 +91,15 @@ export class CreateUserFormComponent implements OnInit {
                 // get fields list
                 this.fields = new Fields(data.fields);
 
+                // get others
+                data.others.forEach((other) => this.fields.others.push(new Other(other)));
+
                 // remove following lines after testing
                 this.fields.accounts[1]["checked"] = false;
                 this.fields.accounts[2]["checked"] = false;
                 this.fields.accounts[3]["checked"] = false;
 
-                // get others
-                data.others.forEach((other) => this.fields.others.push(new Team(other)));
+                console.log("data resolved", data);
             });
         this.initGapiServices();
         this.oldUser = new User({});
@@ -311,7 +314,7 @@ export class CreateUserFormComponent implements OnInit {
 
     public prefillForm() {
         this.currentUser = new User({
-            firstName: "Xrayxray",
+            firstName: "Yankeeyankee",
         });
         this.currentUser.lastName = this.currentUser.firstName;
         this.currentUser.password = Math.random()

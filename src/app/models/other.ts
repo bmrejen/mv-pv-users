@@ -1,11 +1,13 @@
-import { Model } from "./model";
+export class Other {
+    public checked: boolean = false;
+    public id: string = null;
+    public name: string = null;
+    public description: string = null;
 
-export class Other extends Model {
-    public checked: boolean;
-    public id: string;
-    public label: string;
-
-    constructor(data?: any) {
-        super(data);
+    constructor(data: any) {
+        this.checked = data.checked || this.checked;
+        this.id = data.id || this.id;
+        this.name = data.name || this.name;
+        this.description = data.description || this.description;
     }
 }

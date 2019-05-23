@@ -2,17 +2,17 @@ import { Injectable } from "@angular/core";
 import { Resolve } from "@angular/router";
 import { SugarService } from "../services/sugar.service";
 
-import { Team } from "../models/team";
+import { Other } from "../models/other";
 
 @Injectable()
 
-export class OthersResolverService implements Resolve<Promise<Team[]>> {
+export class OthersResolverService implements Resolve<Promise<Other[]>> {
 
     constructor(private sugarService: SugarService) {
         //
     }
 
-    public resolve(): Promise<Team[]> {
+    public resolve(): Promise<Other[]> {
         return this.sugarService.getOthers();
     }
 }
