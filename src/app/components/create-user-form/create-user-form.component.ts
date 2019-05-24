@@ -24,7 +24,6 @@ import { SugarService } from "../../services/sugar.service";
 
 export class CreateUserFormComponent implements OnInit {
     public fields: Fields;
-    public errorMsg;
     public passwordExists = false;
     public usersFromSugar: User[] = [];
     public usernameTaken;
@@ -50,8 +49,6 @@ export class CreateUserFormComponent implements OnInit {
         sendAs: null,
         signature: null,
     };
-
-    public oldJamespotUser: JamespotUser;
 
     // tslint:disable-next-line:max-line-length
     public body = `{"data":[{"codeSonGalileo":"","departments":["departments-Backoffice","departments-Backoffice Billet"],"destinations":["4e12eefb-5dbb-f913-d80b-4c2ab8202809","6f9aedb6-6d68-b4f3-0270-4cc10e363077"],"email":"mfeuillet@marcovasco.fr","employeeStatus":true,"firstName":"Mathilde","functionId":"","inheritsPreferencesFrom":"user_default","isAdmin":false,"lastName":"Feuillet","leadsMax":45,"leadsMin":15,"managerId":"","officeId":"","phoneAsterisk":"phoneAsterisk","phoneFax":"phoneFax","phoneMobile":"phoneMobile","phoneWork":"phoneWork","roles":["128e2eae-322a-8a0d-e9f0-4cf35b5bfe5b","25218251-3011-b347-5d4f-4bfced4de2cc"],"salutation":"Mrs.","status":true,"teams":["0ec63f44-aa38-11e7-924f-005056911f09","1046f88d-3d37-10d5-7760-506023561b57"],"title":"","tourplanID":"MFEUIL","userName":"mfeuillet"}]}`;
@@ -102,7 +99,6 @@ export class CreateUserFormComponent implements OnInit {
                 console.log("data resolved", data);
             });
         this.initGapiServices();
-        this.oldUser = new User({});
         console.log(this.fields);
     }
 
@@ -149,9 +145,15 @@ export class CreateUserFormComponent implements OnInit {
         ];
         Promise.all(promises)
             .then((res) => {
-                console.log(res);
-                // this.currentUser = new User({});
-
+                return {
+                    google: res[1],
+                    jamespot: res[0],
+                    sugar: res[2],
+                };
+            })
+            .then((res) => {
+                console.log("Promise all in getUser", res);
+                console.log("current and oldUser", this.currentUser, this.oldUser);
             })
             .catch((err) => console.error(err));
     }
@@ -168,7 +170,8 @@ export class CreateUserFormComponent implements OnInit {
     public getJamespotUser(mail): Promise<any> {
         return this.james.getByField("mail", mail)
             .then((res: IJamespotUserConfig) => {
-                this.currentUser.jamesCurrentUser = this.oldJamespotUser = new JamespotUser(res);
+                this.currentUser.jamesCurrentUser = new JamespotUser(res);
+                this.oldUser.jamesCurrentUser = new JamespotUser(res);
 
                 return res;
             })
@@ -182,6 +185,10 @@ export class CreateUserFormComponent implements OnInit {
                 this.currentUser.lastName = res.common.lastName;
                 this.currentUser.sugarCurrentUser = new SugarUser(res.sugar);
 
+                this.oldUser.firstName = res.common.firstName;
+                this.oldUser.lastName = res.common.lastName;
+                this.oldUser.sugarCurrentUser = new SugarUser(res.sugar);
+
                 return res;
             })
             .catch((err) => this.sugarMessage = "User not found");
@@ -191,17 +198,22 @@ export class CreateUserFormComponent implements OnInit {
         return this.gapi.getUser(mail)
             .then((res) => {
                 this.currentUser.ggCurrentUser = new GoogleUser(res);
+                this.oldUser.ggCurrentUser = new GoogleUser(res);
+
                 const primaryEmail = res.primaryEmail;
 
-                // Google API
-                this.getGoogleGroupsOfUser(primaryEmail);
+                const promises = [
+                    res,
+                    // Google API
+                    this.getGoogleGroupsOfUser(primaryEmail),
+                    // GMail API
+                    this.getUserAliases(primaryEmail),
+                ];
 
                 // Local boolean
                 this.isAlias = this.gapi.isAlias(primaryEmail, mail, this.currentUser.ggCurrentUser);
 
-                // GMail API
-                return this.getUserAliases(primaryEmail);
-
+                return Promise.all(promises);
             })
             .catch((err) => {
                 console.error("Error getting Gapi User", err);
@@ -250,7 +262,7 @@ export class CreateUserFormComponent implements OnInit {
 
         Promise.all(promises)
             .then((res) => {
-                console.log(res);
+                console.log("onSubmit res", res);
 
                 return res;
             })
@@ -382,7 +394,10 @@ export class CreateUserFormComponent implements OnInit {
                     const myGroup = this.googleGroups.find((grp) => grp.id === group.id);
                     myGroup["isEnabled"] = true;
                     this.currentUser.ggCurrentUser.googleGroups.push(myGroup);
+                    this.oldUser.ggCurrentUser.googleGroups.push(myGroup);
                 });
+
+                return response;
             })
             .catch((err) => alert(err.result.error.message));
     }
@@ -394,12 +409,21 @@ export class CreateUserFormComponent implements OnInit {
             .then((response) => {
                 console.log("aliases for ", primaryEmail, response);
                 this.currentUser.ggCurrentUser.aliases = response;
+                this.oldUser.ggCurrentUser.aliases = response;
 
                 const defaultAlias = response.find((alias) => alias.isDefault === true);
-                this.currentUser.ggCurrentUser.signature = defaultAlias.signature;
-                this.currentUser.ggCurrentUser.sendAs = defaultAlias.sendAsEmail.split("@")[1];
 
-                return response;
+                this.currentUser.ggCurrentUser.signature = defaultAlias.signature;
+                this.oldUser.ggCurrentUser.signature = defaultAlias.signature;
+
+                this.currentUser.ggCurrentUser.sendAs = defaultAlias.sendAsEmail.split("@")[1];
+                this.oldUser.ggCurrentUser.sendAs = defaultAlias.sendAsEmail.split("@")[1];
+
+                return {
+                    aliases: this.currentUser.ggCurrentUser.aliases,
+                    sendAs: this.currentUser.ggCurrentUser.sendAs,
+                    signature: this.currentUser.ggCurrentUser.signature,
+                };
             })
             .catch((err) => console.error(err));
     }

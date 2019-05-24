@@ -20,15 +20,14 @@ enum Domains {
 export class GapiUsersComponent implements OnInit {
     public users;
     public userToGet: string;
-    public ggOldUser: User;
     public orgas;
     public userLoggedIn: "Logged out";
-
     public googleGroups;
 
     public domains = Object.keys(Domains)
         .map((dom) => Domains[dom]);
 
+    @Input() public oldUser: User;
     @Input() public currentUser: User;
     @Input() public ggCurrentUser: GoogleUser;
     @Input() public gapiMessage: string;
@@ -87,14 +86,9 @@ export class GapiUsersComponent implements OnInit {
 
     public updateUser() {
         this.gapiMessage = null;
-        // this.gapiService.updateUser(this.currentUser, this.ggOldUser)
-        //     .then((res) => {
-        //         this.userToGet = res["result"].id;
-        //     })
-        //     .catch((err) => console.error(err));
 
         // Update Gmail settings (sendAs and signature)
-        this.gapiService.updateGmailSendAs(this.currentUser, this.ggOldUser)
+        this.gapiService.updateGmailSendAs(this.currentUser, this.oldUser)
             .then((res) => console.log("Alias updated !", res))
             .catch((err) => console.error(err));
     }

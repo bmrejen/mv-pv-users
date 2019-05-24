@@ -192,39 +192,40 @@ export class GapiAuthenticatorService {
 
     public updateGmailSendAs(usr: User, oldUsr: User): Promise<any> {
         console.log("updateGmailSendAs ", usr, oldUsr);
-        const user = usr.ggCurrentUser;
-        const oldUser = oldUsr.ggCurrentUser;
 
         const body = {};
-        // CHECK WHY USER.SENDAS IS SOMETIMES NULL
-        const newSendAsEmail = `${user.primaryEmail.split("@")[0]}@${user.sendAs}`;
-        console.log("new alias:", newSendAsEmail);
 
-        if (user.sendAs === oldUser.sendAs && user.signature === oldUser.signature) {
+        // "sub" property needed for token but will be deleted if a new alias must be created
+        body["sub"] = `${usr.ggCurrentUser.primaryEmail}`;
+
+        const newSendAsEmail = `${usr.ggCurrentUser.primaryEmail.split("@")[0]}@${usr.ggCurrentUser.sendAs}`;
+
+        if (usr.ggCurrentUser.sendAs === oldUsr.ggCurrentUser.sendAs
+            && usr.ggCurrentUser.signature === oldUsr.ggCurrentUser.signature) {
             return new Promise((resolve, reject) => reject("Alias and signature unchanged"));
         }
 
         // If signature has been modified
-        if (user.signature !== oldUser.signature) {
-            body["signature"] = user.signature;
+        if (usr.ggCurrentUser.signature !== oldUsr.ggCurrentUser.signature) {
+            body["signature"] = usr.ggCurrentUser.signature;
             console.log("signature has been modified");
         }
 
         // If alias has been modified
-        if (user.sendAs !== oldUser.sendAs) {
+        if (usr.ggCurrentUser.sendAs !== oldUsr.ggCurrentUser.sendAs) {
             console.log("alias has been modified");
+            console.log("newSendAsEmail ", newSendAsEmail);
 
-            body["displayName"] = "";
+            body["displayName"] = `${usr.firstName} ${usr.lastName}`;
             body["isDefault"] = true;
             body["replyToAddress"] = "";
             body["sendAsEmail"] = newSendAsEmail;
             body["treatAsAlias"] = true;
-            body["sub"] = `${usr.ggCurrentUser.primaryEmail}`;
         }
 
         // Create the alias if it doesn't exist
-        if (user.aliases.some((alias) => alias.sendAsEmail === newSendAsEmail)) {
-            console.log("alias already exists");
+        if (usr.ggCurrentUser.aliases.some((alias) => alias.sendAsEmail === newSendAsEmail)) {
+            console.log(`ALIAS ${newSendAsEmail} ALREADY EXISTS`);
 
             return this.updateAlias(body);
         } else {
@@ -235,12 +236,12 @@ export class GapiAuthenticatorService {
     }
 
     public updateAlias(body) {
-        const email = body.sendAsEmail;
         const primaryEmail = body.sub;
+        console.log("body ", body);
 
         return this.createToken(primaryEmail)
             .then(() => {
-                const url = `https://www.googleapis.com/gmail/v1/users/me/settings/sendAs/${email}`;
+                const url = `https://www.googleapis.com/gmail/v1/users/me/settings/sendAs/${body.sendAsEmail}`;
                 const headers = new HttpHeaders({ Authorization: `Bearer ${this.accessToken}` });
 
                 return this.http.patch(url, body, { headers })
@@ -286,7 +287,8 @@ export class GapiAuthenticatorService {
             gapi.client.directory.groups.list(body)
                 .then((res) => {
                     console.log("getGroups response", res);
-                    results.push(...res["result"].groups);
+
+                    return results.push(...res["result"].groups);
                 })
                 .then((_) => {
                     body["pageToken"] = pageToken;
