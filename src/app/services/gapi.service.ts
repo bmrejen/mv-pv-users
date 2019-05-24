@@ -443,28 +443,9 @@ export class GapiAuthenticatorService {
             });
     }
 
-    public isAlias(primaryEmail, email, user) {
-        let isCurrentUserAnAlias = null;
+    public isRealUser(primaryEmail, email) {
+        console.log(`checking if ${primaryEmail} and ${email} belong to the same user:`);
 
-        const username = email.split("@")[0];
-        const primaryUsername = primaryEmail.split("@")[0];
-
-        const planetVeoAliases = user.aliases;
-        const otherAliases = user.nonEditableAliases;
-
-        if (planetVeoAliases === undefined
-            || email === primaryEmail
-            || (otherAliases.includes(email) && username === primaryUsername)) {
-            isCurrentUserAnAlias = false;
-
-        } else if (planetVeoAliases.includes(email)
-            || (otherAliases.includes(email) && username !== primaryUsername)) {
-            isCurrentUserAnAlias = true;
-
-        } else {
-            alert("problem checking alias");
-        }
-
-        return isCurrentUserAnAlias;
+        return primaryEmail.split("@")[0] === email.split("@")[0];
     }
 }

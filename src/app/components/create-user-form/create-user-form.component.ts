@@ -35,7 +35,7 @@ export class CreateUserFormComponent implements OnInit {
     public managers: SugarUser[] = [];
     public mailToGet: string;
     public googleGroups = [];
-    public isAlias: boolean = null;
+    public isRealUser: boolean = null;
     public gapiMessage: string = null;
     public jamesMessage: string = null;
     public sugarMessage: string = null;
@@ -159,7 +159,7 @@ export class CreateUserFormComponent implements OnInit {
     }
 
     public resetForm() {
-        this.isAlias = null;
+        this.isRealUser = null;
         this.gapiMessage = null;
         this.jamesMessage = null;
         this.sugarMessage = null;
@@ -202,6 +202,9 @@ export class CreateUserFormComponent implements OnInit {
 
                 const primaryEmail = res.primaryEmail;
 
+                // Local boolean
+                this.isRealUser = this.gapi.isRealUser(primaryEmail, mail);
+
                 const promises = [
                     res,
                     // Google API
@@ -209,9 +212,6 @@ export class CreateUserFormComponent implements OnInit {
                     // GMail API
                     this.getUserAliases(primaryEmail),
                 ];
-
-                // Local boolean
-                this.isAlias = this.gapi.isAlias(primaryEmail, mail, this.currentUser.ggCurrentUser);
 
                 return Promise.all(promises);
             })
