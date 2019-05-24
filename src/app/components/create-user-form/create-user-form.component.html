@@ -22,7 +22,7 @@
             (click)=prefillForm()
         >Prefill</button>
 
-        <div *ngIf="isRealUser === false">{{ mailToGet }} IS AN ALIAS OF
+        <div *ngIf="isRealUser === false">{{ mailToGet }} redirects to
             {{ currentUser.ggCurrentUser.primaryEmail | uppercase }}</div>
         <div *ngIf="isRealUser">{{ mailToGet }} belongs to real account</div>
         <hr>
