@@ -84,7 +84,7 @@ export class SugarService {
     }
 
     public postDataToSugar(user: User) {
-        return this.http.post<any>(this.postEndPoint, this.mapCurrentUserToApi(user))
+        return this.http.post<any>(this.postEndPoint, mapCurrentUserToApi(user))
             .toPromise();
     }
 
@@ -133,49 +133,14 @@ export class SugarService {
         };
     }
 
-    private mapCurrentUserToApi(user: User): ISugarUserToApi {
-        console.log(this);
-
-        return {
-            data: {
-                attributes: {
-                    codeSonGalileo: user.sugarCurrentUser.codeSonGalileo,
-                    department: user.sugarCurrentUser.department,
-                    email: user.sugarCurrentUser.email,
-                    employeeStatus: user.sugarCurrentUser.employeeStatus,
-                    firstName: user.firstName,
-                    lastName: user.lastName,
-                    managerId: user.sugarCurrentUser.managerId,
-                    officeId: user.sugarCurrentUser.officeId,
-                    phoneAsterisk: user.sugarCurrentUser.phoneAsterisk,
-                    phoneFax: user.sugarCurrentUser.phoneFax,
-                    phoneHome: user.sugarCurrentUser.phoneHome,
-                    phoneMobile: user.sugarCurrentUser.phoneMobile,
-                    phoneOther: user.sugarCurrentUser.phoneOther,
-                    phoneWork: user.sugarCurrentUser.phoneWork,
-                    salutation: user.sugarCurrentUser.salutation,
-                    status: user.sugarCurrentUser.status,
-                    swAllowRemoteCalls: user.sugarCurrentUser.swAllowRemoteCalls ? "1" : "0",
-                    swCallNotification: user.sugarCurrentUser.swCallNotification ? "1" : "0",
-                    swClickToCall: user.sugarCurrentUser.swClickToCall ? "1" : "0",
-                    title: user.sugarCurrentUser.title,
-                    tourplanID: user.sugarCurrentUser.tourplanID,
-                    userName: user.sugarCurrentUser.userName,
-                },
-                destinations: user.sugarCurrentUser.destinations,
-                roles: [user.sugarCurrentUser.roleId],
-                teams: [...user.sugarCurrentUser.teams, ...user.sugarCurrentUser.others],
-                type: "users",
-            },
-        };
-    }
-
     private getData(item: string): Promise<any> {
         return this.http.get<any>(this.endPoint + `${item}`)
             .map((array) => array["data"])
             .toPromise();
     }
 }
+
+// --------- FUNCTIONS ------------------
 
 function isTeamMember(item): boolean {
     const prefixTeam = "EQ ";
@@ -188,4 +153,39 @@ function isDestOrTeam(item): boolean {
     const prefixTeam = "EQ ";
 
     return (item.attributes["name"].startsWith(prefixDest) || item.attributes["name"].startsWith(prefixTeam));
+}
+
+function mapCurrentUserToApi(user: User): ISugarUserToApi {
+    return {
+        data: {
+            attributes: {
+                codeSonGalileo: user.sugarCurrentUser.codeSonGalileo,
+                department: user.sugarCurrentUser.department,
+                email: user.sugarCurrentUser.email,
+                employeeStatus: user.sugarCurrentUser.employeeStatus,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                managerId: user.sugarCurrentUser.managerId,
+                officeId: user.sugarCurrentUser.officeId,
+                phoneAsterisk: user.sugarCurrentUser.phoneAsterisk,
+                phoneFax: user.sugarCurrentUser.phoneFax,
+                phoneHome: user.sugarCurrentUser.phoneHome,
+                phoneMobile: user.sugarCurrentUser.phoneMobile,
+                phoneOther: user.sugarCurrentUser.phoneOther,
+                phoneWork: user.sugarCurrentUser.phoneWork,
+                salutation: user.sugarCurrentUser.salutation,
+                status: user.sugarCurrentUser.status,
+                swAllowRemoteCalls: user.sugarCurrentUser.swAllowRemoteCalls ? "1" : "0",
+                swCallNotification: user.sugarCurrentUser.swCallNotification ? "1" : "0",
+                swClickToCall: user.sugarCurrentUser.swClickToCall ? "1" : "0",
+                title: user.sugarCurrentUser.title,
+                tourplanID: user.sugarCurrentUser.tourplanID,
+                userName: user.sugarCurrentUser.userName,
+            },
+            destinations: user.sugarCurrentUser.destinations,
+            roles: [user.sugarCurrentUser.roleId],
+            teams: [...user.sugarCurrentUser.teams, ...user.sugarCurrentUser.others],
+            type: "users",
+        },
+    };
 }

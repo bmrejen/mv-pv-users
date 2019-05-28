@@ -3,7 +3,7 @@
 
 <form
     #createForm="ngForm"
-    (ngSubmit)="onSubmit()"
+    (ngSubmit)="postUser()"
 >
 
     <ng-container *ngIf="fields != null">
@@ -104,7 +104,7 @@
         <button
             [disabled]="!createForm.form.valid"
             type="button"
-            (click)="onSubmit()"
+            (click)="postUser()"
         >Créer l'utilisateur</button>
     </ng-container>
 </form>

@@ -91,7 +91,7 @@ export class CreateUserFormComponent implements OnInit {
                 // get others
                 data.others.forEach((other) => this.fields.others.push(new Other(other)));
 
-                // remove following lines after testing
+                // // remove following lines after testing
                 this.fields.accounts[1]["checked"] = false;
                 this.fields.accounts[2]["checked"] = false;
                 this.fields.accounts[3]["checked"] = false;
@@ -231,7 +231,7 @@ export class CreateUserFormComponent implements OnInit {
     }
 
     // --------- POST USER -------------
-    public onSubmit() {
+    public postUser() {
         this.lowerCasify();
 
         this.mailToGet = this.currentUser.ggCurrentUser.primaryEmail;
@@ -262,7 +262,7 @@ export class CreateUserFormComponent implements OnInit {
 
         Promise.all(promises)
             .then((res) => {
-                console.log("onSubmit res", res);
+                console.log("postUser res", res);
 
                 return res;
             })
@@ -288,29 +288,15 @@ export class CreateUserFormComponent implements OnInit {
 
                 console.log("POST GAPI response", res);
 
-                return new Promise((resolve) => setTimeout(resolve, 10000))
-                    .then(() => {
+                this.getGapiUser(res["result"].primaryEmail)
+                    .then((response) => {
+                        console.log("response du nouveau GET", response);
+                        this.currentUser.ggCurrentUser.sendAs = this.temporaryData.sendAs;
+                        this.currentUser.ggCurrentUser.signature = this.temporaryData.signature;
 
-                        this.getGapiUser(res["result"].primaryEmail)
-                            .then((response) => {
-
-                                return new Promise((resolve, reject) => {
-                                    setTimeout(() => {
-
-                                        this.currentUser.ggCurrentUser.sendAs = this.temporaryData.sendAs;
-                                        this.currentUser.ggCurrentUser.signature = this.temporaryData.signature;
-
-                                        this.gapiMessage = "User created !";
-
-                                        return this.gapi.updateGmailSendAs(this.currentUser, this.oldUser)
-                                            .then((rep) => console.log("response from updateGmailSendAs", rep))
-                                            .catch((err) => console.error("ERROR in UpdateGMailAlias", err));
-                                    }, 3000);
-
-                                });
-
-                            });
-                    });
+                        this.gapiMessage = "User created !";
+                    })
+                    .catch((err) => console.error(err));
 
             })
 
@@ -326,7 +312,7 @@ export class CreateUserFormComponent implements OnInit {
 
     public prefillForm() {
         this.currentUser = new User({
-            firstName: "Yankeeyankee",
+            firstName: "Jacobajacob",
         });
         this.currentUser.lastName = this.currentUser.firstName;
         this.currentUser.password = Math.random()
@@ -336,7 +322,7 @@ export class CreateUserFormComponent implements OnInit {
             orgas: "/IT",
             primaryEmail: `${this.currentUser.firstName[0]}${this.currentUser.lastName}@planetveo.com`,
             sendAs: "marcovasco.fr",
-            signature: "Pouet pouet",
+            signature: "will be modified when sendAs is clicked",
         });
         this.currentUser.sugarCurrentUser = new SugarUser({
             codeSonGalileo: "123456",
@@ -379,6 +365,8 @@ export class CreateUserFormComponent implements OnInit {
             timeZone: "Europe/Paris",
             username: `${this.currentUser.firstName[0]}${this.currentUser.lastName}`,
         });
+
+        console.log("form prefilled", this.temporaryData);
     }
 
     public trackByFn(item) {
@@ -389,6 +377,7 @@ export class CreateUserFormComponent implements OnInit {
     private getGoogleGroupsOfUser(primaryMail) {
         this.gapi.getGroups(primaryMail)
             .then((response) => {
+                console.log("response from getGoogleGroupsOfUser", response);
                 this.googleGroups.forEach((gp) => gp["isEnabled"] = false);
                 response.forEach((group) => {
                     const myGroup = this.googleGroups.find((grp) => grp.id === group.id);
@@ -397,7 +386,7 @@ export class CreateUserFormComponent implements OnInit {
                     this.oldUser.ggCurrentUser.googleGroups.push(myGroup);
                 });
 
-                return response;
+                return { response };
             })
             .catch((err) => alert(err.result.error.message));
     }

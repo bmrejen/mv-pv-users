@@ -125,4 +125,9 @@ export class GapiUsersComponent implements OnInit {
         //     .then((res) => console.log("IMAP settings", res))
         //     .catch((err) => console.error("Error when getting IMAP", err));
     }
+
+    public updateSignature() {
+        // tslint:disable-next-line:max-line-length
+        this.currentUser.ggCurrentUser.signature = `<div dir="ltr"><p style="font-size:1em;color:rgb(164,135,67);font-family:Lato,Calibri,Arial,Helvetica,sans-serif">--------------------------------</p><p style="color:rgb(0,0,0);font-size:1em;font-family:Lato,Calibri,Arial,Helvetica,sans-serif"><span style="font-weight:bold">${this.currentUser.firstName} ${this.currentUser.lastName}</span><br>${this.currentUser.sugarCurrentUser.title}</p><p style="color:rgb(0,0,0);font-size:1em;font-family:Lato,Calibri,Arial,Helvetica,sans-serif">${this.currentUser.sugarCurrentUser.phoneWork} (${this.currentUser.sugarCurrentUser.phoneAsterisk})<span style="font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif"><br><a href="http://www.${this.ggCurrentUser.sendAs}/" target="_blank"><b><span lang="DE" style="color:#a48743">www.${this.ggCurrentUser.sendAs}</span></b></a></span><span style="font-family:&quot;Times New Roman&quot;;font-size:medium">&nbsp;</span></p></div>`;
+    }
 }

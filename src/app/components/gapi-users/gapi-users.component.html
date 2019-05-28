@@ -48,8 +48,9 @@
             <select
                 name="defaultAlias"
                 [(ngModel)]="ggCurrentUser.sendAs"
-                [disabled]="ggCurrentUser.sendAs === null"
+                (click)="updateSignature()"
             >
+                <!-- [disabled]="ggCurrentUser.sendAs === null" -->
                 <option
                     *ngFor="let dom of domains"
                     [value]="dom"
@@ -63,8 +64,8 @@
                 cols="70"
                 name="signature"
                 [(ngModel)]="ggCurrentUser.signature"
-                [disabled]="ggCurrentUser.sendAs === null"
             >
+                <!-- [disabled]="ggCurrentUser.sendAs === null" -->
             </textarea>
 
             <!-- IF ID IS NOT NULL THEN ID, PRIMARY and OTHER EMAILS ARE DISPLAYED -->
