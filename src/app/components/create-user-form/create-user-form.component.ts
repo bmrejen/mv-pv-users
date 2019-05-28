@@ -46,6 +46,7 @@ export class CreateUserFormComponent implements OnInit {
         userLoggedIn: null,
     };
     public temporaryData = {
+        googleGroups: null,
         sendAs: null,
         signature: null,
     };
@@ -282,19 +283,24 @@ export class CreateUserFormComponent implements OnInit {
         this.gapiMessage = null;
         this.temporaryData.sendAs = this.currentUser.ggCurrentUser.sendAs;
         this.temporaryData.signature = this.currentUser.ggCurrentUser.signature;
+        this.temporaryData.googleGroups = this.currentUser.ggCurrentUser.googleGroups;
 
         return this.gapi.postUser(this.currentUser)
             .then((res) => {
 
                 console.log("POST GAPI response", res);
+                const primaryEmail = res["result"].primaryEmail;
 
-                this.getGapiUser(res["result"].primaryEmail)
+                this.getGapiUser(primaryEmail)
                     .then((response) => {
                         console.log("response du nouveau GET", response);
                         this.currentUser.ggCurrentUser.sendAs = this.temporaryData.sendAs;
                         this.currentUser.ggCurrentUser.signature = this.temporaryData.signature;
+                        this.currentUser.ggCurrentUser.googleGroups = this.temporaryData.googleGroups;
 
                         this.gapiMessage = "User created !";
+
+                        this.postGoogleGroups(primaryEmail);
                     })
                     .catch((err) => console.error(err));
 
@@ -302,6 +308,12 @@ export class CreateUserFormComponent implements OnInit {
 
             .catch((err) => console.error(err));
         // .catch((err) => this.gapiMessage = err["result"].error);
+    }
+
+    public postGoogleGroups(primaryEmail) {
+        return this.gapi.postGoogleGroups(primaryEmail, this.currentUser.ggCurrentUser)
+            .then((res) => console.log("posted GoogleGroups", res))
+            .catch((err) => console.error(err));
     }
 
     public postSugarUser(): Promise<any> {

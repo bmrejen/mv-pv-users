@@ -3,6 +3,8 @@ import { Injectable, NgZone } from "@angular/core";
 import { IGapiRequest, IGapiUser } from "../interfaces/gapi-user";
 
 import * as jwt from "jsrsasign";
+
+import { GoogleUser } from "../models/google-user";
 import { User } from "../models/user";
 
 declare const gapi: any;
@@ -340,6 +342,32 @@ export class GapiAuthenticatorService {
             orgas: res.orgUnitPath,
             primaryEmail: res.primaryEmail,
         };
+    }
+
+    public postGoogleGroups(primaryEmail: string, user: GoogleUser): Promise<any> {
+        const promises: Array<Promise<any>> = [];
+
+        user.googleGroups.forEach((group) => {
+            promises.push(new Promise((resolve, reject) => {
+                this.zone.run(() => {
+                    return gapi.client.directory.members.insert({
+                        groupKey: group.id,
+                        resource: {
+                            email: user.primaryEmail,
+                            etag: group.etag,
+                            id: group.id,
+                            kind: "admin#directory#member",
+                            status: "ACTIVE",
+                            type: "USER",
+                        },
+                    })
+                        .then(resolve, reject);
+                });
+            }),
+            );
+        });
+
+        return Promise.all(promises);
     }
 
     public activateImap(id: string): Promise<any> {
