@@ -3,7 +3,7 @@
 
 <form
     #createForm="ngForm"
-    (ngSubmit)="onSubmit(createForm)"
+    (ngSubmit)="postUser()"
 >
 
     <ng-container *ngIf="fields != null">
@@ -17,10 +17,14 @@
             type="button"
             (click)=getUser()
         >Get User</button>
+        <button
+            type="button"
+            (click)=prefillForm()
+        >Prefill</button>
 
-        <div *ngIf="isAlias">{{ mailToGet }} IS AN ALIAS OF
+        <div *ngIf="isRealUser === false">{{ mailToGet }} redirects to
             {{ currentUser.ggCurrentUser.primaryEmail | uppercase }}</div>
-        <div *ngIf="isAlias === false">{{ mailToGet }} belongs to real account</div>
+        <div *ngIf="isRealUser">{{ mailToGet }} belongs to real account</div>
         <hr>
 
 
@@ -43,10 +47,12 @@
                 class="jamespot"
                 [jamesCurrentUser]="currentUser.jamesCurrentUser"
                 [jamesMessage]="jamesMessage"
+                [currentUser]="currentUser"
             >
             </mv-jamespot>
             <mv-gapi-users
                 [currentUser]="currentUser"
+                [oldUser]="oldUser"
                 [ggCurrentUser]="currentUser.ggCurrentUser"
                 [gapiMessage]="gapiMessage"
                 [gapiStatus]="gapiStatus"
@@ -55,6 +61,7 @@
         </div>
         <mv-profiles
             [sugarCurrentUser]="currentUser.sugarCurrentUser"
+            [ggCurrentUser]="currentUser.ggCurrentUser"
             [roles]="roles"
             [userTemplates]="fields.userTemplates"
             [departments]="fields.departments"
@@ -88,7 +95,6 @@
             [sugarCurrentUser]="currentUser.sugarCurrentUser"
         ></mv-others>
         <mv-extraneous [sugarCurrentUser]="currentUser.sugarCurrentUser"></mv-extraneous>
-        <mv-switchvox [sugarCurrentUser]="currentUser.sugarCurrentUser"></mv-switchvox>
         <mv-gapps
             [ggCurrentUser]="currentUser.ggCurrentUser"
             [googleGroups]="googleGroups"
@@ -97,7 +103,8 @@
         <div *ngIf="errorMsg">ERROR: {{ errorMsg }}</div>
         <button
             [disabled]="!createForm.form.valid"
-            type="submit"
+            type="button"
+            (click)="postUser()"
         >Créer l'utilisateur</button>
     </ng-container>
 </form>

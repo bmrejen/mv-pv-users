@@ -7,6 +7,7 @@ export class User {
     // COMMON PROPERTIES
     public firstName: string = "";
     public lastName: string = "";
+    public password: string = "";
 
     // SUGAR
     public sugarCurrentUser: SugarUser = new SugarUser({});
@@ -20,5 +21,6 @@ export class User {
     constructor(data: any) {
         this.firstName = data.firstName || this.firstName;
         this.lastName = data.lastName || this.lastName;
+        this.password = data.password || this.password;
     }
 }

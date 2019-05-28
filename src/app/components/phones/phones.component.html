@@ -29,4 +29,79 @@
             >
         </label>
     </div>
+
+    <div>
+        <label>Extension (phoneAsterisk)
+            <input
+                name="phoneAsterisk"
+                type="text"
+                [(ngModel)]="sugarCurrentUser.phoneAsterisk"
+            >
+        </label>
+    </div>
+
+    <div>Téléphonie a distance
+        <div class="radio">
+            <label>
+                <input
+                    type="radio"
+                    name="swAllowRemoteCalls"
+                    [(ngModel)]="sugarCurrentUser.swAllowRemoteCalls"
+                    [value]=true
+                >Yes
+            </label>
+            <label>
+                <input
+                    type="radio"
+                    name="swAllowRemoteCalls"
+                    [(ngModel)]="sugarCurrentUser.swAllowRemoteCalls"
+                    [value]=false
+                >No
+            </label>
+        </div>
+    </div>
+
+
+    <div>Click to call
+        <div class="radio">
+            <label>
+                <input
+                    type="radio"
+                    name="swClickToCall"
+                    [(ngModel)]="sugarCurrentUser.swClickToCall"
+                    [value]="true"
+                >Yes
+            </label>
+            <label>
+                <input
+                    type="radio"
+                    name="swClickToCall"
+                    [(ngModel)]="sugarCurrentUser.swClickToCall"
+                    [value]="false"
+                >No
+            </label>
+        </div>
+    </div>
+
+    <div>Notifications appels entrants
+        <div class="radio">
+
+            <label>
+                <input
+                    type="radio"
+                    name="swCallNotification"
+                    [(ngModel)]="sugarCurrentUser.swCallNotification"
+                    [value]="true"
+                >Yes
+            </label>
+            <label>
+                <input
+                    type="radio"
+                    name="swCallNotification"
+                    [(ngModel)]="sugarCurrentUser.swCallNotification"
+                    [value]="false"
+                >No
+            </label>
+        </div>
+    </div>
 </fieldset>

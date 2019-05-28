@@ -9,7 +9,9 @@
                 <input
                     type="checkbox"
                     (click)="handleClick(other)"
-                >{{ other.label }}
+                    [(ngModel)]="other.checked"
+                    [name]="other.id"
+                >{{ other.name }}
             </label>
         </div>
     </div>

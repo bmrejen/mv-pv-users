@@ -20,15 +20,14 @@ enum Domains {
 export class GapiUsersComponent implements OnInit {
     public users;
     public userToGet: string;
-    public ggOldUser: User;
     public orgas;
     public userLoggedIn: "Logged out";
-
     public googleGroups;
 
     public domains = Object.keys(Domains)
         .map((dom) => Domains[dom]);
 
+    @Input() public oldUser: User;
     @Input() public currentUser: User;
     @Input() public ggCurrentUser: GoogleUser;
     @Input() public gapiMessage: string;
@@ -42,7 +41,6 @@ export class GapiUsersComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-        this.resetForm();
         this.route.data
             .subscribe((data) => {
                 if (data.fields != null) {
@@ -86,31 +84,11 @@ export class GapiUsersComponent implements OnInit {
         }
     }
 
-    public postUser() {
-        this.gapiMessage = null;
-        this.gapiService.postUser(this.currentUser)
-            .then((res) => {
-                if (res["result"] != null) {
-                    this.resetForm();
-                    this.userToGet = res["result"].id;
-                    // this.getUser();
-                    this.gapiMessage = "User created !";
-                }
-            })
-            .catch((err) => this.gapiMessage = err["result"].error.gapiMessage);
-    }
-
     public updateUser() {
         this.gapiMessage = null;
-        this.gapiService.updateUser(this.currentUser, this.ggOldUser)
-            .then((res) => {
-                this.userToGet = res["result"].id;
-                // this.getUser();
-            })
-            .catch((err) => console.error(err));
 
         // Update Gmail settings (sendAs and signature)
-        this.gapiService.updateGmailSendAs(this.currentUser, this.ggOldUser)
+        this.gapiService.updateGmailSendAs(this.currentUser, this.oldUser)
             .then((res) => console.log("Alias updated !", res))
             .catch((err) => console.error(err));
     }
@@ -119,24 +97,15 @@ export class GapiUsersComponent implements OnInit {
         return index;
     }
 
+    // Can be deleted
     public refreshEmail() {
-        const email = this.ggCurrentUser.primaryEmail;
-        const emailPrefix = email.lastIndexOf("@") === -1 ? email : email.substring(0, email.lastIndexOf("@"));
+        // const email = this.ggCurrentUser.primaryEmail;
+        // const emailPrefix = email.lastIndexOf("@") === -1 ? email : email.substring(0, email.lastIndexOf("@"));
 
-        this.ggCurrentUser.primaryEmail =
-            `${emailPrefix}@${this.ggCurrentUser.primaryEmailSuffix}`;
-    }
-
-    public resetForm(): void {
-        this.gapiMessage = null;
-        this.ggCurrentUser.emails = null;
-        this.ggCurrentUser.id = null;
-        this.ggCurrentUser.orgas = null;
-        this.ggCurrentUser.password = null;
-        this.ggCurrentUser.primaryEmail = null;
-        this.ggCurrentUser.sendAs = null;
-        this.ggCurrentUser.signature = null;
-
+        // this.ggCurrentUser.sendAs =
+        //     `${emailPrefix}@${this.ggCurrentUser.primaryEmailSuffix}`;
+        // this.currentUser.sugarCurrentUser.email =
+        //     `${this.currentUser.sugarCurrentUser.userName}@${this.ggCurrentUser.sendAs}`;
     }
 
     public activateImap(id: string) {
@@ -155,5 +124,10 @@ export class GapiUsersComponent implements OnInit {
         // return this.gapiService.deactivateImap(id)
         //     .then((res) => console.log("IMAP settings", res))
         //     .catch((err) => console.error("Error when getting IMAP", err));
+    }
+
+    public updateSignature() {
+        // tslint:disable-next-line:max-line-length
+        this.currentUser.ggCurrentUser.signature = `<div dir="ltr"><p style="font-size:1em;color:rgb(164,135,67);font-family:Lato,Calibri,Arial,Helvetica,sans-serif">--------------------------------</p><p style="color:rgb(0,0,0);font-size:1em;font-family:Lato,Calibri,Arial,Helvetica,sans-serif"><span style="font-weight:bold">${this.currentUser.firstName} ${this.currentUser.lastName}</span><br>${this.currentUser.sugarCurrentUser.title}</p><p style="color:rgb(0,0,0);font-size:1em;font-family:Lato,Calibri,Arial,Helvetica,sans-serif">${this.currentUser.sugarCurrentUser.phoneWork} (${this.currentUser.sugarCurrentUser.phoneAsterisk})<span style="font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif"><br><a href="http://www.${this.ggCurrentUser.sendAs}/" target="_blank"><b><span lang="DE" style="color:#a48743">www.${this.ggCurrentUser.sendAs}</span></b></a></span><span style="font-family:&quot;Times New Roman&quot;;font-size:medium">&nbsp;</span></p></div>`;
     }
 }

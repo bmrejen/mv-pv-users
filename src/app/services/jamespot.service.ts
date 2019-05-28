@@ -41,21 +41,22 @@ export class JamespotService {
             });
     }
 
-    public postUsers(user, image): Promise<IJamespotUserConfig> {
+    public postUsers(user): Promise<IJamespotUserConfig> {
         const fd = new FormData();
-        fd.append("Mail", user.jamesMail);
-        fd.append("Role", user.jamesRole);
-        fd.append("Country", user.jamesCountry);
-        fd.append("Language", user.jamesLanguage);
-        fd.append("active", user.jamesActive);
-        fd.append("Pseudo", user.jamesUsername);
-        fd.append("Password", user.jamesPassword);
-        fd.append("Firstname", user.jamesFirstname);
-        fd.append("Lastname", user.jamesLastname.toUpperCase());
-        fd.append("Company", user.jamesCompany);
-        fd.append("Field1", user.jamesPhoneExtension);
-        fd.append("timeZone", user.jamesTimeZone);
-        fd.append("image", image);
+        fd.append("Firstname", user.firstName);
+        fd.append("Lastname", user.lastName.toUpperCase());
+        fd.append("image", user.image);
+
+        fd.append("Mail", user.jamesCurrentUser.mail);
+        fd.append("Role", user.jamesCurrentUser.role);
+        fd.append("Country", user.jamesCurrentUser.country);
+        fd.append("Language", user.jamesCurrentUser.language);
+        fd.append("active", user.jamesCurrentUser.active);
+        fd.append("Pseudo", user.jamesCurrentUser.username);
+        fd.append("Password", user.jamesCurrentUser.password);
+        fd.append("Company", user.jamesCurrentUser.company);
+        fd.append("Field1", user.jamesCurrentUser.phoneExtension);
+        fd.append("timeZone", user.jamesCurrentUser.timeZone);
 
         return this.http
             .post<IJamespotApiResponse<IJamespotUserFromApi>>(

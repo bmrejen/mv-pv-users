@@ -3,6 +3,8 @@ import { Injectable, NgZone } from "@angular/core";
 import { IGapiRequest, IGapiUser } from "../interfaces/gapi-user";
 
 import * as jwt from "jsrsasign";
+
+import { GoogleUser } from "../models/google-user";
 import { User } from "../models/user";
 
 declare const gapi: any;
@@ -20,7 +22,7 @@ export class GapiAuthenticatorService {
     // Authorization scopes required by the API; multiple scopes can be
     // included, separated by spaces.
     // tslint:disable-next-line
-    public SCOPES: string = "https://www.googleapis.com/auth/admin.directory.user https://www.googleapis.com/auth/admin.directory.group https://mail.google.com/";
+    public SCOPES: string = "https://www.googleapis.com/auth/admin.directory.user https://www.googleapis.com/auth/admin.directory.group https://www.googleapis.com/auth/admin.directory.group.member https://mail.google.com/";
 
     constructor(private zone: NgZone, private http: HttpClient) {
         //
@@ -31,6 +33,8 @@ export class GapiAuthenticatorService {
     }
 
     public listUsers(): Promise<any> {
+        console.log("listUsers");
+
         return gapi.client.directory.users.list({
             customer: "my_customer",
             maxResults: 500,
@@ -39,6 +43,8 @@ export class GapiAuthenticatorService {
     }
 
     public loadClient(): Promise<any> {
+        console.log("loadClient");
+
         return new Promise((resolve, reject) => {
             this.zone.run(() => {
                 gapi.load("client:auth2", {
@@ -51,6 +57,8 @@ export class GapiAuthenticatorService {
         });
     }
     public initClient(): Promise<any> {
+        console.log("initClient");
+
         const initObj = {
             apiKey: this.API_KEY,
             discoveryDocs: this.DISCOVERY_DOCS,
@@ -65,6 +73,8 @@ export class GapiAuthenticatorService {
     }
 
     public initAuthClient(): Promise<any> {
+        console.log("initAuthClient ");
+
         const initObj = {
             client_id: this.CLIENT_ID,
             scope: this.SCOPES,
@@ -83,24 +93,24 @@ export class GapiAuthenticatorService {
             .get();
     }
 
-    public postUser(user): Promise<any> {
-        const lastName = user.lastName;
-        const firstName = user.firstName;
+    public postUser(user: User): Promise<any> {
 
-        if (lastName != null && firstName != null) {
-            const email = `${firstName[0]}${lastName}@planetveo.com`;
+        if (user.lastName != null
+            && user.firstName != null
+            && user.ggCurrentUser.primaryEmail != null
+        ) {
 
             return new Promise((resolve, reject) => {
                 this.zone.run(() => {
                     gapi.client.directory.users.insert({
                         resource: {
                             name: {
-                                familyName: lastName,
-                                givenName: firstName,
+                                familyName: user.lastName,
+                                givenName: user.firstName,
                             },
                             orgUnitPath: user.ggCurrentUser.orgas,
                             password: user.password,
-                            primaryEmail: email,
+                            primaryEmail: user.ggCurrentUser.primaryEmail,
                         },
                     })
                         .then(resolve, reject);
@@ -183,42 +193,57 @@ export class GapiAuthenticatorService {
     }
 
     public updateGmailSendAs(usr: User, oldUsr: User): Promise<any> {
-        const user = usr.ggCurrentUser;
-        const oldUser = oldUsr.ggCurrentUser;
+        console.log("updateGmailSendAs ", usr, oldUsr);
 
         const body = {};
-        const newSendAsEmail = `${user.primaryEmail.split("@")[0]}@${user.sendAs}`;
 
-        if (user.sendAs === oldUser.sendAs && user.signature === oldUser.signature) {
+        // "sub" property needed for token but will be deleted if a new alias must be created
+        body["sub"] = `${usr.ggCurrentUser.primaryEmail}`;
+
+        const newSendAsEmail = `${usr.ggCurrentUser.primaryEmail.split("@")[0]}@${usr.ggCurrentUser.sendAs}`;
+
+        if (usr.ggCurrentUser.sendAs === oldUsr.ggCurrentUser.sendAs
+            && usr.ggCurrentUser.signature === oldUsr.ggCurrentUser.signature) {
             return new Promise((resolve, reject) => reject("Alias and signature unchanged"));
         }
 
-        // If alias has been modified
-        if (user.signature !== oldUser.signature) {
-            body["signature"] = user.signature;
+        // If signature has been modified
+        if (usr.ggCurrentUser.signature !== oldUsr.ggCurrentUser.signature) {
+            body["signature"] = usr.ggCurrentUser.signature;
+            console.log("signature has been modified");
         }
 
         // If alias has been modified
-        if (user.sendAs !== oldUser.sendAs) {
+        if (usr.ggCurrentUser.sendAs !== oldUsr.ggCurrentUser.sendAs) {
+            console.log("alias has been modified");
+            console.log("newSendAsEmail ", newSendAsEmail);
 
             body["displayName"] = `${usr.firstName} ${usr.lastName}`;
             body["isDefault"] = true;
+            body["replyToAddress"] = "";
             body["sendAsEmail"] = newSendAsEmail;
             body["treatAsAlias"] = true;
         }
 
         // Create the alias if it doesn't exist
-        if (user.aliases.some((alias) => alias.sendAsEmail === newSendAsEmail)) {
-            return this.updateAlias(newSendAsEmail, body);
+        if (usr.ggCurrentUser.aliases.some((alias) => alias.sendAsEmail === newSendAsEmail)) {
+            console.log(`ALIAS ${newSendAsEmail} ALREADY EXISTS`);
+
+            return this.updateAlias(body);
         } else {
-            return this.createNewAlias(newSendAsEmail, body);
+            console.log("creating an alias ");
+
+            return this.createNewAlias(body);
         }
     }
 
-    public updateAlias(email, body) {
-        return this.createToken(email)
+    public updateAlias(body): Promise<any> {
+        const primaryEmail = body.sub;
+        console.log("body ", body);
+
+        return this.createToken(primaryEmail)
             .then(() => {
-                const url = `https://www.googleapis.com/gmail/v1/users/me/settings/sendAs/${email}`;
+                const url = `https://www.googleapis.com/gmail/v1/users/me/settings/sendAs/${body.sendAsEmail}`;
                 const headers = new HttpHeaders({ Authorization: `Bearer ${this.accessToken}` });
 
                 return this.http.patch(url, body, { headers })
@@ -226,10 +251,14 @@ export class GapiAuthenticatorService {
             });
     }
 
-    public createNewAlias(email, body) {
+    public createNewAlias(body): Promise<any> {
+        const primaryEmail = body.sub;
+        console.log("body", body);
 
-        return this.createToken(email)
+        return this.createToken(primaryEmail)
             .then(() => {
+                console.log("token has been created:", this.accessToken);
+                delete body["sub"];
                 const url = `https://www.googleapis.com/gmail/v1/users/me/settings/sendAs`;
                 const headers = new HttpHeaders({ Authorization: `Bearer ${this.accessToken}` });
 
@@ -240,7 +269,6 @@ export class GapiAuthenticatorService {
 
     public getGroups(mail?): Promise<any[]> {
         // 2 requests are run in a row because Google only sends 200 results per response
-
         const body = {
             customer: "my_customer",
             maxResults: 200,
@@ -259,13 +287,17 @@ export class GapiAuthenticatorService {
         return new Promise((resolve, reject) => {
 
             gapi.client.directory.groups.list(body)
-                .then((res) => results.push(...res["result"].groups))
+                .then((res) => {
+
+                    return results.push(...res["result"].groups);
+                })
                 .then((_) => {
                     body["pageToken"] = pageToken;
 
                     return gapi.client.directory.groups.list(body)
                         .then((res) => {
                             results.push(...res["result"].groups);
+                            console.log("getGroups response", results);
 
                             resolve(results);
                         })
@@ -291,6 +323,8 @@ export class GapiAuthenticatorService {
     }
 
     public getUser(user): Promise<any> {
+        console.log("getUser service", user);
+
         return new Promise((resolve, reject) => {
             this.zone.run(() => {
                 gapi.client.directory.users.get({ userKey: user })
@@ -308,6 +342,32 @@ export class GapiAuthenticatorService {
             orgas: res.orgUnitPath,
             primaryEmail: res.primaryEmail,
         };
+    }
+
+    public postGoogleGroups(primaryEmail: string, user: GoogleUser): Promise<any> {
+        const promises: Array<Promise<any>> = [];
+
+        user.googleGroups.forEach((group) => {
+            promises.push(new Promise((resolve, reject) => {
+                this.zone.run(() => {
+                    return gapi.client.directory.members.insert({
+                        groupKey: group.id,
+                        resource: {
+                            email: user.primaryEmail,
+                            etag: group.etag,
+                            id: group.id,
+                            kind: "admin#directory#member",
+                            status: "ACTIVE",
+                            type: "USER",
+                        },
+                    })
+                        .then(resolve, reject);
+                });
+            }),
+            );
+        });
+
+        return Promise.all(promises);
     }
 
     public activateImap(id: string): Promise<any> {
@@ -350,6 +410,9 @@ export class GapiAuthenticatorService {
     }
 
     public createToken(email) {
+        this.accessToken = null;
+
+        console.log("creating a token for the primaryEmail: ", email);
         // Header
         const oHeader = { alg: "RS256", typ: "JWT" };
         // Payload
@@ -359,7 +422,7 @@ export class GapiAuthenticatorService {
             iat: jwt.KJUR.jws.IntDate.get("now"),
             iss: "370957812504-m0eophjpraff16mbnloc330bq7jkm6up@developer.gserviceaccount.com",
             // tslint:disable-next-line
-            scope: "https://mail.google.com/ https://www.googleapis.com/auth/admin.directory.user https://www.googleapis.com/auth/gmail.settings.sharing https://www.googleapis.com/auth/gmail.settings.basic",
+            scope: "https://mail.google.com/ https://www.googleapis.com/auth/admin.directory.user https://www.googleapis.com/auth/gmail.settings.sharing https://www.googleapis.com/auth/gmail.settings.basic https://www.googleapis.com/auth/gmail.modify https://www.googleapis.com/auth/gmail.readonly",
             sub: email,
         };
 
@@ -376,14 +439,32 @@ export class GapiAuthenticatorService {
         const headers = new HttpHeaders({ "Content-Type": "application/x-www-form-urlencoded" });
         const body = `grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Ajwt-bearer&assertion=${sJWT}`;
 
+        // while (this.accessToken === null) {
+        //     console.log("waiting for 3 seconds");
+
+        //     return new Promise((resolve) => setTimeout(resolve, 3000))
+        //         .then(() => {
+        console.log("posting the token");
+
         return this.http.post(url, body, { headers })
             .toPromise()
             .then((res) => {
+                console.log("Token created", res);
                 this.accessToken = res["access_token"];
+
+                return this.accessToken;
+            })
+            .catch((err) => {
+                console.error("ERROR CREATING TOKEN", err);
             });
+        // });
+        // }
+
     }
 
     public getUserAliases(email) {
+        console.log("getUserAliases for ", email);
+
         return this.createToken(email)
             .then((rep) => {
                 const url = `https://www.googleapis.com/gmail/v1/users/me/settings/sendAs`;
@@ -396,31 +477,17 @@ export class GapiAuthenticatorService {
 
                         return aliases;
                     });
+            })
+            .catch((err) => {
+                console.error(err);
+                new Promise((resolve) => setTimeout(resolve, 4000))
+                    .then(() => this.getUserAliases(email));
             });
     }
 
-    public isAlias(primaryEmail, email, user) {
-        let isCurrentUserAnAlias = null;
+    public isRealUser(primaryEmail, email) {
+        console.log(`checking if ${primaryEmail} and ${email} belong to the same user`);
 
-        const username = email.split("@")[0];
-        const primaryUsername = primaryEmail.split("@")[0];
-
-        const planetVeoAliases = user.aliases;
-        const otherAliases = user.nonEditableAliases;
-
-        if (planetVeoAliases === undefined
-            || email === primaryEmail
-            || (otherAliases.includes(email) && username === primaryUsername)) {
-            isCurrentUserAnAlias = false;
-
-        } else if (planetVeoAliases.includes(email)
-            || (otherAliases.includes(email) && username !== primaryUsername)) {
-            isCurrentUserAnAlias = true;
-
-        } else {
-            alert("problem checking alias");
-        }
-
-        return isCurrentUserAnAlias;
+        return primaryEmail.split("@")[0] === email.split("@")[0];
     }
 }

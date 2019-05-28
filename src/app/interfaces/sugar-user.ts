@@ -1,32 +1,70 @@
 export interface ISugarUserFromApi {
-    attributes: {
-        codeSonGalileo: string;
-        department: string;
-        email: string;
-        employeeStatus: string;
-        firstName: string;
-        id: string;
-        lastName: string;
-        managerId: string;
-        officeId: string;
-        phoneAsterisk: string;
-        phoneFax: string;
-        phoneHome: string;
-        phoneMobile: string;
-        phoneOther: string;
-        phoneWork: string;
-        salutation: string;
-        status: string;
-        swAllowRemoteCalls: string;
-        swCallNotification: string;
-        swClickToCall: string;
-        teamId: string;
-        title: string;
-        tourplanID: string;
-        userName: string;
+    data: {
+        attributes: {
+            codeSonGalileo: string;
+            department: string;
+            email: string;
+            employeeStatus: string;
+            firstName: string;
+            id?: string;
+            lastName: string;
+            managerId: string;
+            officeId: string;
+            phoneAsterisk: string;
+            phoneFax: string;
+            phoneHome: string;
+            phoneMobile: string;
+            phoneOther: string;
+            phoneWork: string;
+            roleId: string;
+            salutation: string;
+            status: string;
+            swAllowRemoteCalls: string;
+            swCallNotification: string;
+            swClickToCall: string;
+            teamId: string;
+            title: string;
+            tourplanID: string;
+            userName: string;
+        };
+        id?: string;
+        type: string;
     };
-    id: string;
-    type: string;
+}
+
+export interface ISugarUserToApi {
+    data: {
+        attributes: {
+            codeSonGalileo: string;
+            department: string;
+            email: string;
+            employeeStatus: string;
+            firstName: string;
+            id?: string;
+            lastName: string;
+            managerId: string;
+            officeId: string;
+            phoneAsterisk: string;
+            phoneFax: string;
+            phoneHome: string;
+            phoneMobile: string;
+            phoneOther: string;
+            phoneWork: string;
+            salutation: string;
+            status: string;
+            swAllowRemoteCalls: string;
+            swCallNotification: string;
+            swClickToCall: string;
+            title: string;
+            tourplanID: string;
+            userName: string;
+        };
+        id?: string;
+        destinations: string[];
+        roles: string[];
+        teams: string[];
+        type: string;
+    };
 }
 
 export interface ISugarUserConfig {
@@ -46,13 +84,13 @@ export interface ISugarUserConfig {
     managerId: string;
     department: string;
     officeId: string;
-    teamId: string;
     tourplanID: string;
     swClickToCall: boolean;
     swCallNotification: boolean;
     swAllowRemoteCalls: boolean;
     codeSonGalileo: string;
     type: string;
+    teams: string[];
 
     // Following properties are not returned by the API
 
@@ -64,7 +102,6 @@ export interface ISugarUserConfig {
     // others: Other[];
     // roles: Role[];
     // ggOrganisationId: string;
-    // ggGroups: string;
     // isAdmin: boolean;
     // apiPortalUser: boolean;
     // assignationNotification: boolean;

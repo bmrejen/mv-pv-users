@@ -10,13 +10,26 @@
         <button
             *ngIf="gapiStatus.userLoggedIn==='Logged out'"
             (click)="signIn()"
+            type="button"
         >Sign In</button>
 
         <div *ngIf="gapiStatus.userLoggedIn!=='Logged out'">
-            <button (click)="signIn()">Change Users</button>
-            <button (click)="signOut()">Sign Out</button>
-            <button (click)="listUsers()">List Users</button>
-            <button (click)="resetForm()">New User</button>
+            <button
+                (click)="signIn()"
+                type="button"
+            >Change Users</button>
+            <button
+                (click)="signOut()"
+                type="button"
+            >Sign Out</button>
+            <button
+                (click)="listUsers()"
+                type="button"
+            >List Users</button>
+            <button
+                (click)="resetForm()"
+                type="button"
+            >New User</button>
             <br>
             Orgas
             <select
@@ -30,34 +43,32 @@
                 </option>
             </select>
 
-            <div>Groups
-                <div *ngFor="let group of googleGroups; trackBy: trackByFn">
-                    <label>
-                        <input type="checkbox">{{ group.name }}
-                    </label>
-                </div>
-            </div>
-
-            <!-- IF ID IS NULL THEN ADMIN CAN CHOOSE A DOMAIN -->
-            <div *ngIf="ggCurrentUser.id == null">
-                Primary mail
-                <select
-                    name="primaryEmailSuffix"
-                    [(ngModel)]="ggCurrentUser.primaryEmailSuffix"
-                    (ngModelChange)="refreshEmail()"
-                >
-                    <option
-                        *ngFor="let dom of domains"
-                        [value]="dom"
-                    >{{ dom }}</option>
-                </select>
-
-                <br>
-                <button (click)="postUser()">Create</button>
-            </div>
             <br>
+            Default alias
+            <select
+                name="defaultAlias"
+                [(ngModel)]="ggCurrentUser.sendAs"
+                (click)="updateSignature()"
+            >
+                <!-- [disabled]="ggCurrentUser.sendAs === null" -->
+                <option
+                    *ngFor="let dom of domains"
+                    [value]="dom"
+                >{{ dom }}</option>
+            </select>
+            <br>
+            Signature
+            <br>
+            <textarea
+                rows="5"
+                cols="70"
+                name="signature"
+                [(ngModel)]="ggCurrentUser.signature"
+            >
+                <!-- [disabled]="ggCurrentUser.sendAs === null" -->
+            </textarea>
 
-            <!-- IF ID IS NOT NULL THEN THE DOMAIN IS READONLY -->
+            <!-- IF ID IS NOT NULL THEN ID, PRIMARY and OTHER EMAILS ARE DISPLAYED -->
             <div *ngIf="ggCurrentUser.id != null">
                 <input
                     type="text"
@@ -68,16 +79,9 @@
                 <br>
                 <input
                     type="text"
-                    name="password"
-                    [(ngModel)]="ggCurrentUser.password"
-                >Password
-                <br>
-                <input
-                    type="text"
                     name="primaryEmail"
                     [(ngModel)]="ggCurrentUser.primaryEmail"
-                    (ngModelChange)="refreshEmail()"
-                    [disabled]="ggCurrentUser.id != null"
+                    [attr.disabled]="true"
                 >Primary Mail
                 <br>
 
@@ -89,32 +93,19 @@
                         [attr.disabled]="true"
                     >
                 </div>
-                <br>
-                Default alias
-
-                <select
-                    name="defaultAlias"
-                    [(ngModel)]="ggCurrentUser.sendAs"
-                >
-                    <option
-                        *ngFor="let dom of domains"
-                        [value]="dom"
-                    >{{ dom }}</option>
-                </select>
-                <br>
-                Signature
-                <br>
-                <textarea
-                    rows="5"
-                    cols="70"
-                    name="signature"
-                    [(ngModel)]="ggCurrentUser.signature"
-                >
-                </textarea>
             </div>
-            <button (click)="updateUser()">Update</button>
-            <button (click)="activateImap()">Activate IMAP</button>
-            <button (click)="deactivateImap()">Deactivate IMAP</button>
+            <button
+                (click)="updateUser()"
+                type="button"
+            >Update</button>
+            <button
+                (click)="activateImap()"
+                type="button"
+            >Activate IMAP</button>
+            <button
+                (click)="deactivateImap()"
+                type="button"
+            >Deactivate IMAP</button>
         </div>
     </div>
 
