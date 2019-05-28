@@ -1,0 +1,52 @@
+# ~/.tmuxinator/users.yml
+
+name: users
+root: .
+
+# Optional tmux socket
+# socket_name: foo
+
+# Runs before everything. Use it to start daemons etc.
+# pre: sudo /etc/rc.d/mysqld start
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+# pre_window: rbenv shell 2.0.0-p247
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
+# tmux_command: byobu
+
+# Specifies (by name or index) which window will be selected on project startup. If not set, the first window is used.
+# startup_window: logs
+
+# Controls whether the tmux session should be attached to automatically. Defaults to true.
+# attach: false
+
+# Runs after everything. Use it to attach to tmux with custom options etc.
+# post: tmux -CC attach -t users
+parameters:
+    four_panes_layout_v2:     &four_panes_layout_v2 b4ff,213x60,0,0[213x15,0,0,1,213x44,0,16[213x12,0,16{106x12,0,16,9,106x12,107,16,26},213x31,0,29,27]]
+
+windows:
+    - users:
+          layout: *four_panes_layout_v2
+          panes:
+              - p1:
+                    - printf '\033]2;users logs\033\\'
+                    - cd docker
+                    - docker-compose up
+              - p2:
+                    - printf '\033]2;users docker\033\\'
+                    - sleep 10
+                    - docker exec -e COLUMNS="`tput cols`" -e LINES="`tput lines`" -ti --user=user users_webserver /bin/bash
+                    - clear
+              - p3:
+                    - printf '\033]2;users yarn run dev\033\\'
+                    - sleep 10
+                    - docker exec -e COLUMNS="`tput cols`" -e LINES="`tput lines`" -ti --user=user users_webserver /bin/bash
+                    - yarn && yarn run dev
+              - p4:
+                    - printf '\033]2;users bash\033\\'
+                    - clear

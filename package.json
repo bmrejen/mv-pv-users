@@ -8,6 +8,7 @@
     "license": "UNLICENSED",
     "private": true,
     "devDependencies": {
+        "@angular/animations": "^4.3.3",
         "@angular/common": "^4.3.3",
         "@angular/compiler": "^4.3.3",
         "@angular/compiler-cli": "^4.3.3",
@@ -117,9 +118,7 @@
         "zone.js": "^0.8.16"
     },
     "dependencies": {
-        "@angular/animations": "^4.4.7",
-        "jsrsasign": "^8.0.12",
-        "ui-kit": "git+ssh://git@git.passveo.com:24458/common/ui-kit.git#2.0.13"
+        "jsrsasign": "^8.0.12"
     },
     "scripts": {
         "build": "./node_modules/.bin/gulp build",
@@ -142,7 +141,8 @@
         "test:unit": "./node_modules/.bin/jest",
         "test:unit:ci": "yarn run test:unit:coverage --testResultsProcessor='./node_modules/jest-jenkins-reporter'",
         "test:unit:coverage": "./node_modules/.bin/jest --runInBand --coverage --collectCoverageFrom=src/**/*.ts --collectCoverageFrom=!src/main.ts --collectCoverageFrom=!src/app/rxjs-extensions.ts --collectCoverageFrom=!src/app/routes.ts --collectCoverageFrom=!**/index.ts --collectCoverageFrom=!src/aot/**/*.ts",
-        "version": "./bin/version.sh $npm_package_version"
+        "version": "./bin/version.sh $npm_package_version",
+        "mux": "mux local"
     },
     "engines": {
         "yarn": ">= 1.9.0"
