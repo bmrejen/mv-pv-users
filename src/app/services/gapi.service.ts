@@ -95,8 +95,8 @@ export class GapiAuthenticatorService {
 
     public postUser(user: User): Promise<any> {
 
-        if (user.lastName != null
-            && user.firstName != null
+        if (user.common.lastName != null
+            && user.common.firstName != null
             && user.ggCurrentUser.primaryEmail != null
         ) {
 
@@ -105,11 +105,11 @@ export class GapiAuthenticatorService {
                     gapi.client.directory.users.insert({
                         resource: {
                             name: {
-                                familyName: user.lastName,
-                                givenName: user.firstName,
+                                familyName: user.common.lastName,
+                                givenName: user.common.firstName,
                             },
                             orgUnitPath: user.ggCurrentUser.orgas,
-                            password: user.password,
+                            password: user.common.password,
                             primaryEmail: user.ggCurrentUser.primaryEmail,
                         },
                     })
@@ -218,7 +218,7 @@ export class GapiAuthenticatorService {
             console.log("alias has been modified");
             console.log("newSendAsEmail ", newSendAsEmail);
 
-            body["displayName"] = `${usr.firstName} ${usr.lastName}`;
+            body["displayName"] = `${usr.common.firstName} ${usr.common.lastName}`;
             body["isDefault"] = true;
             body["replyToAddress"] = "";
             body["sendAsEmail"] = newSendAsEmail;

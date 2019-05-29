@@ -69,7 +69,6 @@ export interface ISugarUserToApi {
 
 export interface ISugarUserConfig {
     id: string;
-    userName: string;
     salutation: string;
     phoneHome: string;
     phoneMobile: string;
@@ -111,9 +110,11 @@ export interface ISugarUserConfig {
     // leadsMax: number;
 }
 
-interface ICommonProperties {
+export interface ICommonProperties {
     firstName: string;
     lastName: string;
+    userName: string;
+    password?: string;
 }
 
 // Firstname and lastname will come from Sugar

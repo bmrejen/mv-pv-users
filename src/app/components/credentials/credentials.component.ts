@@ -33,40 +33,40 @@ export class CredentialsComponent {
     }
 
     public credentialClick() {
-        if (this.currentUser.firstName !== ""
-            && this.currentUser.lastName !== ""
-            && this.sugarCurrentUser.userName === "") {
-            this.sugarCurrentUser.userName = this.setUsername();
+        if (this.currentUser.common.firstName !== ""
+            && this.currentUser.common.lastName !== ""
+            && this.currentUser.common.userName === "") {
+            this.currentUser.common.userName = this.setUsername();
             this.checkUsernameAvailability();
             this.sugarCurrentUser.email = this.setEmail();
             this.checkEmailAvailability();
             this.currentUser["password"] = this.sugarCurrentUser.id === "" ? this.setPassword() : "";
             if (this.currentUser.ggCurrentUser.primaryEmail === "") {
-                this.currentUser.ggCurrentUser.primaryEmail = `${this.sugarCurrentUser.userName}@planetveo.com`;
+                this.currentUser.ggCurrentUser.primaryEmail = `${this.currentUser.common.userName}@planetveo.com`;
             }
         }
     }
 
     public setUsername() {
-        const initials = this.currentUser.firstName.split(" ")
+        const initials = this.currentUser.common.firstName.split(" ")
             .map((part) => part[0])
             .join()
             .replace(/,/g, "")
             .toLowerCase();
-        const lastName = this.currentUser.lastName.replace(/ /g, "")
+        const lastName = this.currentUser.common.lastName.replace(/ /g, "")
             .toLowerCase();
 
         return `${initials}${lastName}`;
     }
 
     public setEmail() {
-        return `${this.sugarCurrentUser.userName}@marcovasco.fr`;
+        return `${this.currentUser.common.userName}@marcovasco.fr`;
     }
 
     public checkUsernameAvailability(e?) {
         this.usernameStatus = (this.usersFromSugar
             .find((user) =>
-                user.sugarCurrentUser.userName === this.sugarCurrentUser.userName) !== undefined) ?
+                user.common.userName === this.currentUser.common.userName) !== undefined) ?
             "USERNAME ALREADY TAKEN" : "Username available :)";
     }
 
@@ -82,7 +82,9 @@ export class CredentialsComponent {
             .toString()
             .substring(2, 7);
 
-        return `${this.currentUser.firstName[0].toLowerCase()}${this.currentUser.lastName[0].toLowerCase()}${rndStrg}!`;
+        return `${this.currentUser.common.firstName[0].toLowerCase()}
+        ${this.currentUser.common.lastName[0].toLowerCase()}
+        ${rndStrg}!`;
     }
 
     public trackByFn(item) {

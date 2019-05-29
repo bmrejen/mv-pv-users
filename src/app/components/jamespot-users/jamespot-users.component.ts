@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { IJamespotUserConfig } from "../../interfaces/jamespot-api-response";
 
 import { User } from "../../models/user";

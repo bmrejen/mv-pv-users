@@ -2,15 +2,20 @@ import { GoogleUser } from "./google-user";
 import { JamespotUser } from "./jamespot-user";
 import { SugarUser } from "./sugar-user";
 
+import { ICommonProperties } from "../interfaces/sugar-user";
+
 export class User {
 
     // COMMON PROPERTIES
-    public firstName: string = "";
-    public lastName: string = "";
-    public password: string = "";
+    public common: ICommonProperties = {
+        firstName: "",
+        lastName: "",
+        password: "",
+        userName: "",
+    };
 
     // SUGAR
-    public sugarCurrentUser: SugarUser = new SugarUser({});
+    public sugarCurrentUser: SugarUser = new SugarUser(this.common, {});
 
     // JAMESPOT
     public jamesCurrentUser: JamespotUser = new JamespotUser({});
@@ -19,8 +24,9 @@ export class User {
     public ggCurrentUser: GoogleUser = new GoogleUser({});
 
     constructor(data: any) {
-        this.firstName = data.firstName || this.firstName;
-        this.lastName = data.lastName || this.lastName;
-        this.password = data.password || this.password;
+        this.common.firstName = data.firstName || this.common.firstName;
+        this.common.lastName = data.lastName || this.common.lastName;
+        this.common.password = data.password || this.common.password;
+        this.common.userName = data.username || `${this.common.firstName[0]}${this.common.lastName}`;
     }
 }

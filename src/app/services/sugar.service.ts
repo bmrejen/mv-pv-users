@@ -52,11 +52,15 @@ export class SugarService {
         const usersArray = [];
         users.forEach((user) => {
             const userInfo = this.mapUserFromApi(user);
-            const myUser = new User({});
-            myUser.firstName = userInfo.common.firstName;
-            myUser.lastName = userInfo.common.lastName;
-            myUser.sugarCurrentUser = new SugarUser(userInfo.sugar);
 
+            // Create new user and give it the common properties
+            const myUser = new User({});
+            myUser.common = userInfo.common;
+
+            // Add a Sugar submodel generated from these common properties
+            myUser.sugarCurrentUser = new SugarUser(userInfo.common, userInfo.sugar);
+
+            // Push it to Users array
             usersArray.push(myUser);
         });
 
@@ -104,31 +108,31 @@ export class SugarService {
             common: {
                 firstName: data.attributes.firstName,
                 lastName: data.attributes.lastName,
+                userName: data.attributes.userName,
             },
             sugar: {
-                codeSonGalileo: data.attributes.codeSonGalileo || "",
-                department: data.attributes.department || "",
-                email: data.attributes.email || "",
-                employeeStatus: data.attributes.employeeStatus || "",
-                id: data.attributes.id || "",
-                managerId: data.attributes.managerId || "",
-                officeId: data.attributes.officeId || "",
-                phoneAsterisk: data.attributes.phoneAsterisk || "",
-                phoneFax: data.attributes.phoneFax || "",
-                phoneHome: data.attributes.phoneHome || "",
-                phoneMobile: data.attributes.phoneMobile || "",
-                phoneOther: data.attributes.phoneOther || "",
-                phoneWork: data.attributes.phoneWork || "",
-                salutation: data.attributes.salutation || "",
-                status: data.attributes.status || "",
-                swAllowRemoteCalls: data.attributes.swAllowRemoteCalls || "",
-                swCallNotification: data.attributes.swCallNotification || "",
-                swClickToCall: data.attributes.swClickToCall || "",
-                teams: [data.attributes.teamId] || [],
-                title: data.attributes.title || "",
-                tourplanID: data.attributes.tourplanID || "",
-                type: data.attributes.type || "",
-                userName: data.attributes.userName || "",
+                codeSonGalileo: data.attributes.codeSonGalileo,
+                department: data.attributes.department,
+                email: data.attributes.email,
+                employeeStatus: data.attributes.employeeStatus,
+                id: data.attributes.id,
+                managerId: data.attributes.managerId,
+                officeId: data.attributes.officeId,
+                phoneAsterisk: data.attributes.phoneAsterisk,
+                phoneFax: data.attributes.phoneFax,
+                phoneHome: data.attributes.phoneHome,
+                phoneMobile: data.attributes.phoneMobile,
+                phoneOther: data.attributes.phoneOther,
+                phoneWork: data.attributes.phoneWork,
+                salutation: data.attributes.salutation,
+                status: data.attributes.status,
+                swAllowRemoteCalls: data.attributes.swAllowRemoteCalls,
+                swCallNotification: data.attributes.swCallNotification,
+                swClickToCall: data.attributes.swClickToCall,
+                teams: [data.attributes.teamId],
+                title: data.attributes.title,
+                tourplanID: data.attributes.tourplanID,
+                type: data.attributes.type,
             },
         };
     }
@@ -163,8 +167,8 @@ function mapCurrentUserToApi(user: User): ISugarUserToApi {
                 department: user.sugarCurrentUser.department,
                 email: user.sugarCurrentUser.email,
                 employeeStatus: user.sugarCurrentUser.employeeStatus,
-                firstName: user.firstName,
-                lastName: user.lastName,
+                firstName: user.common.firstName,
+                lastName: user.common.lastName,
                 managerId: user.sugarCurrentUser.managerId,
                 officeId: user.sugarCurrentUser.officeId,
                 phoneAsterisk: user.sugarCurrentUser.phoneAsterisk,
@@ -180,7 +184,7 @@ function mapCurrentUserToApi(user: User): ISugarUserToApi {
                 swClickToCall: user.sugarCurrentUser.swClickToCall ? "1" : "0",
                 title: user.sugarCurrentUser.title,
                 tourplanID: user.sugarCurrentUser.tourplanID,
-                userName: user.sugarCurrentUser.userName,
+                userName: user.common.userName,
             },
             destinations: user.sugarCurrentUser.destinations,
             roles: [user.sugarCurrentUser.roleId],

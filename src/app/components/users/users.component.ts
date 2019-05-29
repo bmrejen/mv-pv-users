@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { SugarUser } from "../../models/sugar-user";
+import { User } from "../../models/user";
 import { SugarService } from "../../services/sugar.service";
 
 @Component({
@@ -21,7 +22,8 @@ export class UsersComponent implements OnInit {
         this.sugarService.getUsers()
             .then((users) => users.forEach((user) => {
                 const userInfo = this.sugarService.mapUserFromApi(user);
-                this.usersFromSugar.push(new SugarUser(userInfo));
+
+                this.usersFromSugar.push(new SugarUser(userInfo.common, userInfo.sugar));
             }))
             .then((users) => this.filteredUsers = this.usersFromSugar);
     }

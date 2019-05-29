@@ -5,6 +5,7 @@ import { SugarService } from "../../services/sugar.service";
 
 import { Fields } from "../../models/fields";
 import { SugarUser } from "../../models/sugar-user";
+import { User } from "../../models/user";
 
 @Component({
     selector: "mv-app-disable-user-form",
@@ -39,7 +40,8 @@ export class DisableUserFormComponent implements OnInit {
             .then((users) => users.forEach((user) => {
                 const userConfig = this.sugar.mapUserFromApi(user);
                 user["checked"] = false;
-                this.users.push(new SugarUser(userConfig));
+
+                this.users.push(new SugarUser(userConfig.common, userConfig.sugar));
             }))
 
             .then((res) => console.log("this.users", this.users));
