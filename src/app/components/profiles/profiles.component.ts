@@ -193,7 +193,6 @@ export class ProfilesComponent implements OnInit {
         this.sugarCurrentUser.functionId = null;
         this.sugarCurrentUser.officeId = "";
         this.sugarCurrentUser.others = [];
-        this.ggCurrentUser.orgas = null;
         this.sugarCurrentUser.status = "Active";
         this.sugarCurrentUser.employeeStatus = "Active";
         this.others.forEach((other) => other.checked = false);

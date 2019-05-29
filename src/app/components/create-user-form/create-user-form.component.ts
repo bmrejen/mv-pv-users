@@ -75,7 +75,14 @@ export class CreateUserFormComponent implements OnInit {
                 this.managers = data.managers;
 
                 // get user list
-                data.users.forEach((user) => this.usersFromSugar.push(new User(user)));
+                data.users.forEach((user) => {
+                    const myUser = new User({});
+                    myUser.common = this.sugar.mapUserFromApi(user).common;
+                    myUser.sugarCurrentUser =
+                        new SugarUser(this.sugar.mapUserFromApi(user).common, this.sugar.mapUserFromApi(user).sugar);
+                    console.log(myUser);
+                    this.usersFromSugar.push(myUser);
+                });
 
                 // get team list
                 data.teams.forEach((team) => this.teams.push(new Team(team)));
@@ -274,7 +281,7 @@ export class CreateUserFormComponent implements OnInit {
 
     public postJamespotUser(): Promise<any> {
         return this.james.postUsers(this.currentUser)
-            .then((res: IJamespotUserConfig) => res)
+            .then((res: IJamespotUserConfig) => this.jamesMessage = `User ${res.idUser} created`)
             .catch((err: string) => {
                 console.error("Jamespot Problem :", err);
                 this.jamesMessage = err.substr(31, err.length - 34);

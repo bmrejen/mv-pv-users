@@ -34,6 +34,9 @@ export class CredentialsComponent {
     }
 
     public credentialClick() {
+        // Check Jamespot username on James component even if name is filled
+        this.jamespot.checkUsernameAvailability();
+
         if (this.currentUser.common.firstName !== ""
             && this.currentUser.common.lastName !== ""
             && this.currentUser.common.userName === "") {
@@ -41,11 +44,10 @@ export class CredentialsComponent {
 
             this.sugarCurrentUser.email = this.setEmail();
             this.checkEmailAvailability();
-            this.currentUser["password"] = this.sugarCurrentUser.id === "" ? this.setPassword() : "";
+            this.currentUser.common.password = this.sugarCurrentUser.id === "" ? this.setPassword() : "";
             this.checkUsernameAvailability();
 
-            // Call methods in Jamespot and Gapp components
-            this.jamespot.checkUsernameAvailability();
+            // Call Gapp component method
             this.gapps.handleSendAsClick();
 
             if (this.currentUser.ggCurrentUser.primaryEmail === "") {
@@ -71,10 +73,23 @@ export class CredentialsComponent {
     }
 
     public checkUsernameAvailability(e?) {
-        this.usernameStatus = (this.usersFromSugar
-            .find((user) =>
-                user.common.userName === this.currentUser.common.userName) !== undefined) ?
-            "USERNAME ALREADY TAKEN" : "Username available :)";
+        this.jamespot.checkUsernameAvailability();
+
+        this.usernameStatus = (this.currentUser.common.userName === "") ?
+            "Please add username" : ((this.usersFromSugar
+                .find((user) =>
+                    user.common.userName === this.currentUser.common.userName) !== undefined) ?
+                "USERNAME TAKEN" : "Username available :)");
+
+        // if (this.currentUser.common.userName === "") {
+        //     this.usernameStatus = "Please add username";
+        // } else if (this.usersFromSugar
+        //     .find((user) =>
+        //         user.common.userName === this.currentUser.common.userName) !== undefined) {
+        //     this.usernameStatus = "USERNAME TAKEN";
+        // } else {
+        //     this.usernameStatus = "Username available :)";
+        // }
     }
 
     public checkEmailAvailability(e?) {
@@ -85,13 +100,15 @@ export class CredentialsComponent {
 
     public setPassword() {
         if (this.sugarCurrentUser.id !== "") { return null; }
-        const rndStrg = Math.random()
+
+        const randomString = Math.random()
             .toString()
             .substring(2, 7);
 
-        return `${this.currentUser.common.firstName[0].toLowerCase()}
-        ${this.currentUser.common.lastName[0].toLowerCase()}
-        ${rndStrg}!`;
+        const initials =
+            `${this.currentUser.common.firstName[0].toLowerCase()}${this.currentUser.common.lastName[0].toLowerCase()}`;
+
+        return `${initials}${randomString}!`;
     }
 
     public trackByFn(item) {

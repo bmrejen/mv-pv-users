@@ -14,7 +14,7 @@ export class SugarUser implements ISugarUserConfig {
     public phoneMobile: string = "";
     public phoneOther: string = "";
     public phoneWork: string = "";
-    public salutation: string = "";
+    public salutation: string = "Mr.";
     public status: string = "";
     public swAllowRemoteCalls: boolean = true;
     public swCallNotification: boolean = true;

@@ -66,6 +66,7 @@ export class JamespotUsersComponent {
     }
 
     public checkUsernameAvailability(): void {
+        console.log("jamespot component checking user", this.currentUser.common.userName);
         this.jamesMessage = null;
         this.isUsernameTaken = null;
 

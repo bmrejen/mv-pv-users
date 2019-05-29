@@ -40,7 +40,7 @@
             type="text"
             [(ngModel)]="currentUser.common.userName"
             name="pseudo"
-            (blur)="checkUsernameAvailability()"
+            (ngModelChange)="checkUsernameAvailability()"
         >Pseudo
         <br>
         <!-- <input
