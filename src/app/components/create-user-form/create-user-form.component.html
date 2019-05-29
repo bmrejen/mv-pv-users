@@ -37,6 +37,8 @@
                 [usersFromSugar]="usersFromSugar"
                 [sugarMessage]="sugarMessage"
                 class="credentials"
+                [jamespot]="jamespot"
+                [gapps]="gapps"
             ></mv-credentials>
 
             <mv-phones
@@ -44,6 +46,7 @@
                 class="phones"
             ></mv-phones>
             <mv-jamespot
+                #jamespot
                 class="jamespot"
                 [jamesCurrentUser]="currentUser.jamesCurrentUser"
                 [jamesMessage]="jamesMessage"
@@ -51,6 +54,7 @@
             >
             </mv-jamespot>
             <mv-gapi-users
+                #gapps
                 [currentUser]="currentUser"
                 [oldUser]="oldUser"
                 [ggCurrentUser]="currentUser.ggCurrentUser"

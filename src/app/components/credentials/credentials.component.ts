@@ -1,6 +1,5 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { ControlContainer, NgForm } from "@angular/forms";
-import { SugarService } from "./../../services/sugar.service";
 
 import { SugarUser } from "../../models/sugar-user";
 import { User } from "../../models/user";
@@ -24,11 +23,13 @@ export class CredentialsComponent {
     @Input() public currentUser: User;
     @Input() public usersFromSugar: User[];
     @Input() public sugarMessage;
+    @Input() public jamespot;
+    @Input() public gapps;
 
     public usernameStatus: string;
     public emailStatus: string;
 
-    constructor(private sugar: SugarService) {
+    constructor() {
         //
     }
 
@@ -37,10 +38,16 @@ export class CredentialsComponent {
             && this.currentUser.common.lastName !== ""
             && this.currentUser.common.userName === "") {
             this.currentUser.common.userName = this.setUsername();
-            this.checkUsernameAvailability();
+
             this.sugarCurrentUser.email = this.setEmail();
             this.checkEmailAvailability();
             this.currentUser["password"] = this.sugarCurrentUser.id === "" ? this.setPassword() : "";
+            this.checkUsernameAvailability();
+
+            // Call methods in Jamespot and Gapp components
+            this.jamespot.checkUsernameAvailability();
+            this.gapps.handleSendAsClick();
+
             if (this.currentUser.ggCurrentUser.primaryEmail === "") {
                 this.currentUser.ggCurrentUser.primaryEmail = `${this.currentUser.common.userName}@planetveo.com`;
             }
@@ -60,7 +67,7 @@ export class CredentialsComponent {
     }
 
     public setEmail() {
-        return `${this.currentUser.common.userName}@marcovasco.fr`;
+        return `${this.currentUser.common.userName}@${this.currentUser.ggCurrentUser.sendAs}`;
     }
 
     public checkUsernameAvailability(e?) {

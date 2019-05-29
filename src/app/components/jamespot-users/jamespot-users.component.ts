@@ -66,18 +66,20 @@ export class JamespotUsersComponent {
     }
 
     public checkUsernameAvailability(): void {
-        this.james.getByField("pseudo", this.jamesCurrentUser.username)
+        this.jamesMessage = null;
+        this.isUsernameTaken = null;
+
+        this.james.getByField("pseudo", this.currentUser.common.userName)
             .then((res: IJamespotUserConfig) => {
                 this.isUsernameTaken = true;
-                this.jamesMessage = null;
                 if (res.idUser !== "" && this.jamesCurrentUser.idUser === null) {
                     this.isUsernameTaken = true;
                     this.jamesMessage = `Username taken by user #${res.idUser}`;
                 }
             })
             .catch((err) => {
-                console.error(err);
-                this.jamesMessage = err;
+                this.isUsernameTaken = false;
+                this.jamesMessage = `Username available :)`;
             });
     }
 

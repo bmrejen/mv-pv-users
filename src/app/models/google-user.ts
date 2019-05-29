@@ -6,7 +6,7 @@ export class GoogleUser implements IGapiUser {
     public emails = null;
     public id = null;
     public nonEditableAliases = [];
-    public sendAs = null;
+    public sendAs = "marcovasco.fr";
     public signature = null;
     public googleGroups = [];
 

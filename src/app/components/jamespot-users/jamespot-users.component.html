@@ -38,29 +38,29 @@
         <br> -->
         <input
             type="text"
-            [(ngModel)]="jamesCurrentUser.username"
+            [(ngModel)]="currentUser.common.userName"
             name="pseudo"
             (blur)="checkUsernameAvailability()"
         >Pseudo
         <br>
-        <input
+        <!-- <input
             type="text"
             [(ngModel)]="jamesCurrentUser.company"
             name="company"
-        >Company
-        <br>
+        >Company -->
+        <!-- <br>
         <input
             type="text"
-            [(ngModel)]="jamesCurrentUser.phoneExtension"
+            [(ngModel)]="currentUser.sugarCurrentUser.phoneAsterisk"
             name="phoneExtension"
-        >Phone Extension
-        <br>
+        >Phone Extension -->
+        <!-- <br>
         <input
             type="text"
             [(ngModel)]="jamesCurrentUser.timeZone"
             name="timeZone"
         >Time Zone
-        <br>
+        <br> -->
 
 
         <!-- IMAGE UPDATE -->
@@ -97,5 +97,5 @@
     <h3 *ngIf="updateSuccessful">Data Updated ! </h3>
 
     <h2 *ngIf="isDeleted">User {{ deletedId }} deleted !</h2>
-    <h2 *ngIf="jamesMessage != null">ERROR: {{ jamesMessage }}</h2>
+    <h3 *ngIf="jamesMessage != null">{{ jamesMessage }}</h3>
 </fieldset>

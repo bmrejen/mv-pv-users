@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { IGapiUser } from "../../interfaces/gapi-user";
 import { GoogleUser } from "../../models/google-user";
 import { User } from "../../models/user";
 import { GapiAuthenticatorService } from "../../services/gapi.service";
@@ -126,8 +125,24 @@ export class GapiUsersComponent implements OnInit {
         //     .catch((err) => console.error("Error when getting IMAP", err));
     }
 
+    public handleSendAsClick() {
+        this.updateSignature();
+        this.updateJamespotCompany();
+        this.updateEmail();
+    }
+
     public updateSignature() {
         // tslint:disable-next-line:max-line-length
         this.currentUser.ggCurrentUser.signature = `<div dir="ltr"><p style="font-size:1em;color:rgb(164,135,67);font-family:Lato,Calibri,Arial,Helvetica,sans-serif">--------------------------------</p><p style="color:rgb(0,0,0);font-size:1em;font-family:Lato,Calibri,Arial,Helvetica,sans-serif"><span style="font-weight:bold">${this.currentUser.common.firstName} ${this.currentUser.common.lastName}</span><br>${this.currentUser.sugarCurrentUser.title}</p><p style="color:rgb(0,0,0);font-size:1em;font-family:Lato,Calibri,Arial,Helvetica,sans-serif">${this.currentUser.sugarCurrentUser.phoneWork} (${this.currentUser.sugarCurrentUser.phoneAsterisk})<span style="font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif"><br><a href="http://www.${this.ggCurrentUser.sendAs}/" target="_blank"><b><span lang="DE" style="color:#a48743">www.${this.ggCurrentUser.sendAs}</span></b></a></span><span style="font-family:&quot;Times New Roman&quot;;font-size:medium">&nbsp;</span></p></div>`;
+    }
+
+    public updateJamespotCompany() {
+        this.currentUser.jamesCurrentUser.company = this.currentUser.ggCurrentUser.sendAs.split(".")[0]
+            .toUpperCase();
+    }
+
+    public updateEmail() {
+        this.currentUser.sugarCurrentUser.email =
+            `${this.currentUser.common.userName}@${this.currentUser.ggCurrentUser.sendAs}`;
     }
 }
