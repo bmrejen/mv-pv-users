@@ -1,4 +1,4 @@
-import { ISugarUserConfig } from "../interfaces/sugar-user";
+import { ICommonProperties, ISugarUserConfig } from "../interfaces/sugar-user";
 
 export class SugarUser implements ISugarUserConfig {
     public codeSonGalileo: string = "";
@@ -14,14 +14,13 @@ export class SugarUser implements ISugarUserConfig {
     public phoneMobile: string = "";
     public phoneOther: string = "";
     public phoneWork: string = "";
-    public salutation: string = "";
+    public salutation: string = "Mr.";
     public status: string = "";
     public swAllowRemoteCalls: boolean = true;
     public swCallNotification: boolean = true;
     public swClickToCall: boolean = true;
     public title: string = "";
     public tourplanID: string;
-    public userName: string = "";
     public type: string = "users";
     public userToCopyHPfrom: string = "";
     public inheritsPreferencesFrom: string = "";
@@ -37,8 +36,11 @@ export class SugarUser implements ISugarUserConfig {
     public leadsMin: number = 15;
     public leadsMax: number = 45;
     public teams: string[] = [];
+    public common: ICommonProperties;
 
-    constructor(data: any) {
+    constructor(common: ICommonProperties, data: any) {
+        this.common = common;
+
         this.codeSonGalileo = data.codeSonGalileo || this.codeSonGalileo;
         this.department = data.department || this.department;
         this.email = data.email || this.email;
@@ -55,15 +57,13 @@ export class SugarUser implements ISugarUserConfig {
         this.salutation = data.salutation || this.salutation;
         this.status = data.status || this.status;
         this.title = data.title || this.title;
-        this.userName = data.userName || this.userName;
         this.type = data.type || this.type;
 
         this.swAllowRemoteCalls = data.swAllowRemoteCalls === "0" ? false : this.swAllowRemoteCalls;
         this.swCallNotification = data.swCallNotification === "0" ? false : this.swCallNotification;
         this.swClickToCall = data.swClickToCall === "0" ? false : this.swClickToCall;
-        this.tourplanID = data.tourplanID || this.userName.substr(0, 6)
+        this.tourplanID = data.tourplanID || this.common.userName.substr(0, 6)
             .toUpperCase();
-
         // Following properties are not returned by the API
 
         // this.userToCopyHPfrom = data.userToCopyHPfrom || this.userToCopyHPfrom;

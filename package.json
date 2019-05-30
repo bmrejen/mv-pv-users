@@ -118,7 +118,8 @@
         "zone.js": "^0.8.16"
     },
     "dependencies": {
-        "jsrsasign": "^8.0.12"
+        "jsrsasign": "^8.0.12",
+        "ui-kit": "git+ssh://git@git.passveo.com:24458/common/ui-kit#5.5.0-beta.0"
     },
     "scripts": {
         "build": "./node_modules/.bin/gulp build",

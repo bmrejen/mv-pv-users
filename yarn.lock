@@ -12812,9 +12812,9 @@ uglify-to-browserify@~1.0.0:
   resolved "https://registry.yarnpkg.com/uglify-to-browserify/-/uglify-to-browserify-1.0.2.tgz#6e0924d6bda6b5afe349e39a6d632850a0f882b7"
   integrity sha1-bgkk1r2mta/jSeOabWMoUKD4grc=
 
-"ui-kit@git+ssh://git@git.passveo.com:24458/common/ui-kit.git#2.0.13":
-  version "2.0.0"
-  resolved "git+ssh://git@git.passveo.com:24458/common/ui-kit.git#3d2ec6838eb86ac4f5d530b9ecde9cd9ea89be2f"
+"ui-kit@git+ssh://git@git.passveo.com:24458/common/ui-kit#5.5.0-beta.0":
+  version "5.5.0-beta.0"
+  resolved "git+ssh://git@git.passveo.com:24458/common/ui-kit#9a532cd3bee917052278c589291dd02fdfd3f23d"
 
 ultron@~1.1.0:
   version "1.1.1"

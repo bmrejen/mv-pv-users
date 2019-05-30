@@ -69,13 +69,20 @@ export class CreateUserFormComponent implements OnInit {
             .subscribe((data) => {
                 // set current user if any
                 this.currentUser = new User({});
-                this.currentUser.sugarCurrentUser = new SugarUser(data.sugarUser || {});
+                this.currentUser.sugarCurrentUser = new SugarUser(this.currentUser.common, data.sugarUser || {});
 
                 // get manager list
                 this.managers = data.managers;
 
                 // get user list
-                data.users.forEach((user) => this.usersFromSugar.push(new User(user)));
+                data.users.forEach((user) => {
+                    const myUser = new User({});
+                    myUser.common = this.sugar.mapUserFromApi(user).common;
+                    myUser.sugarCurrentUser =
+                        new SugarUser(this.sugar.mapUserFromApi(user).common, this.sugar.mapUserFromApi(user).sugar);
+                    console.log(myUser);
+                    this.usersFromSugar.push(myUser);
+                });
 
                 // get team list
                 data.teams.forEach((team) => this.teams.push(new Team(team)));
@@ -92,15 +99,8 @@ export class CreateUserFormComponent implements OnInit {
                 // get others
                 data.others.forEach((other) => this.fields.others.push(new Other(other)));
 
-                // // remove following lines after testing
-                this.fields.accounts[1]["checked"] = false;
-                this.fields.accounts[2]["checked"] = false;
-                this.fields.accounts[3]["checked"] = false;
-
-                console.log("data resolved", data);
             });
         this.initGapiServices();
-        console.log(this.fields);
     }
 
     public initGapiServices() {
@@ -182,13 +182,15 @@ export class CreateUserFormComponent implements OnInit {
     public getSugarUser(username): Promise<any> {
         return this.sugar.getUserByUsername(username)
             .then((res) => {
-                this.currentUser.firstName = res.common.firstName;
-                this.currentUser.lastName = res.common.lastName;
-                this.currentUser.sugarCurrentUser = new SugarUser(res.sugar);
+                this.currentUser.common.firstName = res.common.firstName;
+                this.currentUser.common.lastName = res.common.lastName;
+                this.currentUser.common.userName = res.common.userName;
+                this.currentUser.sugarCurrentUser = new SugarUser(this.currentUser.common, res.sugar);
 
-                this.oldUser.firstName = res.common.firstName;
-                this.oldUser.lastName = res.common.lastName;
-                this.oldUser.sugarCurrentUser = new SugarUser(res.sugar);
+                this.oldUser.common.firstName = res.common.firstName;
+                this.oldUser.common.lastName = res.common.lastName;
+                this.oldUser.common.userName = res.common.userName;
+                this.oldUser.sugarCurrentUser = new SugarUser(this.currentUser.common, res.sugar);
 
                 return res;
             })
@@ -224,7 +226,7 @@ export class CreateUserFormComponent implements OnInit {
 
     public lowerCasify() {
         this.currentUser.sugarCurrentUser.email = this.currentUser.sugarCurrentUser.email.toLowerCase();
-        this.currentUser.sugarCurrentUser.userName = this.currentUser.sugarCurrentUser.userName.toLowerCase();
+        this.currentUser.common.userName = this.currentUser.common.userName.toLowerCase();
         this.currentUser.jamesCurrentUser.mail = this.currentUser.jamesCurrentUser.mail.toLowerCase();
         this.currentUser.jamesCurrentUser.username = this.currentUser.jamesCurrentUser.username.toLowerCase();
         this.currentUser.jamesCurrentUser.mail = this.currentUser.jamesCurrentUser.mail.toLowerCase();
@@ -272,7 +274,7 @@ export class CreateUserFormComponent implements OnInit {
 
     public postJamespotUser(): Promise<any> {
         return this.james.postUsers(this.currentUser)
-            .then((res: IJamespotUserConfig) => res)
+            .then((res: IJamespotUserConfig) => this.jamesMessage = `User ${res.idUser} created`)
             .catch((err: string) => {
                 console.error("Jamespot Problem :", err);
                 this.jamesMessage = err.substr(31, err.length - 34);
@@ -326,22 +328,22 @@ export class CreateUserFormComponent implements OnInit {
         this.currentUser = new User({
             firstName: "Jacobajacob",
         });
-        this.currentUser.lastName = this.currentUser.firstName;
-        this.currentUser.password = Math.random()
+        this.currentUser.common.lastName = this.currentUser.common.firstName;
+        this.currentUser.common.password = Math.random()
             .toString(36)
             .substring(2);
         this.currentUser.ggCurrentUser = new GoogleUser({
             orgas: "/IT",
-            primaryEmail: `${this.currentUser.firstName[0]}${this.currentUser.lastName}@planetveo.com`,
+            primaryEmail: `${this.currentUser.common.firstName[0]}${this.currentUser.common.lastName}@planetveo.com`,
             sendAs: "marcovasco.fr",
             signature: "will be modified when sendAs is clicked",
         });
-        this.currentUser.sugarCurrentUser = new SugarUser({
+        this.currentUser.sugarCurrentUser = new SugarUser(this.currentUser.common, {
             codeSonGalileo: "123456",
             department: "Backoffice Carnet",
             destinations: ["4e12eefb-5dbb-f913-d80b-4c2ab8202809",
                 "6f9aedb6-6d68-b4f3-0270-4cc10e363077"],
-            email: `${this.currentUser.firstName[0]}${this.currentUser.lastName}@marcovasco.fr`,
+            email: `${this.currentUser.common.firstName[0]}${this.currentUser.common.lastName}@marcovasco.fr`,
             employeeStatus: "Active",
             managerId: "4a15f7bb-09ec-32f7-4da8-5a560982cd06",
             officeId: "1006",
@@ -362,9 +364,9 @@ export class CreateUserFormComponent implements OnInit {
             teams: ["0ec63f44-aa38-11e7-924f-005056911f09",
                 "1046f88d-3d37-10d5-7760-506023561b57"],
             title: "Assistant Ventes",
-            tourplanID: this.currentUser.firstName.slice(0, 6)
+            tourplanID: this.currentUser.common.firstName.slice(0, 6)
                 .toUpperCase(),
-            userName: `${this.currentUser.firstName[0]}${this.currentUser.lastName}`,
+            userName: `${this.currentUser.common.firstName[0]}${this.currentUser.common.lastName}`,
         });
         this.currentUser.jamesCurrentUser = new JamespotUser({
             active: "1",
@@ -375,7 +377,7 @@ export class CreateUserFormComponent implements OnInit {
             phoneExtension: "",
             role: "User",
             timeZone: "Europe/Paris",
-            username: `${this.currentUser.firstName[0]}${this.currentUser.lastName}`,
+            username: `${this.currentUser.common.firstName[0]}${this.currentUser.common.lastName}`,
         });
 
         console.log("form prefilled", this.temporaryData);

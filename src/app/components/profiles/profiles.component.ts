@@ -49,9 +49,8 @@ export class ProfilesComponent implements OnInit {
                 const userInfo = this.sugarService.mapUserFromApi(user);
 
                 const myUser = new User({});
-                myUser.firstName = userInfo.common.firstName;
-                myUser.lastName = userInfo.common.lastName;
-                myUser.sugarCurrentUser = new SugarUser(userInfo.sugar);
+                myUser.common = userInfo.common;
+                myUser.sugarCurrentUser = new SugarUser(userInfo.common, userInfo.sugar);
 
                 this.allUsersFromSugar.push(myUser);
             }))
@@ -65,7 +64,7 @@ export class ProfilesComponent implements OnInit {
                 return this.activeUsersFromSugar.map((user) => {
                     return {
                         selected: false,
-                        value: user.sugarCurrentUser.userName,
+                        value: user.common.userName,
                     };
                 });
             })
@@ -194,7 +193,6 @@ export class ProfilesComponent implements OnInit {
         this.sugarCurrentUser.functionId = null;
         this.sugarCurrentUser.officeId = "";
         this.sugarCurrentUser.others = [];
-        this.ggCurrentUser.orgas = null;
         this.sugarCurrentUser.status = "Active";
         this.sugarCurrentUser.employeeStatus = "Active";
         this.others.forEach((other) => other.checked = false);

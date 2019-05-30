@@ -1,3 +1,4 @@
+import { User } from "../models/user";
 import {
     IJamespotApiResponse,
     IJamespotUserConfig,
@@ -41,21 +42,24 @@ export class JamespotService {
             });
     }
 
-    public postUsers(user): Promise<IJamespotUserConfig> {
+    public postUsers(user: User): Promise<IJamespotUserConfig> {
         const fd = new FormData();
-        fd.append("Firstname", user.firstName);
-        fd.append("Lastname", user.lastName.toUpperCase());
-        fd.append("image", user.image);
+        // Common properties
+        fd.append("Firstname", user.common.firstName);
+        fd.append("Lastname", user.common.lastName.toUpperCase());
+        fd.append("Pseudo", user.common.userName);
+        fd.append("Password", user.common.password);
 
-        fd.append("Mail", user.jamesCurrentUser.mail);
+        // Google and Sugar properties
+        fd.append("Mail", user.ggCurrentUser.primaryEmail);
+        fd.append("Field1", user.sugarCurrentUser.phoneAsterisk);
+
+        fd.append("image", user.jamesCurrentUser.image);
         fd.append("Role", user.jamesCurrentUser.role);
         fd.append("Country", user.jamesCurrentUser.country);
         fd.append("Language", user.jamesCurrentUser.language);
         fd.append("active", user.jamesCurrentUser.active);
-        fd.append("Pseudo", user.jamesCurrentUser.username);
-        fd.append("Password", user.jamesCurrentUser.password);
         fd.append("Company", user.jamesCurrentUser.company);
-        fd.append("Field1", user.jamesCurrentUser.phoneExtension);
         fd.append("timeZone", user.jamesCurrentUser.timeZone);
 
         return this.http

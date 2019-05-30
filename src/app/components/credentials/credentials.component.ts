@@ -1,6 +1,5 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { ControlContainer, NgForm } from "@angular/forms";
-import { SugarService } from "./../../services/sugar.service";
 
 import { SugarUser } from "../../models/sugar-user";
 import { User } from "../../models/user";
@@ -24,50 +23,63 @@ export class CredentialsComponent {
     @Input() public currentUser: User;
     @Input() public usersFromSugar: User[];
     @Input() public sugarMessage;
+    @Input() public jamespot;
+    @Input() public gapps;
 
     public usernameStatus: string;
     public emailStatus: string;
 
-    constructor(private sugar: SugarService) {
+    constructor() {
         //
     }
 
     public credentialClick() {
-        if (this.currentUser.firstName !== ""
-            && this.currentUser.lastName !== ""
-            && this.sugarCurrentUser.userName === "") {
-            this.sugarCurrentUser.userName = this.setUsername();
-            this.checkUsernameAvailability();
+        // Check Jamespot username on James component even if name is filled
+        this.jamespot.checkUsernameAvailability();
+
+        if (this.currentUser.common.firstName !== ""
+            && this.currentUser.common.lastName !== ""
+            && this.currentUser.common.userName === "") {
+            this.currentUser.common.userName = this.setUsername();
+
             this.sugarCurrentUser.email = this.setEmail();
             this.checkEmailAvailability();
-            this.currentUser["password"] = this.sugarCurrentUser.id === "" ? this.setPassword() : "";
+            this.currentUser.common.password = this.sugarCurrentUser.id === "" ? this.setPassword() : "";
+            this.checkUsernameAvailability();
+
+            // Call Gapp component method
+            this.gapps.handleSendAsClick();
+
             if (this.currentUser.ggCurrentUser.primaryEmail === "") {
-                this.currentUser.ggCurrentUser.primaryEmail = `${this.sugarCurrentUser.userName}@planetveo.com`;
+                this.currentUser.ggCurrentUser.primaryEmail = `${this.currentUser.common.userName}@planetveo.com`;
             }
         }
     }
 
     public setUsername() {
-        const initials = this.currentUser.firstName.split(" ")
+        const initials = this.currentUser.common.firstName.split(" ")
             .map((part) => part[0])
             .join()
             .replace(/,/g, "")
             .toLowerCase();
-        const lastName = this.currentUser.lastName.replace(/ /g, "")
+        const lastName = this.currentUser.common.lastName.replace(/ /g, "")
             .toLowerCase();
 
         return `${initials}${lastName}`;
     }
 
     public setEmail() {
-        return `${this.sugarCurrentUser.userName}@marcovasco.fr`;
+        return `${this.currentUser.common.userName}@${this.currentUser.ggCurrentUser.sendAs}`;
     }
 
     public checkUsernameAvailability(e?) {
-        this.usernameStatus = (this.usersFromSugar
-            .find((user) =>
-                user.sugarCurrentUser.userName === this.sugarCurrentUser.userName) !== undefined) ?
-            "USERNAME ALREADY TAKEN" : "Username available :)";
+        this.jamespot.checkUsernameAvailability();
+
+        this.usernameStatus = (this.currentUser.common.userName === "") ?
+            "Please add username" : ((this.usersFromSugar
+                .find((user) =>
+                    user.common.userName === this.currentUser.common.userName) !== undefined) ?
+                "USERNAME TAKEN" : "Username available :)");
     }
 
     public checkEmailAvailability(e?) {
@@ -78,11 +90,15 @@ export class CredentialsComponent {
 
     public setPassword() {
         if (this.sugarCurrentUser.id !== "") { return null; }
-        const rndStrg = Math.random()
+
+        const randomString = Math.random()
             .toString()
             .substring(2, 7);
 
-        return `${this.currentUser.firstName[0].toLowerCase()}${this.currentUser.lastName[0].toLowerCase()}${rndStrg}!`;
+        const initials =
+            `${this.currentUser.common.firstName[0].toLowerCase()}${this.currentUser.common.lastName[0].toLowerCase()}`;
+
+        return `${initials}${randomString}!`;
     }
 
     public trackByFn(item) {

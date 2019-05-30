@@ -6,13 +6,13 @@
     </h2>
 
     <form *ngIf="jamesCurrentUser!=null">
-        <input
+        <!-- <input
             type="text"
             [(ngModel)]="jamesCurrentUser.mail"
             name="mail"
         >Email
-        <br>
-        <input
+        <br> -->
+        <!-- <input
             type="text"
             [(ngModel)]="jamesCurrentUser.role"
             name="role"
@@ -29,38 +29,38 @@
             [(ngModel)]="jamesCurrentUser.language"
             name="language"
         >Language
-        <br>
-        <input
+        <br> -->
+        <!-- <input
             type="text"
             [(ngModel)]="jamesCurrentUser.active"
             name="active"
         >active
-        <br>
+        <br> -->
         <input
             type="text"
-            [(ngModel)]="jamesCurrentUser.username"
+            [(ngModel)]="currentUser.common.userName"
             name="pseudo"
-            (blur)="checkUsernameAvailability()"
+            (ngModelChange)="checkUsernameAvailability()"
         >Pseudo
         <br>
-        <input
+        <!-- <input
             type="text"
             [(ngModel)]="jamesCurrentUser.company"
             name="company"
-        >Company
-        <br>
+        >Company -->
+        <!-- <br>
         <input
             type="text"
-            [(ngModel)]="jamesCurrentUser.phoneExtension"
+            [(ngModel)]="currentUser.sugarCurrentUser.phoneAsterisk"
             name="phoneExtension"
-        >Phone Extension
-        <br>
+        >Phone Extension -->
+        <!-- <br>
         <input
             type="text"
             [(ngModel)]="jamesCurrentUser.timeZone"
             name="timeZone"
         >Time Zone
-        <br>
+        <br> -->
 
 
         <!-- IMAGE UPDATE -->
@@ -97,5 +97,5 @@
     <h3 *ngIf="updateSuccessful">Data Updated ! </h3>
 
     <h2 *ngIf="isDeleted">User {{ deletedId }} deleted !</h2>
-    <h2 *ngIf="jamesMessage != null">ERROR: {{ jamesMessage }}</h2>
+    <h3 *ngIf="jamesMessage != null">{{ jamesMessage }}</h3>
 </fieldset>
