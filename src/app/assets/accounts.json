@@ -1,20 +1,24 @@
 {
-  "data" :
-  [
-    {
-      "checked": true,
-      "id": "gapps",
-      "label": "Google Apps"
-    },
-    {
-      "checked": true,
-      "id": "sugar",
-      "label": "Sugar"
-    },
-    {
-      "checked": true,
-      "id": "switchvox",
-      "label": "SwitchVox"
-    }
-  ]
+    "data": [
+        {
+            "checked": true,
+            "id": "gapps",
+            "label": "Google Apps"
+        },
+        {
+            "checked": true,
+            "id": "sugar",
+            "label": "Sugar"
+        },
+        {
+            "checked": true,
+            "id": "switchvox",
+            "label": "SwitchVox"
+        },
+        {
+            "checked": true,
+            "id": "jamespot",
+            "label": "Jamespot"
+        }
+    ]
 }

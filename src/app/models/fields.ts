@@ -1,4 +1,5 @@
 import { Model } from "./model";
+import { Other } from "./other";
 
 export class Fields extends Model {
 
@@ -11,7 +12,7 @@ export class Fields extends Model {
     public managers: any[];
     public offices: any[];
     public orgas: any[];
-    public others: any[];
+    public others: Other[] = [];
     public roles: any[];
     public teams: any[];
     public userFields: any[];

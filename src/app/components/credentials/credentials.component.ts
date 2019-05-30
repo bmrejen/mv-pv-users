@@ -41,11 +41,10 @@ export class CredentialsComponent {
             this.sugarCurrentUser.email = this.setEmail();
             this.checkEmailAvailability();
             this.currentUser["password"] = this.sugarCurrentUser.id === "" ? this.setPassword() : "";
+            if (this.currentUser.ggCurrentUser.primaryEmail === "") {
+                this.currentUser.ggCurrentUser.primaryEmail = `${this.sugarCurrentUser.userName}@planetveo.com`;
+            }
         }
-    }
-
-    public setEmail() {
-        return `${this.sugarCurrentUser.userName}@marcovasco.fr`;
     }
 
     public setUsername() {
@@ -58,6 +57,10 @@ export class CredentialsComponent {
             .toLowerCase();
 
         return `${initials}${lastName}`;
+    }
+
+    public setEmail() {
+        return `${this.sugarCurrentUser.userName}@marcovasco.fr`;
     }
 
     public checkUsernameAvailability(e?) {

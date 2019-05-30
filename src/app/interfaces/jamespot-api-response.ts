@@ -51,9 +51,7 @@ export interface IJamespotUserConfig {
 
 export interface IJamespotUser {
     country: string;
-    firstname: string;
     language: string;
-    lastname: string;
     mail: string;
     username: string;
     role: string;

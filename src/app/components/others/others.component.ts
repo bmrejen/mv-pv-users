@@ -1,6 +1,9 @@
 import { Component, Input } from "@angular/core";
 import { ControlContainer, NgForm } from "@angular/forms";
 
+import { Other } from "../../models/other";
+import { SugarUser } from "../../models/sugar-user";
+
 @Component({
     selector: "mv-others",
     styleUrls: ["./others.component.css"],
@@ -14,10 +17,10 @@ import { ControlContainer, NgForm } from "@angular/forms";
 })
 
 export class OthersComponent {
-    @Input() public others;
-    @Input() public sugarCurrentUser;
+    @Input() public others: Other[];
+    @Input() public sugarCurrentUser: SugarUser;
 
-    public handleClick(other): void {
+    public handleClick(other: Other): void {
         if (!this.sugarCurrentUser.others.includes(other.id)) {
             this.sugarCurrentUser.others.push(other.id);
         } else {
@@ -26,8 +29,8 @@ export class OthersComponent {
         }
     }
 
-    public trackByFn(item) {
-        return item.id;
+    public trackByFn(index) {
+        return index;
     }
 
 }

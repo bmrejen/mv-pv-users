@@ -20,7 +20,6 @@ export class FieldsService {
             "functions",
             "offices",
             "orgas",
-            "others",
             "userFields",
             "userTemplates",
         ];

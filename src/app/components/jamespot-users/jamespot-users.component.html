@@ -1,7 +1,7 @@
 <fieldset class="blue">
     <legend>Jamespot</legend>
     <h2 *ngIf="jamesCurrentUser.idUser != null">
-        {{ jamesCurrentUser.firstname }} {{ jamesCurrentUser.lastname }} - Id:
+        {{ currentUser.firstName }} {{ currentUser.lastName }} - Id:
         {{ jamesCurrentUser.idUser }}
     </h2>
 
@@ -42,12 +42,6 @@
             name="pseudo"
             (blur)="checkUsernameAvailability()"
         >Pseudo
-        <br>
-        <input
-            type="text"
-            [(ngModel)]="jamesCurrentUser.password"
-            name="password"
-        >Password
         <br>
         <input
             type="text"
@@ -93,10 +87,6 @@
             >Delete</button>
         </div>
 
-        <button
-            type=button
-            (click)="onPrefill()"
-        >Prefill form with random data</button>
         <button
             *ngIf="jamesCurrentUser.idUser == null"
             type=button

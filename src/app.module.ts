@@ -39,7 +39,6 @@ import { OthersComponent } from "./app/components/others/others.component";
 import { PhonesComponent } from "./app/components/phones/phones.component";
 import { ProfilesComponent } from "./app/components/profiles/profiles.component";
 import { RolesComponent } from "./app/components/roles/roles.component";
-import { SwitchvoxComponent } from "./app/components/switchvox/switchvox.component";
 import { TeamsComponent } from "./app/components/teams/teams.component";
 import { UserComponent } from "./app/components/user/user.component";
 import { UsersComponent } from "./app/components/users/users.component";
@@ -47,6 +46,7 @@ import { UsersComponent } from "./app/components/users/users.component";
 import { DestinationsResolverService } from "./app/resolvers/destinations-resolver.service";
 import { FieldsResolverService } from "./app/resolvers/fields-resolver.service";
 import { ManagersResolverService } from "./app/resolvers/managers-resolver.service";
+import { OthersResolverService } from "./app/resolvers/others-resolver.service";
 import { RolesResolverService } from "./app/resolvers/roles-resolver.service";
 import { SugarResolverService } from "./app/resolvers/sugar-resolver.service";
 import { TeamsResolverService } from "./app/resolvers/teams-resolver.service";
@@ -89,7 +89,6 @@ import "./app/rxjs-extensions";
         PhonesComponent,
         ProfilesComponent,
         RolesComponent,
-        SwitchvoxComponent,
         TeamsComponent,
         UserComponent,
         UsersComponent,
@@ -109,6 +108,7 @@ import "./app/rxjs-extensions";
         GapiAuthenticatorService,
         JamespotService,
         ManagersResolverService,
+        OthersResolverService,
         ParserService,
         RolesResolverService,
         SugarResolverService,
