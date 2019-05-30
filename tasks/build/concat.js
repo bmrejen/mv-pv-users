@@ -7,7 +7,7 @@ gulp.task('concat:css', ['sass'], function() {
         // 'node_modules/primeng/resources/primeng.css',
         // 'node_modules/primeng/resources/themes/nova-colored/theme.css',
         "node_modules/ui-kit/mv.css",
-        "node_modules/ui-kit/pv.css",
+        // "node_modules/ui-kit/pv.css",
     ])
         .pipe(concat('vendor.css'))
         .pipe(gulp.dest('./dist/css'));
