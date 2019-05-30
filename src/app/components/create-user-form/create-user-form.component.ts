@@ -99,15 +99,8 @@ export class CreateUserFormComponent implements OnInit {
                 // get others
                 data.others.forEach((other) => this.fields.others.push(new Other(other)));
 
-                // // remove following lines after testing
-                this.fields.accounts[1]["checked"] = false;
-                this.fields.accounts[2]["checked"] = false;
-                this.fields.accounts[3]["checked"] = false;
-
-                console.log("data resolved", data);
             });
         this.initGapiServices();
-        console.log(this.fields);
     }
 
     public initGapiServices() {

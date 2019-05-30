@@ -80,16 +80,6 @@ export class CredentialsComponent {
                 .find((user) =>
                     user.common.userName === this.currentUser.common.userName) !== undefined) ?
                 "USERNAME TAKEN" : "Username available :)");
-
-        // if (this.currentUser.common.userName === "") {
-        //     this.usernameStatus = "Please add username";
-        // } else if (this.usersFromSugar
-        //     .find((user) =>
-        //         user.common.userName === this.currentUser.common.userName) !== undefined) {
-        //     this.usernameStatus = "USERNAME TAKEN";
-        // } else {
-        //     this.usernameStatus = "Username available :)";
-        // }
     }
 
     public checkEmailAvailability(e?) {
