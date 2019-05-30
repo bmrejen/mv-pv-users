@@ -2,7 +2,7 @@ import { IGapiUser } from "../interfaces/gapi-user";
 
 export class GoogleUser implements IGapiUser {
     public primaryEmail: string = "";
-    public orgas = null;
+    public orgas = "/";
     public emails = null;
     public id = null;
     public nonEditableAliases = [];
