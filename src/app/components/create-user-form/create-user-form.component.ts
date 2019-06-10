@@ -80,7 +80,6 @@ export class CreateUserFormComponent implements OnInit {
                     myUser.common = this.sugar.mapUserFromApi(user).common;
                     myUser.sugarCurrentUser =
                         new SugarUser(this.sugar.mapUserFromApi(user).common, this.sugar.mapUserFromApi(user).sugar);
-                    console.log(myUser);
                     this.usersFromSugar.push(myUser);
                 });
 
@@ -200,6 +199,7 @@ export class CreateUserFormComponent implements OnInit {
     public getGapiUser(mail): Promise<any> {
         return this.gapi.getUser(mail)
             .then((res) => {
+                console.log("gapi get User OK", res);
                 this.currentUser.ggCurrentUser = new GoogleUser(res);
                 this.oldUser.ggCurrentUser = new GoogleUser(res);
 
@@ -214,9 +214,13 @@ export class CreateUserFormComponent implements OnInit {
                     this.getGoogleGroupsOfUser(primaryEmail),
                     // GMail API
                     this.getUserAliases(primaryEmail),
+                    // Get POP settings
+                    this.getPopSettings(primaryEmail),
                 ];
 
-                return Promise.all(promises);
+                return Promise.all(promises)
+                    .then((response) => response)
+                    .catch((err) => console.error(err));
             })
             .catch((err) => {
                 console.error("Error getting Gapi User", err);
@@ -263,13 +267,13 @@ export class CreateUserFormComponent implements OnInit {
             }
         });
 
-        Promise.all(promises)
-            .then((res) => {
-                console.log("postUser res", res);
+        Promise.all(promises);
+        // .then((res) => {
+        //     console.log("postUser res", res);
 
-                return res;
-            })
-            .catch((err) => console.error(err));
+        //     return res;
+        // })
+        // .catch((err) => console.error(err));
     }
 
     public postJamespotUser(): Promise<any> {
@@ -303,19 +307,31 @@ export class CreateUserFormComponent implements OnInit {
                         this.gapiMessage = "User created !";
 
                         this.postGoogleGroups(primaryEmail);
+
+                        this.activatePopSettings(primaryEmail);
                     })
                     .catch((err) => console.error(err));
 
             })
 
+            .catch((err) => this.gapiMessage = err["result"].error);
+    }
+
+    public getPopSettings(primaryEmail) {
+        return this.gapi.getPopSettings(primaryEmail)
+            .then((res) => console.log("get POP Settings", res))
             .catch((err) => console.error(err));
-        // .catch((err) => this.gapiMessage = err["result"].error);
+    }
+
+    public activatePopSettings(primaryEmail) {
+        return this.gapi.activatePopSettings(primaryEmail)
+            .then((res) => console.log("posted pop settings", res));
+        // .catch((err) => console.error(err));
     }
 
     public postGoogleGroups(primaryEmail) {
         return this.gapi.postGoogleGroups(primaryEmail, this.currentUser.ggCurrentUser)
-            .then((res) => console.log("posted GoogleGroups", res))
-            .catch((err) => console.error(err));
+            .then((res) => console.log("posted GoogleGroups", res));
     }
 
     public postSugarUser(): Promise<any> {
@@ -326,7 +342,7 @@ export class CreateUserFormComponent implements OnInit {
 
     public prefillForm() {
         this.currentUser = new User({
-            firstName: "Jacobajacob",
+            firstName: "Cocoooo",
         });
         this.currentUser.common.lastName = this.currentUser.common.firstName;
         this.currentUser.common.password = Math.random()
