@@ -32,7 +32,7 @@ export class CreateUserFormComponent implements OnInit {
     public teams: Team[] = [];
     public roles: Role[] = [];
     public destinations: Destination[] = [];
-    public managers: SugarUser[] = [];
+    public managers: User[] = [];
     public mailToGet: string;
     public googleGroups = [];
     public isRealUser: boolean = null;
@@ -80,7 +80,6 @@ export class CreateUserFormComponent implements OnInit {
                     myUser.common = this.sugar.mapUserFromApi(user).common;
                     myUser.sugarCurrentUser =
                         new SugarUser(this.sugar.mapUserFromApi(user).common, this.sugar.mapUserFromApi(user).sugar);
-                    console.log(myUser);
                     this.usersFromSugar.push(myUser);
                 });
 

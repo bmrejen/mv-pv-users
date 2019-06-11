@@ -29,10 +29,6 @@ export class JamespotUsersComponent {
         this.jamesCurrentUser.image = event.target.files[0] as File;
     }
 
-    public onPost(): void {
-        //
-    }
-
     public onUpdate(): void {
         // this.mapUserToJamespot();
         this.james.updateUser(this.jamesCurrentUser, this.oldJamespotUser)

@@ -49,6 +49,7 @@
                 name="defaultAlias"
                 [(ngModel)]="ggCurrentUser.sendAs"
                 (click)="handleSendAsClick()"
+                (keyup)="handleSendAsClick()"
             >
                 <option
                     *ngFor="let dom of domains"
