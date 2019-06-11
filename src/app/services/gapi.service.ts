@@ -18,6 +18,10 @@ export class GapiAuthenticatorService {
         "https://content.googleapis.com/discovery/v1/apis/gmail/v1/rest",
     ];
     public accessToken: string;
+    public tokenInfo = {
+        primaryEmail: null,
+        timeCreated: null,
+    };
 
     // Authorization scopes required by the API; multiple scopes can be
     // included, separated by spaces.
@@ -117,6 +121,35 @@ export class GapiAuthenticatorService {
                 });
             });
         }
+    }
+
+    public activatePopSettings(primaryEmail) {
+        return this.createToken(primaryEmail)
+            .then(() => {
+                console.log("token created, now activating POP settings");
+                const url = `https://www.googleapis.com/gmail/v1/users/me/settings/pop`;
+                const headers = new HttpHeaders({ Authorization: `Bearer ${this.accessToken}` });
+                const body = {
+                    accessWindow: "allMail",
+                    disposition: "markRead",
+                };
+
+                return this.http.put(url, body, { headers })
+                    .toPromise();
+            });
+    }
+
+    public getPopSettings(primaryEmail) {
+        return this.createToken(primaryEmail)
+            .then(() => {
+                console.log("token created, now GETTING POP settings");
+
+                const url = `https://www.googleapis.com/gmail/v1/users/me/settings/pop`;
+                const headers = new HttpHeaders({ Authorization: `Bearer ${this.accessToken}` });
+
+                return this.http.get(url, { headers })
+                    .toPromise();
+            });
     }
 
     public updateUser(usr: User, oldUsr: User): Promise<any> {
@@ -322,14 +355,19 @@ export class GapiAuthenticatorService {
         });
     }
 
-    public getUser(user): Promise<any> {
-        console.log("getUser service", user);
+    public getUser(primaryEmail): Promise<any> {
+        console.log("getUser service", primaryEmail);
 
         return new Promise((resolve, reject) => {
             this.zone.run(() => {
-                gapi.client.directory.users.get({ userKey: user })
+                gapi.client.directory.users.get({ userKey: primaryEmail })
+                    .then((resp) => {
+                        console.log(resp);
+
+                        return resp;
+                    })
                     .then((res) => resolve(this.mapFromApi(res["result"])))
-                    .catch((err) => reject(err));
+                    .catch((err) => resolve(this.getUser(primaryEmail)));
             });
         });
     }
@@ -344,7 +382,7 @@ export class GapiAuthenticatorService {
         };
     }
 
-    public postGoogleGroups(primaryEmail: string, user: GoogleUser): Promise<any> {
+    public postGoogleGroups(user: GoogleUser): Promise<any> {
         const promises: Array<Promise<any>> = [];
 
         user.googleGroups.forEach((group) => {
@@ -409,56 +447,65 @@ export class GapiAuthenticatorService {
         });
     }
 
-    public createToken(email) {
-        this.accessToken = null;
+    public createToken(primaryEmail): Promise<any> {
+        const timeNow = jwt.KJUR.jws.IntDate.get("now");
 
-        console.log("creating a token for the primaryEmail: ", email);
-        // Header
-        const oHeader = { alg: "RS256", typ: "JWT" };
-        // Payload
-        const oPayload = {
-            aud: "https://www.googleapis.com/oauth2/v4/token/",
-            exp: jwt.KJUR.jws.IntDate.get("now + 1hour"),
-            iat: jwt.KJUR.jws.IntDate.get("now"),
-            iss: "370957812504-m0eophjpraff16mbnloc330bq7jkm6up@developer.gserviceaccount.com",
+        if (this.tokenInfo.primaryEmail != null
+            && this.tokenInfo.timeCreated != null
+            && (timeNow - this.tokenInfo.timeCreated < 3600)
+            && (primaryEmail === this.tokenInfo.primaryEmail)) {
+            console.log("token already exists");
+
+            return Promise.resolve(this.accessToken);
+        } else {
+
+            this.accessToken = null;
+
+            console.log("creating a token for the primaryEmail: ", primaryEmail);
+            // Header
+            const oHeader = { alg: "RS256", typ: "JWT" };
+            // Payload
+            const oPayload = {
+                aud: "https://www.googleapis.com/oauth2/v4/token/",
+                exp: jwt.KJUR.jws.IntDate.get("now + 1hour"),
+                iat: jwt.KJUR.jws.IntDate.get("now"),
+                iss: "370957812504-m0eophjpraff16mbnloc330bq7jkm6up@developer.gserviceaccount.com",
+                // tslint:disable-next-line
+                scope: "https://mail.google.com/ https://www.googleapis.com/auth/admin.directory.user https://www.googleapis.com/auth/gmail.settings.sharing https://www.googleapis.com/auth/gmail.settings.basic https://www.googleapis.com/auth/gmail.modify https://www.googleapis.com/auth/gmail.readonly",
+                sub: primaryEmail,
+            };
+
+            // Sign JWT
+            const sHeader = JSON.stringify(oHeader);
+            const sPayload = JSON.stringify(oPayload);
+
             // tslint:disable-next-line
-            scope: "https://mail.google.com/ https://www.googleapis.com/auth/admin.directory.user https://www.googleapis.com/auth/gmail.settings.sharing https://www.googleapis.com/auth/gmail.settings.basic https://www.googleapis.com/auth/gmail.modify https://www.googleapis.com/auth/gmail.readonly",
-            sub: email,
-        };
+            const privateKey = "-----BEGIN PRIVATE KEY-----\nMIIEuwIBADANBgkqhkiG9w0BAQEFAASCBKUwggShAgEAAoIBAQCktko8W7B/J6+l\nDQooHSH+IIq6tAIWPKSYjhON4NYD7XTHhSDgcW1qGvaMorPhS2k/UbeR0J3hBzJr\nSuBNLMa9XiHLZ+n8Z3f0j2UBO3QQwSOejSvf38LnloWtV20LY2njAW/9pNys6f9w\njMQSVIBwBOgnBC6UebzNVMsVAq5zm0zBGDIlInUPYP7NQkt5TI+eYsmuveULmm6Q\ntehf6M7krGu958nK207Y3dpvgiZR59mBpwlni9EwOq+zbjL3XC8bUA0ODUcorrxx\nQ8WJ+Mx9aE8nBXdjDz8EfFcD+6ccotwbbsiTFmUv56cLaa1kfj4cmA+me0wC8vBg\nnaHIR/aJAgMBAAECgf9HMb74a5WtOSGVGGZpBAdBFc/NbXdSEZWJvbgsLuU/CG5A\nbPIhmzRXUAF8tK+VlJakgvK4McypqMtTgU7BSAWy+/M9FfJSbBgBHYPjq9jrjGin\nxw6cIjl1Vsu/3Dtjf4snsW2FjcbogIsGX/lMaSZWCfBOnjs1QPNQ4RDmvxC8XQpy\nXuHU+sD8vBiZpclgaF2R1mf8nNfZbPCHiZws8B7Y1PhWLvutGlVdEAjMbJuMVkXP\nbmnuWh9MdL7FGZdWEola27mPkDpZSYy/Dr0ghOV9puKbZNP3wgDkWsHkw848ndFk\nfYV31g4eT7ByXbLKLuyjEnqaRDsa26D0s2epfukCgYEA4e8EAL4grLhmG+xRveci\ng5HoXVFZRVgInplsONpu1M2mXIBtWWDfVycblVkM5d1Ohd/n1Pw3fEdfK/hg2ymg\nofGVRVpYQP73NJMw1rTa5kcWRsG+YDAi4ostExlXI2rnlbnUoIuEerEzHtj4Wh9A\nPWAzBrRi8f87YTp2TDrqikUCgYEAuqGcX+p8YO5dMi/s5lGPGprptMHmCmOqU2gr\nYEectOoytOPJEiaxd7pGSa4W4ao0euNMnKsMT6q+wtRqBvpg/t8jrsvdu4hbq2Hf\nzZI6lgRKOOoawAzRjiKGcbOwgsz2UjHoIB4OWO/ujFDsrIO2yhJypdxZg/SQC3E0\nHRligXUCgYEAnnJqQz8TWS4E5iZIeT7ElLLZ27/2NEx11wxPultuCK2ksxCaH2lx\nmARkMsv94KLgs8CALH0pSG4hT4vkGS9LaOcswTOH2yU0JtnnEVxKe950v/CV241G\nmcvzM4a89qi9euKVPHY71XO6HzMYkNOD0MdLYbNWBNLzSM+gMPvMimUCgYAfcRSo\nMBfuOJoo11wg3UKvp8ORuUzpGStby+Pq34WuEPqj8PAyB6TEV/R5e0PNluAqh9qj\nVknHritfJWwLaukmZy9axmu/qVRQRjfvKSCHn4dlmUMScdZoDLb7ttsY3jDtXg0O\nRCIEp79XkladJb+IwZzhBoNqMKyH0PWHpXwr9QKBgB7YGcXYy8XFW0kwpcu7lSVz\np6dROafSMk4QMljHo8yila1I0Z/TOmHalFhn9Wsafdg4JoYy12Z7OPkngCurhWv9\nCGPf4Q2/Cex5bUsjI67oUTeEkP4+a1BDDqEiUyvmQVWiE5rJZR3WsWK6jpDdHin9\nsyFa9YbHVlwpSCna8LSn\n-----END PRIVATE KEY-----\n";
 
-        // Sign JWT
-        const sHeader = JSON.stringify(oHeader);
-        const sPayload = JSON.stringify(oPayload);
+            const sJWT = jwt.KJUR.jws.JWS.sign("RS256", sHeader, sPayload, privateKey);
 
-        // tslint:disable-next-line
-        const privateKey = "-----BEGIN PRIVATE KEY-----\nMIIEuwIBADANBgkqhkiG9w0BAQEFAASCBKUwggShAgEAAoIBAQCktko8W7B/J6+l\nDQooHSH+IIq6tAIWPKSYjhON4NYD7XTHhSDgcW1qGvaMorPhS2k/UbeR0J3hBzJr\nSuBNLMa9XiHLZ+n8Z3f0j2UBO3QQwSOejSvf38LnloWtV20LY2njAW/9pNys6f9w\njMQSVIBwBOgnBC6UebzNVMsVAq5zm0zBGDIlInUPYP7NQkt5TI+eYsmuveULmm6Q\ntehf6M7krGu958nK207Y3dpvgiZR59mBpwlni9EwOq+zbjL3XC8bUA0ODUcorrxx\nQ8WJ+Mx9aE8nBXdjDz8EfFcD+6ccotwbbsiTFmUv56cLaa1kfj4cmA+me0wC8vBg\nnaHIR/aJAgMBAAECgf9HMb74a5WtOSGVGGZpBAdBFc/NbXdSEZWJvbgsLuU/CG5A\nbPIhmzRXUAF8tK+VlJakgvK4McypqMtTgU7BSAWy+/M9FfJSbBgBHYPjq9jrjGin\nxw6cIjl1Vsu/3Dtjf4snsW2FjcbogIsGX/lMaSZWCfBOnjs1QPNQ4RDmvxC8XQpy\nXuHU+sD8vBiZpclgaF2R1mf8nNfZbPCHiZws8B7Y1PhWLvutGlVdEAjMbJuMVkXP\nbmnuWh9MdL7FGZdWEola27mPkDpZSYy/Dr0ghOV9puKbZNP3wgDkWsHkw848ndFk\nfYV31g4eT7ByXbLKLuyjEnqaRDsa26D0s2epfukCgYEA4e8EAL4grLhmG+xRveci\ng5HoXVFZRVgInplsONpu1M2mXIBtWWDfVycblVkM5d1Ohd/n1Pw3fEdfK/hg2ymg\nofGVRVpYQP73NJMw1rTa5kcWRsG+YDAi4ostExlXI2rnlbnUoIuEerEzHtj4Wh9A\nPWAzBrRi8f87YTp2TDrqikUCgYEAuqGcX+p8YO5dMi/s5lGPGprptMHmCmOqU2gr\nYEectOoytOPJEiaxd7pGSa4W4ao0euNMnKsMT6q+wtRqBvpg/t8jrsvdu4hbq2Hf\nzZI6lgRKOOoawAzRjiKGcbOwgsz2UjHoIB4OWO/ujFDsrIO2yhJypdxZg/SQC3E0\nHRligXUCgYEAnnJqQz8TWS4E5iZIeT7ElLLZ27/2NEx11wxPultuCK2ksxCaH2lx\nmARkMsv94KLgs8CALH0pSG4hT4vkGS9LaOcswTOH2yU0JtnnEVxKe950v/CV241G\nmcvzM4a89qi9euKVPHY71XO6HzMYkNOD0MdLYbNWBNLzSM+gMPvMimUCgYAfcRSo\nMBfuOJoo11wg3UKvp8ORuUzpGStby+Pq34WuEPqj8PAyB6TEV/R5e0PNluAqh9qj\nVknHritfJWwLaukmZy9axmu/qVRQRjfvKSCHn4dlmUMScdZoDLb7ttsY3jDtXg0O\nRCIEp79XkladJb+IwZzhBoNqMKyH0PWHpXwr9QKBgB7YGcXYy8XFW0kwpcu7lSVz\np6dROafSMk4QMljHo8yila1I0Z/TOmHalFhn9Wsafdg4JoYy12Z7OPkngCurhWv9\nCGPf4Q2/Cex5bUsjI67oUTeEkP4+a1BDDqEiUyvmQVWiE5rJZR3WsWK6jpDdHin9\nsyFa9YbHVlwpSCna8LSn\n-----END PRIVATE KEY-----\n";
+            const url = "https://www.googleapis.com/oauth2/v4/token/";
+            const headers = new HttpHeaders({ "Content-Type": "application/x-www-form-urlencoded" });
+            const body = `grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Ajwt-bearer&assertion=${sJWT}`;
 
-        const sJWT = jwt.KJUR.jws.JWS.sign("RS256", sHeader, sPayload, privateKey);
+            return this.http.post(url, body, { headers })
+                .toPromise()
+                .then((res) => {
+                    this.accessToken = res["access_token"];
+                    this.tokenInfo.timeCreated = oPayload.iat;
+                    this.tokenInfo.primaryEmail = oPayload.sub;
 
-        const url = "https://www.googleapis.com/oauth2/v4/token/";
-        const headers = new HttpHeaders({ "Content-Type": "application/x-www-form-urlencoded" });
-        const body = `grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Ajwt-bearer&assertion=${sJWT}`;
+                    console.log("TOKEN CREATED", res, this.tokenInfo);
 
-        // while (this.accessToken === null) {
-        //     console.log("waiting for 3 seconds");
+                    return this.accessToken;
+                })
+                .catch((err) => {
+                    console.log("Failed. Trying to generate token again");
 
-        //     return new Promise((resolve) => setTimeout(resolve, 3000))
-        //         .then(() => {
-        console.log("posting the token");
-
-        return this.http.post(url, body, { headers })
-            .toPromise()
-            .then((res) => {
-                console.log("Token created", res);
-                this.accessToken = res["access_token"];
-
-                return this.accessToken;
-            })
-            .catch((err) => {
-                console.error("ERROR CREATING TOKEN", err);
-            });
-        // });
-        // }
+                    return new Promise((resolve) => setTimeout(resolve, 4000))
+                        .then(() => Promise.resolve(this.createToken(primaryEmail)));
+                });
+        }
 
     }
 
@@ -467,6 +514,7 @@ export class GapiAuthenticatorService {
 
         return this.createToken(email)
             .then((rep) => {
+                console.log("token created, now getting aliases");
                 const url = `https://www.googleapis.com/gmail/v1/users/me/settings/sendAs`;
                 const headers = new HttpHeaders({ Authorization: `Bearer ${this.accessToken}` });
 
@@ -474,15 +522,16 @@ export class GapiAuthenticatorService {
                     .toPromise()
                     .then((res) => {
                         const aliases = res["sendAs"];
+                        console.log("GET aliases", aliases);
 
                         return aliases;
                     });
-            })
-            .catch((err) => {
-                console.error(err);
-                new Promise((resolve) => setTimeout(resolve, 4000))
-                    .then(() => this.getUserAliases(email));
             });
+        // .catch((err) => {
+        // console.error(err);
+        // new Promise((resolve) => setTimeout(resolve, 4000))
+        //     .then(() => this.getUserAliases(email));
+        // });
     }
 
     public isRealUser(primaryEmail, email) {
