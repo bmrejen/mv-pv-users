@@ -306,7 +306,7 @@ export class CreateUserFormComponent implements OnInit {
 
                         this.gapiMessage = "User created !";
 
-                        this.postGoogleGroups(primaryEmail);
+                        this.postGoogleGroups();
 
                         this.activatePopSettings(primaryEmail);
                     })
@@ -325,13 +325,14 @@ export class CreateUserFormComponent implements OnInit {
 
     public activatePopSettings(primaryEmail) {
         return this.gapi.activatePopSettings(primaryEmail)
-            .then((res) => console.log("posted pop settings", res));
-        // .catch((err) => console.error(err));
+            .then((res) => console.log("posted pop settings", res))
+            .catch((err) => console.error(err));
     }
 
-    public postGoogleGroups(primaryEmail) {
-        return this.gapi.postGoogleGroups(primaryEmail, this.currentUser.ggCurrentUser)
-            .then((res) => console.log("posted GoogleGroups", res));
+    public postGoogleGroups() {
+        return this.gapi.postGoogleGroups(this.currentUser.ggCurrentUser)
+            .then((res) => console.log("posted GoogleGroups", res))
+            .catch((err) => console.error(err));
     }
 
     public postSugarUser(): Promise<any> {

@@ -382,7 +382,7 @@ export class GapiAuthenticatorService {
         };
     }
 
-    public postGoogleGroups(primaryEmail: string, user: GoogleUser): Promise<any> {
+    public postGoogleGroups(user: GoogleUser): Promise<any> {
         const promises: Array<Promise<any>> = [];
 
         user.googleGroups.forEach((group) => {
