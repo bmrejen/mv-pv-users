@@ -106,6 +106,7 @@ export class SugarService {
     public mapUserFromApi(data): ISugarConfigAndName {
         return {
             common: {
+                email: data.attributes.email,
                 firstName: data.attributes.firstName,
                 lastName: data.attributes.lastName,
                 userName: data.attributes.userName,
@@ -113,7 +114,6 @@ export class SugarService {
             sugar: {
                 codeSonGalileo: data.attributes.codeSonGalileo,
                 department: data.attributes.department,
-                email: data.attributes.email,
                 employeeStatus: data.attributes.employeeStatus,
                 id: data.attributes.id,
                 managerId: data.attributes.managerId,
@@ -165,7 +165,7 @@ function mapCurrentUserToApi(user: User): ISugarUserToApi {
             attributes: {
                 codeSonGalileo: user.sugarCurrentUser.codeSonGalileo,
                 department: user.sugarCurrentUser.department,
-                email: user.sugarCurrentUser.email,
+                email: user.common.email,
                 employeeStatus: user.sugarCurrentUser.employeeStatus,
                 firstName: user.common.firstName,
                 lastName: user.common.lastName,

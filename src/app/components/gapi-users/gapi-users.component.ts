@@ -147,7 +147,7 @@ export class GapiUsersComponent implements OnInit {
             this.credentials.setUsername();
         }
 
-        this.currentUser.sugarCurrentUser.email =
+        this.currentUser.common.email =
             `${this.currentUser.common.userName}@${this.currentUser.ggCurrentUser.sendAs}`;
     }
 }

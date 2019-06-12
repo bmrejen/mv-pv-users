@@ -170,6 +170,7 @@ export class CreateUserFormComponent implements OnInit {
     public getJamespotUser(mail): Promise<any> {
         return this.james.getByField("mail", mail)
             .then((res: IJamespotUserConfig) => {
+                console.log("get jamespot user", res);
                 this.currentUser.jamesCurrentUser = new JamespotUser(res);
                 this.oldUser.jamesCurrentUser = new JamespotUser(res);
 
@@ -181,11 +182,13 @@ export class CreateUserFormComponent implements OnInit {
     public getSugarUser(username): Promise<any> {
         return this.sugar.getUserByUsername(username)
             .then((res) => {
+                this.currentUser.common.email = res.common.email;
                 this.currentUser.common.firstName = res.common.firstName;
                 this.currentUser.common.lastName = res.common.lastName;
                 this.currentUser.common.userName = res.common.userName;
                 this.currentUser.sugarCurrentUser = new SugarUser(this.currentUser.common, res.sugar);
 
+                this.oldUser.common.email = res.common.email;
                 this.oldUser.common.firstName = res.common.firstName;
                 this.oldUser.common.lastName = res.common.lastName;
                 this.oldUser.common.userName = res.common.userName;
@@ -229,11 +232,9 @@ export class CreateUserFormComponent implements OnInit {
     }
 
     public lowerCasify() {
-        this.currentUser.sugarCurrentUser.email = this.currentUser.sugarCurrentUser.email.toLowerCase();
+        this.currentUser.common.email = this.currentUser.sugarCurrentUser.common.email.toLowerCase();
         this.currentUser.common.userName = this.currentUser.common.userName.toLowerCase();
-        this.currentUser.jamesCurrentUser.mail = this.currentUser.jamesCurrentUser.mail.toLowerCase();
-        this.currentUser.jamesCurrentUser.username = this.currentUser.jamesCurrentUser.username.toLowerCase();
-        this.currentUser.jamesCurrentUser.mail = this.currentUser.jamesCurrentUser.mail.toLowerCase();
+        this.currentUser.common.email = this.currentUser.common.email.toLowerCase();
         this.currentUser.ggCurrentUser.primaryEmail = this.currentUser.ggCurrentUser.primaryEmail.toLowerCase();
     }
 
@@ -268,12 +269,34 @@ export class CreateUserFormComponent implements OnInit {
         });
 
         Promise.all(promises);
-        // .then((res) => {
-        //     console.log("postUser res", res);
+    }
 
-        //     return res;
-        // })
-        // .catch((err) => console.error(err));
+    public updateUser() {
+        const promises = [
+            this.updateJamesUser(),
+        ];
+        Promise.all(promises)
+            .then((res) => {
+                console.log("promise.all", res);
+                this.mailToGet = this.currentUser.common.userName;
+                this.getUser();
+            });
+    }
+
+    public updateJamesUser(): Promise<any> {
+        return this.james.updateUser(this.currentUser, this.oldUser)
+            .then((res: IJamespotUserConfig) => {
+                this.jamesMessage = "Data updated!";
+                console.log("updatejamesUser", res);
+
+                return res;
+            })
+            .catch((err: string) => {
+                console.error("Jamespot update error: ", err);
+                this.jamesMessage = err;
+
+                return err;
+            });
     }
 
     public postJamespotUser(): Promise<any> {
@@ -386,15 +409,13 @@ export class CreateUserFormComponent implements OnInit {
             userName: `${this.currentUser.common.firstName[0]}${this.currentUser.common.lastName}`,
         });
         this.currentUser.jamesCurrentUser = new JamespotUser({
-            active: "1",
+            active: true,
             company: "MARCO VASCO",
             country: "fr",
             language: "fr",
-            mail: this.currentUser.ggCurrentUser.primaryEmail,
             phoneExtension: "",
             role: "User",
             timeZone: "Europe/Paris",
-            username: `${this.currentUser.common.firstName[0]}${this.currentUser.common.lastName}`,
         });
 
         console.log("form prefilled", this.temporaryData);

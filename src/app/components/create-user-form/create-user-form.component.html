@@ -108,10 +108,16 @@
 
         <div *ngIf="errorMsg">ERROR: {{ errorMsg }}</div>
         <button
+            *ngIf="currentUser.sugarCurrentUser.id === ''"
             [disabled]="!createForm.form.valid"
             type="button"
             (click)="postUser()"
-        >Créer l'utilisateur</button>
+        >Create</button>
+        <button
+            *ngIf="currentUser.sugarCurrentUser.id !== ''"
+            type="button"
+            (click)="updateUser()"
+        >Update</button>
     </ng-container>
 </form>
 <pre>{{ currentUser | json }}</pre>
