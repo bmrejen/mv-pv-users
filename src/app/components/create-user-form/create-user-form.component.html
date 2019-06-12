@@ -30,6 +30,7 @@
 
         <div class="grid-container">
             <mv-credentials
+                #credentials
                 [sugarCurrentUser]="currentUser.sugarCurrentUser"
                 [currentUser]="currentUser"
                 [civilites]="fields.civilites"
@@ -55,6 +56,7 @@
             </mv-jamespot>
             <mv-gapi-users
                 #gapps
+                [credentials]="credentials"
                 [currentUser]="currentUser"
                 [oldUser]="oldUser"
                 [ggCurrentUser]="currentUser.ggCurrentUser"
