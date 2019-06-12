@@ -6,62 +6,14 @@
     </h2>
 
     <form *ngIf="jamesCurrentUser!=null">
-        <!-- <input
-            type="text"
-            [(ngModel)]="jamesCurrentUser.mail"
-            name="mail"
-        >Email
-        <br> -->
-        <!-- <input
-            type="text"
-            [(ngModel)]="jamesCurrentUser.role"
-            name="role"
-        >Role
-        <br>
-        <input
-            type="text"
-            [(ngModel)]="jamesCurrentUser.country"
-            name="country"
-        >Country
-        <br>
-        <input
-            type="text"
-            [(ngModel)]="jamesCurrentUser.language"
-            name="language"
-        >Language
-        <br> -->
-        <!-- <input
-            type="text"
-            [(ngModel)]="jamesCurrentUser.active"
-            name="active"
-        >active
-        <br> -->
         <input
             type="text"
             [(ngModel)]="currentUser.common.userName"
             name="pseudo"
             (ngModelChange)="checkUsernameAvailability()"
+            [attr.disabled]="true"
         >Pseudo
         <br>
-        <!-- <input
-            type="text"
-            [(ngModel)]="jamesCurrentUser.company"
-            name="company"
-        >Company -->
-        <!-- <br>
-        <input
-            type="text"
-            [(ngModel)]="currentUser.sugarCurrentUser.phoneAsterisk"
-            name="phoneExtension"
-        >Phone Extension -->
-        <!-- <br>
-        <input
-            type="text"
-            [(ngModel)]="jamesCurrentUser.timeZone"
-            name="timeZone"
-        >Time Zone
-        <br> -->
-
 
         <!-- IMAGE UPDATE -->
         <input
@@ -87,11 +39,6 @@
             >Delete</button>
         </div>
 
-        <button
-            *ngIf="jamesCurrentUser.idUser == null"
-            type=button
-            (click)="onPost()"
-        >Create</button>
     </form>
 
     <h3 *ngIf="updateSuccessful">Data Updated ! </h3>

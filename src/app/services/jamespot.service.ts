@@ -51,7 +51,7 @@ export class JamespotService {
         fd.append("Password", user.common.password);
 
         // Google and Sugar properties
-        fd.append("Mail", user.ggCurrentUser.primaryEmail);
+        fd.append("Mail", user.sugarCurrentUser.email);
         fd.append("Field1", user.sugarCurrentUser.phoneAsterisk);
 
         fd.append("image", user.jamesCurrentUser.image);

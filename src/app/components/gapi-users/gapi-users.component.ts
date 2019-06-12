@@ -31,6 +31,7 @@ export class GapiUsersComponent implements OnInit {
     @Input() public ggCurrentUser: GoogleUser;
     @Input() public gapiMessage: string;
     @Input() public gapiStatus;
+    @Input() public credentials;
 
     constructor(
         private gapiService: GapiAuthenticatorService,
@@ -142,6 +143,10 @@ export class GapiUsersComponent implements OnInit {
     }
 
     public updateEmail() {
+        if (this.currentUser.common.userName === "") {
+            this.credentials.setUsername();
+        }
+
         this.currentUser.sugarCurrentUser.email =
             `${this.currentUser.common.userName}@${this.currentUser.ggCurrentUser.sendAs}`;
     }

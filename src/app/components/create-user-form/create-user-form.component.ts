@@ -32,7 +32,7 @@ export class CreateUserFormComponent implements OnInit {
     public teams: Team[] = [];
     public roles: Role[] = [];
     public destinations: Destination[] = [];
-    public managers: SugarUser[] = [];
+    public managers: User[] = [];
     public mailToGet: string;
     public googleGroups = [];
     public isRealUser: boolean = null;

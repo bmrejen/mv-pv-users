@@ -40,7 +40,7 @@ export class CredentialsComponent {
         if (this.currentUser.common.firstName !== ""
             && this.currentUser.common.lastName !== ""
             && this.currentUser.common.userName === "") {
-            this.currentUser.common.userName = this.setUsername();
+            this.setUsername();
 
             this.sugarCurrentUser.email = this.setEmail();
             this.checkEmailAvailability();
@@ -65,7 +65,7 @@ export class CredentialsComponent {
         const lastName = this.currentUser.common.lastName.replace(/ /g, "")
             .toLowerCase();
 
-        return `${initials}${lastName}`;
+        this.currentUser.common.userName = `${initials}${lastName}`;
     }
 
     public setEmail() {
