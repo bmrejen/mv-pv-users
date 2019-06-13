@@ -47,20 +47,22 @@ export class JamespotService {
         // Common properties
         fd.append("Firstname", user.common.firstName);
         fd.append("Lastname", user.common.lastName.toUpperCase());
-        fd.append("Pseudo", user.common.userName);
+        fd.append("Pseudo", `${user.common.firstName} ${user.common.lastName.toUpperCase()}`);
         fd.append("Password", user.common.password);
 
         // Google and Sugar properties
-        fd.append("Mail", user.sugarCurrentUser.email);
+        fd.append("Mail", user.common.email);
         fd.append("Field1", user.sugarCurrentUser.phoneAsterisk);
 
         fd.append("image", user.jamesCurrentUser.image);
         fd.append("Role", user.jamesCurrentUser.role);
         fd.append("Country", user.jamesCurrentUser.country);
         fd.append("Language", user.jamesCurrentUser.language);
-        fd.append("active", user.jamesCurrentUser.active);
         fd.append("Company", user.jamesCurrentUser.company);
         fd.append("timeZone", user.jamesCurrentUser.timeZone);
+
+        const parseActive = user.jamesCurrentUser.active ? "1" : "0";
+        fd.append("active", parseActive);
 
         return this.http
             .post<IJamespotApiResponse<IJamespotUserFromApi>>(
@@ -76,49 +78,26 @@ export class JamespotService {
 
     public mapFromApi(res: IJamespotApiResponse<IJamespotUserFromApi>): IJamespotUserConfig {
         return {
-            active: res.VAL.properties.active,
+            active: res.VAL.properties.active === "1" ? true : false,
             company: res.VAL.properties.company,
             country: res.VAL.Country,
-            firstname: res.VAL.Firstname,
             idUser: res.VAL.idUser,
             img: res.VAL.img,
             language: res.VAL.Language,
-            lastname: res.VAL.Lastname,
-            mail: res.VAL.Mail,
-            password: null, // password
             phoneExtension: res.VAL.field1, // phoneExtension
             role: res.VAL.Role,
             timeZone: res.VAL.properties.timeZone,
-            username: res.VAL.Pseudo,
         };
     }
 
-    public mapJamespotUserToUserConfig(res: IJamespotUserConfig) {
-        return {
-            jamesActive: res.active,
-            jamesCompany: res.company,
-            jamesCountry: res.country,
-            jamesFirstname: res.firstname,
-            jamesIdUser: res.idUser,
-            jamesImg: res.img,
-            jamesLanguage: res.language,
-            jamesLastname: res.lastname,
-            jamesMail: res.mail,
-            jamesPassword: res.password,
-            jamesPhoneExtension: res.phoneExtension,
-            jamesRole: res.role,
-            jamesTimeZone: res.timeZone,
-            jamesUsername: res.username,
-        };
-    }
-
-    public updateUser(user, oldUser): Promise<IJamespotUserConfig> {
+    public updateUser(user: User, oldUser: User): Promise<IJamespotUserConfig> {
         const params = this.createParamsToUpdate(user, oldUser);
 
         const fd = new FormData();
         // update the image in the form data
-        if (user.image && user.image !== undefined) {
-            fd.append("image", user.image);
+        if (user.jamesCurrentUser.image &&
+            user.jamesCurrentUser.image !== oldUser.jamesCurrentUser.image) {
+            fd.append("image", user.jamesCurrentUser.image);
         }
 
         return this.http.put<IJamespotApiResponse<IJamespotUserFromApi>>
@@ -134,97 +113,98 @@ export class JamespotService {
             });
     }
 
-    public createParamsToUpdate(user, oldUser): HttpParams {
+    public createParamsToUpdate(usr: User, oldUsr: User): HttpParams {
+        const user = usr.jamesCurrentUser;
+        const oldUser = oldUsr.jamesCurrentUser;
+
         let params = new HttpParams()
-            .set("idUser", user.jamesIdUser);
+            .set("idUser", user.idUser);
 
-        for (const key in user) {
-            if (user[key] !== null) {
+        // PASSWORD
+        if (usr.common.password !== "") {
+            params = params.append("Password", usr.common.password);
+        }
+
+        // COMMON PROPERTIES
+        for (const key in usr.common) {
+            if (usr.common[key] !== oldUsr.common[key]) {
                 switch (key) {
-                    // id will not be updated
-                    case "jamesIdUser":
+
+                    case "firstName":
+                        params = params.append("Firstname", user[key]);
                         break;
 
-                    // image is not updated in params - it will be updated in Form Data
-                    case "jamesImg":
+                    case "lastName":
+                        params = params.append("Lastname", user[key]);
                         break;
 
-                    // password updated if it's been inputted
-                    case "jamesPassword":
-                        if (user[key] != null) {
-                            params = params.append("Password", user[key]);
-                        }
+                    case "email":
+                        params = params.append("Mail", user[key]);
                         break;
 
-                    // other properties are added to params if they have been edited
-                    case "jamesPhoneExtension":
-                        if (user[key] !== oldUser[key]) {
-                            params = params.append("field1", user[key]);
-                        }
-                        break;
-
-                    case "jamesActive":
-                        if (user[key] !== oldUser[key]) {
-                            params = params.append("active", user[key]);
-                        }
-                        break;
-
-                    case "jamesCompany":
-                        if (user[key] !== oldUser[key]) {
-                            params = params.append("company", user[key]);
-                        }
-                        break;
-
-                    case "jamesCountry":
-                        if (user[key] !== oldUser[key]) {
-                            params = params.append("Country", user[key]);
-                        }
-                        break;
-
-                    case "jamesFirstname":
-                        if (user[key] !== oldUser[key]) {
-                            params = params.append("Firstname", user[key]);
-                        }
-                        break;
-
-                    case "jamesLastname":
-                        if (user[key] !== oldUser[key]) {
-                            params = params.append("Lastname", user[key]);
-                        }
-                        break;
-
-                    case "jamesLanguage":
-                        if (user[key] !== oldUser[key]) {
-                            params = params.append("Language", user[key]);
-                        }
-                        break;
-
-                    case "jamesMail":
-                        if (user[key] !== oldUser[key]) {
-                            params = params.append("Mail", user[key]);
-                        }
-                        break;
-
-                    case "jamesRole":
-                        if (user[key] !== oldUser[key]) {
-                            params = params.append("Role", user[key]);
-                        }
-                        break;
-
-                    case "jamesTimeZone":
-                        if (user[key] !== oldUser[key]) {
-                            params = params.append("timeZone", user[key]);
-                        }
-                        break;
-
-                    case "jamesUsername":
-                        if (user[key] !== oldUser[key]) {
-                            params = params.append("Pseudo", user[key]);
-                        }
+                    case "userName":
+                        // Username will be updated under
                         break;
 
                     default:
-                        alert("Problem creating the params in the JamespotUpdate service");
+                        alert("Problem updating common properties in Jamespot");
+                        break;
+                }
+            }
+        }
+
+        // Update username
+        if (usr.common.firstName !== usr.common.firstName
+            || usr.common.lastName !== usr.common.lastName) {
+            params = params.append("Pseudo",
+                `${usr.common.firstName} ${usr.common.lastName.toUpperCase()}`);
+        }
+
+        // Update Jamespot properties
+        for (const key in user) {
+            if (user[key] !== oldUser[key]) {
+                switch (key) {
+                    // id, username and image will not be updated (or not here)
+                    case "idUser":
+                    case "image":
+                    case "username":
+                        break;
+
+                    // other properties are added to params if they have been edited
+                    case "phoneExtension":
+                        params = params.append("field1", user[key]);
+                        break;
+
+                    case "active":
+                        const activeStatus = user[key] === true ? "1" : "0";
+                        params = params.append("active", activeStatus);
+                        break;
+
+                    case "company":
+                        params = params.append("company", user[key]);
+                        break;
+
+                    case "country":
+                        params = params.append("Country", user[key]);
+                        break;
+
+                    case "language":
+                        params = params.append("Language", user[key]);
+                        break;
+
+                    case "mail":
+                        params = params.append("Mail", usr.common.email);
+                        break;
+
+                    case "role":
+                        params = params.append("Role", user[key]);
+                        break;
+
+                    case "timeZone":
+                        params = params.append("timeZone", user[key]);
+                        break;
+
+                    default:
                         break;
                 }
             }
@@ -258,22 +238,6 @@ export class JamespotService {
             .toPromise<IJamespotApiResponse<IJamespotUserFromApi>>()
             .then((res: IJamespotApiResponse<IJamespotUserFromApi>) => {
 
-                return new Promise<IJamespotUserConfig>((resolve, reject) => {
-                    const err = res.RC.MSG;
-                    res.RC.CODE === 0 ? resolve(this.mapFromApi(res)) : reject(err);
-                });
-            });
-    }
-
-    public disableUser(id: string): Promise<IJamespotUserConfig> {
-        const params = new HttpParams()
-            .set("idUser", id)
-            .append("active", "0");
-
-        return this.http.put<IJamespotApiResponse<IJamespotUserFromApi>>
-            (`${this.endPoint}user/update`, null, { headers: this.headers, params })
-            .toPromise<IJamespotApiResponse<IJamespotUserFromApi>>()
-            .then((res: IJamespotApiResponse<IJamespotUserFromApi>) => {
                 return new Promise<IJamespotUserConfig>((resolve, reject) => {
                     const err = res.RC.MSG;
                     res.RC.CODE === 0 ? resolve(this.mapFromApi(res)) : reject(err);

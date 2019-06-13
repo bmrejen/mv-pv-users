@@ -76,7 +76,7 @@ export interface ISugarUserConfig {
     phoneOther: string;
     phoneFax: string;
     phoneAsterisk: string;
-    email: string;
+    // email: string;
     status: string;
     employeeStatus: string;
     title: string;
@@ -111,6 +111,7 @@ export interface ISugarUserConfig {
 }
 
 export interface ICommonProperties {
+    email: string;
     firstName: string;
     lastName: string;
     userName: string;

@@ -3,7 +3,7 @@ import { ICommonProperties, ISugarUserConfig } from "../interfaces/sugar-user";
 export class SugarUser implements ISugarUserConfig {
     public codeSonGalileo: string = "";
     public department: string = "";
-    public email: string = "";
+    // public email: string = "";
     public employeeStatus: string = "";
     public id: string = "";
     public managerId: string = "";
@@ -43,7 +43,7 @@ export class SugarUser implements ISugarUserConfig {
 
         this.codeSonGalileo = data.codeSonGalileo || this.codeSonGalileo;
         this.department = data.department || this.department;
-        this.email = data.email || this.email;
+        // this.email = data.email || this.email;
         this.employeeStatus = data.employeeStatus || this.employeeStatus;
         this.id = data.id || this.id;
         this.managerId = data.managerId || this.managerId;

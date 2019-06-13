@@ -42,7 +42,7 @@ export class CredentialsComponent {
             && this.currentUser.common.userName === "") {
             this.setUsername();
 
-            this.sugarCurrentUser.email = this.setEmail();
+            this.currentUser.common.email = this.setEmail();
             this.checkEmailAvailability();
             this.currentUser.common.password = this.sugarCurrentUser.id === "" ? this.setPassword() : "";
             this.checkUsernameAvailability();
@@ -84,7 +84,7 @@ export class CredentialsComponent {
 
     public checkEmailAvailability(e?) {
         this.emailStatus = (this.usersFromSugar
-            .find((user) => user.sugarCurrentUser.email === this.sugarCurrentUser.email) !== undefined) ?
+            .find((user) => user.common.email === this.currentUser.common.email) !== undefined) ?
             "EMAIL ALREADY TAKEN" : "Email available :)";
     }
 

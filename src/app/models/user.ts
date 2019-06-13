@@ -8,6 +8,7 @@ export class User {
 
     // COMMON PROPERTIES
     public common: ICommonProperties = {
+        email: "",
         firstName: "",
         lastName: "",
         password: "",
@@ -28,5 +29,6 @@ export class User {
         this.common.lastName = data.lastName || this.common.lastName;
         this.common.password = data.password || this.common.password;
         this.common.userName = data.username || this.common.userName;
+        this.common.email = data.email || this.common.email;
     }
 }

@@ -1,9 +1,9 @@
 <fieldset class="blue">
     <legend>Jamespot</legend>
-    <h2 *ngIf="jamesCurrentUser.idUser != null">
-        {{ currentUser.firstName }} {{ currentUser.lastName }} - Id:
+    <h4 *ngIf="jamesCurrentUser.idUser != null">
+        {{ currentUser.common.firstName }} {{ currentUser.common.lastName }} - Id:
         {{ jamesCurrentUser.idUser }}
-    </h2>
+    </h4>
 
     <form *ngIf="jamesCurrentUser!=null">
         <input
@@ -21,18 +21,16 @@
             (change)="onFileSelected($event)"
         >
         <br>
+
+        <label>
+            <input
+                type="checkbox"
+                name="active"
+                [(ngModel)]="jamesCurrentUser.active"
+            >Active
+        </label>
         <!-- BUTTONS -->
         <div *ngIf="jamesCurrentUser.idUser != null">
-            <button
-                type="button"
-                (click)="onUpdate()"
-            >Update</button>
-
-            <button
-                type="button"
-                (click)="onDisable()"
-            >Disable</button>
-
             <button
                 type="button"
                 (click)="onDelete()"
@@ -40,8 +38,6 @@
         </div>
 
     </form>
-
-    <h3 *ngIf="updateSuccessful">Data Updated ! </h3>
 
     <h2 *ngIf="isDeleted">User {{ deletedId }} deleted !</h2>
     <h3 *ngIf="jamesMessage != null">{{ jamesMessage }}</h3>

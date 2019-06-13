@@ -33,33 +33,25 @@ export interface IJamespotApiResponse<T> {
 }
 
 export interface IJamespotUserConfig {
-    country: string;
-    firstname: string;
-    language: string;
-    lastname: string;
-    mail: string;
-    username: string;
-    role: string;
-    active: string;
+    country?: string;
+    language?: string;
+    role?: string;
+    active?: boolean;
     timeZone?: string;
     phoneExtension?: string;
     idUser?: string;
     img?: string | File;
-    password?: string;
     company?: string;
 }
 
 export interface IJamespotUser {
     country: string;
     language: string;
-    mail: string;
-    username: string;
     role: string;
-    active: string;
+    active: boolean;
     timeZone?: string;
     phoneExtension?: string;
     idUser?: string;
     img?: string | File;
-    password?: string;
     company?: string;
 }
