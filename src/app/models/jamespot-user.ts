@@ -12,15 +12,14 @@ export class JamespotUser implements IJamespotUser {
     public company: string = "MARCO VASCO";
 
     constructor(data: IJamespotUserConfig) {
-        console.log("data passed to jamespot constructor", data);
         this.language = data.language || this.language;
         this.role = data.role || this.role;
         this.idUser = data.idUser || this.idUser;
         this.image = data.img || this.image;
-        this.active = data.active;
         this.phoneExtension = data.phoneExtension || this.phoneExtension;
         this.timeZone = data.timeZone || this.timeZone;
         this.company = data.company || this.company;
         this.country = data.country || this.country;
+        this.active = data.active != null ? data.active : this.active;
     }
 }

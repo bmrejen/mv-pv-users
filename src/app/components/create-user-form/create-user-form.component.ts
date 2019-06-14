@@ -128,7 +128,7 @@ export class CreateUserFormComponent implements OnInit {
             .catch((err) => this.gapiStatus.apiFailed = true);
     }
 
-    public getUser() {
+    public getUser(): Promise<any> {
         if (this.mailToGet === "" || this.mailToGet == null) {
             alert("Please specify user to get");
         }
@@ -143,7 +143,8 @@ export class CreateUserFormComponent implements OnInit {
             this.getGapiUser(this.mailToGet),
             this.getSugarUser(username),
         ];
-        Promise.all(promises)
+
+        return Promise.all(promises)
             .then((res) => {
                 return {
                     google: res[1],
@@ -151,9 +152,11 @@ export class CreateUserFormComponent implements OnInit {
                     sugar: res[2],
                 };
             })
-            .then((res) => {
-                console.log("Promise all in getUser", res);
+            .then((resp) => {
+                console.log("Promise all in getUser", resp);
                 console.log("current and oldUser", this.currentUser, this.oldUser);
+
+                return resp;
             })
             .catch((err) => console.error(err));
     }
@@ -164,6 +167,7 @@ export class CreateUserFormComponent implements OnInit {
         this.jamesMessage = null;
         this.sugarMessage = null;
         this.currentUser = new User({});
+        this.oldUser = new User({});
     }
 
     // -------- GET USER METHODS -------------
@@ -202,7 +206,6 @@ export class CreateUserFormComponent implements OnInit {
     public getGapiUser(mail): Promise<any> {
         return this.gapi.getUser(mail)
             .then((res) => {
-                console.log("gapi get User OK", res);
                 this.currentUser.ggCurrentUser = new GoogleUser(res);
                 this.oldUser.ggCurrentUser = new GoogleUser(res);
 
@@ -240,6 +243,7 @@ export class CreateUserFormComponent implements OnInit {
 
     // --------- POST USER -------------
     public postUser() {
+        this.validateForm();
         this.lowerCasify();
 
         this.mailToGet = this.currentUser.ggCurrentUser.primaryEmail;
@@ -272,22 +276,49 @@ export class CreateUserFormComponent implements OnInit {
     }
 
     public updateUser() {
+        this.validateForm();
         const promises = [
-            this.updateJamesUser(),
+            // this.updateJamesUser(),
+            this.updateGapiUser(),
         ];
-        Promise.all(promises)
+
+        return Promise.all(promises)
             .then((res) => {
                 console.log("promise.all", res);
                 this.mailToGet = this.currentUser.common.userName;
-                this.getUser();
+
+                return this.getUser();
             });
+    }
+
+    public updateGapiUser() {
+        this.gapiMessage = null;
+
+        const updateUserPromise = this.gapi.updateUser(this.currentUser, this.oldUser)
+            .then((res) => {
+                console.log("response from gapi update user", res);
+
+                // Update Gmail settings (sendAs and signature)
+                return this.gapi.updateGmailSendAs(this.currentUser, this.oldUser)
+                    .then((resp) => resp)
+                    .catch((err) => console.error(err));
+            });
+
+        // Update Googlegroups
+        const updateGoogleGroupsPromise = this.gapi.updateGoogleGroups(this.currentUser, this.oldUser)
+            .then((res) => res)
+            .catch((err) => console.error(err));
+
+        return Promise.all([updateUserPromise, updateGoogleGroupsPromise])
+            .then((res) => console.log("MON RESPONSE", res))
+            .then(() => new Promise((resolve) => setTimeout(resolve, 1000)))
+            .catch((err) => console.error(err));
     }
 
     public updateJamesUser(): Promise<any> {
         return this.james.updateUser(this.currentUser, this.oldUser)
             .then((res: IJamespotUserConfig) => {
                 this.jamesMessage = "Data updated!";
-                console.log("updatejamesUser", res);
 
                 return res;
             })
@@ -342,19 +373,19 @@ export class CreateUserFormComponent implements OnInit {
 
     public getPopSettings(primaryEmail) {
         return this.gapi.getPopSettings(primaryEmail)
-            .then((res) => console.log("get POP Settings", res))
+            .then((res) => res)
             .catch((err) => console.error(err));
     }
 
     public activatePopSettings(primaryEmail) {
         return this.gapi.activatePopSettings(primaryEmail)
-            .then((res) => console.log("posted pop settings", res))
+            .then((res) => res)
             .catch((err) => console.error(err));
     }
 
     public postGoogleGroups() {
         return this.gapi.postGoogleGroups(this.currentUser.ggCurrentUser)
-            .then((res) => console.log("posted GoogleGroups", res))
+            .then((res) => res)
             .catch((err) => console.error(err));
     }
 
@@ -444,7 +475,7 @@ export class CreateUserFormComponent implements OnInit {
     }
 
     private getUserAliases(primaryEmail): Promise<any> {
-        console.log("getting the GMAIL aliases of", primaryEmail);
+        console.log("getting the GMAIL aliases and signature of", primaryEmail);
 
         return this.gapi.getUserAliases(primaryEmail)
             .then((response) => {
@@ -469,4 +500,16 @@ export class CreateUserFormComponent implements OnInit {
             .catch((err) => console.error(err));
     }
 
+    private validateForm() {
+        if ([
+            this.currentUser.common.firstName,
+            this.currentUser.common.lastName,
+            this.currentUser.common.email,
+            this.currentUser.common.userName,
+        ].includes("")) {
+            alert("First and last name can't be empty");
+
+            return;
+        }
+    }
 }
