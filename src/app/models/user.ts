@@ -2,7 +2,7 @@ import { GoogleUser } from "./google-user";
 import { JamespotUser } from "./jamespot-user";
 import { SugarUser } from "./sugar-user";
 
-import { ICommonProperties } from "../interfaces/sugar-user";
+import { ICommonProperties, ISugarUserConfig } from "../interfaces/sugar-user";
 
 export class User {
 
@@ -16,7 +16,7 @@ export class User {
     };
 
     // SUGAR
-    public sugarCurrentUser: SugarUser = new SugarUser(this.common, {});
+    public sugarCurrentUser: SugarUser = new SugarUser(this.common, {} as ISugarUserConfig);
 
     // JAMESPOT
     public jamesCurrentUser: JamespotUser = new JamespotUser({});

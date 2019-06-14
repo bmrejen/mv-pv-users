@@ -139,7 +139,7 @@ export class CreateUserFormComponent implements OnInit {
         const username = this.mailToGet.substring(0, this.mailToGet.lastIndexOf("@"));
 
         const promises = [
-            this.getJamespotUser(`${username}@planetveo.com`),
+            this.getJamespotUser(`${username}@marcovasco.fr`),
             this.getGapiUser(this.mailToGet),
             this.getSugarUser(username),
         ];
@@ -278,13 +278,14 @@ export class CreateUserFormComponent implements OnInit {
     public updateUser() {
         this.validateForm();
         const promises = [
-            // this.updateJamesUser(),
+            this.updateJamesUser(),
             this.updateGapiUser(),
         ];
 
+        // Sugar will be updated once the Jamespot id is retrieved
         return Promise.all(promises)
-            .then((res) => {
-                console.log("promise.all", res);
+            .then((res) => this.updateSugarUser())
+            .then(() => {
                 this.mailToGet = this.currentUser.common.userName;
 
                 return this.getUser();
@@ -313,6 +314,10 @@ export class CreateUserFormComponent implements OnInit {
             .then((res) => console.log("MON RESPONSE", res))
             .then(() => new Promise((resolve) => setTimeout(resolve, 1000)))
             .catch((err) => console.error(err));
+    }
+
+    public updateSugarUser(): Promise<any> {
+        return this.sugar.postDataToSugar(this.currentUser);
     }
 
     public updateJamesUser(): Promise<any> {
@@ -403,6 +408,10 @@ export class CreateUserFormComponent implements OnInit {
         this.currentUser.common.password = Math.random()
             .toString(36)
             .substring(2);
+        this.currentUser.common.email =
+            `${this.currentUser.common.firstName[0]}${this.currentUser.common.lastName}@marcovasco.fr`;
+        this.currentUser.common.userName = `${this.currentUser.common.firstName[0]}${this.currentUser.common.lastName}`;
+
         this.currentUser.ggCurrentUser = new GoogleUser({
             orgas: "/IT",
             primaryEmail: `${this.currentUser.common.firstName[0]}${this.currentUser.common.lastName}@planetveo.com`,
@@ -412,32 +421,26 @@ export class CreateUserFormComponent implements OnInit {
         this.currentUser.sugarCurrentUser = new SugarUser(this.currentUser.common, {
             codeSonGalileo: "123456",
             department: "Backoffice Carnet",
-            destinations: ["4e12eefb-5dbb-f913-d80b-4c2ab8202809",
-                "6f9aedb6-6d68-b4f3-0270-4cc10e363077"],
-            email: `${this.currentUser.common.firstName[0]}${this.currentUser.common.lastName}@marcovasco.fr`,
             employeeStatus: "Active",
             managerId: "4a15f7bb-09ec-32f7-4da8-5a560982cd06",
             officeId: "1006",
-            others: ["013335f9-80ad-11e7-9c8e-64006a75b5cd",
-                "0d5a7e81-d409-11e7-875a-64006a75b5cd"],
             phoneAsterisk: "1211",
             phoneFax: "01 76 64 72 00",
             phoneHome: "01 76 64 72 01",
             phoneMobile: "01 76 64 72 02",
             phoneOther: "01 76 64 72 03",
             phoneWork: "01 76 64 72 04",
-            roleId: "25218251-3011-b347-5d4f-4bfced4de2cc",
             salutation: "Mr.",
             status: "Active",
-            swAllowRemoteCalls: "0",
-            swCallNotification: "1",
-            swClickToCall: "1",
+            swAllowRemoteCalls: false,
+            swCallNotification: true,
+            swClickToCall: true,
             teams: ["0ec63f44-aa38-11e7-924f-005056911f09",
                 "1046f88d-3d37-10d5-7760-506023561b57"],
             title: "Assistant Ventes",
             tourplanID: this.currentUser.common.firstName.slice(0, 6)
                 .toUpperCase(),
-            userName: `${this.currentUser.common.firstName[0]}${this.currentUser.common.lastName}`,
+            type: "user",
         });
         this.currentUser.jamesCurrentUser = new JamespotUser({
             active: true,
