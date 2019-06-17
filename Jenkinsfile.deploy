@@ -36,17 +36,6 @@ pipeline {
                 deploy()
             }
         }
-        stage('Notification') {
-            steps {
-                def envUrl = "http://testing.usr.marcovasco.fr"
-
-                if (env.BRANCH_NAME == "master") {
-                    envUrl = "http://usr.marcovasco.fr"
-                }
-
-                slackSend channel: '#espace-client', message: '[USERS] Une nouvelle version est disponible à l\'adresse ${envUrl}', token: 'swRCGi4mpfmdArgt05vneRUX'
-            }
-        }
     }
 }
 
