@@ -1,0 +1,76 @@
+#!groovy
+String buildToKeepRotation = "10"
+pipeline {
+    options {
+        buildDiscarder(logRotator(numToKeepStr: "${buildToKeepRotation}"))
+    }
+    environment {
+        // default email adress of user interest by this build result
+        emailAddresses = 'dev@marcovasco.fr'
+    }
+    gitlab(
+            triggerOnPush: true,
+            triggerOnMergeRequest: false,
+            triggerOnAcceptedMergeRequest: true,
+            branchFilterType: "NameBasedFilter",
+            includeBranchesSpec: "dev,master",
+            secretToken: "4e9a7fb49fc9307c809db34ac09d542a"
+        )
+    agent {
+        dockerfile {
+            dir "docker/webserver/."
+            filename "Dockerfile"
+            args '--user root --volume /home/jenkins/.ssh:/ssh --env "LOCAL_USER_ID=1002" --entrypoint=\'\''
+            additionalBuildArgs '--pull'
+        }
+    }
+    stages {
+        stage('Clone') {
+           steps {
+               clone(env.BRANCH_NAME)
+           }
+        }
+        stage('Deploy') {
+            steps {
+                deploy()
+            }
+        }
+        stage('Notification') {
+            steps {
+                def envUrl = "http://testing.usr.marcovasco.fr"
+
+                if (env.BRANCH_NAME == "master") {
+                    envUrl = "http://usr.marcovasco.fr"
+                }
+
+                slackSend channel: '#espace-client', message: '[USERS] Une nouvelle version est disponible à l\'adresse ${envUrl}', token: 'swRCGi4mpfmdArgt05vneRUX'
+            }
+        }
+    }
+}
+
+def clone(branch) {
+    git url: 'git@git.passveo.com:marcoetvasco/users.git', branch: branch
+}
+
+def deploy() {
+    deploy: {
+        script {
+            def envHost = "51.254.106.27"
+
+            if (env.BRANCH_NAME == "master") {
+                envHost = "164.132.144.57"
+            }
+
+            sh "mkdir -p /root/.ssh && chmod 700 /root/.ssh && cp -R /ssh/* /root/.ssh"
+            sh "rm -rf .git/hooks/post-checkout"
+
+            sh "git checkout ${BRANCH_NAME} && git checkout ."
+            sh "git branch --set-upstream-to=origin/${BRANCH_NAME} ${BRANCH_NAME}"
+
+            sh "git pull"
+            sh "yarn && yarn run prod"
+            sh "rsync -avzP --delete-after -s -e \'ssh -p 22579\' ${WORKSPACE}/ mvusers@${envHost}:/home2/mvusers/public_html/"
+        }
+    }
+}
