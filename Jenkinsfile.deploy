@@ -8,14 +8,15 @@ pipeline {
         // default email adress of user interest by this build result
         emailAddresses = 'dev@marcovasco.fr'
     }
-    gitlab(
+    triggers {
+        gitlab(
             triggerOnPush: true,
             triggerOnMergeRequest: false,
             triggerOnAcceptedMergeRequest: true,
-            branchFilterType: "NameBasedFilter",
-            includeBranchesSpec: "dev,master",
+            branchFilterType: "All",
             secretToken: "4e9a7fb49fc9307c809db34ac09d542a"
         )
+    }
     agent {
         dockerfile {
             dir "docker/webserver/."
