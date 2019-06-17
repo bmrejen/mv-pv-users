@@ -262,8 +262,6 @@ export class CreateUserFormComponent implements OnInit {
                     case "jamespot":
                         promises.push(this.postJamespotUser());
                         break;
-                    case "switchvox":
-                        break;
 
                     default:
                         alert("This promise is not defined");
@@ -276,20 +274,49 @@ export class CreateUserFormComponent implements OnInit {
     }
 
     public updateUser() {
-        this.validateForm();
-        const promises = [
-            this.updateJamesUser(),
-            this.updateGapiUser(),
-        ];
+        if (!this.fields.accounts
+            .every((account) => account.checked)
+            && (
+                this.currentUser.common.firstName !== this.oldUser.common.firstName
+                || this.currentUser.common.lastName !== this.oldUser.common.lastName
+            )
+        ) {
+            alert("Please select all platforms if changing name");
+        } else {
 
-        // Sugar will be updated once the Jamespot id is retrieved
-        return Promise.all(promises)
-            .then((res) => this.updateSugarUser())
-            .then(() => {
-                this.mailToGet = this.currentUser.common.userName;
-
-                return this.getUser();
+            const promises = [];
+            this.fields.accounts.forEach((account) => {
+                if (account.checked) {
+                    switch (account.id) {
+                        case "gapps":
+                            promises.push(this.updateGapiUser());
+                            break;
+                        case "jamespot":
+                            promises.push(this.updateJamesUser());
+                            break;
+                        default:
+                            break;
+                    }
+                }
             });
+            this.validateForm();
+
+            // Sugar is updated last (to have jamespot id)
+            return Promise.all(promises)
+                .then((res) => {
+                    if (this.fields.accounts
+                        .find((account) => account.id === "sugar")
+                        .checked) {
+                        this.updateSugarUser();
+                    }
+                })
+                .then(() => {
+                    this.mailToGet = this.currentUser.common.userName;
+
+                    return this.getUser();
+                });
+        }
+
     }
 
     public updateGapiUser() {

@@ -156,6 +156,8 @@ export class GapiAuthenticatorService {
         const ggCurrentUser = usr.ggCurrentUser;
         const ggOldUser = oldUsr.ggCurrentUser;
 
+        console.log("UPDATING GAPI USER", usr, oldUsr);
+
         const myObj: IGapiRequest = {
             resource: {},
             userKey: ggOldUser.id,

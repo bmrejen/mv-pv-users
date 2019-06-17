@@ -131,15 +131,15 @@ export class JamespotService {
                 switch (key) {
 
                     case "firstName":
-                        params = params.append("Firstname", user[key]);
+                        params = params.append("Firstname", usr.common[key]);
                         break;
 
                     case "lastName":
-                        params = params.append("Lastname", user[key]);
+                        params = params.append("Lastname", usr.common[key]);
                         break;
 
                     case "email":
-                        params = params.append("Mail", user[key]);
+                        params = params.append("Mail", usr.common[key]);
                         break;
 
                     case "userName":
@@ -154,8 +154,8 @@ export class JamespotService {
         }
 
         // Update username
-        if (usr.common.firstName !== usr.common.firstName
-            || usr.common.lastName !== usr.common.lastName) {
+        if (usr.common.firstName !== oldUsr.common.firstName
+            || usr.common.lastName !== oldUsr.common.lastName) {
             params = params.append("Pseudo",
                 `${usr.common.firstName} ${usr.common.lastName.toUpperCase()}`);
         }
