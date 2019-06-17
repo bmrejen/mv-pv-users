@@ -54,13 +54,11 @@ def deploy() {
 
             sh "mkdir -p /root/.ssh && chmod 700 /root/.ssh && cp -R /ssh/* /root/.ssh"
             sh "rm -rf .git/hooks/post-checkout"
-
             sh "git checkout ${BRANCH_NAME} && git checkout ."
             sh "git branch --set-upstream-to=origin/${BRANCH_NAME} ${BRANCH_NAME}"
-
             sh "git pull"
             sh "yarn && yarn run prod"
-            sh "rsync -avzP --delete-after -s -e \'ssh -p 22579\' ${WORKSPACE}/ mvusers@${envHost}:/home2/mvusers/public_html/"
+            sh "rsync -avzP --delete-after -s -e \'ssh -p 22579\' ${WORKSPACE}/ usr@${envHost}:/home2/usr/public_html/"
         }
     }
 }
