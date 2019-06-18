@@ -7,6 +7,7 @@ export interface ISugarUserFromApi {
             employeeStatus: string;
             firstName: string;
             id?: string;
+            jamespotId: string;
             lastName: string;
             managerId: string;
             officeId: string;
@@ -41,6 +42,7 @@ export interface ISugarUserToApi {
             employeeStatus: string;
             firstName: string;
             id?: string;
+            jamespotId?: string;
             lastName: string;
             managerId: string;
             officeId: string;
@@ -68,7 +70,8 @@ export interface ISugarUserToApi {
 }
 
 export interface ISugarUserConfig {
-    id: string;
+    id?: string;
+    jamespotId?: string;
     salutation: string;
     phoneHome: string;
     phoneMobile: string;
@@ -76,7 +79,6 @@ export interface ISugarUserConfig {
     phoneOther: string;
     phoneFax: string;
     phoneAsterisk: string;
-    // email: string;
     status: string;
     employeeStatus: string;
     title: string;
@@ -88,11 +90,12 @@ export interface ISugarUserConfig {
     swCallNotification: boolean;
     swAllowRemoteCalls: boolean;
     codeSonGalileo: string;
-    type: string;
     teams: string[];
+    type: string;
 
     // Following properties are not returned by the API
 
+    // teams: string[];
     // userToCopyHPfrom: string;
     // inheritsPreferencesFrom: string;
     // role: Role;

@@ -37,8 +37,9 @@ export class SugarUser implements ISugarUserConfig {
     public leadsMax: number = 45;
     public teams: string[] = [];
     public common: ICommonProperties;
+    public jamespotId: string = "";
 
-    constructor(common: ICommonProperties, data: any) {
+    constructor(common: ICommonProperties, data: ISugarUserConfig) {
         this.common = common;
 
         this.codeSonGalileo = data.codeSonGalileo || this.codeSonGalileo;
@@ -58,21 +59,25 @@ export class SugarUser implements ISugarUserConfig {
         this.status = data.status || this.status;
         this.title = data.title || this.title;
         this.type = data.type || this.type;
-
-        this.swAllowRemoteCalls = data.swAllowRemoteCalls === "0" ? false : this.swAllowRemoteCalls;
-        this.swCallNotification = data.swCallNotification === "0" ? false : this.swCallNotification;
-        this.swClickToCall = data.swClickToCall === "0" ? false : this.swClickToCall;
+        this.jamespotId = data.jamespotId || this.jamespotId;
         this.tourplanID = data.tourplanID || this.common.userName.substr(0, 6)
             .toUpperCase();
+
+        // Do not give default values to booleans
+        // They could be intentionally set to false
+        this.swAllowRemoteCalls = data.swAllowRemoteCalls;
+        this.swCallNotification = data.swCallNotification;
+        this.swClickToCall = data.swClickToCall;
+
         // Following properties are not returned by the API
 
         // this.userToCopyHPfrom = data.userToCopyHPfrom || this.userToCopyHPfrom;
         // this.inheritsPreferencesFrom = data.inheritsPreferencesFrom || this.inheritsPreferencesFrom;
-        this.roleId = data.roleId || this.roleId;
+        // this.roleId = data.roleId || this.roleId;
         // this.functionId = data.functionId || this.functionId;
-        this.destinations = data.destinations || this.destinations;
-        this.teams = data.teams || this.teams;
-        this.others = data.others || this.others;
+        // this.destinations = data.destinations || this.destinations;
+        // this.teams = data.teams || this.teams;
+        // this.others = data.others || this.others;
         // this.roles = data.roles || this.roles;
         // this.isAdmin = data.isAdmin || this.isAdmin;
         // this.apiPortalUser = data.apiPortalUser || this.apiPortalUser;

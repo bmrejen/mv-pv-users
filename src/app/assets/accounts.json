@@ -12,11 +12,6 @@
         },
         {
             "checked": true,
-            "id": "switchvox",
-            "label": "SwitchVox"
-        },
-        {
-            "checked": true,
             "id": "jamespot",
             "label": "Jamespot"
         }

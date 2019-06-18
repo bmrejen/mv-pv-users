@@ -84,46 +84,8 @@ export class GapiUsersComponent implements OnInit {
         }
     }
 
-    public updateUser() {
-        this.gapiMessage = null;
-
-        // Update Gmail settings (sendAs and signature)
-        this.gapiService.updateGmailSendAs(this.currentUser, this.oldUser)
-            .then((res) => console.log("Alias updated !", res))
-            .catch((err) => console.error(err));
-    }
-
     public trackByFn(index) {
         return index;
-    }
-
-    // Can be deleted
-    public refreshEmail() {
-        // const email = this.ggCurrentUser.primaryEmail;
-        // const emailPrefix = email.lastIndexOf("@") === -1 ? email : email.substring(0, email.lastIndexOf("@"));
-
-        // this.ggCurrentUser.sendAs =
-        //     `${emailPrefix}@${this.ggCurrentUser.primaryEmailSuffix}`;
-        // this.currentUser.sugarCurrentUser.email =
-        //     `${this.currentUser.sugarCurrentUser.userName}@${this.ggCurrentUser.sendAs}`;
-    }
-
-    public activateImap(id: string) {
-        // return this.gapiService.activateImap(id)
-        //     .then((res) => console.log("IMAP Activated", res))
-        //     .catch((err) => console.error("IMAP Activation error", err));
-    }
-
-    public getImap(id: string) {
-        // return this.gapiService.getImap(id)
-        //     .then((res) => console.log("IMAP settings", res))
-        //     .catch((err) => console.error("Error when getting IMAP", err));
-    }
-
-    public deactivateImap(id: string) {
-        // return this.gapiService.deactivateImap(id)
-        //     .then((res) => console.log("IMAP settings", res))
-        //     .catch((err) => console.error("Error when getting IMAP", err));
     }
 
     public handleSendAsClick() {

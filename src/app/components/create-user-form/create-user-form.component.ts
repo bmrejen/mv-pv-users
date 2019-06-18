@@ -128,7 +128,7 @@ export class CreateUserFormComponent implements OnInit {
             .catch((err) => this.gapiStatus.apiFailed = true);
     }
 
-    public getUser() {
+    public getUser(): Promise<any> {
         if (this.mailToGet === "" || this.mailToGet == null) {
             alert("Please specify user to get");
         }
@@ -139,11 +139,12 @@ export class CreateUserFormComponent implements OnInit {
         const username = this.mailToGet.substring(0, this.mailToGet.lastIndexOf("@"));
 
         const promises = [
-            this.getJamespotUser(`${username}@planetveo.com`),
+            this.getJamespotUser(`${username}@marcovasco.fr`),
             this.getGapiUser(this.mailToGet),
             this.getSugarUser(username),
         ];
-        Promise.all(promises)
+
+        return Promise.all(promises)
             .then((res) => {
                 return {
                     google: res[1],
@@ -151,9 +152,11 @@ export class CreateUserFormComponent implements OnInit {
                     sugar: res[2],
                 };
             })
-            .then((res) => {
-                console.log("Promise all in getUser", res);
+            .then((resp) => {
+                console.log("Promise all in getUser", resp);
                 console.log("current and oldUser", this.currentUser, this.oldUser);
+
+                return resp;
             })
             .catch((err) => console.error(err));
     }
@@ -164,6 +167,7 @@ export class CreateUserFormComponent implements OnInit {
         this.jamesMessage = null;
         this.sugarMessage = null;
         this.currentUser = new User({});
+        this.oldUser = new User({});
     }
 
     // -------- GET USER METHODS -------------
@@ -202,7 +206,6 @@ export class CreateUserFormComponent implements OnInit {
     public getGapiUser(mail): Promise<any> {
         return this.gapi.getUser(mail)
             .then((res) => {
-                console.log("gapi get User OK", res);
                 this.currentUser.ggCurrentUser = new GoogleUser(res);
                 this.oldUser.ggCurrentUser = new GoogleUser(res);
 
@@ -240,6 +243,7 @@ export class CreateUserFormComponent implements OnInit {
 
     // --------- POST USER -------------
     public postUser() {
+        this.validateForm();
         this.lowerCasify();
 
         this.mailToGet = this.currentUser.ggCurrentUser.primaryEmail;
@@ -258,8 +262,6 @@ export class CreateUserFormComponent implements OnInit {
                     case "jamespot":
                         promises.push(this.postJamespotUser());
                         break;
-                    case "switchvox":
-                        break;
 
                     default:
                         alert("This promise is not defined");
@@ -272,22 +274,83 @@ export class CreateUserFormComponent implements OnInit {
     }
 
     public updateUser() {
-        const promises = [
-            this.updateJamesUser(),
-        ];
-        Promise.all(promises)
-            .then((res) => {
-                console.log("promise.all", res);
-                this.mailToGet = this.currentUser.common.userName;
-                this.getUser();
+        if (!this.fields.accounts
+            .every((account) => account.checked)
+            && (
+                this.currentUser.common.firstName !== this.oldUser.common.firstName
+                || this.currentUser.common.lastName !== this.oldUser.common.lastName
+            )
+        ) {
+            alert("Please select all platforms if changing name");
+        } else {
+
+            const promises = [];
+            this.fields.accounts.forEach((account) => {
+                if (account.checked) {
+                    switch (account.id) {
+                        case "gapps":
+                            promises.push(this.updateGapiUser());
+                            break;
+                        case "jamespot":
+                            promises.push(this.updateJamesUser());
+                            break;
+                        default:
+                            break;
+                    }
+                }
             });
+            this.validateForm();
+
+            // Sugar is updated last (to have jamespot id)
+            return Promise.all(promises)
+                .then((res) => {
+                    if (this.fields.accounts
+                        .find((account) => account.id === "sugar")
+                        .checked) {
+                        this.updateSugarUser();
+                    }
+                })
+                .then(() => {
+                    this.mailToGet = this.currentUser.common.userName;
+
+                    return this.getUser();
+                });
+        }
+
+    }
+
+    public updateGapiUser() {
+        this.gapiMessage = null;
+
+        const updateUserPromise = this.gapi.updateUser(this.currentUser, this.oldUser)
+            .then((res) => {
+                console.log("response from gapi update user", res);
+
+                // Update Gmail settings (sendAs and signature)
+                return this.gapi.updateGmailSendAs(this.currentUser, this.oldUser)
+                    .then((resp) => resp)
+                    .catch((err) => console.error(err));
+            });
+
+        // Update Googlegroups
+        const updateGoogleGroupsPromise = this.gapi.updateGoogleGroups(this.currentUser, this.oldUser)
+            .then((res) => res)
+            .catch((err) => console.error(err));
+
+        return Promise.all([updateUserPromise, updateGoogleGroupsPromise])
+            .then((res) => console.log("MON RESPONSE", res))
+            .then(() => new Promise((resolve) => setTimeout(resolve, 1000)))
+            .catch((err) => console.error(err));
+    }
+
+    public updateSugarUser(): Promise<any> {
+        return this.sugar.postDataToSugar(this.currentUser);
     }
 
     public updateJamesUser(): Promise<any> {
         return this.james.updateUser(this.currentUser, this.oldUser)
             .then((res: IJamespotUserConfig) => {
                 this.jamesMessage = "Data updated!";
-                console.log("updatejamesUser", res);
 
                 return res;
             })
@@ -342,19 +405,19 @@ export class CreateUserFormComponent implements OnInit {
 
     public getPopSettings(primaryEmail) {
         return this.gapi.getPopSettings(primaryEmail)
-            .then((res) => console.log("get POP Settings", res))
+            .then((res) => res)
             .catch((err) => console.error(err));
     }
 
     public activatePopSettings(primaryEmail) {
         return this.gapi.activatePopSettings(primaryEmail)
-            .then((res) => console.log("posted pop settings", res))
+            .then((res) => res)
             .catch((err) => console.error(err));
     }
 
     public postGoogleGroups() {
         return this.gapi.postGoogleGroups(this.currentUser.ggCurrentUser)
-            .then((res) => console.log("posted GoogleGroups", res))
+            .then((res) => res)
             .catch((err) => console.error(err));
     }
 
@@ -372,6 +435,10 @@ export class CreateUserFormComponent implements OnInit {
         this.currentUser.common.password = Math.random()
             .toString(36)
             .substring(2);
+        this.currentUser.common.email =
+            `${this.currentUser.common.firstName[0]}${this.currentUser.common.lastName}@marcovasco.fr`;
+        this.currentUser.common.userName = `${this.currentUser.common.firstName[0]}${this.currentUser.common.lastName}`;
+
         this.currentUser.ggCurrentUser = new GoogleUser({
             orgas: "/IT",
             primaryEmail: `${this.currentUser.common.firstName[0]}${this.currentUser.common.lastName}@planetveo.com`,
@@ -381,32 +448,26 @@ export class CreateUserFormComponent implements OnInit {
         this.currentUser.sugarCurrentUser = new SugarUser(this.currentUser.common, {
             codeSonGalileo: "123456",
             department: "Backoffice Carnet",
-            destinations: ["4e12eefb-5dbb-f913-d80b-4c2ab8202809",
-                "6f9aedb6-6d68-b4f3-0270-4cc10e363077"],
-            email: `${this.currentUser.common.firstName[0]}${this.currentUser.common.lastName}@marcovasco.fr`,
             employeeStatus: "Active",
             managerId: "4a15f7bb-09ec-32f7-4da8-5a560982cd06",
             officeId: "1006",
-            others: ["013335f9-80ad-11e7-9c8e-64006a75b5cd",
-                "0d5a7e81-d409-11e7-875a-64006a75b5cd"],
             phoneAsterisk: "1211",
             phoneFax: "01 76 64 72 00",
             phoneHome: "01 76 64 72 01",
             phoneMobile: "01 76 64 72 02",
             phoneOther: "01 76 64 72 03",
             phoneWork: "01 76 64 72 04",
-            roleId: "25218251-3011-b347-5d4f-4bfced4de2cc",
             salutation: "Mr.",
             status: "Active",
-            swAllowRemoteCalls: "0",
-            swCallNotification: "1",
-            swClickToCall: "1",
+            swAllowRemoteCalls: false,
+            swCallNotification: true,
+            swClickToCall: true,
             teams: ["0ec63f44-aa38-11e7-924f-005056911f09",
                 "1046f88d-3d37-10d5-7760-506023561b57"],
             title: "Assistant Ventes",
             tourplanID: this.currentUser.common.firstName.slice(0, 6)
                 .toUpperCase(),
-            userName: `${this.currentUser.common.firstName[0]}${this.currentUser.common.lastName}`,
+            type: "user",
         });
         this.currentUser.jamesCurrentUser = new JamespotUser({
             active: true,
@@ -444,7 +505,7 @@ export class CreateUserFormComponent implements OnInit {
     }
 
     private getUserAliases(primaryEmail): Promise<any> {
-        console.log("getting the GMAIL aliases of", primaryEmail);
+        console.log("getting the GMAIL aliases and signature of", primaryEmail);
 
         return this.gapi.getUserAliases(primaryEmail)
             .then((response) => {
@@ -469,4 +530,16 @@ export class CreateUserFormComponent implements OnInit {
             .catch((err) => console.error(err));
     }
 
+    private validateForm() {
+        if ([
+            this.currentUser.common.firstName,
+            this.currentUser.common.lastName,
+            this.currentUser.common.email,
+            this.currentUser.common.userName,
+        ].includes("")) {
+            alert("First and last name can't be empty");
+
+            return;
+        }
+    }
 }

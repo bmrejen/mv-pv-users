@@ -153,37 +153,36 @@ export class GapiAuthenticatorService {
     }
 
     public updateUser(usr: User, oldUsr: User): Promise<any> {
-        const user = usr.ggCurrentUser;
-        const oldUser = oldUsr.ggCurrentUser;
+        const ggCurrentUser = usr.ggCurrentUser;
+        const ggOldUser = oldUsr.ggCurrentUser;
+
+        console.log("UPDATING GAPI USER", usr, oldUsr);
 
         const myObj: IGapiRequest = {
             resource: {},
-            userKey: oldUser.id,
+            userKey: ggOldUser.id,
         };
 
-        for (const key in usr) {
-            if (usr[key] !== null) {
+        // Update first and last name
+        for (const key in usr.common) {
+            if (usr.common[key] !== oldUsr.common[key]) {
                 switch (key) {
                     case "lastName":
-                        if (usr[key] !== oldUsr[key]) {
-                            if (myObj.resource.name != null) {
-                                myObj.resource.name.familyName = usr[key];
-                            } else {
-                                myObj.resource["name"] = {
-                                    familyName: usr[key],
-                                };
-                            }
+                        if (myObj.resource.name != null) {
+                            myObj.resource.name.familyName = usr.common[key];
+                        } else {
+                            myObj.resource["name"] = {
+                                familyName: usr.common[key],
+                            };
                         }
                         break;
                     case "firstName":
-                        if (usr[key] !== oldUsr[key]) {
-                            if (myObj.resource.name != null) {
-                                myObj.resource.name.givenName = usr[key];
-                            } else {
-                                myObj.resource["name"] = {
-                                    givenName: usr[key],
-                                };
-                            }
+                        if (myObj.resource.name != null) {
+                            myObj.resource.name.givenName = usr.common[key];
+                        } else {
+                            myObj.resource["name"] = {
+                                givenName: usr.common[key],
+                            };
                         }
                         break;
                     default:
@@ -192,42 +191,44 @@ export class GapiAuthenticatorService {
             }
         }
 
-        for (const key in user) {
-            if (user[key] !== null) {
+        // Update orgas
+        for (const key in ggOldUser) {
+            if (ggOldUser[key] !== ggCurrentUser[key]) {
 
                 switch (key) {
+                    case "primaryEmail":
+                    case "nonEditableAliases":
                     case "id":
                     case "sendAs":
                     case "signature":
+                    case "aliases":
+                    case "googleGroups":
                         // do not update id. sendAs or signature will be updated in Gmail service
                         break;
 
                     case "orgas":
-                        if (user[key] !== oldUser[key]) {
-                            myObj.resource["orgUnitPath"] = user[key];
-                            delete myObj[key];
-                        }
+                        myObj.resource["orgUnitPath"] = ggCurrentUser[key];
                         break;
                     default:
-                        if (user[key] !== oldUser[key]) {
-                            myObj.resource[key] = user[key];
-                        }
+                        alert("Problem updating Google Admin SDK");
                         break;
                 }
             }
         }
 
+        console.log("myObj", myObj);
+
         return new Promise((resolve, reject) => {
             this.zone.run(() => {
-                gapi.client.directory.users.update(myObj)
+                return gapi.client.directory.users.update(myObj)
                     .then(resolve, reject);
             });
         });
     }
 
     public updateGmailSendAs(usr: User, oldUsr: User): Promise<any> {
-        console.log("updateGmailSendAs ", usr, oldUsr);
-
+        console.log("usr ", usr);
+        console.log("oldUsr ", oldUsr);
         const body = {};
 
         // "sub" property needed for token but will be deleted if a new alias must be created
@@ -243,14 +244,10 @@ export class GapiAuthenticatorService {
         // If signature has been modified
         if (usr.ggCurrentUser.signature !== oldUsr.ggCurrentUser.signature) {
             body["signature"] = usr.ggCurrentUser.signature;
-            console.log("signature has been modified");
         }
 
         // If alias has been modified
         if (usr.ggCurrentUser.sendAs !== oldUsr.ggCurrentUser.sendAs) {
-            console.log("alias has been modified");
-            console.log("newSendAsEmail ", newSendAsEmail);
-
             body["displayName"] = `${usr.common.firstName} ${usr.common.lastName}`;
             body["isDefault"] = true;
             body["replyToAddress"] = "";
@@ -260,24 +257,21 @@ export class GapiAuthenticatorService {
 
         // Create the alias if it doesn't exist
         if (usr.ggCurrentUser.aliases.some((alias) => alias.sendAsEmail === newSendAsEmail)) {
-            console.log(`ALIAS ${newSendAsEmail} ALREADY EXISTS`);
-
             return this.updateAlias(body);
         } else {
-            console.log("creating an alias ");
-
             return this.createNewAlias(body);
         }
     }
 
     public updateAlias(body): Promise<any> {
         const primaryEmail = body.sub;
-        console.log("body ", body);
+        console.log("BODY OF REQUEST", body);
 
         return this.createToken(primaryEmail)
             .then(() => {
                 const url = `https://www.googleapis.com/gmail/v1/users/me/settings/sendAs/${body.sendAsEmail}`;
                 const headers = new HttpHeaders({ Authorization: `Bearer ${this.accessToken}` });
+                delete body.sub;
 
                 return this.http.patch(url, body, { headers })
                     .toPromise();
@@ -286,14 +280,13 @@ export class GapiAuthenticatorService {
 
     public createNewAlias(body): Promise<any> {
         const primaryEmail = body.sub;
-        console.log("body", body);
 
         return this.createToken(primaryEmail)
             .then(() => {
                 console.log("token has been created:", this.accessToken);
-                delete body["sub"];
                 const url = `https://www.googleapis.com/gmail/v1/users/me/settings/sendAs`;
                 const headers = new HttpHeaders({ Authorization: `Bearer ${this.accessToken}` });
+                delete body.sub;
 
                 return this.http.post(url, body, { headers })
                     .toPromise();
@@ -330,7 +323,6 @@ export class GapiAuthenticatorService {
                     return gapi.client.directory.groups.list(body)
                         .then((res) => {
                             results.push(...res["result"].groups);
-                            console.log("getGroups response", results);
 
                             resolve(results);
                         })
@@ -382,6 +374,48 @@ export class GapiAuthenticatorService {
         };
     }
 
+    public updateGoogleGroups(user: User, oldUser: User): Promise<any> {
+        const promises = [];
+
+        user.ggCurrentUser.googleGroups.forEach((group) => {
+            if (!oldUser.ggCurrentUser.googleGroups
+                .includes(group)) {
+                console.log(`group ${group.name} has been added`);
+                promises.push(new Promise((resolve, reject) => {
+                    this.zone.run(() => {
+                        return gapi.client.directory.members.insert({
+                            groupKey: group.id,
+                            resource: {
+                                email: user.ggCurrentUser.primaryEmail,
+                            },
+                        })
+                            .then(resolve, reject);
+                    });
+                }),
+                );
+            }
+        });
+
+        oldUser.ggCurrentUser.googleGroups.forEach((group) => {
+            if (!user.ggCurrentUser.googleGroups.includes(group)) {
+                console.log(`group ${group.name} was deleted`);
+                promises.push(new Promise((resolve, reject) => {
+                    this.zone.run(() => {
+                        return gapi.client.directory.members.delete({
+                            groupKey: group.id,
+                            memberKey: user.ggCurrentUser.primaryEmail,
+                        })
+                            .then(resolve, reject);
+                    });
+                }));
+            }
+        });
+        console.log("promises", promises);
+
+        return Promise.all(promises)
+            .then((res) => res);
+    }
+
     public postGoogleGroups(user: GoogleUser): Promise<any> {
         const promises: Array<Promise<any>> = [];
 
@@ -392,11 +426,6 @@ export class GapiAuthenticatorService {
                         groupKey: group.id,
                         resource: {
                             email: user.primaryEmail,
-                            etag: group.etag,
-                            id: group.id,
-                            kind: "admin#directory#member",
-                            status: "ACTIVE",
-                            type: "USER",
                         },
                     })
                         .then(resolve, reject);
@@ -408,113 +437,72 @@ export class GapiAuthenticatorService {
         return Promise.all(promises);
     }
 
-    public activateImap(id: string): Promise<any> {
-        return new Promise((resolve, reject) => {
-            this.zone.run(() => {
-                gapi.client.gmail.users.settings.updateImap({
-                    resource: {
-                        enabled: true,
-                    },
-                    userId: "me",
-                })
-                    .then(resolve, reject);
-            });
-        });
-    }
-
-    public deactivateImap(id: string): Promise<any> {
-        return new Promise((resolve, reject) => {
-            this.zone.run(() => {
-                gapi.client.gmail.users.settings.updateImap({
-                    resource: {
-                        enabled: false,
-                    },
-                    userId: "me",
-                })
-                    .then(resolve, reject);
-            });
-        });
-    }
-
-    public getImap(id: string): Promise<any> {
-        return new Promise((resolve, reject) => {
-            this.zone.run(() => {
-                gapi.client.gmail.users.settings.getImap({
-                    userId: "me",
-                })
-                    .then(resolve, reject);
-            });
-        });
-    }
-
     public createToken(primaryEmail): Promise<any> {
         const timeNow = jwt.KJUR.jws.IntDate.get("now");
 
-        if (this.tokenInfo.primaryEmail != null
-            && this.tokenInfo.timeCreated != null
-            && (timeNow - this.tokenInfo.timeCreated < 3600)
-            && (primaryEmail === this.tokenInfo.primaryEmail)) {
-            console.log("token already exists");
+        // if (this.tokenInfo.primaryEmail != null
+        //     && this.tokenInfo.timeCreated != null
+        //     && (timeNow - this.tokenInfo.timeCreated < 3600)
+        //     && (primaryEmail === this.tokenInfo.primaryEmail)) {
+        //     console.log("token already exists");
 
-            return Promise.resolve(this.accessToken);
-        } else {
+        //     return Promise.resolve(this.accessToken);
+        // } else {
 
-            this.accessToken = null;
+        this.accessToken = null;
 
-            console.log("creating a token for the primaryEmail: ", primaryEmail);
-            // Header
-            const oHeader = { alg: "RS256", typ: "JWT" };
-            // Payload
-            const oPayload = {
-                aud: "https://www.googleapis.com/oauth2/v4/token/",
-                exp: jwt.KJUR.jws.IntDate.get("now + 1hour"),
-                iat: jwt.KJUR.jws.IntDate.get("now"),
-                iss: "370957812504-m0eophjpraff16mbnloc330bq7jkm6up@developer.gserviceaccount.com",
-                // tslint:disable-next-line
-                scope: "https://mail.google.com/ https://www.googleapis.com/auth/admin.directory.user https://www.googleapis.com/auth/gmail.settings.sharing https://www.googleapis.com/auth/gmail.settings.basic https://www.googleapis.com/auth/gmail.modify https://www.googleapis.com/auth/gmail.readonly",
-                sub: primaryEmail,
-            };
-
-            // Sign JWT
-            const sHeader = JSON.stringify(oHeader);
-            const sPayload = JSON.stringify(oPayload);
-
+        console.log("creating a token for the primaryEmail: ", primaryEmail);
+        // Header
+        const oHeader = { alg: "RS256", typ: "JWT" };
+        // Payload
+        const oPayload = {
+            aud: "https://www.googleapis.com/oauth2/v4/token/",
+            exp: jwt.KJUR.jws.IntDate.get("now + 1hour"),
+            iat: jwt.KJUR.jws.IntDate.get("now"),
+            iss: "370957812504-m0eophjpraff16mbnloc330bq7jkm6up@developer.gserviceaccount.com",
             // tslint:disable-next-line
-            const privateKey = "-----BEGIN PRIVATE KEY-----\nMIIEuwIBADANBgkqhkiG9w0BAQEFAASCBKUwggShAgEAAoIBAQCktko8W7B/J6+l\nDQooHSH+IIq6tAIWPKSYjhON4NYD7XTHhSDgcW1qGvaMorPhS2k/UbeR0J3hBzJr\nSuBNLMa9XiHLZ+n8Z3f0j2UBO3QQwSOejSvf38LnloWtV20LY2njAW/9pNys6f9w\njMQSVIBwBOgnBC6UebzNVMsVAq5zm0zBGDIlInUPYP7NQkt5TI+eYsmuveULmm6Q\ntehf6M7krGu958nK207Y3dpvgiZR59mBpwlni9EwOq+zbjL3XC8bUA0ODUcorrxx\nQ8WJ+Mx9aE8nBXdjDz8EfFcD+6ccotwbbsiTFmUv56cLaa1kfj4cmA+me0wC8vBg\nnaHIR/aJAgMBAAECgf9HMb74a5WtOSGVGGZpBAdBFc/NbXdSEZWJvbgsLuU/CG5A\nbPIhmzRXUAF8tK+VlJakgvK4McypqMtTgU7BSAWy+/M9FfJSbBgBHYPjq9jrjGin\nxw6cIjl1Vsu/3Dtjf4snsW2FjcbogIsGX/lMaSZWCfBOnjs1QPNQ4RDmvxC8XQpy\nXuHU+sD8vBiZpclgaF2R1mf8nNfZbPCHiZws8B7Y1PhWLvutGlVdEAjMbJuMVkXP\nbmnuWh9MdL7FGZdWEola27mPkDpZSYy/Dr0ghOV9puKbZNP3wgDkWsHkw848ndFk\nfYV31g4eT7ByXbLKLuyjEnqaRDsa26D0s2epfukCgYEA4e8EAL4grLhmG+xRveci\ng5HoXVFZRVgInplsONpu1M2mXIBtWWDfVycblVkM5d1Ohd/n1Pw3fEdfK/hg2ymg\nofGVRVpYQP73NJMw1rTa5kcWRsG+YDAi4ostExlXI2rnlbnUoIuEerEzHtj4Wh9A\nPWAzBrRi8f87YTp2TDrqikUCgYEAuqGcX+p8YO5dMi/s5lGPGprptMHmCmOqU2gr\nYEectOoytOPJEiaxd7pGSa4W4ao0euNMnKsMT6q+wtRqBvpg/t8jrsvdu4hbq2Hf\nzZI6lgRKOOoawAzRjiKGcbOwgsz2UjHoIB4OWO/ujFDsrIO2yhJypdxZg/SQC3E0\nHRligXUCgYEAnnJqQz8TWS4E5iZIeT7ElLLZ27/2NEx11wxPultuCK2ksxCaH2lx\nmARkMsv94KLgs8CALH0pSG4hT4vkGS9LaOcswTOH2yU0JtnnEVxKe950v/CV241G\nmcvzM4a89qi9euKVPHY71XO6HzMYkNOD0MdLYbNWBNLzSM+gMPvMimUCgYAfcRSo\nMBfuOJoo11wg3UKvp8ORuUzpGStby+Pq34WuEPqj8PAyB6TEV/R5e0PNluAqh9qj\nVknHritfJWwLaukmZy9axmu/qVRQRjfvKSCHn4dlmUMScdZoDLb7ttsY3jDtXg0O\nRCIEp79XkladJb+IwZzhBoNqMKyH0PWHpXwr9QKBgB7YGcXYy8XFW0kwpcu7lSVz\np6dROafSMk4QMljHo8yila1I0Z/TOmHalFhn9Wsafdg4JoYy12Z7OPkngCurhWv9\nCGPf4Q2/Cex5bUsjI67oUTeEkP4+a1BDDqEiUyvmQVWiE5rJZR3WsWK6jpDdHin9\nsyFa9YbHVlwpSCna8LSn\n-----END PRIVATE KEY-----\n";
+            scope: "https://mail.google.com/ https://www.googleapis.com/auth/admin.directory.user https://www.googleapis.com/auth/gmail.settings.sharing https://www.googleapis.com/auth/gmail.settings.basic https://www.googleapis.com/auth/gmail.modify https://www.googleapis.com/auth/gmail.readonly",
+            sub: primaryEmail,
+        };
 
-            const sJWT = jwt.KJUR.jws.JWS.sign("RS256", sHeader, sPayload, privateKey);
+        // Sign JWT
+        const sHeader = JSON.stringify(oHeader);
+        const sPayload = JSON.stringify(oPayload);
 
-            const url = "https://www.googleapis.com/oauth2/v4/token/";
-            const headers = new HttpHeaders({ "Content-Type": "application/x-www-form-urlencoded" });
-            const body = `grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Ajwt-bearer&assertion=${sJWT}`;
+        // tslint:disable-next-line
+        const privateKey = "-----BEGIN PRIVATE KEY-----\nMIIEuwIBADANBgkqhkiG9w0BAQEFAASCBKUwggShAgEAAoIBAQCktko8W7B/J6+l\nDQooHSH+IIq6tAIWPKSYjhON4NYD7XTHhSDgcW1qGvaMorPhS2k/UbeR0J3hBzJr\nSuBNLMa9XiHLZ+n8Z3f0j2UBO3QQwSOejSvf38LnloWtV20LY2njAW/9pNys6f9w\njMQSVIBwBOgnBC6UebzNVMsVAq5zm0zBGDIlInUPYP7NQkt5TI+eYsmuveULmm6Q\ntehf6M7krGu958nK207Y3dpvgiZR59mBpwlni9EwOq+zbjL3XC8bUA0ODUcorrxx\nQ8WJ+Mx9aE8nBXdjDz8EfFcD+6ccotwbbsiTFmUv56cLaa1kfj4cmA+me0wC8vBg\nnaHIR/aJAgMBAAECgf9HMb74a5WtOSGVGGZpBAdBFc/NbXdSEZWJvbgsLuU/CG5A\nbPIhmzRXUAF8tK+VlJakgvK4McypqMtTgU7BSAWy+/M9FfJSbBgBHYPjq9jrjGin\nxw6cIjl1Vsu/3Dtjf4snsW2FjcbogIsGX/lMaSZWCfBOnjs1QPNQ4RDmvxC8XQpy\nXuHU+sD8vBiZpclgaF2R1mf8nNfZbPCHiZws8B7Y1PhWLvutGlVdEAjMbJuMVkXP\nbmnuWh9MdL7FGZdWEola27mPkDpZSYy/Dr0ghOV9puKbZNP3wgDkWsHkw848ndFk\nfYV31g4eT7ByXbLKLuyjEnqaRDsa26D0s2epfukCgYEA4e8EAL4grLhmG+xRveci\ng5HoXVFZRVgInplsONpu1M2mXIBtWWDfVycblVkM5d1Ohd/n1Pw3fEdfK/hg2ymg\nofGVRVpYQP73NJMw1rTa5kcWRsG+YDAi4ostExlXI2rnlbnUoIuEerEzHtj4Wh9A\nPWAzBrRi8f87YTp2TDrqikUCgYEAuqGcX+p8YO5dMi/s5lGPGprptMHmCmOqU2gr\nYEectOoytOPJEiaxd7pGSa4W4ao0euNMnKsMT6q+wtRqBvpg/t8jrsvdu4hbq2Hf\nzZI6lgRKOOoawAzRjiKGcbOwgsz2UjHoIB4OWO/ujFDsrIO2yhJypdxZg/SQC3E0\nHRligXUCgYEAnnJqQz8TWS4E5iZIeT7ElLLZ27/2NEx11wxPultuCK2ksxCaH2lx\nmARkMsv94KLgs8CALH0pSG4hT4vkGS9LaOcswTOH2yU0JtnnEVxKe950v/CV241G\nmcvzM4a89qi9euKVPHY71XO6HzMYkNOD0MdLYbNWBNLzSM+gMPvMimUCgYAfcRSo\nMBfuOJoo11wg3UKvp8ORuUzpGStby+Pq34WuEPqj8PAyB6TEV/R5e0PNluAqh9qj\nVknHritfJWwLaukmZy9axmu/qVRQRjfvKSCHn4dlmUMScdZoDLb7ttsY3jDtXg0O\nRCIEp79XkladJb+IwZzhBoNqMKyH0PWHpXwr9QKBgB7YGcXYy8XFW0kwpcu7lSVz\np6dROafSMk4QMljHo8yila1I0Z/TOmHalFhn9Wsafdg4JoYy12Z7OPkngCurhWv9\nCGPf4Q2/Cex5bUsjI67oUTeEkP4+a1BDDqEiUyvmQVWiE5rJZR3WsWK6jpDdHin9\nsyFa9YbHVlwpSCna8LSn\n-----END PRIVATE KEY-----\n";
 
-            return this.http.post(url, body, { headers })
-                .toPromise()
-                .then((res) => {
-                    this.accessToken = res["access_token"];
-                    this.tokenInfo.timeCreated = oPayload.iat;
-                    this.tokenInfo.primaryEmail = oPayload.sub;
+        const sJWT = jwt.KJUR.jws.JWS.sign("RS256", sHeader, sPayload, privateKey);
 
-                    console.log("TOKEN CREATED", res, this.tokenInfo);
+        const url = "https://www.googleapis.com/oauth2/v4/token/";
+        const headers = new HttpHeaders({ "Content-Type": "application/x-www-form-urlencoded" });
+        const body = `grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Ajwt-bearer&assertion=${sJWT}`;
 
-                    return this.accessToken;
-                })
-                .catch((err) => {
-                    console.log("Failed. Trying to generate token again");
+        return this.http.post(url, body, { headers })
+            .toPromise()
+            .then((res) => {
+                this.accessToken = res["access_token"];
+                this.tokenInfo.timeCreated = oPayload.iat;
+                this.tokenInfo.primaryEmail = oPayload.sub;
 
-                    return new Promise((resolve) => setTimeout(resolve, 4000))
-                        .then(() => Promise.resolve(this.createToken(primaryEmail)));
-                });
-        }
+                console.log("TOKEN CREATED", res, this.tokenInfo);
+
+                return this.accessToken;
+            })
+            .catch((err) => {
+                console.log("Failed. Trying to generate token again");
+
+                return new Promise((resolve) => setTimeout(resolve, 4000))
+                    .then(() => Promise.resolve(this.createToken(primaryEmail)));
+            });
+        // }
 
     }
 
     public getUserAliases(email) {
-        console.log("getUserAliases for ", email);
-
         return this.createToken(email)
             .then((rep) => {
-                console.log("token created, now getting aliases");
+                console.log("token created, now getting aliases and signature");
                 const url = `https://www.googleapis.com/gmail/v1/users/me/settings/sendAs`;
                 const headers = new HttpHeaders({ Authorization: `Bearer ${this.accessToken}` });
 
@@ -525,18 +513,16 @@ export class GapiAuthenticatorService {
                         console.log("GET aliases", aliases);
 
                         return aliases;
-                    });
+                    })
+                    .catch((err) => console.error("error getting aliases and signature", err));
             });
-        // .catch((err) => {
-        // console.error(err);
-        // new Promise((resolve) => setTimeout(resolve, 4000))
-        //     .then(() => this.getUserAliases(email));
-        // });
     }
 
     public isRealUser(primaryEmail, email) {
-        console.log(`checking if ${primaryEmail} and ${email} belong to the same user`);
-
-        return primaryEmail.split("@")[0] === email.split("@")[0];
+        return firstNameFromEmail(primaryEmail) === firstNameFromEmail(email);
     }
+}
+
+function firstNameFromEmail(email) {
+    return email.split("@")[0];
 }
