@@ -46,10 +46,10 @@ def clone(branch) {
 def deploy() {
     deploy: {
         script {
-            def envHost = "51.254.106.27"
+            def envHost = "testing.usr.marcovasco.fr"
 
             if (env.BRANCH_NAME == "master") {
-                envHost = "164.132.144.57"
+                envHost = "usr.marcovasco.fr"
             }
 
             sh "mkdir -p /root/.ssh && chmod 700 /root/.ssh && cp -R /ssh/* /root/.ssh"
