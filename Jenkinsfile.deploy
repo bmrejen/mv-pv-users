@@ -14,7 +14,7 @@ pipeline {
             triggerOnMergeRequest: false,
             triggerOnAcceptedMergeRequest: true,
             branchFilterType: "All",
-            secretToken: "4e9a7fb49fc9307c809db34ac09d542a"
+            secretToken: "ae58f5f68204af67a589a53e29a73bbe"
         )
     }
     agent {
