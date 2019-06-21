@@ -23,6 +23,8 @@ export class GapiAuthenticatorService {
         timeCreated: null,
     };
 
+    public numberOfTimesGetHasFailed: number = 0;
+
     // Authorization scopes required by the API; multiple scopes can be
     // included, separated by spaces.
     // tslint:disable-next-line
@@ -358,8 +360,18 @@ export class GapiAuthenticatorService {
 
                         return resp;
                     })
-                    .then((res) => resolve(this.mapFromApi(res["result"])))
-                    .catch((err) => resolve(this.getUser(primaryEmail)));
+                    .then((res) => {
+                        this.numberOfTimesGetHasFailed = 0;
+
+                        return resolve(this.mapFromApi(res["result"]));
+                    })
+                    .catch((err) => {
+                        ++this.numberOfTimesGetHasFailed;
+                        console.log("numberOfFailures ", this.numberOfTimesGetHasFailed);
+
+                        return this.numberOfTimesGetHasFailed <= 30 ?
+                            resolve(this.getUser(primaryEmail)) : reject(err);
+                    });
             });
         });
     }
