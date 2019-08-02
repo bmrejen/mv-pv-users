@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 
 import { Destination } from "../../models/destination";
@@ -23,6 +23,8 @@ import { SugarService } from "../../services/sugar.service";
 })
 
 export class CreateUserFormComponent implements OnInit {
+    @ViewChild("gapps") public gapps;
+
     public fields: Fields;
     public passwordExists = false;
     public usersFromSugar: User[] = [];
@@ -118,7 +120,7 @@ export class CreateUserFormComponent implements OnInit {
                             .isSignedIn() === true) {
                             this.gapiStatus.userLoggedIn = result.currentUser.get().w3.ig;
                         } else {
-                            this.gapi.signIn();
+                            this.gapps.signIn();
                         }
                     })
                     .then(() => this.gapi.getGroups()

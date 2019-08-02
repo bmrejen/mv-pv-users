@@ -20,7 +20,6 @@ export class GapiUsersComponent implements OnInit {
     public users;
     public userToGet: string;
     public orgas;
-    public userLoggedIn: "Logged out";
     public googleGroups;
 
     public domains = Object.keys(Domains)
@@ -57,10 +56,12 @@ export class GapiUsersComponent implements OnInit {
 
     public signIn() {
         this.gapiService.signIn()
-            .then(() => this.gapiService.initAuthClient()
-                .then((result: any) => this.userLoggedIn = result.currentUser.get().w3.ig)
-                .catch((err) => console.log("init auth client error", err)),
-            );
+            .then((res) => {
+                window.location.reload();
+                this.gapiService.initAuthClient()
+                    .then((result: any) => this.gapiStatus.userLoggedIn = result.currentUser.get().w3.ig)
+                    .catch((err) => console.log("init auth client error", err));
+            });
     }
 
     public signOut() {
@@ -68,7 +69,7 @@ export class GapiUsersComponent implements OnInit {
             .then(() => this.gapiService.initAuthClient()
                 .then((result: any) => {
                     if (!this.gapiService.isSignedIn()) {
-                        this.userLoggedIn = "Logged out";
+                        this.gapiStatus.userLoggedIn = "Logged out";
                     }
                 })
                 .catch((err) => console.error("init auth client error", err)));
