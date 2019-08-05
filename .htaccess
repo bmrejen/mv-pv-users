@@ -1,6 +1,6 @@
 AuthType Basic
 AuthName "Password Required"
-AuthUserFile  /home2/usr/www/.htpasswd
+AuthUserFile  /home2/usr/www/src/app/assets/index-password/.htpasswd
 Require valid-user
 Allow from localhost
 Satisfy Any
