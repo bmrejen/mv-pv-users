@@ -8,12 +8,12 @@
         <div>User logged in : {{ gapiStatus.userLoggedIn }}</div>
         <br>
         <button
-            *ngIf="gapiStatus.userLoggedIn==='Logged out'"
+            *ngIf="['Logged out' || '' ].includes(gapiStatus.userLoggedIn)"
             (click)="signIn()"
             type="button"
         >Sign In</button>
 
-        <div *ngIf="gapiStatus.userLoggedIn!=='Logged out'">
+        <div *ngIf="!['Logged out' || '' ].includes(gapiStatus.userLoggedIn)">
             <button
                 (click)="signIn()"
                 type="button"
