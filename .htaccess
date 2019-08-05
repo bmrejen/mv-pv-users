@@ -1,7 +1,12 @@
-AuthUserFile /usr/local/apache2/htdocs/src/app/assets/index-password/.htpasswd
+SetEnvIf Host testing.usr.marcovasco.fr passreq
 AuthType Basic
-AuthName "My restricted Area"
+AuthName "Password Required"
+AuthUserFile /usr/local/apache2/htdocs/src/app/assets/index-password/.htpasswd
 Require valid-user
+Order allow,deny
+Allow from all
+Deny from env=passreq
+Satisfy any
 
 RewriteEngine On
 RewriteBase /
