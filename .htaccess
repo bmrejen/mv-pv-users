@@ -1,12 +1,9 @@
-SetEnvIf Host testing.usr.marcovasco.fr passreq
 AuthType Basic
 AuthName "Password Required"
 AuthUserFile /usr/local/apache2/htdocs/src/app/assets/index-password/.htpasswd
 Require valid-user
-Order allow,deny
-Allow from all
-Deny from env=passreq
-Satisfy any
+Allow from localhost
+Satisfy Any
 
 RewriteEngine On
 RewriteBase /
