@@ -6,11 +6,8 @@ import {
 import {
     DisableUserFormComponent,
 } from "./components/disable-user-form/disable-user-form.component";
-import { GapiUsersComponent } from "./components/gapi-users/gapi-users.component";
-import {
-    ImportComponent,
-} from "./components/import/import.component";
-import { JamespotUsersComponent } from "./components/jamespot-users/jamespot-users.component";
+import { ImportComponent } from "./components/import/import.component";
+import { PrivacyComponent } from "./components/privacy/privacy.component";
 
 import {
     RolesComponent,
@@ -65,6 +62,10 @@ export const AppRoutes: Routes = [
         component: UsersComponent,
     },
     {
+        path: "privacy",
+        component: PrivacyComponent,
+    },
+    {
         path: "user",
         component: UserComponent,
     },
@@ -84,6 +85,6 @@ export const AppRoutes: Routes = [
         path: "import",
         component: ImportComponent,
     },
-    { path: "**", redirectTo: "users" },
+    { path: "**", redirectTo: "create" },
 ];
 /* tslint:enable */
