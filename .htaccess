@@ -1,9 +1,9 @@
 AuthType Basic
 AuthName "Password Required"
-AuthUserFile  /home2/usr/www/src/app/assets/index-password/.htpasswd
+AuthUserFile  /home2/usr/public_html/.htpasswd
 Require valid-user
 Allow from localhost
-Satisfy Any
+# Satisfy Any
 
 RewriteEngine On
 RewriteBase /
