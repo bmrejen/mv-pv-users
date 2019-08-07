@@ -1,0 +1,130 @@
+<fieldset class="blue">
+    <legend>Google / GMail</legend>
+
+    <div>
+        <!-- <div>API is loaded : {{ gapiStatus.apiLoaded }}</div>
+        <div>API is failed : {{ gapiStatus.apiFailed }}</div>
+        <div>API is ready : {{ gapiStatus.apiReady }}</div> -->
+        <div>User logged in : {{ gapiStatus.userLoggedIn }}</div>
+        <br>
+        <button
+            *ngIf="['Logged out' || '' ].includes(gapiStatus.userLoggedIn)"
+            (click)="signIn()"
+            type="button"
+        >Sign In</button>
+
+        <div *ngIf="!['Logged out' || '' ].includes(gapiStatus.userLoggedIn)">
+            <button
+                (click)="signIn()"
+                type="button"
+            >Change Users</button>
+            <button
+                (click)="signOut()"
+                type="button"
+            >Sign Out</button>
+            <button
+                (click)="listUsers()"
+                type="button"
+            >List Users</button>
+            <button
+                (click)="resetForm()"
+                type="button"
+            >New User</button>
+            <br>
+            Orgas
+            <select
+                name="orgas"
+                [(ngModel)]="ggCurrentUser.orgas"
+            >
+                <option
+                    *ngFor="let orga of orgas"
+                    [value]="orga.value"
+                >{{ orga.value }}
+                </option>
+            </select>
+
+            <br>
+            Default alias
+            <select
+                name="defaultAlias"
+                [(ngModel)]="ggCurrentUser.sendAs"
+                (click)="handleSendAsClick()"
+                (keyup)="handleSendAsClick()"
+            >
+                <option
+                    *ngFor="let dom of domains"
+                    [value]="dom"
+                >{{ dom }}</option>
+            </select>
+            <br>
+            Signature
+            <br>
+            <textarea
+                rows="5"
+                cols="70"
+                name="signature"
+                [(ngModel)]="ggCurrentUser.signature"
+            >
+            </textarea>
+
+            <!-- IF ID IS NOT NULL THEN ID, PRIMARY and OTHER EMAILS ARE DISPLAYED -->
+            <div *ngIf="ggCurrentUser.id != null">
+                <input
+                    type="text"
+                    name="id"
+                    [(ngModel)]="ggCurrentUser.id"
+                    [attr.disabled]="true"
+                >ID
+                <br>
+                <input
+                    type="text"
+                    name="primaryEmail"
+                    [(ngModel)]="ggCurrentUser.primaryEmail"
+                    [attr.disabled]="true"
+                >Primary Mail
+                <br>
+
+                Other Emails
+                <div *ngFor="let email of ggCurrentUser.emails">
+                    <input
+                        type="text"
+                        [value]="email.address"
+                        [attr.disabled]="true"
+                    >
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2 *ngIf="gapiMessage != null">{{ gapiMessage }}</h2>
+    <table *ngIf="users != null && users.length > 0">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Is Admin</th>
+                <th>Team</th>
+                <th>Primary Email</th>
+                <th>Emails</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users; trackBy: trackByFn">
+                <td>{{ user.id }}</td>
+                <td>{{ user.name.givenName }}</td>
+                <td>{{ user.name.familyName }}</td>
+                <td>{{ user.isAdmin }}</td>
+                <td>{{ user.orgUnitPath }}</td>
+                <td>{{ user.primaryEmail }}</td>
+                <td>
+                    <ul *ngIf="user.emails && user.emails != null">
+                        <li *ngFor="let email of user.emails; trackBy: trackByFn">
+                            {{ email.address }}
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</fieldset>

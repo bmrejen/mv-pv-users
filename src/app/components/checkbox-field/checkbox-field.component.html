@@ -1,10 +1,25 @@
 <fieldset>
-  <div *ngFor="let box of checkboxes; trackBy: trackByFn">
-    <label>
-      <input
-      type="checkbox"
-      [(ngModel)]="box.checked"
-      [name]="box.id"> {{ box.label }}
-    </label>
+  <div>
+    <label>Zip:</label>
+    <input type="text" name="zip" ngModel>
   </div>
+  <div>
+    <label>Street:</label>
+    <input type="text" name="street" ngModel>
+  </div>
+  <div>
+    <label>City:</label>
+    <input type="text" name="city" ngModel>
+  </div>
+
+
+  <!--   <div *ngFor="let box of checkboxes; trackBy: trackByFn">
+  <label>
+  <input
+  type="checkbox"
+  [(ngModel)]="box.checked"
+  (ngModelChange)="boxClicked($event, box.id)"
+  [name]="box.id"> {{ box.label }}
+  </label>
+</div> -->
 </fieldset>

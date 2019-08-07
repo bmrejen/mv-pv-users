@@ -1,0 +1,64 @@
+#!groovy
+String buildToKeepRotation = "10"
+pipeline {
+    options {
+        buildDiscarder(logRotator(numToKeepStr: "${buildToKeepRotation}"))
+    }
+    environment {
+        // default email adress of user interest by this build result
+        emailAddresses = 'dev@marcovasco.fr'
+    }
+    triggers {
+        gitlab(
+            triggerOnPush: true,
+            triggerOnMergeRequest: false,
+            triggerOnAcceptedMergeRequest: true,
+            branchFilterType: "All",
+            secretToken: "ae58f5f68204af67a589a53e29a73bbe"
+        )
+    }
+    agent {
+        dockerfile {
+            dir "docker/webserver/."
+            filename "Dockerfile"
+            args '--user root --volume /home/jenkins/.ssh:/ssh --env "LOCAL_USER_ID=1002" --entrypoint=\'\''
+            additionalBuildArgs '--pull'
+        }
+    }
+    stages {
+        stage('Clone') {
+           steps {
+               clone(env.BRANCH_NAME)
+           }
+        }
+        stage('Deploy') {
+            steps {
+                deploy()
+            }
+        }
+    }
+}
+
+def clone(branch) {
+    git url: 'git@git.passveo.com:marcoetvasco/users.git', branch: branch
+}
+
+def deploy() {
+    deploy: {
+        script {
+            def envHost = "testing.usr.marcovasco.fr"
+
+            if (env.BRANCH_NAME == "master") {
+                envHost = "usr.marcovasco.fr"
+            }
+
+            sh "mkdir -p /root/.ssh && chmod 700 /root/.ssh && cp -R /ssh/* /root/.ssh"
+            sh "rm -rf .git/hooks/post-checkout"
+            sh "git checkout ${BRANCH_NAME} && git checkout ."
+            sh "git branch --set-upstream-to=origin/${BRANCH_NAME} ${BRANCH_NAME}"
+            sh "git pull"
+            sh "yarn && yarn run prod"
+            sh "rsync -avzP --delete-after -s -e \'ssh -p 22579\' ${WORKSPACE}/ usr@${envHost}:/home2/usr/public_html/"
+        }
+    }
+}

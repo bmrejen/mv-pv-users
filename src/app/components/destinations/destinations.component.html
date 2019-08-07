@@ -1,0 +1,16 @@
+<fieldset
+    class="blue"
+    *ngIf="destinations != null"
+>
+    <legend>Destinations</legend>
+    <div class="destinations">
+        <div *ngFor="let dest of destinations | alphabetical ; trackBy: trackByFn">
+            <label>
+                <input
+                    type="checkbox"
+                    (click)="handleClick(dest)"
+                >{{ dest.name | slice:7 }}
+            </label>
+        </div>
+    </div>
+</fieldset>

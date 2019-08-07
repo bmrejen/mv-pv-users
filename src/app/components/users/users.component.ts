@@ -1,34 +1,60 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { SugarUser } from "../../models/sugar-user";
 import { User } from "../../models/user";
-import { UserService } from "../../services/user.service";
+import { SugarService } from "../../services/sugar.service";
 
 @Component({
-  selector: "mv-app-users",
-  styleUrls: ["./users.component.css"],
-  templateUrl: "./users.component.html",
+    selector: "mv-app-users",
+    styleUrls: ["./users.component.css"],
+    templateUrl: "./users.component.html",
 })
 
 export class UsersComponent implements OnInit {
-  public usersFromSugar;
+    public usersFromSugar: SugarUser[] = [];
+    public filteredUsers: SugarUser[] = [];
+    public filter: string = "All";
 
-  // what is this line for?
-  @ViewChild("disableForm") public form: any;
+    constructor(private sugarService: SugarService) {
+        // constructor
+    }
 
-  constructor(private userService: UserService) {
-    // constructor
-  }
+    public ngOnInit(): void {
+        this.sugarService.getUsers()
+            .then((users) => users.forEach((user) => {
+                const userInfo = this.sugarService.mapUserFromApi(user);
 
-  public ngOnInit(): void {
+                this.usersFromSugar.push(new SugarUser(userInfo.common, userInfo.sugar));
+            }))
+            .then((users) => this.filteredUsers = this.usersFromSugar);
+    }
 
-    this.userService.getUsersFromSugar()
-    .subscribe((users) => {
-      this.usersFromSugar = users.data;
-    });
-  }
+    public filterUsers(prop: string) {
+        switch (prop) {
 
-  public trackByFn(index, item) {
-    const self = this;
+            case "inactive":
+                this.filter = "Inactive";
+                this.filteredUsers = this.usersFromSugar
+                    .filter((user) => user.status !== "Active" || user.employeeStatus !== "Active");
+                break;
 
-    return index; // or item.id
-  }
+            case "active":
+                this.filter = "Active";
+                this.filteredUsers = this.usersFromSugar
+                    .filter((user) => user.status === "Active" && user.employeeStatus === "Active");
+                break;
+
+            case "all":
+                this.filter = "All";
+                this.filteredUsers = this.usersFromSugar;
+                break;
+
+            default:
+                console.error("Users not filtered");
+                break;
+        }
+    }
+
+    public trackByFn(index) {
+        return index;
+    }
 }

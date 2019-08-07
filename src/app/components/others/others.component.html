@@ -1,0 +1,18 @@
+<fieldset
+    class="blue"
+    *ngIf="others != null"
+>
+    <legend>Others</legend>
+    <div class="others">
+        <div *ngFor="let other of others ; trackBy: trackByFn">
+            <label>
+                <input
+                    type="checkbox"
+                    (click)="handleClick(other)"
+                    [(ngModel)]="other.checked"
+                    [name]="other.id"
+                >{{ other.name }}
+            </label>
+        </div>
+    </div>
+</fieldset>

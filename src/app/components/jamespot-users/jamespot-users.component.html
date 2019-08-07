@@ -1,0 +1,44 @@
+<fieldset class="blue">
+    <legend>Jamespot</legend>
+    <h4 *ngIf="jamesCurrentUser.idUser != null">
+        {{ currentUser.common.firstName }} {{ currentUser.common.lastName }} - Id:
+        {{ jamesCurrentUser.idUser }}
+    </h4>
+
+    <form *ngIf="jamesCurrentUser!=null">
+        <input
+            type="text"
+            [(ngModel)]="currentUser.common.userName"
+            name="pseudo"
+            (ngModelChange)="checkUsernameAvailability()"
+            [attr.disabled]="true"
+        >Pseudo
+        <br>
+
+        <!-- IMAGE UPDATE -->
+        <input
+            type="file"
+            (change)="onFileSelected($event)"
+        >
+        <br>
+
+        <label>
+            <input
+                type="checkbox"
+                name="active"
+                [(ngModel)]="jamesCurrentUser.active"
+            >Active
+        </label>
+        <!-- BUTTONS -->
+        <div *ngIf="jamesCurrentUser.idUser != null">
+            <button
+                type="button"
+                (click)="onDelete()"
+            >Delete</button>
+        </div>
+
+    </form>
+
+    <h2 *ngIf="isDeleted">User {{ deletedId }} deleted !</h2>
+    <h3 *ngIf="jamesMessage != null">{{ jamesMessage }}</h3>
+</fieldset>

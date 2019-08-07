@@ -1,0 +1,101 @@
+<div *ngIf="userTemplates != null && roles != null && departments != null">
+    <fieldset class="blue">
+        <legend>Profiles SugarCRM</legend>
+        <button
+            type="button"
+            (click)="handleClick('conseiller')"
+        >Ventes - Conseiller
+        </button>
+        <button
+            type="button"
+            (click)="handleClick('jm')"
+        >Ventes – Junior Manager
+        </button>
+        <button
+            type="button"
+            (click)="handleClick('manager')"
+        >Ventes - Manager
+        </button>
+        <button
+            type="button"
+            (click)="handleClick('assistant')"
+        >Ventes – Assistant de ventes
+        </button>
+        <button
+            type="button"
+            (click)="handleClick('qualite')"
+        >Agent Qualité
+        </button>
+        <button
+            type="button"
+            (click)="handleClick('compta')"
+        >Compta
+        </button>
+        <button
+            type="button"
+            (click)="handleClick('inactif')"
+        >Inactif
+        </button>
+
+
+        <div class="select subtitle">Hérite les préférence de l'utilisateur
+            <select
+                name="userToCopyHPfrom"
+                [(ngModel)]="sugarCurrentUser.userToCopyHPfrom"
+            >
+                <option
+                    *ngFor="let user of userTemplates ; trackBy: trackByFn"
+                    [value]="user.value"
+                >
+                    {{ user.value | uppercase }}
+                </option>
+            </select>
+        </div>
+
+        <div class="checkbox-list subtitle">ROLE:
+            <span *ngFor="let role of roles; trackBy: trackByFn">
+                <label>
+                    <!-- ngModel can be binded to role ID if needed -->
+                    <input
+                        type="radio"
+                        [value]="role.id"
+                        [(ngModel)]="sugarCurrentUser.roleId"
+                        name="role"
+                    >
+                    {{ role.name }}
+                </label>
+            </span>
+        </div>
+
+        <div class="checkbox-list subtitle">DEPARTMENT:
+            <span *ngFor="let department of departments ; trackBy: trackByFn">
+                <label>
+                    <input
+                        type="radio"
+                        name="department"
+                        [(ngModel)]="sugarCurrentUser.department"
+                        [value]="department.name"
+                    >{{ department.name }}
+                </label>
+            </span>
+        </div>
+
+        <div *ngIf="sugarCurrentUser.department === 'Ventes'">
+            <label>Leads min
+                <input
+                    type="number"
+                    name="leadsMin"
+                    [(ngModel)]="sugarCurrentUser.leadsMin"
+                >
+            </label>
+            <br>
+            <label>Leads max
+                <input
+                    type="number"
+                    name="leadsMax"
+                    [(ngModel)]="sugarCurrentUser.leadsMax"
+                >
+            </label>
+        </div>
+    </fieldset>
+</div>

@@ -1,65 +1,90 @@
 import { Routes } from "@angular/router";
 
 import {
-  CreateUserFormComponent,
+    CreateUserFormComponent,
 } from "./components/create-user-form/create-user-form.component";
 import {
-  DisableUserFormComponent,
+    DisableUserFormComponent,
 } from "./components/disable-user-form/disable-user-form.component";
-import {
-  ImportComponent,
-} from "./components/import/import.component";
+import { ImportComponent } from "./components/import/import.component";
+import { PrivacyComponent } from "./components/privacy/privacy.component";
 
 import {
-  HomeComponent,
-} from "./components";
-import {
-  RolesComponent,
+    RolesComponent,
 } from "./components/roles/roles.component";
 import {
-  TeamsComponent,
-} from "./components/teams/teams.component";
-import {
-  UserComponent,
+    UserComponent,
 } from "./components/user/user.component";
 import {
-  UsersComponent,
+    UsersComponent,
 } from "./components/users/users.component";
+
+import { DestinationsResolverService } from "./resolvers/destinations-resolver.service";
+import { FieldsResolverService } from "./resolvers/fields-resolver.service";
+import { ManagersResolverService } from "./resolvers/managers-resolver.service";
+import { OthersResolverService } from "./resolvers/others-resolver.service";
+import { RolesResolverService } from "./resolvers/roles-resolver.service";
+import { SugarResolverService } from "./resolvers/sugar-resolver.service";
+import { TeamsResolverService } from "./resolvers/teams-resolver.service";
+import { UsersResolverService } from "./resolvers/users-resolver.service";
 
 /* tslint:disable object-literal-sort-keys */
 export const AppRoutes: Routes = [
-{
-  path: "home",
-  component: HomeComponent,
-},
-{
-  path: "users",
-  component: UsersComponent,
-},
-{
-  path: "user",
-  component: UserComponent,
-},
-{
-  path: "create",
-  component: CreateUserFormComponent,
-},
-{
-  path: "disable",
-  component: DisableUserFormComponent,
-},
-{
-  path: "teams",
-  component: TeamsComponent,
-},
-{
-  path: "roles",
-  component: RolesComponent,
-},
-{
-  path: "import",
-  component: ImportComponent,
-},
-{ path: "**", redirectTo: "user" },
+    {
+        path: "users/:id",
+        component: CreateUserFormComponent,
+        resolve: {
+            destinations: DestinationsResolverService,
+            fields: FieldsResolverService,
+            managers: ManagersResolverService,
+            others: OthersResolverService,
+            roles: RolesResolverService,
+            sugarUser: SugarResolverService,
+            users: UsersResolverService,
+            teams: TeamsResolverService,
+        },
+    },
+    {
+        path: "create",
+        component: CreateUserFormComponent,
+        resolve: {
+            destinations: DestinationsResolverService,
+            fields: FieldsResolverService,
+            managers: ManagersResolverService,
+            others: OthersResolverService,
+            roles: RolesResolverService,
+            teams: TeamsResolverService,
+            users: UsersResolverService,
+        },
+    },
+    {
+        path: "users",
+        component: UsersComponent,
+    },
+    {
+        path: "privacy",
+        component: PrivacyComponent,
+    },
+    {
+        path: "user",
+        component: UserComponent,
+    },
+    {
+        path: "disable/:id",
+        component: DisableUserFormComponent,
+    },
+    {
+        path: "disable",
+        component: DisableUserFormComponent,
+    },
+    {
+        path: "roles",
+        component: RolesComponent,
+    },
+    {
+        path: "import",
+        component: ImportComponent,
+    },
+    { path: "**", redirectTo: "create" },
 ];
 /* tslint:enable */

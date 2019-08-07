@@ -1,25 +1,28 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { UserService } from "../../services/user.service";
+import { Role } from "../../models/role";
+import { SugarService } from "../../services/sugar.service";
 
 @Component({
   selector: "mv-app-roles",
+  styleUrls: ["./roles.component.css"],
   templateUrl: "./roles.component.html",
 })
 
 export class RolesComponent implements OnInit {
-  public rolesFromSugar;
+  public rolesFromSugar: Role[] = [];
 
-  @ViewChild("disableForm") public form: any;
-  constructor(private userService: UserService) {
+  // @ViewChild("disableForm") public form: any;
+  constructor(private sugarService: SugarService) {
     // constructor
   }
 
   public ngOnInit(): void {
-    this.userService.getRolesFromSugar()
-    .subscribe((roles) => {
-      this.rolesFromSugar = roles.data;
+    this.sugarService.getRoles()
+    .then((roles) => {
+      roles.forEach((role) => {
+        this.rolesFromSugar.push(new Role(role));
+      });
     });
-
   }
 
   public trackByFn(index, item) {

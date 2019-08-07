@@ -1,57 +1,71 @@
-<h2>Users component</h2>
+<h1>Users</h1>
+<h2>{{ filter }} users: {{ filteredUsers.length }}</h2>
 
-<h3>Sugar Users</h3>
+<button (click)="filterUsers('active')">Actifs</button>
+<button (click)="filterUsers('inactive')">Inactifs</button>
+<button (click)="filterUsers('all')">Tous</button>
+<br><br>
+<button routerLink="/create">Nouvel utilisateur</button>
+<button routerLink="/gapi">Google/GMail Users</button>
 
-<table *ngIf="usersFromSugar && usersFromSugar != undefined">
-  <tr>
-    <th>Mr/Mme</th>
-    <th>First name</th>
-    <th>Last name</th>
-    <th>Username</th>
-    <th>Email</th>
-    <th>Dept</th>
-    <th>Office Id</th>
-    <th>Team Id</th>
-    <th>Tourplan Id</th>
-    <th>SW ClickToCall</th>
-    <th>SW CallNotification</th>
-    <th>Code SON Galileo</th>
-    <th>ID</th>
-    <th>Type</th>
-    <th>Phone Home</th>
-    <th>Phone Mobile</th>
-    <th>Phone Work</th>
-    <th>Phone Other</th>
-    <th>Phone Fax</th>
-    <th>Phone Asterisk</th>
-    <th>Status</th>
-    <th>Employee Status</th>
-    <th>Manager ID</th>
-  </tr>
-  <tr *ngFor="let user of usersFromSugar ; trackBy: trackByFn">
-    <td>{{ user.attributes.salutation }}</td>
-    <td>{{ user.attributes.firstName }}</td>
-    <td>{{ user.attributes.lastName }}</td>
-    <td>{{ user.attributes.userName }}</td>
-    <td>{{ user.attributes.email }}</td>
-    <td>{{ user.attributes.department }}</td>
-    <td>{{ user.attributes.officeId }}</td>
-    <td>{{ user.attributes.teamId }}</td>
-    <td>{{ user.attributes.tourplanID }}</td>
-    <td>{{ user.attributes.swClickToCall }}</td>
-    <td>{{ user.attributes.swCallNotification }}</td>
-    <td>{{ user.attributes.codeSonGalileo }}</td>
-    <td>{{ user.id }}</td>
-    <td>{{ user.type }}</td>
-    <td>{{ user.attributes.phoneHome }}</td>
-    <td>{{ user.attributes.phoneMobile }}</td>
-    <td>{{ user.attributes.phoneWork }}</td>
-    <td>{{ user.attributes.phoneOther }}</td>
-    <td>{{ user.attributes.phoneFax }}</td>
-    <td>{{ user.attributes.phoneAsterisk }}</td>
-    <td>{{ user.attributes.status }}</td>
-    <td>{{ user.attributes.employeeStatus }}</td>
-    <td>{{ user.attributes.managerId }}</td>
-  </tr>
+<table *ngIf="filteredUsers && filteredUsers != undefined">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Mr/Mme</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Dept</th>
+            <th>Office Id</th>
+            <th>Team Id</th>
+            <th>Tourplan Id</th>
+            <th>SW ClickToCall</th>
+            <th>SW CallNotification</th>
+            <th>Code SON Galileo</th>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Phone Home</th>
+            <th>Phone Mobile</th>
+            <th>Phone Work</th>
+            <th>Phone Other</th>
+            <th>Phone Fax</th>
+            <th>Phone Asterisk</th>
+            <th>Status</th>
+            <th>Employee Status</th>
+            <th>Manager ID</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of filteredUsers; trackBy: trackByFn">
+            <td>
+                <button [routerLink]="['/users', user.id]">Edit</button>
+                <button [routerLink]="['/disable', user.id]">Delete</button>
+            </td>
+            <td>{{ user.salutation }}</td>
+            <td>{{ user.firstName }}</td>
+            <td>{{ user.lastName }}</td>
+            <td>{{ user.userName }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.department }}</td>
+            <td>{{ user.officeId }}</td>
+            <td>{{ user.teamId }}</td>
+            <td>{{ user.tourplanID }}</td>
+            <td>{{ user.swClickToCall }}</td>
+            <td>{{ user.swCallNotification }}</td>
+            <td>{{ user.codeSonGalileo }}</td>
+            <td>{{ user.id }}</td>
+            <td>{{ user.type }}</td>
+            <td>{{ user.phoneHome }}</td>
+            <td>{{ user.phoneMobile }}</td>
+            <td>{{ user.phoneWork }}</td>
+            <td>{{ user.phoneOther }}</td>
+            <td>{{ user.phoneFax }}</td>
+            <td>{{ user.phoneAsterisk }}</td>
+            <td>{{ user.status }}</td>
+            <td>{{ user.employeeStatus }}</td>
+            <td>{{ user.managerId }}</td>
+        </tr>
+    </tbody>
 </table>
-

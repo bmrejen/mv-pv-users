@@ -1,0 +1,13 @@
+<div *ngIf="managers != null">Manager
+    <select
+        name="manager"
+        [(ngModel)]="sugarCurrentUser.managerId"
+    >
+        <option
+            *ngFor="let manager of managers; trackBy: trackByFn"
+            [value]="manager.sugarCurrentUser.id"
+        >{{ manager.common.firstName }} {{ manager.common.lastName | uppercase }} -
+            {{ manager.sugarCurrentUser.status }}
+        </option>
+    </select>
+</div>

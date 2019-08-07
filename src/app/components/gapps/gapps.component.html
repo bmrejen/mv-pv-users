@@ -1,0 +1,15 @@
+<fieldset class="blue">
+    <legend>Gapps Groups</legend>
+    <div class="googleGroups">
+        <div *ngFor="let group of googleGroups; trackBy: trackByFn">
+            <label>
+                <input
+                    type="checkbox"
+                    (click)="handleClick(group)"
+                    [name]="group.name"
+                    [(ngModel)]="group.isEnabled"
+                >{{ group.name }} ({{ group.directMembersCount }})
+            </label>
+        </div>
+    </div>
+</fieldset>

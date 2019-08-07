@@ -51,11 +51,8 @@ RUN set -x \
 
 RUN apt-get update && \
     apt-get -y install software-properties-common python-software-properties && \
-    add-apt-repository ppa:webupd8team/java && \
     apt-get update && \
-    apt-get -y install dialog apt-utils && \
-    echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections && \
-    apt-get -y install oracle-java8-installer
+    apt-get -y install dialog apt-utils
 
 RUN  sh -c 'echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list' && \
      apt-get -y install wget apt-transport-https && \

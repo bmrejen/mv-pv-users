@@ -1,0 +1,40 @@
+{
+    "data": [
+        {
+            "id": "departments-Backoffice",
+            "name": "Backoffice"
+        },
+        {
+            "id": "departments-Backoffice Billet",
+            "name": "Backoffice Billet"
+        },
+        {
+            "id": "departments-Backoffice Carnet",
+            "name": "Backoffice Carnet"
+        },
+        {
+            "id": "departments-Backoffice Resa",
+            "name": "Backoffice Resa"
+        },
+        {
+            "id": "departments-Comptabilité",
+            "name": "Comptabilité"
+        },
+        {
+            "id": "departments-Production",
+            "name": "Production"
+        },
+        {
+            "id": "departments-SAV",
+            "name": "SAV"
+        },
+        {
+            "id": "departments-Service Qualité",
+            "name": "Service Qualité"
+        },
+        {
+            "id": "departments-Ventes",
+            "name": "Ventes"
+        }
+    ]
+}
