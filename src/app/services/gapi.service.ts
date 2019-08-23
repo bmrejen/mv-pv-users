@@ -18,12 +18,12 @@ export class GapiAuthenticatorService {
         "https://content.googleapis.com/discovery/v1/apis/gmail/v1/rest",
     ];
     public accessToken: string;
-    public tokenInfo = {
-        primaryEmail: null,
-        timeCreated: null,
-    };
 
     public numberOfTimesGetHasFailed: number = 0;
+    public numberOfTimesCreateAliasHasFailed: number = 0;
+    public numberOfTimesGetAliasesHasFailed: number = 0;
+
+    public userSendAsUrl: string = "http://localhost:3000/users";
 
     // Authorization scopes required by the API; multiple scopes can be
     // included, separated by spaces.
@@ -229,12 +229,9 @@ export class GapiAuthenticatorService {
     }
 
     public updateGmailSendAs(usr: User, oldUsr: User): Promise<any> {
-        console.log("usr ", usr);
-        console.log("oldUsr ", oldUsr);
         const body = {};
 
-        // "sub" property needed for token but will be deleted if a new alias must be created
-        body["sub"] = `${usr.ggCurrentUser.primaryEmail}`;
+        const primaryEmail = `${usr.ggCurrentUser.primaryEmail}`;
 
         const newSendAsEmail = `${usr.ggCurrentUser.primaryEmail.split("@")[0]}@${usr.ggCurrentUser.sendAs}`;
 
@@ -248,51 +245,54 @@ export class GapiAuthenticatorService {
             body["signature"] = usr.ggCurrentUser.signature;
         }
 
-        // If alias has been modified
-        if (usr.ggCurrentUser.sendAs !== oldUsr.ggCurrentUser.sendAs) {
+        // If alias or signature have been modified
+        if (usr.ggCurrentUser.sendAs !== oldUsr.ggCurrentUser.sendAs ||
+            usr.ggCurrentUser.signature !== oldUsr.ggCurrentUser.signature) {
             body["displayName"] = `${usr.common.firstName} ${usr.common.lastName}`;
             body["isDefault"] = true;
-            body["replyToAddress"] = "";
             body["sendAsEmail"] = newSendAsEmail;
             body["treatAsAlias"] = true;
+            body["replyToAddress"] = newSendAsEmail;
         }
 
         // Create the alias if it doesn't exist
-        if (usr.ggCurrentUser.aliases.some((alias) => alias.sendAsEmail === newSendAsEmail)) {
-            return this.updateAlias(body);
+        if (usr.ggCurrentUser.aliases !== [] &&
+            usr.ggCurrentUser.aliases.some((alias) => alias.sendAsEmail === newSendAsEmail)) {
+            return this.updateAlias(primaryEmail, body);
         } else {
-            return this.createNewAlias(body);
+            return this.createNewAlias(primaryEmail, body);
         }
     }
 
-    public updateAlias(body): Promise<any> {
-        const primaryEmail = body.sub;
-        console.log("BODY OF REQUEST", body);
+    public updateAlias(primaryEmail, body): Promise<any> {
+        const url = `https://www.googleapis.com/gmail/v1/users/me/settings/sendAs/${body.sendAsEmail}`;
 
-        return this.createToken(primaryEmail)
-            .then(() => {
-                const url = `https://www.googleapis.com/gmail/v1/users/me/settings/sendAs/${body.sendAsEmail}`;
-                const headers = new HttpHeaders({ Authorization: `Bearer ${this.accessToken}` });
-                delete body.sub;
+        const objectForServer = {
+            body,
+            method: "patch",
+            primaryEmail,
+            url,
+        };
 
-                return this.http.patch(url, body, { headers })
-                    .toPromise();
-            });
+        return this.http.post(this.userSendAsUrl, objectForServer)
+            .toPromise()
+            .then((res) => console.log("POSTED TO LOCAL SERVER", res))
+            .catch((err) => console.error("ERROR FROM LOCAL SERVER", err));
     }
 
-    public createNewAlias(body): Promise<any> {
-        const primaryEmail = body.sub;
+    public createNewAlias(primaryEmail, body): Promise<any> {
+        const url = `https://www.googleapis.com/gmail/v1/users/me/settings/sendAs`;
+        const objectForServer = {
+            body,
+            method: "post",
+            primaryEmail,
+            url,
+        };
 
-        return this.createToken(primaryEmail)
-            .then(() => {
-                console.log("token has been created:", this.accessToken);
-                const url = `https://www.googleapis.com/gmail/v1/users/me/settings/sendAs`;
-                const headers = new HttpHeaders({ Authorization: `Bearer ${this.accessToken}` });
-                delete body.sub;
-
-                return this.http.post(url, body, { headers })
-                    .toPromise();
-            });
+        return this.http.post(this.userSendAsUrl, objectForServer)
+            .toPromise()
+            .then((res) => console.log("POSTED TO LOCAL SERVER", res))
+            .catch((err) => console.error("ERROR FROM LOCAL SERVER", err));
     }
 
     public getGroups(mail?): Promise<any[]> {
@@ -450,17 +450,6 @@ export class GapiAuthenticatorService {
     }
 
     public createToken(primaryEmail): Promise<any> {
-        const timeNow = jwt.KJUR.jws.IntDate.get("now");
-
-        // if (this.tokenInfo.primaryEmail != null
-        //     && this.tokenInfo.timeCreated != null
-        //     && (timeNow - this.tokenInfo.timeCreated < 3600)
-        //     && (primaryEmail === this.tokenInfo.primaryEmail)) {
-        //     console.log("token already exists");
-
-        //     return Promise.resolve(this.accessToken);
-        // } else {
-
         this.accessToken = null;
 
         console.log("creating a token for the primaryEmail: ", primaryEmail);
@@ -473,7 +462,7 @@ export class GapiAuthenticatorService {
             iat: jwt.KJUR.jws.IntDate.get("now"),
             iss: "370957812504-m0eophjpraff16mbnloc330bq7jkm6up@developer.gserviceaccount.com",
             // tslint:disable-next-line
-            scope: "https://mail.google.com/ https://www.googleapis.com/auth/admin.directory.user https://www.googleapis.com/auth/gmail.settings.sharing https://www.googleapis.com/auth/gmail.settings.basic https://www.googleapis.com/auth/gmail.modify https://www.googleapis.com/auth/gmail.readonly",
+            scope: "https://mail.google.com https://www.googleapis.com/auth/admin.directory.group https://www.googleapis.com/auth/admin.directory.orgunit https://www.googleapis.com/auth/admin.directory.user https://www.googleapis.com/auth/gmail.modify https://www.googleapis.com/auth/gmail.settings.basic https://www.googleapis.com/auth/gmail.settings.sharing",
             sub: primaryEmail,
         };
 
@@ -494,10 +483,8 @@ export class GapiAuthenticatorService {
             .toPromise()
             .then((res) => {
                 this.accessToken = res["access_token"];
-                this.tokenInfo.timeCreated = oPayload.iat;
-                this.tokenInfo.primaryEmail = oPayload.sub;
 
-                console.log("TOKEN CREATED", res, this.tokenInfo);
+                console.log("TOKEN CREATED", res);
 
                 return this.accessToken;
             })
@@ -523,10 +510,18 @@ export class GapiAuthenticatorService {
                     .then((res) => {
                         const aliases = res["sendAs"];
                         console.log("GET aliases", aliases);
+                        this.numberOfTimesGetAliasesHasFailed = 0;
 
                         return aliases;
                     })
-                    .catch((err) => console.error("error getting aliases and signature", err));
+                    .catch((err) => {
+                        console.log("error getting aliases and signature. Trying again...", err);
+                        ++this.numberOfTimesGetAliasesHasFailed;
+
+                        return this.numberOfTimesGetAliasesHasFailed <= 30 ?
+                            Promise.resolve(setTimeout(() => this.getUserAliases(email), 1000)) :
+                            Promise.reject(err);
+                    });
             });
     }
 
