@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable, NgZone } from "@angular/core";
+import { Config } from "../config";
 import { IGapiRequest, IGapiUser } from "../interfaces/gapi-user";
 
 import * as jwt from "jsrsasign";
@@ -23,7 +24,7 @@ export class GapiAuthenticatorService {
     public numberOfTimesCreateAliasHasFailed: number = 0;
     public numberOfTimesGetAliasesHasFailed: number = 0;
 
-    public userSendAsUrl: string = "http://localhost:3000/users";
+    public userSendAsUrl: string = Config.getSendAsServerUrl();
 
     // Authorization scopes required by the API; multiple scopes can be
     // included, separated by spaces.
@@ -273,6 +274,7 @@ export class GapiAuthenticatorService {
             primaryEmail,
             url,
         };
+        console.log("ON POSTE LAAAAAAAAAAA", this.userSendAsUrl);
 
         return this.http.post(this.userSendAsUrl, objectForServer)
             .toPromise()
