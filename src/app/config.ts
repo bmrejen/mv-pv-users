@@ -57,4 +57,19 @@ export class Config {
 
         return env;
     }
+
+    public static getSendAsServerUrl(): string {
+        let url;
+
+        switch (this.getEnv()) {
+            case "Production":
+            case "Preprod":
+            case "Testing":
+            case "Dev":
+            default:
+                url = "http://localhost:3000/users";
+        }
+
+        return url;
+    }
 }

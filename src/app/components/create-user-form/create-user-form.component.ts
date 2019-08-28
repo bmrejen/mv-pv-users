@@ -329,9 +329,7 @@ export class CreateUserFormComponent implements OnInit {
                 console.log("response from gapi update user", res);
 
                 // Update Gmail settings (sendAs and signature)
-                return this.gapi.updateGmailSendAs(this.currentUser, this.oldUser)
-                    .then((resp) => resp)
-                    .catch((err) => console.error(err));
+                return this.updateGmailSendAs();
             });
 
         // Update Googlegroups
@@ -397,6 +395,8 @@ export class CreateUserFormComponent implements OnInit {
                         this.postGoogleGroups();
 
                         this.activatePopSettings(primaryEmail);
+                        this.updateGapiUser();
+
                     })
                     .catch((err) => console.error(err));
 
@@ -413,13 +413,13 @@ export class CreateUserFormComponent implements OnInit {
 
     public activatePopSettings(primaryEmail) {
         return this.gapi.activatePopSettings(primaryEmail)
-            .then((res) => res)
+            .then((res) => console.log("pop settings activation", res))
             .catch((err) => console.error(err));
     }
 
     public postGoogleGroups() {
         return this.gapi.postGoogleGroups(this.currentUser.ggCurrentUser)
-            .then((res) => res)
+            .then((res) => console.log("postGoogleGroups response", res))
             .catch((err) => console.error(err));
     }
 
@@ -529,6 +529,12 @@ export class CreateUserFormComponent implements OnInit {
                     signature: this.currentUser.ggCurrentUser.signature,
                 };
             })
+            .catch((err) => console.error(err));
+    }
+
+    private updateGmailSendAs() {
+        return this.gapi.updateGmailSendAs(this.currentUser, this.oldUser)
+            .then((resp) => console.log("update GMail SendAs and Signature", resp))
             .catch((err) => console.error(err));
     }
 
