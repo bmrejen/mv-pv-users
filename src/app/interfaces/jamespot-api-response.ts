@@ -45,13 +45,13 @@ export interface IJamespotUserConfig {
 }
 
 export interface IJamespotUser {
-    country: string;
-    language: string;
-    role: string;
     active: boolean;
-    timeZone?: string;
-    phoneExtension?: string;
+    company?: string;
+    country: string;
     idUser?: string;
     img?: string | File;
-    company?: string;
+    language: string;
+    phoneExtension?: string;
+    role: string;
+    timeZone?: string;
 }

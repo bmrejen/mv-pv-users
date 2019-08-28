@@ -15,6 +15,7 @@ import { JamespotUser } from "../../models/jamespot-user";
 import { GapiAuthenticatorService } from "../../services/gapi.service";
 import { JamespotService } from "../../services/jamespot.service";
 import { SugarService } from "../../services/sugar.service";
+import { IJamespotUser } from "./../../interfaces/jamespot-api-response";
 
 @Component({
     selector: "mv-app-create-user-form",
@@ -251,28 +252,37 @@ export class CreateUserFormComponent implements OnInit {
         this.mailToGet = this.currentUser.ggCurrentUser.primaryEmail;
 
         const promises: Array<Promise<any>> = [];
+        let firstPromise: Promise<any>;
 
-        this.fields.accounts.forEach((account) => {
-            if (account.checked) {
-                switch (account.id) {
-                    case "gapps":
-                        promises.push(this.postGapiUser());
-                        break;
-                    case "sugar":
-                        promises.push(this.postSugarUser());
-                        break;
-                    case "jamespot":
-                        promises.push(this.postJamespotUser());
-                        break;
+        if (this.fields.accounts.find((account) => account.id === "jamespot").checked) {
+            firstPromise = Promise.resolve(this.postJamespotUser())
+                .then((res: IJamespotUser) => this.mapJamespotIdToUser(res));
+        } else {
+            firstPromise = Promise.resolve();
+        }
 
-                    default:
-                        alert("This promise is not defined");
-                        break;
+        firstPromise.then(() => {
+            this.fields.accounts.forEach((account) => {
+                if (account.checked) {
+                    switch (account.id) {
+                        case "gapps":
+                            promises.push(this.postGapiUser());
+                            break;
+                        case "sugar":
+                            promises.push(this.postSugarUser());
+                            break;
+                        case "jamespot":
+                            break;
+                        default:
+                            alert("This promise is not defined");
+                            break;
+                    }
                 }
-            }
+            });
+
+            Promise.all(promises);
         });
 
-        Promise.all(promises);
     }
 
     public updateUser() {
@@ -364,7 +374,11 @@ export class CreateUserFormComponent implements OnInit {
 
     public postJamespotUser(): Promise<any> {
         return this.james.postUsers(this.currentUser)
-            .then((res: IJamespotUserConfig) => this.jamesMessage = `User ${res.idUser} created`)
+            .then((res: IJamespotUserConfig) => {
+                this.jamesMessage = `User ${res.idUser} created`;
+
+                return res;
+            })
             .catch((err: string) => {
                 console.error("Jamespot Problem :", err);
                 this.jamesMessage = err.substr(31, err.length - 34);
@@ -549,5 +563,9 @@ export class CreateUserFormComponent implements OnInit {
 
             return;
         }
+    }
+
+    private mapJamespotIdToUser(res: IJamespotUser) {
+        this.currentUser.sugarCurrentUser.jamespotId = res.idUser;
     }
 }
