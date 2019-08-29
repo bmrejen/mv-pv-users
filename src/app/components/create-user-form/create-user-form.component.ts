@@ -179,30 +179,23 @@ export class CreateUserFormComponent implements OnInit {
 
     // -------- GET USER METHODS -------------
     public getJamespotUser(searchTerm, type): Promise<any> {
-        console.log("getJamespotUser ", searchTerm, type);
-
         if (type === "mail") {
             return this.james.getByField("mail", searchTerm)
-                .then((res: IJamespotUserConfig) => {
-                    console.log("get jamespot user", res);
-                    this.currentUser.jamesCurrentUser = new JamespotUser(res);
-                    this.oldUser.jamesCurrentUser = new JamespotUser(res);
-
-                    return res;
-                })
+                .then((res) => this.mapJamespotResponseToUser(res))
                 .catch((err) => this.jamesMessage = err);
         } else if (type === "id") {
             return this.james.getUser(searchTerm)
-                .then((res: IJamespotUserConfig) => {
-                    console.log("get jamespot id", res);
-                    this.currentUser.jamesCurrentUser = new JamespotUser(res);
-                    this.oldUser.jamesCurrentUser = new JamespotUser(res);
-
-                    return res;
-                });
+                .then((res) => this.mapJamespotResponseToUser(res));
         } else {
             alert("getjamespot error");
         }
+    }
+
+    public mapJamespotResponseToUser(res: IJamespotUserConfig): IJamespotUserConfig {
+        this.currentUser.jamesCurrentUser = new JamespotUser(res);
+        this.oldUser.jamesCurrentUser = new JamespotUser(res);
+
+        return res;
     }
 
     public getSugarUser(username): Promise<any> {
