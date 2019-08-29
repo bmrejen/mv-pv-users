@@ -45,9 +45,9 @@ export class JamespotService {
     public postUsers(user: User): Promise<IJamespotUserConfig> {
         const fd = new FormData();
         // Common properties
-        fd.append("Firstname", user.common.firstName);
+        fd.append("Firstname", capitalize(user.common.firstName));
         fd.append("Lastname", user.common.lastName.toUpperCase());
-        fd.append("Pseudo", `${user.common.firstName} ${user.common.lastName.toUpperCase()}`);
+        fd.append("Pseudo", capitalize(`${user.common.firstName} ${user.common.lastName}`));
         fd.append("Password", user.common.password);
 
         // Google and Sugar properties
@@ -244,4 +244,16 @@ export class JamespotService {
                 });
             });
     }
+
+}
+function capitalize(s) {
+    if (typeof s !== "string") {
+        return "";
+    }
+
+    return s.split(/ /)
+        .map((word) => word.charAt(0)
+            .toUpperCase() + word.toLowerCase()
+                .slice(1))
+        .join(" ");
 }
