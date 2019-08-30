@@ -141,19 +141,23 @@ export class CreateUserFormComponent implements OnInit {
         }
         const username = this.mailToGet.substring(0, this.mailToGet.lastIndexOf("@"));
 
-        const promises = [
-            this.getJamespotUser(`${username}@marcovasco.fr`),
-            this.getGapiUser(this.mailToGet),
-            this.getSugarUser(username),
-        ];
+        const jamespotSearchTerms = {
+            searchTerm: `${username}@marcovasco.fr`,
+            type: "mail",
+        };
 
-        return Promise.all(promises)
+        return this.getSugarUser(username)
             .then((res) => {
-                return {
-                    google: res[1],
-                    jamespot: res[0],
-                    sugar: res[2],
-                };
+                console.log("GET SUGAR USER ", res);
+                jamespotSearchTerms.searchTerm = this.currentUser.sugarCurrentUser.jamespotId;
+                jamespotSearchTerms.type = "id";
+                console.log("changed the jamespot params", jamespotSearchTerms);
+
+                return Promise.all([
+                    this.getJamespotUser(jamespotSearchTerms.searchTerm, jamespotSearchTerms.type),
+                    this.getGapiUser(this.mailToGet),
+                    res,
+                ]);
             })
             .then((resp) => {
                 console.log("Promise all in getUser", resp);
@@ -174,16 +178,24 @@ export class CreateUserFormComponent implements OnInit {
     }
 
     // -------- GET USER METHODS -------------
-    public getJamespotUser(mail): Promise<any> {
-        return this.james.getByField("mail", mail)
-            .then((res: IJamespotUserConfig) => {
-                console.log("get jamespot user", res);
-                this.currentUser.jamesCurrentUser = new JamespotUser(res);
-                this.oldUser.jamesCurrentUser = new JamespotUser(res);
+    public getJamespotUser(searchTerm, type): Promise<any> {
+        if (type === "mail") {
+            return this.james.getByField("mail", searchTerm)
+                .then((res) => this.mapJamespotResponseToUser(res))
+                .catch((err) => this.jamesMessage = err);
+        } else if (type === "id") {
+            return this.james.getUser(searchTerm)
+                .then((res) => this.mapJamespotResponseToUser(res));
+        } else {
+            alert("getjamespot error");
+        }
+    }
 
-                return res;
-            })
-            .catch((err) => this.jamesMessage = err);
+    public mapJamespotResponseToUser(res: IJamespotUserConfig): IJamespotUserConfig {
+        this.currentUser.jamesCurrentUser = new JamespotUser(res);
+        this.oldUser.jamesCurrentUser = new JamespotUser(res);
+
+        return res;
     }
 
     public getSugarUser(username): Promise<any> {
