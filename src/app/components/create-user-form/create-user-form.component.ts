@@ -251,8 +251,9 @@ export class CreateUserFormComponent implements OnInit {
 
     public lowerCasify() {
         this.currentUser.common.email = this.currentUser.sugarCurrentUser.common.email.toLowerCase();
+        this.currentUser.common.email = this.currentUser.common.email.toLowerCase()
+            .replace(/"'"/g, "");
         this.currentUser.common.userName = this.currentUser.common.userName.toLowerCase();
-        this.currentUser.common.email = this.currentUser.common.email.toLowerCase();
         this.currentUser.ggCurrentUser.primaryEmail = this.currentUser.ggCurrentUser.primaryEmail.toLowerCase();
     }
 
