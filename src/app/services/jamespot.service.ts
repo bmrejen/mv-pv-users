@@ -163,11 +163,11 @@ export class JamespotService {
                 switch (key) {
 
                     case "firstName":
-                        params = params.append("Firstname", usr.common[key]);
+                        params = params.append("Firstname", capitalize(usr.common[key]));
                         break;
 
                     case "lastName":
-                        params = params.append("Lastname", usr.common[key]);
+                        params = params.append("Lastname", usr.common[key].toUpperCase());
                         break;
 
                     case "email":
@@ -175,7 +175,7 @@ export class JamespotService {
                         break;
 
                     case "userName":
-                        // Username will be updated under
+                        // do nothing - userName is updated lower
                         break;
 
                     default:
@@ -188,8 +188,8 @@ export class JamespotService {
         // Update username
         if (usr.common.firstName !== oldUsr.common.firstName
             || usr.common.lastName !== oldUsr.common.lastName) {
-            params = params.append("Pseudo",
-                `${usr.common.firstName} ${usr.common.lastName.toUpperCase()}`);
+            params = params.append("Pseudo", capitalize(`${usr.common.firstName} ${usr.common.lastName}`));
+
         }
 
         // Update Jamespot properties
@@ -236,6 +236,30 @@ export class JamespotService {
                         params = params.append("timeZone", user[key]);
                         break;
 
+                    case "destinations":
+                        params = params.append("Field4", user.destinations.join(", "));
+                        break;
+                    case "birthDate":
+                        params = params.append("Field3", user.birthDate);
+                        break;
+                    case "skypeUsername":
+                        params = params.append("Field5", user.skypeUsername);
+                        break;
+                    case "managerJamespotId":
+                        params = params.append("businessManagementManager",
+                            `user/${user.managerJamespotId}`);
+                        break;
+
+                    // *** FOLLOWING FIELDS ARE CURRENTLY DISABLED ***
+                    case "expertiseZone":
+                        // params = params.append("tag_2", Object.keys(user.expertiseZone)[0]);
+                        break;
+                    case "city":
+                        // params = params.append("tag_5", Object.keys(user.city)[0]);
+                        break;
+                    case "service":
+                        // params = params.append("tag_8", Object.keys(user.service)[0]);
+                        break;
                     default:
                         break;
                 }

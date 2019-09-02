@@ -341,7 +341,7 @@ export class CreateUserFormComponent implements OnInit {
 
     }
 
-    public updateGapiUser() {
+    public updateGapiUser(): Promise<any> {
         this.gapiMessage = null;
 
         const updateUserPromise = this.gapi.updateUser(this.currentUser, this.oldUser)
