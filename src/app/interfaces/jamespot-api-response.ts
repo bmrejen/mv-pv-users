@@ -1,23 +1,33 @@
 export interface IJamespotUserFromApi {
-    properties: {
-        active: string,
-        company?: string,
-        timeZone?: string,
-    };
-    Country: string;
-    Firstname: string;
     idUser: string;
-    img: string | File;
-    Language: string;
-    Lastname: string;
     Mail: string;
     Pseudo: string;
+    Firstname: string;
+    Lastname: string;
+    Language: string;
+    Country: string;
     Role: string;
+    img: string | File;
     field1?: string;
     field2?: string;
     field3?: string;
     field4?: string;
     field5?: string;
+    properties: {
+        active: string,
+        company?: string,
+        timeZone?: string,
+        type: string,
+        description: string,
+        function?: string,
+        department: string,
+        phoneNumber: string,
+        tag_2: {},
+        tag_5: {},
+        tag_8: {},
+        mobileNumber: string,
+        businessManagementManager: string,
+    };
 }
 
 export interface IJamespotUserList {
@@ -33,6 +43,7 @@ export interface IJamespotApiResponse<T> {
 }
 
 export interface IJamespotUserConfig {
+    function?: string;
     country?: string;
     language?: string;
     role?: string;
@@ -42,6 +53,14 @@ export interface IJamespotUserConfig {
     idUser?: string;
     img?: string | File;
     company?: string;
+    destinations?: string[];
+    teams?: string[];
+    birthDate?: string;
+    skypeUsername?: string;
+    city?: {};
+    service?: {};
+    expertiseZone?: {};
+    managerJamespotId?: string;
 }
 
 export interface IJamespotUser {

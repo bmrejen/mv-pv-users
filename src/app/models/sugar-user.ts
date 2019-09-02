@@ -38,6 +38,7 @@ export class SugarUser implements ISugarUserConfig {
     public teams: string[] = [];
     public common: ICommonProperties;
     public jamespotId: string = "";
+    public jamespotManagerId: string = "";
 
     constructor(common: ICommonProperties, data: ISugarUserConfig) {
         this.common = common;
@@ -60,6 +61,7 @@ export class SugarUser implements ISugarUserConfig {
         this.title = data.title || this.title;
         this.type = data.type || this.type;
         this.jamespotId = data.jamespotId || this.jamespotId;
+        this.jamespotManagerId = data.jamespotId || this.jamespotId;
         this.tourplanID = data.tourplanID || this.common.userName.substr(0, 6)
             .toUpperCase();
 

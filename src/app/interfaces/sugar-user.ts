@@ -72,6 +72,7 @@ export interface ISugarUserToApi {
 export interface ISugarUserConfig {
     id?: string;
     jamespotId?: string;
+    jamespotManagerId?: string;
     salutation: string;
     phoneHome: string;
     phoneMobile: string;
