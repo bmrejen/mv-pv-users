@@ -29,7 +29,7 @@ export class ManagerComponent {
             this.sugar.getUserById(sugarId)
                 .then((res) => {
                     if (!["", null].includes(res.sugar.jamespotId)) {
-                        this.currentUser.sugarCurrentUser.jamespotManagerId = res.sugar.jamespotId;
+                        this.currentUser.jamesCurrentUser.managerJamespotId = res.sugar.jamespotId;
                     } else {
                         alert("Manager has no Jamespot id");
                     }

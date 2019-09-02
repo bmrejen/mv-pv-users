@@ -72,7 +72,7 @@ export class JamespotService {
         fd.append("tag_5", Object.keys(user.jamesCurrentUser.city)[0]); // Ville de travail
         fd.append("tag_8", Object.keys(user.jamesCurrentUser.service)[0]); // Service
         fd.append("tag_2", Object.keys(user.jamesCurrentUser.expertiseZone)[0]); // Zone d'expertises
-        fd.append("businessManagementManager", `user/${user.sugarCurrentUser.jamespotManagerId}`);
+        fd.append("businessManagementManager", `user/${user.jamesCurrentUser.managerJamespotId}`);
         // Jamespot id of manager, eg. user/258
 
         // *** Empty fields ***
