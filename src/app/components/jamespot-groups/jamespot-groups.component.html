@@ -1,0 +1,15 @@
+<fieldset class="blue">
+    <legend>Jamespot Groups (only for POST)</legend>
+    <div class="jamespotGroups">
+        <div *ngFor="let spot of spots; trackBy: trackByFn">
+            <label>
+                <input
+                    type="checkbox"
+                    (click)="handleClick(spot)"
+                    [name]="spot.title"
+                    [(ngModel)]="spot.isEnabled"
+                >{{ spot.title }}
+            </label>
+        </div>
+    </div>
+</fieldset>

@@ -1,3 +1,5 @@
+import { Spot } from "./../models/jamespot-spot";
+
 export interface IJamespotUserFromApi {
     idUser: string;
     Mail: string;
@@ -61,6 +63,7 @@ export interface IJamespotUserConfig {
     service?: {};
     expertiseZone?: {};
     managerJamespotId?: string;
+    spots?: Spot[];
 }
 
 export interface IJamespotUser {

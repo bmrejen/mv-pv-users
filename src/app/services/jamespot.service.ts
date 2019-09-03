@@ -1,4 +1,6 @@
 import { User } from "../models/user";
+import { Spot } from "./../models/jamespot-spot";
+
 import {
     IJamespotApiResponse,
     IJamespotUserConfig,
@@ -6,7 +8,7 @@ import {
     IJamespotUserList,
 } from "./../interfaces/jamespot-api-response";
 
-import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams, HttpResponseBase } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 
@@ -42,8 +44,8 @@ export class JamespotService {
             });
     }
 
-    public postUsers(user: User): Promise<IJamespotUserConfig> {
-        console.log("post jamespot user", user.jamesCurrentUser);
+    // : Promise<IJamespotUserConfig>
+    public postUsers(user: User) {
         const fd = new FormData();
         // Common properties
         fd.append("Firstname", capitalize(user.common.firstName));
@@ -96,7 +98,27 @@ export class JamespotService {
                     const err = res.RC.MSG;
                     res.RC.CODE === 0 ? resolve(this.mapFromApi(res)) : reject(err);
                 });
-            });
+            })
+            .then((res: IJamespotUserConfig) => this.postUserGroups(res, user.jamesCurrentUser.spots));
+    }
+
+    public postUserGroups(res: IJamespotUserConfig, spots: Spot[]) {
+        const responses = [];
+
+        spots.forEach((spot) => {
+            let params = new HttpParams()
+                .set("idUser", res.idUser);
+            params = params.append("idSpot", spot.id);
+            params = params.append("Level", "3");   // 0 Fondateur, 1 Admin, 2 Redacteur, 3 Membre, 4 Non-membre
+            this.http.get(`${this.endPoint}spot/setUserLevel`, { headers: this.headers, params })
+                .toPromise()
+                .then((response) => responses.push(response));
+        });
+
+        return {
+            groups: responses,
+            user: res,
+        };
     }
 
     public mapFromApi(res: IJamespotApiResponse<IJamespotUserFromApi>): IJamespotUserConfig {
@@ -301,7 +323,13 @@ export class JamespotService {
             });
     }
 
+    public getSpots() {
+        return this.http.get(`./src/app/assets/jamespot-groups.json`)
+            .map((res) => res["data"])
+            .toPromise();
+    }
 }
+
 function capitalize(s) {
     if (typeof s !== "string") {
         return "";

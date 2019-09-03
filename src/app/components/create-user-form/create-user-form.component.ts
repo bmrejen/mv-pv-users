@@ -11,6 +11,7 @@ import { User } from "../../models/user";
 
 import { IJamespotUserConfig } from "../../interfaces/jamespot-api-response";
 import { GoogleUser } from "../../models/google-user";
+import { Spot } from "../../models/jamespot-spot";
 import { JamespotUser } from "../../models/jamespot-user";
 import { GapiAuthenticatorService } from "../../services/gapi.service";
 import { JamespotService } from "../../services/jamespot.service";
@@ -53,10 +54,7 @@ export class CreateUserFormComponent implements OnInit {
         sendAs: null,
         signature: null,
     };
-
-    // tslint:disable-next-line:max-line-length
-    public body = `{"data":[{"codeSonGalileo":"","departments":["departments-Backoffice","departments-Backoffice Billet"],"destinations":["4e12eefb-5dbb-f913-d80b-4c2ab8202809","6f9aedb6-6d68-b4f3-0270-4cc10e363077"],"email":"mfeuillet@marcovasco.fr","employeeStatus":true,"firstName":"Mathilde","functionId":"","inheritsPreferencesFrom":"user_default","isAdmin":false,"lastName":"Feuillet","leadsMax":45,"leadsMin":15,"managerId":"","officeId":"","phoneAsterisk":"phoneAsterisk","phoneFax":"phoneFax","phoneMobile":"phoneMobile","phoneWork":"phoneWork","roles":["128e2eae-322a-8a0d-e9f0-4cf35b5bfe5b","25218251-3011-b347-5d4f-4bfced4de2cc"],"salutation":"Mrs.","status":true,"teams":["0ec63f44-aa38-11e7-924f-005056911f09","1046f88d-3d37-10d5-7760-506023561b57"],"title":"","tourplanID":"MFEUIL","userName":"mfeuillet"}]}`;
-
+    public spots: Spot[] = [];
     public userObject;
 
     constructor(
@@ -100,6 +98,10 @@ export class CreateUserFormComponent implements OnInit {
 
                 // get others
                 data.others.forEach((other) => this.fields.others.push(new Other(other)));
+
+                // get jamespot spots
+                data.spots.forEach((spot) => this.spots.push(new Spot(spot)));
+                this.spots.sort((a, b) => a.title < b.title ? -1 : a.title > b.title ? 1 : 0);
 
             });
         this.initGapiServices();
@@ -384,8 +386,8 @@ export class CreateUserFormComponent implements OnInit {
 
     public postJamespotUser(): Promise<any> {
         return this.james.postUsers(this.currentUser)
-            .then((res: IJamespotUserConfig) => {
-                this.jamesMessage = `User ${res.idUser} created`;
+            .then((res) => {
+                this.jamesMessage = `User ${res.user.idUser} created`;
 
                 return res;
             })

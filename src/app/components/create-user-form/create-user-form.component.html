@@ -105,6 +105,12 @@
             [ggCurrentUser]="currentUser.ggCurrentUser"
             [googleGroups]="googleGroups"
         ></mv-gapps>
+        <mv-jamespot-groups
+            *ngIf="currentUser.jamesCurrentUser.idUser === null"
+            [currentUser]="currentUser"
+            [spots]="spots"
+        >
+        </mv-jamespot-groups>
 
         <div *ngIf="errorMsg">ERROR: {{ errorMsg }}</div>
         <button

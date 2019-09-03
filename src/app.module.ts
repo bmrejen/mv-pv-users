@@ -32,6 +32,7 @@ import { FunctionComponent } from "./app/components/function/function.component"
 import { GapiUsersComponent } from "./app/components/gapi-users/gapi-users.component";
 import { GappsComponent } from "./app/components/gapps/gapps.component";
 import { ImportComponent } from "./app/components/import/import.component";
+import { JamespotGroupsComponent } from "./app/components/jamespot-groups/jamespot-groups.component";
 import { JamespotUsersComponent } from "./app/components/jamespot-users/jamespot-users.component";
 import { ManagerComponent } from "./app/components/manager/manager.component";
 import { OfficeComponent } from "./app/components/office/office.component";
@@ -46,6 +47,7 @@ import { UsersComponent } from "./app/components/users/users.component";
 
 import { DestinationsResolverService } from "./app/resolvers/destinations-resolver.service";
 import { FieldsResolverService } from "./app/resolvers/fields-resolver.service";
+import { JamespotResolverService } from "./app/resolvers/jamespot-resolver.service";
 import { ManagersResolverService } from "./app/resolvers/managers-resolver.service";
 import { OthersResolverService } from "./app/resolvers/others-resolver.service";
 import { RolesResolverService } from "./app/resolvers/roles-resolver.service";
@@ -83,6 +85,7 @@ import "./app/rxjs-extensions";
         GapiUsersComponent,
         GappsComponent,
         ImportComponent,
+        JamespotGroupsComponent,
         JamespotUsersComponent,
         ManagerComponent,
         OfficeComponent,
@@ -108,6 +111,7 @@ import "./app/rxjs-extensions";
         FieldsResolverService,
         FormValueMapperService,
         GapiAuthenticatorService,
+        JamespotResolverService,
         JamespotService,
         ManagersResolverService,
         OthersResolverService,
