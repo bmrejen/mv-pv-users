@@ -66,7 +66,7 @@ import { SwitchVoxService } from "./app/services/switchvox.service";
 
 import { AlphabeticalPipe } from "./app/pipes/alphabetical.pipe";
 
-import { NavbarComponentModule } from "./app/components/navbar/navbar.module";
+// import { NavbarComponentModule } from "./app/components/navbar/navbar.module";
 
 import "./app/rxjs-extensions";
 
