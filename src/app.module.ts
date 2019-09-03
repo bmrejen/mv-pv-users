@@ -35,6 +35,7 @@ import { ImportComponent } from "./app/components/import/import.component";
 import { JamespotGroupsComponent } from "./app/components/jamespot-groups/jamespot-groups.component";
 import { JamespotUsersComponent } from "./app/components/jamespot-users/jamespot-users.component";
 import { ManagerComponent } from "./app/components/manager/manager.component";
+import { NavbarComponent } from "./app/components/navbar/navbar.component";
 import { OfficeComponent } from "./app/components/office/office.component";
 import { OthersComponent } from "./app/components/others/others.component";
 import { PhonesComponent } from "./app/components/phones/phones.component";
@@ -88,6 +89,7 @@ import "./app/rxjs-extensions";
         JamespotGroupsComponent,
         JamespotUsersComponent,
         ManagerComponent,
+        NavbarComponent,
         OfficeComponent,
         OthersComponent,
         PhonesComponent,
