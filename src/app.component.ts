@@ -6,8 +6,8 @@ import {
     selector: "mv-users",
     template: `
     <div id="mv-users" class="content">
-      <mv-navbar></mv-navbar>
-      <router-outlet></router-outlet>
+        <mv-navbar></mv-navbar>
+        <router-outlet></router-outlet>
     </div>
   `,
 })
