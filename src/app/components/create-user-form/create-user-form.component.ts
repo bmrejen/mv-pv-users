@@ -148,10 +148,8 @@ export class CreateUserFormComponent implements OnInit {
 
         return this.getSugarUser(username)
             .then((res) => {
-                console.log("GET SUGAR USER ", res);
                 jamespotSearchTerms.searchTerm = this.currentUser.sugarCurrentUser.jamespotId;
                 jamespotSearchTerms.type = "id";
-                console.log("changed the jamespot params", jamespotSearchTerms);
 
                 return Promise.all([
                     this.getJamespotUser(jamespotSearchTerms.searchTerm, jamespotSearchTerms.type),
@@ -160,7 +158,6 @@ export class CreateUserFormComponent implements OnInit {
                 ]);
             })
             .then((resp) => {
-                console.log("Promise all in getUser", resp);
                 console.log("current and oldUser", this.currentUser, this.oldUser);
 
                 return resp;
@@ -344,7 +341,7 @@ export class CreateUserFormComponent implements OnInit {
 
     }
 
-    public updateGapiUser() {
+    public updateGapiUser(): Promise<any> {
         this.gapiMessage = null;
 
         const updateUserPromise = this.gapi.updateUser(this.currentUser, this.oldUser)
