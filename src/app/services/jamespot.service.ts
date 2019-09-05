@@ -43,23 +43,46 @@ export class JamespotService {
     }
 
     public postUsers(user: User): Promise<IJamespotUserConfig> {
+        console.log("post jamespot user", user.jamesCurrentUser);
         const fd = new FormData();
         // Common properties
-        fd.append("Firstname", user.common.firstName);
+        fd.append("Firstname", capitalize(user.common.firstName));
         fd.append("Lastname", user.common.lastName.toUpperCase());
-        fd.append("Pseudo", `${user.common.firstName} ${user.common.lastName.toUpperCase()}`);
+        fd.append("Pseudo", capitalize(`${user.common.firstName} ${user.common.lastName}`));
         fd.append("Password", user.common.password);
 
         // Google and Sugar properties
         fd.append("Mail", user.common.email);
         fd.append("Field1", user.sugarCurrentUser.phoneAsterisk);
-
         fd.append("image", user.jamesCurrentUser.image);
         fd.append("Role", user.jamesCurrentUser.role);
         fd.append("Country", user.jamesCurrentUser.country);
-        fd.append("Language", user.jamesCurrentUser.language);
         fd.append("Company", user.jamesCurrentUser.company);
-        fd.append("timeZone", user.jamesCurrentUser.timeZone);
+        fd.append("PhoneNumber", user.sugarCurrentUser.phoneWork);
+        fd.append("MobileNumber", user.sugarCurrentUser.phoneMobile);
+        fd.append("Department", user.jamesCurrentUser.teams.join(", "));    // Teams
+        fd.append("Function", user.sugarCurrentUser.department);
+        fd.append("Gender", user.sugarCurrentUser.salutation);
+        fd.append("Field2", user.common.email);
+        fd.append("TimeZone", user.jamesCurrentUser.timeZone);
+        fd.append("Language", user.jamesCurrentUser.language);
+        fd.append("Field4", user.jamesCurrentUser.destinations.join(", "));  // Destinations
+        fd.append("Field3", user.jamesCurrentUser.birthDate);  // Birth date
+        fd.append("Field5", user.jamesCurrentUser.skypeUsername);  // Pseudo Skype
+        fd.append("tag_5", Object.keys(user.jamesCurrentUser.city)[0]); // Ville de travail
+        fd.append("tag_8", Object.keys(user.jamesCurrentUser.service)[0]); // Service
+        fd.append("tag_2", Object.keys(user.jamesCurrentUser.expertiseZone)[0]); // Zone d'expertises
+        fd.append("businessManagementManager", `user/${user.jamesCurrentUser.managerJamespotId}`);
+        // Jamespot id of manager, eg. user/258
+
+        // *** Empty fields ***
+        fd.append("Site", "");
+        fd.append("Description", "");   // Présence en entreprise
+        fd.append("DateOfBirth", "");   // Empty field, use Field3 instead
+        fd.append("Profile", "");
+        fd.append("Communities", "");
+        fd.append("classifiedAdTypeOfContract", ""); // Type de contrat - CDD, CDI, CTT
+        fd.append("userBanner", ""); // must be file
 
         const parseActive = user.jamesCurrentUser.active ? "1" : "0";
         fd.append("active", parseActive);
@@ -79,13 +102,22 @@ export class JamespotService {
     public mapFromApi(res: IJamespotApiResponse<IJamespotUserFromApi>): IJamespotUserConfig {
         return {
             active: res.VAL.properties.active === "1" ? true : false,
+            birthDate: res.VAL.field3,
+            city: res.VAL.properties.tag_5,
             company: res.VAL.properties.company,
             country: res.VAL.Country,
+            destinations: [res.VAL.field4],
+            expertiseZone: res.VAL.properties.tag_2,
+            function: res.VAL.properties.function,
             idUser: res.VAL.idUser,
             img: res.VAL.img,
             language: res.VAL.Language,
-            phoneExtension: res.VAL.field1, // phoneExtension
+            managerJamespotId: res.VAL.properties.businessManagementManager,
+            phoneExtension: res.VAL.field1,
             role: res.VAL.Role,
+            service: res.VAL.properties.tag_8,
+            skypeUsername: res.VAL.field5,
+            teams: [res.VAL.properties.department],
             timeZone: res.VAL.properties.timeZone,
         };
     }
@@ -131,11 +163,11 @@ export class JamespotService {
                 switch (key) {
 
                     case "firstName":
-                        params = params.append("Firstname", usr.common[key]);
+                        params = params.append("Firstname", capitalize(usr.common[key]));
                         break;
 
                     case "lastName":
-                        params = params.append("Lastname", usr.common[key]);
+                        params = params.append("Lastname", usr.common[key].toUpperCase());
                         break;
 
                     case "email":
@@ -143,7 +175,7 @@ export class JamespotService {
                         break;
 
                     case "userName":
-                        // Username will be updated under
+                        // do nothing - userName is updated lower
                         break;
 
                     default:
@@ -156,8 +188,8 @@ export class JamespotService {
         // Update username
         if (usr.common.firstName !== oldUsr.common.firstName
             || usr.common.lastName !== oldUsr.common.lastName) {
-            params = params.append("Pseudo",
-                `${usr.common.firstName} ${usr.common.lastName.toUpperCase()}`);
+            params = params.append("Pseudo", capitalize(`${usr.common.firstName} ${usr.common.lastName}`));
+
         }
 
         // Update Jamespot properties
@@ -204,6 +236,30 @@ export class JamespotService {
                         params = params.append("timeZone", user[key]);
                         break;
 
+                    case "destinations":
+                        params = params.append("Field4", user.destinations.join(", "));
+                        break;
+                    case "birthDate":
+                        params = params.append("Field3", user.birthDate);
+                        break;
+                    case "skypeUsername":
+                        params = params.append("Field5", user.skypeUsername);
+                        break;
+                    case "managerJamespotId":
+                        params = params.append("businessManagementManager",
+                            `user/${user.managerJamespotId}`);
+                        break;
+
+                    // *** FOLLOWING FIELDS ARE CURRENTLY DISABLED ***
+                    case "expertiseZone":
+                        // params = params.append("tag_2", Object.keys(user.expertiseZone)[0]);
+                        break;
+                    case "city":
+                        // params = params.append("tag_5", Object.keys(user.city)[0]);
+                        break;
+                    case "service":
+                        // params = params.append("tag_8", Object.keys(user.service)[0]);
+                        break;
                     default:
                         break;
                 }
@@ -244,4 +300,16 @@ export class JamespotService {
                 });
             });
     }
+
+}
+function capitalize(s) {
+    if (typeof s !== "string") {
+        return "";
+    }
+
+    return s.split(/ /)
+        .map((word) => word.charAt(0)
+            .toUpperCase() + word.toLowerCase()
+                .slice(1))
+        .join(" ");
 }

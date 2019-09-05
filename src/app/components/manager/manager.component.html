@@ -1,7 +1,8 @@
 <div *ngIf="managers != null">Manager
     <select
         name="manager"
-        [(ngModel)]="sugarCurrentUser.managerId"
+        [(ngModel)]="currentUser.sugarCurrentUser.managerId"
+        (change)="handleClickManager($event)"
     >
         <option
             *ngFor="let manager of managers; trackBy: trackByFn"

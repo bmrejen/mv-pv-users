@@ -2,6 +2,7 @@ import { Component, Input } from "@angular/core";
 import { ControlContainer, NgForm } from "@angular/forms";
 
 import { Destination } from "../../models/destination";
+import { User } from "./../../models/user";
 
 @Component({
     selector: "mv-destinations",
@@ -17,14 +18,16 @@ import { Destination } from "../../models/destination";
 
 export class DestinationsComponent {
     @Input() public destinations: Destination[];
-    @Input() public sugarCurrentUser;
+    @Input() public currentUser: User;
 
     public handleClick(dest: Destination): void {
-        if (!this.sugarCurrentUser.destinations.includes(dest.id)) {
-            this.sugarCurrentUser.destinations.push(dest.id);
+        if (!this.currentUser.sugarCurrentUser.destinations.includes(dest.id)) {
+            this.currentUser.sugarCurrentUser.destinations.push(dest.id);
+            this.currentUser.jamesCurrentUser.destinations.push(dest.name.replace(/DESTI - /g, ""));
         } else {
-            const index = this.sugarCurrentUser.destinations.indexOf(dest.id);
-            this.sugarCurrentUser.destinations.splice(index, 1);
+            const index = this.currentUser.sugarCurrentUser.destinations.indexOf(dest.id);
+            this.currentUser.sugarCurrentUser.destinations.splice(index, 1);
+            this.currentUser.jamesCurrentUser.destinations.splice(index, 1);
         }
     }
 

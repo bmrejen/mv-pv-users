@@ -6,22 +6,61 @@
     </h4>
 
     <form *ngIf="jamesCurrentUser!=null">
-        <input
-            type="text"
-            [(ngModel)]="currentUser.common.userName"
-            name="pseudo"
-            (ngModelChange)="checkUsernameAvailability()"
-            [attr.disabled]="true"
-        >Pseudo
+        <label for="">
+            <input
+                type="text"
+                [(ngModel)]="currentUser.common.userName"
+                name="pseudo"
+                (ngModelChange)="checkUsernameAvailability()"
+                [attr.disabled]="true"
+            >Pseudo
+        </label>
         <br>
 
-        <!-- IMAGE UPDATE -->
-        <input
-            type="file"
-            (change)="onFileSelected($event)"
-        >
+        <label>
+            <input
+                type="text"
+                name="birthDate"
+                [(ngModel)]="jamesCurrentUser.birthDate"
+            >Birth date (dd/mm/yyyy)
+        </label>
         <br>
-
+        <label>
+            <input
+                type="text"
+                name="skypeUsername"
+                [(ngModel)]="jamesCurrentUser.skypeUsername"
+            >Skype username
+        </label>
+        <br>
+        <label>
+            <input
+                type="text"
+                name="city"
+                [(ngModel)]="jamesCurrentUser.city"
+                [attr.disabled]="true"
+            >City
+        </label>
+        <br>
+        <label>
+            <input
+                type="text"
+                name="service"
+                [(ngModel)]="jamesCurrentUser.service"
+                [attr.disabled]="true"
+            >Service (optionnel)
+        </label>
+        <br>
+        <label>
+            <input
+                type="text"
+                name="expertiseZone"
+                [(ngModel)]="jamesCurrentUser.expertiseZone"
+                [attr.disabled]="true"
+            >Zones d'expertise, hobbies
+        </label>
+        <br>
+        Status
         <label>
             <input
                 type="checkbox"
@@ -29,6 +68,15 @@
                 [(ngModel)]="jamesCurrentUser.active"
             >Active
         </label>
+        <br>
+        Profile picture
+        <!-- IMAGE UPDATE -->
+        <input
+            type="file"
+            (change)="onFileSelected($event)"
+        >
+        <br>
+
         <!-- BUTTONS -->
         <div *ngIf="jamesCurrentUser.idUser != null">
             <button

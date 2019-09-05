@@ -1,5 +1,7 @@
 import { Component, Input } from "@angular/core";
 import { ControlContainer, NgForm } from "@angular/forms";
+import { Team } from "./../../models/team";
+import { User } from "./../../models/user";
 
 @Component({
     selector: "mv-teams",
@@ -15,14 +17,16 @@ import { ControlContainer, NgForm } from "@angular/forms";
 
 export class TeamsComponent {
     @Input() public teams;
-    @Input() public sugarCurrentUser;
+    @Input() public currentUser: User;
 
-    public handleClick(team): void {
-        if (!this.sugarCurrentUser.teams.includes(team.id)) {
-            this.sugarCurrentUser.teams.push(team.id);
+    public handleClick(team: Team): void {
+        if (!this.currentUser.sugarCurrentUser.teams.includes(team.id)) {
+            this.currentUser.sugarCurrentUser.teams.push(team.id);
+            this.currentUser.jamesCurrentUser.teams.push(team.name.replace(/EQ /, "Team "));
         } else {
-            const index = this.sugarCurrentUser.teams.indexOf(team.id);
-            this.sugarCurrentUser.teams.splice(index, 1);
+            const index = this.currentUser.sugarCurrentUser.teams.indexOf(team.id);
+            this.currentUser.sugarCurrentUser.teams.splice(index, 1);
+            this.currentUser.jamesCurrentUser.teams.splice(index, 1);
         }
     }
 

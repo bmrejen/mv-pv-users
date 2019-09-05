@@ -15,6 +15,7 @@ import { JamespotUser } from "../../models/jamespot-user";
 import { GapiAuthenticatorService } from "../../services/gapi.service";
 import { JamespotService } from "../../services/jamespot.service";
 import { SugarService } from "../../services/sugar.service";
+import { IJamespotUser } from "./../../interfaces/jamespot-api-response";
 
 @Component({
     selector: "mv-app-create-user-form",
@@ -140,22 +141,23 @@ export class CreateUserFormComponent implements OnInit {
         }
         const username = this.mailToGet.substring(0, this.mailToGet.lastIndexOf("@"));
 
-        const promises = [
-            this.getJamespotUser(`${username}@marcovasco.fr`),
-            this.getGapiUser(this.mailToGet),
-            this.getSugarUser(username),
-        ];
+        const jamespotSearchTerms = {
+            searchTerm: `${username}@marcovasco.fr`,
+            type: "mail",
+        };
 
-        return Promise.all(promises)
+        return this.getSugarUser(username)
             .then((res) => {
-                return {
-                    google: res[1],
-                    jamespot: res[0],
-                    sugar: res[2],
-                };
+                jamespotSearchTerms.searchTerm = this.currentUser.sugarCurrentUser.jamespotId;
+                jamespotSearchTerms.type = "id";
+
+                return Promise.all([
+                    this.getJamespotUser(jamespotSearchTerms.searchTerm, jamespotSearchTerms.type),
+                    this.getGapiUser(this.mailToGet),
+                    res,
+                ]);
             })
             .then((resp) => {
-                console.log("Promise all in getUser", resp);
                 console.log("current and oldUser", this.currentUser, this.oldUser);
 
                 return resp;
@@ -173,16 +175,24 @@ export class CreateUserFormComponent implements OnInit {
     }
 
     // -------- GET USER METHODS -------------
-    public getJamespotUser(mail): Promise<any> {
-        return this.james.getByField("mail", mail)
-            .then((res: IJamespotUserConfig) => {
-                console.log("get jamespot user", res);
-                this.currentUser.jamesCurrentUser = new JamespotUser(res);
-                this.oldUser.jamesCurrentUser = new JamespotUser(res);
+    public getJamespotUser(searchTerm, type): Promise<any> {
+        if (type === "mail") {
+            return this.james.getByField("mail", searchTerm)
+                .then((res) => this.mapJamespotResponseToUser(res))
+                .catch((err) => this.jamesMessage = err);
+        } else if (type === "id") {
+            return this.james.getUser(searchTerm)
+                .then((res) => this.mapJamespotResponseToUser(res));
+        } else {
+            alert("getjamespot error");
+        }
+    }
 
-                return res;
-            })
-            .catch((err) => this.jamesMessage = err);
+    public mapJamespotResponseToUser(res: IJamespotUserConfig): IJamespotUserConfig {
+        this.currentUser.jamesCurrentUser = new JamespotUser(res);
+        this.oldUser.jamesCurrentUser = new JamespotUser(res);
+
+        return res;
     }
 
     public getSugarUser(username): Promise<any> {
@@ -238,8 +248,9 @@ export class CreateUserFormComponent implements OnInit {
 
     public lowerCasify() {
         this.currentUser.common.email = this.currentUser.sugarCurrentUser.common.email.toLowerCase();
+        this.currentUser.common.email = this.currentUser.common.email.toLowerCase()
+            .replace(/"'"/g, "");
         this.currentUser.common.userName = this.currentUser.common.userName.toLowerCase();
-        this.currentUser.common.email = this.currentUser.common.email.toLowerCase();
         this.currentUser.ggCurrentUser.primaryEmail = this.currentUser.ggCurrentUser.primaryEmail.toLowerCase();
     }
 
@@ -251,28 +262,37 @@ export class CreateUserFormComponent implements OnInit {
         this.mailToGet = this.currentUser.ggCurrentUser.primaryEmail;
 
         const promises: Array<Promise<any>> = [];
+        let firstPromise: Promise<any>;
 
-        this.fields.accounts.forEach((account) => {
-            if (account.checked) {
-                switch (account.id) {
-                    case "gapps":
-                        promises.push(this.postGapiUser());
-                        break;
-                    case "sugar":
-                        promises.push(this.postSugarUser());
-                        break;
-                    case "jamespot":
-                        promises.push(this.postJamespotUser());
-                        break;
+        if (this.fields.accounts.find((account) => account.id === "jamespot").checked) {
+            firstPromise = Promise.resolve(this.postJamespotUser())
+                .then((res: IJamespotUser) => this.mapJamespotIdToUser(res));
+        } else {
+            firstPromise = Promise.resolve();
+        }
 
-                    default:
-                        alert("This promise is not defined");
-                        break;
+        firstPromise.then(() => {
+            this.fields.accounts.forEach((account) => {
+                if (account.checked) {
+                    switch (account.id) {
+                        case "gapps":
+                            promises.push(this.postGapiUser());
+                            break;
+                        case "sugar":
+                            promises.push(this.postSugarUser());
+                            break;
+                        case "jamespot":
+                            break;
+                        default:
+                            alert("This promise is not defined");
+                            break;
+                    }
                 }
-            }
+            });
+
+            Promise.all(promises);
         });
 
-        Promise.all(promises);
     }
 
     public updateUser() {
@@ -321,7 +341,7 @@ export class CreateUserFormComponent implements OnInit {
 
     }
 
-    public updateGapiUser() {
+    public updateGapiUser(): Promise<any> {
         this.gapiMessage = null;
 
         const updateUserPromise = this.gapi.updateUser(this.currentUser, this.oldUser)
@@ -364,7 +384,11 @@ export class CreateUserFormComponent implements OnInit {
 
     public postJamespotUser(): Promise<any> {
         return this.james.postUsers(this.currentUser)
-            .then((res: IJamespotUserConfig) => this.jamesMessage = `User ${res.idUser} created`)
+            .then((res: IJamespotUserConfig) => {
+                this.jamesMessage = `User ${res.idUser} created`;
+
+                return res;
+            })
             .catch((err: string) => {
                 console.error("Jamespot Problem :", err);
                 this.jamesMessage = err.substr(31, err.length - 34);
@@ -549,5 +573,9 @@ export class CreateUserFormComponent implements OnInit {
 
             return;
         }
+    }
+
+    private mapJamespotIdToUser(res: IJamespotUser) {
+        this.currentUser.sugarCurrentUser.jamespotId = res.idUser;
     }
 }

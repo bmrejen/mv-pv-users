@@ -169,7 +169,7 @@ function mapCurrentUserToApi(user: User): ISugarUserToApi {
                 email: user.common.email,
                 employeeStatus: user.sugarCurrentUser.employeeStatus,
                 firstName: user.common.firstName,
-                jamespotId: user.jamesCurrentUser.idUser,
+                jamespotId: user.sugarCurrentUser.jamespotId,
                 lastName: user.common.lastName,
                 managerId: user.sugarCurrentUser.managerId,
                 officeId: user.sugarCurrentUser.officeId,
