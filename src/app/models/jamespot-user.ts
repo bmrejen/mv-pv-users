@@ -1,4 +1,5 @@
 import { IJamespotUser, IJamespotUserConfig } from "../interfaces/jamespot-api-response";
+import { Spot } from "./jamespot-spot";
 
 export class JamespotUser implements IJamespotUser {
     public country: string = "fr";
@@ -18,6 +19,7 @@ export class JamespotUser implements IJamespotUser {
     public service = {}; // Service
     public expertiseZone = {}; // Zone d'expertises
     public managerJamespotId: string = ""; // Jamespot id of manager, eg. user/258
+    public spots: Spot[] = [];
 
     constructor(data: IJamespotUserConfig) {
         this.language = data.language || this.language;
@@ -37,5 +39,6 @@ export class JamespotUser implements IJamespotUser {
         this.service = data.service || this.service;
         this.expertiseZone = data.expertiseZone || this.expertiseZone;
         this.managerJamespotId = data.managerJamespotId || this.managerJamespotId;
+        this.spots = data.spots || this.spots;
     }
 }

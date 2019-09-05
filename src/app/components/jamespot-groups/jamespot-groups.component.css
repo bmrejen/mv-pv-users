@@ -1,0 +1,6 @@
+.jamespotGroups {
+    display: flex;
+    flex-direction: column;
+    height: 900px;
+    flex-wrap: wrap;
+  }

@@ -1,19 +1,19 @@
 import {
-  Component,
-  ElementRef,
+    Component,
 } from "@angular/core";
 
 @Component({
-  selector: "mv-users",
-  template: `
+    selector: "mv-users",
+    template: `
     <div id="mv-users" class="content">
-      <router-outlet></router-outlet>
+        <mv-navbar></mv-navbar>
+        <router-outlet></router-outlet>
     </div>
   `,
 })
 export class AppComponent {
 
-  public constructor() {
-    // constructor
-  }
+    public constructor() {
+        // constructor
+    }
 }

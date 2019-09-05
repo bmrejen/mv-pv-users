@@ -1,6 +1,3 @@
-<h3 [routerLink]="['/users']">&lt;-- Back</h3>
-<h2> Create User Form </h2>
-
 <form
     #createForm="ngForm"
     (ngSubmit)="postUser()"
@@ -105,6 +102,12 @@
             [ggCurrentUser]="currentUser.ggCurrentUser"
             [googleGroups]="googleGroups"
         ></mv-gapps>
+        <mv-jamespot-groups
+            *ngIf="currentUser.jamesCurrentUser.idUser === null"
+            [currentUser]="currentUser"
+            [spots]="spots"
+        >
+        </mv-jamespot-groups>
 
         <div *ngIf="errorMsg">ERROR: {{ errorMsg }}</div>
         <button
