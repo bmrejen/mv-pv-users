@@ -41,6 +41,7 @@ export class CredentialsComponent {
             && this.currentUser.common.lastName !== ""
             && this.currentUser.common.userName === "") {
             this.setUsername();
+            this.setTourplan();
 
             this.currentUser.common.email = this.setEmail();
             this.checkEmailAvailability();
@@ -99,6 +100,11 @@ export class CredentialsComponent {
             `${this.currentUser.common.firstName[0].toLowerCase()}${this.currentUser.common.lastName[0].toLowerCase()}`;
 
         return `${initials}${randomString}!`;
+    }
+
+    public setTourplan() {
+        this.currentUser.sugarCurrentUser.tourplanID = this.currentUser.common.userName.substr(0, 6)
+            .toUpperCase();
     }
 
     public trackByFn(item) {
