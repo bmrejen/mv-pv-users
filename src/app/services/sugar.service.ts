@@ -21,8 +21,8 @@ export class SugarService {
     public teamList: Team[] = [];
     public userList: User[] = [];
     public itemList = [];
-    private endPoint: string = "http://sh.pvcrm.com/sugarcrm/sugarcrm/api/";
-    private postEndPoint: string = "http://sh.pvcrm.com/sugarcrm/sugarcrm/api/users";
+    private endPoint: string = "http://pvcrm.com/c/api/";
+    private postEndPoint: string = "http://pvcrm.com/c/api/users";
 
     constructor(private http: HttpClient) {
         //
@@ -51,6 +51,7 @@ export class SugarService {
     public createUsersArray(users): User[] {
         const usersArray = [];
         users.forEach((user) => {
+
             const userInfo = this.mapUserFromApi(user);
 
             // Create new user and give it the common properties
@@ -104,7 +105,7 @@ export class SugarService {
     }
 
     public mapUserFromApi(data): ISugarConfigAndName {
-        return {
+        const myObj = {
             common: {
                 email: data.attributes.email,
                 firstName: data.attributes.firstName,
@@ -136,6 +137,8 @@ export class SugarService {
                 type: data.attributes.type,
             },
         };
+
+        return myObj;
     }
 
     private getData(item: string): Promise<any> {

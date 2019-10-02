@@ -10,6 +10,7 @@ thead > td, th {
   background-color: #dddddd;
 }
 
+
 tbody > tr:nth-child(even) {
   background-color: #dddddd;
 }

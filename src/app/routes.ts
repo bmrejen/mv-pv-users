@@ -32,20 +32,6 @@ import { UsersResolverService } from "./resolvers/users-resolver.service";
 /* tslint:disable object-literal-sort-keys */
 export const AppRoutes: Routes = [
     {
-        path: "users/:id",
-        component: CreateUserFormComponent,
-        resolve: {
-            destinations: DestinationsResolverService,
-            fields: FieldsResolverService,
-            managers: ManagersResolverService,
-            others: OthersResolverService,
-            roles: RolesResolverService,
-            sugarUser: SugarResolverService,
-            users: UsersResolverService,
-            teams: TeamsResolverService,
-        },
-    },
-    {
         path: "create",
         component: CreateUserFormComponent,
         resolve: {
@@ -60,8 +46,32 @@ export const AppRoutes: Routes = [
         },
     },
     {
+        path: "users/:id",
+        component: CreateUserFormComponent,
+        resolve: {
+            destinations: DestinationsResolverService,
+            fields: FieldsResolverService,
+            managers: ManagersResolverService,
+            others: OthersResolverService,
+            roles: RolesResolverService,
+            spots: JamespotResolverService,
+            sugarUser: SugarResolverService,
+            users: UsersResolverService,
+            teams: TeamsResolverService,
+        },
+    },
+    {
         path: "users",
         component: UsersComponent,
+        resolve: {
+            destinations: DestinationsResolverService,
+            fields: FieldsResolverService,
+            managers: ManagersResolverService,
+            others: OthersResolverService,
+            roles: RolesResolverService,
+            users: UsersResolverService,
+            teams: TeamsResolverService,
+        },
     },
     {
         path: "privacy",
@@ -78,6 +88,9 @@ export const AppRoutes: Routes = [
     {
         path: "disable",
         component: DisableUserFormComponent,
+        resolve: {
+            users: UsersResolverService,
+        },
     },
     {
         path: "roles",

@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { SugarUser } from "../../models/sugar-user";
+import { ActivatedRoute } from "@angular/router";
 import { User } from "../../models/user";
-import { SugarService } from "../../services/sugar.service";
 
 @Component({
     selector: "mv-app-users",
@@ -10,37 +9,39 @@ import { SugarService } from "../../services/sugar.service";
 })
 
 export class UsersComponent implements OnInit {
-    public usersFromSugar: SugarUser[] = [];
-    public filteredUsers: SugarUser[] = [];
+    public usersFromSugar: User[] = [];
+    public filteredUsers: User[] = [];
     public filter: string = "All";
 
-    constructor(private sugarService: SugarService) {
+    constructor(
+        private route: ActivatedRoute,
+    ) {
         // constructor
     }
 
     public ngOnInit(): void {
-        this.sugarService.getUsers()
-            .then((users) => users.forEach((user) => {
-                const userInfo = this.sugarService.mapUserFromApi(user);
-
-                this.usersFromSugar.push(new SugarUser(userInfo.common, userInfo.sugar));
-            }))
-            .then((users) => this.filteredUsers = this.usersFromSugar);
+        this.route.data
+            .subscribe((data) => {
+                this.usersFromSugar = data.users;
+                this.filterUsers("active");
+            });
     }
 
-    public filterUsers(prop: string) {
-        switch (prop) {
+    public filterUsers(filter: string) {
+        switch (filter) {
 
             case "inactive":
                 this.filter = "Inactive";
                 this.filteredUsers = this.usersFromSugar
-                    .filter((user) => user.status !== "Active" || user.employeeStatus !== "Active");
+                    .filter((user) => user.sugarCurrentUser.status !== "Active"
+                        || user.sugarCurrentUser.employeeStatus !== "Active");
                 break;
 
             case "active":
                 this.filter = "Active";
                 this.filteredUsers = this.usersFromSugar
-                    .filter((user) => user.status === "Active" && user.employeeStatus === "Active");
+                    .filter((user) => user.sugarCurrentUser.status === "Active"
+                        && user.sugarCurrentUser.employeeStatus === "Active");
                 break;
 
             case "all":
@@ -56,5 +57,12 @@ export class UsersComponent implements OnInit {
 
     public trackByFn(index) {
         return index;
+    }
+
+    public mapIdToUser(id: string): string {
+        const manager = this.usersFromSugar.find((user) => user.sugarCurrentUser.id === id);
+
+        return (manager != null && manager.sugarCurrentUser != null) ?
+            `${manager.common.firstName} ${manager.common.lastName}` : "";
     }
 }

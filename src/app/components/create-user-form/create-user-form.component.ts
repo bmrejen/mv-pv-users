@@ -31,7 +31,7 @@ export class CreateUserFormComponent implements OnInit {
     public passwordExists = false;
     public usersFromSugar: User[] = [];
     public usernameTaken;
-    public currentUser: User;
+    public currentUser: User = new User({});
     public oldUser: User = new User({});
     public teams: Team[] = [];
     public roles: Role[] = [];
@@ -69,20 +69,13 @@ export class CreateUserFormComponent implements OnInit {
         this.route.data
             .subscribe((data) => {
                 // set current user if any
-                this.currentUser = new User({});
-                this.currentUser.sugarCurrentUser = new SugarUser(this.currentUser.common, data.sugarUser || {});
+                this.currentUser = data.sugarUser;
 
                 // get manager list
                 this.managers = data.managers;
 
                 // get user list
-                data.users.forEach((user) => {
-                    const myUser = new User({});
-                    myUser.common = this.sugar.mapUserFromApi(user).common;
-                    myUser.sugarCurrentUser =
-                        new SugarUser(this.sugar.mapUserFromApi(user).common, this.sugar.mapUserFromApi(user).sugar);
-                    this.usersFromSugar.push(myUser);
-                });
+                this.usersFromSugar = data.users;
 
                 // get team list
                 data.teams.forEach((team) => this.teams.push(new Team(team)));

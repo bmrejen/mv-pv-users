@@ -3,7 +3,7 @@ import { ControlContainer, NgForm } from "@angular/forms";
 
 @Component({
     selector: "mv-phones",
-    styleUrls: ["./phones.component.css"],
+    // styleUrls: ["./phones.component.css"],
     templateUrl: "./phones.component.html",
     viewProviders: [
         {

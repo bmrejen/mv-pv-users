@@ -46,7 +46,7 @@ export class SugarUser implements ISugarUserConfig {
         this.department = data.department || this.department;
         // this.email = data.email || this.email;
         this.employeeStatus = data.employeeStatus || this.employeeStatus;
-        this.id = data.id || this.id;
+        this.id = data.id;
         this.managerId = data.managerId || this.managerId;
         this.officeId = data.officeId || this.officeId;
         this.phoneAsterisk = data.phoneAsterisk || this.phoneAsterisk;
