@@ -1,6 +1,7 @@
 import { Spot } from "./../models/jamespot-spot";
 
 export interface IJamespotUserFromApi {
+    Communities: string;
     idUser: string;
     Mail: string;
     Pseudo: string;

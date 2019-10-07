@@ -14,3 +14,7 @@ thead > td, th {
 tbody > tr:nth-child(even) {
   background-color: #dddddd;
 }
+
+/* tr:hover {
+    opacity: 0.5;
+} */

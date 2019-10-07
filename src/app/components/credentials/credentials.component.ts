@@ -6,7 +6,7 @@ import { User } from "../../models/user";
 
 @Component({
     selector: "mv-credentials",
-    styleUrls: ["./credentials.component.css"],
+    // styleUrls: ["./credentials.component.css"],
     templateUrl: "./credentials.component.html",
     viewProviders: [
         {

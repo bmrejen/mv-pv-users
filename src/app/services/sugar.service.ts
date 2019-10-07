@@ -21,8 +21,12 @@ export class SugarService {
     public teamList: Team[] = [];
     public userList: User[] = [];
     public itemList = [];
-    private endPoint: string = "http://pvcrm.com/c/api/";
-    private postEndPoint: string = "http://pvcrm.com/c/api/users";
+    // PROD
+    // private endPoint: string = "http://pvcrm.com/c/api/";
+    // private postEndPoint: string = "http://pvcrm.com/c/api/users";
+    // PREPROD
+    private endPoint: string = "http://sh.pvcrm.com/sugarcrm/sugarcrm/api/";
+    private postEndPoint: string = "http://sh.pvcrm.com/sugarcrm/sugarcrm/api/users";
 
     constructor(private http: HttpClient) {
         //
@@ -90,6 +94,21 @@ export class SugarService {
 
     public postDataToSugar(user: User) {
         return this.http.post<any>(this.postEndPoint, mapCurrentUserToApi(user))
+            .toPromise();
+    }
+
+    public disableUser(id: string) {
+        return this.http.post<any>(this.postEndPoint,
+            {
+                data: {
+                    attributes: {
+                        employeeStatus: "Inactive",
+                        id,
+                        status: "Inactive",
+                    },
+                },
+            },
+        )
             .toPromise();
     }
 

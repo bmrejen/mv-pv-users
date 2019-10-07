@@ -530,6 +530,22 @@ export class GapiAuthenticatorService {
     public isRealUser(primaryEmail, email) {
         return firstNameFromEmail(primaryEmail) === firstNameFromEmail(email);
     }
+
+    public disableUser(primaryEmail: string) {
+        const myObj: IGapiRequest = {
+            resource: {
+                orgUnitPath: "/X Partis",
+            },
+            userKey: primaryEmail,
+        };
+
+        return new Promise((resolve, reject) => {
+            this.zone.run(() => {
+                return gapi.client.directory.users.update(myObj)
+                    .then(resolve, reject);
+            });
+        });
+    }
 }
 
 function firstNameFromEmail(email) {

@@ -5,6 +5,13 @@
 <button (click)="filterUsers('all')">Tous</button>
 <br><br>
 <button routerLink="/create">Nouvel utilisateur</button>
+<span *ngIf="selectedUsers.length != 0">
+    <button (click)="disableUsers()">Disable</button>
+</span>
+
+<div>Sugar: {{ messages.sugar }}</div>
+<div>Google: {{ messages.google }}</div>
+<div>Jamespot: {{ messages.jamespot }}</div>
 
 <table *ngIf="filteredUsers && filteredUsers != null">
     <thead>
@@ -21,21 +28,28 @@
         </tr>
     </thead>
     <tbody>
-        <tr
-            *ngFor="let user of filteredUsers; trackBy: trackByFn"
-            [routerLink]="['/users', user.sugarCurrentUser.id]"
-        >
+        <tr *ngFor="let user of filteredUsers; trackBy: trackByFn">
             <td>
-                <button [routerLink]="['/disable', user.id]">Delete</button>
+                <label>
+                    <input
+                        type="checkbox"
+                        (click)="handleClick(user)"
+                        [name]="user"
+                        [(ngModel)]="user.isChecked"
+                    >
+                </label>
             </td>
-            <td>{{ user.sugarCurrentUser.salutation }}</td>
-            <td>{{ user.common.firstName }}</td>
-            <td>{{ user.common.lastName }}</td>
-            <td>{{ user.sugarCurrentUser.department }}</td>
-            <td>{{ user.sugarCurrentUser.id }}</td>
-            <td>{{ user.sugarCurrentUser.status }}</td>
-            <td>{{ user.sugarCurrentUser.employeeStatus }}</td>
-            <td>{{ mapIdToUser(user.sugarCurrentUser.managerId) }}</td>
+            <!-- Refactor with template or ng-container -->
+            <td [routerLink]="['/users', user.sugarCurrentUser.id]">{{ user.sugarCurrentUser.salutation }}</td>
+            <td [routerLink]="['/users', user.sugarCurrentUser.id]">{{ user.common.firstName }}</td>
+            <td [routerLink]="['/users', user.sugarCurrentUser.id]">{{ user.common.lastName }}</td>
+            <td [routerLink]="['/users', user.sugarCurrentUser.id]">{{ user.sugarCurrentUser.department }}</td>
+            <td [routerLink]="['/users', user.sugarCurrentUser.id]">{{ user.sugarCurrentUser.id }}</td>
+            <td [routerLink]="['/users', user.sugarCurrentUser.id]">{{ user.sugarCurrentUser.status }}</td>
+            <td [routerLink]="['/users', user.sugarCurrentUser.id]">{{ user.sugarCurrentUser.employeeStatus }}</td>
+            <td [routerLink]="['/users', user.sugarCurrentUser.id]">{{ mapIdToUser(user.sugarCurrentUser.managerId) }}
+            </td>
+
         </tr>
     </tbody>
 </table>
