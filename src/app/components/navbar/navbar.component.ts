@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { GapiAuthenticatorService } from "./../../services/gapi.service";
 
 @Component({
+    providers: [GapiAuthenticatorService],
     selector: "mv-navbar",
     styleUrls: ["./navbar.component.css"],
     templateUrl: "./navbar.component.html",
