@@ -1,74 +1,75 @@
 <h2>Import</h2>
 
 <textarea
-#textArea="ngModel"
-[(ngModel)]="csv"
-name="csv"
-rows="4"
-cols="100"
+    #textArea="ngModel"
+    [(ngModel)]="csv"
+    name="csv"
+    rows="4"
+    cols="100"
+    (ngModelChange)="parse(csv)"
 >
 </textarea>
+<h2>{{ message }}</h2>
 <br>
 <br>
 <button (click)="parse(csv)">Parse</button>
 <br>
 <br>
 <table *ngIf="users && users != undefined">
-  <thead>
-    <tr>
-      <th></th>
-      <th>First name</th>
-      <th>Last name</th>
-      <th>Id</th>
-      <th>Function Id</th>
-      <th>Service Id</th>
-      <th>Office Id</th>
-      <th>Tourplan Id</th>
-      <th>Email</th>
-      <th>Phone Work</th>
-      <th>Phone Asterisk</th>
-      <th>Password</th>
-      <th>Manager ID</th>
-      <th>Username</th>
-      <th>IsAdmin?</th>
-      <th>API User?</th>
-      <th>Status</th>
-      <th>Notification</th>
-      <th>Employee Status</th>
-      <th>Group User</th>
-      <th>Number Of Teams</th>
-      <th>Leads Min</th>
-      <th>Leads Max</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let user of users; trackBy: trackByFn">
-      <td>{{ users.indexOf(user) +1 }}.</td>
-      <td>{{ user.firstname }}</td>
-      <td>{{ user.lastname }}</td>
-      <td>{{ user.id }}</td>
-      <td>{{ user.functionId }}</td>
-      <td>{{ user.serviceId }}</td>
-      <td>{{ user.officeId }}</td>
-      <td>{{ user.tourplanID }}</td>
-      <td>{{ user.email }}</td>
-      <td>{{ user.phoneWork }}</td>
-      <td>{{ user.phoneAsterisk }}</td>
-      <td>{{ user.password }}</td>
-      <td>{{ user.managerId }}</td>
-      <td>{{ user.userName }}</td>
-      <td>{{ user.isAdmin }}</td>
-      <td>{{ user.apiPortalUser }}</td>
-      <td>{{ user.status }}</td>
-      <td>{{ user.assignationNotification }}</td>
-      <td>{{ user.employeeStatus }}</td>
-      <td>{{ user.groupUser }}</td>
-      <td>{{ user.numberOfTeams }}</td>
-      <td>{{ user.leadsMin }}</td>
-      <td>{{ user.leadsMax }}</td>
-    </tr>
-  </tbody>
+    <thead>
+        <tr>
+            <th></th>
+            <th>Salutation</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Department</th>
+            <th>Office Id</th>
+            <th>Team</th>
+            <th>Tourplan Id</th>
+            <th>Email</th>
+            <th>Phone Work</th>
+            <th>Phone Asterisk</th>
+            <th>Password</th>
+            <th>Manager</th>
+            <th>Username</th>
+            <th>IsAdmin?</th>
+            <th>API User?</th>
+            <th>Status</th>
+            <th>Notification</th>
+            <th>Employee Status</th>
+            <th>Leads Min</th>
+            <th>Leads Max</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users; trackBy: trackByFn">
+            <td>{{ users.indexOf(user) +1 }}.</td>
+            <td>{{ user.sugarCurrentUser.salutation }}</td>
+            <td>{{ user.common.firstName }}</td>
+            <td>{{ user.common.lastName }}</td>
+            <td>{{ user.sugarCurrentUser.id }}</td>
+            <td>{{ user.sugarCurrentUser.title }}</td>
+            <td>{{ user.sugarCurrentUser.department }}</td>
+            <td>{{ displayOfficeNameFromId(user.sugarCurrentUser.officeId) }}</td>
+            <td>{{ user.sugarCurrentUser.teams[0] }}</td>
+            <td>{{ user.sugarCurrentUser.tourplanID }}</td>
+            <td>{{ user.common.email }}</td>
+            <td>{{ user.sugarCurrentUser.phoneWork }}</td>
+            <td>{{ user.sugarCurrentUser.phoneAsterisk }}</td>
+            <td>{{ user.common.password }}</td>
+            <td>{{ displayManagerName(user.sugarCurrentUser.managerId) }}</td>
+            <td>{{ user.common.userName }}</td>
+            <td>{{ user.sugarCurrentUser.isAdmin }}</td>
+            <td>{{ user.sugarCurrentUser.apiPortalUser }}</td>
+            <td>{{ user.sugarCurrentUser.status }}</td>
+            <td>{{ user.sugarCurrentUser.assignationNotification }}</td>
+            <td>{{ user.sugarCurrentUser.employeeStatus }}</td>
+            <td>{{ user.sugarCurrentUser.leadsMin }}</td>
+            <td>{{ user.sugarCurrentUser.leadsMax }}</td>
+        </tr>
+    </tbody>
 </table>
 
-
-
+<pre>{{ users[0] | json }}</pre>

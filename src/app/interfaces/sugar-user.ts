@@ -105,13 +105,13 @@ export interface ISugarUserConfig {
     // others: Other[];
     // roles: Role[];
     // ggOrganisationId: string;
-    // isAdmin: boolean;
-    // apiPortalUser: boolean;
-    // assignationNotification: boolean;
+    isAdmin?: boolean;
+    apiPortalUser?: boolean;
+    assignationNotification?: boolean;
     // userGroup: boolean;
     // defaultTeams: number;
-    // leadsMin: number;
-    // leadsMax: number;
+    leadsMin?: number;
+    leadsMax?: number;
 }
 
 export interface ICommonProperties {

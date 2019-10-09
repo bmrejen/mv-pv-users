@@ -3,6 +3,7 @@ import { ControlContainer, NgForm } from "@angular/forms";
 
 import { SugarUser } from "../../models/sugar-user";
 import { User } from "../../models/user";
+import { UserPopulaterService } from "../../services/user-populater.service";
 
 @Component({
     selector: "mv-credentials",
@@ -29,7 +30,7 @@ export class CredentialsComponent {
     public usernameStatus: string;
     public emailStatus: string;
 
-    constructor() {
+    constructor(private populater: UserPopulaterService) {
         //
     }
 
@@ -40,37 +41,14 @@ export class CredentialsComponent {
         if (this.currentUser.common.firstName !== ""
             && this.currentUser.common.lastName !== ""
             && this.currentUser.common.userName === "") {
-            this.setUsername();
-            this.setTourplan();
+            this.populater.populateUserProperties(this.currentUser);
 
-            this.currentUser.common.email = this.setEmail();
             this.checkEmailAvailability();
-            this.currentUser.common.password = this.sugarCurrentUser.id === "" ? this.setPassword() : "";
             this.checkUsernameAvailability();
 
             // Call Gapp component method
             this.gapps.handleSendAsClick();
-
-            if (this.currentUser.ggCurrentUser.primaryEmail === "") {
-                this.currentUser.ggCurrentUser.primaryEmail = `${this.currentUser.common.userName}@planetveo.com`;
-            }
         }
-    }
-
-    public setUsername() {
-        const initials = this.currentUser.common.firstName.split(" ")
-            .map((part) => part[0])
-            .join()
-            .replace(/,/g, "")
-            .toLowerCase();
-        const lastName = this.currentUser.common.lastName.replace(/ /g, "")
-            .toLowerCase();
-
-        this.currentUser.common.userName = `${initials}${lastName}`;
-    }
-
-    public setEmail() {
-        return `${this.currentUser.common.userName}@${this.currentUser.ggCurrentUser.sendAs}`;
     }
 
     public checkUsernameAvailability(e?) {
@@ -87,24 +65,6 @@ export class CredentialsComponent {
         this.emailStatus = (this.usersFromSugar
             .find((user) => user.common.email === this.currentUser.common.email) !== undefined) ?
             "EMAIL ALREADY TAKEN" : "Email available :)";
-    }
-
-    public setPassword() {
-        if (this.sugarCurrentUser.id !== "") { return null; }
-
-        const randomString = Math.random()
-            .toString()
-            .substring(2, 7);
-
-        const initials =
-            `${this.currentUser.common.firstName[0].toLowerCase()}${this.currentUser.common.lastName[0].toLowerCase()}`;
-
-        return `${initials}${randomString}!`;
-    }
-
-    public setTourplan() {
-        this.currentUser.sugarCurrentUser.tourplanID = this.currentUser.common.userName.substr(0, 6)
-            .toUpperCase();
     }
 
     public trackByFn(item) {

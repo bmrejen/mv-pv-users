@@ -57,12 +57,12 @@ import { TeamsResolverService } from "./app/resolvers/teams-resolver.service";
 import { UsersResolverService } from "./app/resolvers/users-resolver.service";
 
 import { FieldsService } from "./app/services/fields.service";
-import { FormValueMapperService } from "./app/services/form-value-mapper.service";
 import { GapiAuthenticatorService } from "./app/services/gapi.service";
 import { JamespotService } from "./app/services/jamespot.service";
 import { ParserService } from "./app/services/parser.service";
 import { SugarService } from "./app/services/sugar.service";
 import { SwitchVoxService } from "./app/services/switchvox.service";
+import { UserPopulaterService } from "./app/services/user-populater.service";
 
 import { AlphabeticalPipe } from "./app/pipes/alphabetical.pipe";
 
@@ -114,7 +114,6 @@ import "./app/rxjs-extensions";
         DestinationsResolverService,
         FieldsService,
         FieldsResolverService,
-        FormValueMapperService,
         GapiAuthenticatorService,
         JamespotResolverService,
         JamespotService,
@@ -126,6 +125,7 @@ import "./app/rxjs-extensions";
         SugarService,
         SwitchVoxService,
         TeamsResolverService,
+        UserPopulaterService,
         UsersResolverService,
         HttpClient,
         { provide: APP_BASE_HREF, useValue: "/" },

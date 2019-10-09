@@ -99,6 +99,10 @@ export const AppRoutes: Routes = [
     {
         path: "import",
         component: ImportComponent,
+        resolve: {
+            fields: FieldsResolverService,
+            managers: ManagersResolverService,
+        },
     },
     { path: "**", redirectTo: "create" },
 ];
