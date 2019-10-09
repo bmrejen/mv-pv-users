@@ -158,11 +158,13 @@ export class ImportComponent implements OnInit {
     }
 
     private populateOfficeFromTeam(user: User): void {
-        if (user.sugarCurrentUser.teams.length === 0 || user.sugarCurrentUser.teams[0] === "") {
-            user.sugarCurrentUser.officeId = "";
-        } else {
-            const myOffice = this.offices.find((office) => office.label.includes(user.sugarCurrentUser.teams[0]));
-            user.sugarCurrentUser.officeId = myOffice != null ? myOffice.value : "";
+        if (user.sugarCurrentUser.officeId === "") {
+            if (user.sugarCurrentUser.teams.length === 0 || user.sugarCurrentUser.teams[0] === "") {
+                user.sugarCurrentUser.officeId = "";
+            } else {
+                const myOffice = this.offices.find((office) => office.label.includes(user.sugarCurrentUser.teams[0]));
+                user.sugarCurrentUser.officeId = myOffice != null ? myOffice.value : "";
+            }
         }
     }
 }
