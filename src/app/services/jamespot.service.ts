@@ -8,7 +8,7 @@ import {
     IJamespotUserList,
 } from "./../interfaces/jamespot-api-response";
 
-import { HttpClient, HttpHeaders, HttpParams, HttpResponseBase } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 
@@ -165,6 +165,19 @@ export class JamespotService {
                     res.RC.CODE === 0 ? resolve(this.mapFromApi(res)) : reject(err);
                 });
             });
+    }
+
+    public disableUser(idUser: string): Promise<IJamespotUserFromApi> {
+        return this.http.put<IJamespotApiResponse<IJamespotUserFromApi>>
+            (`${this.endPoint}user/update?idUser=${idUser}&active=1`, {}, { headers: this.headers })
+            .toPromise<IJamespotApiResponse<IJamespotUserFromApi>>()
+            .then((res) => new Promise<IJamespotUserFromApi>((resolve, reject) => {
+                if (res.RC.CODE === 0) {
+                    resolve(res.VAL);
+                } else {
+                    reject(res);
+                }
+            }));
     }
 
     public createParamsToUpdate(usr: User, oldUsr: User): HttpParams {

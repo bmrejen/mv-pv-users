@@ -36,15 +36,11 @@ export class DisableUserFormComponent implements OnInit {
             .then((res) => console.log(this.fields))
             .catch((err) => console.error(err));
 
-        this.sugar.getUsers()
-            .then((users) => users.forEach((user) => {
-                const userConfig = this.sugar.mapUserFromApi(user);
-                user["checked"] = false;
+        this.route.data.subscribe((data) => {
+            this.users = data.users;
+            this.users.forEach((user) => user["checked"] = false);
 
-                this.users.push(new SugarUser(userConfig.common, userConfig.sugar));
-            }))
-
-            .then((res) => console.log("this.users", this.users));
+        });
 
         this.route.paramMap.subscribe((params) => console.log(params));
 

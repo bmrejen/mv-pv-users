@@ -23,12 +23,12 @@
                 *ngFor="let user of users ; trackBy: trackByFn"
                 ngModelGroup="users"
             >
-                <label *ngIf="user.userName != null">
+                <label *ngIf="user.common.userName != null">
                     <input
                         type="checkbox"
-                        [name]="user.userName"
+                        [name]="user.common.userName"
                         [(ngModel)]="user.checked"
-                    >{{ user.userName }}
+                    >{{ user.common.userName }}
                 </label>
             </div>
         </div>

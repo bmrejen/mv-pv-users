@@ -29,7 +29,6 @@ export class GapiUsersComponent implements OnInit {
     @Input() public currentUser: User;
     @Input() public ggCurrentUser: GoogleUser;
     @Input() public gapiMessage: string;
-    @Input() public gapiStatus;
     @Input() public credentials;
 
     constructor(
@@ -46,33 +45,9 @@ export class GapiUsersComponent implements OnInit {
                     this.orgas = data.fields.orgas;
                 }
             });
-    }
-
-    public listUsers(): void {
-        this.gapiService.listUsers()
-            .then((res) => this.users = res.result.users)
-            .catch((err) => console.error("error", err));
-    }
-
-    public signIn() {
-        this.gapiService.signIn()
-            .then((res) => {
-                window.location.reload();
-                this.gapiService.initAuthClient()
-                    .then((result: any) => this.gapiStatus.userLoggedIn = result.currentUser.get().w3.ig)
-                    .catch((err) => console.log("init auth client error", err));
-            });
-    }
-
-    public signOut() {
-        this.gapiService.signOut()
-            .then(() => this.gapiService.initAuthClient()
-                .then((result: any) => {
-                    if (!this.gapiService.isSignedIn()) {
-                        this.gapiStatus.userLoggedIn = "Logged out";
-                    }
-                })
-                .catch((err) => console.error("init auth client error", err)));
+        this.gapiService.getGroups()
+            .then((groups) => this.googleGroups = groups)
+            .catch((err) => console.error(err));
     }
 
     public pushGroupToUser(group) {

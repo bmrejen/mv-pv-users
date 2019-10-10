@@ -1,9 +1,35 @@
 <nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
     <div class="container">
-        <ul routerLinkActive="active">
-            <li><a routerLink="users">Liste users</a></li>
-            <li><a routerLink="create">Création</a></li>
-            <li><a routerLink="import">Import</a></li>
-        </ul>
+        <div *ngIf="['Logged out' || '' ].includes(gapiStatus.userLoggedIn); else alreadyLoggedIn">
+            <ul>
+                <li>
+                    <h2>Please sign in the Google admin account</h2>
+                </li>
+                <li> <button
+                        (click)="signIn()"
+                        type="button"
+                    >Sign In</button></li>
+            </ul>
+        </div>
+
+        <ng-template #alreadyLoggedIn>
+            <ul routerLinkActive="active">
+                <li><a routerLink="users">Liste users</a></li>
+                <li><a routerLink="create">Création</a></li>
+                <li><a routerLink="import">Import</a></li>
+                <li><button
+                        (click)="signIn()"
+                        type="button"
+                    >Change Users</button>
+                </li>
+                <li>
+                    <button
+                        (click)="signOut()"
+                        type="button"
+                    >Sign Out</button>
+                </li>
+                <li>User logged in : {{ gapiStatus.userLoggedIn }}</li>
+            </ul>
+        </ng-template>
     </div>
 </nav>

@@ -3,7 +3,8 @@
     (ngSubmit)="postUser()"
 >
 
-    <ng-container *ngIf="fields != null">
+    <h1 *ngIf="!isSignedIn()">Please sign in Google Account</h1>
+    <ng-container *ngIf="fields != null && isSignedIn()">
         <mv-accounts [accounts]="fields.accounts"></mv-accounts>
         <input
             type="text"
@@ -14,10 +15,6 @@
             type="button"
             (click)=getUser()
         >Get User</button>
-        <button
-            type="button"
-            (click)=prefillForm()
-        >Prefill</button>
 
         <div *ngIf="isRealUser === false">{{ mailToGet }} redirects to
             {{ currentUser.ggCurrentUser.primaryEmail | uppercase }}</div>
@@ -58,7 +55,6 @@
                 [oldUser]="oldUser"
                 [ggCurrentUser]="currentUser.ggCurrentUser"
                 [gapiMessage]="gapiMessage"
-                [gapiStatus]="gapiStatus"
                 class="google"
             ></mv-gapi-users>
         </div>
@@ -111,13 +107,13 @@
 
         <div *ngIf="errorMsg">ERROR: {{ errorMsg }}</div>
         <button
-            *ngIf="currentUser.sugarCurrentUser.id === ''"
+            *ngIf="currentUser.sugarCurrentUser.id == null"
             [disabled]="!createForm.form.valid"
             type="button"
             (click)="postUser()"
         >Create</button>
         <button
-            *ngIf="currentUser.sugarCurrentUser.id !== ''"
+            *ngIf="currentUser.sugarCurrentUser.id != null"
             type="button"
             (click)="updateUser()"
         >Update</button>

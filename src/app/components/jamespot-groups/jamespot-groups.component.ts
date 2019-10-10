@@ -4,7 +4,7 @@ import { User } from "./../../models/user";
 
 @Component({
     selector: "mv-jamespot-groups",
-    styleUrls: ["./jamespot-groups.component.css"],
+    // styleUrls: ["./jamespot-groups.component.css"],
     templateUrl: "./jamespot-groups.component.html",
 })
 

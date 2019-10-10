@@ -31,7 +31,7 @@ export class CreateUserFormComponent implements OnInit {
     public passwordExists = false;
     public usersFromSugar: User[] = [];
     public usernameTaken;
-    public currentUser: User;
+    public currentUser: User = new User({});
     public oldUser: User = new User({});
     public teams: Team[] = [];
     public roles: Role[] = [];
@@ -43,12 +43,6 @@ export class CreateUserFormComponent implements OnInit {
     public gapiMessage: string = null;
     public jamesMessage: string = null;
     public sugarMessage: string = null;
-    public gapiStatus = {
-        apiFailed: false,
-        apiLoaded: false,
-        apiReady: false,
-        userLoggedIn: null,
-    };
     public temporaryData = {
         googleGroups: null,
         sendAs: null,
@@ -69,20 +63,13 @@ export class CreateUserFormComponent implements OnInit {
         this.route.data
             .subscribe((data) => {
                 // set current user if any
-                this.currentUser = new User({});
-                this.currentUser.sugarCurrentUser = new SugarUser(this.currentUser.common, data.sugarUser || {});
+                this.currentUser = data.sugarUser || this.currentUser;
 
                 // get manager list
                 this.managers = data.managers;
 
                 // get user list
-                data.users.forEach((user) => {
-                    const myUser = new User({});
-                    myUser.common = this.sugar.mapUserFromApi(user).common;
-                    myUser.sugarCurrentUser =
-                        new SugarUser(this.sugar.mapUserFromApi(user).common, this.sugar.mapUserFromApi(user).sugar);
-                    this.usersFromSugar.push(myUser);
-                });
+                this.usersFromSugar = data.users;
 
                 // get team list
                 data.teams.forEach((team) => this.teams.push(new Team(team)));
@@ -102,35 +89,7 @@ export class CreateUserFormComponent implements OnInit {
                 // get jamespot spots
                 data.spots.forEach((spot) => this.spots.push(new Spot(spot)));
                 this.spots.sort((a, b) => a.title < b.title ? -1 : a.title > b.title ? 1 : 0);
-
             });
-        this.initGapiServices();
-    }
-
-    public initGapiServices() {
-        this.gapi.loadClient()
-            .then((result) => {
-                this.gapiStatus.apiLoaded = true;
-
-                return this.gapi.initClient();
-            })
-            .catch((err) => this.gapiStatus.apiFailed = true)
-            .then((res) => {
-                this.gapiStatus.apiReady = true;
-                this.gapi.initAuthClient()
-                    .then((result) => {
-                        if (result.currentUser.get()
-                            .isSignedIn() === true) {
-                            this.gapiStatus.userLoggedIn = result.currentUser.get().w3.ig;
-                        } else {
-                            this.gapps.signIn();
-                        }
-                    })
-                    .then(() => this.gapi.getGroups()
-                        .then((groups) => this.googleGroups = groups))
-                    .catch((err) => console.error("initAuthClient error", err));
-            })
-            .catch((err) => this.gapiStatus.apiFailed = true);
     }
 
     public getUser(): Promise<any> {
@@ -455,59 +414,8 @@ export class CreateUserFormComponent implements OnInit {
             .catch((err) => err);
     }
 
-    public prefillForm() {
-        this.currentUser = new User({
-            firstName: "Cocoooo",
-        });
-        this.currentUser.common.lastName = this.currentUser.common.firstName;
-        this.currentUser.common.password = Math.random()
-            .toString(36)
-            .substring(2);
-        this.currentUser.common.email =
-            `${this.currentUser.common.firstName[0]}${this.currentUser.common.lastName}@marcovasco.fr`;
-        this.currentUser.common.userName = `${this.currentUser.common.firstName[0]}${this.currentUser.common.lastName}`;
-
-        this.currentUser.ggCurrentUser = new GoogleUser({
-            orgas: "/IT",
-            primaryEmail: `${this.currentUser.common.firstName[0]}${this.currentUser.common.lastName}@planetveo.com`,
-            sendAs: "marcovasco.fr",
-            signature: "will be modified when sendAs is clicked",
-        });
-        this.currentUser.sugarCurrentUser = new SugarUser(this.currentUser.common, {
-            codeSonGalileo: "123456",
-            department: "Backoffice Carnet",
-            employeeStatus: "Active",
-            managerId: "4a15f7bb-09ec-32f7-4da8-5a560982cd06",
-            officeId: "1006",
-            phoneAsterisk: "1211",
-            phoneFax: "01 76 64 72 00",
-            phoneHome: "01 76 64 72 01",
-            phoneMobile: "01 76 64 72 02",
-            phoneOther: "01 76 64 72 03",
-            phoneWork: "01 76 64 72 04",
-            salutation: "Mr.",
-            status: "Active",
-            swAllowRemoteCalls: false,
-            swCallNotification: true,
-            swClickToCall: true,
-            teams: ["0ec63f44-aa38-11e7-924f-005056911f09",
-                "1046f88d-3d37-10d5-7760-506023561b57"],
-            title: "Assistant Ventes",
-            tourplanID: this.currentUser.common.firstName.slice(0, 6)
-                .toUpperCase(),
-            type: "user",
-        });
-        this.currentUser.jamesCurrentUser = new JamespotUser({
-            active: true,
-            company: "MARCO VASCO",
-            country: "fr",
-            language: "fr",
-            phoneExtension: "",
-            role: "User",
-            timeZone: "Europe/Paris",
-        });
-
-        console.log("form prefilled", this.temporaryData);
+    public isSignedIn() {
+        return this.gapi.isSignedIn();
     }
 
     public trackByFn(item) {
@@ -578,6 +486,7 @@ export class CreateUserFormComponent implements OnInit {
     }
 
     private mapJamespotIdToUser(res: IJamespotUser) {
-        this.currentUser.sugarCurrentUser.jamespotId = res.idUser;
+        console.log("id from jamespot", res);
+        this.currentUser.sugarCurrentUser.jamespotId = res["user"].idUser;
     }
 }

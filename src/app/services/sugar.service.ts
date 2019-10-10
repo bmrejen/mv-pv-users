@@ -21,6 +21,10 @@ export class SugarService {
     public teamList: Team[] = [];
     public userList: User[] = [];
     public itemList = [];
+    // PROD
+    // private endPoint: string = "http://pvcrm.com/c/api/";
+    // private postEndPoint: string = "http://pvcrm.com/c/api/users";
+    // PREPROD
     private endPoint: string = "http://sh.pvcrm.com/sugarcrm/sugarcrm/api/";
     private postEndPoint: string = "http://sh.pvcrm.com/sugarcrm/sugarcrm/api/users";
 
@@ -51,6 +55,7 @@ export class SugarService {
     public createUsersArray(users): User[] {
         const usersArray = [];
         users.forEach((user) => {
+
             const userInfo = this.mapUserFromApi(user);
 
             // Create new user and give it the common properties
@@ -92,6 +97,21 @@ export class SugarService {
             .toPromise();
     }
 
+    public disableUser(id: string) {
+        return this.http.post<any>(this.postEndPoint,
+            {
+                data: {
+                    attributes: {
+                        employeeStatus: "Inactive",
+                        id,
+                        status: "Inactive",
+                    },
+                },
+            },
+        )
+            .toPromise();
+    }
+
     public getTeams(): Promise<Team[]> {
         return this.getData("teams")
             .then((items) => items.filter((item) => isTeamMember(item)));
@@ -104,7 +124,7 @@ export class SugarService {
     }
 
     public mapUserFromApi(data): ISugarConfigAndName {
-        return {
+        const myObj = {
             common: {
                 email: data.attributes.email,
                 firstName: data.attributes.firstName,
@@ -136,6 +156,8 @@ export class SugarService {
                 type: data.attributes.type,
             },
         };
+
+        return myObj;
     }
 
     private getData(item: string): Promise<any> {
