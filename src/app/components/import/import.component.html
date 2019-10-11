@@ -11,10 +11,6 @@
 </textarea>
 <h2>{{ message }}</h2>
 <br>
-<br>
-<button (click)="parse(csv)">Parse</button>
-<br>
-<br>
 <table *ngIf="users && users != undefined">
     <thead>
         <tr>
@@ -41,6 +37,9 @@
             <th>Employee Status</th>
             <th>Leads Min</th>
             <th>Leads Max</th>
+            <th>Sugar</th>
+            <th>Jamespot</th>
+            <th>Google</th>
         </tr>
     </thead>
     <tbody>
@@ -68,8 +67,22 @@
             <td>{{ user.sugarCurrentUser.employeeStatus }}</td>
             <td>{{ user.sugarCurrentUser.leadsMin }}</td>
             <td>{{ user.sugarCurrentUser.leadsMax }}</td>
+            <td [ngClass]="{'danger': user.postStatus.sugar.isFailed}">{{ user.postStatus.sugar.message }}</td>
+            <td [ngClass]="{'danger': user.postStatus.jamespot.isFailed}">
+                {{ user.postStatus.jamespot.message }}</td>
+            <td [ngClass]="{'danger': user.postStatus.gapi.isFailed}">
+                {{ user.postStatus.gapi.message }}</td>
         </tr>
     </tbody>
 </table>
+<button
+    *ngIf="showParseButton"
+    (click)="parse(csv)"
+>Parse</button>
+<button
+    *ngIf="!showParseButton"
+    (click)="postUsers(users)"
+>Create</button>
+<br>
 
 <pre>{{ users[0] | json }}</pre>

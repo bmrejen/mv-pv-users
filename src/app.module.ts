@@ -55,6 +55,7 @@ import { RolesResolverService } from "./app/resolvers/roles-resolver.service";
 import { SugarResolverService } from "./app/resolvers/sugar-resolver.service";
 import { TeamsResolverService } from "./app/resolvers/teams-resolver.service";
 import { UsersResolverService } from "./app/resolvers/users-resolver.service";
+import { ValidateUserService } from "./app/services/validate-user.service";
 
 import { FieldsService } from "./app/services/fields.service";
 import { GapiAuthenticatorService } from "./app/services/gapi.service";
@@ -127,6 +128,7 @@ import "./app/rxjs-extensions";
         TeamsResolverService,
         UserPopulaterService,
         UsersResolverService,
+        ValidateUserService,
         HttpClient,
         { provide: APP_BASE_HREF, useValue: "/" },
         { provide: LOCALE_ID, useValue: "fr-FR" },

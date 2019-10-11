@@ -17,3 +17,7 @@ tbody > tr:nth-child(even) {
 textarea {
   width: 100%;
 }
+
+.danger {
+    background-color: tomato;
+}

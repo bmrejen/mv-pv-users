@@ -1,8 +1,8 @@
 export class Office {
-    public label: string = "";
-    public value: string = "";
+    public name: string = "";
+    public id: string = "";
     constructor(data) {
-        this.label = data.label;
-        this.value = data.value;
+        this.name = data.name;
+        this.id = data.id;
     }
 }

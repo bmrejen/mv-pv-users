@@ -1,5 +1,6 @@
 import { GoogleUser } from "./google-user";
 import { JamespotUser } from "./jamespot-user";
+import { PostStatus } from "./post-status";
 import { SugarUser } from "./sugar-user";
 
 import { ICommonProperties, ISugarUserConfig } from "../interfaces/sugar-user";
@@ -23,6 +24,9 @@ export class User {
 
     // GOOGLE
     public ggCurrentUser: GoogleUser = new GoogleUser({});
+
+    // POST STATUS (used by import component)
+    public postStatus: PostStatus = new PostStatus();
 
     constructor(data: any) {
 

@@ -3,10 +3,6 @@ import { User } from "./../models/user";
 
 @Injectable()
 export class UserPopulaterService {
-    constructor() {
-        //
-    }
-
     public populateUserProperties(user: User) {
         setUsername(user);
         setTourplan(user);

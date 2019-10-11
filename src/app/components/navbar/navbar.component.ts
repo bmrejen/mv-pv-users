@@ -47,7 +47,10 @@ export class NavbarComponent implements OnInit {
                             this.signIn();
                         }
                     })
-                    .catch((err) => console.error("initAuthClient error", err));
+                    .catch((err) => {
+                        console.error("initAuthClient error", err);
+                        this.gapiStatus.userLoggedIn = "";
+                    });
             })
             .catch((err) => this.gapiStatus.apiFailed = true);
     }

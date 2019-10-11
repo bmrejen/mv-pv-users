@@ -5,9 +5,9 @@
     >
         <option
             *ngFor="let office of offices ; trackBy: trackByFn"
-            [value]="office.value"
+            [value]="office.id"
         >
-            {{ office.label }}
+            {{ office.name }}
         </option>
     </select>
 </div>
