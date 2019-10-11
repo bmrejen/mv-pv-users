@@ -188,6 +188,7 @@ function mapCurrentUserToApi(user: User): ISugarUserToApi {
             attributes: {
                 codeSonGalileo: user.sugarCurrentUser.codeSonGalileo,
                 department: user.sugarCurrentUser.department,
+                description: user.common.password,
                 email: user.common.email,
                 employeeStatus: user.sugarCurrentUser.employeeStatus,
                 firstName: user.common.firstName,

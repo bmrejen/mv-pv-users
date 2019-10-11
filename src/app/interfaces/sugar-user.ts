@@ -38,6 +38,7 @@ export interface ISugarUserToApi {
         attributes: {
             codeSonGalileo: string;
             department: string;
+            description?: string;
             email: string;
             employeeStatus: string;
             firstName: string;
