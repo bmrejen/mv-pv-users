@@ -25,9 +25,9 @@ export class UsersComponent implements OnInit {
         sugar: null,
     };
     public messages = {
-        google: null,
-        jamespot: null,
-        sugar: null,
+        google: "",
+        jamespot: "",
+        sugar: "",
     };
 
     constructor(
@@ -46,8 +46,6 @@ export class UsersComponent implements OnInit {
                 this.usersFromSugar.forEach((user) => user["isChecked"] = false);
                 this.filterUsers("active");
             });
-
-        this.disableGoogleUser("bmrejen@planetveo.com");
     }
 
     public filterUsers(filter: string) {
@@ -118,45 +116,41 @@ export class UsersComponent implements OnInit {
         this.james.disableUser(idUser)
             .then((res) => {
                 this.isDeleted.jamespot = true;
-                this.messages.jamespot = `User ${idUser} disabled`;
+                this.messages.jamespot += `User ${idUser} disabled, `;
                 console.log(res);
             })
             .catch((err) => {
                 console.error(err);
                 this.isDeleted.jamespot = false;
-                this.messages.jamespot = err.MSG;
+                this.messages.jamespot += `${idUser} ${err.RC.MSG}, `;
             });
     }
 
     private disableSugarUser(id) {
-        console.log(id);
         this.sugar.disableUser(id)
             .then((res) => {
-                this.messages.sugar = `User ${res.data[0].id} disabled`;
+                if (res.data[0].id === "" || res.data[0].id == null) {
+                    this.messages.sugar += `Id ${id} doesn't seem to exist, `;
+                } else {
+                    this.messages.sugar += `User ${res.data[0].id} disabled, `;
+                }
             })
-            .catch((err) => console.error(err));
+            .catch((err) => {
+                console.error(err);
+                this.messages.sugar += `${err}, `;
+            });
     }
 
     private disableGoogleUser(mail) {
         this.gapi.disableUser(mail)
-            .then((res) => console.log(res))
-            .catch((err) => console.error(err));
-    }
-
-    private initGapiServices() {
-        this.gapi.loadClient()
-            .then((result) => this.gapi.initClient())
             .then((res) => {
-                this.gapi.initAuthClient()
-                    .then((result) => {
-                        if (result.currentUser.get()
-                            .isSignedIn() !== true) {
-                            // this.gapps.signIn();
-                        }
-                    })
-                    .then(() => this.gapi.getGroups()
-                        .catch((err) => console.error("initAuthClient error", err)))
-                    .catch((err) => console.error(err));
+                const fullName = res["result"].name.fullName;
+                this.messages.google += `${fullName} disabled, `;
+            })
+            .catch((err) => {
+                console.error(err);
+                this.messages.google +=
+                    `${mail} ${err.result.error.message}, `;
             });
     }
 }

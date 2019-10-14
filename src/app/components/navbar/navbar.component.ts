@@ -1,7 +1,13 @@
+import { HttpClient } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
 import { GapiAuthenticatorService } from "./../../services/gapi.service";
 
 @Component({
+    providers: [
+        BrowserModule,
+        GapiAuthenticatorService,
+        HttpClient],
     selector: "mv-navbar",
     styleUrls: ["./navbar.component.css"],
     templateUrl: "./navbar.component.html",
