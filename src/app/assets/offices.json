@@ -1,88 +1,88 @@
 {
     "data": [
         {
-            "label": "Bureau - Billeterie & Qualité",
-            "value": "1006"
+            "name": "Bureau - Billeterie & Qualité",
+            "id": "1006"
         },
         {
-            "label": "Bureau - Carnets",
-            "value": "1019"
+            "name": "Bureau - Carnets",
+            "id": "1019"
         },
         {
-            "label": "Bureau - Comptabilité",
-            "value": "1377"
+            "name": "Bureau - Comptabilité",
+            "id": "1377"
         },
         {
-            "label": "Bureau - SG",
-            "value": "1690"
+            "name": "Bureau - SG",
+            "id": "1690"
         },
         {
-            "label": "Bureau - Production",
-            "value": "1017"
+            "name": "Bureau - Production",
+            "id": "1017"
         },
         {
-            "label": "Bureau - Atome (Paris)",
-            "value": "128399"
+            "name": "Bureau - Atome (Paris)",
+            "id": "128399"
         },
         {
-            "label": "Bureau - Black Pearl",
-            "value": "1012"
+            "name": "Bureau - Black Pearl",
+            "id": "1012"
         },
         {
-            "label": "Bureau - Cajuns",
-            "value": "4944"
+            "name": "Bureau - Cajuns",
+            "id": "4944"
         },
         {
-            "label": "Bureau - Drakkars",
-            "value": "117345"
+            "name": "Bureau - Drakkars",
+            "id": "117345"
         },
         {
-            "label": "Bureau - Explorers",
-            "value": "127945"
+            "name": "Bureau - Explorers",
+            "id": "127945"
         },
         {
-            "label": "Bureau - Golden Dragons",
-            "value": "1014"
+            "name": "Bureau - Golden Dragons",
+            "id": "1014"
         },
         {
-            "label": "Bureau - Guaranis",
-            "value": "1010"
+            "name": "Bureau - Guaranis",
+            "id": "1010"
         },
         {
-            "label": "Bureau - Iroquois",
-            "value": "1009"
+            "name": "Bureau - Iroquois",
+            "id": "1009"
         },
         {
-            "label": "Bureau - Islanders",
-            "value": "1005"
+            "name": "Bureau - Islanders",
+            "id": "1005"
         },
         {
-            "label": "Bureau - Yankees",
-            "value": "1007"
+            "name": "Bureau - Yankees",
+            "id": "1007"
         },
         {
-            "label": "Bureau - Marketing",
-            "value": "3968"
+            "name": "Bureau - Marketing",
+            "id": "3968"
         },
         {
-            "label": "Bureau - Masai",
-            "value": "1008"
+            "name": "Bureau - Masai",
+            "id": "1008"
         },
         {
-            "label": "Bureau - Papagayos",
-            "value": "1930"
+            "name": "Bureau - Papagayos",
+            "id": "1930"
         },
         {
-            "label": "Bureau - Phare Ouest",
-            "value": "181091"
+            "name": "Bureau - Phare Ouest",
+            "id": "181091"
         },
         {
-            "label": "Bureau - Seven Seas",
-            "value": "66663"
+            "name": "Bureau - Seven Seas",
+            "id": "66663"
         },
         {
-            "label": "Bureau - Shaolin",
-            "value": "1013"
+            "name": "Bureau - Shaolin",
+            "id": "1013"
         }
     ]
 }

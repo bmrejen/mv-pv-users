@@ -3,7 +3,6 @@ import { ICommonProperties, ISugarUserConfig } from "../interfaces/sugar-user";
 export class SugarUser implements ISugarUserConfig {
     public codeSonGalileo: string = "";
     public department: string = "";
-    // public email: string = "";
     public employeeStatus: string = "";
     public id: string = "";
     public managerId: string = "";
@@ -44,7 +43,6 @@ export class SugarUser implements ISugarUserConfig {
 
         this.codeSonGalileo = data.codeSonGalileo || this.codeSonGalileo;
         this.department = data.department || this.department;
-        // this.email = data.email || this.email;
         this.employeeStatus = data.employeeStatus || this.employeeStatus;
         this.id = data.id;
         this.managerId = data.managerId || this.managerId;
@@ -62,30 +60,17 @@ export class SugarUser implements ISugarUserConfig {
         this.jamespotId = data.jamespotId || this.jamespotId;
         this.tourplanID = data.tourplanID || this.common.userName.substr(0, 6)
             .toUpperCase();
+        this.leadsMin = data.leadsMin || this.leadsMin;
+        this.leadsMax = data.leadsMax || this.leadsMax;
+        this.teams = data.teams || this.teams;
 
         // Do not give default values to booleans
         // They could be intentionally set to false
+        this.isAdmin = data.isAdmin;
+        this.apiPortalUser = data.apiPortalUser;
+        this.assignationNotification = data.assignationNotification;
         this.swAllowRemoteCalls = data.swAllowRemoteCalls;
         this.swCallNotification = data.swCallNotification;
         this.swClickToCall = data.swClickToCall;
-
-        // Following properties are not returned by the API
-
-        // this.userToCopyHPfrom = data.userToCopyHPfrom || this.userToCopyHPfrom;
-        // this.inheritsPreferencesFrom = data.inheritsPreferencesFrom || this.inheritsPreferencesFrom;
-        // this.roleId = data.roleId || this.roleId;
-        // this.functionId = data.functionId || this.functionId;
-        // this.destinations = data.destinations || this.destinations;
-        // this.teams = data.teams || this.teams;
-        // this.others = data.others || this.others;
-        // this.roles = data.roles || this.roles;
-        // this.isAdmin = data.isAdmin || this.isAdmin;
-        // this.apiPortalUser = data.apiPortalUser || this.apiPortalUser;
-        // this.assignationNotification = data.assignationNotification || this.assignationNotification;
-        // this.userGroup = data.userGroup || this.userGroup;
-        // this.defaultTeams = data.defaultTeams || this.defaultTeams;
-        // this.leadsMin = data.leadsMin || this.leadsMin;
-        // this.leadsMax = data.leadsMax || this.leadsMax;
-
     }
 }

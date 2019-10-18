@@ -6,7 +6,7 @@ import { Fields } from "../models/fields";
 
 export class FieldsService {
 
-    public myObj = {};
+    public myObj = {} as Fields;
     public fields = new Fields();
     constructor(private http: HttpClient) {
         //

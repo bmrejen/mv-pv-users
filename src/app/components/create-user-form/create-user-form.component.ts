@@ -16,6 +16,8 @@ import { JamespotUser } from "../../models/jamespot-user";
 import { GapiAuthenticatorService } from "../../services/gapi.service";
 import { JamespotService } from "../../services/jamespot.service";
 import { SugarService } from "../../services/sugar.service";
+import { ValidateUserService } from "./../../services/validate-user.service";
+
 import { IJamespotUser } from "./../../interfaces/jamespot-api-response";
 
 @Component({
@@ -55,7 +57,9 @@ export class CreateUserFormComponent implements OnInit {
         private route: ActivatedRoute,
         private james: JamespotService,
         private sugar: SugarService,
-        private gapi: GapiAuthenticatorService) {
+        private gapi: GapiAuthenticatorService,
+        private validate: ValidateUserService,
+    ) {
         //
     }
 
@@ -207,18 +211,9 @@ export class CreateUserFormComponent implements OnInit {
             });
     }
 
-    public lowerCasify() {
-        this.currentUser.common.email = this.currentUser.sugarCurrentUser.common.email.toLowerCase();
-        this.currentUser.common.email = this.currentUser.common.email.toLowerCase()
-            .replace(/"'"/g, "");
-        this.currentUser.common.userName = this.currentUser.common.userName.toLowerCase();
-        this.currentUser.ggCurrentUser.primaryEmail = this.currentUser.ggCurrentUser.primaryEmail.toLowerCase();
-    }
-
     // --------- POST USER -------------
     public postUser() {
-        this.validateForm();
-        this.lowerCasify();
+        this.validate.handleUser(this.currentUser);
 
         this.mailToGet = this.currentUser.ggCurrentUser.primaryEmail;
 
@@ -282,7 +277,7 @@ export class CreateUserFormComponent implements OnInit {
                     }
                 }
             });
-            this.validateForm();
+            this.validate.handleUser(this.currentUser);
 
             // Sugar is updated last (to have jamespot id)
             return Promise.all(promises)
@@ -470,19 +465,6 @@ export class CreateUserFormComponent implements OnInit {
         return this.gapi.updateGmailSendAs(this.currentUser, this.oldUser)
             .then((resp) => console.log("update GMail SendAs and Signature", resp))
             .catch((err) => console.error(err));
-    }
-
-    private validateForm() {
-        if ([
-            this.currentUser.common.firstName,
-            this.currentUser.common.lastName,
-            this.currentUser.common.email,
-            this.currentUser.common.userName,
-        ].includes("")) {
-            alert("First and last name can't be empty");
-
-            return;
-        }
     }
 
     private mapJamespotIdToUser(res: IJamespotUser) {
