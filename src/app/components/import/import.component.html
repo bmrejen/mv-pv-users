@@ -37,6 +37,7 @@
             <th>Employee Status</th>
             <th>Leads Min</th>
             <th>Leads Max</th>
+            <th>Google Groups</th>
             <th>Sugar</th>
             <th>Jamespot</th>
             <th>Google</th>
@@ -67,6 +68,11 @@
             <td>{{ user.sugarCurrentUser.employeeStatus }}</td>
             <td>{{ user.sugarCurrentUser.leadsMin }}</td>
             <td>{{ user.sugarCurrentUser.leadsMax }}</td>
+            <td>
+                <span *ngFor="let group of user.ggCurrentUser.googleGroups">
+                    {{ group.name }}
+                </span>
+            </td>
             <td [ngClass]="{'danger': user.postStatus.sugar.isFailed}">{{ user.postStatus.sugar.message }}</td>
             <td [ngClass]="{'danger': user.postStatus.jamespot.isFailed}">
                 {{ user.postStatus.jamespot.message }}</td>

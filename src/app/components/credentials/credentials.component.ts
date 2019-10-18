@@ -7,7 +7,7 @@ import { UserPopulaterService } from "../../services/user-populater.service";
 
 @Component({
     selector: "mv-credentials",
-    // styleUrls: ["./credentials.component.css"],
+    styleUrls: ["./credentials.component.css"],
     templateUrl: "./credentials.component.html",
     viewProviders: [
         {

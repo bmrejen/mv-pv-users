@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Fields } from "../models/fields";
+import { Office } from "../models/office";
 
 @Injectable()
 
@@ -27,7 +28,7 @@ export class FieldsService {
         const promises = fields.map((field) => this.getSingleField(field));
 
         return Promise.all(promises)
-            .then((result) => new Promise((resolve, reject) => resolve(result[0])));
+            .then((result) => new Promise((resolve, reject) => resolve(populateFields(result[0]))));
     }
 
     public getSingleField(field: string) {
@@ -40,5 +41,12 @@ export class FieldsService {
             })
             .toPromise();
     }
+}
 
+function populateFields(fields: Fields) {
+    const offices: Office[] = [];
+    fields.offices.forEach((office) => offices.push(new Office(office)));
+    fields.offices = offices;
+
+    return fields;
 }

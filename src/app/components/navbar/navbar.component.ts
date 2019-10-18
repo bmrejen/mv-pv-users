@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { GapiAuthenticatorService } from "./../../services/gapi.service";
+import { NavbarService } from "./../../services/navbar.service";
 
 @Component({
     providers: [
@@ -20,7 +21,7 @@ export class NavbarComponent implements OnInit {
         userLoggedIn: null,
     };
 
-    constructor(private gapi: GapiAuthenticatorService) {
+    constructor(private gapi: GapiAuthenticatorService, private navbar: NavbarService) {
         //
     }
 
@@ -29,7 +30,7 @@ export class NavbarComponent implements OnInit {
     }
 
     public initGapiServices() {
-        this.gapi.loadClient()
+        return this.gapi.loadClient()
             .then((result) => {
                 this.gapiStatus.apiLoaded = true;
 
@@ -43,9 +44,18 @@ export class NavbarComponent implements OnInit {
                         if (result.currentUser.get()
                             .isSignedIn() === true) {
                             this.gapiStatus.userLoggedIn = result.currentUser.get().w3.ig;
+
+                            return this.gapiStatus.userLoggedIn;
                         } else {
-                            this.signIn();
+                            return this.signIn();
                         }
+                    })
+                    .then(() => {
+                        return this.gapi.getGroups()
+                            .then((groups) => {
+                                this.navbar.groupsSource.next(groups);
+                            });
+
                     })
                     .catch((err) => {
                         console.error("initAuthClient error", err);
@@ -56,17 +66,22 @@ export class NavbarComponent implements OnInit {
     }
 
     public signIn() {
-        this.gapi.signIn()
+        return this.gapi.signIn()
             .then((res) => {
                 window.location.reload();
-                this.gapi.initAuthClient()
-                    .then((result: any) => this.gapiStatus.userLoggedIn = result.currentUser.get().w3.ig)
+
+                return this.gapi.initAuthClient()
+                    .then((result: any) => {
+                        this.gapiStatus.userLoggedIn = result.currentUser.get().w3.ig;
+
+                        return this.gapiStatus.userLoggedIn;
+                    })
                     .catch((err) => console.log("init auth client error", err));
             });
     }
 
     public signOut() {
-        this.gapi.signOut()
+        return this.gapi.signOut()
             .then(() => this.gapi.initAuthClient()
                 .then((result: any) => {
                     if (!this.gapi.isSignedIn()) {

@@ -1,3 +1,4 @@
+import { Keys } from "../keys";
 import { User } from "../models/user";
 import { Spot } from "./../models/jamespot-spot";
 
@@ -18,8 +19,8 @@ export class JamespotService {
     public endPoint: string = "https://polevoyages.jamespot.pro/api/server/2.0/";
 
     public headers: HttpHeaders = new HttpHeaders()
-        .append("X-Com-Jamespot-Module-Name", "EXT-MV-User-Admin")
-        .append("X-Com-Jamespot-Module-Key", "dAl4fQm52s");
+        .append("X-Com-Jamespot-Module-Name", Keys.getJamespotModuleName())
+        .append("X-Com-Jamespot-Module-Key", Keys.getJamespotModuleKey());
 
     constructor(private http: HttpClient) {
         //
@@ -54,7 +55,7 @@ export class JamespotService {
         fd.append("Password", user.common.password);
 
         // Google and Sugar properties
-        fd.append("Mail", user.common.email);
+        fd.append("Mail", user.ggCurrentUser.primaryEmail);
         fd.append("Field1", user.sugarCurrentUser.phoneAsterisk);
         fd.append("image", user.jamesCurrentUser.image);
         fd.append("Role", user.jamesCurrentUser.role);
@@ -62,7 +63,7 @@ export class JamespotService {
         fd.append("Company", user.jamesCurrentUser.company);
         fd.append("PhoneNumber", user.sugarCurrentUser.phoneWork);
         fd.append("MobileNumber", user.sugarCurrentUser.phoneMobile);
-        fd.append("Department", user.jamesCurrentUser.teams.join(", "));    // Teams
+        fd.append("Department", user.sugarCurrentUser.department);    // Teams
         fd.append("Function", user.sugarCurrentUser.department);
         fd.append("Gender", user.sugarCurrentUser.salutation);
         fd.append("Field2", user.common.email);

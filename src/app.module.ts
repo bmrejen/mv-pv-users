@@ -60,6 +60,7 @@ import { ValidateUserService } from "./app/services/validate-user.service";
 import { FieldsService } from "./app/services/fields.service";
 import { GapiAuthenticatorService } from "./app/services/gapi.service";
 import { JamespotService } from "./app/services/jamespot.service";
+import { NavbarService } from "./app/services/navbar.service";
 import { ParserService } from "./app/services/parser.service";
 import { SugarService } from "./app/services/sugar.service";
 import { SwitchVoxService } from "./app/services/switchvox.service";
@@ -119,6 +120,7 @@ import "./app/rxjs-extensions";
         JamespotResolverService,
         JamespotService,
         ManagersResolverService,
+        NavbarService,
         OthersResolverService,
         ParserService,
         RolesResolverService,

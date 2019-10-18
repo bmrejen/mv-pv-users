@@ -32,3 +32,6 @@ TODO.md
 
 #G Suite credentials
 .gsuite_credentials.json
+
+#private keys
+keys.ts

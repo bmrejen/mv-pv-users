@@ -9,6 +9,7 @@ export class UserPopulaterService {
         setPassword(user);
         setGooglePrimaryEmail(user);
         setEmail(user);
+        setSignature(user);
     }
 }
 
@@ -24,6 +25,7 @@ function setUsername(user: User) {
 
         user.common.userName = `${initials}${lastName}`;
     }
+    console.log("user.common.userName ", user.common.userName);
 }
 
 function setTourplan(user: User) {
@@ -55,7 +57,14 @@ function setGooglePrimaryEmail(user: User) {
 }
 
 function setEmail(user: User) {
-    if (user.common.email == null && user.common.email === "") {
+    if (user.common.email == null || user.common.email === "") {
         user.common.email = `${user.common.userName}@${user.ggCurrentUser.sendAs}`;
+    }
+}
+
+function setSignature(user: User) {
+    if (user.ggCurrentUser.signature == null || user.ggCurrentUser.signature === "") {
+        // tslint:disable-next-line:max-line-length
+        user.ggCurrentUser.signature = `<div dir="ltr"><p style="font-size:1em;color:rgb(164,135,67);font-family:Lato,Calibri,Arial,Helvetica,sans-serif">--------------------------------</p><p style="color:rgb(0,0,0);font-size:1em;font-family:Lato,Calibri,Arial,Helvetica,sans-serif"><span style="font-weight:bold">${user.common.firstName} ${user.common.lastName}</span><br>${user.sugarCurrentUser.title}</p><p style="color:rgb(0,0,0);font-size:1em;font-family:Lato,Calibri,Arial,Helvetica,sans-serif">${user.sugarCurrentUser.phoneWork} (${user.sugarCurrentUser.phoneAsterisk})<span style="font-size:11.0pt;font-family:&quot;Calibri&quot;,sans-serif"><br><a href="http://www.${user.ggCurrentUser.sendAs}/" target="_blank"><b><span lang="DE" style="color:#a48743">www.${user.ggCurrentUser.sendAs}</span></b></a></span><span style="font-family:&quot;Times New Roman&quot;;font-size:medium">&nbsp;</span></p></div>`;
     }
 }

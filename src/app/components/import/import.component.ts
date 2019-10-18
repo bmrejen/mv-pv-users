@@ -3,6 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 
 // Models
 import { Fields } from "../../models/fields";
+import { GoogleUser } from "../../models/google-user";
 import { Office } from "../../models/office";
 import { SugarUser } from "../../models/sugar-user";
 import { User } from "../../models/user";
@@ -11,6 +12,7 @@ import { PostStatus } from "./../../models/post-status";
 // Services
 import { GapiAuthenticatorService } from "../../services/gapi.service";
 import { JamespotService } from "../../services/jamespot.service";
+import { NavbarService } from "../../services/navbar.service";
 import { ParserService } from "../../services/parser.service";
 import { SugarService } from "../../services/sugar.service";
 import { UserPopulaterService } from "../../services/user-populater.service";
@@ -26,19 +28,21 @@ import { ICommonProperties, ISugarUserConfig } from "./../../interfaces/sugar-us
 })
 
 export class ImportComponent implements OnInit {
-    public numberOfFields = 22;
+    public numberOfFields = 23;
     public users: User[] = [];
     public usersData;
     public managers: User[] = [];
     public message: string = "";
     public offices: Office[] = [];
     public showParseButton: boolean = true;
+    public googleGroups = [];
 
     // tslint:disable:max-line-length
-    public csv = '"Mme","Cindy","Guerineau","","New","Ventes","","Golden Dragons","","cguerineau@marcovasco.fr","01 76 64 72 87","1287","cg11215!","4193eb55-9bc2-08c8-5f3c-582cec03d96f","cguerineau","0","0","Active","0","Active","15","45","Mlle","Coralie","Viarnes","","New","Ventes","","Golden Dragons","","cviarnes@marcovasco.fr","01 56 67 01 00","2100","cv19833!","4193eb55-9bc2-08c8-5f3c-582cec03d96f","cviarnes","0","0","Active","0","Active","15","45","Mme","Nejma","Mebarki","","New","Ventes","","Golden Dragons","","nmebarki@marcovasco.fr","01 76 64 72 92","1292","nm62684!","","nmebarki","0","0","Active","0","Active","15","45","Mlle","Fanny","Marh-Zhoock","","New","Ventes","","Golden Dragons","","farhzhoock@marcovasco.fr","01 56 67 00 88","2088","fm48032!","4193eb55-9bc2-08c8-5f3c-582cec03d96f","farhzhoock","0","0","Active","0","Active","15","45"';
+    public csv = '"Mme","Cindy","Guerineau","","New","Ventes","","Golden Dragons","","cguerineau@marcovasco.fr","01 76 64 72 87","1287","cg11215!","4193eb55-9bc2-08c8-5f3c-582cec03d96f","cguerineau","0","0","Active","0","Active","15","45","iroquois;usa;canada","Mlle","Coralie","Viarnes","","New","Ventes","","Golden Dragons","","cviarnes@marcovasco.fr","01 56 67 01 00","2100","cv19833!","4193eb55-9bc2-08c8-5f3c-582cec03d96f","cviarnes","0","0","Active","0","Active","15","45","iroquois;usa;canada","Mme","Nejma","Mebarki","","New","Ventes","","Golden Dragons","","nmebarki@marcovasco.fr","01 76 64 72 92","1292","nm62684!","","nmebarki","0","0","Active","0","Active","15","45","iroquois;usa;canada","Mlle","Fanny","Marh-Zhoock","","New","Ventes","","Golden Dragons","","farhzhoock@marcovasco.fr","01 56 67 00 88","2088","fm48032!","4193eb55-9bc2-08c8-5f3c-582cec03d96f","farhzhoock","0","0","Active","0","Active","15","45","iroquois;usa;canada"';
     // tslint:enable:max-line-length
 
     constructor(
+        private navbar: NavbarService,
         private parserService: ParserService,
         private populater: UserPopulaterService,
         private route: ActivatedRoute,
@@ -57,6 +61,8 @@ export class ImportComponent implements OnInit {
             const fields = new Fields(data.fields);
             fields.offices.forEach((office) => this.offices.push(new Office(office)));
         });
+        this.navbar.currentGroups
+            .subscribe((res) => this.googleGroups = res);
     }
 
     public parse(d) {
@@ -97,6 +103,7 @@ export class ImportComponent implements OnInit {
                 employeeStatus,
                 leadsMin,
                 leadsMax,
+                googleGroupNames,
             ] = [...user];
 
             myObj.salutation = salutation;
@@ -127,11 +134,20 @@ export class ImportComponent implements OnInit {
             const myUser = new User(common);
 
             myUser.sugarCurrentUser = new SugarUser(common, myObj);
+            myUser.ggCurrentUser = new GoogleUser(myObj);
+            myUser.postStatus = new PostStatus();
+
+            const arrayOfGoogleGroupNames = googleGroupNames.split(";");
+            arrayOfGoogleGroupNames.forEach((groupName) => {
+                const myGroup = this.googleGroups.find((group) => group.name.toLowerCase()
+                    .includes(groupName.toLowerCase()));
+                myUser.ggCurrentUser.googleGroups.push(myGroup);
+            });
+
             this.populater.populateUserProperties(myUser);
             this.populateManager(myUser);
             this.populateOfficeFromTeam(myUser);
             this.users.push(myUser);
-            myUser.postStatus = new PostStatus();
         });
     }
 
@@ -178,7 +194,7 @@ export class ImportComponent implements OnInit {
                 }));
         };
 
-        return users.forEach((user) => {
+        return users.forEach((user: User) => {
             user.postStatus = new PostStatus();
             this.validator.handleUser(user)
                 .then((usr) => {
@@ -202,6 +218,8 @@ export class ImportComponent implements OnInit {
                     if (res[1].status === "fulfilled") {
                         user.postStatus.jamespot.isPosted = true;
                         user.postStatus.jamespot.message = res[1].value.user.idUser;
+                        user.sugarCurrentUser.jamespotId = res[1].value.user.idUser;
+                        this.sugar.postDataToSugar(user);
                     } else if (res[1].status === "rejected") {
                         user.postStatus.jamespot.isFailed = true;
                         user.postStatus.jamespot.message = res[1].reason.substr(res[1].reason.indexOf("=>"));
@@ -212,6 +230,9 @@ export class ImportComponent implements OnInit {
                     if (res[2].status === "fulfilled") {
                         user.postStatus.gapi.isPosted = true;
                         user.postStatus.gapi.message = res[2].value.result.id;
+                        this.createGmailSendAs(user);
+                        user.ggCurrentUser = new GoogleUser(this.gapi.mapFromApi(res[2].value.result));
+                        this.postGoogleGroups(user);
                     } else if (res[2].status === "rejected") {
                         user.postStatus.gapi.isFailed = true;
                         user.postStatus.gapi.message = res[2].reason.result.error.message;
@@ -224,6 +245,12 @@ export class ImportComponent implements OnInit {
 
     public trackByFn(id) {
         return id;
+    }
+
+    private createGmailSendAs(user: User) {
+        return this.gapi.createGmailSendAs(user)
+            .then((resp) => console.log("create GMail SendAs and Signature", resp))
+            .catch((err) => console.error(err));
     }
 
     private findManagerByTeam(teamId): User {
@@ -243,5 +270,11 @@ export class ImportComponent implements OnInit {
                 user.sugarCurrentUser.officeId = myOffice != null ? myOffice.id : "";
             }
         }
+    }
+
+    private postGoogleGroups(user: User) {
+        return this.gapi.postGoogleGroups(user.ggCurrentUser)
+            .then((res) => console.log("postGoogleGroups response", res))
+            .catch((err) => console.error(err));
     }
 }

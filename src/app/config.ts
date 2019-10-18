@@ -72,4 +72,21 @@ export class Config {
 
         return url;
     }
+
+    public static getEndpointUrl(): string {
+        let url;
+
+        switch (this.getEnv()) {
+            case "Production":
+                url = "http://pvcrm.com/c/api/";
+                break;
+            case "Preprod":
+            case "Testing":
+            case "Dev":
+            default:
+                url = "http://sh.pvcrm.com/sugarcrm/sugarcrm/api/";
+        }
+
+        return url;
+    }
 }
