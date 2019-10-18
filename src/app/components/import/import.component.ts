@@ -38,7 +38,7 @@ export class ImportComponent implements OnInit {
     public googleGroups = [];
 
     // tslint:disable:max-line-length
-    public csv = '"Mme","Cindy","Guerineau","","New","Ventes","","Golden Dragons","","cguerineau@marcovasco.fr","01 76 64 72 87","1287","cg11215!","4193eb55-9bc2-08c8-5f3c-582cec03d96f","cguerineau","0","0","Active","0","Active","15","45","iroquois;usa;canada","Mlle","Coralie","Viarnes","","New","Ventes","","Golden Dragons","","cviarnes@marcovasco.fr","01 56 67 01 00","2100","cv19833!","4193eb55-9bc2-08c8-5f3c-582cec03d96f","cviarnes","0","0","Active","0","Active","15","45","iroquois;usa;canada","Mme","Nejma","Mebarki","","New","Ventes","","Golden Dragons","","nmebarki@marcovasco.fr","01 76 64 72 92","1292","nm62684!","","nmebarki","0","0","Active","0","Active","15","45","iroquois;usa;canada","Mlle","Fanny","Marh-Zhoock","","New","Ventes","","Golden Dragons","","farhzhoock@marcovasco.fr","01 56 67 00 88","2088","fm48032!","4193eb55-9bc2-08c8-5f3c-582cec03d96f","farhzhoock","0","0","Active","0","Active","15","45","iroquois;usa;canada"';
+    public csv = '"Mme","Cindy","Guerineau","","New","Ventes","","Golden Dragons","","cguerineau@marcovasco.fr","01 76 64 72 87","1287","cg11215!","4193eb55-9bc2-08c8-5f3c-582cec03d96f","cguerineau","0","0","Active","0","Active","15","45","iroquois;usa;canada","Mlle","Coralie","Viarnes","","New","Ventes","","Golden Dragons","","cviarnes@marcovasco.fr","01 56 67 01 00","2100","cv19833!","4193eb55-9bc2-08c8-5f3c-582cec03d96f","cviarnes","0","0","Active","0","Active","15","45","iroquois;usa;canada"';
     // tslint:enable:max-line-length
 
     constructor(
@@ -139,9 +139,13 @@ export class ImportComponent implements OnInit {
 
             const arrayOfGoogleGroupNames = googleGroupNames.split(";");
             arrayOfGoogleGroupNames.forEach((groupName) => {
-                const myGroup = this.googleGroups.find((group) => group.name.toLowerCase()
-                    .includes(groupName.toLowerCase()));
-                myUser.ggCurrentUser.googleGroups.push(myGroup);
+                if (groupName === "") {
+                    myUser.ggCurrentUser.googleGroups = [];
+                } else {
+                    const myGroup = this.googleGroups.find((group) => group.name.toLowerCase()
+                        .includes(groupName.toLowerCase()));
+                    myUser.ggCurrentUser.googleGroups.push(myGroup);
+                }
             });
 
             this.populater.populateUserProperties(myUser);
