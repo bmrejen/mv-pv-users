@@ -166,8 +166,10 @@ export class ImportComponent implements OnInit {
 
     public populateManager(user: User) {
         if (user.sugarCurrentUser.managerId === "") {
-            user.sugarCurrentUser.managerId =
-                this.findManagerByTeam(user.sugarCurrentUser.teams[0]).sugarCurrentUser.id;
+            const manager = this.findManagerByTeam(user.sugarCurrentUser.teams[0]);
+
+            user.sugarCurrentUser.managerId = manager != null ?
+                manager.sugarCurrentUser.id : "";
         }
     }
 
