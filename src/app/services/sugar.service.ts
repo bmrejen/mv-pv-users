@@ -15,18 +15,15 @@ import "rxjs/add/operator/toPromise";
 import { SugarUser } from "../models/sugar-user";
 import { ISugarConfigAndName, ISugarUserToApi } from "./../interfaces/sugar-user";
 
+import { Config } from "./../config";
+
 @Injectable()
 export class SugarService {
     public roleList: Role[] = [];
     public teamList: Team[] = [];
     public userList: User[] = [];
     public itemList = [];
-    // PROD
-    // private endPoint: string = "http://pvcrm.com/c/api/";
-    // private postEndPoint: string = "http://pvcrm.com/c/api/users";
-    // PREPROD
-    private endPoint: string = "http://sh.pvcrm.com/sugarcrm/sugarcrm/api/";
-    private postEndPoint: string = "http://sh.pvcrm.com/sugarcrm/sugarcrm/api/users";
+    private endPoint: string = Config.getEndpointUrl();
 
     constructor(private http: HttpClient) {
         //
@@ -93,12 +90,12 @@ export class SugarService {
     }
 
     public postDataToSugar(user: User) {
-        return this.http.post<any>(this.postEndPoint, mapCurrentUserToApi(user))
+        return this.http.post<any>(this.endPoint + "users", mapCurrentUserToApi(user))
             .toPromise();
     }
 
     public disableUser(id: string) {
-        return this.http.post<any>(this.postEndPoint,
+        return this.http.post<any>(this.endPoint + "users",
             {
                 data: {
                     attributes: {

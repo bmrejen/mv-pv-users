@@ -1,4 +1,5 @@
 import { Model } from "./model";
+import { Office } from "./office";
 import { Other } from "./other";
 
 export class Fields extends Model {

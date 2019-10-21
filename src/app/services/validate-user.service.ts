@@ -29,20 +29,7 @@ export class ValidateUserService {
             isValid = false;
         }
 
-        if (!this.isOfficeValid(user)) {
-            alert(`${user.common.firstName} ${user.common.lastName} - Office not valid`);
-            isValid = false;
-        }
-
         return isValid;
-    }
-
-    private isOfficeValid(user: User) {
-        const offices: Office[] = [];
-        this.fields.myObj.offices.forEach((office) => offices.push(new Office(office)));
-        const myOffice = offices.find((office) => office.id === user.sugarCurrentUser.officeId);
-
-        return myOffice != null;
     }
 }
 

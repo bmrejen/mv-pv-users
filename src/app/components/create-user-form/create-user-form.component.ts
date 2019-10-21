@@ -1,24 +1,28 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 
+// Interfaces
+import { IJamespotUser, IJamespotUserConfig } from "../../interfaces/jamespot-api-response";
+
+// Models
 import { Destination } from "../../models/destination";
 import { Fields } from "../../models/fields";
+import { GoogleUser } from "../../models/google-user";
+import { Spot } from "../../models/jamespot-spot";
+import { JamespotUser } from "../../models/jamespot-user";
+import { Office } from "../../models/office";
 import { Other } from "../../models/other";
 import { Role } from "../../models/role";
 import { SugarUser } from "../../models/sugar-user";
 import { Team } from "../../models/team";
 import { User } from "../../models/user";
 
-import { IJamespotUserConfig } from "../../interfaces/jamespot-api-response";
-import { GoogleUser } from "../../models/google-user";
-import { Spot } from "../../models/jamespot-spot";
-import { JamespotUser } from "../../models/jamespot-user";
+// Services
 import { GapiAuthenticatorService } from "../../services/gapi.service";
 import { JamespotService } from "../../services/jamespot.service";
+import { NavbarService } from "../../services/navbar.service";
 import { SugarService } from "../../services/sugar.service";
 import { ValidateUserService } from "./../../services/validate-user.service";
-
-import { IJamespotUser } from "./../../interfaces/jamespot-api-response";
 
 @Component({
     selector: "mv-app-create-user-form",
@@ -54,6 +58,7 @@ export class CreateUserFormComponent implements OnInit {
     public userObject;
 
     constructor(
+        private navbar: NavbarService,
         private route: ActivatedRoute,
         private james: JamespotService,
         private sugar: SugarService,
@@ -86,6 +91,8 @@ export class CreateUserFormComponent implements OnInit {
 
                 // get fields list
                 this.fields = new Fields(data.fields);
+                this.fields.offices = [];
+                data.fields.offices.forEach((office) => this.fields.offices.push(new Office(office)));
 
                 // get others
                 data.others.forEach((other) => this.fields.others.push(new Other(other)));
@@ -93,6 +100,8 @@ export class CreateUserFormComponent implements OnInit {
                 // get jamespot spots
                 data.spots.forEach((spot) => this.spots.push(new Spot(spot)));
                 this.spots.sort((a, b) => a.title < b.title ? -1 : a.title > b.title ? 1 : 0);
+
+                this.getGoogleGroups();
             });
     }
 
@@ -359,7 +368,6 @@ export class CreateUserFormComponent implements OnInit {
 
         return this.gapi.postUser(this.currentUser)
             .then((res) => {
-
                 console.log("POST GAPI response", res);
                 const primaryEmail = res["result"].primaryEmail;
 
@@ -373,27 +381,16 @@ export class CreateUserFormComponent implements OnInit {
                         this.gapiMessage = "User created !";
 
                         this.postGoogleGroups();
-
-                        this.activatePopSettings(primaryEmail);
-                        this.updateGapiUser();
-
+                        this.updateGmailSendAs();
                     })
                     .catch((err) => console.error(err));
-
             })
-
             .catch((err) => this.gapiMessage = err["result"].error);
     }
 
     public getPopSettings(primaryEmail) {
         return this.gapi.getPopSettings(primaryEmail)
             .then((res) => res)
-            .catch((err) => console.error(err));
-    }
-
-    public activatePopSettings(primaryEmail) {
-        return this.gapi.activatePopSettings(primaryEmail)
-            .then((res) => console.log("pop settings activation", res))
             .catch((err) => console.error(err));
     }
 
@@ -439,18 +436,20 @@ export class CreateUserFormComponent implements OnInit {
         console.log("getting the GMAIL aliases and signature of", primaryEmail);
 
         return this.gapi.getUserAliases(primaryEmail)
-            .then((response) => {
+            .then((response = []) => {
                 console.log("aliases for ", primaryEmail, response);
                 this.currentUser.ggCurrentUser.aliases = response;
                 this.oldUser.ggCurrentUser.aliases = response;
 
                 const defaultAlias = response.find((alias) => alias.isDefault === true);
 
-                this.currentUser.ggCurrentUser.signature = defaultAlias.signature;
-                this.oldUser.ggCurrentUser.signature = defaultAlias.signature;
+                if (defaultAlias != null) {
+                    this.currentUser.ggCurrentUser.signature = defaultAlias.signature;
+                    this.oldUser.ggCurrentUser.signature = defaultAlias.signature;
 
-                this.currentUser.ggCurrentUser.sendAs = defaultAlias.sendAsEmail.split("@")[1];
-                this.oldUser.ggCurrentUser.sendAs = defaultAlias.sendAsEmail.split("@")[1];
+                    this.currentUser.ggCurrentUser.sendAs = defaultAlias.sendAsEmail.split("@")[1];
+                    this.oldUser.ggCurrentUser.sendAs = defaultAlias.sendAsEmail.split("@")[1];
+                }
 
                 return {
                     aliases: this.currentUser.ggCurrentUser.aliases,
@@ -470,5 +469,10 @@ export class CreateUserFormComponent implements OnInit {
     private mapJamespotIdToUser(res: IJamespotUser) {
         console.log("id from jamespot", res);
         this.currentUser.sugarCurrentUser.jamespotId = res["user"].idUser;
+    }
+
+    private getGoogleGroups() {
+        this.navbar.currentGroups
+            .subscribe((res) => this.googleGroups = res);
     }
 }

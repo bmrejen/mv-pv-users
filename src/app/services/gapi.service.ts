@@ -7,13 +7,14 @@ import * as jwt from "jsrsasign";
 
 import { GoogleUser } from "../models/google-user";
 import { User } from "../models/user";
+import { Keys } from "./../keys";
 
 declare const gapi: any;
 
 @Injectable()
 export class GapiAuthenticatorService {
-    public API_KEY: string = "AIzaSyBeysOdY1ZjiSNpj-PA5Qr2Z-EaJGQNOTQ";
-    public CLIENT_ID: string = "370957812504-q434e61j772ehv68fl4722fraomiduc4.apps.googleusercontent.com";
+    public API_KEY: string = Keys.getApiKey();
+    public CLIENT_ID: string = Keys.getClientId();
     public DISCOVERY_DOCS: string[] = [
         "https://www.googleapis.com/discovery/v1/apis/admin/directory_v1/rest",
         "https://content.googleapis.com/discovery/v1/apis/gmail/v1/rest",
@@ -26,8 +27,6 @@ export class GapiAuthenticatorService {
 
     public userSendAsUrl: string = Config.getSendAsServerUrl();
 
-    // Authorization scopes required by the API; multiple scopes can be
-    // included, separated by spaces.
     // tslint:disable-next-line
     public SCOPES: string = "https://www.googleapis.com/auth/admin.directory.user https://www.googleapis.com/auth/admin.directory.group https://www.googleapis.com/auth/admin.directory.group.member https://mail.google.com/";
 
@@ -126,22 +125,6 @@ export class GapiAuthenticatorService {
         }
     }
 
-    public activatePopSettings(primaryEmail) {
-        return this.createToken(primaryEmail)
-            .then(() => {
-                console.log("token created, now activating POP settings");
-                const url = `https://www.googleapis.com/gmail/v1/users/me/settings/pop`;
-                const headers = new HttpHeaders({ Authorization: `Bearer ${this.accessToken}` });
-                const body = {
-                    accessWindow: "allMail",
-                    disposition: "markRead",
-                };
-
-                return this.http.put(url, body, { headers })
-                    .toPromise();
-            });
-    }
-
     public getPopSettings(primaryEmail) {
         return this.createToken(primaryEmail)
             .then(() => {
@@ -230,6 +213,7 @@ export class GapiAuthenticatorService {
     }
 
     public updateGmailSendAs(usr: User, oldUsr: User): Promise<any> {
+        console.log("updateGmailSendAs ", usr, oldUsr);
         const body = {};
 
         const primaryEmail = `${usr.ggCurrentUser.primaryEmail}`;
@@ -259,37 +243,44 @@ export class GapiAuthenticatorService {
         // Create the alias if it doesn't exist
         if (usr.ggCurrentUser.aliases !== [] &&
             usr.ggCurrentUser.aliases.some((alias) => alias.sendAsEmail === newSendAsEmail)) {
-            return this.updateAlias(primaryEmail, body);
+            return this.updateAlias(primaryEmail, body, "patch");
         } else {
-            return this.createNewAlias(primaryEmail, body);
+            return this.updateAlias(primaryEmail, body, "post");
         }
     }
 
-    public updateAlias(primaryEmail, body): Promise<any> {
-        const url = `https://www.googleapis.com/gmail/v1/users/me/settings/sendAs/${body.sendAsEmail}`;
+    public createGmailSendAs(usr: User): Promise<any> {
+        console.log("updateGmailSendAs ", usr);
+        const body = {};
+
+        const primaryEmail = `${usr.ggCurrentUser.primaryEmail}`;
+        const newSendAsEmail = `${usr.ggCurrentUser.primaryEmail.split("@")[0]}@${usr.ggCurrentUser.sendAs}`;
+
+        body["signature"] = usr.ggCurrentUser.signature;
+        body["displayName"] = `${usr.common.firstName} ${usr.common.lastName}`;
+        body["isDefault"] = true;
+        body["sendAsEmail"] = newSendAsEmail;
+        body["treatAsAlias"] = true;
+        body["replyToAddress"] = newSendAsEmail;
+
+        return this.updateAlias(primaryEmail, body, "post");
+    }
+
+    public updateAlias(primaryEmail, body, method): Promise<any> {
+        console.log("primaryEmail, body, method ", primaryEmail, body, method);
+
+        let url = "https://www.googleapis.com/gmail/v1/users/me/settings/sendAs/";
+        if (method === "patch") {
+            url += body.sendAsEmail;
+        }
 
         const objectForServer = {
             body,
-            method: "patch",
+            method,
             primaryEmail,
             url,
         };
         console.log("ON POSTE LAAAAAAAAAAA", this.userSendAsUrl);
-
-        return this.http.post(this.userSendAsUrl, objectForServer)
-            .toPromise()
-            .then((res) => console.log("POSTED TO LOCAL SERVER", res))
-            .catch((err) => console.error("ERROR FROM LOCAL SERVER", err));
-    }
-
-    public createNewAlias(primaryEmail, body): Promise<any> {
-        const url = `https://www.googleapis.com/gmail/v1/users/me/settings/sendAs`;
-        const objectForServer = {
-            body,
-            method: "post",
-            primaryEmail,
-            url,
-        };
 
         return this.http.post(this.userSendAsUrl, objectForServer)
             .toPromise()
@@ -357,13 +348,9 @@ export class GapiAuthenticatorService {
         return new Promise((resolve, reject) => {
             this.zone.run(() => {
                 gapi.client.directory.users.get({ userKey: primaryEmail })
-                    .then((resp) => {
-                        console.log(resp);
-
-                        return resp;
-                    })
                     .then((res) => {
                         this.numberOfTimesGetHasFailed = 0;
+                        console.log("getUser service response", res);
 
                         return resolve(this.mapFromApi(res["result"]));
                     })
@@ -371,7 +358,7 @@ export class GapiAuthenticatorService {
                         ++this.numberOfTimesGetHasFailed;
                         console.log("numberOfFailures ", this.numberOfTimesGetHasFailed);
 
-                        return this.numberOfTimesGetHasFailed <= 30 ?
+                        return this.numberOfTimesGetHasFailed <= 3 ?
                             resolve(this.getUser(primaryEmail)) : reject(err);
                     });
             });
@@ -448,7 +435,8 @@ export class GapiAuthenticatorService {
             );
         });
 
-        return Promise.all(promises);
+        return Promise.all(promises)
+            .then((res) => console.log("google groups posted", res));
     }
 
     public createToken(primaryEmail): Promise<any> {
@@ -462,7 +450,7 @@ export class GapiAuthenticatorService {
             aud: "https://www.googleapis.com/oauth2/v4/token/",
             exp: jwt.KJUR.jws.IntDate.get("now + 1hour"),
             iat: jwt.KJUR.jws.IntDate.get("now"),
-            iss: "service-account-1@user-interface-1007.iam.gserviceaccount.com",
+            iss: Keys.getIss(),
             // tslint:disable-next-line
             scope: "https://mail.google.com https://www.googleapis.com/auth/admin.directory.group https://www.googleapis.com/auth/admin.directory.orgunit https://www.googleapis.com/auth/admin.directory.user https://www.googleapis.com/auth/gmail.modify https://www.googleapis.com/auth/gmail.settings.basic https://www.googleapis.com/auth/gmail.settings.sharing",
             sub: primaryEmail,
@@ -472,8 +460,7 @@ export class GapiAuthenticatorService {
         const sHeader = JSON.stringify(oHeader);
         const sPayload = JSON.stringify(oPayload);
 
-        // tslint:disable-next-line
-        const privateKey = "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCtOQWoAZ/Gfpic\nb3D7v2XvT6X9bSZsHR/LsLmc4QXYaU6rqlh1MFSON8Dh2EXpkqXfa9flik80v+me\n18A2pRg/hsA7zLMJwGmtXgs28VPB4DjbYshnMhYMkbtRhuvYxCat/fCsp1DenaZE\nFT2CmUjByewduFSspBIliEEUWBSJXRA376u73wpvRnfbeuhoijOj/VC12lUf10vD\n48fRfsaRBY0SoRrQ9ZPf43eli3pSc6V+2U56dsShyjVeJFPWgT6W/RYI0ZDcEIMb\nfhEZ2Bg35qQWMQjfC6FhotGhbwUqjVq6r6HWZedEwNjcfxdhywd9bUTlD9LffJJA\nEriwGgvjAgMBAAECggEAMEjgxsANJWtMZu65c7MaWua8wjOWrjRAFKsiUhR3aKeS\nAk/tcF0UdMAdx9ZdRopWKj0JZTZ0daO5H0nMjm7en3aURxb8IQ+9ZVH9lkcWrcgu\nkRir+/f+JWrJ6CPPwhCLJ5zNZZMN+7++BORWzPylRz9dzbr//0+Mr2GXonAa6V7O\nJ3DGnFMA45vHxgljDheYIqt1FIClOF83KrgTyjPO4vkcm9XEwbhpxMZrgAhEK2L4\naHxSgKIJSjs4YF3ZUEXqelhSLMbA8DIr511vHx7U4/2a1LB0n+d4W4SWuqZUMiCS\nj/gw77fgGt08acd94VmKTGAbYPX3l44QGvkOStopgQKBgQDWdueDLIFoHQJMizPG\n9AyMvbs40gdpgSLYt8rYZOREf/mmuM2i3AFBEaRa5VD34xbIA2sXAsDOT7X30lSJ\n08okcOM3h4eNOQwXzK/IpsSr/4wDKDcpvXBvLMqaaGwwiCQc5KT7HPy+LP9YP4om\nCbUFGTNusMaRiTfQmXDMPwKg0QKBgQDOxVzwmje5b2e3Xim+MK8d3voRKfrOkc5o\ntMaAEYVcPzw5d1VWjj8baEf3DEwp7h0UB9YZdxYuM/iDVuvZSKAxhRLpQIiL+b7p\nEnj9VDf4UPuiExgRA7pb0BoMS7fm9TFKKRNTtYga32cKduWzZG0RDQccbOHTyRnE\nfsL6WDJucwKBgQCNLBARZMZ6Rj4xLKCUoilwq6QGLxr59CuABNvdvewUuzkW6idS\nwQeCUZ6ixriZtD5WwwlHSGSqagYab7V+VI+HlVe8QdaUu6yeLfq4Vi64GauMmHhX\nXYAZbp6fLYWqHLPI4SlIszgb53reGFVT3KfwBzq37l2Hh4/aHGcHy6JrQQKBgQCz\nX2lp3A8dUbTC0PAbarZvjmCXBTjrfHd4Q+KzdP+g78Z5/7jLVqkOSJ+thECKW2Nk\nXgvwmWtnd3RN09jT7PnzG4M1T+NksqpYHMtS0H2hb/drOW82S2qefWArbIBD3k79\nC7cVdjR1Q3prDIvl3Of0071oflhF1n4BBQp2DI7rWwKBgC8AipK80qNvwRRSWHhW\nrBX8Tj9Z1m60WmxAdo4ANsjvP1MlX8GIDgnntEb9874ofI2nXAEKjJjQ7vYy9Ig4\n2YN3eeQqNbjTehBWhrqo9tPL85+nweN0P4RO1js3l6+Mr89ePabrd8DRu+hnpPpJ\nuYMXzEF4C9CeTr4Cc18LjV1x\n-----END PRIVATE KEY-----\n";
+        const privateKey = Keys.getPrivateKey();
 
         const sJWT = jwt.KJUR.jws.JWS.sign("RS256", sHeader, sPayload, privateKey);
 
@@ -490,14 +477,7 @@ export class GapiAuthenticatorService {
 
                 return this.accessToken;
             })
-            .catch((err) => {
-                console.log("Failed. Trying to generate token again");
-
-                return new Promise((resolve) => setTimeout(resolve, 4000))
-                    .then(() => Promise.resolve(this.createToken(primaryEmail)));
-            });
-        // }
-
+            .catch((err) => err);
     }
 
     public getUserAliases(email) {
@@ -507,7 +487,7 @@ export class GapiAuthenticatorService {
                 const url = `https://www.googleapis.com/gmail/v1/users/me/settings/sendAs`;
                 const headers = new HttpHeaders({ Authorization: `Bearer ${this.accessToken}` });
 
-                return this.http.get(url, { headers })
+                return this.http.get<any[]>(url, { headers })
                     .toPromise()
                     .then((res) => {
                         const aliases = res["sendAs"];
@@ -520,9 +500,9 @@ export class GapiAuthenticatorService {
                         console.log("error getting aliases and signature. Trying again...", err);
                         ++this.numberOfTimesGetAliasesHasFailed;
 
-                        return this.numberOfTimesGetAliasesHasFailed <= 30 ?
-                            Promise.resolve(setTimeout(() => this.getUserAliases(email), 1000)) :
-                            Promise.reject(err);
+                        if (this.numberOfTimesGetAliasesHasFailed <= 3) {
+                            Promise.resolve(setTimeout(() => this.getUserAliases(email), 1000));
+                        } else { return []; }
                     });
             });
     }
